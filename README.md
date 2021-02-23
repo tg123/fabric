@@ -2,6 +2,7 @@
 
 [![](https://pkg.go.dev/badge/github.com/tg123/fabric?status.svg)](https://pkg.go.dev/github.com/tg123/fabric)
 
+## status: UNOFFICIAL and WIP
 
 This is SDK is generated from IDL file in service fabric repo <https://github.com/microsoft/service-fabric/tree/master/src/prod/src/idl/public>.
 The package calls Service Fabric COM+ API directly which is the same to what dotnet SDK does.
