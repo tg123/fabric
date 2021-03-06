@@ -22,13 +22,13 @@ type ComFabricAsyncOperationCallback struct {
 	ole.IUnknown
 }
 
-type ComFabricAsyncOperationCallbackVtbl struct {
+type comFabricAsyncOperationCallbackVtbl struct {
 	ole.IUnknownVtbl
 	Invoke uintptr
 }
 
-func (v *ComFabricAsyncOperationCallback) VTable() *ComFabricAsyncOperationCallbackVtbl {
-	return (*ComFabricAsyncOperationCallbackVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricAsyncOperationCallback) VTable() *comFabricAsyncOperationCallbackVtbl {
+	return (*comFabricAsyncOperationCallbackVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricAsyncOperationCallback) Invoke(
@@ -66,7 +66,7 @@ type ComFabricAsyncOperationContext struct {
 	ole.IUnknown
 }
 
-type ComFabricAsyncOperationContextVtbl struct {
+type comFabricAsyncOperationContextVtbl struct {
 	ole.IUnknownVtbl
 	IsCompleted            uintptr
 	CompletedSynchronously uintptr
@@ -74,8 +74,8 @@ type ComFabricAsyncOperationContextVtbl struct {
 	Cancel                 uintptr
 }
 
-func (v *ComFabricAsyncOperationContext) VTable() *ComFabricAsyncOperationContextVtbl {
-	return (*ComFabricAsyncOperationContextVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricAsyncOperationContext) VTable() *comFabricAsyncOperationContextVtbl {
+	return (*comFabricAsyncOperationContextVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricAsyncOperationContext) IsCompleted() (rt bool, err error) {
@@ -149,13 +149,13 @@ type ComFabricStringResult struct {
 	ole.IUnknown
 }
 
-type ComFabricStringResultVtbl struct {
+type comFabricStringResultVtbl struct {
 	ole.IUnknownVtbl
 	get_String uintptr
 }
 
-func (v *ComFabricStringResult) VTable() *ComFabricStringResultVtbl {
-	return (*ComFabricStringResultVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricStringResult) VTable() *comFabricStringResultVtbl {
+	return (*comFabricStringResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricStringResult) GetString() (rt string, err error) {
@@ -191,13 +191,13 @@ type ComFabricStringListResult struct {
 	ole.IUnknown
 }
 
-type ComFabricStringListResultVtbl struct {
+type comFabricStringListResultVtbl struct {
 	ole.IUnknownVtbl
 	GetStrings uintptr
 }
 
-func (v *ComFabricStringListResult) VTable() *ComFabricStringListResultVtbl {
-	return (*ComFabricStringListResultVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricStringListResult) VTable() *comFabricStringListResultVtbl {
+	return (*comFabricStringListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (c *FabricClient) CreateFabricGetReplicatorStatusResult() (*ComFabricGetReplicatorStatusResult, error) {
@@ -214,13 +214,13 @@ type ComFabricGetReplicatorStatusResult struct {
 	ole.IUnknown
 }
 
-type ComFabricGetReplicatorStatusResultVtbl struct {
+type comFabricGetReplicatorStatusResultVtbl struct {
 	ole.IUnknownVtbl
 	get_ReplicatorStatus uintptr
 }
 
-func (v *ComFabricGetReplicatorStatusResult) VTable() *ComFabricGetReplicatorStatusResultVtbl {
-	return (*ComFabricGetReplicatorStatusResultVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricGetReplicatorStatusResult) VTable() *comFabricGetReplicatorStatusResultVtbl {
+	return (*comFabricGetReplicatorStatusResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetReplicatorStatusResult) GetReplicatorStatus() (rt *FabricReplicatorStatusQueryResult, err error) {

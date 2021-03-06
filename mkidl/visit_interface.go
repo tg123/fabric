@@ -86,9 +86,8 @@ func (g *generator) generateAsyncCall(n *ast.InterfaceNode, begin, end *ast.Meth
 			continue
 		}
 
+		// replace by context.Context
 		if p.Name == "timeoutMilliseconds" {
-			// g.importpkg("time")
-			// g.printfln("timeout time.Duration,")
 			continue
 		}
 
@@ -459,24 +458,28 @@ func (g *generator) visitInterface(n *ast.InterfaceNode) {
 			{{.Parent}}
 		}
 
-		type {{.Name}}Vtbl struct {
-			{{.Parent}}Vtbl
+		type {{.InnerName}}Vtbl struct {
+			{{.InnerParent}}Vtbl
 			{{ range .Methods }} {{.Name}} uintptr
 			{{ end }} 
 		}
 
-		func (v *{{.Name}}) VTable() *{{.Name}}Vtbl {
-			return (*{{.Name}}Vtbl)(unsafe.Pointer(v.RawVTable))
+		func (v *{{.Name}}) VTable() *{{.InnerName}}Vtbl {
+			return (*{{.InnerName}}Vtbl)(unsafe.Pointer(v.RawVTable))
 		}
 
 	`, struct {
-		Name    string
-		Parent  string
-		Methods []*ast.MethodNode
+		Name        string
+		InnerName   string
+		Parent      string
+		InnerParent string
+		Methods     []*ast.MethodNode
 	}{
-		Name:    interfaceName,
-		Parent:  pn,
-		Methods: n.Methods,
+		Name:        interfaceName,
+		InnerName:   casee.ToCamelCase(interfaceName),
+		Parent:      pn,
+		InnerParent: casee.ToCamelCase(pn),
+		Methods:     n.Methods,
 	})
 
 	g.generateMethods(n)

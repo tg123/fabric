@@ -25,7 +25,7 @@ type ComFabricRuntime struct {
 	ole.IUnknown
 }
 
-type ComFabricRuntimeVtbl struct {
+type comFabricRuntimeVtbl struct {
 	ole.IUnknownVtbl
 	BeginRegisterStatelessServiceFactory uintptr
 	EndRegisterStatelessServiceFactory   uintptr
@@ -39,8 +39,8 @@ type ComFabricRuntimeVtbl struct {
 	RegisterServiceGroupFactory          uintptr
 }
 
-func (v *ComFabricRuntime) VTable() *ComFabricRuntimeVtbl {
-	return (*ComFabricRuntimeVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricRuntime) VTable() *comFabricRuntimeVtbl {
+	return (*comFabricRuntimeVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricRuntime) beginRegisterStatelessServiceFactory(
@@ -229,13 +229,13 @@ type ComFabricStatelessServiceFactory struct {
 	ole.IUnknown
 }
 
-type ComFabricStatelessServiceFactoryVtbl struct {
+type comFabricStatelessServiceFactoryVtbl struct {
 	ole.IUnknownVtbl
 	CreateInstance uintptr
 }
 
-func (v *ComFabricStatelessServiceFactory) VTable() *ComFabricStatelessServiceFactoryVtbl {
-	return (*ComFabricStatelessServiceFactoryVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricStatelessServiceFactory) VTable() *comFabricStatelessServiceFactoryVtbl {
+	return (*comFabricStatelessServiceFactoryVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricStatelessServiceFactory) CreateInstance(
@@ -292,7 +292,7 @@ type ComFabricStatelessServiceInstance struct {
 	ole.IUnknown
 }
 
-type ComFabricStatelessServiceInstanceVtbl struct {
+type comFabricStatelessServiceInstanceVtbl struct {
 	ole.IUnknownVtbl
 	BeginOpen  uintptr
 	EndOpen    uintptr
@@ -301,8 +301,8 @@ type ComFabricStatelessServiceInstanceVtbl struct {
 	Abort      uintptr
 }
 
-func (v *ComFabricStatelessServiceInstance) VTable() *ComFabricStatelessServiceInstanceVtbl {
-	return (*ComFabricStatelessServiceInstanceVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricStatelessServiceInstance) VTable() *comFabricStatelessServiceInstanceVtbl {
+	return (*comFabricStatelessServiceInstanceVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricStatelessServiceInstance) beginOpen(
@@ -452,15 +452,15 @@ type ComFabricStatelessServicePartition struct {
 	ole.IUnknown
 }
 
-type ComFabricStatelessServicePartitionVtbl struct {
+type comFabricStatelessServicePartitionVtbl struct {
 	ole.IUnknownVtbl
 	GetPartitionInfo uintptr
 	ReportLoad       uintptr
 	ReportFault      uintptr
 }
 
-func (v *ComFabricStatelessServicePartition) VTable() *ComFabricStatelessServicePartitionVtbl {
-	return (*ComFabricStatelessServicePartitionVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricStatelessServicePartition) VTable() *comFabricStatelessServicePartitionVtbl {
+	return (*comFabricStatelessServicePartitionVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricStatelessServicePartition) GetPartitionInfo() (bufferedValue *FabricServicePartitionInformation, err error) {
@@ -531,13 +531,13 @@ type ComFabricStatelessServicePartition1 struct {
 	ComFabricStatelessServicePartition
 }
 
-type ComFabricStatelessServicePartition1Vtbl struct {
-	ComFabricStatelessServicePartitionVtbl
+type comFabricStatelessServicePartition1Vtbl struct {
+	comFabricStatelessServicePartitionVtbl
 	ReportMoveCost uintptr
 }
 
-func (v *ComFabricStatelessServicePartition1) VTable() *ComFabricStatelessServicePartition1Vtbl {
-	return (*ComFabricStatelessServicePartition1Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricStatelessServicePartition1) VTable() *comFabricStatelessServicePartition1Vtbl {
+	return (*comFabricStatelessServicePartition1Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricStatelessServicePartition1) ReportMoveCost(
@@ -571,14 +571,14 @@ type ComFabricStatelessServicePartition2 struct {
 	ComFabricStatelessServicePartition1
 }
 
-type ComFabricStatelessServicePartition2Vtbl struct {
-	ComFabricStatelessServicePartition1Vtbl
+type comFabricStatelessServicePartition2Vtbl struct {
+	comFabricStatelessServicePartition1Vtbl
 	ReportInstanceHealth  uintptr
 	ReportPartitionHealth uintptr
 }
 
-func (v *ComFabricStatelessServicePartition2) VTable() *ComFabricStatelessServicePartition2Vtbl {
-	return (*ComFabricStatelessServicePartition2Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricStatelessServicePartition2) VTable() *comFabricStatelessServicePartition2Vtbl {
+	return (*comFabricStatelessServicePartition2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricStatelessServicePartition2) ReportInstanceHealth(
@@ -632,14 +632,14 @@ type ComFabricStatelessServicePartition3 struct {
 	ComFabricStatelessServicePartition2
 }
 
-type ComFabricStatelessServicePartition3Vtbl struct {
-	ComFabricStatelessServicePartition2Vtbl
+type comFabricStatelessServicePartition3Vtbl struct {
+	comFabricStatelessServicePartition2Vtbl
 	ReportInstanceHealth2  uintptr
 	ReportPartitionHealth2 uintptr
 }
 
-func (v *ComFabricStatelessServicePartition3) VTable() *ComFabricStatelessServicePartition3Vtbl {
-	return (*ComFabricStatelessServicePartition3Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricStatelessServicePartition3) VTable() *comFabricStatelessServicePartition3Vtbl {
+	return (*comFabricStatelessServicePartition3Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricStatelessServicePartition3) ReportInstanceHealth2(
@@ -699,13 +699,13 @@ type ComFabricStatefulServiceFactory struct {
 	ole.IUnknown
 }
 
-type ComFabricStatefulServiceFactoryVtbl struct {
+type comFabricStatefulServiceFactoryVtbl struct {
 	ole.IUnknownVtbl
 	CreateReplica uintptr
 }
 
-func (v *ComFabricStatefulServiceFactory) VTable() *ComFabricStatefulServiceFactoryVtbl {
-	return (*ComFabricStatefulServiceFactoryVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricStatefulServiceFactory) VTable() *comFabricStatefulServiceFactoryVtbl {
+	return (*comFabricStatefulServiceFactoryVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricStatefulServiceFactory) CreateReplica(
@@ -762,7 +762,7 @@ type ComFabricStatefulServiceReplica struct {
 	ole.IUnknown
 }
 
-type ComFabricStatefulServiceReplicaVtbl struct {
+type comFabricStatefulServiceReplicaVtbl struct {
 	ole.IUnknownVtbl
 	BeginOpen       uintptr
 	EndOpen         uintptr
@@ -773,8 +773,8 @@ type ComFabricStatefulServiceReplicaVtbl struct {
 	Abort           uintptr
 }
 
-func (v *ComFabricStatefulServiceReplica) VTable() *ComFabricStatefulServiceReplicaVtbl {
-	return (*ComFabricStatefulServiceReplicaVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricStatefulServiceReplica) VTable() *comFabricStatefulServiceReplicaVtbl {
+	return (*comFabricStatefulServiceReplicaVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricStatefulServiceReplica) beginOpen(
@@ -1026,7 +1026,7 @@ type ComFabricStatefulServicePartition struct {
 	ole.IUnknown
 }
 
-type ComFabricStatefulServicePartitionVtbl struct {
+type comFabricStatefulServicePartitionVtbl struct {
 	ole.IUnknownVtbl
 	GetPartitionInfo uintptr
 	GetReadStatus    uintptr
@@ -1036,8 +1036,8 @@ type ComFabricStatefulServicePartitionVtbl struct {
 	ReportFault      uintptr
 }
 
-func (v *ComFabricStatefulServicePartition) VTable() *ComFabricStatefulServicePartitionVtbl {
-	return (*ComFabricStatefulServicePartitionVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricStatefulServicePartition) VTable() *comFabricStatefulServicePartitionVtbl {
+	return (*comFabricStatefulServicePartitionVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricStatefulServicePartition) GetPartitionInfo() (bufferedValue *FabricServicePartitionInformation, err error) {
@@ -1174,13 +1174,13 @@ type ComFabricStatefulServicePartition1 struct {
 	ComFabricStatefulServicePartition
 }
 
-type ComFabricStatefulServicePartition1Vtbl struct {
-	ComFabricStatefulServicePartitionVtbl
+type comFabricStatefulServicePartition1Vtbl struct {
+	comFabricStatefulServicePartitionVtbl
 	ReportMoveCost uintptr
 }
 
-func (v *ComFabricStatefulServicePartition1) VTable() *ComFabricStatefulServicePartition1Vtbl {
-	return (*ComFabricStatefulServicePartition1Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricStatefulServicePartition1) VTable() *comFabricStatefulServicePartition1Vtbl {
+	return (*comFabricStatefulServicePartition1Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricStatefulServicePartition1) ReportMoveCost(
@@ -1214,14 +1214,14 @@ type ComFabricStatefulServicePartition2 struct {
 	ComFabricStatefulServicePartition1
 }
 
-type ComFabricStatefulServicePartition2Vtbl struct {
-	ComFabricStatefulServicePartition1Vtbl
+type comFabricStatefulServicePartition2Vtbl struct {
+	comFabricStatefulServicePartition1Vtbl
 	ReportReplicaHealth   uintptr
 	ReportPartitionHealth uintptr
 }
 
-func (v *ComFabricStatefulServicePartition2) VTable() *ComFabricStatefulServicePartition2Vtbl {
-	return (*ComFabricStatefulServicePartition2Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricStatefulServicePartition2) VTable() *comFabricStatefulServicePartition2Vtbl {
+	return (*comFabricStatefulServicePartition2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricStatefulServicePartition2) ReportReplicaHealth(
@@ -1275,14 +1275,14 @@ type ComFabricStatefulServicePartition3 struct {
 	ComFabricStatefulServicePartition2
 }
 
-type ComFabricStatefulServicePartition3Vtbl struct {
-	ComFabricStatefulServicePartition2Vtbl
+type comFabricStatefulServicePartition3Vtbl struct {
+	comFabricStatefulServicePartition2Vtbl
 	ReportReplicaHealth2   uintptr
 	ReportPartitionHealth2 uintptr
 }
 
-func (v *ComFabricStatefulServicePartition3) VTable() *ComFabricStatefulServicePartition3Vtbl {
-	return (*ComFabricStatefulServicePartition3Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricStatefulServicePartition3) VTable() *comFabricStatefulServicePartition3Vtbl {
+	return (*comFabricStatefulServicePartition3Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricStatefulServicePartition3) ReportReplicaHealth2(
@@ -1342,7 +1342,7 @@ type ComFabricStateReplicator struct {
 	ole.IUnknown
 }
 
-type ComFabricStateReplicatorVtbl struct {
+type comFabricStateReplicatorVtbl struct {
 	ole.IUnknownVtbl
 	BeginReplicate           uintptr
 	EndReplicate             uintptr
@@ -1351,8 +1351,8 @@ type ComFabricStateReplicatorVtbl struct {
 	UpdateReplicatorSettings uintptr
 }
 
-func (v *ComFabricStateReplicator) VTable() *ComFabricStateReplicatorVtbl {
-	return (*ComFabricStateReplicatorVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricStateReplicator) VTable() *comFabricStateReplicatorVtbl {
+	return (*comFabricStateReplicatorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricStateReplicator) beginReplicate(
@@ -1530,13 +1530,13 @@ type ComFabricStateReplicator2 struct {
 	ComFabricStateReplicator
 }
 
-type ComFabricStateReplicator2Vtbl struct {
-	ComFabricStateReplicatorVtbl
+type comFabricStateReplicator2Vtbl struct {
+	comFabricStateReplicatorVtbl
 	GetReplicatorSettings uintptr
 }
 
-func (v *ComFabricStateReplicator2) VTable() *ComFabricStateReplicator2Vtbl {
-	return (*ComFabricStateReplicator2Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricStateReplicator2) VTable() *comFabricStateReplicator2Vtbl {
+	return (*comFabricStateReplicator2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricStateReplicator2) GetReplicatorSettings() (replicatorSettings *ComFabricReplicatorSettingsResult, err error) {
@@ -1572,7 +1572,7 @@ type ComFabricStateProvider struct {
 	ole.IUnknown
 }
 
-type ComFabricStateProviderVtbl struct {
+type comFabricStateProviderVtbl struct {
 	ole.IUnknownVtbl
 	BeginUpdateEpoch               uintptr
 	EndUpdateEpoch                 uintptr
@@ -1583,8 +1583,8 @@ type ComFabricStateProviderVtbl struct {
 	GetCopyState                   uintptr
 }
 
-func (v *ComFabricStateProvider) VTable() *ComFabricStateProviderVtbl {
-	return (*ComFabricStateProviderVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricStateProvider) VTable() *comFabricStateProviderVtbl {
+	return (*comFabricStateProviderVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricStateProvider) beginUpdateEpoch(
@@ -1858,15 +1858,15 @@ type ComFabricOperation struct {
 	ole.IUnknown
 }
 
-type ComFabricOperationVtbl struct {
+type comFabricOperationVtbl struct {
 	ole.IUnknownVtbl
 	get_Metadata uintptr
 	GetData      uintptr
 	Acknowledge  uintptr
 }
 
-func (v *ComFabricOperation) VTable() *ComFabricOperationVtbl {
-	return (*ComFabricOperationVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricOperation) VTable() *comFabricOperationVtbl {
+	return (*comFabricOperationVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricOperation) GetMetadata() (rt *FabricOperationMetadata, err error) {
@@ -1938,13 +1938,13 @@ type ComFabricOperationData struct {
 	ole.IUnknown
 }
 
-type ComFabricOperationDataVtbl struct {
+type comFabricOperationDataVtbl struct {
 	ole.IUnknownVtbl
 	GetData uintptr
 }
 
-func (v *ComFabricOperationData) VTable() *ComFabricOperationDataVtbl {
-	return (*ComFabricOperationDataVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricOperationData) VTable() *comFabricOperationDataVtbl {
+	return (*comFabricOperationDataVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricOperationData) GetData() (count uint32, buffers *FabricOperationDataBuffer, err error) {
@@ -1984,14 +1984,14 @@ type ComFabricOperationStream struct {
 	ole.IUnknown
 }
 
-type ComFabricOperationStreamVtbl struct {
+type comFabricOperationStreamVtbl struct {
 	ole.IUnknownVtbl
 	BeginGetOperation uintptr
 	EndGetOperation   uintptr
 }
 
-func (v *ComFabricOperationStream) VTable() *ComFabricOperationStreamVtbl {
-	return (*ComFabricOperationStreamVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricOperationStream) VTable() *comFabricOperationStreamVtbl {
+	return (*comFabricOperationStreamVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricOperationStream) beginGetOperation(
@@ -2029,13 +2029,13 @@ type ComFabricOperationStream2 struct {
 	ComFabricOperationStream
 }
 
-type ComFabricOperationStream2Vtbl struct {
-	ComFabricOperationStreamVtbl
+type comFabricOperationStream2Vtbl struct {
+	comFabricOperationStreamVtbl
 	ReportFault uintptr
 }
 
-func (v *ComFabricOperationStream2) VTable() *ComFabricOperationStream2Vtbl {
-	return (*ComFabricOperationStream2Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricOperationStream2) VTable() *comFabricOperationStream2Vtbl {
+	return (*comFabricOperationStream2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricOperationStream2) ReportFault(
@@ -2069,14 +2069,14 @@ type ComFabricOperationDataStream struct {
 	ole.IUnknown
 }
 
-type ComFabricOperationDataStreamVtbl struct {
+type comFabricOperationDataStreamVtbl struct {
 	ole.IUnknownVtbl
 	BeginGetNext uintptr
 	EndGetNext   uintptr
 }
 
-func (v *ComFabricOperationDataStream) VTable() *ComFabricOperationDataStreamVtbl {
-	return (*ComFabricOperationDataStreamVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricOperationDataStream) VTable() *comFabricOperationDataStreamVtbl {
+	return (*comFabricOperationDataStreamVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricOperationDataStream) beginGetNext(
@@ -2114,7 +2114,7 @@ type ComFabricReplicator struct {
 	ole.IUnknown
 }
 
-type ComFabricReplicatorVtbl struct {
+type comFabricReplicatorVtbl struct {
 	ole.IUnknownVtbl
 	BeginOpen            uintptr
 	EndOpen              uintptr
@@ -2129,8 +2129,8 @@ type ComFabricReplicatorVtbl struct {
 	GetCatchUpCapability uintptr
 }
 
-func (v *ComFabricReplicator) VTable() *ComFabricReplicatorVtbl {
-	return (*ComFabricReplicatorVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricReplicator) VTable() *comFabricReplicatorVtbl {
+	return (*comFabricReplicatorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricReplicator) beginOpen(
@@ -2511,8 +2511,8 @@ type ComFabricPrimaryReplicator struct {
 	ComFabricReplicator
 }
 
-type ComFabricPrimaryReplicatorVtbl struct {
-	ComFabricReplicatorVtbl
+type comFabricPrimaryReplicatorVtbl struct {
+	comFabricReplicatorVtbl
 	BeginOnDataLoss                      uintptr
 	EndOnDataLoss                        uintptr
 	UpdateCatchUpReplicaSetConfiguration uintptr
@@ -2524,8 +2524,8 @@ type ComFabricPrimaryReplicatorVtbl struct {
 	RemoveReplica                        uintptr
 }
 
-func (v *ComFabricPrimaryReplicator) VTable() *ComFabricPrimaryReplicatorVtbl {
-	return (*ComFabricPrimaryReplicatorVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricPrimaryReplicator) VTable() *comFabricPrimaryReplicatorVtbl {
+	return (*comFabricPrimaryReplicatorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricPrimaryReplicator) beginOnDataLoss(
@@ -2887,12 +2887,12 @@ type ComFabricReplicatorCatchupSpecificQuorum struct {
 	ole.IUnknown
 }
 
-type ComFabricReplicatorCatchupSpecificQuorumVtbl struct {
+type comFabricReplicatorCatchupSpecificQuorumVtbl struct {
 	ole.IUnknownVtbl
 }
 
-func (v *ComFabricReplicatorCatchupSpecificQuorum) VTable() *ComFabricReplicatorCatchupSpecificQuorumVtbl {
-	return (*ComFabricReplicatorCatchupSpecificQuorumVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricReplicatorCatchupSpecificQuorum) VTable() *comFabricReplicatorCatchupSpecificQuorumVtbl {
+	return (*comFabricReplicatorCatchupSpecificQuorumVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (c *FabricClient) CreateFabricAtomicGroupStateReplicator() (*ComFabricAtomicGroupStateReplicator, error) {
@@ -2909,7 +2909,7 @@ type ComFabricAtomicGroupStateReplicator struct {
 	ole.IUnknown
 }
 
-type ComFabricAtomicGroupStateReplicatorVtbl struct {
+type comFabricAtomicGroupStateReplicatorVtbl struct {
 	ole.IUnknownVtbl
 	CreateAtomicGroup                  uintptr
 	BeginReplicateAtomicGroupOperation uintptr
@@ -2920,8 +2920,8 @@ type ComFabricAtomicGroupStateReplicatorVtbl struct {
 	EndReplicateAtomicGroupRollback    uintptr
 }
 
-func (v *ComFabricAtomicGroupStateReplicator) VTable() *ComFabricAtomicGroupStateReplicatorVtbl {
-	return (*ComFabricAtomicGroupStateReplicatorVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricAtomicGroupStateReplicator) VTable() *comFabricAtomicGroupStateReplicatorVtbl {
+	return (*comFabricAtomicGroupStateReplicatorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricAtomicGroupStateReplicator) CreateAtomicGroup() (AtomicGroupId int64, err error) {
@@ -3278,7 +3278,7 @@ type ComFabricAtomicGroupStateProvider struct {
 	ole.IUnknown
 }
 
-type ComFabricAtomicGroupStateProviderVtbl struct {
+type comFabricAtomicGroupStateProviderVtbl struct {
 	ole.IUnknownVtbl
 	BeginAtomicGroupCommit   uintptr
 	EndAtomicGroupCommit     uintptr
@@ -3288,8 +3288,8 @@ type ComFabricAtomicGroupStateProviderVtbl struct {
 	EndUndoProgress          uintptr
 }
 
-func (v *ComFabricAtomicGroupStateProvider) VTable() *ComFabricAtomicGroupStateProviderVtbl {
-	return (*ComFabricAtomicGroupStateProviderVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricAtomicGroupStateProvider) VTable() *comFabricAtomicGroupStateProviderVtbl {
+	return (*comFabricAtomicGroupStateProviderVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricAtomicGroupStateProvider) beginAtomicGroupCommit(
@@ -3601,12 +3601,12 @@ type ComFabricServiceGroupFactory struct {
 	ole.IUnknown
 }
 
-type ComFabricServiceGroupFactoryVtbl struct {
+type comFabricServiceGroupFactoryVtbl struct {
 	ole.IUnknownVtbl
 }
 
-func (v *ComFabricServiceGroupFactory) VTable() *ComFabricServiceGroupFactoryVtbl {
-	return (*ComFabricServiceGroupFactoryVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricServiceGroupFactory) VTable() *comFabricServiceGroupFactoryVtbl {
+	return (*comFabricServiceGroupFactoryVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (c *FabricClient) CreateFabricServiceGroupFactoryBuilder() (*ComFabricServiceGroupFactoryBuilder, error) {
@@ -3623,7 +3623,7 @@ type ComFabricServiceGroupFactoryBuilder struct {
 	ole.IUnknown
 }
 
-type ComFabricServiceGroupFactoryBuilderVtbl struct {
+type comFabricServiceGroupFactoryBuilderVtbl struct {
 	ole.IUnknownVtbl
 	AddStatelessServiceFactory uintptr
 	AddStatefulServiceFactory  uintptr
@@ -3631,8 +3631,8 @@ type ComFabricServiceGroupFactoryBuilderVtbl struct {
 	ToServiceGroupFactory      uintptr
 }
 
-func (v *ComFabricServiceGroupFactoryBuilder) VTable() *ComFabricServiceGroupFactoryBuilderVtbl {
-	return (*ComFabricServiceGroupFactoryBuilderVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricServiceGroupFactoryBuilder) VTable() *comFabricServiceGroupFactoryBuilderVtbl {
+	return (*comFabricServiceGroupFactoryBuilderVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricServiceGroupFactoryBuilder) AddStatelessServiceFactory(
@@ -3730,13 +3730,13 @@ type ComFabricServiceGroupPartition struct {
 	ole.IUnknown
 }
 
-type ComFabricServiceGroupPartitionVtbl struct {
+type comFabricServiceGroupPartitionVtbl struct {
 	ole.IUnknownVtbl
 	ResolveMember uintptr
 }
 
-func (v *ComFabricServiceGroupPartition) VTable() *ComFabricServiceGroupPartitionVtbl {
-	return (*ComFabricServiceGroupPartitionVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricServiceGroupPartition) VTable() *comFabricServiceGroupPartitionVtbl {
+	return (*comFabricServiceGroupPartitionVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricServiceGroupPartition) ResolveMember(
@@ -3782,7 +3782,7 @@ type ComFabricCodePackageActivationContext struct {
 	ole.IUnknown
 }
 
-type ComFabricCodePackageActivationContextVtbl struct {
+type comFabricCodePackageActivationContextVtbl struct {
 	ole.IUnknownVtbl
 	get_ContextId                               uintptr
 	get_CodePackageName                         uintptr
@@ -3809,8 +3809,8 @@ type ComFabricCodePackageActivationContextVtbl struct {
 	UnregisterDataPackageChangeHandler          uintptr
 }
 
-func (v *ComFabricCodePackageActivationContext) VTable() *ComFabricCodePackageActivationContextVtbl {
-	return (*ComFabricCodePackageActivationContextVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricCodePackageActivationContext) VTable() *comFabricCodePackageActivationContextVtbl {
+	return (*comFabricCodePackageActivationContextVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricCodePackageActivationContext) GetContextId() (rt string, err error) {
@@ -4332,16 +4332,16 @@ type ComFabricCodePackageActivationContext2 struct {
 	ComFabricCodePackageActivationContext
 }
 
-type ComFabricCodePackageActivationContext2Vtbl struct {
-	ComFabricCodePackageActivationContextVtbl
+type comFabricCodePackageActivationContext2Vtbl struct {
+	comFabricCodePackageActivationContextVtbl
 	get_ApplicationName       uintptr
 	get_ApplicationTypeName   uintptr
 	GetServiceManifestName    uintptr
 	GetServiceManifestVersion uintptr
 }
 
-func (v *ComFabricCodePackageActivationContext2) VTable() *ComFabricCodePackageActivationContext2Vtbl {
-	return (*ComFabricCodePackageActivationContext2Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricCodePackageActivationContext2) VTable() *comFabricCodePackageActivationContext2Vtbl {
+	return (*comFabricCodePackageActivationContext2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricCodePackageActivationContext2) GetApplicationName() (rt string, err error) {
@@ -4431,15 +4431,15 @@ type ComFabricCodePackageActivationContext3 struct {
 	ComFabricCodePackageActivationContext2
 }
 
-type ComFabricCodePackageActivationContext3Vtbl struct {
-	ComFabricCodePackageActivationContext2Vtbl
+type comFabricCodePackageActivationContext3Vtbl struct {
+	comFabricCodePackageActivationContext2Vtbl
 	ReportApplicationHealth            uintptr
 	ReportDeployedApplicationHealth    uintptr
 	ReportDeployedServicePackageHealth uintptr
 }
 
-func (v *ComFabricCodePackageActivationContext3) VTable() *ComFabricCodePackageActivationContext3Vtbl {
-	return (*ComFabricCodePackageActivationContext3Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricCodePackageActivationContext3) VTable() *comFabricCodePackageActivationContext3Vtbl {
+	return (*comFabricCodePackageActivationContext3Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricCodePackageActivationContext3) ReportApplicationHealth(
@@ -4511,15 +4511,15 @@ type ComFabricCodePackageActivationContext4 struct {
 	ComFabricCodePackageActivationContext3
 }
 
-type ComFabricCodePackageActivationContext4Vtbl struct {
-	ComFabricCodePackageActivationContext3Vtbl
+type comFabricCodePackageActivationContext4Vtbl struct {
+	comFabricCodePackageActivationContext3Vtbl
 	ReportApplicationHealth2            uintptr
 	ReportDeployedApplicationHealth2    uintptr
 	ReportDeployedServicePackageHealth2 uintptr
 }
 
-func (v *ComFabricCodePackageActivationContext4) VTable() *ComFabricCodePackageActivationContext4Vtbl {
-	return (*ComFabricCodePackageActivationContext4Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricCodePackageActivationContext4) VTable() *comFabricCodePackageActivationContext4Vtbl {
+	return (*comFabricCodePackageActivationContext4Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricCodePackageActivationContext4) ReportApplicationHealth2(
@@ -4600,14 +4600,14 @@ type ComFabricCodePackageActivationContext5 struct {
 	ComFabricCodePackageActivationContext4
 }
 
-type ComFabricCodePackageActivationContext5Vtbl struct {
-	ComFabricCodePackageActivationContext4Vtbl
+type comFabricCodePackageActivationContext5Vtbl struct {
+	comFabricCodePackageActivationContext4Vtbl
 	get_ServiceListenAddress  uintptr
 	get_ServicePublishAddress uintptr
 }
 
-func (v *ComFabricCodePackageActivationContext5) VTable() *ComFabricCodePackageActivationContext5Vtbl {
-	return (*ComFabricCodePackageActivationContext5Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricCodePackageActivationContext5) VTable() *comFabricCodePackageActivationContext5Vtbl {
+	return (*comFabricCodePackageActivationContext5Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricCodePackageActivationContext5) GetServiceListenAddress() (rt string, err error) {
@@ -4661,13 +4661,13 @@ type ComFabricCodePackageActivationContext6 struct {
 	ComFabricCodePackageActivationContext5
 }
 
-type ComFabricCodePackageActivationContext6Vtbl struct {
-	ComFabricCodePackageActivationContext5Vtbl
+type comFabricCodePackageActivationContext6Vtbl struct {
+	comFabricCodePackageActivationContext5Vtbl
 	GetDirectory uintptr
 }
 
-func (v *ComFabricCodePackageActivationContext6) VTable() *ComFabricCodePackageActivationContext6Vtbl {
-	return (*ComFabricCodePackageActivationContext6Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricCodePackageActivationContext6) VTable() *comFabricCodePackageActivationContext6Vtbl {
+	return (*comFabricCodePackageActivationContext6Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricCodePackageActivationContext6) GetDirectory(
@@ -4709,14 +4709,14 @@ type ComFabricCodePackage struct {
 	ole.IUnknown
 }
 
-type ComFabricCodePackageVtbl struct {
+type comFabricCodePackageVtbl struct {
 	ole.IUnknownVtbl
 	get_Description uintptr
 	get_Path        uintptr
 }
 
-func (v *ComFabricCodePackage) VTable() *ComFabricCodePackageVtbl {
-	return (*ComFabricCodePackageVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricCodePackage) VTable() *comFabricCodePackageVtbl {
+	return (*comFabricCodePackageVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricCodePackage) GetDescription() (rt *FabricCodePackageDescription, err error) {
@@ -4770,14 +4770,14 @@ type ComFabricCodePackage2 struct {
 	ComFabricCodePackage
 }
 
-type ComFabricCodePackage2Vtbl struct {
-	ComFabricCodePackageVtbl
+type comFabricCodePackage2Vtbl struct {
+	comFabricCodePackageVtbl
 	get_SetupEntryPointRunAsPolicy uintptr
 	get_EntryPointRunAsPolicy      uintptr
 }
 
-func (v *ComFabricCodePackage2) VTable() *ComFabricCodePackage2Vtbl {
-	return (*ComFabricCodePackage2Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricCodePackage2) VTable() *comFabricCodePackage2Vtbl {
+	return (*comFabricCodePackage2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricCodePackage2) GetSetupEntryPointRunAsPolicy() (rt *FabricRunasPolicyDescription, err error) {
@@ -4831,7 +4831,7 @@ type ComFabricConfigurationPackage struct {
 	ole.IUnknown
 }
 
-type ComFabricConfigurationPackageVtbl struct {
+type comFabricConfigurationPackageVtbl struct {
 	ole.IUnknownVtbl
 	get_Description uintptr
 	get_Path        uintptr
@@ -4841,8 +4841,8 @@ type ComFabricConfigurationPackageVtbl struct {
 	DecryptValue    uintptr
 }
 
-func (v *ComFabricConfigurationPackage) VTable() *ComFabricConfigurationPackageVtbl {
-	return (*ComFabricConfigurationPackageVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricConfigurationPackage) VTable() *comFabricConfigurationPackageVtbl {
+	return (*comFabricConfigurationPackageVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricConfigurationPackage) GetDescription() (rt *FabricConfigurationPackageDescription, err error) {
@@ -4998,13 +4998,13 @@ type ComFabricConfigurationPackage2 struct {
 	ComFabricConfigurationPackage
 }
 
-type ComFabricConfigurationPackage2Vtbl struct {
-	ComFabricConfigurationPackageVtbl
+type comFabricConfigurationPackage2Vtbl struct {
+	comFabricConfigurationPackageVtbl
 	GetValues uintptr
 }
 
-func (v *ComFabricConfigurationPackage2) VTable() *ComFabricConfigurationPackage2Vtbl {
-	return (*ComFabricConfigurationPackage2Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricConfigurationPackage2) VTable() *comFabricConfigurationPackage2Vtbl {
+	return (*comFabricConfigurationPackage2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricConfigurationPackage2) GetValues(
@@ -5076,14 +5076,14 @@ type ComFabricDataPackage struct {
 	ole.IUnknown
 }
 
-type ComFabricDataPackageVtbl struct {
+type comFabricDataPackageVtbl struct {
 	ole.IUnknownVtbl
 	get_Description uintptr
 	get_Path        uintptr
 }
 
-func (v *ComFabricDataPackage) VTable() *ComFabricDataPackageVtbl {
-	return (*ComFabricDataPackageVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricDataPackage) VTable() *comFabricDataPackageVtbl {
+	return (*comFabricDataPackageVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricDataPackage) GetDescription() (rt *FabricDataPackageDescription, err error) {
@@ -5137,15 +5137,15 @@ type ComFabricCodePackageChangeHandler struct {
 	ole.IUnknown
 }
 
-type ComFabricCodePackageChangeHandlerVtbl struct {
+type comFabricCodePackageChangeHandlerVtbl struct {
 	ole.IUnknownVtbl
 	OnPackageAdded    uintptr
 	OnPackageRemoved  uintptr
 	OnPackageModified uintptr
 }
 
-func (v *ComFabricCodePackageChangeHandler) VTable() *ComFabricCodePackageChangeHandlerVtbl {
-	return (*ComFabricCodePackageChangeHandlerVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricCodePackageChangeHandler) VTable() *comFabricCodePackageChangeHandlerVtbl {
+	return (*comFabricCodePackageChangeHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricCodePackageChangeHandler) OnPackageAdded(
@@ -5230,15 +5230,15 @@ type ComFabricConfigurationPackageChangeHandler struct {
 	ole.IUnknown
 }
 
-type ComFabricConfigurationPackageChangeHandlerVtbl struct {
+type comFabricConfigurationPackageChangeHandlerVtbl struct {
 	ole.IUnknownVtbl
 	OnPackageAdded    uintptr
 	OnPackageRemoved  uintptr
 	OnPackageModified uintptr
 }
 
-func (v *ComFabricConfigurationPackageChangeHandler) VTable() *ComFabricConfigurationPackageChangeHandlerVtbl {
-	return (*ComFabricConfigurationPackageChangeHandlerVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricConfigurationPackageChangeHandler) VTable() *comFabricConfigurationPackageChangeHandlerVtbl {
+	return (*comFabricConfigurationPackageChangeHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricConfigurationPackageChangeHandler) OnPackageAdded(
@@ -5323,15 +5323,15 @@ type ComFabricDataPackageChangeHandler struct {
 	ole.IUnknown
 }
 
-type ComFabricDataPackageChangeHandlerVtbl struct {
+type comFabricDataPackageChangeHandlerVtbl struct {
 	ole.IUnknownVtbl
 	OnPackageAdded    uintptr
 	OnPackageRemoved  uintptr
 	OnPackageModified uintptr
 }
 
-func (v *ComFabricDataPackageChangeHandler) VTable() *ComFabricDataPackageChangeHandlerVtbl {
-	return (*ComFabricDataPackageChangeHandlerVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricDataPackageChangeHandler) VTable() *comFabricDataPackageChangeHandlerVtbl {
+	return (*comFabricDataPackageChangeHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricDataPackageChangeHandler) OnPackageAdded(
@@ -5416,13 +5416,13 @@ type ComFabricProcessExitHandler struct {
 	ole.IUnknown
 }
 
-type ComFabricProcessExitHandlerVtbl struct {
+type comFabricProcessExitHandlerVtbl struct {
 	ole.IUnknownVtbl
 	FabricProcessExited uintptr
 }
 
-func (v *ComFabricProcessExitHandler) VTable() *ComFabricProcessExitHandlerVtbl {
-	return (*ComFabricProcessExitHandlerVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricProcessExitHandler) VTable() *comFabricProcessExitHandlerVtbl {
+	return (*comFabricProcessExitHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricProcessExitHandler) FabricProcessExited() (rt interface{}, err error) {
@@ -5458,14 +5458,14 @@ type ComFabricTransactionBase struct {
 	ole.IUnknown
 }
 
-type ComFabricTransactionBaseVtbl struct {
+type comFabricTransactionBaseVtbl struct {
 	ole.IUnknownVtbl
 	get_Id             uintptr
 	get_IsolationLevel uintptr
 }
 
-func (v *ComFabricTransactionBase) VTable() *ComFabricTransactionBaseVtbl {
-	return (*ComFabricTransactionBaseVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricTransactionBase) VTable() *comFabricTransactionBaseVtbl {
+	return (*comFabricTransactionBaseVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricTransactionBase) GetId() (rt *windows.GUID, err error) {
@@ -5513,15 +5513,15 @@ type ComFabricTransaction struct {
 	ComFabricTransactionBase
 }
 
-type ComFabricTransactionVtbl struct {
-	ComFabricTransactionBaseVtbl
+type comFabricTransactionVtbl struct {
+	comFabricTransactionBaseVtbl
 	BeginCommit uintptr
 	EndCommit   uintptr
 	Rollback    uintptr
 }
 
-func (v *ComFabricTransaction) VTable() *ComFabricTransactionVtbl {
-	return (*ComFabricTransactionVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricTransaction) VTable() *comFabricTransactionVtbl {
+	return (*comFabricTransactionVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricTransaction) beginCommit(
@@ -5657,8 +5657,8 @@ type ComFabricKeyValueStoreReplica struct {
 	ComFabricStatefulServiceReplica
 }
 
-type ComFabricKeyValueStoreReplicaVtbl struct {
-	ComFabricStatefulServiceReplicaVtbl
+type comFabricKeyValueStoreReplicaVtbl struct {
+	comFabricStatefulServiceReplicaVtbl
 	GetCurrentEpoch          uintptr
 	UpdateReplicatorSettings uintptr
 	CreateTransaction        uintptr
@@ -5674,8 +5674,8 @@ type ComFabricKeyValueStoreReplicaVtbl struct {
 	EnumerateMetadataByKey   uintptr
 }
 
-func (v *ComFabricKeyValueStoreReplica) VTable() *ComFabricKeyValueStoreReplicaVtbl {
-	return (*ComFabricKeyValueStoreReplicaVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricKeyValueStoreReplica) VTable() *comFabricKeyValueStoreReplicaVtbl {
+	return (*comFabricKeyValueStoreReplicaVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricKeyValueStoreReplica) GetCurrentEpoch() (currentEpoch FabricEpoch, err error) {
@@ -6005,15 +6005,15 @@ type ComFabricKeyValueStoreReplica2 struct {
 	ComFabricKeyValueStoreReplica
 }
 
-type ComFabricKeyValueStoreReplica2Vtbl struct {
-	ComFabricKeyValueStoreReplicaVtbl
+type comFabricKeyValueStoreReplica2Vtbl struct {
+	comFabricKeyValueStoreReplicaVtbl
 	Backup             uintptr
 	Restore            uintptr
 	CreateTransaction2 uintptr
 }
 
-func (v *ComFabricKeyValueStoreReplica2) VTable() *ComFabricKeyValueStoreReplica2Vtbl {
-	return (*ComFabricKeyValueStoreReplica2Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricKeyValueStoreReplica2) VTable() *comFabricKeyValueStoreReplica2Vtbl {
+	return (*comFabricKeyValueStoreReplica2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricKeyValueStoreReplica2) Backup(
@@ -6093,14 +6093,14 @@ type ComFabricKeyValueStoreReplica3 struct {
 	ComFabricKeyValueStoreReplica2
 }
 
-type ComFabricKeyValueStoreReplica3Vtbl struct {
-	ComFabricKeyValueStoreReplica2Vtbl
+type comFabricKeyValueStoreReplica3Vtbl struct {
+	comFabricKeyValueStoreReplica2Vtbl
 	BeginBackup uintptr
 	EndBackup   uintptr
 }
 
-func (v *ComFabricKeyValueStoreReplica3) VTable() *ComFabricKeyValueStoreReplica3Vtbl {
-	return (*ComFabricKeyValueStoreReplica3Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricKeyValueStoreReplica3) VTable() *comFabricKeyValueStoreReplica3Vtbl {
+	return (*comFabricKeyValueStoreReplica3Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricKeyValueStoreReplica3) beginBackup(
@@ -6224,14 +6224,14 @@ type ComFabricKeyValueStoreReplica4 struct {
 	ComFabricKeyValueStoreReplica3
 }
 
-type ComFabricKeyValueStoreReplica4Vtbl struct {
-	ComFabricKeyValueStoreReplica3Vtbl
+type comFabricKeyValueStoreReplica4Vtbl struct {
+	comFabricKeyValueStoreReplica3Vtbl
 	BeginRestore uintptr
 	EndRestore   uintptr
 }
 
-func (v *ComFabricKeyValueStoreReplica4) VTable() *ComFabricKeyValueStoreReplica4Vtbl {
-	return (*ComFabricKeyValueStoreReplica4Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricKeyValueStoreReplica4) VTable() *comFabricKeyValueStoreReplica4Vtbl {
+	return (*comFabricKeyValueStoreReplica4Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricKeyValueStoreReplica4) beginRestore(
@@ -6349,8 +6349,8 @@ type ComFabricKeyValueStoreReplica5 struct {
 	ComFabricKeyValueStoreReplica4
 }
 
-type ComFabricKeyValueStoreReplica5Vtbl struct {
-	ComFabricKeyValueStoreReplica4Vtbl
+type comFabricKeyValueStoreReplica5Vtbl struct {
+	comFabricKeyValueStoreReplica4Vtbl
 	TryAdd                  uintptr
 	TryRemove               uintptr
 	TryUpdate               uintptr
@@ -6360,8 +6360,8 @@ type ComFabricKeyValueStoreReplica5Vtbl struct {
 	EnumerateMetadataByKey2 uintptr
 }
 
-func (v *ComFabricKeyValueStoreReplica5) VTable() *ComFabricKeyValueStoreReplica5Vtbl {
-	return (*ComFabricKeyValueStoreReplica5Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricKeyValueStoreReplica5) VTable() *comFabricKeyValueStoreReplica5Vtbl {
+	return (*comFabricKeyValueStoreReplica5Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricKeyValueStoreReplica5) TryAdd(
@@ -6594,13 +6594,13 @@ type ComFabricKeyValueStoreReplica6 struct {
 	ComFabricKeyValueStoreReplica5
 }
 
-type ComFabricKeyValueStoreReplica6Vtbl struct {
-	ComFabricKeyValueStoreReplica5Vtbl
+type comFabricKeyValueStoreReplica6Vtbl struct {
+	comFabricKeyValueStoreReplica5Vtbl
 	BeginRestore2 uintptr
 }
 
-func (v *ComFabricKeyValueStoreReplica6) VTable() *ComFabricKeyValueStoreReplica6Vtbl {
-	return (*ComFabricKeyValueStoreReplica6Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricKeyValueStoreReplica6) VTable() *comFabricKeyValueStoreReplica6Vtbl {
+	return (*comFabricKeyValueStoreReplica6Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricKeyValueStoreReplica6) beginRestore2(
@@ -6649,14 +6649,14 @@ type ComFabricKeyValueStoreEnumerator struct {
 	ole.IUnknown
 }
 
-type ComFabricKeyValueStoreEnumeratorVtbl struct {
+type comFabricKeyValueStoreEnumeratorVtbl struct {
 	ole.IUnknownVtbl
 	EnumerateByKey         uintptr
 	EnumerateMetadataByKey uintptr
 }
 
-func (v *ComFabricKeyValueStoreEnumerator) VTable() *ComFabricKeyValueStoreEnumeratorVtbl {
-	return (*ComFabricKeyValueStoreEnumeratorVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricKeyValueStoreEnumerator) VTable() *comFabricKeyValueStoreEnumeratorVtbl {
+	return (*comFabricKeyValueStoreEnumeratorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricKeyValueStoreEnumerator) EnumerateByKey(
@@ -6722,14 +6722,14 @@ type ComFabricKeyValueStoreEnumerator2 struct {
 	ComFabricKeyValueStoreEnumerator
 }
 
-type ComFabricKeyValueStoreEnumerator2Vtbl struct {
-	ComFabricKeyValueStoreEnumeratorVtbl
+type comFabricKeyValueStoreEnumerator2Vtbl struct {
+	comFabricKeyValueStoreEnumeratorVtbl
 	EnumerateByKey2         uintptr
 	EnumerateMetadataByKey2 uintptr
 }
 
-func (v *ComFabricKeyValueStoreEnumerator2) VTable() *ComFabricKeyValueStoreEnumerator2Vtbl {
-	return (*ComFabricKeyValueStoreEnumerator2Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricKeyValueStoreEnumerator2) VTable() *comFabricKeyValueStoreEnumerator2Vtbl {
+	return (*comFabricKeyValueStoreEnumerator2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricKeyValueStoreEnumerator2) EnumerateByKey2(
@@ -6811,14 +6811,14 @@ type ComFabricKeyValueStoreItemEnumerator struct {
 	ole.IUnknown
 }
 
-type ComFabricKeyValueStoreItemEnumeratorVtbl struct {
+type comFabricKeyValueStoreItemEnumeratorVtbl struct {
 	ole.IUnknownVtbl
 	MoveNext    uintptr
 	get_Current uintptr
 }
 
-func (v *ComFabricKeyValueStoreItemEnumerator) VTable() *ComFabricKeyValueStoreItemEnumeratorVtbl {
-	return (*ComFabricKeyValueStoreItemEnumeratorVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricKeyValueStoreItemEnumerator) VTable() *comFabricKeyValueStoreItemEnumeratorVtbl {
+	return (*comFabricKeyValueStoreItemEnumeratorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricKeyValueStoreItemEnumerator) MoveNext() (err error) {
@@ -6868,14 +6868,14 @@ type ComFabricKeyValueStoreItemMetadataEnumerator struct {
 	ole.IUnknown
 }
 
-type ComFabricKeyValueStoreItemMetadataEnumeratorVtbl struct {
+type comFabricKeyValueStoreItemMetadataEnumeratorVtbl struct {
 	ole.IUnknownVtbl
 	MoveNext    uintptr
 	get_Current uintptr
 }
 
-func (v *ComFabricKeyValueStoreItemMetadataEnumerator) VTable() *ComFabricKeyValueStoreItemMetadataEnumeratorVtbl {
-	return (*ComFabricKeyValueStoreItemMetadataEnumeratorVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricKeyValueStoreItemMetadataEnumerator) VTable() *comFabricKeyValueStoreItemMetadataEnumeratorVtbl {
+	return (*comFabricKeyValueStoreItemMetadataEnumeratorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricKeyValueStoreItemMetadataEnumerator) MoveNext() (err error) {
@@ -6925,15 +6925,15 @@ type ComFabricKeyValueStoreNotificationEnumerator struct {
 	ole.IUnknown
 }
 
-type ComFabricKeyValueStoreNotificationEnumeratorVtbl struct {
+type comFabricKeyValueStoreNotificationEnumeratorVtbl struct {
 	ole.IUnknownVtbl
 	MoveNext    uintptr
 	get_Current uintptr
 	Reset       uintptr
 }
 
-func (v *ComFabricKeyValueStoreNotificationEnumerator) VTable() *ComFabricKeyValueStoreNotificationEnumeratorVtbl {
-	return (*ComFabricKeyValueStoreNotificationEnumeratorVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricKeyValueStoreNotificationEnumerator) VTable() *comFabricKeyValueStoreNotificationEnumeratorVtbl {
+	return (*comFabricKeyValueStoreNotificationEnumeratorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricKeyValueStoreNotificationEnumerator) MoveNext() (err error) {
@@ -7001,13 +7001,13 @@ type ComFabricKeyValueStoreItemEnumerator2 struct {
 	ComFabricKeyValueStoreItemEnumerator
 }
 
-type ComFabricKeyValueStoreItemEnumerator2Vtbl struct {
-	ComFabricKeyValueStoreItemEnumeratorVtbl
+type comFabricKeyValueStoreItemEnumerator2Vtbl struct {
+	comFabricKeyValueStoreItemEnumeratorVtbl
 	TryMoveNext uintptr
 }
 
-func (v *ComFabricKeyValueStoreItemEnumerator2) VTable() *ComFabricKeyValueStoreItemEnumerator2Vtbl {
-	return (*ComFabricKeyValueStoreItemEnumerator2Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricKeyValueStoreItemEnumerator2) VTable() *comFabricKeyValueStoreItemEnumerator2Vtbl {
+	return (*comFabricKeyValueStoreItemEnumerator2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricKeyValueStoreItemEnumerator2) TryMoveNext() (success bool, err error) {
@@ -7043,13 +7043,13 @@ type ComFabricKeyValueStoreItemMetadataEnumerator2 struct {
 	ComFabricKeyValueStoreItemMetadataEnumerator
 }
 
-type ComFabricKeyValueStoreItemMetadataEnumerator2Vtbl struct {
-	ComFabricKeyValueStoreItemMetadataEnumeratorVtbl
+type comFabricKeyValueStoreItemMetadataEnumerator2Vtbl struct {
+	comFabricKeyValueStoreItemMetadataEnumeratorVtbl
 	TryMoveNext uintptr
 }
 
-func (v *ComFabricKeyValueStoreItemMetadataEnumerator2) VTable() *ComFabricKeyValueStoreItemMetadataEnumerator2Vtbl {
-	return (*ComFabricKeyValueStoreItemMetadataEnumerator2Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricKeyValueStoreItemMetadataEnumerator2) VTable() *comFabricKeyValueStoreItemMetadataEnumerator2Vtbl {
+	return (*comFabricKeyValueStoreItemMetadataEnumerator2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricKeyValueStoreItemMetadataEnumerator2) TryMoveNext() (success bool, err error) {
@@ -7085,13 +7085,13 @@ type ComFabricKeyValueStoreNotificationEnumerator2 struct {
 	ComFabricKeyValueStoreNotificationEnumerator
 }
 
-type ComFabricKeyValueStoreNotificationEnumerator2Vtbl struct {
-	ComFabricKeyValueStoreNotificationEnumeratorVtbl
+type comFabricKeyValueStoreNotificationEnumerator2Vtbl struct {
+	comFabricKeyValueStoreNotificationEnumeratorVtbl
 	TryMoveNext uintptr
 }
 
-func (v *ComFabricKeyValueStoreNotificationEnumerator2) VTable() *ComFabricKeyValueStoreNotificationEnumerator2Vtbl {
-	return (*ComFabricKeyValueStoreNotificationEnumerator2Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricKeyValueStoreNotificationEnumerator2) VTable() *comFabricKeyValueStoreNotificationEnumerator2Vtbl {
+	return (*comFabricKeyValueStoreNotificationEnumerator2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricKeyValueStoreNotificationEnumerator2) TryMoveNext() (success bool, err error) {
@@ -7127,13 +7127,13 @@ type ComFabricKeyValueStoreItemResult struct {
 	ole.IUnknown
 }
 
-type ComFabricKeyValueStoreItemResultVtbl struct {
+type comFabricKeyValueStoreItemResultVtbl struct {
 	ole.IUnknownVtbl
 	get_Item uintptr
 }
 
-func (v *ComFabricKeyValueStoreItemResult) VTable() *ComFabricKeyValueStoreItemResultVtbl {
-	return (*ComFabricKeyValueStoreItemResultVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricKeyValueStoreItemResult) VTable() *comFabricKeyValueStoreItemResultVtbl {
+	return (*comFabricKeyValueStoreItemResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricKeyValueStoreItemResult) GetItem() (rt *FabricKeyValueStoreItem, err error) {
@@ -7169,13 +7169,13 @@ type ComFabricKeyValueStoreItemMetadataResult struct {
 	ole.IUnknown
 }
 
-type ComFabricKeyValueStoreItemMetadataResultVtbl struct {
+type comFabricKeyValueStoreItemMetadataResultVtbl struct {
 	ole.IUnknownVtbl
 	get_Metadata uintptr
 }
 
-func (v *ComFabricKeyValueStoreItemMetadataResult) VTable() *ComFabricKeyValueStoreItemMetadataResultVtbl {
-	return (*ComFabricKeyValueStoreItemMetadataResultVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricKeyValueStoreItemMetadataResult) VTable() *comFabricKeyValueStoreItemMetadataResultVtbl {
+	return (*comFabricKeyValueStoreItemMetadataResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricKeyValueStoreItemMetadataResult) GetMetadata() (rt *FabricKeyValueStoreItemMetadata, err error) {
@@ -7211,13 +7211,13 @@ type ComFabricKeyValueStoreNotification struct {
 	ComFabricKeyValueStoreItemResult
 }
 
-type ComFabricKeyValueStoreNotificationVtbl struct {
-	ComFabricKeyValueStoreItemResultVtbl
+type comFabricKeyValueStoreNotificationVtbl struct {
+	comFabricKeyValueStoreItemResultVtbl
 	IsDelete uintptr
 }
 
-func (v *ComFabricKeyValueStoreNotification) VTable() *ComFabricKeyValueStoreNotificationVtbl {
-	return (*ComFabricKeyValueStoreNotificationVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricKeyValueStoreNotification) VTable() *comFabricKeyValueStoreNotificationVtbl {
+	return (*comFabricKeyValueStoreNotificationVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricKeyValueStoreNotification) IsDelete() (rt bool, err error) {
@@ -7247,13 +7247,13 @@ type ComFabricStoreEventHandler struct {
 	ole.IUnknown
 }
 
-type ComFabricStoreEventHandlerVtbl struct {
+type comFabricStoreEventHandlerVtbl struct {
 	ole.IUnknownVtbl
 	OnDataLoss uintptr
 }
 
-func (v *ComFabricStoreEventHandler) VTable() *ComFabricStoreEventHandlerVtbl {
-	return (*ComFabricStoreEventHandlerVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricStoreEventHandler) VTable() *comFabricStoreEventHandlerVtbl {
+	return (*comFabricStoreEventHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricStoreEventHandler) OnDataLoss() (rt interface{}, err error) {
@@ -7289,14 +7289,14 @@ type ComFabricStoreEventHandler2 struct {
 	ComFabricStoreEventHandler
 }
 
-type ComFabricStoreEventHandler2Vtbl struct {
-	ComFabricStoreEventHandlerVtbl
+type comFabricStoreEventHandler2Vtbl struct {
+	comFabricStoreEventHandlerVtbl
 	BeginOnDataLoss uintptr
 	EndOnDataLoss   uintptr
 }
 
-func (v *ComFabricStoreEventHandler2) VTable() *ComFabricStoreEventHandler2Vtbl {
-	return (*ComFabricStoreEventHandler2Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricStoreEventHandler2) VTable() *comFabricStoreEventHandler2Vtbl {
+	return (*comFabricStoreEventHandler2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricStoreEventHandler2) beginOnDataLoss(
@@ -7409,14 +7409,14 @@ type ComFabricStorePostBackupHandler struct {
 	ole.IUnknown
 }
 
-type ComFabricStorePostBackupHandlerVtbl struct {
+type comFabricStorePostBackupHandlerVtbl struct {
 	ole.IUnknownVtbl
 	BeginPostBackup uintptr
 	EndPostBackup   uintptr
 }
 
-func (v *ComFabricStorePostBackupHandler) VTable() *ComFabricStorePostBackupHandlerVtbl {
-	return (*ComFabricStorePostBackupHandlerVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricStorePostBackupHandler) VTable() *comFabricStorePostBackupHandlerVtbl {
+	return (*comFabricStorePostBackupHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricStorePostBackupHandler) beginPostBackup(
@@ -7537,14 +7537,14 @@ type ComFabricSecondaryEventHandler struct {
 	ole.IUnknown
 }
 
-type ComFabricSecondaryEventHandlerVtbl struct {
+type comFabricSecondaryEventHandlerVtbl struct {
 	ole.IUnknownVtbl
 	OnCopyComplete         uintptr
 	OnReplicationOperation uintptr
 }
 
-func (v *ComFabricSecondaryEventHandler) VTable() *ComFabricSecondaryEventHandlerVtbl {
-	return (*ComFabricSecondaryEventHandlerVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricSecondaryEventHandler) VTable() *comFabricSecondaryEventHandlerVtbl {
+	return (*comFabricSecondaryEventHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricSecondaryEventHandler) OnCopyComplete(
@@ -7594,13 +7594,13 @@ type ComFabricNodeContextResult struct {
 	ole.IUnknown
 }
 
-type ComFabricNodeContextResultVtbl struct {
+type comFabricNodeContextResultVtbl struct {
 	ole.IUnknownVtbl
 	get_NodeContext uintptr
 }
 
-func (v *ComFabricNodeContextResult) VTable() *ComFabricNodeContextResultVtbl {
-	return (*ComFabricNodeContextResultVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricNodeContextResult) VTable() *comFabricNodeContextResultVtbl {
+	return (*comFabricNodeContextResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricNodeContextResult) GetNodeContext() (rt *FabricNodeContext, err error) {
@@ -7636,13 +7636,13 @@ type ComFabricNodeContextResult2 struct {
 	ComFabricNodeContextResult
 }
 
-type ComFabricNodeContextResult2Vtbl struct {
-	ComFabricNodeContextResultVtbl
+type comFabricNodeContextResult2Vtbl struct {
+	comFabricNodeContextResultVtbl
 	GetDirectory uintptr
 }
 
-func (v *ComFabricNodeContextResult2) VTable() *ComFabricNodeContextResult2Vtbl {
-	return (*ComFabricNodeContextResult2Vtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricNodeContextResult2) VTable() *comFabricNodeContextResult2Vtbl {
+	return (*comFabricNodeContextResult2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricNodeContextResult2) GetDirectory(
@@ -7684,13 +7684,13 @@ type ComFabricReplicatorSettingsResult struct {
 	ole.IUnknown
 }
 
-type ComFabricReplicatorSettingsResultVtbl struct {
+type comFabricReplicatorSettingsResultVtbl struct {
 	ole.IUnknownVtbl
 	get_ReplicatorSettings uintptr
 }
 
-func (v *ComFabricReplicatorSettingsResult) VTable() *ComFabricReplicatorSettingsResultVtbl {
-	return (*ComFabricReplicatorSettingsResultVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricReplicatorSettingsResult) VTable() *comFabricReplicatorSettingsResultVtbl {
+	return (*comFabricReplicatorSettingsResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricReplicatorSettingsResult) GetReplicatorSettings() (rt *FabricReplicatorSettings, err error) {
@@ -7726,13 +7726,13 @@ type ComFabricEseLocalStoreSettingsResult struct {
 	ole.IUnknown
 }
 
-type ComFabricEseLocalStoreSettingsResultVtbl struct {
+type comFabricEseLocalStoreSettingsResultVtbl struct {
 	ole.IUnknownVtbl
 	get_Settings uintptr
 }
 
-func (v *ComFabricEseLocalStoreSettingsResult) VTable() *ComFabricEseLocalStoreSettingsResultVtbl {
-	return (*ComFabricEseLocalStoreSettingsResultVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricEseLocalStoreSettingsResult) VTable() *comFabricEseLocalStoreSettingsResultVtbl {
+	return (*comFabricEseLocalStoreSettingsResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricEseLocalStoreSettingsResult) GetSettings() (rt *FabricEseLocalStoreSettings, err error) {
@@ -7768,13 +7768,13 @@ type ComFabricSecurityCredentialsResult struct {
 	ole.IUnknown
 }
 
-type ComFabricSecurityCredentialsResultVtbl struct {
+type comFabricSecurityCredentialsResultVtbl struct {
 	ole.IUnknownVtbl
 	get_SecurityCredentials uintptr
 }
 
-func (v *ComFabricSecurityCredentialsResult) VTable() *ComFabricSecurityCredentialsResultVtbl {
-	return (*ComFabricSecurityCredentialsResultVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricSecurityCredentialsResult) VTable() *comFabricSecurityCredentialsResultVtbl {
+	return (*comFabricSecurityCredentialsResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricSecurityCredentialsResult) GetSecurityCredentials() (rt *FabricSecurityCredentials, err error) {
@@ -7810,7 +7810,7 @@ type ComFabricCodePackageActivator struct {
 	ole.IUnknown
 }
 
-type ComFabricCodePackageActivatorVtbl struct {
+type comFabricCodePackageActivatorVtbl struct {
 	ole.IUnknownVtbl
 	BeginActivateCodePackage          uintptr
 	EndActivateCodePackage            uintptr
@@ -7821,8 +7821,8 @@ type ComFabricCodePackageActivatorVtbl struct {
 	UnregisterCodePackageEventHandler uintptr
 }
 
-func (v *ComFabricCodePackageActivator) VTable() *ComFabricCodePackageActivatorVtbl {
-	return (*ComFabricCodePackageActivatorVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricCodePackageActivator) VTable() *comFabricCodePackageActivatorVtbl {
+	return (*comFabricCodePackageActivatorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricCodePackageActivator) beginActivateCodePackage(
@@ -8182,13 +8182,13 @@ type ComFabricCodePackageEventHandler struct {
 	ole.IUnknown
 }
 
-type ComFabricCodePackageEventHandlerVtbl struct {
+type comFabricCodePackageEventHandlerVtbl struct {
 	ole.IUnknownVtbl
 	OnCodePackageEvent uintptr
 }
 
-func (v *ComFabricCodePackageEventHandler) VTable() *ComFabricCodePackageEventHandlerVtbl {
-	return (*ComFabricCodePackageEventHandlerVtbl)(unsafe.Pointer(v.RawVTable))
+func (v *ComFabricCodePackageEventHandler) VTable() *comFabricCodePackageEventHandlerVtbl {
+	return (*comFabricCodePackageEventHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricCodePackageEventHandler) OnCodePackageEvent(
