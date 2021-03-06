@@ -45,7 +45,7 @@ func (v *ComFabricRuntime) vtable() *comFabricRuntimeVtbl {
 
 func (v *ComFabricRuntime) beginRegisterStatelessServiceFactory(
 	serviceTypeName string,
-	factory *ComFabricStatelessServiceFactory,
+	factory *comFabricStatelessServiceFactory,
 	timeoutMilliseconds uint32,
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
@@ -75,7 +75,7 @@ func (v *ComFabricRuntime) beginRegisterStatelessServiceFactory(
 }
 func (v *ComFabricRuntime) RegisterStatelessServiceFactory(
 	serviceTypeName string,
-	factory *ComFabricStatelessServiceFactory,
+	factory *comFabricStatelessServiceFactory,
 ) (err error) {
 	var p_0 *uint16
 	s_2, _ := windows.UTF16PtrFromString(serviceTypeName)
@@ -96,7 +96,7 @@ func (v *ComFabricRuntime) RegisterStatelessServiceFactory(
 }
 func (v *ComFabricRuntime) beginRegisterStatefulServiceFactory(
 	serviceTypeName string,
-	factory *ComFabricStatefulServiceFactory,
+	factory *comFabricStatefulServiceFactory,
 	timeoutMilliseconds uint32,
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
@@ -126,7 +126,7 @@ func (v *ComFabricRuntime) beginRegisterStatefulServiceFactory(
 }
 func (v *ComFabricRuntime) RegisterStatefulServiceFactory(
 	serviceTypeName string,
-	factory *ComFabricStatefulServiceFactory,
+	factory *comFabricStatefulServiceFactory,
 ) (err error) {
 	var p_0 *uint16
 	s_4, _ := windows.UTF16PtrFromString(serviceTypeName)
@@ -215,7 +215,7 @@ func (v *ComFabricRuntime) RegisterServiceGroupFactory(
 	return
 }
 
-type ComFabricStatelessServiceFactory struct {
+type comFabricStatelessServiceFactory struct {
 	ole.IUnknown
 }
 
@@ -224,18 +224,18 @@ type comFabricStatelessServiceFactoryVtbl struct {
 	CreateInstance uintptr
 }
 
-func (v *ComFabricStatelessServiceFactory) vtable() *comFabricStatelessServiceFactoryVtbl {
+func (v *comFabricStatelessServiceFactory) vtable() *comFabricStatelessServiceFactoryVtbl {
 	return (*comFabricStatelessServiceFactoryVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricStatelessServiceFactory) CreateInstance(
+func (v *comFabricStatelessServiceFactory) CreateInstance(
 	serviceTypeName string,
 	serviceName string,
 	initializationDataLength uint32,
 	initializationData *byte,
 	partitionId windows.GUID,
 	instanceId int64,
-) (serviceInstance *ComFabricStatelessServiceInstance, err error) {
+) (serviceInstance *comFabricStatelessServiceInstance, err error) {
 	var p_0 *uint16
 	s_7, _ := windows.UTF16PtrFromString(serviceTypeName)
 	p_0 = s_7
@@ -244,7 +244,7 @@ func (v *ComFabricStatelessServiceFactory) CreateInstance(
 	s_8, _ := windows.UTF16PtrFromString(serviceName)
 	p_1 = s_8
 
-	var p_6 *ComFabricStatelessServiceInstance
+	var p_6 *comFabricStatelessServiceInstance
 	defer func() {
 		serviceInstance = p_6
 	}()
@@ -268,7 +268,7 @@ func (v *ComFabricStatelessServiceFactory) CreateInstance(
 	return
 }
 
-type ComFabricStatelessServiceInstance struct {
+type comFabricStatelessServiceInstance struct {
 	ole.IUnknown
 }
 
@@ -281,12 +281,12 @@ type comFabricStatelessServiceInstanceVtbl struct {
 	Abort      uintptr
 }
 
-func (v *ComFabricStatelessServiceInstance) vtable() *comFabricStatelessServiceInstanceVtbl {
+func (v *comFabricStatelessServiceInstance) vtable() *comFabricStatelessServiceInstanceVtbl {
 	return (*comFabricStatelessServiceInstanceVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricStatelessServiceInstance) beginOpen(
-	partition *ComFabricStatelessServicePartition,
+func (v *comFabricStatelessServiceInstance) beginOpen(
+	partition *comFabricStatelessServicePartition,
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
 	var p_2 *comIFabricAsyncOperationContext
@@ -309,7 +309,7 @@ func (v *ComFabricStatelessServiceInstance) beginOpen(
 	}
 	return
 }
-func (v *ComFabricStatelessServiceInstance) beginClose(
+func (v *comFabricStatelessServiceInstance) beginClose(
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
 	var p_1 *comIFabricAsyncOperationContext
@@ -329,7 +329,7 @@ func (v *ComFabricStatelessServiceInstance) beginClose(
 	}
 	return
 }
-func (v *ComFabricStatelessServiceInstance) endClose(
+func (v *comFabricStatelessServiceInstance) endClose(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
@@ -345,7 +345,7 @@ func (v *ComFabricStatelessServiceInstance) endClose(
 	}
 	return
 }
-func (v *ComFabricStatelessServiceInstance) Abort() (rt interface{}, err error) {
+func (v *comFabricStatelessServiceInstance) Abort() (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().Abort,
 		1,
@@ -363,7 +363,7 @@ func (v *ComFabricStatelessServiceInstance) Abort() (rt interface{}, err error) 
 	rt = fromUnsafePointer(tmp)
 	return
 }
-func (v *ComFabricStatelessServiceInstance) Close(
+func (v *comFabricStatelessServiceInstance) Close(
 	ctx context.Context,
 ) (err error) {
 	ch := make(chan error, 1)
@@ -418,7 +418,7 @@ func (v *ComFabricStatelessServiceInstance) Close(
 
 }
 
-type ComFabricStatelessServicePartition struct {
+type comFabricStatelessServicePartition struct {
 	ole.IUnknown
 }
 
@@ -429,11 +429,11 @@ type comFabricStatelessServicePartitionVtbl struct {
 	ReportFault      uintptr
 }
 
-func (v *ComFabricStatelessServicePartition) vtable() *comFabricStatelessServicePartitionVtbl {
+func (v *comFabricStatelessServicePartition) vtable() *comFabricStatelessServicePartitionVtbl {
 	return (*comFabricStatelessServicePartitionVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricStatelessServicePartition) GetPartitionInfo() (bufferedValue *FabricServicePartitionInformation, err error) {
+func (v *comFabricStatelessServicePartition) GetPartitionInfo() (bufferedValue *FabricServicePartitionInformation, err error) {
 	var p_0 *innerFabricServicePartitionInformation
 	defer func() {
 		bufferedValue = p_0.toGoStruct()
@@ -451,7 +451,7 @@ func (v *ComFabricStatelessServicePartition) GetPartitionInfo() (bufferedValue *
 	}
 	return
 }
-func (v *ComFabricStatelessServicePartition) ReportLoad(
+func (v *comFabricStatelessServicePartition) ReportLoad(
 	metricCount uint32,
 	metrics *FabricLoadMetric,
 ) (err error) {
@@ -470,7 +470,7 @@ func (v *ComFabricStatelessServicePartition) ReportLoad(
 	}
 	return
 }
-func (v *ComFabricStatelessServicePartition) ReportFault(
+func (v *comFabricStatelessServicePartition) ReportFault(
 	faultType FabricFaultType,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
@@ -487,8 +487,8 @@ func (v *ComFabricStatelessServicePartition) ReportFault(
 	return
 }
 
-type ComFabricStatelessServicePartition1 struct {
-	ComFabricStatelessServicePartition
+type comFabricStatelessServicePartition1 struct {
+	comFabricStatelessServicePartition
 }
 
 type comFabricStatelessServicePartition1Vtbl struct {
@@ -496,11 +496,11 @@ type comFabricStatelessServicePartition1Vtbl struct {
 	ReportMoveCost uintptr
 }
 
-func (v *ComFabricStatelessServicePartition1) vtable() *comFabricStatelessServicePartition1Vtbl {
+func (v *comFabricStatelessServicePartition1) vtable() *comFabricStatelessServicePartition1Vtbl {
 	return (*comFabricStatelessServicePartition1Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricStatelessServicePartition1) ReportMoveCost(
+func (v *comFabricStatelessServicePartition1) ReportMoveCost(
 	moveCost FabricMoveCost,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
@@ -517,8 +517,8 @@ func (v *ComFabricStatelessServicePartition1) ReportMoveCost(
 	return
 }
 
-type ComFabricStatelessServicePartition2 struct {
-	ComFabricStatelessServicePartition1
+type comFabricStatelessServicePartition2 struct {
+	comFabricStatelessServicePartition1
 }
 
 type comFabricStatelessServicePartition2Vtbl struct {
@@ -527,11 +527,11 @@ type comFabricStatelessServicePartition2Vtbl struct {
 	ReportPartitionHealth uintptr
 }
 
-func (v *ComFabricStatelessServicePartition2) vtable() *comFabricStatelessServicePartition2Vtbl {
+func (v *comFabricStatelessServicePartition2) vtable() *comFabricStatelessServicePartition2Vtbl {
 	return (*comFabricStatelessServicePartition2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricStatelessServicePartition2) ReportInstanceHealth(
+func (v *comFabricStatelessServicePartition2) ReportInstanceHealth(
 	healthInfo *FabricHealthInformation,
 ) (err error) {
 	var p_0 *innerFabricHealthInformation
@@ -549,7 +549,7 @@ func (v *ComFabricStatelessServicePartition2) ReportInstanceHealth(
 	}
 	return
 }
-func (v *ComFabricStatelessServicePartition2) ReportPartitionHealth(
+func (v *comFabricStatelessServicePartition2) ReportPartitionHealth(
 	healthInfo *FabricHealthInformation,
 ) (err error) {
 	var p_0 *innerFabricHealthInformation
@@ -568,8 +568,8 @@ func (v *ComFabricStatelessServicePartition2) ReportPartitionHealth(
 	return
 }
 
-type ComFabricStatelessServicePartition3 struct {
-	ComFabricStatelessServicePartition2
+type comFabricStatelessServicePartition3 struct {
+	comFabricStatelessServicePartition2
 }
 
 type comFabricStatelessServicePartition3Vtbl struct {
@@ -578,11 +578,11 @@ type comFabricStatelessServicePartition3Vtbl struct {
 	ReportPartitionHealth2 uintptr
 }
 
-func (v *ComFabricStatelessServicePartition3) vtable() *comFabricStatelessServicePartition3Vtbl {
+func (v *comFabricStatelessServicePartition3) vtable() *comFabricStatelessServicePartition3Vtbl {
 	return (*comFabricStatelessServicePartition3Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricStatelessServicePartition3) ReportInstanceHealth2(
+func (v *comFabricStatelessServicePartition3) ReportInstanceHealth2(
 	healthInfo *FabricHealthInformation,
 	sendOptions *FabricHealthReportSendOptions,
 ) (err error) {
@@ -603,7 +603,7 @@ func (v *ComFabricStatelessServicePartition3) ReportInstanceHealth2(
 	}
 	return
 }
-func (v *ComFabricStatelessServicePartition3) ReportPartitionHealth2(
+func (v *comFabricStatelessServicePartition3) ReportPartitionHealth2(
 	healthInfo *FabricHealthInformation,
 	sendOptions *FabricHealthReportSendOptions,
 ) (err error) {
@@ -625,7 +625,7 @@ func (v *ComFabricStatelessServicePartition3) ReportPartitionHealth2(
 	return
 }
 
-type ComFabricStatefulServiceFactory struct {
+type comFabricStatefulServiceFactory struct {
 	ole.IUnknown
 }
 
@@ -634,18 +634,18 @@ type comFabricStatefulServiceFactoryVtbl struct {
 	CreateReplica uintptr
 }
 
-func (v *ComFabricStatefulServiceFactory) vtable() *comFabricStatefulServiceFactoryVtbl {
+func (v *comFabricStatefulServiceFactory) vtable() *comFabricStatefulServiceFactoryVtbl {
 	return (*comFabricStatefulServiceFactoryVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricStatefulServiceFactory) CreateReplica(
+func (v *comFabricStatefulServiceFactory) CreateReplica(
 	serviceTypeName string,
 	serviceName string,
 	initializationDataLength uint32,
 	initializationData *byte,
 	partitionId windows.GUID,
 	replicaId int64,
-) (serviceReplica *ComFabricStatefulServiceReplica, err error) {
+) (serviceReplica *comFabricStatefulServiceReplica, err error) {
 	var p_0 *uint16
 	s_9, _ := windows.UTF16PtrFromString(serviceTypeName)
 	p_0 = s_9
@@ -654,7 +654,7 @@ func (v *ComFabricStatefulServiceFactory) CreateReplica(
 	s_10, _ := windows.UTF16PtrFromString(serviceName)
 	p_1 = s_10
 
-	var p_6 *ComFabricStatefulServiceReplica
+	var p_6 *comFabricStatefulServiceReplica
 	defer func() {
 		serviceReplica = p_6
 	}()
@@ -678,7 +678,7 @@ func (v *ComFabricStatefulServiceFactory) CreateReplica(
 	return
 }
 
-type ComFabricStatefulServiceReplica struct {
+type comFabricStatefulServiceReplica struct {
 	ole.IUnknown
 }
 
@@ -693,13 +693,13 @@ type comFabricStatefulServiceReplicaVtbl struct {
 	Abort           uintptr
 }
 
-func (v *ComFabricStatefulServiceReplica) vtable() *comFabricStatefulServiceReplicaVtbl {
+func (v *comFabricStatefulServiceReplica) vtable() *comFabricStatefulServiceReplicaVtbl {
 	return (*comFabricStatefulServiceReplicaVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricStatefulServiceReplica) beginOpen(
+func (v *comFabricStatefulServiceReplica) beginOpen(
 	openMode FabricReplicaOpenMode,
-	partition *ComFabricStatefulServicePartition,
+	partition *comFabricStatefulServicePartition,
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
 	var p_3 *comIFabricAsyncOperationContext
@@ -722,7 +722,7 @@ func (v *ComFabricStatefulServiceReplica) beginOpen(
 	}
 	return
 }
-func (v *ComFabricStatefulServiceReplica) beginChangeRole(
+func (v *comFabricStatefulServiceReplica) beginChangeRole(
 	newRole FabricReplicaRole,
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
@@ -746,10 +746,10 @@ func (v *ComFabricStatefulServiceReplica) beginChangeRole(
 	}
 	return
 }
-func (v *ComFabricStatefulServiceReplica) endChangeRole(
+func (v *comFabricStatefulServiceReplica) endChangeRole(
 	context *comIFabricAsyncOperationContext,
-) (serviceAddress *ComFabricStringResult, err error) {
-	var p_1 *ComFabricStringResult
+) (serviceAddress *comFabricStringResult, err error) {
+	var p_1 *comFabricStringResult
 	defer func() {
 		serviceAddress = p_1
 	}()
@@ -766,7 +766,7 @@ func (v *ComFabricStatefulServiceReplica) endChangeRole(
 	}
 	return
 }
-func (v *ComFabricStatefulServiceReplica) beginClose(
+func (v *comFabricStatefulServiceReplica) beginClose(
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
 	var p_1 *comIFabricAsyncOperationContext
@@ -786,7 +786,7 @@ func (v *ComFabricStatefulServiceReplica) beginClose(
 	}
 	return
 }
-func (v *ComFabricStatefulServiceReplica) endClose(
+func (v *comFabricStatefulServiceReplica) endClose(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
@@ -802,7 +802,7 @@ func (v *ComFabricStatefulServiceReplica) endClose(
 	}
 	return
 }
-func (v *ComFabricStatefulServiceReplica) Abort() (rt interface{}, err error) {
+func (v *comFabricStatefulServiceReplica) Abort() (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().Abort,
 		1,
@@ -820,7 +820,7 @@ func (v *ComFabricStatefulServiceReplica) Abort() (rt interface{}, err error) {
 	rt = fromUnsafePointer(tmp)
 	return
 }
-func (v *ComFabricStatefulServiceReplica) ChangeRole(
+func (v *comFabricStatefulServiceReplica) ChangeRole(
 	ctx context.Context,
 	newRole FabricReplicaRole,
 ) (result_0 string, err error) {
@@ -877,7 +877,7 @@ func (v *ComFabricStatefulServiceReplica) ChangeRole(
 	}
 
 }
-func (v *ComFabricStatefulServiceReplica) Close(
+func (v *comFabricStatefulServiceReplica) Close(
 	ctx context.Context,
 ) (err error) {
 	ch := make(chan error, 1)
@@ -932,7 +932,7 @@ func (v *ComFabricStatefulServiceReplica) Close(
 
 }
 
-type ComFabricStatefulServicePartition struct {
+type comFabricStatefulServicePartition struct {
 	ole.IUnknown
 }
 
@@ -946,11 +946,11 @@ type comFabricStatefulServicePartitionVtbl struct {
 	ReportFault      uintptr
 }
 
-func (v *ComFabricStatefulServicePartition) vtable() *comFabricStatefulServicePartitionVtbl {
+func (v *comFabricStatefulServicePartition) vtable() *comFabricStatefulServicePartitionVtbl {
 	return (*comFabricStatefulServicePartitionVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricStatefulServicePartition) GetPartitionInfo() (bufferedValue *FabricServicePartitionInformation, err error) {
+func (v *comFabricStatefulServicePartition) GetPartitionInfo() (bufferedValue *FabricServicePartitionInformation, err error) {
 	var p_0 *innerFabricServicePartitionInformation
 	defer func() {
 		bufferedValue = p_0.toGoStruct()
@@ -968,7 +968,7 @@ func (v *ComFabricStatefulServicePartition) GetPartitionInfo() (bufferedValue *F
 	}
 	return
 }
-func (v *ComFabricStatefulServicePartition) GetReadStatus() (readStatus FabricServicePartitionAccessStatus, err error) {
+func (v *comFabricStatefulServicePartition) GetReadStatus() (readStatus FabricServicePartitionAccessStatus, err error) {
 	var p_0 FabricServicePartitionAccessStatus
 	defer func() {
 		readStatus = p_0
@@ -986,7 +986,7 @@ func (v *ComFabricStatefulServicePartition) GetReadStatus() (readStatus FabricSe
 	}
 	return
 }
-func (v *ComFabricStatefulServicePartition) GetWriteStatus() (writeStatus FabricServicePartitionAccessStatus, err error) {
+func (v *comFabricStatefulServicePartition) GetWriteStatus() (writeStatus FabricServicePartitionAccessStatus, err error) {
 	var p_0 FabricServicePartitionAccessStatus
 	defer func() {
 		writeStatus = p_0
@@ -1004,17 +1004,17 @@ func (v *ComFabricStatefulServicePartition) GetWriteStatus() (writeStatus Fabric
 	}
 	return
 }
-func (v *ComFabricStatefulServicePartition) CreateReplicator(
-	stateProvider *ComFabricStateProvider,
+func (v *comFabricStatefulServicePartition) CreateReplicator(
+	stateProvider *comFabricStateProvider,
 	replicatorSettings *FabricReplicatorSettings,
-) (replicator *ComFabricReplicator, stateReplicator *ComFabricStateReplicator, err error) {
+) (replicator *comFabricReplicator, stateReplicator *comFabricStateReplicator, err error) {
 	var p_1 *innerFabricReplicatorSettings
 	p_1 = replicatorSettings.toInnerStruct()
-	var p_2 *ComFabricReplicator
+	var p_2 *comFabricReplicator
 	defer func() {
 		replicator = p_2
 	}()
-	var p_3 *ComFabricStateReplicator
+	var p_3 *comFabricStateReplicator
 	defer func() {
 		stateReplicator = p_3
 	}()
@@ -1034,7 +1034,7 @@ func (v *ComFabricStatefulServicePartition) CreateReplicator(
 	}
 	return
 }
-func (v *ComFabricStatefulServicePartition) ReportLoad(
+func (v *comFabricStatefulServicePartition) ReportLoad(
 	metricCount uint32,
 	metrics *FabricLoadMetric,
 ) (err error) {
@@ -1053,7 +1053,7 @@ func (v *ComFabricStatefulServicePartition) ReportLoad(
 	}
 	return
 }
-func (v *ComFabricStatefulServicePartition) ReportFault(
+func (v *comFabricStatefulServicePartition) ReportFault(
 	faultType FabricFaultType,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
@@ -1070,8 +1070,8 @@ func (v *ComFabricStatefulServicePartition) ReportFault(
 	return
 }
 
-type ComFabricStatefulServicePartition1 struct {
-	ComFabricStatefulServicePartition
+type comFabricStatefulServicePartition1 struct {
+	comFabricStatefulServicePartition
 }
 
 type comFabricStatefulServicePartition1Vtbl struct {
@@ -1079,11 +1079,11 @@ type comFabricStatefulServicePartition1Vtbl struct {
 	ReportMoveCost uintptr
 }
 
-func (v *ComFabricStatefulServicePartition1) vtable() *comFabricStatefulServicePartition1Vtbl {
+func (v *comFabricStatefulServicePartition1) vtable() *comFabricStatefulServicePartition1Vtbl {
 	return (*comFabricStatefulServicePartition1Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricStatefulServicePartition1) ReportMoveCost(
+func (v *comFabricStatefulServicePartition1) ReportMoveCost(
 	moveCost FabricMoveCost,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
@@ -1100,8 +1100,8 @@ func (v *ComFabricStatefulServicePartition1) ReportMoveCost(
 	return
 }
 
-type ComFabricStatefulServicePartition2 struct {
-	ComFabricStatefulServicePartition1
+type comFabricStatefulServicePartition2 struct {
+	comFabricStatefulServicePartition1
 }
 
 type comFabricStatefulServicePartition2Vtbl struct {
@@ -1110,11 +1110,11 @@ type comFabricStatefulServicePartition2Vtbl struct {
 	ReportPartitionHealth uintptr
 }
 
-func (v *ComFabricStatefulServicePartition2) vtable() *comFabricStatefulServicePartition2Vtbl {
+func (v *comFabricStatefulServicePartition2) vtable() *comFabricStatefulServicePartition2Vtbl {
 	return (*comFabricStatefulServicePartition2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricStatefulServicePartition2) ReportReplicaHealth(
+func (v *comFabricStatefulServicePartition2) ReportReplicaHealth(
 	healthInfo *FabricHealthInformation,
 ) (err error) {
 	var p_0 *innerFabricHealthInformation
@@ -1132,7 +1132,7 @@ func (v *ComFabricStatefulServicePartition2) ReportReplicaHealth(
 	}
 	return
 }
-func (v *ComFabricStatefulServicePartition2) ReportPartitionHealth(
+func (v *comFabricStatefulServicePartition2) ReportPartitionHealth(
 	healthInfo *FabricHealthInformation,
 ) (err error) {
 	var p_0 *innerFabricHealthInformation
@@ -1151,8 +1151,8 @@ func (v *ComFabricStatefulServicePartition2) ReportPartitionHealth(
 	return
 }
 
-type ComFabricStatefulServicePartition3 struct {
-	ComFabricStatefulServicePartition2
+type comFabricStatefulServicePartition3 struct {
+	comFabricStatefulServicePartition2
 }
 
 type comFabricStatefulServicePartition3Vtbl struct {
@@ -1161,11 +1161,11 @@ type comFabricStatefulServicePartition3Vtbl struct {
 	ReportPartitionHealth2 uintptr
 }
 
-func (v *ComFabricStatefulServicePartition3) vtable() *comFabricStatefulServicePartition3Vtbl {
+func (v *comFabricStatefulServicePartition3) vtable() *comFabricStatefulServicePartition3Vtbl {
 	return (*comFabricStatefulServicePartition3Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricStatefulServicePartition3) ReportReplicaHealth2(
+func (v *comFabricStatefulServicePartition3) ReportReplicaHealth2(
 	healthInfo *FabricHealthInformation,
 	sendOptions *FabricHealthReportSendOptions,
 ) (err error) {
@@ -1186,7 +1186,7 @@ func (v *ComFabricStatefulServicePartition3) ReportReplicaHealth2(
 	}
 	return
 }
-func (v *ComFabricStatefulServicePartition3) ReportPartitionHealth2(
+func (v *comFabricStatefulServicePartition3) ReportPartitionHealth2(
 	healthInfo *FabricHealthInformation,
 	sendOptions *FabricHealthReportSendOptions,
 ) (err error) {
@@ -1208,7 +1208,7 @@ func (v *ComFabricStatefulServicePartition3) ReportPartitionHealth2(
 	return
 }
 
-type ComFabricStateReplicator struct {
+type comFabricStateReplicator struct {
 	ole.IUnknown
 }
 
@@ -1221,12 +1221,12 @@ type comFabricStateReplicatorVtbl struct {
 	UpdateReplicatorSettings uintptr
 }
 
-func (v *ComFabricStateReplicator) vtable() *comFabricStateReplicatorVtbl {
+func (v *comFabricStateReplicator) vtable() *comFabricStateReplicatorVtbl {
 	return (*comFabricStateReplicatorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricStateReplicator) beginReplicate(
-	operationData *ComFabricOperationData,
+func (v *comFabricStateReplicator) beginReplicate(
+	operationData *comFabricOperationData,
 	callback *comIFabricAsyncOperationCallback,
 ) (sequenceNumber int64, context *comIFabricAsyncOperationContext, err error) {
 	var p_2 int64
@@ -1253,7 +1253,7 @@ func (v *ComFabricStateReplicator) beginReplicate(
 	}
 	return
 }
-func (v *ComFabricStateReplicator) endReplicate(
+func (v *comFabricStateReplicator) endReplicate(
 	context *comIFabricAsyncOperationContext,
 ) (sequenceNumber int64, err error) {
 	var p_1 int64
@@ -1273,8 +1273,8 @@ func (v *ComFabricStateReplicator) endReplicate(
 	}
 	return
 }
-func (v *ComFabricStateReplicator) GetReplicationStream() (stream *ComFabricOperationStream, err error) {
-	var p_0 *ComFabricOperationStream
+func (v *comFabricStateReplicator) GetReplicationStream() (stream *comFabricOperationStream, err error) {
+	var p_0 *comFabricOperationStream
 	defer func() {
 		stream = p_0
 	}()
@@ -1291,8 +1291,8 @@ func (v *ComFabricStateReplicator) GetReplicationStream() (stream *ComFabricOper
 	}
 	return
 }
-func (v *ComFabricStateReplicator) GetCopyStream() (stream *ComFabricOperationStream, err error) {
-	var p_0 *ComFabricOperationStream
+func (v *comFabricStateReplicator) GetCopyStream() (stream *comFabricOperationStream, err error) {
+	var p_0 *comFabricOperationStream
 	defer func() {
 		stream = p_0
 	}()
@@ -1309,7 +1309,7 @@ func (v *ComFabricStateReplicator) GetCopyStream() (stream *ComFabricOperationSt
 	}
 	return
 }
-func (v *ComFabricStateReplicator) UpdateReplicatorSettings(
+func (v *comFabricStateReplicator) UpdateReplicatorSettings(
 	replicatorSettings *FabricReplicatorSettings,
 ) (err error) {
 	var p_0 *innerFabricReplicatorSettings
@@ -1327,9 +1327,9 @@ func (v *ComFabricStateReplicator) UpdateReplicatorSettings(
 	}
 	return
 }
-func (v *ComFabricStateReplicator) Replicate(
+func (v *comFabricStateReplicator) Replicate(
 	ctx context.Context,
-	operationData *ComFabricOperationData,
+	operationData *comFabricOperationData,
 	sequenceNumber *int64,
 ) (result_0 int64, err error) {
 	ch := make(chan error, 1)
@@ -1386,8 +1386,8 @@ func (v *ComFabricStateReplicator) Replicate(
 
 }
 
-type ComFabricStateReplicator2 struct {
-	ComFabricStateReplicator
+type comFabricStateReplicator2 struct {
+	comFabricStateReplicator
 }
 
 type comFabricStateReplicator2Vtbl struct {
@@ -1395,12 +1395,12 @@ type comFabricStateReplicator2Vtbl struct {
 	GetReplicatorSettings uintptr
 }
 
-func (v *ComFabricStateReplicator2) vtable() *comFabricStateReplicator2Vtbl {
+func (v *comFabricStateReplicator2) vtable() *comFabricStateReplicator2Vtbl {
 	return (*comFabricStateReplicator2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricStateReplicator2) GetReplicatorSettings() (replicatorSettings *ComFabricReplicatorSettingsResult, err error) {
-	var p_0 *ComFabricReplicatorSettingsResult
+func (v *comFabricStateReplicator2) GetReplicatorSettings() (replicatorSettings *comFabricReplicatorSettingsResult, err error) {
+	var p_0 *comFabricReplicatorSettingsResult
 	defer func() {
 		replicatorSettings = p_0
 	}()
@@ -1418,7 +1418,7 @@ func (v *ComFabricStateReplicator2) GetReplicatorSettings() (replicatorSettings 
 	return
 }
 
-type ComFabricStateProvider struct {
+type comFabricStateProvider struct {
 	ole.IUnknown
 }
 
@@ -1433,11 +1433,11 @@ type comFabricStateProviderVtbl struct {
 	GetCopyState                   uintptr
 }
 
-func (v *ComFabricStateProvider) vtable() *comFabricStateProviderVtbl {
+func (v *comFabricStateProvider) vtable() *comFabricStateProviderVtbl {
 	return (*comFabricStateProviderVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricStateProvider) beginUpdateEpoch(
+func (v *comFabricStateProvider) beginUpdateEpoch(
 	epoch *FabricEpoch,
 	previousEpochLastSequenceNumber int64,
 	callback *comIFabricAsyncOperationCallback,
@@ -1464,7 +1464,7 @@ func (v *ComFabricStateProvider) beginUpdateEpoch(
 	}
 	return
 }
-func (v *ComFabricStateProvider) endUpdateEpoch(
+func (v *comFabricStateProvider) endUpdateEpoch(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
@@ -1480,7 +1480,7 @@ func (v *ComFabricStateProvider) endUpdateEpoch(
 	}
 	return
 }
-func (v *ComFabricStateProvider) GetLastCommittedSequenceNumber() (sequenceNumber int64, err error) {
+func (v *comFabricStateProvider) GetLastCommittedSequenceNumber() (sequenceNumber int64, err error) {
 	var p_0 int64
 	defer func() {
 		sequenceNumber = p_0
@@ -1498,7 +1498,7 @@ func (v *ComFabricStateProvider) GetLastCommittedSequenceNumber() (sequenceNumbe
 	}
 	return
 }
-func (v *ComFabricStateProvider) beginOnDataLoss(
+func (v *comFabricStateProvider) beginOnDataLoss(
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
 	var p_1 *comIFabricAsyncOperationContext
@@ -1518,7 +1518,7 @@ func (v *ComFabricStateProvider) beginOnDataLoss(
 	}
 	return
 }
-func (v *ComFabricStateProvider) endOnDataLoss(
+func (v *comFabricStateProvider) endOnDataLoss(
 	context *comIFabricAsyncOperationContext,
 ) (isStateChanged bool, err error) {
 	var p_1 bool
@@ -1538,8 +1538,8 @@ func (v *ComFabricStateProvider) endOnDataLoss(
 	}
 	return
 }
-func (v *ComFabricStateProvider) GetCopyContext() (copyContextStream *ComFabricOperationDataStream, err error) {
-	var p_0 *ComFabricOperationDataStream
+func (v *comFabricStateProvider) GetCopyContext() (copyContextStream *comFabricOperationDataStream, err error) {
+	var p_0 *comFabricOperationDataStream
 	defer func() {
 		copyContextStream = p_0
 	}()
@@ -1556,11 +1556,11 @@ func (v *ComFabricStateProvider) GetCopyContext() (copyContextStream *ComFabricO
 	}
 	return
 }
-func (v *ComFabricStateProvider) GetCopyState(
+func (v *comFabricStateProvider) GetCopyState(
 	uptoSequenceNumber int64,
-	copyContextStream *ComFabricOperationDataStream,
-) (copyStateStream *ComFabricOperationDataStream, err error) {
-	var p_2 *ComFabricOperationDataStream
+	copyContextStream *comFabricOperationDataStream,
+) (copyStateStream *comFabricOperationDataStream, err error) {
+	var p_2 *comFabricOperationDataStream
 	defer func() {
 		copyStateStream = p_2
 	}()
@@ -1580,7 +1580,7 @@ func (v *ComFabricStateProvider) GetCopyState(
 	}
 	return
 }
-func (v *ComFabricStateProvider) UpdateEpoch(
+func (v *comFabricStateProvider) UpdateEpoch(
 	ctx context.Context,
 	epoch *FabricEpoch,
 	previousEpochLastSequenceNumber int64,
@@ -1638,7 +1638,7 @@ func (v *ComFabricStateProvider) UpdateEpoch(
 	}
 
 }
-func (v *ComFabricStateProvider) OnDataLoss(
+func (v *comFabricStateProvider) OnDataLoss(
 	ctx context.Context,
 ) (result_0 bool, err error) {
 	ch := make(chan error, 1)
@@ -1694,7 +1694,7 @@ func (v *ComFabricStateProvider) OnDataLoss(
 
 }
 
-type ComFabricOperation struct {
+type comFabricOperation struct {
 	ole.IUnknown
 }
 
@@ -1705,11 +1705,11 @@ type comFabricOperationVtbl struct {
 	Acknowledge  uintptr
 }
 
-func (v *ComFabricOperation) vtable() *comFabricOperationVtbl {
+func (v *comFabricOperation) vtable() *comFabricOperationVtbl {
 	return (*comFabricOperationVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricOperation) GetMetadata() (rt *FabricOperationMetadata, err error) {
+func (v *comFabricOperation) GetMetadata() (rt *FabricOperationMetadata, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_Metadata,
 		1,
@@ -1727,7 +1727,7 @@ func (v *ComFabricOperation) GetMetadata() (rt *FabricOperationMetadata, err err
 	rt = tmp.toGoStruct()
 	return
 }
-func (v *ComFabricOperation) GetData() (count uint32, buffers *FabricOperationDataBuffer, err error) {
+func (v *comFabricOperation) GetData() (count uint32, buffers *FabricOperationDataBuffer, err error) {
 	var p_0 uint32
 	defer func() {
 		count = p_0
@@ -1749,7 +1749,7 @@ func (v *ComFabricOperation) GetData() (count uint32, buffers *FabricOperationDa
 	}
 	return
 }
-func (v *ComFabricOperation) Acknowledge() (err error) {
+func (v *comFabricOperation) Acknowledge() (err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().Acknowledge,
 		1,
@@ -1764,7 +1764,7 @@ func (v *ComFabricOperation) Acknowledge() (err error) {
 	return
 }
 
-type ComFabricOperationData struct {
+type comFabricOperationData struct {
 	ole.IUnknown
 }
 
@@ -1773,11 +1773,11 @@ type comFabricOperationDataVtbl struct {
 	GetData uintptr
 }
 
-func (v *ComFabricOperationData) vtable() *comFabricOperationDataVtbl {
+func (v *comFabricOperationData) vtable() *comFabricOperationDataVtbl {
 	return (*comFabricOperationDataVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricOperationData) GetData() (count uint32, buffers *FabricOperationDataBuffer, err error) {
+func (v *comFabricOperationData) GetData() (count uint32, buffers *FabricOperationDataBuffer, err error) {
 	var p_0 uint32
 	defer func() {
 		count = p_0
@@ -1800,7 +1800,7 @@ func (v *ComFabricOperationData) GetData() (count uint32, buffers *FabricOperati
 	return
 }
 
-type ComFabricOperationStream struct {
+type comFabricOperationStream struct {
 	ole.IUnknown
 }
 
@@ -1810,11 +1810,11 @@ type comFabricOperationStreamVtbl struct {
 	EndGetOperation   uintptr
 }
 
-func (v *ComFabricOperationStream) vtable() *comFabricOperationStreamVtbl {
+func (v *comFabricOperationStream) vtable() *comFabricOperationStreamVtbl {
 	return (*comFabricOperationStreamVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricOperationStream) beginGetOperation(
+func (v *comFabricOperationStream) beginGetOperation(
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
 	var p_1 *comIFabricAsyncOperationContext
@@ -1835,8 +1835,8 @@ func (v *ComFabricOperationStream) beginGetOperation(
 	return
 }
 
-type ComFabricOperationStream2 struct {
-	ComFabricOperationStream
+type comFabricOperationStream2 struct {
+	comFabricOperationStream
 }
 
 type comFabricOperationStream2Vtbl struct {
@@ -1844,11 +1844,11 @@ type comFabricOperationStream2Vtbl struct {
 	ReportFault uintptr
 }
 
-func (v *ComFabricOperationStream2) vtable() *comFabricOperationStream2Vtbl {
+func (v *comFabricOperationStream2) vtable() *comFabricOperationStream2Vtbl {
 	return (*comFabricOperationStream2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricOperationStream2) ReportFault(
+func (v *comFabricOperationStream2) ReportFault(
 	faultType FabricFaultType,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
@@ -1865,7 +1865,7 @@ func (v *ComFabricOperationStream2) ReportFault(
 	return
 }
 
-type ComFabricOperationDataStream struct {
+type comFabricOperationDataStream struct {
 	ole.IUnknown
 }
 
@@ -1875,11 +1875,11 @@ type comFabricOperationDataStreamVtbl struct {
 	EndGetNext   uintptr
 }
 
-func (v *ComFabricOperationDataStream) vtable() *comFabricOperationDataStreamVtbl {
+func (v *comFabricOperationDataStream) vtable() *comFabricOperationDataStreamVtbl {
 	return (*comFabricOperationDataStreamVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricOperationDataStream) beginGetNext(
+func (v *comFabricOperationDataStream) beginGetNext(
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
 	var p_1 *comIFabricAsyncOperationContext
@@ -1900,7 +1900,7 @@ func (v *ComFabricOperationDataStream) beginGetNext(
 	return
 }
 
-type ComFabricReplicator struct {
+type comFabricReplicator struct {
 	ole.IUnknown
 }
 
@@ -1919,11 +1919,11 @@ type comFabricReplicatorVtbl struct {
 	GetCatchUpCapability uintptr
 }
 
-func (v *ComFabricReplicator) vtable() *comFabricReplicatorVtbl {
+func (v *comFabricReplicator) vtable() *comFabricReplicatorVtbl {
 	return (*comFabricReplicatorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricReplicator) beginOpen(
+func (v *comFabricReplicator) beginOpen(
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
 	var p_1 *comIFabricAsyncOperationContext
@@ -1943,7 +1943,7 @@ func (v *ComFabricReplicator) beginOpen(
 	}
 	return
 }
-func (v *ComFabricReplicator) beginChangeRole(
+func (v *comFabricReplicator) beginChangeRole(
 	epoch *FabricEpoch,
 	role FabricReplicaRole,
 	callback *comIFabricAsyncOperationCallback,
@@ -1970,7 +1970,7 @@ func (v *ComFabricReplicator) beginChangeRole(
 	}
 	return
 }
-func (v *ComFabricReplicator) endChangeRole(
+func (v *comFabricReplicator) endChangeRole(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
@@ -1986,7 +1986,7 @@ func (v *ComFabricReplicator) endChangeRole(
 	}
 	return
 }
-func (v *ComFabricReplicator) beginUpdateEpoch(
+func (v *comFabricReplicator) beginUpdateEpoch(
 	epoch *FabricEpoch,
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
@@ -2012,7 +2012,7 @@ func (v *ComFabricReplicator) beginUpdateEpoch(
 	}
 	return
 }
-func (v *ComFabricReplicator) endUpdateEpoch(
+func (v *comFabricReplicator) endUpdateEpoch(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
@@ -2028,7 +2028,7 @@ func (v *ComFabricReplicator) endUpdateEpoch(
 	}
 	return
 }
-func (v *ComFabricReplicator) beginClose(
+func (v *comFabricReplicator) beginClose(
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
 	var p_1 *comIFabricAsyncOperationContext
@@ -2048,7 +2048,7 @@ func (v *ComFabricReplicator) beginClose(
 	}
 	return
 }
-func (v *ComFabricReplicator) endClose(
+func (v *comFabricReplicator) endClose(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
@@ -2064,7 +2064,7 @@ func (v *ComFabricReplicator) endClose(
 	}
 	return
 }
-func (v *ComFabricReplicator) Abort() (rt interface{}, err error) {
+func (v *comFabricReplicator) Abort() (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().Abort,
 		1,
@@ -2082,7 +2082,7 @@ func (v *ComFabricReplicator) Abort() (rt interface{}, err error) {
 	rt = fromUnsafePointer(tmp)
 	return
 }
-func (v *ComFabricReplicator) GetCurrentProgress() (lastSequenceNumber int64, err error) {
+func (v *comFabricReplicator) GetCurrentProgress() (lastSequenceNumber int64, err error) {
 	var p_0 int64
 	defer func() {
 		lastSequenceNumber = p_0
@@ -2100,7 +2100,7 @@ func (v *ComFabricReplicator) GetCurrentProgress() (lastSequenceNumber int64, er
 	}
 	return
 }
-func (v *ComFabricReplicator) GetCatchUpCapability() (fromSequenceNumber int64, err error) {
+func (v *comFabricReplicator) GetCatchUpCapability() (fromSequenceNumber int64, err error) {
 	var p_0 int64
 	defer func() {
 		fromSequenceNumber = p_0
@@ -2118,7 +2118,7 @@ func (v *ComFabricReplicator) GetCatchUpCapability() (fromSequenceNumber int64, 
 	}
 	return
 }
-func (v *ComFabricReplicator) ChangeRole(
+func (v *comFabricReplicator) ChangeRole(
 	ctx context.Context,
 	epoch *FabricEpoch,
 	role FabricReplicaRole,
@@ -2176,7 +2176,7 @@ func (v *ComFabricReplicator) ChangeRole(
 	}
 
 }
-func (v *ComFabricReplicator) UpdateEpoch(
+func (v *comFabricReplicator) UpdateEpoch(
 	ctx context.Context,
 	epoch *FabricEpoch,
 ) (err error) {
@@ -2232,7 +2232,7 @@ func (v *ComFabricReplicator) UpdateEpoch(
 	}
 
 }
-func (v *ComFabricReplicator) Close(
+func (v *comFabricReplicator) Close(
 	ctx context.Context,
 ) (err error) {
 	ch := make(chan error, 1)
@@ -2287,8 +2287,8 @@ func (v *ComFabricReplicator) Close(
 
 }
 
-type ComFabricPrimaryReplicator struct {
-	ComFabricReplicator
+type comFabricPrimaryReplicator struct {
+	comFabricReplicator
 }
 
 type comFabricPrimaryReplicatorVtbl struct {
@@ -2304,11 +2304,11 @@ type comFabricPrimaryReplicatorVtbl struct {
 	RemoveReplica                        uintptr
 }
 
-func (v *ComFabricPrimaryReplicator) vtable() *comFabricPrimaryReplicatorVtbl {
+func (v *comFabricPrimaryReplicator) vtable() *comFabricPrimaryReplicatorVtbl {
 	return (*comFabricPrimaryReplicatorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricPrimaryReplicator) beginOnDataLoss(
+func (v *comFabricPrimaryReplicator) beginOnDataLoss(
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
 	var p_1 *comIFabricAsyncOperationContext
@@ -2328,7 +2328,7 @@ func (v *ComFabricPrimaryReplicator) beginOnDataLoss(
 	}
 	return
 }
-func (v *ComFabricPrimaryReplicator) endOnDataLoss(
+func (v *comFabricPrimaryReplicator) endOnDataLoss(
 	context *comIFabricAsyncOperationContext,
 ) (isStateChanged bool, err error) {
 	var p_1 bool
@@ -2348,7 +2348,7 @@ func (v *ComFabricPrimaryReplicator) endOnDataLoss(
 	}
 	return
 }
-func (v *ComFabricPrimaryReplicator) UpdateCatchUpReplicaSetConfiguration(
+func (v *comFabricPrimaryReplicator) UpdateCatchUpReplicaSetConfiguration(
 	currentConfiguration *FabricReplicaSetConfiguration,
 	previousConfiguration *FabricReplicaSetConfiguration,
 ) (err error) {
@@ -2369,7 +2369,7 @@ func (v *ComFabricPrimaryReplicator) UpdateCatchUpReplicaSetConfiguration(
 	}
 	return
 }
-func (v *ComFabricPrimaryReplicator) beginWaitForCatchUpQuorum(
+func (v *comFabricPrimaryReplicator) beginWaitForCatchUpQuorum(
 	catchUpMode FabricReplicaSetQuorumMode,
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
@@ -2393,7 +2393,7 @@ func (v *ComFabricPrimaryReplicator) beginWaitForCatchUpQuorum(
 	}
 	return
 }
-func (v *ComFabricPrimaryReplicator) endWaitForCatchUpQuorum(
+func (v *comFabricPrimaryReplicator) endWaitForCatchUpQuorum(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
@@ -2409,7 +2409,7 @@ func (v *ComFabricPrimaryReplicator) endWaitForCatchUpQuorum(
 	}
 	return
 }
-func (v *ComFabricPrimaryReplicator) UpdateCurrentReplicaSetConfiguration(
+func (v *comFabricPrimaryReplicator) UpdateCurrentReplicaSetConfiguration(
 	currentConfiguration *FabricReplicaSetConfiguration,
 ) (err error) {
 	var p_0 *innerFabricReplicaSetConfiguration
@@ -2427,7 +2427,7 @@ func (v *ComFabricPrimaryReplicator) UpdateCurrentReplicaSetConfiguration(
 	}
 	return
 }
-func (v *ComFabricPrimaryReplicator) beginBuildReplica(
+func (v *comFabricPrimaryReplicator) beginBuildReplica(
 	replica *FabricReplicaInformation,
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
@@ -2453,7 +2453,7 @@ func (v *ComFabricPrimaryReplicator) beginBuildReplica(
 	}
 	return
 }
-func (v *ComFabricPrimaryReplicator) endBuildReplica(
+func (v *comFabricPrimaryReplicator) endBuildReplica(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
@@ -2469,7 +2469,7 @@ func (v *ComFabricPrimaryReplicator) endBuildReplica(
 	}
 	return
 }
-func (v *ComFabricPrimaryReplicator) RemoveReplica(
+func (v *comFabricPrimaryReplicator) RemoveReplica(
 	replicaId int64,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
@@ -2485,7 +2485,7 @@ func (v *ComFabricPrimaryReplicator) RemoveReplica(
 	}
 	return
 }
-func (v *ComFabricPrimaryReplicator) OnDataLoss(
+func (v *comFabricPrimaryReplicator) OnDataLoss(
 	ctx context.Context,
 ) (result_0 bool, err error) {
 	ch := make(chan error, 1)
@@ -2540,7 +2540,7 @@ func (v *ComFabricPrimaryReplicator) OnDataLoss(
 	}
 
 }
-func (v *ComFabricPrimaryReplicator) WaitForCatchUpQuorum(
+func (v *comFabricPrimaryReplicator) WaitForCatchUpQuorum(
 	ctx context.Context,
 	catchUpMode FabricReplicaSetQuorumMode,
 ) (err error) {
@@ -2596,7 +2596,7 @@ func (v *ComFabricPrimaryReplicator) WaitForCatchUpQuorum(
 	}
 
 }
-func (v *ComFabricPrimaryReplicator) BuildReplica(
+func (v *comFabricPrimaryReplicator) BuildReplica(
 	ctx context.Context,
 	replica *FabricReplicaInformation,
 ) (err error) {
@@ -2653,7 +2653,7 @@ func (v *ComFabricPrimaryReplicator) BuildReplica(
 
 }
 
-type ComFabricReplicatorCatchupSpecificQuorum struct {
+type comFabricReplicatorCatchupSpecificQuorum struct {
 	ole.IUnknown
 }
 
@@ -2661,11 +2661,11 @@ type comFabricReplicatorCatchupSpecificQuorumVtbl struct {
 	ole.IUnknownVtbl
 }
 
-func (v *ComFabricReplicatorCatchupSpecificQuorum) vtable() *comFabricReplicatorCatchupSpecificQuorumVtbl {
+func (v *comFabricReplicatorCatchupSpecificQuorum) vtable() *comFabricReplicatorCatchupSpecificQuorumVtbl {
 	return (*comFabricReplicatorCatchupSpecificQuorumVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-type ComFabricAtomicGroupStateReplicator struct {
+type comFabricAtomicGroupStateReplicator struct {
 	ole.IUnknown
 }
 
@@ -2680,11 +2680,11 @@ type comFabricAtomicGroupStateReplicatorVtbl struct {
 	EndReplicateAtomicGroupRollback    uintptr
 }
 
-func (v *ComFabricAtomicGroupStateReplicator) vtable() *comFabricAtomicGroupStateReplicatorVtbl {
+func (v *comFabricAtomicGroupStateReplicator) vtable() *comFabricAtomicGroupStateReplicatorVtbl {
 	return (*comFabricAtomicGroupStateReplicatorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricAtomicGroupStateReplicator) CreateAtomicGroup() (AtomicGroupId int64, err error) {
+func (v *comFabricAtomicGroupStateReplicator) CreateAtomicGroup() (AtomicGroupId int64, err error) {
 	var p_0 int64
 	defer func() {
 		AtomicGroupId = p_0
@@ -2702,9 +2702,9 @@ func (v *ComFabricAtomicGroupStateReplicator) CreateAtomicGroup() (AtomicGroupId
 	}
 	return
 }
-func (v *ComFabricAtomicGroupStateReplicator) beginReplicateAtomicGroupOperation(
+func (v *comFabricAtomicGroupStateReplicator) beginReplicateAtomicGroupOperation(
 	atomicGroupId int64,
-	operationData *ComFabricOperationData,
+	operationData *comFabricOperationData,
 	callback *comIFabricAsyncOperationCallback,
 ) (operationSequenceNumber int64, context *comIFabricAsyncOperationContext, err error) {
 	var p_3 int64
@@ -2731,7 +2731,7 @@ func (v *ComFabricAtomicGroupStateReplicator) beginReplicateAtomicGroupOperation
 	}
 	return
 }
-func (v *ComFabricAtomicGroupStateReplicator) endReplicateAtomicGroupOperation(
+func (v *comFabricAtomicGroupStateReplicator) endReplicateAtomicGroupOperation(
 	context *comIFabricAsyncOperationContext,
 ) (operationSequenceNumber int64, err error) {
 	var p_1 int64
@@ -2751,7 +2751,7 @@ func (v *ComFabricAtomicGroupStateReplicator) endReplicateAtomicGroupOperation(
 	}
 	return
 }
-func (v *ComFabricAtomicGroupStateReplicator) beginReplicateAtomicGroupCommit(
+func (v *comFabricAtomicGroupStateReplicator) beginReplicateAtomicGroupCommit(
 	atomicGroupId int64,
 	callback *comIFabricAsyncOperationCallback,
 ) (commitSequenceNumber int64, context *comIFabricAsyncOperationContext, err error) {
@@ -2779,7 +2779,7 @@ func (v *ComFabricAtomicGroupStateReplicator) beginReplicateAtomicGroupCommit(
 	}
 	return
 }
-func (v *ComFabricAtomicGroupStateReplicator) endReplicateAtomicGroupCommit(
+func (v *comFabricAtomicGroupStateReplicator) endReplicateAtomicGroupCommit(
 	context *comIFabricAsyncOperationContext,
 ) (commitSequenceNumber int64, err error) {
 	var p_1 int64
@@ -2799,7 +2799,7 @@ func (v *ComFabricAtomicGroupStateReplicator) endReplicateAtomicGroupCommit(
 	}
 	return
 }
-func (v *ComFabricAtomicGroupStateReplicator) beginReplicateAtomicGroupRollback(
+func (v *comFabricAtomicGroupStateReplicator) beginReplicateAtomicGroupRollback(
 	atomicGroupId int64,
 	callback *comIFabricAsyncOperationCallback,
 ) (rollbackSequenceNumber int64, context *comIFabricAsyncOperationContext, err error) {
@@ -2827,7 +2827,7 @@ func (v *ComFabricAtomicGroupStateReplicator) beginReplicateAtomicGroupRollback(
 	}
 	return
 }
-func (v *ComFabricAtomicGroupStateReplicator) endReplicateAtomicGroupRollback(
+func (v *comFabricAtomicGroupStateReplicator) endReplicateAtomicGroupRollback(
 	context *comIFabricAsyncOperationContext,
 ) (rollbackSequenceNumber int64, err error) {
 	var p_1 int64
@@ -2847,10 +2847,10 @@ func (v *ComFabricAtomicGroupStateReplicator) endReplicateAtomicGroupRollback(
 	}
 	return
 }
-func (v *ComFabricAtomicGroupStateReplicator) ReplicateAtomicGroupOperation(
+func (v *comFabricAtomicGroupStateReplicator) ReplicateAtomicGroupOperation(
 	ctx context.Context,
 	atomicGroupId int64,
-	operationData *ComFabricOperationData,
+	operationData *comFabricOperationData,
 	operationSequenceNumber *int64,
 ) (result_0 int64, err error) {
 	ch := make(chan error, 1)
@@ -2907,7 +2907,7 @@ func (v *ComFabricAtomicGroupStateReplicator) ReplicateAtomicGroupOperation(
 	}
 
 }
-func (v *ComFabricAtomicGroupStateReplicator) ReplicateAtomicGroupCommit(
+func (v *comFabricAtomicGroupStateReplicator) ReplicateAtomicGroupCommit(
 	ctx context.Context,
 	atomicGroupId int64,
 	commitSequenceNumber *int64,
@@ -2965,7 +2965,7 @@ func (v *ComFabricAtomicGroupStateReplicator) ReplicateAtomicGroupCommit(
 	}
 
 }
-func (v *ComFabricAtomicGroupStateReplicator) ReplicateAtomicGroupRollback(
+func (v *comFabricAtomicGroupStateReplicator) ReplicateAtomicGroupRollback(
 	ctx context.Context,
 	atomicGroupId int64,
 	rollbackSequenceNumber *int64,
@@ -3024,7 +3024,7 @@ func (v *ComFabricAtomicGroupStateReplicator) ReplicateAtomicGroupRollback(
 
 }
 
-type ComFabricAtomicGroupStateProvider struct {
+type comFabricAtomicGroupStateProvider struct {
 	ole.IUnknown
 }
 
@@ -3038,11 +3038,11 @@ type comFabricAtomicGroupStateProviderVtbl struct {
 	EndUndoProgress          uintptr
 }
 
-func (v *ComFabricAtomicGroupStateProvider) vtable() *comFabricAtomicGroupStateProviderVtbl {
+func (v *comFabricAtomicGroupStateProvider) vtable() *comFabricAtomicGroupStateProviderVtbl {
 	return (*comFabricAtomicGroupStateProviderVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricAtomicGroupStateProvider) beginAtomicGroupCommit(
+func (v *comFabricAtomicGroupStateProvider) beginAtomicGroupCommit(
 	atomicGroupId int64,
 	commitSequenceNumber int64,
 	callback *comIFabricAsyncOperationCallback,
@@ -3067,7 +3067,7 @@ func (v *ComFabricAtomicGroupStateProvider) beginAtomicGroupCommit(
 	}
 	return
 }
-func (v *ComFabricAtomicGroupStateProvider) endAtomicGroupCommit(
+func (v *comFabricAtomicGroupStateProvider) endAtomicGroupCommit(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
@@ -3083,7 +3083,7 @@ func (v *ComFabricAtomicGroupStateProvider) endAtomicGroupCommit(
 	}
 	return
 }
-func (v *ComFabricAtomicGroupStateProvider) beginAtomicGroupRollback(
+func (v *comFabricAtomicGroupStateProvider) beginAtomicGroupRollback(
 	atomicGroupId int64,
 	rollbackequenceNumber int64,
 	callback *comIFabricAsyncOperationCallback,
@@ -3108,7 +3108,7 @@ func (v *ComFabricAtomicGroupStateProvider) beginAtomicGroupRollback(
 	}
 	return
 }
-func (v *ComFabricAtomicGroupStateProvider) endAtomicGroupRollback(
+func (v *comFabricAtomicGroupStateProvider) endAtomicGroupRollback(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
@@ -3124,7 +3124,7 @@ func (v *ComFabricAtomicGroupStateProvider) endAtomicGroupRollback(
 	}
 	return
 }
-func (v *ComFabricAtomicGroupStateProvider) beginUndoProgress(
+func (v *comFabricAtomicGroupStateProvider) beginUndoProgress(
 	fromCommitSequenceNumber int64,
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
@@ -3148,7 +3148,7 @@ func (v *ComFabricAtomicGroupStateProvider) beginUndoProgress(
 	}
 	return
 }
-func (v *ComFabricAtomicGroupStateProvider) endUndoProgress(
+func (v *comFabricAtomicGroupStateProvider) endUndoProgress(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
@@ -3164,7 +3164,7 @@ func (v *ComFabricAtomicGroupStateProvider) endUndoProgress(
 	}
 	return
 }
-func (v *ComFabricAtomicGroupStateProvider) AtomicGroupCommit(
+func (v *comFabricAtomicGroupStateProvider) AtomicGroupCommit(
 	ctx context.Context,
 	atomicGroupId int64,
 	commitSequenceNumber int64,
@@ -3222,7 +3222,7 @@ func (v *ComFabricAtomicGroupStateProvider) AtomicGroupCommit(
 	}
 
 }
-func (v *ComFabricAtomicGroupStateProvider) AtomicGroupRollback(
+func (v *comFabricAtomicGroupStateProvider) AtomicGroupRollback(
 	ctx context.Context,
 	atomicGroupId int64,
 	rollbackequenceNumber int64,
@@ -3280,7 +3280,7 @@ func (v *ComFabricAtomicGroupStateProvider) AtomicGroupRollback(
 	}
 
 }
-func (v *ComFabricAtomicGroupStateProvider) UndoProgress(
+func (v *comFabricAtomicGroupStateProvider) UndoProgress(
 	ctx context.Context,
 	fromCommitSequenceNumber int64,
 ) (err error) {
@@ -3367,7 +3367,7 @@ func (v *ComFabricServiceGroupFactoryBuilder) vtable() *comFabricServiceGroupFac
 
 func (v *ComFabricServiceGroupFactoryBuilder) AddStatelessServiceFactory(
 	memberServiceType string,
-	factory *ComFabricStatelessServiceFactory,
+	factory *comFabricStatelessServiceFactory,
 ) (err error) {
 	var p_0 *uint16
 	s_11, _ := windows.UTF16PtrFromString(memberServiceType)
@@ -3388,7 +3388,7 @@ func (v *ComFabricServiceGroupFactoryBuilder) AddStatelessServiceFactory(
 }
 func (v *ComFabricServiceGroupFactoryBuilder) AddStatefulServiceFactory(
 	memberServiceType string,
-	factory *ComFabricStatefulServiceFactory,
+	factory *comFabricStatefulServiceFactory,
 ) (err error) {
 	var p_0 *uint16
 	s_12, _ := windows.UTF16PtrFromString(memberServiceType)
@@ -3446,7 +3446,7 @@ func (v *ComFabricServiceGroupFactoryBuilder) ToServiceGroupFactory() (factory *
 	return
 }
 
-type ComFabricServiceGroupPartition struct {
+type comFabricServiceGroupPartition struct {
 	ole.IUnknown
 }
 
@@ -3455,11 +3455,11 @@ type comFabricServiceGroupPartitionVtbl struct {
 	ResolveMember uintptr
 }
 
-func (v *ComFabricServiceGroupPartition) vtable() *comFabricServiceGroupPartitionVtbl {
+func (v *comFabricServiceGroupPartition) vtable() *comFabricServiceGroupPartitionVtbl {
 	return (*comFabricServiceGroupPartitionVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricServiceGroupPartition) ResolveMember(
+func (v *comFabricServiceGroupPartition) ResolveMember(
 	name string,
 	riid windows.GUID,
 ) (member interface{}, err error) {
@@ -3488,7 +3488,7 @@ func (v *ComFabricServiceGroupPartition) ResolveMember(
 	return
 }
 
-type ComFabricCodePackageActivationContext struct {
+type comFabricCodePackageActivationContext struct {
 	ole.IUnknown
 }
 
@@ -3519,11 +3519,11 @@ type comFabricCodePackageActivationContextVtbl struct {
 	UnregisterDataPackageChangeHandler          uintptr
 }
 
-func (v *ComFabricCodePackageActivationContext) vtable() *comFabricCodePackageActivationContextVtbl {
+func (v *comFabricCodePackageActivationContext) vtable() *comFabricCodePackageActivationContextVtbl {
 	return (*comFabricCodePackageActivationContextVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricCodePackageActivationContext) GetContextId() (rt string, err error) {
+func (v *comFabricCodePackageActivationContext) GetContextId() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_ContextId,
 		1,
@@ -3541,7 +3541,7 @@ func (v *ComFabricCodePackageActivationContext) GetContextId() (rt string, err e
 	rt = windows.UTF16PtrToString(tmp)
 	return
 }
-func (v *ComFabricCodePackageActivationContext) GetCodePackageName() (rt string, err error) {
+func (v *comFabricCodePackageActivationContext) GetCodePackageName() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_CodePackageName,
 		1,
@@ -3559,7 +3559,7 @@ func (v *ComFabricCodePackageActivationContext) GetCodePackageName() (rt string,
 	rt = windows.UTF16PtrToString(tmp)
 	return
 }
-func (v *ComFabricCodePackageActivationContext) GetCodePackageVersion() (rt string, err error) {
+func (v *comFabricCodePackageActivationContext) GetCodePackageVersion() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_CodePackageVersion,
 		1,
@@ -3577,7 +3577,7 @@ func (v *ComFabricCodePackageActivationContext) GetCodePackageVersion() (rt stri
 	rt = windows.UTF16PtrToString(tmp)
 	return
 }
-func (v *ComFabricCodePackageActivationContext) GetWorkDirectory() (rt string, err error) {
+func (v *comFabricCodePackageActivationContext) GetWorkDirectory() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_WorkDirectory,
 		1,
@@ -3595,7 +3595,7 @@ func (v *ComFabricCodePackageActivationContext) GetWorkDirectory() (rt string, e
 	rt = windows.UTF16PtrToString(tmp)
 	return
 }
-func (v *ComFabricCodePackageActivationContext) GetLogDirectory() (rt string, err error) {
+func (v *comFabricCodePackageActivationContext) GetLogDirectory() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_LogDirectory,
 		1,
@@ -3613,7 +3613,7 @@ func (v *ComFabricCodePackageActivationContext) GetLogDirectory() (rt string, er
 	rt = windows.UTF16PtrToString(tmp)
 	return
 }
-func (v *ComFabricCodePackageActivationContext) GetTempDirectory() (rt string, err error) {
+func (v *comFabricCodePackageActivationContext) GetTempDirectory() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_TempDirectory,
 		1,
@@ -3631,7 +3631,7 @@ func (v *ComFabricCodePackageActivationContext) GetTempDirectory() (rt string, e
 	rt = windows.UTF16PtrToString(tmp)
 	return
 }
-func (v *ComFabricCodePackageActivationContext) GetServiceTypes() (rt []FabricServiceTypeDescription, err error) {
+func (v *comFabricCodePackageActivationContext) GetServiceTypes() (rt []FabricServiceTypeDescription, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_ServiceTypes,
 		1,
@@ -3671,7 +3671,7 @@ func (v *ComFabricCodePackageActivationContext) GetServiceTypes() (rt []FabricSe
 	}
 	return
 }
-func (v *ComFabricCodePackageActivationContext) GetServiceGroupTypes() (rt []FabricServiceGroupTypeDescription, err error) {
+func (v *comFabricCodePackageActivationContext) GetServiceGroupTypes() (rt []FabricServiceGroupTypeDescription, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_ServiceGroupTypes,
 		1,
@@ -3711,7 +3711,7 @@ func (v *ComFabricCodePackageActivationContext) GetServiceGroupTypes() (rt []Fab
 	}
 	return
 }
-func (v *ComFabricCodePackageActivationContext) GetApplicationPrincipals() (rt *FabricApplicationPrincipalsDescription, err error) {
+func (v *comFabricCodePackageActivationContext) GetApplicationPrincipals() (rt *FabricApplicationPrincipalsDescription, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_ApplicationPrincipals,
 		1,
@@ -3729,7 +3729,7 @@ func (v *ComFabricCodePackageActivationContext) GetApplicationPrincipals() (rt *
 	rt = tmp.toGoStruct()
 	return
 }
-func (v *ComFabricCodePackageActivationContext) GetServiceEndpointResources() (rt []FabricEndpointResourceDescription, err error) {
+func (v *comFabricCodePackageActivationContext) GetServiceEndpointResources() (rt []FabricEndpointResourceDescription, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_ServiceEndpointResources,
 		1,
@@ -3769,7 +3769,7 @@ func (v *ComFabricCodePackageActivationContext) GetServiceEndpointResources() (r
 	}
 	return
 }
-func (v *ComFabricCodePackageActivationContext) GetServiceEndpointResource(
+func (v *comFabricCodePackageActivationContext) GetServiceEndpointResource(
 	serviceEndpointResourceName string,
 ) (bufferedValue *FabricEndpointResourceDescription, err error) {
 	var p_0 *uint16
@@ -3793,8 +3793,8 @@ func (v *ComFabricCodePackageActivationContext) GetServiceEndpointResource(
 	}
 	return
 }
-func (v *ComFabricCodePackageActivationContext) GetCodePackageNames() (names *ComFabricStringListResult, err error) {
-	var p_0 *ComFabricStringListResult
+func (v *comFabricCodePackageActivationContext) GetCodePackageNames() (names *comFabricStringListResult, err error) {
+	var p_0 *comFabricStringListResult
 	defer func() {
 		names = p_0
 	}()
@@ -3811,8 +3811,8 @@ func (v *ComFabricCodePackageActivationContext) GetCodePackageNames() (names *Co
 	}
 	return
 }
-func (v *ComFabricCodePackageActivationContext) GetConfigurationPackageNames() (names *ComFabricStringListResult, err error) {
-	var p_0 *ComFabricStringListResult
+func (v *comFabricCodePackageActivationContext) GetConfigurationPackageNames() (names *comFabricStringListResult, err error) {
+	var p_0 *comFabricStringListResult
 	defer func() {
 		names = p_0
 	}()
@@ -3829,8 +3829,8 @@ func (v *ComFabricCodePackageActivationContext) GetConfigurationPackageNames() (
 	}
 	return
 }
-func (v *ComFabricCodePackageActivationContext) GetDataPackageNames() (names *ComFabricStringListResult, err error) {
-	var p_0 *ComFabricStringListResult
+func (v *comFabricCodePackageActivationContext) GetDataPackageNames() (names *comFabricStringListResult, err error) {
+	var p_0 *comFabricStringListResult
 	defer func() {
 		names = p_0
 	}()
@@ -3847,14 +3847,14 @@ func (v *ComFabricCodePackageActivationContext) GetDataPackageNames() (names *Co
 	}
 	return
 }
-func (v *ComFabricCodePackageActivationContext) GetCodePackage(
+func (v *comFabricCodePackageActivationContext) GetCodePackage(
 	codePackageName string,
-) (codePackage *ComFabricCodePackage, err error) {
+) (codePackage *comFabricCodePackage, err error) {
 	var p_0 *uint16
 	s_19, _ := windows.UTF16PtrFromString(codePackageName)
 	p_0 = s_19
 
-	var p_1 *ComFabricCodePackage
+	var p_1 *comFabricCodePackage
 	defer func() {
 		codePackage = p_1
 	}()
@@ -3871,14 +3871,14 @@ func (v *ComFabricCodePackageActivationContext) GetCodePackage(
 	}
 	return
 }
-func (v *ComFabricCodePackageActivationContext) GetConfigurationPackage(
+func (v *comFabricCodePackageActivationContext) GetConfigurationPackage(
 	configPackageName string,
-) (configPackage *ComFabricConfigurationPackage, err error) {
+) (configPackage *comFabricConfigurationPackage, err error) {
 	var p_0 *uint16
 	s_20, _ := windows.UTF16PtrFromString(configPackageName)
 	p_0 = s_20
 
-	var p_1 *ComFabricConfigurationPackage
+	var p_1 *comFabricConfigurationPackage
 	defer func() {
 		configPackage = p_1
 	}()
@@ -3895,14 +3895,14 @@ func (v *ComFabricCodePackageActivationContext) GetConfigurationPackage(
 	}
 	return
 }
-func (v *ComFabricCodePackageActivationContext) GetDataPackage(
+func (v *comFabricCodePackageActivationContext) GetDataPackage(
 	dataPackageName string,
-) (dataPackage *ComFabricDataPackage, err error) {
+) (dataPackage *comFabricDataPackage, err error) {
 	var p_0 *uint16
 	s_21, _ := windows.UTF16PtrFromString(dataPackageName)
 	p_0 = s_21
 
-	var p_1 *ComFabricDataPackage
+	var p_1 *comFabricDataPackage
 	defer func() {
 		dataPackage = p_1
 	}()
@@ -3919,8 +3919,8 @@ func (v *ComFabricCodePackageActivationContext) GetDataPackage(
 	}
 	return
 }
-func (v *ComFabricCodePackageActivationContext) RegisterCodePackageChangeHandler(
-	callback *ComFabricCodePackageChangeHandler,
+func (v *comFabricCodePackageActivationContext) RegisterCodePackageChangeHandler(
+	callback *comFabricCodePackageChangeHandler,
 ) (callbackHandle int64, err error) {
 	var p_1 int64
 	defer func() {
@@ -3939,7 +3939,7 @@ func (v *ComFabricCodePackageActivationContext) RegisterCodePackageChangeHandler
 	}
 	return
 }
-func (v *ComFabricCodePackageActivationContext) UnregisterCodePackageChangeHandler(
+func (v *comFabricCodePackageActivationContext) UnregisterCodePackageChangeHandler(
 	callbackHandle int64,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
@@ -3955,8 +3955,8 @@ func (v *ComFabricCodePackageActivationContext) UnregisterCodePackageChangeHandl
 	}
 	return
 }
-func (v *ComFabricCodePackageActivationContext) RegisterConfigurationPackageChangeHandler(
-	callback *ComFabricConfigurationPackageChangeHandler,
+func (v *comFabricCodePackageActivationContext) RegisterConfigurationPackageChangeHandler(
+	callback *comFabricConfigurationPackageChangeHandler,
 ) (callbackHandle int64, err error) {
 	var p_1 int64
 	defer func() {
@@ -3975,7 +3975,7 @@ func (v *ComFabricCodePackageActivationContext) RegisterConfigurationPackageChan
 	}
 	return
 }
-func (v *ComFabricCodePackageActivationContext) UnregisterConfigurationPackageChangeHandler(
+func (v *comFabricCodePackageActivationContext) UnregisterConfigurationPackageChangeHandler(
 	callbackHandle int64,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
@@ -3991,8 +3991,8 @@ func (v *ComFabricCodePackageActivationContext) UnregisterConfigurationPackageCh
 	}
 	return
 }
-func (v *ComFabricCodePackageActivationContext) RegisterDataPackageChangeHandler(
-	callback *ComFabricDataPackageChangeHandler,
+func (v *comFabricCodePackageActivationContext) RegisterDataPackageChangeHandler(
+	callback *comFabricDataPackageChangeHandler,
 ) (callbackHandle int64, err error) {
 	var p_1 int64
 	defer func() {
@@ -4011,7 +4011,7 @@ func (v *ComFabricCodePackageActivationContext) RegisterDataPackageChangeHandler
 	}
 	return
 }
-func (v *ComFabricCodePackageActivationContext) UnregisterDataPackageChangeHandler(
+func (v *comFabricCodePackageActivationContext) UnregisterDataPackageChangeHandler(
 	callbackHandle int64,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
@@ -4028,8 +4028,8 @@ func (v *ComFabricCodePackageActivationContext) UnregisterDataPackageChangeHandl
 	return
 }
 
-type ComFabricCodePackageActivationContext2 struct {
-	ComFabricCodePackageActivationContext
+type comFabricCodePackageActivationContext2 struct {
+	comFabricCodePackageActivationContext
 }
 
 type comFabricCodePackageActivationContext2Vtbl struct {
@@ -4040,11 +4040,11 @@ type comFabricCodePackageActivationContext2Vtbl struct {
 	GetServiceManifestVersion uintptr
 }
 
-func (v *ComFabricCodePackageActivationContext2) vtable() *comFabricCodePackageActivationContext2Vtbl {
+func (v *comFabricCodePackageActivationContext2) vtable() *comFabricCodePackageActivationContext2Vtbl {
 	return (*comFabricCodePackageActivationContext2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricCodePackageActivationContext2) GetApplicationName() (rt string, err error) {
+func (v *comFabricCodePackageActivationContext2) GetApplicationName() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_ApplicationName,
 		1,
@@ -4062,7 +4062,7 @@ func (v *ComFabricCodePackageActivationContext2) GetApplicationName() (rt string
 	rt = windows.UTF16PtrToString(tmp)
 	return
 }
-func (v *ComFabricCodePackageActivationContext2) GetApplicationTypeName() (rt string, err error) {
+func (v *comFabricCodePackageActivationContext2) GetApplicationTypeName() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_ApplicationTypeName,
 		1,
@@ -4080,8 +4080,8 @@ func (v *ComFabricCodePackageActivationContext2) GetApplicationTypeName() (rt st
 	rt = windows.UTF16PtrToString(tmp)
 	return
 }
-func (v *ComFabricCodePackageActivationContext2) GetServiceManifestName() (serviceManifestName *ComFabricStringResult, err error) {
-	var p_0 *ComFabricStringResult
+func (v *comFabricCodePackageActivationContext2) GetServiceManifestName() (serviceManifestName *comFabricStringResult, err error) {
+	var p_0 *comFabricStringResult
 	defer func() {
 		serviceManifestName = p_0
 	}()
@@ -4098,8 +4098,8 @@ func (v *ComFabricCodePackageActivationContext2) GetServiceManifestName() (servi
 	}
 	return
 }
-func (v *ComFabricCodePackageActivationContext2) GetServiceManifestVersion() (serviceManifestVersion *ComFabricStringResult, err error) {
-	var p_0 *ComFabricStringResult
+func (v *comFabricCodePackageActivationContext2) GetServiceManifestVersion() (serviceManifestVersion *comFabricStringResult, err error) {
+	var p_0 *comFabricStringResult
 	defer func() {
 		serviceManifestVersion = p_0
 	}()
@@ -4117,8 +4117,8 @@ func (v *ComFabricCodePackageActivationContext2) GetServiceManifestVersion() (se
 	return
 }
 
-type ComFabricCodePackageActivationContext3 struct {
-	ComFabricCodePackageActivationContext2
+type comFabricCodePackageActivationContext3 struct {
+	comFabricCodePackageActivationContext2
 }
 
 type comFabricCodePackageActivationContext3Vtbl struct {
@@ -4128,11 +4128,11 @@ type comFabricCodePackageActivationContext3Vtbl struct {
 	ReportDeployedServicePackageHealth uintptr
 }
 
-func (v *ComFabricCodePackageActivationContext3) vtable() *comFabricCodePackageActivationContext3Vtbl {
+func (v *comFabricCodePackageActivationContext3) vtable() *comFabricCodePackageActivationContext3Vtbl {
 	return (*comFabricCodePackageActivationContext3Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricCodePackageActivationContext3) ReportApplicationHealth(
+func (v *comFabricCodePackageActivationContext3) ReportApplicationHealth(
 	healthInfo *FabricHealthInformation,
 ) (err error) {
 	var p_0 *innerFabricHealthInformation
@@ -4150,7 +4150,7 @@ func (v *ComFabricCodePackageActivationContext3) ReportApplicationHealth(
 	}
 	return
 }
-func (v *ComFabricCodePackageActivationContext3) ReportDeployedApplicationHealth(
+func (v *comFabricCodePackageActivationContext3) ReportDeployedApplicationHealth(
 	healthInfo *FabricHealthInformation,
 ) (err error) {
 	var p_0 *innerFabricHealthInformation
@@ -4168,7 +4168,7 @@ func (v *ComFabricCodePackageActivationContext3) ReportDeployedApplicationHealth
 	}
 	return
 }
-func (v *ComFabricCodePackageActivationContext3) ReportDeployedServicePackageHealth(
+func (v *comFabricCodePackageActivationContext3) ReportDeployedServicePackageHealth(
 	healthInfo *FabricHealthInformation,
 ) (err error) {
 	var p_0 *innerFabricHealthInformation
@@ -4187,8 +4187,8 @@ func (v *ComFabricCodePackageActivationContext3) ReportDeployedServicePackageHea
 	return
 }
 
-type ComFabricCodePackageActivationContext4 struct {
-	ComFabricCodePackageActivationContext3
+type comFabricCodePackageActivationContext4 struct {
+	comFabricCodePackageActivationContext3
 }
 
 type comFabricCodePackageActivationContext4Vtbl struct {
@@ -4198,11 +4198,11 @@ type comFabricCodePackageActivationContext4Vtbl struct {
 	ReportDeployedServicePackageHealth2 uintptr
 }
 
-func (v *ComFabricCodePackageActivationContext4) vtable() *comFabricCodePackageActivationContext4Vtbl {
+func (v *comFabricCodePackageActivationContext4) vtable() *comFabricCodePackageActivationContext4Vtbl {
 	return (*comFabricCodePackageActivationContext4Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricCodePackageActivationContext4) ReportApplicationHealth2(
+func (v *comFabricCodePackageActivationContext4) ReportApplicationHealth2(
 	healthInfo *FabricHealthInformation,
 	sendOptions *FabricHealthReportSendOptions,
 ) (err error) {
@@ -4223,7 +4223,7 @@ func (v *ComFabricCodePackageActivationContext4) ReportApplicationHealth2(
 	}
 	return
 }
-func (v *ComFabricCodePackageActivationContext4) ReportDeployedApplicationHealth2(
+func (v *comFabricCodePackageActivationContext4) ReportDeployedApplicationHealth2(
 	healthInfo *FabricHealthInformation,
 	sendOptions *FabricHealthReportSendOptions,
 ) (err error) {
@@ -4244,7 +4244,7 @@ func (v *ComFabricCodePackageActivationContext4) ReportDeployedApplicationHealth
 	}
 	return
 }
-func (v *ComFabricCodePackageActivationContext4) ReportDeployedServicePackageHealth2(
+func (v *comFabricCodePackageActivationContext4) ReportDeployedServicePackageHealth2(
 	healthInfo *FabricHealthInformation,
 	sendOptions *FabricHealthReportSendOptions,
 ) (err error) {
@@ -4266,8 +4266,8 @@ func (v *ComFabricCodePackageActivationContext4) ReportDeployedServicePackageHea
 	return
 }
 
-type ComFabricCodePackageActivationContext5 struct {
-	ComFabricCodePackageActivationContext4
+type comFabricCodePackageActivationContext5 struct {
+	comFabricCodePackageActivationContext4
 }
 
 type comFabricCodePackageActivationContext5Vtbl struct {
@@ -4276,11 +4276,11 @@ type comFabricCodePackageActivationContext5Vtbl struct {
 	get_ServicePublishAddress uintptr
 }
 
-func (v *ComFabricCodePackageActivationContext5) vtable() *comFabricCodePackageActivationContext5Vtbl {
+func (v *comFabricCodePackageActivationContext5) vtable() *comFabricCodePackageActivationContext5Vtbl {
 	return (*comFabricCodePackageActivationContext5Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricCodePackageActivationContext5) GetServiceListenAddress() (rt string, err error) {
+func (v *comFabricCodePackageActivationContext5) GetServiceListenAddress() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_ServiceListenAddress,
 		1,
@@ -4298,7 +4298,7 @@ func (v *ComFabricCodePackageActivationContext5) GetServiceListenAddress() (rt s
 	rt = windows.UTF16PtrToString(tmp)
 	return
 }
-func (v *ComFabricCodePackageActivationContext5) GetServicePublishAddress() (rt string, err error) {
+func (v *comFabricCodePackageActivationContext5) GetServicePublishAddress() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_ServicePublishAddress,
 		1,
@@ -4317,8 +4317,8 @@ func (v *ComFabricCodePackageActivationContext5) GetServicePublishAddress() (rt 
 	return
 }
 
-type ComFabricCodePackageActivationContext6 struct {
-	ComFabricCodePackageActivationContext5
+type comFabricCodePackageActivationContext6 struct {
+	comFabricCodePackageActivationContext5
 }
 
 type comFabricCodePackageActivationContext6Vtbl struct {
@@ -4326,18 +4326,18 @@ type comFabricCodePackageActivationContext6Vtbl struct {
 	GetDirectory uintptr
 }
 
-func (v *ComFabricCodePackageActivationContext6) vtable() *comFabricCodePackageActivationContext6Vtbl {
+func (v *comFabricCodePackageActivationContext6) vtable() *comFabricCodePackageActivationContext6Vtbl {
 	return (*comFabricCodePackageActivationContext6Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricCodePackageActivationContext6) GetDirectory(
+func (v *comFabricCodePackageActivationContext6) GetDirectory(
 	logicalDirectoryName string,
-) (directoryPath *ComFabricStringResult, err error) {
+) (directoryPath *comFabricStringResult, err error) {
 	var p_0 *uint16
 	s_22, _ := windows.UTF16PtrFromString(logicalDirectoryName)
 	p_0 = s_22
 
-	var p_1 *ComFabricStringResult
+	var p_1 *comFabricStringResult
 	defer func() {
 		directoryPath = p_1
 	}()
@@ -4355,7 +4355,7 @@ func (v *ComFabricCodePackageActivationContext6) GetDirectory(
 	return
 }
 
-type ComFabricCodePackage struct {
+type comFabricCodePackage struct {
 	ole.IUnknown
 }
 
@@ -4365,11 +4365,11 @@ type comFabricCodePackageVtbl struct {
 	get_Path        uintptr
 }
 
-func (v *ComFabricCodePackage) vtable() *comFabricCodePackageVtbl {
+func (v *comFabricCodePackage) vtable() *comFabricCodePackageVtbl {
 	return (*comFabricCodePackageVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricCodePackage) GetDescription() (rt *FabricCodePackageDescription, err error) {
+func (v *comFabricCodePackage) GetDescription() (rt *FabricCodePackageDescription, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_Description,
 		1,
@@ -4387,7 +4387,7 @@ func (v *ComFabricCodePackage) GetDescription() (rt *FabricCodePackageDescriptio
 	rt = tmp.toGoStruct()
 	return
 }
-func (v *ComFabricCodePackage) GetPath() (rt string, err error) {
+func (v *comFabricCodePackage) GetPath() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_Path,
 		1,
@@ -4406,8 +4406,8 @@ func (v *ComFabricCodePackage) GetPath() (rt string, err error) {
 	return
 }
 
-type ComFabricCodePackage2 struct {
-	ComFabricCodePackage
+type comFabricCodePackage2 struct {
+	comFabricCodePackage
 }
 
 type comFabricCodePackage2Vtbl struct {
@@ -4416,11 +4416,11 @@ type comFabricCodePackage2Vtbl struct {
 	get_EntryPointRunAsPolicy      uintptr
 }
 
-func (v *ComFabricCodePackage2) vtable() *comFabricCodePackage2Vtbl {
+func (v *comFabricCodePackage2) vtable() *comFabricCodePackage2Vtbl {
 	return (*comFabricCodePackage2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricCodePackage2) GetSetupEntryPointRunAsPolicy() (rt *FabricRunasPolicyDescription, err error) {
+func (v *comFabricCodePackage2) GetSetupEntryPointRunAsPolicy() (rt *FabricRunasPolicyDescription, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_SetupEntryPointRunAsPolicy,
 		1,
@@ -4438,7 +4438,7 @@ func (v *ComFabricCodePackage2) GetSetupEntryPointRunAsPolicy() (rt *FabricRunas
 	rt = tmp.toGoStruct()
 	return
 }
-func (v *ComFabricCodePackage2) GetEntryPointRunAsPolicy() (rt *FabricRunasPolicyDescription, err error) {
+func (v *comFabricCodePackage2) GetEntryPointRunAsPolicy() (rt *FabricRunasPolicyDescription, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_EntryPointRunAsPolicy,
 		1,
@@ -4457,7 +4457,7 @@ func (v *ComFabricCodePackage2) GetEntryPointRunAsPolicy() (rt *FabricRunasPolic
 	return
 }
 
-type ComFabricConfigurationPackage struct {
+type comFabricConfigurationPackage struct {
 	ole.IUnknown
 }
 
@@ -4471,11 +4471,11 @@ type comFabricConfigurationPackageVtbl struct {
 	DecryptValue    uintptr
 }
 
-func (v *ComFabricConfigurationPackage) vtable() *comFabricConfigurationPackageVtbl {
+func (v *comFabricConfigurationPackage) vtable() *comFabricConfigurationPackageVtbl {
 	return (*comFabricConfigurationPackageVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricConfigurationPackage) GetDescription() (rt *FabricConfigurationPackageDescription, err error) {
+func (v *comFabricConfigurationPackage) GetDescription() (rt *FabricConfigurationPackageDescription, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_Description,
 		1,
@@ -4493,7 +4493,7 @@ func (v *ComFabricConfigurationPackage) GetDescription() (rt *FabricConfiguratio
 	rt = tmp.toGoStruct()
 	return
 }
-func (v *ComFabricConfigurationPackage) GetPath() (rt string, err error) {
+func (v *comFabricConfigurationPackage) GetPath() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_Path,
 		1,
@@ -4511,7 +4511,7 @@ func (v *ComFabricConfigurationPackage) GetPath() (rt string, err error) {
 	rt = windows.UTF16PtrToString(tmp)
 	return
 }
-func (v *ComFabricConfigurationPackage) GetSettings() (rt *FabricConfigurationSettings, err error) {
+func (v *comFabricConfigurationPackage) GetSettings() (rt *FabricConfigurationSettings, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_Settings,
 		1,
@@ -4529,7 +4529,7 @@ func (v *ComFabricConfigurationPackage) GetSettings() (rt *FabricConfigurationSe
 	rt = tmp.toGoStruct()
 	return
 }
-func (v *ComFabricConfigurationPackage) GetSection(
+func (v *comFabricConfigurationPackage) GetSection(
 	sectionName string,
 ) (bufferedValue *FabricConfigurationSection, err error) {
 	var p_0 *uint16
@@ -4553,7 +4553,7 @@ func (v *ComFabricConfigurationPackage) GetSection(
 	}
 	return
 }
-func (v *ComFabricConfigurationPackage) GetValue(
+func (v *comFabricConfigurationPackage) GetValue(
 	sectionName string,
 	parameterName string,
 ) (isEncrypted bool, bufferedValue string, err error) {
@@ -4589,14 +4589,14 @@ func (v *ComFabricConfigurationPackage) GetValue(
 	}
 	return
 }
-func (v *ComFabricConfigurationPackage) DecryptValue(
+func (v *comFabricConfigurationPackage) DecryptValue(
 	encryptedValue string,
-) (decryptedValue *ComFabricStringResult, err error) {
+) (decryptedValue *comFabricStringResult, err error) {
 	var p_0 *uint16
 	s_26, _ := windows.UTF16PtrFromString(encryptedValue)
 	p_0 = s_26
 
-	var p_1 *ComFabricStringResult
+	var p_1 *comFabricStringResult
 	defer func() {
 		decryptedValue = p_1
 	}()
@@ -4614,8 +4614,8 @@ func (v *ComFabricConfigurationPackage) DecryptValue(
 	return
 }
 
-type ComFabricConfigurationPackage2 struct {
-	ComFabricConfigurationPackage
+type comFabricConfigurationPackage2 struct {
+	comFabricConfigurationPackage
 }
 
 type comFabricConfigurationPackage2Vtbl struct {
@@ -4623,11 +4623,11 @@ type comFabricConfigurationPackage2Vtbl struct {
 	GetValues uintptr
 }
 
-func (v *ComFabricConfigurationPackage2) vtable() *comFabricConfigurationPackage2Vtbl {
+func (v *comFabricConfigurationPackage2) vtable() *comFabricConfigurationPackage2Vtbl {
 	return (*comFabricConfigurationPackage2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricConfigurationPackage2) GetValues(
+func (v *comFabricConfigurationPackage2) GetValues(
 	sectionName string,
 	parameterPrefix string,
 ) (bufferedValue []FabricConfigurationParameter, err error) {
@@ -4682,7 +4682,7 @@ func (v *ComFabricConfigurationPackage2) GetValues(
 	return
 }
 
-type ComFabricDataPackage struct {
+type comFabricDataPackage struct {
 	ole.IUnknown
 }
 
@@ -4692,11 +4692,11 @@ type comFabricDataPackageVtbl struct {
 	get_Path        uintptr
 }
 
-func (v *ComFabricDataPackage) vtable() *comFabricDataPackageVtbl {
+func (v *comFabricDataPackage) vtable() *comFabricDataPackageVtbl {
 	return (*comFabricDataPackageVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricDataPackage) GetDescription() (rt *FabricDataPackageDescription, err error) {
+func (v *comFabricDataPackage) GetDescription() (rt *FabricDataPackageDescription, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_Description,
 		1,
@@ -4714,7 +4714,7 @@ func (v *ComFabricDataPackage) GetDescription() (rt *FabricDataPackageDescriptio
 	rt = tmp.toGoStruct()
 	return
 }
-func (v *ComFabricDataPackage) GetPath() (rt string, err error) {
+func (v *comFabricDataPackage) GetPath() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_Path,
 		1,
@@ -4733,7 +4733,7 @@ func (v *ComFabricDataPackage) GetPath() (rt string, err error) {
 	return
 }
 
-type ComFabricCodePackageChangeHandler struct {
+type comFabricCodePackageChangeHandler struct {
 	ole.IUnknown
 }
 
@@ -4744,13 +4744,13 @@ type comFabricCodePackageChangeHandlerVtbl struct {
 	OnPackageModified uintptr
 }
 
-func (v *ComFabricCodePackageChangeHandler) vtable() *comFabricCodePackageChangeHandlerVtbl {
+func (v *comFabricCodePackageChangeHandler) vtable() *comFabricCodePackageChangeHandlerVtbl {
 	return (*comFabricCodePackageChangeHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricCodePackageChangeHandler) OnPackageAdded(
-	source *ComFabricCodePackageActivationContext,
-	codePackage *ComFabricCodePackage,
+func (v *comFabricCodePackageChangeHandler) OnPackageAdded(
+	source *comFabricCodePackageActivationContext,
+	codePackage *comFabricCodePackage,
 ) (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().OnPackageAdded,
@@ -4769,9 +4769,9 @@ func (v *ComFabricCodePackageChangeHandler) OnPackageAdded(
 	rt = fromUnsafePointer(tmp)
 	return
 }
-func (v *ComFabricCodePackageChangeHandler) OnPackageRemoved(
-	source *ComFabricCodePackageActivationContext,
-	codePackage *ComFabricCodePackage,
+func (v *comFabricCodePackageChangeHandler) OnPackageRemoved(
+	source *comFabricCodePackageActivationContext,
+	codePackage *comFabricCodePackage,
 ) (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().OnPackageRemoved,
@@ -4790,10 +4790,10 @@ func (v *ComFabricCodePackageChangeHandler) OnPackageRemoved(
 	rt = fromUnsafePointer(tmp)
 	return
 }
-func (v *ComFabricCodePackageChangeHandler) OnPackageModified(
-	source *ComFabricCodePackageActivationContext,
-	previousCodePackage *ComFabricCodePackage,
-	codePackage *ComFabricCodePackage,
+func (v *comFabricCodePackageChangeHandler) OnPackageModified(
+	source *comFabricCodePackageActivationContext,
+	previousCodePackage *comFabricCodePackage,
+	codePackage *comFabricCodePackage,
 ) (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall6(
 		v.vtable().OnPackageModified,
@@ -4816,7 +4816,7 @@ func (v *ComFabricCodePackageChangeHandler) OnPackageModified(
 	return
 }
 
-type ComFabricConfigurationPackageChangeHandler struct {
+type comFabricConfigurationPackageChangeHandler struct {
 	ole.IUnknown
 }
 
@@ -4827,13 +4827,13 @@ type comFabricConfigurationPackageChangeHandlerVtbl struct {
 	OnPackageModified uintptr
 }
 
-func (v *ComFabricConfigurationPackageChangeHandler) vtable() *comFabricConfigurationPackageChangeHandlerVtbl {
+func (v *comFabricConfigurationPackageChangeHandler) vtable() *comFabricConfigurationPackageChangeHandlerVtbl {
 	return (*comFabricConfigurationPackageChangeHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricConfigurationPackageChangeHandler) OnPackageAdded(
-	source *ComFabricCodePackageActivationContext,
-	configPackage *ComFabricConfigurationPackage,
+func (v *comFabricConfigurationPackageChangeHandler) OnPackageAdded(
+	source *comFabricCodePackageActivationContext,
+	configPackage *comFabricConfigurationPackage,
 ) (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().OnPackageAdded,
@@ -4852,9 +4852,9 @@ func (v *ComFabricConfigurationPackageChangeHandler) OnPackageAdded(
 	rt = fromUnsafePointer(tmp)
 	return
 }
-func (v *ComFabricConfigurationPackageChangeHandler) OnPackageRemoved(
-	source *ComFabricCodePackageActivationContext,
-	configPackage *ComFabricConfigurationPackage,
+func (v *comFabricConfigurationPackageChangeHandler) OnPackageRemoved(
+	source *comFabricCodePackageActivationContext,
+	configPackage *comFabricConfigurationPackage,
 ) (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().OnPackageRemoved,
@@ -4873,10 +4873,10 @@ func (v *ComFabricConfigurationPackageChangeHandler) OnPackageRemoved(
 	rt = fromUnsafePointer(tmp)
 	return
 }
-func (v *ComFabricConfigurationPackageChangeHandler) OnPackageModified(
-	source *ComFabricCodePackageActivationContext,
-	previousConfigPackage *ComFabricConfigurationPackage,
-	configPackage *ComFabricConfigurationPackage,
+func (v *comFabricConfigurationPackageChangeHandler) OnPackageModified(
+	source *comFabricCodePackageActivationContext,
+	previousConfigPackage *comFabricConfigurationPackage,
+	configPackage *comFabricConfigurationPackage,
 ) (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall6(
 		v.vtable().OnPackageModified,
@@ -4899,7 +4899,7 @@ func (v *ComFabricConfigurationPackageChangeHandler) OnPackageModified(
 	return
 }
 
-type ComFabricDataPackageChangeHandler struct {
+type comFabricDataPackageChangeHandler struct {
 	ole.IUnknown
 }
 
@@ -4910,13 +4910,13 @@ type comFabricDataPackageChangeHandlerVtbl struct {
 	OnPackageModified uintptr
 }
 
-func (v *ComFabricDataPackageChangeHandler) vtable() *comFabricDataPackageChangeHandlerVtbl {
+func (v *comFabricDataPackageChangeHandler) vtable() *comFabricDataPackageChangeHandlerVtbl {
 	return (*comFabricDataPackageChangeHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricDataPackageChangeHandler) OnPackageAdded(
-	source *ComFabricCodePackageActivationContext,
-	dataPackage *ComFabricDataPackage,
+func (v *comFabricDataPackageChangeHandler) OnPackageAdded(
+	source *comFabricCodePackageActivationContext,
+	dataPackage *comFabricDataPackage,
 ) (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().OnPackageAdded,
@@ -4935,9 +4935,9 @@ func (v *ComFabricDataPackageChangeHandler) OnPackageAdded(
 	rt = fromUnsafePointer(tmp)
 	return
 }
-func (v *ComFabricDataPackageChangeHandler) OnPackageRemoved(
-	source *ComFabricCodePackageActivationContext,
-	dataPackage *ComFabricDataPackage,
+func (v *comFabricDataPackageChangeHandler) OnPackageRemoved(
+	source *comFabricCodePackageActivationContext,
+	dataPackage *comFabricDataPackage,
 ) (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().OnPackageRemoved,
@@ -4956,10 +4956,10 @@ func (v *ComFabricDataPackageChangeHandler) OnPackageRemoved(
 	rt = fromUnsafePointer(tmp)
 	return
 }
-func (v *ComFabricDataPackageChangeHandler) OnPackageModified(
-	source *ComFabricCodePackageActivationContext,
-	previousDataPackage *ComFabricDataPackage,
-	dataPackage *ComFabricDataPackage,
+func (v *comFabricDataPackageChangeHandler) OnPackageModified(
+	source *comFabricCodePackageActivationContext,
+	previousDataPackage *comFabricDataPackage,
+	dataPackage *comFabricDataPackage,
 ) (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall6(
 		v.vtable().OnPackageModified,
@@ -4982,7 +4982,7 @@ func (v *ComFabricDataPackageChangeHandler) OnPackageModified(
 	return
 }
 
-type ComFabricProcessExitHandler struct {
+type comFabricProcessExitHandler struct {
 	ole.IUnknown
 }
 
@@ -4991,11 +4991,11 @@ type comFabricProcessExitHandlerVtbl struct {
 	FabricProcessExited uintptr
 }
 
-func (v *ComFabricProcessExitHandler) vtable() *comFabricProcessExitHandlerVtbl {
+func (v *comFabricProcessExitHandler) vtable() *comFabricProcessExitHandlerVtbl {
 	return (*comFabricProcessExitHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricProcessExitHandler) FabricProcessExited() (rt interface{}, err error) {
+func (v *comFabricProcessExitHandler) FabricProcessExited() (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().FabricProcessExited,
 		1,
@@ -5014,7 +5014,7 @@ func (v *ComFabricProcessExitHandler) FabricProcessExited() (rt interface{}, err
 	return
 }
 
-type ComFabricTransactionBase struct {
+type comFabricTransactionBase struct {
 	ole.IUnknown
 }
 
@@ -5024,11 +5024,11 @@ type comFabricTransactionBaseVtbl struct {
 	get_IsolationLevel uintptr
 }
 
-func (v *ComFabricTransactionBase) vtable() *comFabricTransactionBaseVtbl {
+func (v *comFabricTransactionBase) vtable() *comFabricTransactionBaseVtbl {
 	return (*comFabricTransactionBaseVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricTransactionBase) GetId() (rt *windows.GUID, err error) {
+func (v *comFabricTransactionBase) GetId() (rt *windows.GUID, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_Id,
 		1,
@@ -5046,7 +5046,7 @@ func (v *ComFabricTransactionBase) GetId() (rt *windows.GUID, err error) {
 	rt = tmp
 	return
 }
-func (v *ComFabricTransactionBase) GetIsolationLevel() (rt FabricTransactionIsolationLevel, err error) {
+func (v *comFabricTransactionBase) GetIsolationLevel() (rt FabricTransactionIsolationLevel, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_IsolationLevel,
 		1,
@@ -5059,8 +5059,8 @@ func (v *ComFabricTransactionBase) GetIsolationLevel() (rt FabricTransactionIsol
 	return
 }
 
-type ComFabricTransaction struct {
-	ComFabricTransactionBase
+type comFabricTransaction struct {
+	comFabricTransactionBase
 }
 
 type comFabricTransactionVtbl struct {
@@ -5070,11 +5070,11 @@ type comFabricTransactionVtbl struct {
 	Rollback    uintptr
 }
 
-func (v *ComFabricTransaction) vtable() *comFabricTransactionVtbl {
+func (v *comFabricTransaction) vtable() *comFabricTransactionVtbl {
 	return (*comFabricTransactionVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricTransaction) beginCommit(
+func (v *comFabricTransaction) beginCommit(
 	timeoutMilliseconds uint32,
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
@@ -5098,7 +5098,7 @@ func (v *ComFabricTransaction) beginCommit(
 	}
 	return
 }
-func (v *ComFabricTransaction) endCommit(
+func (v *comFabricTransaction) endCommit(
 	context *comIFabricAsyncOperationContext,
 ) (commitSequenceNumber int64, err error) {
 	var p_1 int64
@@ -5118,7 +5118,7 @@ func (v *ComFabricTransaction) endCommit(
 	}
 	return
 }
-func (v *ComFabricTransaction) Rollback() (rt interface{}, err error) {
+func (v *comFabricTransaction) Rollback() (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().Rollback,
 		1,
@@ -5136,7 +5136,7 @@ func (v *ComFabricTransaction) Rollback() (rt interface{}, err error) {
 	rt = fromUnsafePointer(tmp)
 	return
 }
-func (v *ComFabricTransaction) Commit(
+func (v *comFabricTransaction) Commit(
 	ctx context.Context,
 ) (result_0 int64, err error) {
 	ch := make(chan error, 1)
@@ -5193,8 +5193,8 @@ func (v *ComFabricTransaction) Commit(
 
 }
 
-type ComFabricKeyValueStoreReplica struct {
-	ComFabricStatefulServiceReplica
+type comFabricKeyValueStoreReplica struct {
+	comFabricStatefulServiceReplica
 }
 
 type comFabricKeyValueStoreReplicaVtbl struct {
@@ -5214,11 +5214,11 @@ type comFabricKeyValueStoreReplicaVtbl struct {
 	EnumerateMetadataByKey   uintptr
 }
 
-func (v *ComFabricKeyValueStoreReplica) vtable() *comFabricKeyValueStoreReplicaVtbl {
+func (v *comFabricKeyValueStoreReplica) vtable() *comFabricKeyValueStoreReplicaVtbl {
 	return (*comFabricKeyValueStoreReplicaVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricKeyValueStoreReplica) GetCurrentEpoch() (currentEpoch FabricEpoch, err error) {
+func (v *comFabricKeyValueStoreReplica) GetCurrentEpoch() (currentEpoch FabricEpoch, err error) {
 	var p_0 innerFabricEpoch
 	defer func() {
 		currentEpoch = *p_0.toGoStruct()
@@ -5236,7 +5236,7 @@ func (v *ComFabricKeyValueStoreReplica) GetCurrentEpoch() (currentEpoch FabricEp
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreReplica) UpdateReplicatorSettings(
+func (v *comFabricKeyValueStoreReplica) UpdateReplicatorSettings(
 	replicatorSettings *FabricReplicatorSettings,
 ) (err error) {
 	var p_0 *innerFabricReplicatorSettings
@@ -5254,8 +5254,8 @@ func (v *ComFabricKeyValueStoreReplica) UpdateReplicatorSettings(
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreReplica) CreateTransaction() (transaction *ComFabricTransaction, err error) {
-	var p_0 *ComFabricTransaction
+func (v *comFabricKeyValueStoreReplica) CreateTransaction() (transaction *comFabricTransaction, err error) {
+	var p_0 *comFabricTransaction
 	defer func() {
 		transaction = p_0
 	}()
@@ -5272,8 +5272,8 @@ func (v *ComFabricKeyValueStoreReplica) CreateTransaction() (transaction *ComFab
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreReplica) Add(
-	transaction *ComFabricTransactionBase,
+func (v *comFabricKeyValueStoreReplica) Add(
+	transaction *comFabricTransactionBase,
 	key string,
 	valueSizeInBytes int32,
 	value *byte,
@@ -5298,8 +5298,8 @@ func (v *ComFabricKeyValueStoreReplica) Add(
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreReplica) Remove(
-	transaction *ComFabricTransactionBase,
+func (v *comFabricKeyValueStoreReplica) Remove(
+	transaction *comFabricTransactionBase,
 	key string,
 	checkSequenceNumber int64,
 ) (err error) {
@@ -5323,8 +5323,8 @@ func (v *ComFabricKeyValueStoreReplica) Remove(
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreReplica) Update(
-	transaction *ComFabricTransactionBase,
+func (v *comFabricKeyValueStoreReplica) Update(
+	transaction *comFabricTransactionBase,
 	key string,
 	valueSizeInBytes int32,
 	value *byte,
@@ -5350,15 +5350,15 @@ func (v *ComFabricKeyValueStoreReplica) Update(
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreReplica) Get(
-	transaction *ComFabricTransactionBase,
+func (v *comFabricKeyValueStoreReplica) Get(
+	transaction *comFabricTransactionBase,
 	key string,
-) (result *ComFabricKeyValueStoreItemResult, err error) {
+) (result *comFabricKeyValueStoreItemResult, err error) {
 	var p_1 *uint16
 	s_33, _ := windows.UTF16PtrFromString(key)
 	p_1 = s_33
 
-	var p_2 *ComFabricKeyValueStoreItemResult
+	var p_2 *comFabricKeyValueStoreItemResult
 	defer func() {
 		result = p_2
 	}()
@@ -5378,15 +5378,15 @@ func (v *ComFabricKeyValueStoreReplica) Get(
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreReplica) GetMetadata(
-	transaction *ComFabricTransactionBase,
+func (v *comFabricKeyValueStoreReplica) GetMetadata(
+	transaction *comFabricTransactionBase,
 	key string,
-) (result *ComFabricKeyValueStoreItemMetadataResult, err error) {
+) (result *comFabricKeyValueStoreItemMetadataResult, err error) {
 	var p_1 *uint16
 	s_34, _ := windows.UTF16PtrFromString(key)
 	p_1 = s_34
 
-	var p_2 *ComFabricKeyValueStoreItemMetadataResult
+	var p_2 *comFabricKeyValueStoreItemMetadataResult
 	defer func() {
 		result = p_2
 	}()
@@ -5406,8 +5406,8 @@ func (v *ComFabricKeyValueStoreReplica) GetMetadata(
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreReplica) Contains(
-	transaction *ComFabricTransactionBase,
+func (v *comFabricKeyValueStoreReplica) Contains(
+	transaction *comFabricTransactionBase,
 	key string,
 ) (result bool, err error) {
 	var p_1 *uint16
@@ -5434,10 +5434,10 @@ func (v *ComFabricKeyValueStoreReplica) Contains(
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreReplica) Enumerate(
-	transaction *ComFabricTransactionBase,
-) (result *ComFabricKeyValueStoreItemEnumerator, err error) {
-	var p_1 *ComFabricKeyValueStoreItemEnumerator
+func (v *comFabricKeyValueStoreReplica) Enumerate(
+	transaction *comFabricTransactionBase,
+) (result *comFabricKeyValueStoreItemEnumerator, err error) {
+	var p_1 *comFabricKeyValueStoreItemEnumerator
 	defer func() {
 		result = p_1
 	}()
@@ -5454,15 +5454,15 @@ func (v *ComFabricKeyValueStoreReplica) Enumerate(
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreReplica) EnumerateByKey(
-	transaction *ComFabricTransactionBase,
+func (v *comFabricKeyValueStoreReplica) EnumerateByKey(
+	transaction *comFabricTransactionBase,
 	keyPrefix string,
-) (result *ComFabricKeyValueStoreItemEnumerator, err error) {
+) (result *comFabricKeyValueStoreItemEnumerator, err error) {
 	var p_1 *uint16
 	s_36, _ := windows.UTF16PtrFromString(keyPrefix)
 	p_1 = s_36
 
-	var p_2 *ComFabricKeyValueStoreItemEnumerator
+	var p_2 *comFabricKeyValueStoreItemEnumerator
 	defer func() {
 		result = p_2
 	}()
@@ -5482,10 +5482,10 @@ func (v *ComFabricKeyValueStoreReplica) EnumerateByKey(
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreReplica) EnumerateMetadata(
-	transaction *ComFabricTransactionBase,
-) (result *ComFabricKeyValueStoreItemMetadataEnumerator, err error) {
-	var p_1 *ComFabricKeyValueStoreItemMetadataEnumerator
+func (v *comFabricKeyValueStoreReplica) EnumerateMetadata(
+	transaction *comFabricTransactionBase,
+) (result *comFabricKeyValueStoreItemMetadataEnumerator, err error) {
+	var p_1 *comFabricKeyValueStoreItemMetadataEnumerator
 	defer func() {
 		result = p_1
 	}()
@@ -5502,15 +5502,15 @@ func (v *ComFabricKeyValueStoreReplica) EnumerateMetadata(
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreReplica) EnumerateMetadataByKey(
-	transaction *ComFabricTransactionBase,
+func (v *comFabricKeyValueStoreReplica) EnumerateMetadataByKey(
+	transaction *comFabricTransactionBase,
 	keyPrefix string,
-) (result *ComFabricKeyValueStoreItemMetadataEnumerator, err error) {
+) (result *comFabricKeyValueStoreItemMetadataEnumerator, err error) {
 	var p_1 *uint16
 	s_37, _ := windows.UTF16PtrFromString(keyPrefix)
 	p_1 = s_37
 
-	var p_2 *ComFabricKeyValueStoreItemMetadataEnumerator
+	var p_2 *comFabricKeyValueStoreItemMetadataEnumerator
 	defer func() {
 		result = p_2
 	}()
@@ -5531,8 +5531,8 @@ func (v *ComFabricKeyValueStoreReplica) EnumerateMetadataByKey(
 	return
 }
 
-type ComFabricKeyValueStoreReplica2 struct {
-	ComFabricKeyValueStoreReplica
+type comFabricKeyValueStoreReplica2 struct {
+	comFabricKeyValueStoreReplica
 }
 
 type comFabricKeyValueStoreReplica2Vtbl struct {
@@ -5542,11 +5542,11 @@ type comFabricKeyValueStoreReplica2Vtbl struct {
 	CreateTransaction2 uintptr
 }
 
-func (v *ComFabricKeyValueStoreReplica2) vtable() *comFabricKeyValueStoreReplica2Vtbl {
+func (v *comFabricKeyValueStoreReplica2) vtable() *comFabricKeyValueStoreReplica2Vtbl {
 	return (*comFabricKeyValueStoreReplica2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricKeyValueStoreReplica2) Backup(
+func (v *comFabricKeyValueStoreReplica2) Backup(
 	backupDirectory string,
 ) (err error) {
 	var p_0 *uint16
@@ -5566,7 +5566,7 @@ func (v *ComFabricKeyValueStoreReplica2) Backup(
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreReplica2) Restore(
+func (v *comFabricKeyValueStoreReplica2) Restore(
 	backupDirectory string,
 ) (err error) {
 	var p_0 *uint16
@@ -5586,12 +5586,12 @@ func (v *ComFabricKeyValueStoreReplica2) Restore(
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreReplica2) CreateTransaction2(
+func (v *comFabricKeyValueStoreReplica2) CreateTransaction2(
 	settings *FabricKeyValueStoreTransactionSettings,
-) (transaction *ComFabricTransaction, err error) {
+) (transaction *comFabricTransaction, err error) {
 	var p_0 *innerFabricKeyValueStoreTransactionSettings
 	p_0 = settings.toInnerStruct()
-	var p_1 *ComFabricTransaction
+	var p_1 *comFabricTransaction
 	defer func() {
 		transaction = p_1
 	}()
@@ -5609,8 +5609,8 @@ func (v *ComFabricKeyValueStoreReplica2) CreateTransaction2(
 	return
 }
 
-type ComFabricKeyValueStoreReplica3 struct {
-	ComFabricKeyValueStoreReplica2
+type comFabricKeyValueStoreReplica3 struct {
+	comFabricKeyValueStoreReplica2
 }
 
 type comFabricKeyValueStoreReplica3Vtbl struct {
@@ -5619,14 +5619,14 @@ type comFabricKeyValueStoreReplica3Vtbl struct {
 	EndBackup   uintptr
 }
 
-func (v *ComFabricKeyValueStoreReplica3) vtable() *comFabricKeyValueStoreReplica3Vtbl {
+func (v *comFabricKeyValueStoreReplica3) vtable() *comFabricKeyValueStoreReplica3Vtbl {
 	return (*comFabricKeyValueStoreReplica3Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricKeyValueStoreReplica3) beginBackup(
+func (v *comFabricKeyValueStoreReplica3) beginBackup(
 	backupDirectory string,
 	backupOption FabricStoreBackupOption,
-	postBackupHandler *ComFabricStorePostBackupHandler,
+	postBackupHandler *comFabricStorePostBackupHandler,
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
@@ -5653,7 +5653,7 @@ func (v *ComFabricKeyValueStoreReplica3) beginBackup(
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreReplica3) endBackup(
+func (v *comFabricKeyValueStoreReplica3) endBackup(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
@@ -5669,11 +5669,11 @@ func (v *ComFabricKeyValueStoreReplica3) endBackup(
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreReplica3) Backup(
+func (v *comFabricKeyValueStoreReplica3) Backup(
 	ctx context.Context,
 	backupDirectory string,
 	backupOption FabricStoreBackupOption,
-	postBackupHandler *ComFabricStorePostBackupHandler,
+	postBackupHandler *comFabricStorePostBackupHandler,
 ) (err error) {
 	ch := make(chan error, 1)
 	defer close(ch)
@@ -5730,8 +5730,8 @@ func (v *ComFabricKeyValueStoreReplica3) Backup(
 
 }
 
-type ComFabricKeyValueStoreReplica4 struct {
-	ComFabricKeyValueStoreReplica3
+type comFabricKeyValueStoreReplica4 struct {
+	comFabricKeyValueStoreReplica3
 }
 
 type comFabricKeyValueStoreReplica4Vtbl struct {
@@ -5740,11 +5740,11 @@ type comFabricKeyValueStoreReplica4Vtbl struct {
 	EndRestore   uintptr
 }
 
-func (v *ComFabricKeyValueStoreReplica4) vtable() *comFabricKeyValueStoreReplica4Vtbl {
+func (v *comFabricKeyValueStoreReplica4) vtable() *comFabricKeyValueStoreReplica4Vtbl {
 	return (*comFabricKeyValueStoreReplica4Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricKeyValueStoreReplica4) beginRestore(
+func (v *comFabricKeyValueStoreReplica4) beginRestore(
 	backupDirectory string,
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
@@ -5772,7 +5772,7 @@ func (v *ComFabricKeyValueStoreReplica4) beginRestore(
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreReplica4) endRestore(
+func (v *comFabricKeyValueStoreReplica4) endRestore(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
@@ -5788,7 +5788,7 @@ func (v *ComFabricKeyValueStoreReplica4) endRestore(
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreReplica4) Restore(
+func (v *comFabricKeyValueStoreReplica4) Restore(
 	ctx context.Context,
 	backupDirectory string,
 ) (err error) {
@@ -5845,8 +5845,8 @@ func (v *ComFabricKeyValueStoreReplica4) Restore(
 
 }
 
-type ComFabricKeyValueStoreReplica5 struct {
-	ComFabricKeyValueStoreReplica4
+type comFabricKeyValueStoreReplica5 struct {
+	comFabricKeyValueStoreReplica4
 }
 
 type comFabricKeyValueStoreReplica5Vtbl struct {
@@ -5860,12 +5860,12 @@ type comFabricKeyValueStoreReplica5Vtbl struct {
 	EnumerateMetadataByKey2 uintptr
 }
 
-func (v *ComFabricKeyValueStoreReplica5) vtable() *comFabricKeyValueStoreReplica5Vtbl {
+func (v *comFabricKeyValueStoreReplica5) vtable() *comFabricKeyValueStoreReplica5Vtbl {
 	return (*comFabricKeyValueStoreReplica5Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricKeyValueStoreReplica5) TryAdd(
-	transaction *ComFabricTransactionBase,
+func (v *comFabricKeyValueStoreReplica5) TryAdd(
+	transaction *comFabricTransactionBase,
 	key string,
 	valueSizeInBytes int32,
 	value *byte,
@@ -5894,8 +5894,8 @@ func (v *ComFabricKeyValueStoreReplica5) TryAdd(
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreReplica5) TryRemove(
-	transaction *ComFabricTransactionBase,
+func (v *comFabricKeyValueStoreReplica5) TryRemove(
+	transaction *comFabricTransactionBase,
 	key string,
 	checkSequenceNumber int64,
 ) (exists bool, err error) {
@@ -5923,8 +5923,8 @@ func (v *ComFabricKeyValueStoreReplica5) TryRemove(
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreReplica5) TryUpdate(
-	transaction *ComFabricTransactionBase,
+func (v *comFabricKeyValueStoreReplica5) TryUpdate(
+	transaction *comFabricTransactionBase,
 	key string,
 	valueSizeInBytes int32,
 	value *byte,
@@ -5957,15 +5957,15 @@ func (v *ComFabricKeyValueStoreReplica5) TryUpdate(
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreReplica5) TryGet(
-	transaction *ComFabricTransactionBase,
+func (v *comFabricKeyValueStoreReplica5) TryGet(
+	transaction *comFabricTransactionBase,
 	key string,
-) (result *ComFabricKeyValueStoreItemResult, err error) {
+) (result *comFabricKeyValueStoreItemResult, err error) {
 	var p_1 *uint16
 	s_45, _ := windows.UTF16PtrFromString(key)
 	p_1 = s_45
 
-	var p_2 *ComFabricKeyValueStoreItemResult
+	var p_2 *comFabricKeyValueStoreItemResult
 	defer func() {
 		result = p_2
 	}()
@@ -5985,15 +5985,15 @@ func (v *ComFabricKeyValueStoreReplica5) TryGet(
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreReplica5) TryGetMetadata(
-	transaction *ComFabricTransactionBase,
+func (v *comFabricKeyValueStoreReplica5) TryGetMetadata(
+	transaction *comFabricTransactionBase,
 	key string,
-) (result *ComFabricKeyValueStoreItemMetadataResult, err error) {
+) (result *comFabricKeyValueStoreItemMetadataResult, err error) {
 	var p_1 *uint16
 	s_46, _ := windows.UTF16PtrFromString(key)
 	p_1 = s_46
 
-	var p_2 *ComFabricKeyValueStoreItemMetadataResult
+	var p_2 *comFabricKeyValueStoreItemMetadataResult
 	defer func() {
 		result = p_2
 	}()
@@ -6013,11 +6013,11 @@ func (v *ComFabricKeyValueStoreReplica5) TryGetMetadata(
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreReplica5) EnumerateByKey2(
-	transaction *ComFabricTransactionBase,
+func (v *comFabricKeyValueStoreReplica5) EnumerateByKey2(
+	transaction *comFabricTransactionBase,
 	keyPrefix string,
 	strictPrefix bool,
-) (result *ComFabricKeyValueStoreItemEnumerator, err error) {
+) (result *comFabricKeyValueStoreItemEnumerator, err error) {
 	var p_1 *uint16
 	s_47, _ := windows.UTF16PtrFromString(keyPrefix)
 	p_1 = s_47
@@ -6026,7 +6026,7 @@ func (v *ComFabricKeyValueStoreReplica5) EnumerateByKey2(
 	if strictPrefix {
 		p_2 = 1
 	}
-	var p_3 *ComFabricKeyValueStoreItemEnumerator
+	var p_3 *comFabricKeyValueStoreItemEnumerator
 	defer func() {
 		result = p_3
 	}()
@@ -6046,11 +6046,11 @@ func (v *ComFabricKeyValueStoreReplica5) EnumerateByKey2(
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreReplica5) EnumerateMetadataByKey2(
-	transaction *ComFabricTransactionBase,
+func (v *comFabricKeyValueStoreReplica5) EnumerateMetadataByKey2(
+	transaction *comFabricTransactionBase,
 	keyPrefix string,
 	strictPrefix bool,
-) (result *ComFabricKeyValueStoreItemMetadataEnumerator, err error) {
+) (result *comFabricKeyValueStoreItemMetadataEnumerator, err error) {
 	var p_1 *uint16
 	s_48, _ := windows.UTF16PtrFromString(keyPrefix)
 	p_1 = s_48
@@ -6059,7 +6059,7 @@ func (v *ComFabricKeyValueStoreReplica5) EnumerateMetadataByKey2(
 	if strictPrefix {
 		p_2 = 1
 	}
-	var p_3 *ComFabricKeyValueStoreItemMetadataEnumerator
+	var p_3 *comFabricKeyValueStoreItemMetadataEnumerator
 	defer func() {
 		result = p_3
 	}()
@@ -6080,8 +6080,8 @@ func (v *ComFabricKeyValueStoreReplica5) EnumerateMetadataByKey2(
 	return
 }
 
-type ComFabricKeyValueStoreReplica6 struct {
-	ComFabricKeyValueStoreReplica5
+type comFabricKeyValueStoreReplica6 struct {
+	comFabricKeyValueStoreReplica5
 }
 
 type comFabricKeyValueStoreReplica6Vtbl struct {
@@ -6089,11 +6089,11 @@ type comFabricKeyValueStoreReplica6Vtbl struct {
 	BeginRestore2 uintptr
 }
 
-func (v *ComFabricKeyValueStoreReplica6) vtable() *comFabricKeyValueStoreReplica6Vtbl {
+func (v *comFabricKeyValueStoreReplica6) vtable() *comFabricKeyValueStoreReplica6Vtbl {
 	return (*comFabricKeyValueStoreReplica6Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricKeyValueStoreReplica6) beginRestore2(
+func (v *comFabricKeyValueStoreReplica6) beginRestore2(
 	backupDirectory string,
 	settings *FabricKeyValueStoreRestoreSettings,
 	callback *comIFabricAsyncOperationCallback,
@@ -6125,7 +6125,7 @@ func (v *ComFabricKeyValueStoreReplica6) beginRestore2(
 	return
 }
 
-type ComFabricKeyValueStoreEnumerator struct {
+type comFabricKeyValueStoreEnumerator struct {
 	ole.IUnknown
 }
 
@@ -6135,18 +6135,18 @@ type comFabricKeyValueStoreEnumeratorVtbl struct {
 	EnumerateMetadataByKey uintptr
 }
 
-func (v *ComFabricKeyValueStoreEnumerator) vtable() *comFabricKeyValueStoreEnumeratorVtbl {
+func (v *comFabricKeyValueStoreEnumerator) vtable() *comFabricKeyValueStoreEnumeratorVtbl {
 	return (*comFabricKeyValueStoreEnumeratorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricKeyValueStoreEnumerator) EnumerateByKey(
+func (v *comFabricKeyValueStoreEnumerator) EnumerateByKey(
 	keyPrefix string,
-) (result *ComFabricKeyValueStoreItemEnumerator, err error) {
+) (result *comFabricKeyValueStoreItemEnumerator, err error) {
 	var p_0 *uint16
 	s_50, _ := windows.UTF16PtrFromString(keyPrefix)
 	p_0 = s_50
 
-	var p_1 *ComFabricKeyValueStoreItemEnumerator
+	var p_1 *comFabricKeyValueStoreItemEnumerator
 	defer func() {
 		result = p_1
 	}()
@@ -6163,14 +6163,14 @@ func (v *ComFabricKeyValueStoreEnumerator) EnumerateByKey(
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreEnumerator) EnumerateMetadataByKey(
+func (v *comFabricKeyValueStoreEnumerator) EnumerateMetadataByKey(
 	keyPrefix string,
-) (result *ComFabricKeyValueStoreItemMetadataEnumerator, err error) {
+) (result *comFabricKeyValueStoreItemMetadataEnumerator, err error) {
 	var p_0 *uint16
 	s_51, _ := windows.UTF16PtrFromString(keyPrefix)
 	p_0 = s_51
 
-	var p_1 *ComFabricKeyValueStoreItemMetadataEnumerator
+	var p_1 *comFabricKeyValueStoreItemMetadataEnumerator
 	defer func() {
 		result = p_1
 	}()
@@ -6188,8 +6188,8 @@ func (v *ComFabricKeyValueStoreEnumerator) EnumerateMetadataByKey(
 	return
 }
 
-type ComFabricKeyValueStoreEnumerator2 struct {
-	ComFabricKeyValueStoreEnumerator
+type comFabricKeyValueStoreEnumerator2 struct {
+	comFabricKeyValueStoreEnumerator
 }
 
 type comFabricKeyValueStoreEnumerator2Vtbl struct {
@@ -6198,14 +6198,14 @@ type comFabricKeyValueStoreEnumerator2Vtbl struct {
 	EnumerateMetadataByKey2 uintptr
 }
 
-func (v *ComFabricKeyValueStoreEnumerator2) vtable() *comFabricKeyValueStoreEnumerator2Vtbl {
+func (v *comFabricKeyValueStoreEnumerator2) vtable() *comFabricKeyValueStoreEnumerator2Vtbl {
 	return (*comFabricKeyValueStoreEnumerator2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricKeyValueStoreEnumerator2) EnumerateByKey2(
+func (v *comFabricKeyValueStoreEnumerator2) EnumerateByKey2(
 	keyPrefix string,
 	strictPrefix bool,
-) (result *ComFabricKeyValueStoreItemEnumerator, err error) {
+) (result *comFabricKeyValueStoreItemEnumerator, err error) {
 	var p_0 *uint16
 	s_52, _ := windows.UTF16PtrFromString(keyPrefix)
 	p_0 = s_52
@@ -6214,7 +6214,7 @@ func (v *ComFabricKeyValueStoreEnumerator2) EnumerateByKey2(
 	if strictPrefix {
 		p_1 = 1
 	}
-	var p_2 *ComFabricKeyValueStoreItemEnumerator
+	var p_2 *comFabricKeyValueStoreItemEnumerator
 	defer func() {
 		result = p_2
 	}()
@@ -6234,10 +6234,10 @@ func (v *ComFabricKeyValueStoreEnumerator2) EnumerateByKey2(
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreEnumerator2) EnumerateMetadataByKey2(
+func (v *comFabricKeyValueStoreEnumerator2) EnumerateMetadataByKey2(
 	keyPrefix string,
 	strictPrefix bool,
-) (result *ComFabricKeyValueStoreItemMetadataEnumerator, err error) {
+) (result *comFabricKeyValueStoreItemMetadataEnumerator, err error) {
 	var p_0 *uint16
 	s_53, _ := windows.UTF16PtrFromString(keyPrefix)
 	p_0 = s_53
@@ -6246,7 +6246,7 @@ func (v *ComFabricKeyValueStoreEnumerator2) EnumerateMetadataByKey2(
 	if strictPrefix {
 		p_1 = 1
 	}
-	var p_2 *ComFabricKeyValueStoreItemMetadataEnumerator
+	var p_2 *comFabricKeyValueStoreItemMetadataEnumerator
 	defer func() {
 		result = p_2
 	}()
@@ -6267,7 +6267,7 @@ func (v *ComFabricKeyValueStoreEnumerator2) EnumerateMetadataByKey2(
 	return
 }
 
-type ComFabricKeyValueStoreItemEnumerator struct {
+type comFabricKeyValueStoreItemEnumerator struct {
 	ole.IUnknown
 }
 
@@ -6277,11 +6277,11 @@ type comFabricKeyValueStoreItemEnumeratorVtbl struct {
 	get_Current uintptr
 }
 
-func (v *ComFabricKeyValueStoreItemEnumerator) vtable() *comFabricKeyValueStoreItemEnumeratorVtbl {
+func (v *comFabricKeyValueStoreItemEnumerator) vtable() *comFabricKeyValueStoreItemEnumeratorVtbl {
 	return (*comFabricKeyValueStoreItemEnumeratorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricKeyValueStoreItemEnumerator) MoveNext() (err error) {
+func (v *comFabricKeyValueStoreItemEnumerator) MoveNext() (err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().MoveNext,
 		1,
@@ -6295,7 +6295,7 @@ func (v *ComFabricKeyValueStoreItemEnumerator) MoveNext() (err error) {
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreItemEnumerator) GetCurrent() (rt *ComFabricKeyValueStoreItemResult, err error) {
+func (v *comFabricKeyValueStoreItemEnumerator) GetCurrent() (rt *comFabricKeyValueStoreItemResult, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_Current,
 		1,
@@ -6308,13 +6308,13 @@ func (v *ComFabricKeyValueStoreItemEnumerator) GetCurrent() (rt *ComFabricKeyVal
 		return
 	}
 
-	tmp := (*ComFabricKeyValueStoreItemResult)(unsafe.Pointer(hr))
+	tmp := (*comFabricKeyValueStoreItemResult)(unsafe.Pointer(hr))
 
 	rt = tmp
 	return
 }
 
-type ComFabricKeyValueStoreItemMetadataEnumerator struct {
+type comFabricKeyValueStoreItemMetadataEnumerator struct {
 	ole.IUnknown
 }
 
@@ -6324,11 +6324,11 @@ type comFabricKeyValueStoreItemMetadataEnumeratorVtbl struct {
 	get_Current uintptr
 }
 
-func (v *ComFabricKeyValueStoreItemMetadataEnumerator) vtable() *comFabricKeyValueStoreItemMetadataEnumeratorVtbl {
+func (v *comFabricKeyValueStoreItemMetadataEnumerator) vtable() *comFabricKeyValueStoreItemMetadataEnumeratorVtbl {
 	return (*comFabricKeyValueStoreItemMetadataEnumeratorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricKeyValueStoreItemMetadataEnumerator) MoveNext() (err error) {
+func (v *comFabricKeyValueStoreItemMetadataEnumerator) MoveNext() (err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().MoveNext,
 		1,
@@ -6342,7 +6342,7 @@ func (v *ComFabricKeyValueStoreItemMetadataEnumerator) MoveNext() (err error) {
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreItemMetadataEnumerator) GetCurrent() (rt *ComFabricKeyValueStoreItemMetadataResult, err error) {
+func (v *comFabricKeyValueStoreItemMetadataEnumerator) GetCurrent() (rt *comFabricKeyValueStoreItemMetadataResult, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_Current,
 		1,
@@ -6355,13 +6355,13 @@ func (v *ComFabricKeyValueStoreItemMetadataEnumerator) GetCurrent() (rt *ComFabr
 		return
 	}
 
-	tmp := (*ComFabricKeyValueStoreItemMetadataResult)(unsafe.Pointer(hr))
+	tmp := (*comFabricKeyValueStoreItemMetadataResult)(unsafe.Pointer(hr))
 
 	rt = tmp
 	return
 }
 
-type ComFabricKeyValueStoreNotificationEnumerator struct {
+type comFabricKeyValueStoreNotificationEnumerator struct {
 	ole.IUnknown
 }
 
@@ -6372,11 +6372,11 @@ type comFabricKeyValueStoreNotificationEnumeratorVtbl struct {
 	Reset       uintptr
 }
 
-func (v *ComFabricKeyValueStoreNotificationEnumerator) vtable() *comFabricKeyValueStoreNotificationEnumeratorVtbl {
+func (v *comFabricKeyValueStoreNotificationEnumerator) vtable() *comFabricKeyValueStoreNotificationEnumeratorVtbl {
 	return (*comFabricKeyValueStoreNotificationEnumeratorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricKeyValueStoreNotificationEnumerator) MoveNext() (err error) {
+func (v *comFabricKeyValueStoreNotificationEnumerator) MoveNext() (err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().MoveNext,
 		1,
@@ -6390,7 +6390,7 @@ func (v *ComFabricKeyValueStoreNotificationEnumerator) MoveNext() (err error) {
 	}
 	return
 }
-func (v *ComFabricKeyValueStoreNotificationEnumerator) GetCurrent() (rt *ComFabricKeyValueStoreNotification, err error) {
+func (v *comFabricKeyValueStoreNotificationEnumerator) GetCurrent() (rt *comFabricKeyValueStoreNotification, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_Current,
 		1,
@@ -6403,12 +6403,12 @@ func (v *ComFabricKeyValueStoreNotificationEnumerator) GetCurrent() (rt *ComFabr
 		return
 	}
 
-	tmp := (*ComFabricKeyValueStoreNotification)(unsafe.Pointer(hr))
+	tmp := (*comFabricKeyValueStoreNotification)(unsafe.Pointer(hr))
 
 	rt = tmp
 	return
 }
-func (v *ComFabricKeyValueStoreNotificationEnumerator) Reset() (rt interface{}, err error) {
+func (v *comFabricKeyValueStoreNotificationEnumerator) Reset() (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().Reset,
 		1,
@@ -6427,8 +6427,8 @@ func (v *ComFabricKeyValueStoreNotificationEnumerator) Reset() (rt interface{}, 
 	return
 }
 
-type ComFabricKeyValueStoreItemEnumerator2 struct {
-	ComFabricKeyValueStoreItemEnumerator
+type comFabricKeyValueStoreItemEnumerator2 struct {
+	comFabricKeyValueStoreItemEnumerator
 }
 
 type comFabricKeyValueStoreItemEnumerator2Vtbl struct {
@@ -6436,11 +6436,11 @@ type comFabricKeyValueStoreItemEnumerator2Vtbl struct {
 	TryMoveNext uintptr
 }
 
-func (v *ComFabricKeyValueStoreItemEnumerator2) vtable() *comFabricKeyValueStoreItemEnumerator2Vtbl {
+func (v *comFabricKeyValueStoreItemEnumerator2) vtable() *comFabricKeyValueStoreItemEnumerator2Vtbl {
 	return (*comFabricKeyValueStoreItemEnumerator2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricKeyValueStoreItemEnumerator2) TryMoveNext() (success bool, err error) {
+func (v *comFabricKeyValueStoreItemEnumerator2) TryMoveNext() (success bool, err error) {
 	var p_0 bool
 	defer func() {
 		success = p_0
@@ -6459,8 +6459,8 @@ func (v *ComFabricKeyValueStoreItemEnumerator2) TryMoveNext() (success bool, err
 	return
 }
 
-type ComFabricKeyValueStoreItemMetadataEnumerator2 struct {
-	ComFabricKeyValueStoreItemMetadataEnumerator
+type comFabricKeyValueStoreItemMetadataEnumerator2 struct {
+	comFabricKeyValueStoreItemMetadataEnumerator
 }
 
 type comFabricKeyValueStoreItemMetadataEnumerator2Vtbl struct {
@@ -6468,11 +6468,11 @@ type comFabricKeyValueStoreItemMetadataEnumerator2Vtbl struct {
 	TryMoveNext uintptr
 }
 
-func (v *ComFabricKeyValueStoreItemMetadataEnumerator2) vtable() *comFabricKeyValueStoreItemMetadataEnumerator2Vtbl {
+func (v *comFabricKeyValueStoreItemMetadataEnumerator2) vtable() *comFabricKeyValueStoreItemMetadataEnumerator2Vtbl {
 	return (*comFabricKeyValueStoreItemMetadataEnumerator2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricKeyValueStoreItemMetadataEnumerator2) TryMoveNext() (success bool, err error) {
+func (v *comFabricKeyValueStoreItemMetadataEnumerator2) TryMoveNext() (success bool, err error) {
 	var p_0 bool
 	defer func() {
 		success = p_0
@@ -6491,8 +6491,8 @@ func (v *ComFabricKeyValueStoreItemMetadataEnumerator2) TryMoveNext() (success b
 	return
 }
 
-type ComFabricKeyValueStoreNotificationEnumerator2 struct {
-	ComFabricKeyValueStoreNotificationEnumerator
+type comFabricKeyValueStoreNotificationEnumerator2 struct {
+	comFabricKeyValueStoreNotificationEnumerator
 }
 
 type comFabricKeyValueStoreNotificationEnumerator2Vtbl struct {
@@ -6500,11 +6500,11 @@ type comFabricKeyValueStoreNotificationEnumerator2Vtbl struct {
 	TryMoveNext uintptr
 }
 
-func (v *ComFabricKeyValueStoreNotificationEnumerator2) vtable() *comFabricKeyValueStoreNotificationEnumerator2Vtbl {
+func (v *comFabricKeyValueStoreNotificationEnumerator2) vtable() *comFabricKeyValueStoreNotificationEnumerator2Vtbl {
 	return (*comFabricKeyValueStoreNotificationEnumerator2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricKeyValueStoreNotificationEnumerator2) TryMoveNext() (success bool, err error) {
+func (v *comFabricKeyValueStoreNotificationEnumerator2) TryMoveNext() (success bool, err error) {
 	var p_0 bool
 	defer func() {
 		success = p_0
@@ -6523,7 +6523,7 @@ func (v *ComFabricKeyValueStoreNotificationEnumerator2) TryMoveNext() (success b
 	return
 }
 
-type ComFabricKeyValueStoreItemResult struct {
+type comFabricKeyValueStoreItemResult struct {
 	ole.IUnknown
 }
 
@@ -6532,11 +6532,11 @@ type comFabricKeyValueStoreItemResultVtbl struct {
 	get_Item uintptr
 }
 
-func (v *ComFabricKeyValueStoreItemResult) vtable() *comFabricKeyValueStoreItemResultVtbl {
+func (v *comFabricKeyValueStoreItemResult) vtable() *comFabricKeyValueStoreItemResultVtbl {
 	return (*comFabricKeyValueStoreItemResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricKeyValueStoreItemResult) GetItem() (rt *FabricKeyValueStoreItem, err error) {
+func (v *comFabricKeyValueStoreItemResult) GetItem() (rt *FabricKeyValueStoreItem, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_Item,
 		1,
@@ -6555,7 +6555,7 @@ func (v *ComFabricKeyValueStoreItemResult) GetItem() (rt *FabricKeyValueStoreIte
 	return
 }
 
-type ComFabricKeyValueStoreItemMetadataResult struct {
+type comFabricKeyValueStoreItemMetadataResult struct {
 	ole.IUnknown
 }
 
@@ -6564,11 +6564,11 @@ type comFabricKeyValueStoreItemMetadataResultVtbl struct {
 	get_Metadata uintptr
 }
 
-func (v *ComFabricKeyValueStoreItemMetadataResult) vtable() *comFabricKeyValueStoreItemMetadataResultVtbl {
+func (v *comFabricKeyValueStoreItemMetadataResult) vtable() *comFabricKeyValueStoreItemMetadataResultVtbl {
 	return (*comFabricKeyValueStoreItemMetadataResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricKeyValueStoreItemMetadataResult) GetMetadata() (rt *FabricKeyValueStoreItemMetadata, err error) {
+func (v *comFabricKeyValueStoreItemMetadataResult) GetMetadata() (rt *FabricKeyValueStoreItemMetadata, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_Metadata,
 		1,
@@ -6587,8 +6587,8 @@ func (v *ComFabricKeyValueStoreItemMetadataResult) GetMetadata() (rt *FabricKeyV
 	return
 }
 
-type ComFabricKeyValueStoreNotification struct {
-	ComFabricKeyValueStoreItemResult
+type comFabricKeyValueStoreNotification struct {
+	comFabricKeyValueStoreItemResult
 }
 
 type comFabricKeyValueStoreNotificationVtbl struct {
@@ -6596,11 +6596,11 @@ type comFabricKeyValueStoreNotificationVtbl struct {
 	IsDelete uintptr
 }
 
-func (v *ComFabricKeyValueStoreNotification) vtable() *comFabricKeyValueStoreNotificationVtbl {
+func (v *comFabricKeyValueStoreNotification) vtable() *comFabricKeyValueStoreNotificationVtbl {
 	return (*comFabricKeyValueStoreNotificationVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricKeyValueStoreNotification) IsDelete() (rt bool, err error) {
+func (v *comFabricKeyValueStoreNotification) IsDelete() (rt bool, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().IsDelete,
 		1,
@@ -6613,7 +6613,7 @@ func (v *ComFabricKeyValueStoreNotification) IsDelete() (rt bool, err error) {
 	return
 }
 
-type ComFabricStoreEventHandler struct {
+type comFabricStoreEventHandler struct {
 	ole.IUnknown
 }
 
@@ -6622,11 +6622,11 @@ type comFabricStoreEventHandlerVtbl struct {
 	OnDataLoss uintptr
 }
 
-func (v *ComFabricStoreEventHandler) vtable() *comFabricStoreEventHandlerVtbl {
+func (v *comFabricStoreEventHandler) vtable() *comFabricStoreEventHandlerVtbl {
 	return (*comFabricStoreEventHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricStoreEventHandler) OnDataLoss() (rt interface{}, err error) {
+func (v *comFabricStoreEventHandler) OnDataLoss() (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().OnDataLoss,
 		1,
@@ -6645,8 +6645,8 @@ func (v *ComFabricStoreEventHandler) OnDataLoss() (rt interface{}, err error) {
 	return
 }
 
-type ComFabricStoreEventHandler2 struct {
-	ComFabricStoreEventHandler
+type comFabricStoreEventHandler2 struct {
+	comFabricStoreEventHandler
 }
 
 type comFabricStoreEventHandler2Vtbl struct {
@@ -6655,11 +6655,11 @@ type comFabricStoreEventHandler2Vtbl struct {
 	EndOnDataLoss   uintptr
 }
 
-func (v *ComFabricStoreEventHandler2) vtable() *comFabricStoreEventHandler2Vtbl {
+func (v *comFabricStoreEventHandler2) vtable() *comFabricStoreEventHandler2Vtbl {
 	return (*comFabricStoreEventHandler2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricStoreEventHandler2) beginOnDataLoss(
+func (v *comFabricStoreEventHandler2) beginOnDataLoss(
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
 	var p_1 *comIFabricAsyncOperationContext
@@ -6679,7 +6679,7 @@ func (v *ComFabricStoreEventHandler2) beginOnDataLoss(
 	}
 	return
 }
-func (v *ComFabricStoreEventHandler2) endOnDataLoss(
+func (v *comFabricStoreEventHandler2) endOnDataLoss(
 	context *comIFabricAsyncOperationContext,
 ) (isStateChanged bool, err error) {
 	var p_1 bool
@@ -6699,7 +6699,7 @@ func (v *ComFabricStoreEventHandler2) endOnDataLoss(
 	}
 	return
 }
-func (v *ComFabricStoreEventHandler2) OnDataLoss(
+func (v *comFabricStoreEventHandler2) OnDataLoss(
 	ctx context.Context,
 ) (result_0 bool, err error) {
 	ch := make(chan error, 1)
@@ -6755,7 +6755,7 @@ func (v *ComFabricStoreEventHandler2) OnDataLoss(
 
 }
 
-type ComFabricStorePostBackupHandler struct {
+type comFabricStorePostBackupHandler struct {
 	ole.IUnknown
 }
 
@@ -6765,11 +6765,11 @@ type comFabricStorePostBackupHandlerVtbl struct {
 	EndPostBackup   uintptr
 }
 
-func (v *ComFabricStorePostBackupHandler) vtable() *comFabricStorePostBackupHandlerVtbl {
+func (v *comFabricStorePostBackupHandler) vtable() *comFabricStorePostBackupHandlerVtbl {
 	return (*comFabricStorePostBackupHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricStorePostBackupHandler) beginPostBackup(
+func (v *comFabricStorePostBackupHandler) beginPostBackup(
 	info *FabricStoreBackupInfo,
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
@@ -6795,7 +6795,7 @@ func (v *ComFabricStorePostBackupHandler) beginPostBackup(
 	}
 	return
 }
-func (v *ComFabricStorePostBackupHandler) endPostBackup(
+func (v *comFabricStorePostBackupHandler) endPostBackup(
 	context *comIFabricAsyncOperationContext,
 ) (status bool, err error) {
 	var p_1 bool
@@ -6815,7 +6815,7 @@ func (v *ComFabricStorePostBackupHandler) endPostBackup(
 	}
 	return
 }
-func (v *ComFabricStorePostBackupHandler) PostBackup(
+func (v *comFabricStorePostBackupHandler) PostBackup(
 	ctx context.Context,
 	info *FabricStoreBackupInfo,
 ) (result_0 bool, err error) {
@@ -6873,7 +6873,7 @@ func (v *ComFabricStorePostBackupHandler) PostBackup(
 
 }
 
-type ComFabricSecondaryEventHandler struct {
+type comFabricSecondaryEventHandler struct {
 	ole.IUnknown
 }
 
@@ -6883,12 +6883,12 @@ type comFabricSecondaryEventHandlerVtbl struct {
 	OnReplicationOperation uintptr
 }
 
-func (v *ComFabricSecondaryEventHandler) vtable() *comFabricSecondaryEventHandlerVtbl {
+func (v *comFabricSecondaryEventHandler) vtable() *comFabricSecondaryEventHandlerVtbl {
 	return (*comFabricSecondaryEventHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricSecondaryEventHandler) OnCopyComplete(
-	enumerator *ComFabricKeyValueStoreEnumerator,
+func (v *comFabricSecondaryEventHandler) OnCopyComplete(
+	enumerator *comFabricKeyValueStoreEnumerator,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().OnCopyComplete,
@@ -6903,8 +6903,8 @@ func (v *ComFabricSecondaryEventHandler) OnCopyComplete(
 	}
 	return
 }
-func (v *ComFabricSecondaryEventHandler) OnReplicationOperation(
-	enumerator *ComFabricKeyValueStoreNotificationEnumerator,
+func (v *comFabricSecondaryEventHandler) OnReplicationOperation(
+	enumerator *comFabricKeyValueStoreNotificationEnumerator,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().OnReplicationOperation,
@@ -6920,7 +6920,7 @@ func (v *ComFabricSecondaryEventHandler) OnReplicationOperation(
 	return
 }
 
-type ComFabricNodeContextResult struct {
+type comFabricNodeContextResult struct {
 	ole.IUnknown
 }
 
@@ -6929,11 +6929,11 @@ type comFabricNodeContextResultVtbl struct {
 	get_NodeContext uintptr
 }
 
-func (v *ComFabricNodeContextResult) vtable() *comFabricNodeContextResultVtbl {
+func (v *comFabricNodeContextResult) vtable() *comFabricNodeContextResultVtbl {
 	return (*comFabricNodeContextResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricNodeContextResult) GetNodeContext() (rt *FabricNodeContext, err error) {
+func (v *comFabricNodeContextResult) GetNodeContext() (rt *FabricNodeContext, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_NodeContext,
 		1,
@@ -6952,8 +6952,8 @@ func (v *ComFabricNodeContextResult) GetNodeContext() (rt *FabricNodeContext, er
 	return
 }
 
-type ComFabricNodeContextResult2 struct {
-	ComFabricNodeContextResult
+type comFabricNodeContextResult2 struct {
+	comFabricNodeContextResult
 }
 
 type comFabricNodeContextResult2Vtbl struct {
@@ -6961,18 +6961,18 @@ type comFabricNodeContextResult2Vtbl struct {
 	GetDirectory uintptr
 }
 
-func (v *ComFabricNodeContextResult2) vtable() *comFabricNodeContextResult2Vtbl {
+func (v *comFabricNodeContextResult2) vtable() *comFabricNodeContextResult2Vtbl {
 	return (*comFabricNodeContextResult2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricNodeContextResult2) GetDirectory(
+func (v *comFabricNodeContextResult2) GetDirectory(
 	logicalDirectoryName string,
-) (directoryPath *ComFabricStringResult, err error) {
+) (directoryPath *comFabricStringResult, err error) {
 	var p_0 *uint16
 	s_54, _ := windows.UTF16PtrFromString(logicalDirectoryName)
 	p_0 = s_54
 
-	var p_1 *ComFabricStringResult
+	var p_1 *comFabricStringResult
 	defer func() {
 		directoryPath = p_1
 	}()
@@ -6990,7 +6990,7 @@ func (v *ComFabricNodeContextResult2) GetDirectory(
 	return
 }
 
-type ComFabricReplicatorSettingsResult struct {
+type comFabricReplicatorSettingsResult struct {
 	ole.IUnknown
 }
 
@@ -6999,11 +6999,11 @@ type comFabricReplicatorSettingsResultVtbl struct {
 	get_ReplicatorSettings uintptr
 }
 
-func (v *ComFabricReplicatorSettingsResult) vtable() *comFabricReplicatorSettingsResultVtbl {
+func (v *comFabricReplicatorSettingsResult) vtable() *comFabricReplicatorSettingsResultVtbl {
 	return (*comFabricReplicatorSettingsResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricReplicatorSettingsResult) GetReplicatorSettings() (rt *FabricReplicatorSettings, err error) {
+func (v *comFabricReplicatorSettingsResult) GetReplicatorSettings() (rt *FabricReplicatorSettings, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_ReplicatorSettings,
 		1,
@@ -7022,7 +7022,7 @@ func (v *ComFabricReplicatorSettingsResult) GetReplicatorSettings() (rt *FabricR
 	return
 }
 
-type ComFabricEseLocalStoreSettingsResult struct {
+type comFabricEseLocalStoreSettingsResult struct {
 	ole.IUnknown
 }
 
@@ -7031,11 +7031,11 @@ type comFabricEseLocalStoreSettingsResultVtbl struct {
 	get_Settings uintptr
 }
 
-func (v *ComFabricEseLocalStoreSettingsResult) vtable() *comFabricEseLocalStoreSettingsResultVtbl {
+func (v *comFabricEseLocalStoreSettingsResult) vtable() *comFabricEseLocalStoreSettingsResultVtbl {
 	return (*comFabricEseLocalStoreSettingsResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricEseLocalStoreSettingsResult) GetSettings() (rt *FabricEseLocalStoreSettings, err error) {
+func (v *comFabricEseLocalStoreSettingsResult) GetSettings() (rt *FabricEseLocalStoreSettings, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_Settings,
 		1,
@@ -7054,7 +7054,7 @@ func (v *ComFabricEseLocalStoreSettingsResult) GetSettings() (rt *FabricEseLocal
 	return
 }
 
-type ComFabricSecurityCredentialsResult struct {
+type comFabricSecurityCredentialsResult struct {
 	ole.IUnknown
 }
 
@@ -7063,11 +7063,11 @@ type comFabricSecurityCredentialsResultVtbl struct {
 	get_SecurityCredentials uintptr
 }
 
-func (v *ComFabricSecurityCredentialsResult) vtable() *comFabricSecurityCredentialsResultVtbl {
+func (v *comFabricSecurityCredentialsResult) vtable() *comFabricSecurityCredentialsResultVtbl {
 	return (*comFabricSecurityCredentialsResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricSecurityCredentialsResult) GetSecurityCredentials() (rt *FabricSecurityCredentials, err error) {
+func (v *comFabricSecurityCredentialsResult) GetSecurityCredentials() (rt *FabricSecurityCredentials, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_SecurityCredentials,
 		1,
@@ -7086,7 +7086,7 @@ func (v *ComFabricSecurityCredentialsResult) GetSecurityCredentials() (rt *Fabri
 	return
 }
 
-type ComFabricCodePackageActivator struct {
+type comFabricCodePackageActivator struct {
 	ole.IUnknown
 }
 
@@ -7101,11 +7101,11 @@ type comFabricCodePackageActivatorVtbl struct {
 	UnregisterCodePackageEventHandler uintptr
 }
 
-func (v *ComFabricCodePackageActivator) vtable() *comFabricCodePackageActivatorVtbl {
+func (v *comFabricCodePackageActivator) vtable() *comFabricCodePackageActivatorVtbl {
 	return (*comFabricCodePackageActivatorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricCodePackageActivator) beginActivateCodePackage(
+func (v *comFabricCodePackageActivator) beginActivateCodePackage(
 	codePackageNames []string,
 	environment map[string]string,
 	timeoutMilliseconds uint32,
@@ -7178,7 +7178,7 @@ func (v *ComFabricCodePackageActivator) beginActivateCodePackage(
 	}
 	return
 }
-func (v *ComFabricCodePackageActivator) endActivateCodePackage(
+func (v *comFabricCodePackageActivator) endActivateCodePackage(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
@@ -7194,7 +7194,7 @@ func (v *ComFabricCodePackageActivator) endActivateCodePackage(
 	}
 	return
 }
-func (v *ComFabricCodePackageActivator) beginDeactivateCodePackage(
+func (v *comFabricCodePackageActivator) beginDeactivateCodePackage(
 	codePackageNames []string,
 	timeoutMilliseconds uint32,
 	callback *comIFabricAsyncOperationCallback,
@@ -7241,7 +7241,7 @@ func (v *ComFabricCodePackageActivator) beginDeactivateCodePackage(
 	}
 	return
 }
-func (v *ComFabricCodePackageActivator) endDeactivateCodePackage(
+func (v *comFabricCodePackageActivator) endDeactivateCodePackage(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
@@ -7257,7 +7257,7 @@ func (v *ComFabricCodePackageActivator) endDeactivateCodePackage(
 	}
 	return
 }
-func (v *ComFabricCodePackageActivator) AbortCodePackage(
+func (v *comFabricCodePackageActivator) AbortCodePackage(
 	codePackageNames []string,
 ) (err error) {
 	var p_0 *innerFabricStringList
@@ -7295,8 +7295,8 @@ func (v *ComFabricCodePackageActivator) AbortCodePackage(
 	}
 	return
 }
-func (v *ComFabricCodePackageActivator) RegisterCodePackageEventHandler(
-	eventHandler *ComFabricCodePackageEventHandler,
+func (v *comFabricCodePackageActivator) RegisterCodePackageEventHandler(
+	eventHandler *comFabricCodePackageEventHandler,
 ) (callbackHandle uint64, err error) {
 	var p_1 uint64
 	defer func() {
@@ -7315,7 +7315,7 @@ func (v *ComFabricCodePackageActivator) RegisterCodePackageEventHandler(
 	}
 	return
 }
-func (v *ComFabricCodePackageActivator) UnregisterCodePackageEventHandler(
+func (v *comFabricCodePackageActivator) UnregisterCodePackageEventHandler(
 	callbackHandle uint64,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
@@ -7331,7 +7331,7 @@ func (v *ComFabricCodePackageActivator) UnregisterCodePackageEventHandler(
 	}
 	return
 }
-func (v *ComFabricCodePackageActivator) ActivateCodePackage(
+func (v *comFabricCodePackageActivator) ActivateCodePackage(
 	ctx context.Context,
 	codePackageNames []string,
 	environment map[string]string,
@@ -7390,7 +7390,7 @@ func (v *ComFabricCodePackageActivator) ActivateCodePackage(
 	}
 
 }
-func (v *ComFabricCodePackageActivator) DeactivateCodePackage(
+func (v *comFabricCodePackageActivator) DeactivateCodePackage(
 	ctx context.Context,
 	codePackageNames []string,
 ) (err error) {
@@ -7448,7 +7448,7 @@ func (v *ComFabricCodePackageActivator) DeactivateCodePackage(
 
 }
 
-type ComFabricCodePackageEventHandler struct {
+type comFabricCodePackageEventHandler struct {
 	ole.IUnknown
 }
 
@@ -7457,12 +7457,12 @@ type comFabricCodePackageEventHandlerVtbl struct {
 	OnCodePackageEvent uintptr
 }
 
-func (v *ComFabricCodePackageEventHandler) vtable() *comFabricCodePackageEventHandlerVtbl {
+func (v *comFabricCodePackageEventHandler) vtable() *comFabricCodePackageEventHandlerVtbl {
 	return (*comFabricCodePackageEventHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricCodePackageEventHandler) OnCodePackageEvent(
-	source *ComFabricCodePackageActivator,
+func (v *comFabricCodePackageEventHandler) OnCodePackageEvent(
+	source *comFabricCodePackageActivator,
 	eventDesc *FabricCodePackageEventDescription,
 ) (rt interface{}, err error) {
 	var p_1 *innerFabricCodePackageEventDescription

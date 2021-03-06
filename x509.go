@@ -110,7 +110,7 @@ type fabricSecurityCredentials struct {
 }
 
 // hack due to interface{} to unsafe
-func (v *ComFabricClientSettings) innerSetSecurityCredentials(
+func (v *comFabricClientSettings) innerSetSecurityCredentials(
 	cred *X509Credentials,
 ) (err error) {
 

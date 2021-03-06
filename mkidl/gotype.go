@@ -130,7 +130,7 @@ func (g *generator) toGolangType(idltype string, indirections int, inner bool) s
 	} else if _, ok := g.ctx.definedEnum[idltype]; ok {
 		gotype = goEnumName(idltype)
 	} else if _, ok := g.ctx.definedInterface[idltype]; ok {
-		gotype = goInterfaceName(idltype)
+		gotype = g.goInterfaceName(idltype)
 	}
 
 	if gotype == "" {

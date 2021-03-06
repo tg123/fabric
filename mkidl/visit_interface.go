@@ -11,8 +11,13 @@ import (
 	"github.com/pinzolo/casee"
 )
 
-func goInterfaceName(name string) string {
-	return fmt.Sprintf("Com%v", strings.TrimPrefix(name, "I"))
+func (g *generator) goInterfaceName(name string) string {
+
+	if g.ctx.publicReturnedInterfaces[name] {
+		return fmt.Sprintf("Com%v", strings.TrimPrefix(name, "I"))
+	}
+
+	return fmt.Sprintf("com%v", strings.TrimPrefix(name, "I"))
 }
 
 // TODO support those method
@@ -72,7 +77,7 @@ func isOutParam(p *ast.ParamNode) bool {
 
 func (g *generator) generateAsyncCall(n *ast.InterfaceNode, begin, end *ast.MethodNode) {
 
-	g.printfln("func (v *%s) %s(", goInterfaceName(n.Name), strings.TrimPrefix(begin.Name, "Begin"))
+	g.printfln("func (v *%s) %s(", g.goInterfaceName(n.Name), strings.TrimPrefix(begin.Name, "Begin"))
 	g.importpkg("context")
 	g.printfln("ctx context.Context,")
 
@@ -252,7 +257,7 @@ next:
 }
 
 func (g *generator) generateMethods(n *ast.InterfaceNode) {
-	interfaceName := goInterfaceName(n.Name)
+	interfaceName := g.goInterfaceName(n.Name)
 
 	for _, m := range n.Methods {
 
@@ -421,7 +426,7 @@ func (g *generator) generateMethods(n *ast.InterfaceNode) {
 }
 
 func (g *generator) generateCoClzInterface(n *ast.InterfaceNode) {
-	interfaceName := goInterfaceName(n.Name)
+	interfaceName := g.goInterfaceName(n.Name)
 
 	// generate client
 	// TODO combine client1 client2
@@ -443,13 +448,16 @@ func (g *generator) generateCoClzInterface(n *ast.InterfaceNode) {
 }
 
 func (g *generator) visitInterface(n *ast.InterfaceNode) {
+	if _, ok := basicTypeMap[n.Name]; ok {
+		return
+	}
 
-	interfaceName := goInterfaceName(n.Name)
+	interfaceName := g.goInterfaceName(n.Name)
 
 	// generate vtable
 	pn := n.ParentName
 	if _, ok := g.ctx.definedInterface[pn]; ok {
-		pn = goInterfaceName(pn)
+		pn = g.goInterfaceName(pn)
 	}
 	if pn == "IUnknown" || pn == "" {
 		g.importpkg("ole")

@@ -13,13 +13,13 @@ var (
 )
 
 func fabricGetLastError() string {
-	var result *ComFabricStringResult
+	var result *comFabricStringResult
 	hr, _, _ := fabricGetLastErrorMessageProc.Call(uintptr(unsafe.Pointer(&result)))
 
 	if hr != 0 {
 		return ""
 	}
-	
+
 	msg, _ := result.GetString()
 	return msg
 }

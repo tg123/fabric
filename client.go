@@ -91,7 +91,7 @@ func queryObject(com *ole.IUnknown, iid string, outptr unsafe.Pointer) error {
 
 func NewLocalClient() (*FabricClient, error) {
 
-	var com *ComFabricClientSettings
+	var com *comFabricClientSettings
 	err := createLocalClient(comIFabricClientSettingsIID, unsafe.Pointer(&com))
 	if err != nil {
 		return nil, err
@@ -103,7 +103,7 @@ func NewLocalClient() (*FabricClient, error) {
 }
 
 func NewInsecureClient(conn string) (*FabricClient, error) {
-	var com *ComFabricClientSettings
+	var com *comFabricClientSettings
 	err := createClient([]string{conn}, comIFabricClientSettingsIID, unsafe.Pointer(&com))
 	if err != nil {
 		return nil, err
@@ -115,7 +115,7 @@ func NewInsecureClient(conn string) (*FabricClient, error) {
 }
 
 func NewX509Client(conn string, cred X509Credentials) (*FabricClient, error) {
-	var com *ComFabricClientSettings
+	var com *comFabricClientSettings
 	err := createClient([]string{conn}, comIFabricClientSettingsIID, unsafe.Pointer(&com))
 	if err != nil {
 		return nil, err
