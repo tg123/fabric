@@ -215,16 +215,6 @@ func (v *ComFabricRuntime) RegisterServiceGroupFactory(
 	return
 }
 
-func (c *FabricClient) CreateFabricStatelessServiceFactory() (*ComFabricStatelessServiceFactory, error) {
-	var com *ComFabricStatelessServiceFactory
-	err := c.createComObject("{cc53af8f-74cd-11df-ac3e-0024811e3892}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricStatelessServiceFactory struct {
 	ole.IUnknown
 }
@@ -276,16 +266,6 @@ func (v *ComFabricStatelessServiceFactory) CreateInstance(
 		return
 	}
 	return
-}
-
-func (c *FabricClient) CreateFabricStatelessServiceInstance() (*ComFabricStatelessServiceInstance, error) {
-	var com *ComFabricStatelessServiceInstance
-	err := c.createComObject("{cc53af90-74cd-11df-ac3e-0024811e3892}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricStatelessServiceInstance struct {
@@ -438,16 +418,6 @@ func (v *ComFabricStatelessServiceInstance) Close(
 
 }
 
-func (c *FabricClient) CreateFabricStatelessServicePartition() (*ComFabricStatelessServicePartition, error) {
-	var com *ComFabricStatelessServicePartition
-	err := c.createComObject("{cc53af91-74cd-11df-ac3e-0024811e3892}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricStatelessServicePartition struct {
 	ole.IUnknown
 }
@@ -517,16 +487,6 @@ func (v *ComFabricStatelessServicePartition) ReportFault(
 	return
 }
 
-func (c *FabricClient) CreateFabricStatelessServicePartition1() (*ComFabricStatelessServicePartition1, error) {
-	var com *ComFabricStatelessServicePartition1
-	err := c.createComObject("{bf6bb505-7bd0-4371-b6c0-cba319a5e50b}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricStatelessServicePartition1 struct {
 	ComFabricStatelessServicePartition
 }
@@ -555,16 +515,6 @@ func (v *ComFabricStatelessServicePartition1) ReportMoveCost(
 		return
 	}
 	return
-}
-
-func (c *FabricClient) CreateFabricStatelessServicePartition2() (*ComFabricStatelessServicePartition2, error) {
-	var com *ComFabricStatelessServicePartition2
-	err := c.createComObject("{9ff35b6c-9d97-4312-93ad-7f34cbdb4ca4}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricStatelessServicePartition2 struct {
@@ -616,16 +566,6 @@ func (v *ComFabricStatelessServicePartition2) ReportPartitionHealth(
 		return
 	}
 	return
-}
-
-func (c *FabricClient) CreateFabricStatelessServicePartition3() (*ComFabricStatelessServicePartition3, error) {
-	var com *ComFabricStatelessServicePartition3
-	err := c.createComObject("{f2fa2000-70a7-4ed5-9d3e-0b7deca2433f}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricStatelessServicePartition3 struct {
@@ -685,16 +625,6 @@ func (v *ComFabricStatelessServicePartition3) ReportPartitionHealth2(
 	return
 }
 
-func (c *FabricClient) CreateFabricStatefulServiceFactory() (*ComFabricStatefulServiceFactory, error) {
-	var com *ComFabricStatefulServiceFactory
-	err := c.createComObject("{77ff0c6b-6780-48ec-b4b0-61989327b0f2}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricStatefulServiceFactory struct {
 	ole.IUnknown
 }
@@ -746,16 +676,6 @@ func (v *ComFabricStatefulServiceFactory) CreateReplica(
 		return
 	}
 	return
-}
-
-func (c *FabricClient) CreateFabricStatefulServiceReplica() (*ComFabricStatefulServiceReplica, error) {
-	var com *ComFabricStatefulServiceReplica
-	err := c.createComObject("{8ae3be0e-505d-4dc1-ad8f-0cb0f9576b8a}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricStatefulServiceReplica struct {
@@ -1012,16 +932,6 @@ func (v *ComFabricStatefulServiceReplica) Close(
 
 }
 
-func (c *FabricClient) CreateFabricStatefulServicePartition() (*ComFabricStatefulServicePartition, error) {
-	var com *ComFabricStatefulServicePartition
-	err := c.createComObject("{5beccc37-8655-4f20-bd43-f50691d7cd16}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricStatefulServicePartition struct {
 	ole.IUnknown
 }
@@ -1160,16 +1070,6 @@ func (v *ComFabricStatefulServicePartition) ReportFault(
 	return
 }
 
-func (c *FabricClient) CreateFabricStatefulServicePartition1() (*ComFabricStatefulServicePartition1, error) {
-	var com *ComFabricStatefulServicePartition1
-	err := c.createComObject("{c9c66f2f-9dff-4c87-bbe4-a08b4c4074cf}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricStatefulServicePartition1 struct {
 	ComFabricStatefulServicePartition
 }
@@ -1198,16 +1098,6 @@ func (v *ComFabricStatefulServicePartition1) ReportMoveCost(
 		return
 	}
 	return
-}
-
-func (c *FabricClient) CreateFabricStatefulServicePartition2() (*ComFabricStatefulServicePartition2, error) {
-	var com *ComFabricStatefulServicePartition2
-	err := c.createComObject("{df27b476-fa25-459f-a7d3-87d3eec9c73c}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricStatefulServicePartition2 struct {
@@ -1259,16 +1149,6 @@ func (v *ComFabricStatefulServicePartition2) ReportPartitionHealth(
 		return
 	}
 	return
-}
-
-func (c *FabricClient) CreateFabricStatefulServicePartition3() (*ComFabricStatefulServicePartition3, error) {
-	var com *ComFabricStatefulServicePartition3
-	err := c.createComObject("{51f1269d-b061-4c1c-96cf-6508cece813b}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricStatefulServicePartition3 struct {
@@ -1326,16 +1206,6 @@ func (v *ComFabricStatefulServicePartition3) ReportPartitionHealth2(
 		return
 	}
 	return
-}
-
-func (c *FabricClient) CreateFabricStateReplicator() (*ComFabricStateReplicator, error) {
-	var com *ComFabricStateReplicator
-	err := c.createComObject("{89e9a978-c771-44f2-92e8-3bf271cabe9c}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricStateReplicator struct {
@@ -1516,16 +1386,6 @@ func (v *ComFabricStateReplicator) Replicate(
 
 }
 
-func (c *FabricClient) CreateFabricStateReplicator2() (*ComFabricStateReplicator2, error) {
-	var com *ComFabricStateReplicator2
-	err := c.createComObject("{4A28D542-658F-46F9-9BF4-79B7CAE25C5D}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricStateReplicator2 struct {
 	ComFabricStateReplicator
 }
@@ -1556,16 +1416,6 @@ func (v *ComFabricStateReplicator2) GetReplicatorSettings() (replicatorSettings 
 		return
 	}
 	return
-}
-
-func (c *FabricClient) CreateFabricStateProvider() (*ComFabricStateProvider, error) {
-	var com *ComFabricStateProvider
-	err := c.createComObject("{3ebfec79-bd27-43f3-8be8-da38ee723951}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricStateProvider struct {
@@ -1844,16 +1694,6 @@ func (v *ComFabricStateProvider) OnDataLoss(
 
 }
 
-func (c *FabricClient) CreateFabricOperation() (*ComFabricOperation, error) {
-	var com *ComFabricOperation
-	err := c.createComObject("{f4ad6bfa-e23c-4a48-9617-c099cd59a23a}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricOperation struct {
 	ole.IUnknown
 }
@@ -1924,16 +1764,6 @@ func (v *ComFabricOperation) Acknowledge() (err error) {
 	return
 }
 
-func (c *FabricClient) CreateFabricOperationData() (*ComFabricOperationData, error) {
-	var com *ComFabricOperationData
-	err := c.createComObject("{bab8ad87-37b7-482a-985d-baf38a785dcd}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricOperationData struct {
 	ole.IUnknown
 }
@@ -1968,16 +1798,6 @@ func (v *ComFabricOperationData) GetData() (count uint32, buffers *FabricOperati
 		return
 	}
 	return
-}
-
-func (c *FabricClient) CreateFabricOperationStream() (*ComFabricOperationStream, error) {
-	var com *ComFabricOperationStream
-	err := c.createComObject("{A98FB97A-D6B0-408A-A878-A9EDB09C2587}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricOperationStream struct {
@@ -2015,16 +1835,6 @@ func (v *ComFabricOperationStream) beginGetOperation(
 	return
 }
 
-func (c *FabricClient) CreateFabricOperationStream2() (*ComFabricOperationStream2, error) {
-	var com *ComFabricOperationStream2
-	err := c.createComObject("{0930199B-590A-4065-BEC9-5F93B6AAE086}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricOperationStream2 struct {
 	ComFabricOperationStream
 }
@@ -2053,16 +1863,6 @@ func (v *ComFabricOperationStream2) ReportFault(
 		return
 	}
 	return
-}
-
-func (c *FabricClient) CreateFabricOperationDataStream() (*ComFabricOperationDataStream, error) {
-	var com *ComFabricOperationDataStream
-	err := c.createComObject("{c4e9084c-be92-49c9-8c18-d44d088c2e32}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricOperationDataStream struct {
@@ -2098,16 +1898,6 @@ func (v *ComFabricOperationDataStream) beginGetNext(
 		return
 	}
 	return
-}
-
-func (c *FabricClient) CreateFabricReplicator() (*ComFabricReplicator, error) {
-	var com *ComFabricReplicator
-	err := c.createComObject("{067f144a-e5be-4f5e-a181-8b5593e20242}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricReplicator struct {
@@ -2497,16 +2287,6 @@ func (v *ComFabricReplicator) Close(
 
 }
 
-func (c *FabricClient) CreateFabricPrimaryReplicator() (*ComFabricPrimaryReplicator, error) {
-	var com *ComFabricPrimaryReplicator
-	err := c.createComObject("{564e50dd-c3a4-4600-a60e-6658874307ae}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricPrimaryReplicator struct {
 	ComFabricReplicator
 }
@@ -2873,16 +2653,6 @@ func (v *ComFabricPrimaryReplicator) BuildReplica(
 
 }
 
-func (c *FabricClient) CreateFabricReplicatorCatchupSpecificQuorum() (*ComFabricReplicatorCatchupSpecificQuorum, error) {
-	var com *ComFabricReplicatorCatchupSpecificQuorum
-	err := c.createComObject("{aa3116fe-277d-482d-bd16-5366fa405757}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricReplicatorCatchupSpecificQuorum struct {
 	ole.IUnknown
 }
@@ -2893,16 +2663,6 @@ type comFabricReplicatorCatchupSpecificQuorumVtbl struct {
 
 func (v *ComFabricReplicatorCatchupSpecificQuorum) vtable() *comFabricReplicatorCatchupSpecificQuorumVtbl {
 	return (*comFabricReplicatorCatchupSpecificQuorumVtbl)(unsafe.Pointer(v.RawVTable))
-}
-
-func (c *FabricClient) CreateFabricAtomicGroupStateReplicator() (*ComFabricAtomicGroupStateReplicator, error) {
-	var com *ComFabricAtomicGroupStateReplicator
-	err := c.createComObject("{80d2155c-4fc2-4fde-9696-c2f39b471c3d}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricAtomicGroupStateReplicator struct {
@@ -3264,16 +3024,6 @@ func (v *ComFabricAtomicGroupStateReplicator) ReplicateAtomicGroupRollback(
 
 }
 
-func (c *FabricClient) CreateFabricAtomicGroupStateProvider() (*ComFabricAtomicGroupStateProvider, error) {
-	var com *ComFabricAtomicGroupStateProvider
-	err := c.createComObject("{2b670953-6148-4f7d-a920-b390de43d913}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricAtomicGroupStateProvider struct {
 	ole.IUnknown
 }
@@ -3587,16 +3337,6 @@ func (v *ComFabricAtomicGroupStateProvider) UndoProgress(
 
 }
 
-func (c *FabricClient) CreateFabricServiceGroupFactory() (*ComFabricServiceGroupFactory, error) {
-	var com *ComFabricServiceGroupFactory
-	err := c.createComObject("{3860d61d-1e51-4a65-b109-d93c11311657}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricServiceGroupFactory struct {
 	ole.IUnknown
 }
@@ -3607,16 +3347,6 @@ type comFabricServiceGroupFactoryVtbl struct {
 
 func (v *ComFabricServiceGroupFactory) vtable() *comFabricServiceGroupFactoryVtbl {
 	return (*comFabricServiceGroupFactoryVtbl)(unsafe.Pointer(v.RawVTable))
-}
-
-func (c *FabricClient) CreateFabricServiceGroupFactoryBuilder() (*ComFabricServiceGroupFactoryBuilder, error) {
-	var com *ComFabricServiceGroupFactoryBuilder
-	err := c.createComObject("{a9fe8b06-19b1-49e6-8911-41d9d9219e1c}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricServiceGroupFactoryBuilder struct {
@@ -3716,16 +3446,6 @@ func (v *ComFabricServiceGroupFactoryBuilder) ToServiceGroupFactory() (factory *
 	return
 }
 
-func (c *FabricClient) CreateFabricServiceGroupPartition() (*ComFabricServiceGroupPartition, error) {
-	var com *ComFabricServiceGroupPartition
-	err := c.createComObject("{2b24299a-7489-467f-8e7f-4507bff73b86}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricServiceGroupPartition struct {
 	ole.IUnknown
 }
@@ -3766,16 +3486,6 @@ func (v *ComFabricServiceGroupPartition) ResolveMember(
 		return
 	}
 	return
-}
-
-func (c *FabricClient) CreateFabricCodePackageActivationContext() (*ComFabricCodePackageActivationContext, error) {
-	var com *ComFabricCodePackageActivationContext
-	err := c.createComObject("{68a971e2-f15f-4d95-a79c-8a257909659e}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricCodePackageActivationContext struct {
@@ -4318,16 +4028,6 @@ func (v *ComFabricCodePackageActivationContext) UnregisterDataPackageChangeHandl
 	return
 }
 
-func (c *FabricClient) CreateFabricCodePackageActivationContext2() (*ComFabricCodePackageActivationContext2, error) {
-	var com *ComFabricCodePackageActivationContext2
-	err := c.createComObject("{6c83d5c1-1954-4b80-9175-0d0e7c8715c9}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricCodePackageActivationContext2 struct {
 	ComFabricCodePackageActivationContext
 }
@@ -4417,16 +4117,6 @@ func (v *ComFabricCodePackageActivationContext2) GetServiceManifestVersion() (se
 	return
 }
 
-func (c *FabricClient) CreateFabricCodePackageActivationContext3() (*ComFabricCodePackageActivationContext3, error) {
-	var com *ComFabricCodePackageActivationContext3
-	err := c.createComObject("{6efee900-f491-4b03-bc5b-3a70de103593}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricCodePackageActivationContext3 struct {
 	ComFabricCodePackageActivationContext2
 }
@@ -4495,16 +4185,6 @@ func (v *ComFabricCodePackageActivationContext3) ReportDeployedServicePackageHea
 		return
 	}
 	return
-}
-
-func (c *FabricClient) CreateFabricCodePackageActivationContext4() (*ComFabricCodePackageActivationContext4, error) {
-	var com *ComFabricCodePackageActivationContext4
-	err := c.createComObject("{99efebb6-a7b4-4d45-b45e-f191a66eef03}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricCodePackageActivationContext4 struct {
@@ -4586,16 +4266,6 @@ func (v *ComFabricCodePackageActivationContext4) ReportDeployedServicePackageHea
 	return
 }
 
-func (c *FabricClient) CreateFabricCodePackageActivationContext5() (*ComFabricCodePackageActivationContext5, error) {
-	var com *ComFabricCodePackageActivationContext5
-	err := c.createComObject("{fe45387e-8711-4949-ac36-31dc95035513}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricCodePackageActivationContext5 struct {
 	ComFabricCodePackageActivationContext4
 }
@@ -4647,16 +4317,6 @@ func (v *ComFabricCodePackageActivationContext5) GetServicePublishAddress() (rt 
 	return
 }
 
-func (c *FabricClient) CreateFabricCodePackageActivationContext6() (*ComFabricCodePackageActivationContext6, error) {
-	var com *ComFabricCodePackageActivationContext6
-	err := c.createComObject("{fa5fda9b-472c-45a0-9b60-a374691227a4}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricCodePackageActivationContext6 struct {
 	ComFabricCodePackageActivationContext5
 }
@@ -4693,16 +4353,6 @@ func (v *ComFabricCodePackageActivationContext6) GetDirectory(
 		return
 	}
 	return
-}
-
-func (c *FabricClient) CreateFabricCodePackage() (*ComFabricCodePackage, error) {
-	var com *ComFabricCodePackage
-	err := c.createComObject("{20792b45-4d13-41a4-af13-346e529f00c5}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricCodePackage struct {
@@ -4756,16 +4406,6 @@ func (v *ComFabricCodePackage) GetPath() (rt string, err error) {
 	return
 }
 
-func (c *FabricClient) CreateFabricCodePackage2() (*ComFabricCodePackage2, error) {
-	var com *ComFabricCodePackage2
-	err := c.createComObject("{cdf0a4e6-ad80-4cd6-b67e-e4c002428600}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricCodePackage2 struct {
 	ComFabricCodePackage
 }
@@ -4815,16 +4455,6 @@ func (v *ComFabricCodePackage2) GetEntryPointRunAsPolicy() (rt *FabricRunasPolic
 
 	rt = tmp.toGoStruct()
 	return
-}
-
-func (c *FabricClient) CreateFabricConfigurationPackage() (*ComFabricConfigurationPackage, error) {
-	var com *ComFabricConfigurationPackage
-	err := c.createComObject("{ac4c3bfa-2563-46b7-a71d-2dca7b0a8f4d}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricConfigurationPackage struct {
@@ -4984,16 +4614,6 @@ func (v *ComFabricConfigurationPackage) DecryptValue(
 	return
 }
 
-func (c *FabricClient) CreateFabricConfigurationPackage2() (*ComFabricConfigurationPackage2, error) {
-	var com *ComFabricConfigurationPackage2
-	err := c.createComObject("{d3161f31-708a-4f83-91ff-f2af15f74a2f}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricConfigurationPackage2 struct {
 	ComFabricConfigurationPackage
 }
@@ -5062,16 +4682,6 @@ func (v *ComFabricConfigurationPackage2) GetValues(
 	return
 }
 
-func (c *FabricClient) CreateFabricDataPackage() (*ComFabricDataPackage, error) {
-	var com *ComFabricDataPackage
-	err := c.createComObject("{aa67de09-3657-435f-a2f6-b3a17a0a4371}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricDataPackage struct {
 	ole.IUnknown
 }
@@ -5121,16 +4731,6 @@ func (v *ComFabricDataPackage) GetPath() (rt string, err error) {
 
 	rt = windows.UTF16PtrToString(tmp)
 	return
-}
-
-func (c *FabricClient) CreateFabricCodePackageChangeHandler() (*ComFabricCodePackageChangeHandler, error) {
-	var com *ComFabricCodePackageChangeHandler
-	err := c.createComObject("{b90d36cd-acb5-427a-b318-3b045981d0cc}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricCodePackageChangeHandler struct {
@@ -5216,16 +4816,6 @@ func (v *ComFabricCodePackageChangeHandler) OnPackageModified(
 	return
 }
 
-func (c *FabricClient) CreateFabricConfigurationPackageChangeHandler() (*ComFabricConfigurationPackageChangeHandler, error) {
-	var com *ComFabricConfigurationPackageChangeHandler
-	err := c.createComObject("{c3954d48-b5ee-4ff4-9bc0-c30f6d0d3a85}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricConfigurationPackageChangeHandler struct {
 	ole.IUnknown
 }
@@ -5307,16 +4897,6 @@ func (v *ComFabricConfigurationPackageChangeHandler) OnPackageModified(
 
 	rt = fromUnsafePointer(tmp)
 	return
-}
-
-func (c *FabricClient) CreateFabricDataPackageChangeHandler() (*ComFabricDataPackageChangeHandler, error) {
-	var com *ComFabricDataPackageChangeHandler
-	err := c.createComObject("{8d0a726f-bd17-4b32-807b-be2a8024b2e0}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricDataPackageChangeHandler struct {
@@ -5402,16 +4982,6 @@ func (v *ComFabricDataPackageChangeHandler) OnPackageModified(
 	return
 }
 
-func (c *FabricClient) CreateFabricProcessExitHandler() (*ComFabricProcessExitHandler, error) {
-	var com *ComFabricProcessExitHandler
-	err := c.createComObject("{c58d50a2-01f0-4267-bbe7-223b565c1346}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricProcessExitHandler struct {
 	ole.IUnknown
 }
@@ -5442,16 +5012,6 @@ func (v *ComFabricProcessExitHandler) FabricProcessExited() (rt interface{}, err
 
 	rt = fromUnsafePointer(tmp)
 	return
-}
-
-func (c *FabricClient) CreateFabricTransactionBase() (*ComFabricTransactionBase, error) {
-	var com *ComFabricTransactionBase
-	err := c.createComObject("{32d656a1-7ad5-47b8-bd66-a2e302626b7e}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricTransactionBase struct {
@@ -5497,16 +5057,6 @@ func (v *ComFabricTransactionBase) GetIsolationLevel() (rt FabricTransactionIsol
 	_ = err1
 	rt = FabricTransactionIsolationLevel(hr)
 	return
-}
-
-func (c *FabricClient) CreateFabricTransaction() (*ComFabricTransaction, error) {
-	var com *ComFabricTransaction
-	err := c.createComObject("{19ee48b4-6d4d-470b-ac1e-2d3996a173c8}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricTransaction struct {
@@ -5641,16 +5191,6 @@ func (v *ComFabricTransaction) Commit(
 		return
 	}
 
-}
-
-func (c *FabricClient) CreateFabricKeyValueStoreReplica() (*ComFabricKeyValueStoreReplica, error) {
-	var com *ComFabricKeyValueStoreReplica
-	err := c.createComObject("{97da35c4-38ed-4a2a-8f37-fbeb56382235}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricKeyValueStoreReplica struct {
@@ -5991,16 +5531,6 @@ func (v *ComFabricKeyValueStoreReplica) EnumerateMetadataByKey(
 	return
 }
 
-func (c *FabricClient) CreateFabricKeyValueStoreReplica2() (*ComFabricKeyValueStoreReplica2, error) {
-	var com *ComFabricKeyValueStoreReplica2
-	err := c.createComObject("{fef805b2-5aca-4caa-9c51-fb3bd577a792}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricKeyValueStoreReplica2 struct {
 	ComFabricKeyValueStoreReplica
 }
@@ -6077,16 +5607,6 @@ func (v *ComFabricKeyValueStoreReplica2) CreateTransaction2(
 		return
 	}
 	return
-}
-
-func (c *FabricClient) CreateFabricKeyValueStoreReplica3() (*ComFabricKeyValueStoreReplica3, error) {
-	var com *ComFabricKeyValueStoreReplica3
-	err := c.createComObject("{c1297172-a8aa-4096-bdcc-1ece0c5d8c8f}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricKeyValueStoreReplica3 struct {
@@ -6210,16 +5730,6 @@ func (v *ComFabricKeyValueStoreReplica3) Backup(
 
 }
 
-func (c *FabricClient) CreateFabricKeyValueStoreReplica4() (*ComFabricKeyValueStoreReplica4, error) {
-	var com *ComFabricKeyValueStoreReplica4
-	err := c.createComObject("{ff16d2f1-41a9-4c64-804a-a20bf28c04f3}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricKeyValueStoreReplica4 struct {
 	ComFabricKeyValueStoreReplica3
 }
@@ -6333,16 +5843,6 @@ func (v *ComFabricKeyValueStoreReplica4) Restore(
 		return
 	}
 
-}
-
-func (c *FabricClient) CreateFabricKeyValueStoreReplica5() (*ComFabricKeyValueStoreReplica5, error) {
-	var com *ComFabricKeyValueStoreReplica5
-	err := c.createComObject("{34f2da40-6227-448a-be72-c517b0d69432}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricKeyValueStoreReplica5 struct {
@@ -6580,16 +6080,6 @@ func (v *ComFabricKeyValueStoreReplica5) EnumerateMetadataByKey2(
 	return
 }
 
-func (c *FabricClient) CreateFabricKeyValueStoreReplica6() (*ComFabricKeyValueStoreReplica6, error) {
-	var com *ComFabricKeyValueStoreReplica6
-	err := c.createComObject("{56e77be1-e81f-4e42-8522-162c2d608184}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricKeyValueStoreReplica6 struct {
 	ComFabricKeyValueStoreReplica5
 }
@@ -6633,16 +6123,6 @@ func (v *ComFabricKeyValueStoreReplica6) beginRestore2(
 		return
 	}
 	return
-}
-
-func (c *FabricClient) CreateFabricKeyValueStoreEnumerator() (*ComFabricKeyValueStoreEnumerator, error) {
-	var com *ComFabricKeyValueStoreEnumerator
-	err := c.createComObject("{6722b848-15bb-4528-bf54-c7bbe27b6f9a}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricKeyValueStoreEnumerator struct {
@@ -6706,16 +6186,6 @@ func (v *ComFabricKeyValueStoreEnumerator) EnumerateMetadataByKey(
 		return
 	}
 	return
-}
-
-func (c *FabricClient) CreateFabricKeyValueStoreEnumerator2() (*ComFabricKeyValueStoreEnumerator2, error) {
-	var com *ComFabricKeyValueStoreEnumerator2
-	err := c.createComObject("{63dfd264-4f2b-4be6-8234-1fa200165fe9}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricKeyValueStoreEnumerator2 struct {
@@ -6797,16 +6267,6 @@ func (v *ComFabricKeyValueStoreEnumerator2) EnumerateMetadataByKey2(
 	return
 }
 
-func (c *FabricClient) CreateFabricKeyValueStoreItemEnumerator() (*ComFabricKeyValueStoreItemEnumerator, error) {
-	var com *ComFabricKeyValueStoreItemEnumerator
-	err := c.createComObject("{c202788f-54d3-44a6-8f3c-b4bbfcdb95d2}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricKeyValueStoreItemEnumerator struct {
 	ole.IUnknown
 }
@@ -6854,16 +6314,6 @@ func (v *ComFabricKeyValueStoreItemEnumerator) GetCurrent() (rt *ComFabricKeyVal
 	return
 }
 
-func (c *FabricClient) CreateFabricKeyValueStoreItemMetadataEnumerator() (*ComFabricKeyValueStoreItemMetadataEnumerator, error) {
-	var com *ComFabricKeyValueStoreItemMetadataEnumerator
-	err := c.createComObject("{0bc06aee-fffa-4450-9099-116a5f0e0b53}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricKeyValueStoreItemMetadataEnumerator struct {
 	ole.IUnknown
 }
@@ -6909,16 +6359,6 @@ func (v *ComFabricKeyValueStoreItemMetadataEnumerator) GetCurrent() (rt *ComFabr
 
 	rt = tmp
 	return
-}
-
-func (c *FabricClient) CreateFabricKeyValueStoreNotificationEnumerator() (*ComFabricKeyValueStoreNotificationEnumerator, error) {
-	var com *ComFabricKeyValueStoreNotificationEnumerator
-	err := c.createComObject("{ef25bc08-be76-43c7-adad-20f01fba3399}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricKeyValueStoreNotificationEnumerator struct {
@@ -6987,16 +6427,6 @@ func (v *ComFabricKeyValueStoreNotificationEnumerator) Reset() (rt interface{}, 
 	return
 }
 
-func (c *FabricClient) CreateFabricKeyValueStoreItemEnumerator2() (*ComFabricKeyValueStoreItemEnumerator2, error) {
-	var com *ComFabricKeyValueStoreItemEnumerator2
-	err := c.createComObject("{da143bbc-81e1-48cd-afd7-b642bc5b9bfd}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricKeyValueStoreItemEnumerator2 struct {
 	ComFabricKeyValueStoreItemEnumerator
 }
@@ -7027,16 +6457,6 @@ func (v *ComFabricKeyValueStoreItemEnumerator2) TryMoveNext() (success bool, err
 		return
 	}
 	return
-}
-
-func (c *FabricClient) CreateFabricKeyValueStoreItemMetadataEnumerator2() (*ComFabricKeyValueStoreItemMetadataEnumerator2, error) {
-	var com *ComFabricKeyValueStoreItemMetadataEnumerator2
-	err := c.createComObject("{8803d53e-dd73-40fc-a662-1bfe999419ea}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricKeyValueStoreItemMetadataEnumerator2 struct {
@@ -7071,16 +6491,6 @@ func (v *ComFabricKeyValueStoreItemMetadataEnumerator2) TryMoveNext() (success b
 	return
 }
 
-func (c *FabricClient) CreateFabricKeyValueStoreNotificationEnumerator2() (*ComFabricKeyValueStoreNotificationEnumerator2, error) {
-	var com *ComFabricKeyValueStoreNotificationEnumerator2
-	err := c.createComObject("{55eec7c6-ae81-407a-b84c-22771d314ac7}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricKeyValueStoreNotificationEnumerator2 struct {
 	ComFabricKeyValueStoreNotificationEnumerator
 }
@@ -7111,16 +6521,6 @@ func (v *ComFabricKeyValueStoreNotificationEnumerator2) TryMoveNext() (success b
 		return
 	}
 	return
-}
-
-func (c *FabricClient) CreateFabricKeyValueStoreItemResult() (*ComFabricKeyValueStoreItemResult, error) {
-	var com *ComFabricKeyValueStoreItemResult
-	err := c.createComObject("{c1f1c89d-b0b8-44dc-bc97-6c074c1a805e}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricKeyValueStoreItemResult struct {
@@ -7155,16 +6555,6 @@ func (v *ComFabricKeyValueStoreItemResult) GetItem() (rt *FabricKeyValueStoreIte
 	return
 }
 
-func (c *FabricClient) CreateFabricKeyValueStoreItemMetadataResult() (*ComFabricKeyValueStoreItemMetadataResult, error) {
-	var com *ComFabricKeyValueStoreItemMetadataResult
-	err := c.createComObject("{17c483a1-69e6-4bdc-a058-54fd4a1839fd}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricKeyValueStoreItemMetadataResult struct {
 	ole.IUnknown
 }
@@ -7197,16 +6587,6 @@ func (v *ComFabricKeyValueStoreItemMetadataResult) GetMetadata() (rt *FabricKeyV
 	return
 }
 
-func (c *FabricClient) CreateFabricKeyValueStoreNotification() (*ComFabricKeyValueStoreNotification, error) {
-	var com *ComFabricKeyValueStoreNotification
-	err := c.createComObject("{cb660aa6-c51e-4f05-9526-93982b550e8f}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricKeyValueStoreNotification struct {
 	ComFabricKeyValueStoreItemResult
 }
@@ -7231,16 +6611,6 @@ func (v *ComFabricKeyValueStoreNotification) IsDelete() (rt bool, err error) {
 	_ = err1
 	rt = hr != 0
 	return
-}
-
-func (c *FabricClient) CreateFabricStoreEventHandler() (*ComFabricStoreEventHandler, error) {
-	var com *ComFabricStoreEventHandler
-	err := c.createComObject("{220e6da4-985b-4dee-8fe9-77521b838795}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricStoreEventHandler struct {
@@ -7273,16 +6643,6 @@ func (v *ComFabricStoreEventHandler) OnDataLoss() (rt interface{}, err error) {
 
 	rt = fromUnsafePointer(tmp)
 	return
-}
-
-func (c *FabricClient) CreateFabricStoreEventHandler2() (*ComFabricStoreEventHandler2, error) {
-	var com *ComFabricStoreEventHandler2
-	err := c.createComObject("{CCE4523F-614B-4D6A-98A3-1E197C0213EA}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricStoreEventHandler2 struct {
@@ -7393,16 +6753,6 @@ func (v *ComFabricStoreEventHandler2) OnDataLoss(
 		return
 	}
 
-}
-
-func (c *FabricClient) CreateFabricStorePostBackupHandler() (*ComFabricStorePostBackupHandler, error) {
-	var com *ComFabricStorePostBackupHandler
-	err := c.createComObject("{2af2e8a6-41df-4e32-9d2a-d73a711e652a}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricStorePostBackupHandler struct {
@@ -7523,16 +6873,6 @@ func (v *ComFabricStorePostBackupHandler) PostBackup(
 
 }
 
-func (c *FabricClient) CreateFabricSecondaryEventHandler() (*ComFabricSecondaryEventHandler, error) {
-	var com *ComFabricSecondaryEventHandler
-	err := c.createComObject("{7d124a7d-258e-49f2-a9b0-e800406103fb}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricSecondaryEventHandler struct {
 	ole.IUnknown
 }
@@ -7580,16 +6920,6 @@ func (v *ComFabricSecondaryEventHandler) OnReplicationOperation(
 	return
 }
 
-func (c *FabricClient) CreateFabricNodeContextResult() (*ComFabricNodeContextResult, error) {
-	var com *ComFabricNodeContextResult
-	err := c.createComObject("{0952f885-6f5a-4ed3-abe4-90c403d1e3ce}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricNodeContextResult struct {
 	ole.IUnknown
 }
@@ -7620,16 +6950,6 @@ func (v *ComFabricNodeContextResult) GetNodeContext() (rt *FabricNodeContext, er
 
 	rt = tmp.toGoStruct()
 	return
-}
-
-func (c *FabricClient) CreateFabricNodeContextResult2() (*ComFabricNodeContextResult2, error) {
-	var com *ComFabricNodeContextResult2
-	err := c.createComObject("{472bf2e1-d617-4b5c-a91d-fabed9ff3550}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricNodeContextResult2 struct {
@@ -7670,16 +6990,6 @@ func (v *ComFabricNodeContextResult2) GetDirectory(
 	return
 }
 
-func (c *FabricClient) CreateFabricReplicatorSettingsResult() (*ComFabricReplicatorSettingsResult, error) {
-	var com *ComFabricReplicatorSettingsResult
-	err := c.createComObject("{718954F3-DC1E-4060-9806-0CBF36F71051}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricReplicatorSettingsResult struct {
 	ole.IUnknown
 }
@@ -7710,16 +7020,6 @@ func (v *ComFabricReplicatorSettingsResult) GetReplicatorSettings() (rt *FabricR
 
 	rt = tmp.toGoStruct()
 	return
-}
-
-func (c *FabricClient) CreateFabricEseLocalStoreSettingsResult() (*ComFabricEseLocalStoreSettingsResult, error) {
-	var com *ComFabricEseLocalStoreSettingsResult
-	err := c.createComObject("{AACE77AE-D8E1-4144-B1EE-5AC74FD54F65}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricEseLocalStoreSettingsResult struct {
@@ -7754,16 +7054,6 @@ func (v *ComFabricEseLocalStoreSettingsResult) GetSettings() (rt *FabricEseLocal
 	return
 }
 
-func (c *FabricClient) CreateFabricSecurityCredentialsResult() (*ComFabricSecurityCredentialsResult, error) {
-	var com *ComFabricSecurityCredentialsResult
-	err := c.createComObject("{049A111D-6A30-48E9-8F69-470760D3EFB9}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricSecurityCredentialsResult struct {
 	ole.IUnknown
 }
@@ -7794,16 +7084,6 @@ func (v *ComFabricSecurityCredentialsResult) GetSecurityCredentials() (rt *Fabri
 
 	rt = tmp.toGoStruct()
 	return
-}
-
-func (c *FabricClient) CreateFabricCodePackageActivator() (*ComFabricCodePackageActivator, error) {
-	var com *ComFabricCodePackageActivator
-	err := c.createComObject("{70BE1B10-B259-46FC-B813-0B75720E7183}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricCodePackageActivator struct {
@@ -8166,16 +7446,6 @@ func (v *ComFabricCodePackageActivator) DeactivateCodePackage(
 		return
 	}
 
-}
-
-func (c *FabricClient) CreateFabricCodePackageEventHandler() (*ComFabricCodePackageEventHandler, error) {
-	var com *ComFabricCodePackageEventHandler
-	err := c.createComObject("{899E0CA8-16DF-458E-8915-D0307B4AB101}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricCodePackageEventHandler struct {

@@ -420,8 +420,7 @@ func (g *generator) generateMethods(n *ast.InterfaceNode) {
 	}
 }
 
-func (g *generator) visitInterface(n *ast.InterfaceNode) {
-
+func (g *generator) generateCoClzInterface(n *ast.InterfaceNode) {
 	interfaceName := goInterfaceName(n.Name)
 
 	// generate client
@@ -441,6 +440,11 @@ func (g *generator) visitInterface(n *ast.InterfaceNode) {
 			`, strings.TrimPrefix(n.Name, "I"), interfaceName, interfaceName, attr.Val)
 		}
 	}
+}
+
+func (g *generator) visitInterface(n *ast.InterfaceNode) {
+
+	interfaceName := goInterfaceName(n.Name)
 
 	// generate vtable
 	pn := n.ParentName

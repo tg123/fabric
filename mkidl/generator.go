@@ -109,7 +109,7 @@ func (g *generator) walk(nodes ...interface{}) {
 			g.walk(v.Nodes...)
 		case *ast.CoClassNode:
 			for _, ifc := range v.Interfaces {
-				g.walk(ifc)
+				g.generateCoClzInterface(g.ctx.definedInterface[ifc.Name])
 			}
 
 		case []interface{}:

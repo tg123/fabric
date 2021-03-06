@@ -8,16 +8,6 @@ import (
 	"unsafe"
 )
 
-func (c *FabricClient) CreateFabricAsyncOperationCallback() (*ComFabricAsyncOperationCallback, error) {
-	var com *ComFabricAsyncOperationCallback
-	err := c.createComObject("{86f08d7e-14dd-4575-8489-b1d5d679029c}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricAsyncOperationCallback struct {
 	ole.IUnknown
 }
@@ -50,16 +40,6 @@ func (v *ComFabricAsyncOperationCallback) Invoke(
 
 	rt = fromUnsafePointer(tmp)
 	return
-}
-
-func (c *FabricClient) CreateFabricAsyncOperationContext() (*ComFabricAsyncOperationContext, error) {
-	var com *ComFabricAsyncOperationContext
-	err := c.createComObject("{841720bf-c9e8-4e6f-9c3f-6b7f4ac73bcd}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricAsyncOperationContext struct {
@@ -135,16 +115,6 @@ func (v *ComFabricAsyncOperationContext) Cancel() (err error) {
 	return
 }
 
-func (c *FabricClient) CreateFabricStringResult() (*ComFabricStringResult, error) {
-	var com *ComFabricStringResult
-	err := c.createComObject("{4ae69614-7d0f-4cd4-b836-23017000d132}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricStringResult struct {
 	ole.IUnknown
 }
@@ -177,16 +147,6 @@ func (v *ComFabricStringResult) GetString() (rt string, err error) {
 	return
 }
 
-func (c *FabricClient) CreateFabricStringListResult() (*ComFabricStringListResult, error) {
-	var com *ComFabricStringListResult
-	err := c.createComObject("{afab1c53-757b-4b0e-8b7e-237aeee6bfe9}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
-}
-
 type ComFabricStringListResult struct {
 	ole.IUnknown
 }
@@ -198,16 +158,6 @@ type comFabricStringListResultVtbl struct {
 
 func (v *ComFabricStringListResult) vtable() *comFabricStringListResultVtbl {
 	return (*comFabricStringListResultVtbl)(unsafe.Pointer(v.RawVTable))
-}
-
-func (c *FabricClient) CreateFabricGetReplicatorStatusResult() (*ComFabricGetReplicatorStatusResult, error) {
-	var com *ComFabricGetReplicatorStatusResult
-	err := c.createComObject("{30E10C61-A710-4F99-A623-BB1403265186}", unsafe.Pointer(&com))
-	if err != nil {
-		return nil, err
-	}
-
-	return com, nil
 }
 
 type ComFabricGetReplicatorStatusResult struct {
