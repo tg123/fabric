@@ -146,7 +146,7 @@ func (v *ComFabricClientSettings) innerSetSecurityCredentials(
 	}
 
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().SetSecurityCredentials,
+		v.vtable().SetSecurityCredentials,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&securityCredentials)),

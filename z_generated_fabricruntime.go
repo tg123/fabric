@@ -39,7 +39,7 @@ type comFabricRuntimeVtbl struct {
 	RegisterServiceGroupFactory          uintptr
 }
 
-func (v *ComFabricRuntime) VTable() *comFabricRuntimeVtbl {
+func (v *ComFabricRuntime) vtable() *comFabricRuntimeVtbl {
 	return (*comFabricRuntimeVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -58,7 +58,7 @@ func (v *ComFabricRuntime) beginRegisterStatelessServiceFactory(
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginRegisterStatelessServiceFactory,
+		v.vtable().BeginRegisterStatelessServiceFactory,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -82,7 +82,7 @@ func (v *ComFabricRuntime) RegisterStatelessServiceFactory(
 	p_0 = s_2
 
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().RegisterStatelessServiceFactory,
+		v.vtable().RegisterStatelessServiceFactory,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -109,7 +109,7 @@ func (v *ComFabricRuntime) beginRegisterStatefulServiceFactory(
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginRegisterStatefulServiceFactory,
+		v.vtable().BeginRegisterStatefulServiceFactory,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -133,7 +133,7 @@ func (v *ComFabricRuntime) RegisterStatefulServiceFactory(
 	p_0 = s_4
 
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().RegisterStatefulServiceFactory,
+		v.vtable().RegisterStatefulServiceFactory,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -151,7 +151,7 @@ func (v *ComFabricRuntime) CreateServiceGroupFactoryBuilder() (builder *ComFabri
 		builder = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().CreateServiceGroupFactoryBuilder,
+		v.vtable().CreateServiceGroupFactoryBuilder,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -178,7 +178,7 @@ func (v *ComFabricRuntime) beginRegisterServiceGroupFactory(
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginRegisterServiceGroupFactory,
+		v.vtable().BeginRegisterServiceGroupFactory,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -202,7 +202,7 @@ func (v *ComFabricRuntime) RegisterServiceGroupFactory(
 	p_0 = s_6
 
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().RegisterServiceGroupFactory,
+		v.vtable().RegisterServiceGroupFactory,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -234,7 +234,7 @@ type comFabricStatelessServiceFactoryVtbl struct {
 	CreateInstance uintptr
 }
 
-func (v *ComFabricStatelessServiceFactory) VTable() *comFabricStatelessServiceFactoryVtbl {
+func (v *ComFabricStatelessServiceFactory) vtable() *comFabricStatelessServiceFactoryVtbl {
 	return (*comFabricStatelessServiceFactoryVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -259,7 +259,7 @@ func (v *ComFabricStatelessServiceFactory) CreateInstance(
 		serviceInstance = p_6
 	}()
 	hr, _, err1 := syscall.Syscall9(
-		v.VTable().CreateInstance,
+		v.vtable().CreateInstance,
 		8,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -301,7 +301,7 @@ type comFabricStatelessServiceInstanceVtbl struct {
 	Abort      uintptr
 }
 
-func (v *ComFabricStatelessServiceInstance) VTable() *comFabricStatelessServiceInstanceVtbl {
+func (v *ComFabricStatelessServiceInstance) vtable() *comFabricStatelessServiceInstanceVtbl {
 	return (*comFabricStatelessServiceInstanceVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -314,7 +314,7 @@ func (v *ComFabricStatelessServiceInstance) beginOpen(
 		context = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginOpen,
+		v.vtable().BeginOpen,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(partition)),
@@ -337,7 +337,7 @@ func (v *ComFabricStatelessServiceInstance) beginClose(
 		context = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().BeginClose,
+		v.vtable().BeginClose,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(callback)),
@@ -353,7 +353,7 @@ func (v *ComFabricStatelessServiceInstance) endClose(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndClose,
+		v.vtable().EndClose,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -367,7 +367,7 @@ func (v *ComFabricStatelessServiceInstance) endClose(
 }
 func (v *ComFabricStatelessServiceInstance) Abort() (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().Abort,
+		v.vtable().Abort,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -459,7 +459,7 @@ type comFabricStatelessServicePartitionVtbl struct {
 	ReportFault      uintptr
 }
 
-func (v *ComFabricStatelessServicePartition) VTable() *comFabricStatelessServicePartitionVtbl {
+func (v *ComFabricStatelessServicePartition) vtable() *comFabricStatelessServicePartitionVtbl {
 	return (*comFabricStatelessServicePartitionVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -469,7 +469,7 @@ func (v *ComFabricStatelessServicePartition) GetPartitionInfo() (bufferedValue *
 		bufferedValue = p_0.toGoStruct()
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetPartitionInfo,
+		v.vtable().GetPartitionInfo,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -488,7 +488,7 @@ func (v *ComFabricStatelessServicePartition) ReportLoad(
 	var p_1 *innerFabricLoadMetric
 	p_1 = metrics.toInnerStruct()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().ReportLoad,
+		v.vtable().ReportLoad,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(metricCount),
@@ -504,7 +504,7 @@ func (v *ComFabricStatelessServicePartition) ReportFault(
 	faultType FabricFaultType,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().ReportFault,
+		v.vtable().ReportFault,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(faultType),
@@ -536,7 +536,7 @@ type comFabricStatelessServicePartition1Vtbl struct {
 	ReportMoveCost uintptr
 }
 
-func (v *ComFabricStatelessServicePartition1) VTable() *comFabricStatelessServicePartition1Vtbl {
+func (v *ComFabricStatelessServicePartition1) vtable() *comFabricStatelessServicePartition1Vtbl {
 	return (*comFabricStatelessServicePartition1Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -544,7 +544,7 @@ func (v *ComFabricStatelessServicePartition1) ReportMoveCost(
 	moveCost FabricMoveCost,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().ReportMoveCost,
+		v.vtable().ReportMoveCost,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(moveCost),
@@ -577,7 +577,7 @@ type comFabricStatelessServicePartition2Vtbl struct {
 	ReportPartitionHealth uintptr
 }
 
-func (v *ComFabricStatelessServicePartition2) VTable() *comFabricStatelessServicePartition2Vtbl {
+func (v *ComFabricStatelessServicePartition2) vtable() *comFabricStatelessServicePartition2Vtbl {
 	return (*comFabricStatelessServicePartition2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -587,7 +587,7 @@ func (v *ComFabricStatelessServicePartition2) ReportInstanceHealth(
 	var p_0 *innerFabricHealthInformation
 	p_0 = healthInfo.toInnerStruct()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().ReportInstanceHealth,
+		v.vtable().ReportInstanceHealth,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -605,7 +605,7 @@ func (v *ComFabricStatelessServicePartition2) ReportPartitionHealth(
 	var p_0 *innerFabricHealthInformation
 	p_0 = healthInfo.toInnerStruct()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().ReportPartitionHealth,
+		v.vtable().ReportPartitionHealth,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -638,7 +638,7 @@ type comFabricStatelessServicePartition3Vtbl struct {
 	ReportPartitionHealth2 uintptr
 }
 
-func (v *ComFabricStatelessServicePartition3) VTable() *comFabricStatelessServicePartition3Vtbl {
+func (v *ComFabricStatelessServicePartition3) vtable() *comFabricStatelessServicePartition3Vtbl {
 	return (*comFabricStatelessServicePartition3Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -651,7 +651,7 @@ func (v *ComFabricStatelessServicePartition3) ReportInstanceHealth2(
 	var p_1 *innerFabricHealthReportSendOptions
 	p_1 = sendOptions.toInnerStruct()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().ReportInstanceHealth2,
+		v.vtable().ReportInstanceHealth2,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -672,7 +672,7 @@ func (v *ComFabricStatelessServicePartition3) ReportPartitionHealth2(
 	var p_1 *innerFabricHealthReportSendOptions
 	p_1 = sendOptions.toInnerStruct()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().ReportPartitionHealth2,
+		v.vtable().ReportPartitionHealth2,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -704,7 +704,7 @@ type comFabricStatefulServiceFactoryVtbl struct {
 	CreateReplica uintptr
 }
 
-func (v *ComFabricStatefulServiceFactory) VTable() *comFabricStatefulServiceFactoryVtbl {
+func (v *ComFabricStatefulServiceFactory) vtable() *comFabricStatefulServiceFactoryVtbl {
 	return (*comFabricStatefulServiceFactoryVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -729,7 +729,7 @@ func (v *ComFabricStatefulServiceFactory) CreateReplica(
 		serviceReplica = p_6
 	}()
 	hr, _, err1 := syscall.Syscall9(
-		v.VTable().CreateReplica,
+		v.vtable().CreateReplica,
 		8,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -773,7 +773,7 @@ type comFabricStatefulServiceReplicaVtbl struct {
 	Abort           uintptr
 }
 
-func (v *ComFabricStatefulServiceReplica) VTable() *comFabricStatefulServiceReplicaVtbl {
+func (v *ComFabricStatefulServiceReplica) vtable() *comFabricStatefulServiceReplicaVtbl {
 	return (*comFabricStatefulServiceReplicaVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -787,7 +787,7 @@ func (v *ComFabricStatefulServiceReplica) beginOpen(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginOpen,
+		v.vtable().BeginOpen,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(openMode),
@@ -811,7 +811,7 @@ func (v *ComFabricStatefulServiceReplica) beginChangeRole(
 		context = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginChangeRole,
+		v.vtable().BeginChangeRole,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(newRole),
@@ -834,7 +834,7 @@ func (v *ComFabricStatefulServiceReplica) endChangeRole(
 		serviceAddress = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndChangeRole,
+		v.vtable().EndChangeRole,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -854,7 +854,7 @@ func (v *ComFabricStatefulServiceReplica) beginClose(
 		context = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().BeginClose,
+		v.vtable().BeginClose,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(callback)),
@@ -870,7 +870,7 @@ func (v *ComFabricStatefulServiceReplica) endClose(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndClose,
+		v.vtable().EndClose,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -884,7 +884,7 @@ func (v *ComFabricStatefulServiceReplica) endClose(
 }
 func (v *ComFabricStatefulServiceReplica) Abort() (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().Abort,
+		v.vtable().Abort,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -1036,7 +1036,7 @@ type comFabricStatefulServicePartitionVtbl struct {
 	ReportFault      uintptr
 }
 
-func (v *ComFabricStatefulServicePartition) VTable() *comFabricStatefulServicePartitionVtbl {
+func (v *ComFabricStatefulServicePartition) vtable() *comFabricStatefulServicePartitionVtbl {
 	return (*comFabricStatefulServicePartitionVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -1046,7 +1046,7 @@ func (v *ComFabricStatefulServicePartition) GetPartitionInfo() (bufferedValue *F
 		bufferedValue = p_0.toGoStruct()
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetPartitionInfo,
+		v.vtable().GetPartitionInfo,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -1064,7 +1064,7 @@ func (v *ComFabricStatefulServicePartition) GetReadStatus() (readStatus FabricSe
 		readStatus = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetReadStatus,
+		v.vtable().GetReadStatus,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -1082,7 +1082,7 @@ func (v *ComFabricStatefulServicePartition) GetWriteStatus() (writeStatus Fabric
 		writeStatus = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetWriteStatus,
+		v.vtable().GetWriteStatus,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -1109,7 +1109,7 @@ func (v *ComFabricStatefulServicePartition) CreateReplicator(
 		stateReplicator = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().CreateReplicator,
+		v.vtable().CreateReplicator,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(stateProvider)),
@@ -1131,7 +1131,7 @@ func (v *ComFabricStatefulServicePartition) ReportLoad(
 	var p_1 *innerFabricLoadMetric
 	p_1 = metrics.toInnerStruct()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().ReportLoad,
+		v.vtable().ReportLoad,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(metricCount),
@@ -1147,7 +1147,7 @@ func (v *ComFabricStatefulServicePartition) ReportFault(
 	faultType FabricFaultType,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().ReportFault,
+		v.vtable().ReportFault,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(faultType),
@@ -1179,7 +1179,7 @@ type comFabricStatefulServicePartition1Vtbl struct {
 	ReportMoveCost uintptr
 }
 
-func (v *ComFabricStatefulServicePartition1) VTable() *comFabricStatefulServicePartition1Vtbl {
+func (v *ComFabricStatefulServicePartition1) vtable() *comFabricStatefulServicePartition1Vtbl {
 	return (*comFabricStatefulServicePartition1Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -1187,7 +1187,7 @@ func (v *ComFabricStatefulServicePartition1) ReportMoveCost(
 	moveCost FabricMoveCost,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().ReportMoveCost,
+		v.vtable().ReportMoveCost,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(moveCost),
@@ -1220,7 +1220,7 @@ type comFabricStatefulServicePartition2Vtbl struct {
 	ReportPartitionHealth uintptr
 }
 
-func (v *ComFabricStatefulServicePartition2) VTable() *comFabricStatefulServicePartition2Vtbl {
+func (v *ComFabricStatefulServicePartition2) vtable() *comFabricStatefulServicePartition2Vtbl {
 	return (*comFabricStatefulServicePartition2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -1230,7 +1230,7 @@ func (v *ComFabricStatefulServicePartition2) ReportReplicaHealth(
 	var p_0 *innerFabricHealthInformation
 	p_0 = healthInfo.toInnerStruct()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().ReportReplicaHealth,
+		v.vtable().ReportReplicaHealth,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -1248,7 +1248,7 @@ func (v *ComFabricStatefulServicePartition2) ReportPartitionHealth(
 	var p_0 *innerFabricHealthInformation
 	p_0 = healthInfo.toInnerStruct()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().ReportPartitionHealth,
+		v.vtable().ReportPartitionHealth,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -1281,7 +1281,7 @@ type comFabricStatefulServicePartition3Vtbl struct {
 	ReportPartitionHealth2 uintptr
 }
 
-func (v *ComFabricStatefulServicePartition3) VTable() *comFabricStatefulServicePartition3Vtbl {
+func (v *ComFabricStatefulServicePartition3) vtable() *comFabricStatefulServicePartition3Vtbl {
 	return (*comFabricStatefulServicePartition3Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -1294,7 +1294,7 @@ func (v *ComFabricStatefulServicePartition3) ReportReplicaHealth2(
 	var p_1 *innerFabricHealthReportSendOptions
 	p_1 = sendOptions.toInnerStruct()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().ReportReplicaHealth2,
+		v.vtable().ReportReplicaHealth2,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -1315,7 +1315,7 @@ func (v *ComFabricStatefulServicePartition3) ReportPartitionHealth2(
 	var p_1 *innerFabricHealthReportSendOptions
 	p_1 = sendOptions.toInnerStruct()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().ReportPartitionHealth2,
+		v.vtable().ReportPartitionHealth2,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -1351,7 +1351,7 @@ type comFabricStateReplicatorVtbl struct {
 	UpdateReplicatorSettings uintptr
 }
 
-func (v *ComFabricStateReplicator) VTable() *comFabricStateReplicatorVtbl {
+func (v *ComFabricStateReplicator) vtable() *comFabricStateReplicatorVtbl {
 	return (*comFabricStateReplicatorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -1368,7 +1368,7 @@ func (v *ComFabricStateReplicator) beginReplicate(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginReplicate,
+		v.vtable().BeginReplicate,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(operationData)),
@@ -1391,7 +1391,7 @@ func (v *ComFabricStateReplicator) endReplicate(
 		sequenceNumber = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndReplicate,
+		v.vtable().EndReplicate,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -1409,7 +1409,7 @@ func (v *ComFabricStateReplicator) GetReplicationStream() (stream *ComFabricOper
 		stream = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetReplicationStream,
+		v.vtable().GetReplicationStream,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -1427,7 +1427,7 @@ func (v *ComFabricStateReplicator) GetCopyStream() (stream *ComFabricOperationSt
 		stream = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetCopyStream,
+		v.vtable().GetCopyStream,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -1445,7 +1445,7 @@ func (v *ComFabricStateReplicator) UpdateReplicatorSettings(
 	var p_0 *innerFabricReplicatorSettings
 	p_0 = replicatorSettings.toInnerStruct()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().UpdateReplicatorSettings,
+		v.vtable().UpdateReplicatorSettings,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -1535,7 +1535,7 @@ type comFabricStateReplicator2Vtbl struct {
 	GetReplicatorSettings uintptr
 }
 
-func (v *ComFabricStateReplicator2) VTable() *comFabricStateReplicator2Vtbl {
+func (v *ComFabricStateReplicator2) vtable() *comFabricStateReplicator2Vtbl {
 	return (*comFabricStateReplicator2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -1545,7 +1545,7 @@ func (v *ComFabricStateReplicator2) GetReplicatorSettings() (replicatorSettings 
 		replicatorSettings = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetReplicatorSettings,
+		v.vtable().GetReplicatorSettings,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -1583,7 +1583,7 @@ type comFabricStateProviderVtbl struct {
 	GetCopyState                   uintptr
 }
 
-func (v *ComFabricStateProvider) VTable() *comFabricStateProviderVtbl {
+func (v *ComFabricStateProvider) vtable() *comFabricStateProviderVtbl {
 	return (*comFabricStateProviderVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -1599,7 +1599,7 @@ func (v *ComFabricStateProvider) beginUpdateEpoch(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginUpdateEpoch,
+		v.vtable().BeginUpdateEpoch,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -1618,7 +1618,7 @@ func (v *ComFabricStateProvider) endUpdateEpoch(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndUpdateEpoch,
+		v.vtable().EndUpdateEpoch,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -1636,7 +1636,7 @@ func (v *ComFabricStateProvider) GetLastCommittedSequenceNumber() (sequenceNumbe
 		sequenceNumber = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetLastCommittedSequenceNumber,
+		v.vtable().GetLastCommittedSequenceNumber,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -1656,7 +1656,7 @@ func (v *ComFabricStateProvider) beginOnDataLoss(
 		context = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().BeginOnDataLoss,
+		v.vtable().BeginOnDataLoss,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(callback)),
@@ -1676,7 +1676,7 @@ func (v *ComFabricStateProvider) endOnDataLoss(
 		isStateChanged = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndOnDataLoss,
+		v.vtable().EndOnDataLoss,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -1694,7 +1694,7 @@ func (v *ComFabricStateProvider) GetCopyContext() (copyContextStream *ComFabricO
 		copyContextStream = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetCopyContext,
+		v.vtable().GetCopyContext,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -1715,7 +1715,7 @@ func (v *ComFabricStateProvider) GetCopyState(
 		copyStateStream = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().GetCopyState,
+		v.vtable().GetCopyState,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(uptoSequenceNumber),
@@ -1865,13 +1865,13 @@ type comFabricOperationVtbl struct {
 	Acknowledge  uintptr
 }
 
-func (v *ComFabricOperation) VTable() *comFabricOperationVtbl {
+func (v *ComFabricOperation) vtable() *comFabricOperationVtbl {
 	return (*comFabricOperationVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricOperation) GetMetadata() (rt *FabricOperationMetadata, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Metadata,
+		v.vtable().get_Metadata,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -1897,7 +1897,7 @@ func (v *ComFabricOperation) GetData() (count uint32, buffers *FabricOperationDa
 		buffers = p_1.toGoStruct()
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetData,
+		v.vtable().GetData,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -1911,7 +1911,7 @@ func (v *ComFabricOperation) GetData() (count uint32, buffers *FabricOperationDa
 }
 func (v *ComFabricOperation) Acknowledge() (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().Acknowledge,
+		v.vtable().Acknowledge,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -1943,7 +1943,7 @@ type comFabricOperationDataVtbl struct {
 	GetData uintptr
 }
 
-func (v *ComFabricOperationData) VTable() *comFabricOperationDataVtbl {
+func (v *ComFabricOperationData) vtable() *comFabricOperationDataVtbl {
 	return (*comFabricOperationDataVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -1957,7 +1957,7 @@ func (v *ComFabricOperationData) GetData() (count uint32, buffers *FabricOperati
 		buffers = p_1.toGoStruct()
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetData,
+		v.vtable().GetData,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -1990,7 +1990,7 @@ type comFabricOperationStreamVtbl struct {
 	EndGetOperation   uintptr
 }
 
-func (v *ComFabricOperationStream) VTable() *comFabricOperationStreamVtbl {
+func (v *ComFabricOperationStream) vtable() *comFabricOperationStreamVtbl {
 	return (*comFabricOperationStreamVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -2002,7 +2002,7 @@ func (v *ComFabricOperationStream) beginGetOperation(
 		context = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().BeginGetOperation,
+		v.vtable().BeginGetOperation,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(callback)),
@@ -2034,7 +2034,7 @@ type comFabricOperationStream2Vtbl struct {
 	ReportFault uintptr
 }
 
-func (v *ComFabricOperationStream2) VTable() *comFabricOperationStream2Vtbl {
+func (v *ComFabricOperationStream2) vtable() *comFabricOperationStream2Vtbl {
 	return (*comFabricOperationStream2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -2042,7 +2042,7 @@ func (v *ComFabricOperationStream2) ReportFault(
 	faultType FabricFaultType,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().ReportFault,
+		v.vtable().ReportFault,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(faultType),
@@ -2075,7 +2075,7 @@ type comFabricOperationDataStreamVtbl struct {
 	EndGetNext   uintptr
 }
 
-func (v *ComFabricOperationDataStream) VTable() *comFabricOperationDataStreamVtbl {
+func (v *ComFabricOperationDataStream) vtable() *comFabricOperationDataStreamVtbl {
 	return (*comFabricOperationDataStreamVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -2087,7 +2087,7 @@ func (v *ComFabricOperationDataStream) beginGetNext(
 		context = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().BeginGetNext,
+		v.vtable().BeginGetNext,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(callback)),
@@ -2129,7 +2129,7 @@ type comFabricReplicatorVtbl struct {
 	GetCatchUpCapability uintptr
 }
 
-func (v *ComFabricReplicator) VTable() *comFabricReplicatorVtbl {
+func (v *ComFabricReplicator) vtable() *comFabricReplicatorVtbl {
 	return (*comFabricReplicatorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -2141,7 +2141,7 @@ func (v *ComFabricReplicator) beginOpen(
 		context = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().BeginOpen,
+		v.vtable().BeginOpen,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(callback)),
@@ -2165,7 +2165,7 @@ func (v *ComFabricReplicator) beginChangeRole(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginChangeRole,
+		v.vtable().BeginChangeRole,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -2184,7 +2184,7 @@ func (v *ComFabricReplicator) endChangeRole(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndChangeRole,
+		v.vtable().EndChangeRole,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -2207,7 +2207,7 @@ func (v *ComFabricReplicator) beginUpdateEpoch(
 		context = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginUpdateEpoch,
+		v.vtable().BeginUpdateEpoch,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -2226,7 +2226,7 @@ func (v *ComFabricReplicator) endUpdateEpoch(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndUpdateEpoch,
+		v.vtable().EndUpdateEpoch,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -2246,7 +2246,7 @@ func (v *ComFabricReplicator) beginClose(
 		context = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().BeginClose,
+		v.vtable().BeginClose,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(callback)),
@@ -2262,7 +2262,7 @@ func (v *ComFabricReplicator) endClose(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndClose,
+		v.vtable().EndClose,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -2276,7 +2276,7 @@ func (v *ComFabricReplicator) endClose(
 }
 func (v *ComFabricReplicator) Abort() (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().Abort,
+		v.vtable().Abort,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -2298,7 +2298,7 @@ func (v *ComFabricReplicator) GetCurrentProgress() (lastSequenceNumber int64, er
 		lastSequenceNumber = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetCurrentProgress,
+		v.vtable().GetCurrentProgress,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -2316,7 +2316,7 @@ func (v *ComFabricReplicator) GetCatchUpCapability() (fromSequenceNumber int64, 
 		fromSequenceNumber = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetCatchUpCapability,
+		v.vtable().GetCatchUpCapability,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -2524,7 +2524,7 @@ type comFabricPrimaryReplicatorVtbl struct {
 	RemoveReplica                        uintptr
 }
 
-func (v *ComFabricPrimaryReplicator) VTable() *comFabricPrimaryReplicatorVtbl {
+func (v *ComFabricPrimaryReplicator) vtable() *comFabricPrimaryReplicatorVtbl {
 	return (*comFabricPrimaryReplicatorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -2536,7 +2536,7 @@ func (v *ComFabricPrimaryReplicator) beginOnDataLoss(
 		context = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().BeginOnDataLoss,
+		v.vtable().BeginOnDataLoss,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(callback)),
@@ -2556,7 +2556,7 @@ func (v *ComFabricPrimaryReplicator) endOnDataLoss(
 		isStateChanged = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndOnDataLoss,
+		v.vtable().EndOnDataLoss,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -2577,7 +2577,7 @@ func (v *ComFabricPrimaryReplicator) UpdateCatchUpReplicaSetConfiguration(
 	var p_1 *innerFabricReplicaSetConfiguration
 	p_1 = previousConfiguration.toInnerStruct()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().UpdateCatchUpReplicaSetConfiguration,
+		v.vtable().UpdateCatchUpReplicaSetConfiguration,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -2598,7 +2598,7 @@ func (v *ComFabricPrimaryReplicator) beginWaitForCatchUpQuorum(
 		context = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginWaitForCatchUpQuorum,
+		v.vtable().BeginWaitForCatchUpQuorum,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(catchUpMode),
@@ -2617,7 +2617,7 @@ func (v *ComFabricPrimaryReplicator) endWaitForCatchUpQuorum(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndWaitForCatchUpQuorum,
+		v.vtable().EndWaitForCatchUpQuorum,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -2635,7 +2635,7 @@ func (v *ComFabricPrimaryReplicator) UpdateCurrentReplicaSetConfiguration(
 	var p_0 *innerFabricReplicaSetConfiguration
 	p_0 = currentConfiguration.toInnerStruct()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().UpdateCurrentReplicaSetConfiguration,
+		v.vtable().UpdateCurrentReplicaSetConfiguration,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -2658,7 +2658,7 @@ func (v *ComFabricPrimaryReplicator) beginBuildReplica(
 		context = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginBuildReplica,
+		v.vtable().BeginBuildReplica,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -2677,7 +2677,7 @@ func (v *ComFabricPrimaryReplicator) endBuildReplica(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndBuildReplica,
+		v.vtable().EndBuildReplica,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -2693,7 +2693,7 @@ func (v *ComFabricPrimaryReplicator) RemoveReplica(
 	replicaId int64,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().RemoveReplica,
+		v.vtable().RemoveReplica,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(replicaId),
@@ -2891,7 +2891,7 @@ type comFabricReplicatorCatchupSpecificQuorumVtbl struct {
 	ole.IUnknownVtbl
 }
 
-func (v *ComFabricReplicatorCatchupSpecificQuorum) VTable() *comFabricReplicatorCatchupSpecificQuorumVtbl {
+func (v *ComFabricReplicatorCatchupSpecificQuorum) vtable() *comFabricReplicatorCatchupSpecificQuorumVtbl {
 	return (*comFabricReplicatorCatchupSpecificQuorumVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -2920,7 +2920,7 @@ type comFabricAtomicGroupStateReplicatorVtbl struct {
 	EndReplicateAtomicGroupRollback    uintptr
 }
 
-func (v *ComFabricAtomicGroupStateReplicator) VTable() *comFabricAtomicGroupStateReplicatorVtbl {
+func (v *ComFabricAtomicGroupStateReplicator) vtable() *comFabricAtomicGroupStateReplicatorVtbl {
 	return (*comFabricAtomicGroupStateReplicatorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -2930,7 +2930,7 @@ func (v *ComFabricAtomicGroupStateReplicator) CreateAtomicGroup() (AtomicGroupId
 		AtomicGroupId = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().CreateAtomicGroup,
+		v.vtable().CreateAtomicGroup,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -2956,7 +2956,7 @@ func (v *ComFabricAtomicGroupStateReplicator) beginReplicateAtomicGroupOperation
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginReplicateAtomicGroupOperation,
+		v.vtable().BeginReplicateAtomicGroupOperation,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(atomicGroupId),
@@ -2979,7 +2979,7 @@ func (v *ComFabricAtomicGroupStateReplicator) endReplicateAtomicGroupOperation(
 		operationSequenceNumber = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndReplicateAtomicGroupOperation,
+		v.vtable().EndReplicateAtomicGroupOperation,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -3004,7 +3004,7 @@ func (v *ComFabricAtomicGroupStateReplicator) beginReplicateAtomicGroupCommit(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginReplicateAtomicGroupCommit,
+		v.vtable().BeginReplicateAtomicGroupCommit,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(atomicGroupId),
@@ -3027,7 +3027,7 @@ func (v *ComFabricAtomicGroupStateReplicator) endReplicateAtomicGroupCommit(
 		commitSequenceNumber = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndReplicateAtomicGroupCommit,
+		v.vtable().EndReplicateAtomicGroupCommit,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -3052,7 +3052,7 @@ func (v *ComFabricAtomicGroupStateReplicator) beginReplicateAtomicGroupRollback(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginReplicateAtomicGroupRollback,
+		v.vtable().BeginReplicateAtomicGroupRollback,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(atomicGroupId),
@@ -3075,7 +3075,7 @@ func (v *ComFabricAtomicGroupStateReplicator) endReplicateAtomicGroupRollback(
 		rollbackSequenceNumber = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndReplicateAtomicGroupRollback,
+		v.vtable().EndReplicateAtomicGroupRollback,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -3288,7 +3288,7 @@ type comFabricAtomicGroupStateProviderVtbl struct {
 	EndUndoProgress          uintptr
 }
 
-func (v *ComFabricAtomicGroupStateProvider) VTable() *comFabricAtomicGroupStateProviderVtbl {
+func (v *ComFabricAtomicGroupStateProvider) vtable() *comFabricAtomicGroupStateProviderVtbl {
 	return (*comFabricAtomicGroupStateProviderVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -3302,7 +3302,7 @@ func (v *ComFabricAtomicGroupStateProvider) beginAtomicGroupCommit(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginAtomicGroupCommit,
+		v.vtable().BeginAtomicGroupCommit,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(atomicGroupId),
@@ -3321,7 +3321,7 @@ func (v *ComFabricAtomicGroupStateProvider) endAtomicGroupCommit(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndAtomicGroupCommit,
+		v.vtable().EndAtomicGroupCommit,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -3343,7 +3343,7 @@ func (v *ComFabricAtomicGroupStateProvider) beginAtomicGroupRollback(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginAtomicGroupRollback,
+		v.vtable().BeginAtomicGroupRollback,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(atomicGroupId),
@@ -3362,7 +3362,7 @@ func (v *ComFabricAtomicGroupStateProvider) endAtomicGroupRollback(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndAtomicGroupRollback,
+		v.vtable().EndAtomicGroupRollback,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -3383,7 +3383,7 @@ func (v *ComFabricAtomicGroupStateProvider) beginUndoProgress(
 		context = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginUndoProgress,
+		v.vtable().BeginUndoProgress,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(fromCommitSequenceNumber),
@@ -3402,7 +3402,7 @@ func (v *ComFabricAtomicGroupStateProvider) endUndoProgress(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndUndoProgress,
+		v.vtable().EndUndoProgress,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -3605,7 +3605,7 @@ type comFabricServiceGroupFactoryVtbl struct {
 	ole.IUnknownVtbl
 }
 
-func (v *ComFabricServiceGroupFactory) VTable() *comFabricServiceGroupFactoryVtbl {
+func (v *ComFabricServiceGroupFactory) vtable() *comFabricServiceGroupFactoryVtbl {
 	return (*comFabricServiceGroupFactoryVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -3631,7 +3631,7 @@ type comFabricServiceGroupFactoryBuilderVtbl struct {
 	ToServiceGroupFactory      uintptr
 }
 
-func (v *ComFabricServiceGroupFactoryBuilder) VTable() *comFabricServiceGroupFactoryBuilderVtbl {
+func (v *ComFabricServiceGroupFactoryBuilder) vtable() *comFabricServiceGroupFactoryBuilderVtbl {
 	return (*comFabricServiceGroupFactoryBuilderVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -3644,7 +3644,7 @@ func (v *ComFabricServiceGroupFactoryBuilder) AddStatelessServiceFactory(
 	p_0 = s_11
 
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().AddStatelessServiceFactory,
+		v.vtable().AddStatelessServiceFactory,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -3665,7 +3665,7 @@ func (v *ComFabricServiceGroupFactoryBuilder) AddStatefulServiceFactory(
 	p_0 = s_12
 
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().AddStatefulServiceFactory,
+		v.vtable().AddStatefulServiceFactory,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -3685,7 +3685,7 @@ func (v *ComFabricServiceGroupFactoryBuilder) RemoveServiceFactory(
 	p_0 = s_13
 
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().RemoveServiceFactory,
+		v.vtable().RemoveServiceFactory,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -3703,7 +3703,7 @@ func (v *ComFabricServiceGroupFactoryBuilder) ToServiceGroupFactory() (factory *
 		factory = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().ToServiceGroupFactory,
+		v.vtable().ToServiceGroupFactory,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -3735,7 +3735,7 @@ type comFabricServiceGroupPartitionVtbl struct {
 	ResolveMember uintptr
 }
 
-func (v *ComFabricServiceGroupPartition) VTable() *comFabricServiceGroupPartitionVtbl {
+func (v *ComFabricServiceGroupPartition) vtable() *comFabricServiceGroupPartitionVtbl {
 	return (*comFabricServiceGroupPartitionVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -3752,7 +3752,7 @@ func (v *ComFabricServiceGroupPartition) ResolveMember(
 		member = fromUnsafePointer(p_2)
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().ResolveMember,
+		v.vtable().ResolveMember,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -3809,13 +3809,13 @@ type comFabricCodePackageActivationContextVtbl struct {
 	UnregisterDataPackageChangeHandler          uintptr
 }
 
-func (v *ComFabricCodePackageActivationContext) VTable() *comFabricCodePackageActivationContextVtbl {
+func (v *ComFabricCodePackageActivationContext) vtable() *comFabricCodePackageActivationContextVtbl {
 	return (*comFabricCodePackageActivationContextVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricCodePackageActivationContext) GetContextId() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ContextId,
+		v.vtable().get_ContextId,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -3833,7 +3833,7 @@ func (v *ComFabricCodePackageActivationContext) GetContextId() (rt string, err e
 }
 func (v *ComFabricCodePackageActivationContext) GetCodePackageName() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_CodePackageName,
+		v.vtable().get_CodePackageName,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -3851,7 +3851,7 @@ func (v *ComFabricCodePackageActivationContext) GetCodePackageName() (rt string,
 }
 func (v *ComFabricCodePackageActivationContext) GetCodePackageVersion() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_CodePackageVersion,
+		v.vtable().get_CodePackageVersion,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -3869,7 +3869,7 @@ func (v *ComFabricCodePackageActivationContext) GetCodePackageVersion() (rt stri
 }
 func (v *ComFabricCodePackageActivationContext) GetWorkDirectory() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_WorkDirectory,
+		v.vtable().get_WorkDirectory,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -3887,7 +3887,7 @@ func (v *ComFabricCodePackageActivationContext) GetWorkDirectory() (rt string, e
 }
 func (v *ComFabricCodePackageActivationContext) GetLogDirectory() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_LogDirectory,
+		v.vtable().get_LogDirectory,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -3905,7 +3905,7 @@ func (v *ComFabricCodePackageActivationContext) GetLogDirectory() (rt string, er
 }
 func (v *ComFabricCodePackageActivationContext) GetTempDirectory() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_TempDirectory,
+		v.vtable().get_TempDirectory,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -3923,7 +3923,7 @@ func (v *ComFabricCodePackageActivationContext) GetTempDirectory() (rt string, e
 }
 func (v *ComFabricCodePackageActivationContext) GetServiceTypes() (rt []FabricServiceTypeDescription, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ServiceTypes,
+		v.vtable().get_ServiceTypes,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -3963,7 +3963,7 @@ func (v *ComFabricCodePackageActivationContext) GetServiceTypes() (rt []FabricSe
 }
 func (v *ComFabricCodePackageActivationContext) GetServiceGroupTypes() (rt []FabricServiceGroupTypeDescription, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ServiceGroupTypes,
+		v.vtable().get_ServiceGroupTypes,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -4003,7 +4003,7 @@ func (v *ComFabricCodePackageActivationContext) GetServiceGroupTypes() (rt []Fab
 }
 func (v *ComFabricCodePackageActivationContext) GetApplicationPrincipals() (rt *FabricApplicationPrincipalsDescription, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ApplicationPrincipals,
+		v.vtable().get_ApplicationPrincipals,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -4021,7 +4021,7 @@ func (v *ComFabricCodePackageActivationContext) GetApplicationPrincipals() (rt *
 }
 func (v *ComFabricCodePackageActivationContext) GetServiceEndpointResources() (rt []FabricEndpointResourceDescription, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ServiceEndpointResources,
+		v.vtable().get_ServiceEndpointResources,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -4071,7 +4071,7 @@ func (v *ComFabricCodePackageActivationContext) GetServiceEndpointResource(
 		bufferedValue = p_1.toGoStruct()
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetServiceEndpointResource,
+		v.vtable().GetServiceEndpointResource,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -4089,7 +4089,7 @@ func (v *ComFabricCodePackageActivationContext) GetCodePackageNames() (names *Co
 		names = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetCodePackageNames,
+		v.vtable().GetCodePackageNames,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -4107,7 +4107,7 @@ func (v *ComFabricCodePackageActivationContext) GetConfigurationPackageNames() (
 		names = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetConfigurationPackageNames,
+		v.vtable().GetConfigurationPackageNames,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -4125,7 +4125,7 @@ func (v *ComFabricCodePackageActivationContext) GetDataPackageNames() (names *Co
 		names = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetDataPackageNames,
+		v.vtable().GetDataPackageNames,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -4149,7 +4149,7 @@ func (v *ComFabricCodePackageActivationContext) GetCodePackage(
 		codePackage = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetCodePackage,
+		v.vtable().GetCodePackage,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -4173,7 +4173,7 @@ func (v *ComFabricCodePackageActivationContext) GetConfigurationPackage(
 		configPackage = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetConfigurationPackage,
+		v.vtable().GetConfigurationPackage,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -4197,7 +4197,7 @@ func (v *ComFabricCodePackageActivationContext) GetDataPackage(
 		dataPackage = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetDataPackage,
+		v.vtable().GetDataPackage,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -4217,7 +4217,7 @@ func (v *ComFabricCodePackageActivationContext) RegisterCodePackageChangeHandler
 		callbackHandle = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().RegisterCodePackageChangeHandler,
+		v.vtable().RegisterCodePackageChangeHandler,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(callback)),
@@ -4233,7 +4233,7 @@ func (v *ComFabricCodePackageActivationContext) UnregisterCodePackageChangeHandl
 	callbackHandle int64,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().UnregisterCodePackageChangeHandler,
+		v.vtable().UnregisterCodePackageChangeHandler,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(callbackHandle),
@@ -4253,7 +4253,7 @@ func (v *ComFabricCodePackageActivationContext) RegisterConfigurationPackageChan
 		callbackHandle = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().RegisterConfigurationPackageChangeHandler,
+		v.vtable().RegisterConfigurationPackageChangeHandler,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(callback)),
@@ -4269,7 +4269,7 @@ func (v *ComFabricCodePackageActivationContext) UnregisterConfigurationPackageCh
 	callbackHandle int64,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().UnregisterConfigurationPackageChangeHandler,
+		v.vtable().UnregisterConfigurationPackageChangeHandler,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(callbackHandle),
@@ -4289,7 +4289,7 @@ func (v *ComFabricCodePackageActivationContext) RegisterDataPackageChangeHandler
 		callbackHandle = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().RegisterDataPackageChangeHandler,
+		v.vtable().RegisterDataPackageChangeHandler,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(callback)),
@@ -4305,7 +4305,7 @@ func (v *ComFabricCodePackageActivationContext) UnregisterDataPackageChangeHandl
 	callbackHandle int64,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().UnregisterDataPackageChangeHandler,
+		v.vtable().UnregisterDataPackageChangeHandler,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(callbackHandle),
@@ -4340,13 +4340,13 @@ type comFabricCodePackageActivationContext2Vtbl struct {
 	GetServiceManifestVersion uintptr
 }
 
-func (v *ComFabricCodePackageActivationContext2) VTable() *comFabricCodePackageActivationContext2Vtbl {
+func (v *ComFabricCodePackageActivationContext2) vtable() *comFabricCodePackageActivationContext2Vtbl {
 	return (*comFabricCodePackageActivationContext2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricCodePackageActivationContext2) GetApplicationName() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ApplicationName,
+		v.vtable().get_ApplicationName,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -4364,7 +4364,7 @@ func (v *ComFabricCodePackageActivationContext2) GetApplicationName() (rt string
 }
 func (v *ComFabricCodePackageActivationContext2) GetApplicationTypeName() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ApplicationTypeName,
+		v.vtable().get_ApplicationTypeName,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -4386,7 +4386,7 @@ func (v *ComFabricCodePackageActivationContext2) GetServiceManifestName() (servi
 		serviceManifestName = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetServiceManifestName,
+		v.vtable().GetServiceManifestName,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -4404,7 +4404,7 @@ func (v *ComFabricCodePackageActivationContext2) GetServiceManifestVersion() (se
 		serviceManifestVersion = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetServiceManifestVersion,
+		v.vtable().GetServiceManifestVersion,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -4438,7 +4438,7 @@ type comFabricCodePackageActivationContext3Vtbl struct {
 	ReportDeployedServicePackageHealth uintptr
 }
 
-func (v *ComFabricCodePackageActivationContext3) VTable() *comFabricCodePackageActivationContext3Vtbl {
+func (v *ComFabricCodePackageActivationContext3) vtable() *comFabricCodePackageActivationContext3Vtbl {
 	return (*comFabricCodePackageActivationContext3Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -4448,7 +4448,7 @@ func (v *ComFabricCodePackageActivationContext3) ReportApplicationHealth(
 	var p_0 *innerFabricHealthInformation
 	p_0 = healthInfo.toInnerStruct()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().ReportApplicationHealth,
+		v.vtable().ReportApplicationHealth,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -4466,7 +4466,7 @@ func (v *ComFabricCodePackageActivationContext3) ReportDeployedApplicationHealth
 	var p_0 *innerFabricHealthInformation
 	p_0 = healthInfo.toInnerStruct()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().ReportDeployedApplicationHealth,
+		v.vtable().ReportDeployedApplicationHealth,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -4484,7 +4484,7 @@ func (v *ComFabricCodePackageActivationContext3) ReportDeployedServicePackageHea
 	var p_0 *innerFabricHealthInformation
 	p_0 = healthInfo.toInnerStruct()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().ReportDeployedServicePackageHealth,
+		v.vtable().ReportDeployedServicePackageHealth,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -4518,7 +4518,7 @@ type comFabricCodePackageActivationContext4Vtbl struct {
 	ReportDeployedServicePackageHealth2 uintptr
 }
 
-func (v *ComFabricCodePackageActivationContext4) VTable() *comFabricCodePackageActivationContext4Vtbl {
+func (v *ComFabricCodePackageActivationContext4) vtable() *comFabricCodePackageActivationContext4Vtbl {
 	return (*comFabricCodePackageActivationContext4Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -4531,7 +4531,7 @@ func (v *ComFabricCodePackageActivationContext4) ReportApplicationHealth2(
 	var p_1 *innerFabricHealthReportSendOptions
 	p_1 = sendOptions.toInnerStruct()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().ReportApplicationHealth2,
+		v.vtable().ReportApplicationHealth2,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -4552,7 +4552,7 @@ func (v *ComFabricCodePackageActivationContext4) ReportDeployedApplicationHealth
 	var p_1 *innerFabricHealthReportSendOptions
 	p_1 = sendOptions.toInnerStruct()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().ReportDeployedApplicationHealth2,
+		v.vtable().ReportDeployedApplicationHealth2,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -4573,7 +4573,7 @@ func (v *ComFabricCodePackageActivationContext4) ReportDeployedServicePackageHea
 	var p_1 *innerFabricHealthReportSendOptions
 	p_1 = sendOptions.toInnerStruct()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().ReportDeployedServicePackageHealth2,
+		v.vtable().ReportDeployedServicePackageHealth2,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -4606,13 +4606,13 @@ type comFabricCodePackageActivationContext5Vtbl struct {
 	get_ServicePublishAddress uintptr
 }
 
-func (v *ComFabricCodePackageActivationContext5) VTable() *comFabricCodePackageActivationContext5Vtbl {
+func (v *ComFabricCodePackageActivationContext5) vtable() *comFabricCodePackageActivationContext5Vtbl {
 	return (*comFabricCodePackageActivationContext5Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricCodePackageActivationContext5) GetServiceListenAddress() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ServiceListenAddress,
+		v.vtable().get_ServiceListenAddress,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -4630,7 +4630,7 @@ func (v *ComFabricCodePackageActivationContext5) GetServiceListenAddress() (rt s
 }
 func (v *ComFabricCodePackageActivationContext5) GetServicePublishAddress() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ServicePublishAddress,
+		v.vtable().get_ServicePublishAddress,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -4666,7 +4666,7 @@ type comFabricCodePackageActivationContext6Vtbl struct {
 	GetDirectory uintptr
 }
 
-func (v *ComFabricCodePackageActivationContext6) VTable() *comFabricCodePackageActivationContext6Vtbl {
+func (v *ComFabricCodePackageActivationContext6) vtable() *comFabricCodePackageActivationContext6Vtbl {
 	return (*comFabricCodePackageActivationContext6Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -4682,7 +4682,7 @@ func (v *ComFabricCodePackageActivationContext6) GetDirectory(
 		directoryPath = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetDirectory,
+		v.vtable().GetDirectory,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -4715,13 +4715,13 @@ type comFabricCodePackageVtbl struct {
 	get_Path        uintptr
 }
 
-func (v *ComFabricCodePackage) VTable() *comFabricCodePackageVtbl {
+func (v *ComFabricCodePackage) vtable() *comFabricCodePackageVtbl {
 	return (*comFabricCodePackageVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricCodePackage) GetDescription() (rt *FabricCodePackageDescription, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Description,
+		v.vtable().get_Description,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -4739,7 +4739,7 @@ func (v *ComFabricCodePackage) GetDescription() (rt *FabricCodePackageDescriptio
 }
 func (v *ComFabricCodePackage) GetPath() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Path,
+		v.vtable().get_Path,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -4776,13 +4776,13 @@ type comFabricCodePackage2Vtbl struct {
 	get_EntryPointRunAsPolicy      uintptr
 }
 
-func (v *ComFabricCodePackage2) VTable() *comFabricCodePackage2Vtbl {
+func (v *ComFabricCodePackage2) vtable() *comFabricCodePackage2Vtbl {
 	return (*comFabricCodePackage2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricCodePackage2) GetSetupEntryPointRunAsPolicy() (rt *FabricRunasPolicyDescription, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_SetupEntryPointRunAsPolicy,
+		v.vtable().get_SetupEntryPointRunAsPolicy,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -4800,7 +4800,7 @@ func (v *ComFabricCodePackage2) GetSetupEntryPointRunAsPolicy() (rt *FabricRunas
 }
 func (v *ComFabricCodePackage2) GetEntryPointRunAsPolicy() (rt *FabricRunasPolicyDescription, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_EntryPointRunAsPolicy,
+		v.vtable().get_EntryPointRunAsPolicy,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -4841,13 +4841,13 @@ type comFabricConfigurationPackageVtbl struct {
 	DecryptValue    uintptr
 }
 
-func (v *ComFabricConfigurationPackage) VTable() *comFabricConfigurationPackageVtbl {
+func (v *ComFabricConfigurationPackage) vtable() *comFabricConfigurationPackageVtbl {
 	return (*comFabricConfigurationPackageVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricConfigurationPackage) GetDescription() (rt *FabricConfigurationPackageDescription, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Description,
+		v.vtable().get_Description,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -4865,7 +4865,7 @@ func (v *ComFabricConfigurationPackage) GetDescription() (rt *FabricConfiguratio
 }
 func (v *ComFabricConfigurationPackage) GetPath() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Path,
+		v.vtable().get_Path,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -4883,7 +4883,7 @@ func (v *ComFabricConfigurationPackage) GetPath() (rt string, err error) {
 }
 func (v *ComFabricConfigurationPackage) GetSettings() (rt *FabricConfigurationSettings, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Settings,
+		v.vtable().get_Settings,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -4911,7 +4911,7 @@ func (v *ComFabricConfigurationPackage) GetSection(
 		bufferedValue = p_1.toGoStruct()
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetSection,
+		v.vtable().GetSection,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -4944,7 +4944,7 @@ func (v *ComFabricConfigurationPackage) GetValue(
 		bufferedValue = windows.UTF16PtrToString(p_3)
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().GetValue,
+		v.vtable().GetValue,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -4971,7 +4971,7 @@ func (v *ComFabricConfigurationPackage) DecryptValue(
 		decryptedValue = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().DecryptValue,
+		v.vtable().DecryptValue,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -5003,7 +5003,7 @@ type comFabricConfigurationPackage2Vtbl struct {
 	GetValues uintptr
 }
 
-func (v *ComFabricConfigurationPackage2) VTable() *comFabricConfigurationPackage2Vtbl {
+func (v *ComFabricConfigurationPackage2) vtable() *comFabricConfigurationPackage2Vtbl {
 	return (*comFabricConfigurationPackage2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -5046,7 +5046,7 @@ func (v *ComFabricConfigurationPackage2) GetValues(
 		}
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().GetValues,
+		v.vtable().GetValues,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -5082,13 +5082,13 @@ type comFabricDataPackageVtbl struct {
 	get_Path        uintptr
 }
 
-func (v *ComFabricDataPackage) VTable() *comFabricDataPackageVtbl {
+func (v *ComFabricDataPackage) vtable() *comFabricDataPackageVtbl {
 	return (*comFabricDataPackageVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricDataPackage) GetDescription() (rt *FabricDataPackageDescription, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Description,
+		v.vtable().get_Description,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -5106,7 +5106,7 @@ func (v *ComFabricDataPackage) GetDescription() (rt *FabricDataPackageDescriptio
 }
 func (v *ComFabricDataPackage) GetPath() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Path,
+		v.vtable().get_Path,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -5144,7 +5144,7 @@ type comFabricCodePackageChangeHandlerVtbl struct {
 	OnPackageModified uintptr
 }
 
-func (v *ComFabricCodePackageChangeHandler) VTable() *comFabricCodePackageChangeHandlerVtbl {
+func (v *ComFabricCodePackageChangeHandler) vtable() *comFabricCodePackageChangeHandlerVtbl {
 	return (*comFabricCodePackageChangeHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -5153,7 +5153,7 @@ func (v *ComFabricCodePackageChangeHandler) OnPackageAdded(
 	codePackage *ComFabricCodePackage,
 ) (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().OnPackageAdded,
+		v.vtable().OnPackageAdded,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(source)),
@@ -5174,7 +5174,7 @@ func (v *ComFabricCodePackageChangeHandler) OnPackageRemoved(
 	codePackage *ComFabricCodePackage,
 ) (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().OnPackageRemoved,
+		v.vtable().OnPackageRemoved,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(source)),
@@ -5196,7 +5196,7 @@ func (v *ComFabricCodePackageChangeHandler) OnPackageModified(
 	codePackage *ComFabricCodePackage,
 ) (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().OnPackageModified,
+		v.vtable().OnPackageModified,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(source)),
@@ -5237,7 +5237,7 @@ type comFabricConfigurationPackageChangeHandlerVtbl struct {
 	OnPackageModified uintptr
 }
 
-func (v *ComFabricConfigurationPackageChangeHandler) VTable() *comFabricConfigurationPackageChangeHandlerVtbl {
+func (v *ComFabricConfigurationPackageChangeHandler) vtable() *comFabricConfigurationPackageChangeHandlerVtbl {
 	return (*comFabricConfigurationPackageChangeHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -5246,7 +5246,7 @@ func (v *ComFabricConfigurationPackageChangeHandler) OnPackageAdded(
 	configPackage *ComFabricConfigurationPackage,
 ) (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().OnPackageAdded,
+		v.vtable().OnPackageAdded,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(source)),
@@ -5267,7 +5267,7 @@ func (v *ComFabricConfigurationPackageChangeHandler) OnPackageRemoved(
 	configPackage *ComFabricConfigurationPackage,
 ) (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().OnPackageRemoved,
+		v.vtable().OnPackageRemoved,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(source)),
@@ -5289,7 +5289,7 @@ func (v *ComFabricConfigurationPackageChangeHandler) OnPackageModified(
 	configPackage *ComFabricConfigurationPackage,
 ) (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().OnPackageModified,
+		v.vtable().OnPackageModified,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(source)),
@@ -5330,7 +5330,7 @@ type comFabricDataPackageChangeHandlerVtbl struct {
 	OnPackageModified uintptr
 }
 
-func (v *ComFabricDataPackageChangeHandler) VTable() *comFabricDataPackageChangeHandlerVtbl {
+func (v *ComFabricDataPackageChangeHandler) vtable() *comFabricDataPackageChangeHandlerVtbl {
 	return (*comFabricDataPackageChangeHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -5339,7 +5339,7 @@ func (v *ComFabricDataPackageChangeHandler) OnPackageAdded(
 	dataPackage *ComFabricDataPackage,
 ) (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().OnPackageAdded,
+		v.vtable().OnPackageAdded,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(source)),
@@ -5360,7 +5360,7 @@ func (v *ComFabricDataPackageChangeHandler) OnPackageRemoved(
 	dataPackage *ComFabricDataPackage,
 ) (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().OnPackageRemoved,
+		v.vtable().OnPackageRemoved,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(source)),
@@ -5382,7 +5382,7 @@ func (v *ComFabricDataPackageChangeHandler) OnPackageModified(
 	dataPackage *ComFabricDataPackage,
 ) (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().OnPackageModified,
+		v.vtable().OnPackageModified,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(source)),
@@ -5421,13 +5421,13 @@ type comFabricProcessExitHandlerVtbl struct {
 	FabricProcessExited uintptr
 }
 
-func (v *ComFabricProcessExitHandler) VTable() *comFabricProcessExitHandlerVtbl {
+func (v *ComFabricProcessExitHandler) vtable() *comFabricProcessExitHandlerVtbl {
 	return (*comFabricProcessExitHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricProcessExitHandler) FabricProcessExited() (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().FabricProcessExited,
+		v.vtable().FabricProcessExited,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -5464,13 +5464,13 @@ type comFabricTransactionBaseVtbl struct {
 	get_IsolationLevel uintptr
 }
 
-func (v *ComFabricTransactionBase) VTable() *comFabricTransactionBaseVtbl {
+func (v *ComFabricTransactionBase) vtable() *comFabricTransactionBaseVtbl {
 	return (*comFabricTransactionBaseVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricTransactionBase) GetId() (rt *windows.GUID, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Id,
+		v.vtable().get_Id,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -5488,7 +5488,7 @@ func (v *ComFabricTransactionBase) GetId() (rt *windows.GUID, err error) {
 }
 func (v *ComFabricTransactionBase) GetIsolationLevel() (rt FabricTransactionIsolationLevel, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_IsolationLevel,
+		v.vtable().get_IsolationLevel,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -5520,7 +5520,7 @@ type comFabricTransactionVtbl struct {
 	Rollback    uintptr
 }
 
-func (v *ComFabricTransaction) VTable() *comFabricTransactionVtbl {
+func (v *ComFabricTransaction) vtable() *comFabricTransactionVtbl {
 	return (*comFabricTransactionVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -5533,7 +5533,7 @@ func (v *ComFabricTransaction) beginCommit(
 		context = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginCommit,
+		v.vtable().BeginCommit,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(timeoutMilliseconds),
@@ -5556,7 +5556,7 @@ func (v *ComFabricTransaction) endCommit(
 		commitSequenceNumber = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndCommit,
+		v.vtable().EndCommit,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -5570,7 +5570,7 @@ func (v *ComFabricTransaction) endCommit(
 }
 func (v *ComFabricTransaction) Rollback() (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().Rollback,
+		v.vtable().Rollback,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -5674,7 +5674,7 @@ type comFabricKeyValueStoreReplicaVtbl struct {
 	EnumerateMetadataByKey   uintptr
 }
 
-func (v *ComFabricKeyValueStoreReplica) VTable() *comFabricKeyValueStoreReplicaVtbl {
+func (v *ComFabricKeyValueStoreReplica) vtable() *comFabricKeyValueStoreReplicaVtbl {
 	return (*comFabricKeyValueStoreReplicaVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -5684,7 +5684,7 @@ func (v *ComFabricKeyValueStoreReplica) GetCurrentEpoch() (currentEpoch FabricEp
 		currentEpoch = *p_0.toGoStruct()
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetCurrentEpoch,
+		v.vtable().GetCurrentEpoch,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -5702,7 +5702,7 @@ func (v *ComFabricKeyValueStoreReplica) UpdateReplicatorSettings(
 	var p_0 *innerFabricReplicatorSettings
 	p_0 = replicatorSettings.toInnerStruct()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().UpdateReplicatorSettings,
+		v.vtable().UpdateReplicatorSettings,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -5720,7 +5720,7 @@ func (v *ComFabricKeyValueStoreReplica) CreateTransaction() (transaction *ComFab
 		transaction = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().CreateTransaction,
+		v.vtable().CreateTransaction,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -5743,7 +5743,7 @@ func (v *ComFabricKeyValueStoreReplica) Add(
 	p_1 = s_30
 
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().Add,
+		v.vtable().Add,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(transaction)),
@@ -5768,7 +5768,7 @@ func (v *ComFabricKeyValueStoreReplica) Remove(
 	p_1 = s_31
 
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().Remove,
+		v.vtable().Remove,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(transaction)),
@@ -5795,7 +5795,7 @@ func (v *ComFabricKeyValueStoreReplica) Update(
 	p_1 = s_32
 
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().Update,
+		v.vtable().Update,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(transaction)),
@@ -5823,7 +5823,7 @@ func (v *ComFabricKeyValueStoreReplica) Get(
 		result = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().Get,
+		v.vtable().Get,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(transaction)),
@@ -5851,7 +5851,7 @@ func (v *ComFabricKeyValueStoreReplica) GetMetadata(
 		result = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().GetMetadata,
+		v.vtable().GetMetadata,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(transaction)),
@@ -5879,7 +5879,7 @@ func (v *ComFabricKeyValueStoreReplica) Contains(
 		result = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().Contains,
+		v.vtable().Contains,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(transaction)),
@@ -5902,7 +5902,7 @@ func (v *ComFabricKeyValueStoreReplica) Enumerate(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().Enumerate,
+		v.vtable().Enumerate,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(transaction)),
@@ -5927,7 +5927,7 @@ func (v *ComFabricKeyValueStoreReplica) EnumerateByKey(
 		result = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().EnumerateByKey,
+		v.vtable().EnumerateByKey,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(transaction)),
@@ -5950,7 +5950,7 @@ func (v *ComFabricKeyValueStoreReplica) EnumerateMetadata(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EnumerateMetadata,
+		v.vtable().EnumerateMetadata,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(transaction)),
@@ -5975,7 +5975,7 @@ func (v *ComFabricKeyValueStoreReplica) EnumerateMetadataByKey(
 		result = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().EnumerateMetadataByKey,
+		v.vtable().EnumerateMetadataByKey,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(transaction)),
@@ -6012,7 +6012,7 @@ type comFabricKeyValueStoreReplica2Vtbl struct {
 	CreateTransaction2 uintptr
 }
 
-func (v *ComFabricKeyValueStoreReplica2) VTable() *comFabricKeyValueStoreReplica2Vtbl {
+func (v *ComFabricKeyValueStoreReplica2) vtable() *comFabricKeyValueStoreReplica2Vtbl {
 	return (*comFabricKeyValueStoreReplica2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -6024,7 +6024,7 @@ func (v *ComFabricKeyValueStoreReplica2) Backup(
 	p_0 = s_38
 
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().Backup,
+		v.vtable().Backup,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -6044,7 +6044,7 @@ func (v *ComFabricKeyValueStoreReplica2) Restore(
 	p_0 = s_39
 
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().Restore,
+		v.vtable().Restore,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -6066,7 +6066,7 @@ func (v *ComFabricKeyValueStoreReplica2) CreateTransaction2(
 		transaction = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().CreateTransaction2,
+		v.vtable().CreateTransaction2,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -6099,7 +6099,7 @@ type comFabricKeyValueStoreReplica3Vtbl struct {
 	EndBackup   uintptr
 }
 
-func (v *ComFabricKeyValueStoreReplica3) VTable() *comFabricKeyValueStoreReplica3Vtbl {
+func (v *ComFabricKeyValueStoreReplica3) vtable() *comFabricKeyValueStoreReplica3Vtbl {
 	return (*comFabricKeyValueStoreReplica3Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -6118,7 +6118,7 @@ func (v *ComFabricKeyValueStoreReplica3) beginBackup(
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginBackup,
+		v.vtable().BeginBackup,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -6137,7 +6137,7 @@ func (v *ComFabricKeyValueStoreReplica3) endBackup(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndBackup,
+		v.vtable().EndBackup,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -6230,7 +6230,7 @@ type comFabricKeyValueStoreReplica4Vtbl struct {
 	EndRestore   uintptr
 }
 
-func (v *ComFabricKeyValueStoreReplica4) VTable() *comFabricKeyValueStoreReplica4Vtbl {
+func (v *ComFabricKeyValueStoreReplica4) vtable() *comFabricKeyValueStoreReplica4Vtbl {
 	return (*comFabricKeyValueStoreReplica4Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -6247,7 +6247,7 @@ func (v *ComFabricKeyValueStoreReplica4) beginRestore(
 		context = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginRestore,
+		v.vtable().BeginRestore,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -6266,7 +6266,7 @@ func (v *ComFabricKeyValueStoreReplica4) endRestore(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndRestore,
+		v.vtable().EndRestore,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -6360,7 +6360,7 @@ type comFabricKeyValueStoreReplica5Vtbl struct {
 	EnumerateMetadataByKey2 uintptr
 }
 
-func (v *ComFabricKeyValueStoreReplica5) VTable() *comFabricKeyValueStoreReplica5Vtbl {
+func (v *ComFabricKeyValueStoreReplica5) vtable() *comFabricKeyValueStoreReplica5Vtbl {
 	return (*comFabricKeyValueStoreReplica5Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -6379,7 +6379,7 @@ func (v *ComFabricKeyValueStoreReplica5) TryAdd(
 		added = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().TryAdd,
+		v.vtable().TryAdd,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(transaction)),
@@ -6408,7 +6408,7 @@ func (v *ComFabricKeyValueStoreReplica5) TryRemove(
 		exists = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().TryRemove,
+		v.vtable().TryRemove,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(transaction)),
@@ -6439,7 +6439,7 @@ func (v *ComFabricKeyValueStoreReplica5) TryUpdate(
 		exists = p_5
 	}()
 	hr, _, err1 := syscall.Syscall9(
-		v.VTable().TryUpdate,
+		v.vtable().TryUpdate,
 		7,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(transaction)),
@@ -6470,7 +6470,7 @@ func (v *ComFabricKeyValueStoreReplica5) TryGet(
 		result = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().TryGet,
+		v.vtable().TryGet,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(transaction)),
@@ -6498,7 +6498,7 @@ func (v *ComFabricKeyValueStoreReplica5) TryGetMetadata(
 		result = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().TryGetMetadata,
+		v.vtable().TryGetMetadata,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(transaction)),
@@ -6531,7 +6531,7 @@ func (v *ComFabricKeyValueStoreReplica5) EnumerateByKey2(
 		result = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().EnumerateByKey2,
+		v.vtable().EnumerateByKey2,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(transaction)),
@@ -6564,7 +6564,7 @@ func (v *ComFabricKeyValueStoreReplica5) EnumerateMetadataByKey2(
 		result = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().EnumerateMetadataByKey2,
+		v.vtable().EnumerateMetadataByKey2,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(transaction)),
@@ -6599,7 +6599,7 @@ type comFabricKeyValueStoreReplica6Vtbl struct {
 	BeginRestore2 uintptr
 }
 
-func (v *ComFabricKeyValueStoreReplica6) VTable() *comFabricKeyValueStoreReplica6Vtbl {
+func (v *ComFabricKeyValueStoreReplica6) vtable() *comFabricKeyValueStoreReplica6Vtbl {
 	return (*comFabricKeyValueStoreReplica6Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -6619,7 +6619,7 @@ func (v *ComFabricKeyValueStoreReplica6) beginRestore2(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginRestore2,
+		v.vtable().BeginRestore2,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -6655,7 +6655,7 @@ type comFabricKeyValueStoreEnumeratorVtbl struct {
 	EnumerateMetadataByKey uintptr
 }
 
-func (v *ComFabricKeyValueStoreEnumerator) VTable() *comFabricKeyValueStoreEnumeratorVtbl {
+func (v *ComFabricKeyValueStoreEnumerator) vtable() *comFabricKeyValueStoreEnumeratorVtbl {
 	return (*comFabricKeyValueStoreEnumeratorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -6671,7 +6671,7 @@ func (v *ComFabricKeyValueStoreEnumerator) EnumerateByKey(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EnumerateByKey,
+		v.vtable().EnumerateByKey,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -6695,7 +6695,7 @@ func (v *ComFabricKeyValueStoreEnumerator) EnumerateMetadataByKey(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EnumerateMetadataByKey,
+		v.vtable().EnumerateMetadataByKey,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -6728,7 +6728,7 @@ type comFabricKeyValueStoreEnumerator2Vtbl struct {
 	EnumerateMetadataByKey2 uintptr
 }
 
-func (v *ComFabricKeyValueStoreEnumerator2) VTable() *comFabricKeyValueStoreEnumerator2Vtbl {
+func (v *ComFabricKeyValueStoreEnumerator2) vtable() *comFabricKeyValueStoreEnumerator2Vtbl {
 	return (*comFabricKeyValueStoreEnumerator2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -6749,7 +6749,7 @@ func (v *ComFabricKeyValueStoreEnumerator2) EnumerateByKey2(
 		result = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().EnumerateByKey2,
+		v.vtable().EnumerateByKey2,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -6781,7 +6781,7 @@ func (v *ComFabricKeyValueStoreEnumerator2) EnumerateMetadataByKey2(
 		result = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().EnumerateMetadataByKey2,
+		v.vtable().EnumerateMetadataByKey2,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -6817,13 +6817,13 @@ type comFabricKeyValueStoreItemEnumeratorVtbl struct {
 	get_Current uintptr
 }
 
-func (v *ComFabricKeyValueStoreItemEnumerator) VTable() *comFabricKeyValueStoreItemEnumeratorVtbl {
+func (v *ComFabricKeyValueStoreItemEnumerator) vtable() *comFabricKeyValueStoreItemEnumeratorVtbl {
 	return (*comFabricKeyValueStoreItemEnumeratorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricKeyValueStoreItemEnumerator) MoveNext() (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().MoveNext,
+		v.vtable().MoveNext,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -6837,7 +6837,7 @@ func (v *ComFabricKeyValueStoreItemEnumerator) MoveNext() (err error) {
 }
 func (v *ComFabricKeyValueStoreItemEnumerator) GetCurrent() (rt *ComFabricKeyValueStoreItemResult, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Current,
+		v.vtable().get_Current,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -6874,13 +6874,13 @@ type comFabricKeyValueStoreItemMetadataEnumeratorVtbl struct {
 	get_Current uintptr
 }
 
-func (v *ComFabricKeyValueStoreItemMetadataEnumerator) VTable() *comFabricKeyValueStoreItemMetadataEnumeratorVtbl {
+func (v *ComFabricKeyValueStoreItemMetadataEnumerator) vtable() *comFabricKeyValueStoreItemMetadataEnumeratorVtbl {
 	return (*comFabricKeyValueStoreItemMetadataEnumeratorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricKeyValueStoreItemMetadataEnumerator) MoveNext() (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().MoveNext,
+		v.vtable().MoveNext,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -6894,7 +6894,7 @@ func (v *ComFabricKeyValueStoreItemMetadataEnumerator) MoveNext() (err error) {
 }
 func (v *ComFabricKeyValueStoreItemMetadataEnumerator) GetCurrent() (rt *ComFabricKeyValueStoreItemMetadataResult, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Current,
+		v.vtable().get_Current,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -6932,13 +6932,13 @@ type comFabricKeyValueStoreNotificationEnumeratorVtbl struct {
 	Reset       uintptr
 }
 
-func (v *ComFabricKeyValueStoreNotificationEnumerator) VTable() *comFabricKeyValueStoreNotificationEnumeratorVtbl {
+func (v *ComFabricKeyValueStoreNotificationEnumerator) vtable() *comFabricKeyValueStoreNotificationEnumeratorVtbl {
 	return (*comFabricKeyValueStoreNotificationEnumeratorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricKeyValueStoreNotificationEnumerator) MoveNext() (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().MoveNext,
+		v.vtable().MoveNext,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -6952,7 +6952,7 @@ func (v *ComFabricKeyValueStoreNotificationEnumerator) MoveNext() (err error) {
 }
 func (v *ComFabricKeyValueStoreNotificationEnumerator) GetCurrent() (rt *ComFabricKeyValueStoreNotification, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Current,
+		v.vtable().get_Current,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -6970,7 +6970,7 @@ func (v *ComFabricKeyValueStoreNotificationEnumerator) GetCurrent() (rt *ComFabr
 }
 func (v *ComFabricKeyValueStoreNotificationEnumerator) Reset() (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().Reset,
+		v.vtable().Reset,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -7006,7 +7006,7 @@ type comFabricKeyValueStoreItemEnumerator2Vtbl struct {
 	TryMoveNext uintptr
 }
 
-func (v *ComFabricKeyValueStoreItemEnumerator2) VTable() *comFabricKeyValueStoreItemEnumerator2Vtbl {
+func (v *ComFabricKeyValueStoreItemEnumerator2) vtable() *comFabricKeyValueStoreItemEnumerator2Vtbl {
 	return (*comFabricKeyValueStoreItemEnumerator2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -7016,7 +7016,7 @@ func (v *ComFabricKeyValueStoreItemEnumerator2) TryMoveNext() (success bool, err
 		success = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().TryMoveNext,
+		v.vtable().TryMoveNext,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -7048,7 +7048,7 @@ type comFabricKeyValueStoreItemMetadataEnumerator2Vtbl struct {
 	TryMoveNext uintptr
 }
 
-func (v *ComFabricKeyValueStoreItemMetadataEnumerator2) VTable() *comFabricKeyValueStoreItemMetadataEnumerator2Vtbl {
+func (v *ComFabricKeyValueStoreItemMetadataEnumerator2) vtable() *comFabricKeyValueStoreItemMetadataEnumerator2Vtbl {
 	return (*comFabricKeyValueStoreItemMetadataEnumerator2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -7058,7 +7058,7 @@ func (v *ComFabricKeyValueStoreItemMetadataEnumerator2) TryMoveNext() (success b
 		success = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().TryMoveNext,
+		v.vtable().TryMoveNext,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -7090,7 +7090,7 @@ type comFabricKeyValueStoreNotificationEnumerator2Vtbl struct {
 	TryMoveNext uintptr
 }
 
-func (v *ComFabricKeyValueStoreNotificationEnumerator2) VTable() *comFabricKeyValueStoreNotificationEnumerator2Vtbl {
+func (v *ComFabricKeyValueStoreNotificationEnumerator2) vtable() *comFabricKeyValueStoreNotificationEnumerator2Vtbl {
 	return (*comFabricKeyValueStoreNotificationEnumerator2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -7100,7 +7100,7 @@ func (v *ComFabricKeyValueStoreNotificationEnumerator2) TryMoveNext() (success b
 		success = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().TryMoveNext,
+		v.vtable().TryMoveNext,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -7132,13 +7132,13 @@ type comFabricKeyValueStoreItemResultVtbl struct {
 	get_Item uintptr
 }
 
-func (v *ComFabricKeyValueStoreItemResult) VTable() *comFabricKeyValueStoreItemResultVtbl {
+func (v *ComFabricKeyValueStoreItemResult) vtable() *comFabricKeyValueStoreItemResultVtbl {
 	return (*comFabricKeyValueStoreItemResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricKeyValueStoreItemResult) GetItem() (rt *FabricKeyValueStoreItem, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Item,
+		v.vtable().get_Item,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -7174,13 +7174,13 @@ type comFabricKeyValueStoreItemMetadataResultVtbl struct {
 	get_Metadata uintptr
 }
 
-func (v *ComFabricKeyValueStoreItemMetadataResult) VTable() *comFabricKeyValueStoreItemMetadataResultVtbl {
+func (v *ComFabricKeyValueStoreItemMetadataResult) vtable() *comFabricKeyValueStoreItemMetadataResultVtbl {
 	return (*comFabricKeyValueStoreItemMetadataResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricKeyValueStoreItemMetadataResult) GetMetadata() (rt *FabricKeyValueStoreItemMetadata, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Metadata,
+		v.vtable().get_Metadata,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -7216,13 +7216,13 @@ type comFabricKeyValueStoreNotificationVtbl struct {
 	IsDelete uintptr
 }
 
-func (v *ComFabricKeyValueStoreNotification) VTable() *comFabricKeyValueStoreNotificationVtbl {
+func (v *ComFabricKeyValueStoreNotification) vtable() *comFabricKeyValueStoreNotificationVtbl {
 	return (*comFabricKeyValueStoreNotificationVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricKeyValueStoreNotification) IsDelete() (rt bool, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().IsDelete,
+		v.vtable().IsDelete,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -7252,13 +7252,13 @@ type comFabricStoreEventHandlerVtbl struct {
 	OnDataLoss uintptr
 }
 
-func (v *ComFabricStoreEventHandler) VTable() *comFabricStoreEventHandlerVtbl {
+func (v *ComFabricStoreEventHandler) vtable() *comFabricStoreEventHandlerVtbl {
 	return (*comFabricStoreEventHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricStoreEventHandler) OnDataLoss() (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().OnDataLoss,
+		v.vtable().OnDataLoss,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -7295,7 +7295,7 @@ type comFabricStoreEventHandler2Vtbl struct {
 	EndOnDataLoss   uintptr
 }
 
-func (v *ComFabricStoreEventHandler2) VTable() *comFabricStoreEventHandler2Vtbl {
+func (v *ComFabricStoreEventHandler2) vtable() *comFabricStoreEventHandler2Vtbl {
 	return (*comFabricStoreEventHandler2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -7307,7 +7307,7 @@ func (v *ComFabricStoreEventHandler2) beginOnDataLoss(
 		context = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().BeginOnDataLoss,
+		v.vtable().BeginOnDataLoss,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(callback)),
@@ -7327,7 +7327,7 @@ func (v *ComFabricStoreEventHandler2) endOnDataLoss(
 		isStateChanged = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndOnDataLoss,
+		v.vtable().EndOnDataLoss,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -7415,7 +7415,7 @@ type comFabricStorePostBackupHandlerVtbl struct {
 	EndPostBackup   uintptr
 }
 
-func (v *ComFabricStorePostBackupHandler) VTable() *comFabricStorePostBackupHandlerVtbl {
+func (v *ComFabricStorePostBackupHandler) vtable() *comFabricStorePostBackupHandlerVtbl {
 	return (*comFabricStorePostBackupHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -7430,7 +7430,7 @@ func (v *ComFabricStorePostBackupHandler) beginPostBackup(
 		context = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginPostBackup,
+		v.vtable().BeginPostBackup,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -7453,7 +7453,7 @@ func (v *ComFabricStorePostBackupHandler) endPostBackup(
 		status = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndPostBackup,
+		v.vtable().EndPostBackup,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -7543,7 +7543,7 @@ type comFabricSecondaryEventHandlerVtbl struct {
 	OnReplicationOperation uintptr
 }
 
-func (v *ComFabricSecondaryEventHandler) VTable() *comFabricSecondaryEventHandlerVtbl {
+func (v *ComFabricSecondaryEventHandler) vtable() *comFabricSecondaryEventHandlerVtbl {
 	return (*comFabricSecondaryEventHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -7551,7 +7551,7 @@ func (v *ComFabricSecondaryEventHandler) OnCopyComplete(
 	enumerator *ComFabricKeyValueStoreEnumerator,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().OnCopyComplete,
+		v.vtable().OnCopyComplete,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(enumerator)),
@@ -7567,7 +7567,7 @@ func (v *ComFabricSecondaryEventHandler) OnReplicationOperation(
 	enumerator *ComFabricKeyValueStoreNotificationEnumerator,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().OnReplicationOperation,
+		v.vtable().OnReplicationOperation,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(enumerator)),
@@ -7599,13 +7599,13 @@ type comFabricNodeContextResultVtbl struct {
 	get_NodeContext uintptr
 }
 
-func (v *ComFabricNodeContextResult) VTable() *comFabricNodeContextResultVtbl {
+func (v *ComFabricNodeContextResult) vtable() *comFabricNodeContextResultVtbl {
 	return (*comFabricNodeContextResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricNodeContextResult) GetNodeContext() (rt *FabricNodeContext, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_NodeContext,
+		v.vtable().get_NodeContext,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -7641,7 +7641,7 @@ type comFabricNodeContextResult2Vtbl struct {
 	GetDirectory uintptr
 }
 
-func (v *ComFabricNodeContextResult2) VTable() *comFabricNodeContextResult2Vtbl {
+func (v *ComFabricNodeContextResult2) vtable() *comFabricNodeContextResult2Vtbl {
 	return (*comFabricNodeContextResult2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -7657,7 +7657,7 @@ func (v *ComFabricNodeContextResult2) GetDirectory(
 		directoryPath = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetDirectory,
+		v.vtable().GetDirectory,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -7689,13 +7689,13 @@ type comFabricReplicatorSettingsResultVtbl struct {
 	get_ReplicatorSettings uintptr
 }
 
-func (v *ComFabricReplicatorSettingsResult) VTable() *comFabricReplicatorSettingsResultVtbl {
+func (v *ComFabricReplicatorSettingsResult) vtable() *comFabricReplicatorSettingsResultVtbl {
 	return (*comFabricReplicatorSettingsResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricReplicatorSettingsResult) GetReplicatorSettings() (rt *FabricReplicatorSettings, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ReplicatorSettings,
+		v.vtable().get_ReplicatorSettings,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -7731,13 +7731,13 @@ type comFabricEseLocalStoreSettingsResultVtbl struct {
 	get_Settings uintptr
 }
 
-func (v *ComFabricEseLocalStoreSettingsResult) VTable() *comFabricEseLocalStoreSettingsResultVtbl {
+func (v *ComFabricEseLocalStoreSettingsResult) vtable() *comFabricEseLocalStoreSettingsResultVtbl {
 	return (*comFabricEseLocalStoreSettingsResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricEseLocalStoreSettingsResult) GetSettings() (rt *FabricEseLocalStoreSettings, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Settings,
+		v.vtable().get_Settings,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -7773,13 +7773,13 @@ type comFabricSecurityCredentialsResultVtbl struct {
 	get_SecurityCredentials uintptr
 }
 
-func (v *ComFabricSecurityCredentialsResult) VTable() *comFabricSecurityCredentialsResultVtbl {
+func (v *ComFabricSecurityCredentialsResult) vtable() *comFabricSecurityCredentialsResultVtbl {
 	return (*comFabricSecurityCredentialsResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricSecurityCredentialsResult) GetSecurityCredentials() (rt *FabricSecurityCredentials, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_SecurityCredentials,
+		v.vtable().get_SecurityCredentials,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -7821,7 +7821,7 @@ type comFabricCodePackageActivatorVtbl struct {
 	UnregisterCodePackageEventHandler uintptr
 }
 
-func (v *ComFabricCodePackageActivator) VTable() *comFabricCodePackageActivatorVtbl {
+func (v *ComFabricCodePackageActivator) vtable() *comFabricCodePackageActivatorVtbl {
 	return (*comFabricCodePackageActivatorVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -7883,7 +7883,7 @@ func (v *ComFabricCodePackageActivator) beginActivateCodePackage(
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginActivateCodePackage,
+		v.vtable().BeginActivateCodePackage,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -7902,7 +7902,7 @@ func (v *ComFabricCodePackageActivator) endActivateCodePackage(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndActivateCodePackage,
+		v.vtable().EndActivateCodePackage,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -7946,7 +7946,7 @@ func (v *ComFabricCodePackageActivator) beginDeactivateCodePackage(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginDeactivateCodePackage,
+		v.vtable().BeginDeactivateCodePackage,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -7965,7 +7965,7 @@ func (v *ComFabricCodePackageActivator) endDeactivateCodePackage(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndDeactivateCodePackage,
+		v.vtable().EndDeactivateCodePackage,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -8003,7 +8003,7 @@ func (v *ComFabricCodePackageActivator) AbortCodePackage(
 		p_0 = lst
 	}
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().AbortCodePackage,
+		v.vtable().AbortCodePackage,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -8023,7 +8023,7 @@ func (v *ComFabricCodePackageActivator) RegisterCodePackageEventHandler(
 		callbackHandle = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().RegisterCodePackageEventHandler,
+		v.vtable().RegisterCodePackageEventHandler,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(eventHandler)),
@@ -8039,7 +8039,7 @@ func (v *ComFabricCodePackageActivator) UnregisterCodePackageEventHandler(
 	callbackHandle uint64,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().UnregisterCodePackageEventHandler,
+		v.vtable().UnregisterCodePackageEventHandler,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(callbackHandle),
@@ -8187,7 +8187,7 @@ type comFabricCodePackageEventHandlerVtbl struct {
 	OnCodePackageEvent uintptr
 }
 
-func (v *ComFabricCodePackageEventHandler) VTable() *comFabricCodePackageEventHandlerVtbl {
+func (v *ComFabricCodePackageEventHandler) vtable() *comFabricCodePackageEventHandlerVtbl {
 	return (*comFabricCodePackageEventHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -8198,7 +8198,7 @@ func (v *ComFabricCodePackageEventHandler) OnCodePackageEvent(
 	var p_1 *innerFabricCodePackageEventDescription
 	p_1 = eventDesc.toInnerStruct()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().OnCodePackageEvent,
+		v.vtable().OnCodePackageEvent,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(source)),

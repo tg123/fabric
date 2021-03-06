@@ -31,7 +31,7 @@ type comFabricClientSettingsVtbl struct {
 	SetKeepAlive           uintptr
 }
 
-func (v *ComFabricClientSettings) VTable() *comFabricClientSettingsVtbl {
+func (v *ComFabricClientSettings) vtable() *comFabricClientSettingsVtbl {
 	return (*comFabricClientSettingsVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -41,7 +41,7 @@ func (v *ComFabricClientSettings) SetSecurityCredentials(
 	var p_0 *innerFabricSecurityCredentials
 	p_0 = securityCredentials.toInnerStruct()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().SetSecurityCredentials,
+		v.vtable().SetSecurityCredentials,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -57,7 +57,7 @@ func (v *ComFabricClientSettings) SetKeepAlive(
 	keepAliveIntervalInSeconds uint32,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().SetKeepAlive,
+		v.vtable().SetKeepAlive,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(keepAliveIntervalInSeconds),
@@ -90,7 +90,7 @@ type comFabricClientSettings2Vtbl struct {
 	SetSettings uintptr
 }
 
-func (v *ComFabricClientSettings2) VTable() *comFabricClientSettings2Vtbl {
+func (v *ComFabricClientSettings2) vtable() *comFabricClientSettings2Vtbl {
 	return (*comFabricClientSettings2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -100,7 +100,7 @@ func (v *ComFabricClientSettings2) GetSettings() (result *ComFabricClientSetting
 		result = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetSettings,
+		v.vtable().GetSettings,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -118,7 +118,7 @@ func (v *ComFabricClientSettings2) SetSettings(
 	var p_0 *innerFabricClientSettings
 	p_0 = fabricClientSettings.toInnerStruct()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().SetSettings,
+		v.vtable().SetSettings,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -177,7 +177,7 @@ type comFabricPropertyManagementClientVtbl struct {
 	EndEnumerateProperties   uintptr
 }
 
-func (v *ComFabricPropertyManagementClient) VTable() *comFabricPropertyManagementClientVtbl {
+func (v *ComFabricPropertyManagementClient) vtable() *comFabricPropertyManagementClientVtbl {
 	return (*comFabricPropertyManagementClientVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -195,7 +195,7 @@ func (v *ComFabricPropertyManagementClient) beginCreateName(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginCreateName,
+		v.vtable().BeginCreateName,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -214,7 +214,7 @@ func (v *ComFabricPropertyManagementClient) endCreateName(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndCreateName,
+		v.vtable().EndCreateName,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -240,7 +240,7 @@ func (v *ComFabricPropertyManagementClient) beginDeleteName(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginDeleteName,
+		v.vtable().BeginDeleteName,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -259,7 +259,7 @@ func (v *ComFabricPropertyManagementClient) endDeleteName(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndDeleteName,
+		v.vtable().EndDeleteName,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -285,7 +285,7 @@ func (v *ComFabricPropertyManagementClient) beginNameExists(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginNameExists,
+		v.vtable().BeginNameExists,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -308,7 +308,7 @@ func (v *ComFabricPropertyManagementClient) endNameExists(
 		value = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndNameExists,
+		v.vtable().EndNameExists,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -340,7 +340,7 @@ func (v *ComFabricPropertyManagementClient) beginEnumerateSubNames(
 		context = p_5
 	}()
 	hr, _, err1 := syscall.Syscall9(
-		v.VTable().BeginEnumerateSubNames,
+		v.vtable().BeginEnumerateSubNames,
 		7,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -379,7 +379,7 @@ func (v *ComFabricPropertyManagementClient) beginPutPropertyBinary(
 		context = p_6
 	}()
 	hr, _, err1 := syscall.Syscall9(
-		v.VTable().BeginPutPropertyBinary,
+		v.vtable().BeginPutPropertyBinary,
 		8,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -401,7 +401,7 @@ func (v *ComFabricPropertyManagementClient) endPutPropertyBinary(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndPutPropertyBinary,
+		v.vtable().EndPutPropertyBinary,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -433,7 +433,7 @@ func (v *ComFabricPropertyManagementClient) beginPutPropertyInt64(
 		context = p_5
 	}()
 	hr, _, err1 := syscall.Syscall9(
-		v.VTable().BeginPutPropertyInt64,
+		v.vtable().BeginPutPropertyInt64,
 		7,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -455,7 +455,7 @@ func (v *ComFabricPropertyManagementClient) endPutPropertyInt64(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndPutPropertyInt64,
+		v.vtable().EndPutPropertyInt64,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -487,7 +487,7 @@ func (v *ComFabricPropertyManagementClient) beginPutPropertyDouble(
 		context = p_5
 	}()
 	hr, _, err1 := syscall.Syscall9(
-		v.VTable().BeginPutPropertyDouble,
+		v.vtable().BeginPutPropertyDouble,
 		7,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -509,7 +509,7 @@ func (v *ComFabricPropertyManagementClient) endPutPropertyDouble(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndPutPropertyDouble,
+		v.vtable().EndPutPropertyDouble,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -545,7 +545,7 @@ func (v *ComFabricPropertyManagementClient) beginPutPropertyWString(
 		context = p_5
 	}()
 	hr, _, err1 := syscall.Syscall9(
-		v.VTable().BeginPutPropertyWString,
+		v.vtable().BeginPutPropertyWString,
 		7,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -567,7 +567,7 @@ func (v *ComFabricPropertyManagementClient) endPutPropertyWString(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndPutPropertyWString,
+		v.vtable().EndPutPropertyWString,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -599,7 +599,7 @@ func (v *ComFabricPropertyManagementClient) beginPutPropertyGuid(
 		context = p_5
 	}()
 	hr, _, err1 := syscall.Syscall9(
-		v.VTable().BeginPutPropertyGuid,
+		v.vtable().BeginPutPropertyGuid,
 		7,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -621,7 +621,7 @@ func (v *ComFabricPropertyManagementClient) endPutPropertyGuid(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndPutPropertyGuid,
+		v.vtable().EndPutPropertyGuid,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -652,7 +652,7 @@ func (v *ComFabricPropertyManagementClient) beginDeleteProperty(
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginDeleteProperty,
+		v.vtable().BeginDeleteProperty,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -671,7 +671,7 @@ func (v *ComFabricPropertyManagementClient) endDeleteProperty(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndDeleteProperty,
+		v.vtable().EndDeleteProperty,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -702,7 +702,7 @@ func (v *ComFabricPropertyManagementClient) beginGetPropertyMetadata(
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetPropertyMetadata,
+		v.vtable().BeginGetPropertyMetadata,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -725,7 +725,7 @@ func (v *ComFabricPropertyManagementClient) endGetPropertyMetadata(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetPropertyMetadata,
+		v.vtable().EndGetPropertyMetadata,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -756,7 +756,7 @@ func (v *ComFabricPropertyManagementClient) beginGetProperty(
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetProperty,
+		v.vtable().BeginGetProperty,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -789,7 +789,7 @@ func (v *ComFabricPropertyManagementClient) beginSubmitPropertyBatch(
 		context = p_5
 	}()
 	hr, _, err1 := syscall.Syscall9(
-		v.VTable().BeginSubmitPropertyBatch,
+		v.vtable().BeginSubmitPropertyBatch,
 		7,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -827,7 +827,7 @@ func (v *ComFabricPropertyManagementClient) beginEnumerateProperties(
 		context = p_5
 	}()
 	hr, _, err1 := syscall.Syscall9(
-		v.VTable().BeginEnumerateProperties,
+		v.vtable().BeginEnumerateProperties,
 		7,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -1464,7 +1464,7 @@ type comFabricPropertyManagementClient2Vtbl struct {
 	EndPutCustomPropertyOperation   uintptr
 }
 
-func (v *ComFabricPropertyManagementClient2) VTable() *comFabricPropertyManagementClient2Vtbl {
+func (v *ComFabricPropertyManagementClient2) vtable() *comFabricPropertyManagementClient2Vtbl {
 	return (*comFabricPropertyManagementClient2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -1485,7 +1485,7 @@ func (v *ComFabricPropertyManagementClient2) beginPutCustomPropertyOperation(
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginPutCustomPropertyOperation,
+		v.vtable().BeginPutCustomPropertyOperation,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -1504,7 +1504,7 @@ func (v *ComFabricPropertyManagementClient2) endPutCustomPropertyOperation(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndPutCustomPropertyOperation,
+		v.vtable().EndPutCustomPropertyOperation,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -1606,7 +1606,7 @@ type comFabricServiceManagementClientVtbl struct {
 	EndResolveServicePartition                        uintptr
 }
 
-func (v *ComFabricServiceManagementClient) VTable() *comFabricServiceManagementClientVtbl {
+func (v *ComFabricServiceManagementClient) vtable() *comFabricServiceManagementClientVtbl {
 	return (*comFabricServiceManagementClientVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -1622,7 +1622,7 @@ func (v *ComFabricServiceManagementClient) beginCreateService(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginCreateService,
+		v.vtable().BeginCreateService,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -1641,7 +1641,7 @@ func (v *ComFabricServiceManagementClient) endCreateService(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndCreateService,
+		v.vtable().EndCreateService,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -1679,7 +1679,7 @@ func (v *ComFabricServiceManagementClient) beginCreateServiceFromTemplate(
 		context = p_7
 	}()
 	hr, _, err1 := syscall.Syscall9(
-		v.VTable().BeginCreateServiceFromTemplate,
+		v.vtable().BeginCreateServiceFromTemplate,
 		9,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -1701,7 +1701,7 @@ func (v *ComFabricServiceManagementClient) endCreateServiceFromTemplate(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndCreateServiceFromTemplate,
+		v.vtable().EndCreateServiceFromTemplate,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -1727,7 +1727,7 @@ func (v *ComFabricServiceManagementClient) beginDeleteService(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginDeleteService,
+		v.vtable().BeginDeleteService,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -1746,7 +1746,7 @@ func (v *ComFabricServiceManagementClient) endDeleteService(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndDeleteService,
+		v.vtable().EndDeleteService,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -1772,7 +1772,7 @@ func (v *ComFabricServiceManagementClient) beginGetServiceDescription(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetServiceDescription,
+		v.vtable().BeginGetServiceDescription,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -1795,7 +1795,7 @@ func (v *ComFabricServiceManagementClient) endGetServiceDescription(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetServiceDescription,
+		v.vtable().EndGetServiceDescription,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -1822,7 +1822,7 @@ func (v *ComFabricServiceManagementClient) RegisterServicePartitionResolutionCha
 		callbackHandle = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().RegisterServicePartitionResolutionChangeHandler,
+		v.vtable().RegisterServicePartitionResolutionChangeHandler,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -1841,7 +1841,7 @@ func (v *ComFabricServiceManagementClient) UnregisterServicePartitionResolutionC
 	callbackHandle int64,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().UnregisterServicePartitionResolutionChangeHandler,
+		v.vtable().UnregisterServicePartitionResolutionChangeHandler,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(callbackHandle),
@@ -1870,7 +1870,7 @@ func (v *ComFabricServiceManagementClient) beginResolveServicePartition(
 		context = p_6
 	}()
 	hr, _, err1 := syscall.Syscall9(
-		v.VTable().BeginResolveServicePartition,
+		v.vtable().BeginResolveServicePartition,
 		8,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -2148,7 +2148,7 @@ type comFabricServiceManagementClient2Vtbl struct {
 	EndUpdateService        uintptr
 }
 
-func (v *ComFabricServiceManagementClient2) VTable() *comFabricServiceManagementClient2Vtbl {
+func (v *ComFabricServiceManagementClient2) vtable() *comFabricServiceManagementClient2Vtbl {
 	return (*comFabricServiceManagementClient2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -2176,7 +2176,7 @@ func (v *ComFabricServiceManagementClient2) beginGetServiceManifest(
 		context = p_5
 	}()
 	hr, _, err1 := syscall.Syscall9(
-		v.VTable().BeginGetServiceManifest,
+		v.vtable().BeginGetServiceManifest,
 		7,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -2202,7 +2202,7 @@ func (v *ComFabricServiceManagementClient2) endGetServiceManifest(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetServiceManifest,
+		v.vtable().EndGetServiceManifest,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -2231,7 +2231,7 @@ func (v *ComFabricServiceManagementClient2) beginUpdateService(
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginUpdateService,
+		v.vtable().BeginUpdateService,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -2250,7 +2250,7 @@ func (v *ComFabricServiceManagementClient2) endUpdateService(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndUpdateService,
+		v.vtable().EndUpdateService,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -2406,7 +2406,7 @@ type comFabricServiceManagementClient3Vtbl struct {
 	EndRestartReplica   uintptr
 }
 
-func (v *ComFabricServiceManagementClient3) VTable() *comFabricServiceManagementClient3Vtbl {
+func (v *ComFabricServiceManagementClient3) vtable() *comFabricServiceManagementClient3Vtbl {
 	return (*comFabricServiceManagementClient3Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -2422,7 +2422,7 @@ func (v *ComFabricServiceManagementClient3) beginRemoveReplica(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginRemoveReplica,
+		v.vtable().BeginRemoveReplica,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -2441,7 +2441,7 @@ func (v *ComFabricServiceManagementClient3) endRemoveReplica(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndRemoveReplica,
+		v.vtable().EndRemoveReplica,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -2465,7 +2465,7 @@ func (v *ComFabricServiceManagementClient3) beginRestartReplica(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginRestartReplica,
+		v.vtable().BeginRestartReplica,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -2484,7 +2484,7 @@ func (v *ComFabricServiceManagementClient3) endRestartReplica(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndRestartReplica,
+		v.vtable().EndRestartReplica,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -2633,7 +2633,7 @@ type comFabricServiceManagementClient4Vtbl struct {
 	EndUnregisterServiceNotificationFilter   uintptr
 }
 
-func (v *ComFabricServiceManagementClient4) VTable() *comFabricServiceManagementClient4Vtbl {
+func (v *ComFabricServiceManagementClient4) vtable() *comFabricServiceManagementClient4Vtbl {
 	return (*comFabricServiceManagementClient4Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -2649,7 +2649,7 @@ func (v *ComFabricServiceManagementClient4) beginRegisterServiceNotificationFilt
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginRegisterServiceNotificationFilter,
+		v.vtable().BeginRegisterServiceNotificationFilter,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -2672,7 +2672,7 @@ func (v *ComFabricServiceManagementClient4) endRegisterServiceNotificationFilter
 		filterId = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndRegisterServiceNotificationFilter,
+		v.vtable().EndRegisterServiceNotificationFilter,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -2694,7 +2694,7 @@ func (v *ComFabricServiceManagementClient4) beginUnregisterServiceNotificationFi
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginUnregisterServiceNotificationFilter,
+		v.vtable().BeginUnregisterServiceNotificationFilter,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(filterId),
@@ -2713,7 +2713,7 @@ func (v *ComFabricServiceManagementClient4) endUnregisterServiceNotificationFilt
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndUnregisterServiceNotificationFilter,
+		v.vtable().EndUnregisterServiceNotificationFilter,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -2861,7 +2861,7 @@ type comFabricServiceManagementClient5Vtbl struct {
 	EndDeleteService2   uintptr
 }
 
-func (v *ComFabricServiceManagementClient5) VTable() *comFabricServiceManagementClient5Vtbl {
+func (v *ComFabricServiceManagementClient5) vtable() *comFabricServiceManagementClient5Vtbl {
 	return (*comFabricServiceManagementClient5Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -2877,7 +2877,7 @@ func (v *ComFabricServiceManagementClient5) beginDeleteService2(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginDeleteService2,
+		v.vtable().BeginDeleteService2,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -2896,7 +2896,7 @@ func (v *ComFabricServiceManagementClient5) endDeleteService2(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndDeleteService2,
+		v.vtable().EndDeleteService2,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -2986,7 +2986,7 @@ type comFabricServiceManagementClient6Vtbl struct {
 	EndCreateServiceFromTemplate2   uintptr
 }
 
-func (v *ComFabricServiceManagementClient6) VTable() *comFabricServiceManagementClient6Vtbl {
+func (v *ComFabricServiceManagementClient6) vtable() *comFabricServiceManagementClient6Vtbl {
 	return (*comFabricServiceManagementClient6Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -3002,7 +3002,7 @@ func (v *ComFabricServiceManagementClient6) beginCreateServiceFromTemplate2(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginCreateServiceFromTemplate2,
+		v.vtable().BeginCreateServiceFromTemplate2,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -3021,7 +3021,7 @@ func (v *ComFabricServiceManagementClient6) endCreateServiceFromTemplate2(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndCreateServiceFromTemplate2,
+		v.vtable().EndCreateServiceFromTemplate2,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -3115,7 +3115,7 @@ type comFabricServiceGroupManagementClientVtbl struct {
 	EndGetServiceGroupDescription   uintptr
 }
 
-func (v *ComFabricServiceGroupManagementClient) VTable() *comFabricServiceGroupManagementClientVtbl {
+func (v *ComFabricServiceGroupManagementClient) vtable() *comFabricServiceGroupManagementClientVtbl {
 	return (*comFabricServiceGroupManagementClientVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -3131,7 +3131,7 @@ func (v *ComFabricServiceGroupManagementClient) beginCreateServiceGroup(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginCreateServiceGroup,
+		v.vtable().BeginCreateServiceGroup,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -3150,7 +3150,7 @@ func (v *ComFabricServiceGroupManagementClient) endCreateServiceGroup(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndCreateServiceGroup,
+		v.vtable().EndCreateServiceGroup,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -3176,7 +3176,7 @@ func (v *ComFabricServiceGroupManagementClient) beginDeleteServiceGroup(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginDeleteServiceGroup,
+		v.vtable().BeginDeleteServiceGroup,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -3195,7 +3195,7 @@ func (v *ComFabricServiceGroupManagementClient) endDeleteServiceGroup(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndDeleteServiceGroup,
+		v.vtable().EndDeleteServiceGroup,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -3221,7 +3221,7 @@ func (v *ComFabricServiceGroupManagementClient) beginGetServiceGroupDescription(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetServiceGroupDescription,
+		v.vtable().BeginGetServiceGroupDescription,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -3244,7 +3244,7 @@ func (v *ComFabricServiceGroupManagementClient) endGetServiceGroupDescription(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetServiceGroupDescription,
+		v.vtable().EndGetServiceGroupDescription,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -3449,7 +3449,7 @@ type comFabricServiceGroupManagementClient2Vtbl struct {
 	EndUpdateServiceGroup   uintptr
 }
 
-func (v *ComFabricServiceGroupManagementClient2) VTable() *comFabricServiceGroupManagementClient2Vtbl {
+func (v *ComFabricServiceGroupManagementClient2) vtable() *comFabricServiceGroupManagementClient2Vtbl {
 	return (*comFabricServiceGroupManagementClient2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -3470,7 +3470,7 @@ func (v *ComFabricServiceGroupManagementClient2) beginUpdateServiceGroup(
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginUpdateServiceGroup,
+		v.vtable().BeginUpdateServiceGroup,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -3489,7 +3489,7 @@ func (v *ComFabricServiceGroupManagementClient2) endUpdateServiceGroup(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndUpdateServiceGroup,
+		v.vtable().EndUpdateServiceGroup,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -3581,7 +3581,7 @@ type comFabricServiceGroupManagementClient3Vtbl struct {
 	EndCreateServiceGroupFromTemplate   uintptr
 }
 
-func (v *ComFabricServiceGroupManagementClient3) VTable() *comFabricServiceGroupManagementClient3Vtbl {
+func (v *ComFabricServiceGroupManagementClient3) vtable() *comFabricServiceGroupManagementClient3Vtbl {
 	return (*comFabricServiceGroupManagementClient3Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -3611,7 +3611,7 @@ func (v *ComFabricServiceGroupManagementClient3) beginCreateServiceGroupFromTemp
 		context = p_7
 	}()
 	hr, _, err1 := syscall.Syscall9(
-		v.VTable().BeginCreateServiceGroupFromTemplate,
+		v.vtable().BeginCreateServiceGroupFromTemplate,
 		9,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -3633,7 +3633,7 @@ func (v *ComFabricServiceGroupManagementClient3) endCreateServiceGroupFromTempla
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndCreateServiceGroupFromTemplate,
+		v.vtable().EndCreateServiceGroupFromTemplate,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -3731,7 +3731,7 @@ type comFabricServiceGroupManagementClient4Vtbl struct {
 	EndCreateServiceGroupFromTemplate2   uintptr
 }
 
-func (v *ComFabricServiceGroupManagementClient4) VTable() *comFabricServiceGroupManagementClient4Vtbl {
+func (v *ComFabricServiceGroupManagementClient4) vtable() *comFabricServiceGroupManagementClient4Vtbl {
 	return (*comFabricServiceGroupManagementClient4Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -3747,7 +3747,7 @@ func (v *ComFabricServiceGroupManagementClient4) beginCreateServiceGroupFromTemp
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginCreateServiceGroupFromTemplate2,
+		v.vtable().BeginCreateServiceGroupFromTemplate2,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -3766,7 +3766,7 @@ func (v *ComFabricServiceGroupManagementClient4) endCreateServiceGroupFromTempla
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndCreateServiceGroupFromTemplate2,
+		v.vtable().EndCreateServiceGroupFromTemplate2,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -3868,7 +3868,7 @@ type comFabricApplicationManagementClientVtbl struct {
 	EndUnprovisionApplicationType         uintptr
 }
 
-func (v *ComFabricApplicationManagementClient) VTable() *comFabricApplicationManagementClientVtbl {
+func (v *ComFabricApplicationManagementClient) vtable() *comFabricApplicationManagementClientVtbl {
 	return (*comFabricApplicationManagementClientVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -3886,7 +3886,7 @@ func (v *ComFabricApplicationManagementClient) beginProvisionApplicationType(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginProvisionApplicationType,
+		v.vtable().BeginProvisionApplicationType,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -3905,7 +3905,7 @@ func (v *ComFabricApplicationManagementClient) endProvisionApplicationType(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndProvisionApplicationType,
+		v.vtable().EndProvisionApplicationType,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -3929,7 +3929,7 @@ func (v *ComFabricApplicationManagementClient) beginCreateApplication(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginCreateApplication,
+		v.vtable().BeginCreateApplication,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -3948,7 +3948,7 @@ func (v *ComFabricApplicationManagementClient) endCreateApplication(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndCreateApplication,
+		v.vtable().EndCreateApplication,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -3972,7 +3972,7 @@ func (v *ComFabricApplicationManagementClient) beginUpgradeApplication(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginUpgradeApplication,
+		v.vtable().BeginUpgradeApplication,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -3991,7 +3991,7 @@ func (v *ComFabricApplicationManagementClient) endUpgradeApplication(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndUpgradeApplication,
+		v.vtable().EndUpgradeApplication,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -4017,7 +4017,7 @@ func (v *ComFabricApplicationManagementClient) beginGetApplicationUpgradeProgres
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetApplicationUpgradeProgress,
+		v.vtable().BeginGetApplicationUpgradeProgress,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -4040,7 +4040,7 @@ func (v *ComFabricApplicationManagementClient) endGetApplicationUpgradeProgress(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetApplicationUpgradeProgress,
+		v.vtable().EndGetApplicationUpgradeProgress,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -4062,7 +4062,7 @@ func (v *ComFabricApplicationManagementClient) beginMoveNextApplicationUpgradeDo
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginMoveNextApplicationUpgradeDomain,
+		v.vtable().BeginMoveNextApplicationUpgradeDomain,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(progress)),
@@ -4081,7 +4081,7 @@ func (v *ComFabricApplicationManagementClient) endMoveNextApplicationUpgradeDoma
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndMoveNextApplicationUpgradeDomain,
+		v.vtable().EndMoveNextApplicationUpgradeDomain,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -4107,7 +4107,7 @@ func (v *ComFabricApplicationManagementClient) beginDeleteApplication(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginDeleteApplication,
+		v.vtable().BeginDeleteApplication,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -4126,7 +4126,7 @@ func (v *ComFabricApplicationManagementClient) endDeleteApplication(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndDeleteApplication,
+		v.vtable().EndDeleteApplication,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -4157,7 +4157,7 @@ func (v *ComFabricApplicationManagementClient) beginUnprovisionApplicationType(
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginUnprovisionApplicationType,
+		v.vtable().BeginUnprovisionApplicationType,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -4176,7 +4176,7 @@ func (v *ComFabricApplicationManagementClient) endUnprovisionApplicationType(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndUnprovisionApplicationType,
+		v.vtable().EndUnprovisionApplicationType,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -4618,7 +4618,7 @@ type comFabricApplicationManagementClient2Vtbl struct {
 	EndMoveNextApplicationUpgradeDomain2   uintptr
 }
 
-func (v *ComFabricApplicationManagementClient2) VTable() *comFabricApplicationManagementClient2Vtbl {
+func (v *ComFabricApplicationManagementClient2) vtable() *comFabricApplicationManagementClient2Vtbl {
 	return (*comFabricApplicationManagementClient2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -4641,7 +4641,7 @@ func (v *ComFabricApplicationManagementClient2) beginGetApplicationManifest(
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetApplicationManifest,
+		v.vtable().BeginGetApplicationManifest,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -4664,7 +4664,7 @@ func (v *ComFabricApplicationManagementClient2) endGetApplicationManifest(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetApplicationManifest,
+		v.vtable().EndGetApplicationManifest,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -4695,7 +4695,7 @@ func (v *ComFabricApplicationManagementClient2) beginMoveNextApplicationUpgradeD
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginMoveNextApplicationUpgradeDomain2,
+		v.vtable().BeginMoveNextApplicationUpgradeDomain2,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -4714,7 +4714,7 @@ func (v *ComFabricApplicationManagementClient2) endMoveNextApplicationUpgradeDom
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndMoveNextApplicationUpgradeDomain2,
+		v.vtable().EndMoveNextApplicationUpgradeDomain2,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -4870,7 +4870,7 @@ type comFabricApplicationManagementClient3Vtbl struct {
 	RemoveApplicationPackage        uintptr
 }
 
-func (v *ComFabricApplicationManagementClient3) VTable() *comFabricApplicationManagementClient3Vtbl {
+func (v *ComFabricApplicationManagementClient3) vtable() *comFabricApplicationManagementClient3Vtbl {
 	return (*comFabricApplicationManagementClient3Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -4886,7 +4886,7 @@ func (v *ComFabricApplicationManagementClient3) beginUpdateApplicationUpgrade(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginUpdateApplicationUpgrade,
+		v.vtable().BeginUpdateApplicationUpgrade,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -4905,7 +4905,7 @@ func (v *ComFabricApplicationManagementClient3) endUpdateApplicationUpgrade(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndUpdateApplicationUpgrade,
+		v.vtable().EndUpdateApplicationUpgrade,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -4929,7 +4929,7 @@ func (v *ComFabricApplicationManagementClient3) beginRestartDeployedCodePackage(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginRestartDeployedCodePackage,
+		v.vtable().BeginRestartDeployedCodePackage,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -4948,7 +4948,7 @@ func (v *ComFabricApplicationManagementClient3) endRestartDeployedCodePackage(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndRestartDeployedCodePackage,
+		v.vtable().EndRestartDeployedCodePackage,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -4978,7 +4978,7 @@ func (v *ComFabricApplicationManagementClient3) CopyApplicationPackage(
 	p_2 = s_53
 
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().CopyApplicationPackage,
+		v.vtable().CopyApplicationPackage,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -5006,7 +5006,7 @@ func (v *ComFabricApplicationManagementClient3) RemoveApplicationPackage(
 	p_1 = s_55
 
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().RemoveApplicationPackage,
+		v.vtable().RemoveApplicationPackage,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -5153,7 +5153,7 @@ type comFabricApplicationManagementClient4Vtbl struct {
 	EndDeployServicePackageToNode   uintptr
 }
 
-func (v *ComFabricApplicationManagementClient4) VTable() *comFabricApplicationManagementClient4Vtbl {
+func (v *ComFabricApplicationManagementClient4) vtable() *comFabricApplicationManagementClient4Vtbl {
 	return (*comFabricApplicationManagementClient4Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -5208,7 +5208,7 @@ func (v *ComFabricApplicationManagementClient4) beginDeployServicePackageToNode(
 		context = p_7
 	}()
 	hr, _, err1 := syscall.Syscall9(
-		v.VTable().BeginDeployServicePackageToNode,
+		v.vtable().BeginDeployServicePackageToNode,
 		9,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -5230,7 +5230,7 @@ func (v *ComFabricApplicationManagementClient4) endDeployServicePackageToNode(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndDeployServicePackageToNode,
+		v.vtable().EndDeployServicePackageToNode,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -5328,7 +5328,7 @@ type comFabricApplicationManagementClient5Vtbl struct {
 	EndRollbackApplicationUpgrade   uintptr
 }
 
-func (v *ComFabricApplicationManagementClient5) VTable() *comFabricApplicationManagementClient5Vtbl {
+func (v *ComFabricApplicationManagementClient5) vtable() *comFabricApplicationManagementClient5Vtbl {
 	return (*comFabricApplicationManagementClient5Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -5346,7 +5346,7 @@ func (v *ComFabricApplicationManagementClient5) beginRollbackApplicationUpgrade(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginRollbackApplicationUpgrade,
+		v.vtable().BeginRollbackApplicationUpgrade,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -5365,7 +5365,7 @@ func (v *ComFabricApplicationManagementClient5) endRollbackApplicationUpgrade(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndRollbackApplicationUpgrade,
+		v.vtable().EndRollbackApplicationUpgrade,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -5455,7 +5455,7 @@ type comFabricApplicationManagementClient6Vtbl struct {
 	EndUpdateApplication   uintptr
 }
 
-func (v *ComFabricApplicationManagementClient6) VTable() *comFabricApplicationManagementClient6Vtbl {
+func (v *ComFabricApplicationManagementClient6) vtable() *comFabricApplicationManagementClient6Vtbl {
 	return (*comFabricApplicationManagementClient6Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -5471,7 +5471,7 @@ func (v *ComFabricApplicationManagementClient6) beginUpdateApplication(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginUpdateApplication,
+		v.vtable().BeginUpdateApplication,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -5490,7 +5490,7 @@ func (v *ComFabricApplicationManagementClient6) endUpdateApplication(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndUpdateApplication,
+		v.vtable().EndUpdateApplication,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -5580,7 +5580,7 @@ type comFabricApplicationManagementClient7Vtbl struct {
 	EndDeleteApplication2   uintptr
 }
 
-func (v *ComFabricApplicationManagementClient7) VTable() *comFabricApplicationManagementClient7Vtbl {
+func (v *ComFabricApplicationManagementClient7) vtable() *comFabricApplicationManagementClient7Vtbl {
 	return (*comFabricApplicationManagementClient7Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -5596,7 +5596,7 @@ func (v *ComFabricApplicationManagementClient7) beginDeleteApplication2(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginDeleteApplication2,
+		v.vtable().BeginDeleteApplication2,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -5615,7 +5615,7 @@ func (v *ComFabricApplicationManagementClient7) endDeleteApplication2(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndDeleteApplication2,
+		v.vtable().EndDeleteApplication2,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -5705,7 +5705,7 @@ type comFabricApplicationManagementClient8Vtbl struct {
 	EndProvisionApplicationType2   uintptr
 }
 
-func (v *ComFabricApplicationManagementClient8) VTable() *comFabricApplicationManagementClient8Vtbl {
+func (v *ComFabricApplicationManagementClient8) vtable() *comFabricApplicationManagementClient8Vtbl {
 	return (*comFabricApplicationManagementClient8Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -5721,7 +5721,7 @@ func (v *ComFabricApplicationManagementClient8) beginProvisionApplicationType2(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginProvisionApplicationType2,
+		v.vtable().BeginProvisionApplicationType2,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -5740,7 +5740,7 @@ func (v *ComFabricApplicationManagementClient8) endProvisionApplicationType2(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndProvisionApplicationType2,
+		v.vtable().EndProvisionApplicationType2,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -5830,7 +5830,7 @@ type comFabricApplicationManagementClient9Vtbl struct {
 	EndUnprovisionApplicationType2   uintptr
 }
 
-func (v *ComFabricApplicationManagementClient9) VTable() *comFabricApplicationManagementClient9Vtbl {
+func (v *ComFabricApplicationManagementClient9) vtable() *comFabricApplicationManagementClient9Vtbl {
 	return (*comFabricApplicationManagementClient9Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -5846,7 +5846,7 @@ func (v *ComFabricApplicationManagementClient9) beginUnprovisionApplicationType2
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginUnprovisionApplicationType2,
+		v.vtable().BeginUnprovisionApplicationType2,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -5865,7 +5865,7 @@ func (v *ComFabricApplicationManagementClient9) endUnprovisionApplicationType2(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndUnprovisionApplicationType2,
+		v.vtable().EndUnprovisionApplicationType2,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -5955,7 +5955,7 @@ type comFabricApplicationManagementClient10Vtbl struct {
 	EndProvisionApplicationType3   uintptr
 }
 
-func (v *ComFabricApplicationManagementClient10) VTable() *comFabricApplicationManagementClient10Vtbl {
+func (v *ComFabricApplicationManagementClient10) vtable() *comFabricApplicationManagementClient10Vtbl {
 	return (*comFabricApplicationManagementClient10Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -5971,7 +5971,7 @@ func (v *ComFabricApplicationManagementClient10) beginProvisionApplicationType3(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginProvisionApplicationType3,
+		v.vtable().BeginProvisionApplicationType3,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -5990,7 +5990,7 @@ func (v *ComFabricApplicationManagementClient10) endProvisionApplicationType3(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndProvisionApplicationType3,
+		v.vtable().EndProvisionApplicationType3,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -6082,7 +6082,7 @@ type comFabricClusterManagementClientVtbl struct {
 	EndRecoverPartitions   uintptr
 }
 
-func (v *ComFabricClusterManagementClient) VTable() *comFabricClusterManagementClientVtbl {
+func (v *ComFabricClusterManagementClient) vtable() *comFabricClusterManagementClientVtbl {
 	return (*comFabricClusterManagementClientVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -6100,7 +6100,7 @@ func (v *ComFabricClusterManagementClient) beginNodeStateRemoved(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginNodeStateRemoved,
+		v.vtable().BeginNodeStateRemoved,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -6119,7 +6119,7 @@ func (v *ComFabricClusterManagementClient) endNodeStateRemoved(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndNodeStateRemoved,
+		v.vtable().EndNodeStateRemoved,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -6140,7 +6140,7 @@ func (v *ComFabricClusterManagementClient) beginRecoverPartitions(
 		context = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginRecoverPartitions,
+		v.vtable().BeginRecoverPartitions,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(timeoutMilliseconds),
@@ -6159,7 +6159,7 @@ func (v *ComFabricClusterManagementClient) endRecoverPartitions(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndRecoverPartitions,
+		v.vtable().EndRecoverPartitions,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -6326,7 +6326,7 @@ type comFabricClusterManagementClient2Vtbl struct {
 	EndRecoverSystemPartitions        uintptr
 }
 
-func (v *ComFabricClusterManagementClient2) VTable() *comFabricClusterManagementClient2Vtbl {
+func (v *ComFabricClusterManagementClient2) vtable() *comFabricClusterManagementClient2Vtbl {
 	return (*comFabricClusterManagementClient2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -6345,7 +6345,7 @@ func (v *ComFabricClusterManagementClient2) beginDeactivateNode(
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginDeactivateNode,
+		v.vtable().BeginDeactivateNode,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -6364,7 +6364,7 @@ func (v *ComFabricClusterManagementClient2) endDeactivateNode(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndDeactivateNode,
+		v.vtable().EndDeactivateNode,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -6390,7 +6390,7 @@ func (v *ComFabricClusterManagementClient2) beginActivateNode(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginActivateNode,
+		v.vtable().BeginActivateNode,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -6409,7 +6409,7 @@ func (v *ComFabricClusterManagementClient2) endActivateNode(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndActivateNode,
+		v.vtable().EndActivateNode,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -6440,7 +6440,7 @@ func (v *ComFabricClusterManagementClient2) beginProvisionFabric(
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginProvisionFabric,
+		v.vtable().BeginProvisionFabric,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -6459,7 +6459,7 @@ func (v *ComFabricClusterManagementClient2) endProvisionFabric(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndProvisionFabric,
+		v.vtable().EndProvisionFabric,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -6483,7 +6483,7 @@ func (v *ComFabricClusterManagementClient2) beginUpgradeFabric(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginUpgradeFabric,
+		v.vtable().BeginUpgradeFabric,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -6502,7 +6502,7 @@ func (v *ComFabricClusterManagementClient2) endUpgradeFabric(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndUpgradeFabric,
+		v.vtable().EndUpgradeFabric,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -6523,7 +6523,7 @@ func (v *ComFabricClusterManagementClient2) beginGetFabricUpgradeProgress(
 		context = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetFabricUpgradeProgress,
+		v.vtable().BeginGetFabricUpgradeProgress,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(timeoutMilliseconds),
@@ -6546,7 +6546,7 @@ func (v *ComFabricClusterManagementClient2) endGetFabricUpgradeProgress(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetFabricUpgradeProgress,
+		v.vtable().EndGetFabricUpgradeProgress,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -6568,7 +6568,7 @@ func (v *ComFabricClusterManagementClient2) beginMoveNextFabricUpgradeDomain(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginMoveNextFabricUpgradeDomain,
+		v.vtable().BeginMoveNextFabricUpgradeDomain,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(progress)),
@@ -6587,7 +6587,7 @@ func (v *ComFabricClusterManagementClient2) endMoveNextFabricUpgradeDomain(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndMoveNextFabricUpgradeDomain,
+		v.vtable().EndMoveNextFabricUpgradeDomain,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -6613,7 +6613,7 @@ func (v *ComFabricClusterManagementClient2) beginMoveNextFabricUpgradeDomain2(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginMoveNextFabricUpgradeDomain2,
+		v.vtable().BeginMoveNextFabricUpgradeDomain2,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -6632,7 +6632,7 @@ func (v *ComFabricClusterManagementClient2) endMoveNextFabricUpgradeDomain2(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndMoveNextFabricUpgradeDomain2,
+		v.vtable().EndMoveNextFabricUpgradeDomain2,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -6663,7 +6663,7 @@ func (v *ComFabricClusterManagementClient2) beginUnprovisionFabric(
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginUnprovisionFabric,
+		v.vtable().BeginUnprovisionFabric,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -6682,7 +6682,7 @@ func (v *ComFabricClusterManagementClient2) endUnprovisionFabric(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndUnprovisionFabric,
+		v.vtable().EndUnprovisionFabric,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -6703,7 +6703,7 @@ func (v *ComFabricClusterManagementClient2) beginGetClusterManifest(
 		context = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetClusterManifest,
+		v.vtable().BeginGetClusterManifest,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(timeoutMilliseconds),
@@ -6726,7 +6726,7 @@ func (v *ComFabricClusterManagementClient2) endGetClusterManifest(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetClusterManifest,
+		v.vtable().EndGetClusterManifest,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -6748,7 +6748,7 @@ func (v *ComFabricClusterManagementClient2) beginRecoverPartition(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginRecoverPartition,
+		v.vtable().BeginRecoverPartition,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&partitionId)),
@@ -6767,7 +6767,7 @@ func (v *ComFabricClusterManagementClient2) endRecoverPartition(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndRecoverPartition,
+		v.vtable().EndRecoverPartition,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -6793,7 +6793,7 @@ func (v *ComFabricClusterManagementClient2) beginRecoverServicePartitions(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginRecoverServicePartitions,
+		v.vtable().BeginRecoverServicePartitions,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -6812,7 +6812,7 @@ func (v *ComFabricClusterManagementClient2) endRecoverServicePartitions(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndRecoverServicePartitions,
+		v.vtable().EndRecoverServicePartitions,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -6833,7 +6833,7 @@ func (v *ComFabricClusterManagementClient2) beginRecoverSystemPartitions(
 		context = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginRecoverSystemPartitions,
+		v.vtable().BeginRecoverSystemPartitions,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(timeoutMilliseconds),
@@ -6852,7 +6852,7 @@ func (v *ComFabricClusterManagementClient2) endRecoverSystemPartitions(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndRecoverSystemPartitions,
+		v.vtable().EndRecoverSystemPartitions,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -7584,7 +7584,7 @@ type comFabricClusterManagementClient3Vtbl struct {
 	RemoveClusterPackage     uintptr
 }
 
-func (v *ComFabricClusterManagementClient3) VTable() *comFabricClusterManagementClient3Vtbl {
+func (v *ComFabricClusterManagementClient3) vtable() *comFabricClusterManagementClient3Vtbl {
 	return (*comFabricClusterManagementClient3Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -7600,7 +7600,7 @@ func (v *ComFabricClusterManagementClient3) beginUpdateFabricUpgrade(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginUpdateFabricUpgrade,
+		v.vtable().BeginUpdateFabricUpgrade,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -7619,7 +7619,7 @@ func (v *ComFabricClusterManagementClient3) endUpdateFabricUpgrade(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndUpdateFabricUpgrade,
+		v.vtable().EndUpdateFabricUpgrade,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -7643,7 +7643,7 @@ func (v *ComFabricClusterManagementClient3) beginStopNode(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginStopNode,
+		v.vtable().BeginStopNode,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -7662,7 +7662,7 @@ func (v *ComFabricClusterManagementClient3) endStopNode(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndStopNode,
+		v.vtable().EndStopNode,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -7686,7 +7686,7 @@ func (v *ComFabricClusterManagementClient3) beginRestartNode(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginRestartNode,
+		v.vtable().BeginRestartNode,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -7705,7 +7705,7 @@ func (v *ComFabricClusterManagementClient3) endRestartNode(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndRestartNode,
+		v.vtable().EndRestartNode,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -7729,7 +7729,7 @@ func (v *ComFabricClusterManagementClient3) beginStartNode(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginStartNode,
+		v.vtable().BeginStartNode,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -7748,7 +7748,7 @@ func (v *ComFabricClusterManagementClient3) endStartNode(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndStartNode,
+		v.vtable().EndStartNode,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -7788,7 +7788,7 @@ func (v *ComFabricClusterManagementClient3) CopyClusterPackage(
 	p_4 = s_75
 
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().CopyClusterPackage,
+		v.vtable().CopyClusterPackage,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -7821,7 +7821,7 @@ func (v *ComFabricClusterManagementClient3) RemoveClusterPackage(
 	p_2 = s_78
 
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().RemoveClusterPackage,
+		v.vtable().RemoveClusterPackage,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -8085,7 +8085,7 @@ type comFabricClusterManagementClient4Vtbl struct {
 	EndRollbackFabricUpgrade   uintptr
 }
 
-func (v *ComFabricClusterManagementClient4) VTable() *comFabricClusterManagementClient4Vtbl {
+func (v *ComFabricClusterManagementClient4) vtable() *comFabricClusterManagementClient4Vtbl {
 	return (*comFabricClusterManagementClient4Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -8098,7 +8098,7 @@ func (v *ComFabricClusterManagementClient4) beginRollbackFabricUpgrade(
 		context = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginRollbackFabricUpgrade,
+		v.vtable().BeginRollbackFabricUpgrade,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(timeoutMilliseconds),
@@ -8117,7 +8117,7 @@ func (v *ComFabricClusterManagementClient4) endRollbackFabricUpgrade(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndRollbackFabricUpgrade,
+		v.vtable().EndRollbackFabricUpgrade,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -8205,7 +8205,7 @@ type comFabricClusterManagementClient5Vtbl struct {
 	EndResetPartitionLoad   uintptr
 }
 
-func (v *ComFabricClusterManagementClient5) VTable() *comFabricClusterManagementClient5Vtbl {
+func (v *ComFabricClusterManagementClient5) vtable() *comFabricClusterManagementClient5Vtbl {
 	return (*comFabricClusterManagementClient5Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -8219,7 +8219,7 @@ func (v *ComFabricClusterManagementClient5) beginResetPartitionLoad(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginResetPartitionLoad,
+		v.vtable().BeginResetPartitionLoad,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&partitionId)),
@@ -8238,7 +8238,7 @@ func (v *ComFabricClusterManagementClient5) endResetPartitionLoad(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndResetPartitionLoad,
+		v.vtable().EndResetPartitionLoad,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -8328,7 +8328,7 @@ type comFabricClusterManagementClient6Vtbl struct {
 	EndToggleVerboseServicePlacementHealthReporting   uintptr
 }
 
-func (v *ComFabricClusterManagementClient6) VTable() *comFabricClusterManagementClient6Vtbl {
+func (v *ComFabricClusterManagementClient6) vtable() *comFabricClusterManagementClient6Vtbl {
 	return (*comFabricClusterManagementClient6Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -8346,7 +8346,7 @@ func (v *ComFabricClusterManagementClient6) beginToggleVerboseServicePlacementHe
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginToggleVerboseServicePlacementHealthReporting,
+		v.vtable().BeginToggleVerboseServicePlacementHealthReporting,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(p_0),
@@ -8365,7 +8365,7 @@ func (v *ComFabricClusterManagementClient6) endToggleVerboseServicePlacementHeal
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndToggleVerboseServicePlacementHealthReporting,
+		v.vtable().EndToggleVerboseServicePlacementHealthReporting,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -8463,7 +8463,7 @@ type comFabricClusterManagementClient7Vtbl struct {
 	EndStartApprovedUpgrades                  uintptr
 }
 
-func (v *ComFabricClusterManagementClient7) VTable() *comFabricClusterManagementClient7Vtbl {
+func (v *ComFabricClusterManagementClient7) vtable() *comFabricClusterManagementClient7Vtbl {
 	return (*comFabricClusterManagementClient7Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -8479,7 +8479,7 @@ func (v *ComFabricClusterManagementClient7) beginUpgradeConfiguration(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginUpgradeConfiguration,
+		v.vtable().BeginUpgradeConfiguration,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -8498,7 +8498,7 @@ func (v *ComFabricClusterManagementClient7) endUpgradeConfiguration(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndUpgradeConfiguration,
+		v.vtable().EndUpgradeConfiguration,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -8519,7 +8519,7 @@ func (v *ComFabricClusterManagementClient7) beginGetClusterConfigurationUpgradeS
 		context = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetClusterConfigurationUpgradeStatus,
+		v.vtable().BeginGetClusterConfigurationUpgradeStatus,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(timeoutMilliseconds),
@@ -8542,7 +8542,7 @@ func (v *ComFabricClusterManagementClient7) endGetClusterConfigurationUpgradeSta
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetClusterConfigurationUpgradeStatus,
+		v.vtable().EndGetClusterConfigurationUpgradeStatus,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -8563,7 +8563,7 @@ func (v *ComFabricClusterManagementClient7) beginGetClusterConfiguration(
 		context = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetClusterConfiguration,
+		v.vtable().BeginGetClusterConfiguration,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(timeoutMilliseconds),
@@ -8586,7 +8586,7 @@ func (v *ComFabricClusterManagementClient7) endGetClusterConfiguration(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetClusterConfiguration,
+		v.vtable().EndGetClusterConfiguration,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -8607,7 +8607,7 @@ func (v *ComFabricClusterManagementClient7) beginGetUpgradesPendingApproval(
 		context = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetUpgradesPendingApproval,
+		v.vtable().BeginGetUpgradesPendingApproval,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(timeoutMilliseconds),
@@ -8626,7 +8626,7 @@ func (v *ComFabricClusterManagementClient7) endGetUpgradesPendingApproval(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetUpgradesPendingApproval,
+		v.vtable().EndGetUpgradesPendingApproval,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -8647,7 +8647,7 @@ func (v *ComFabricClusterManagementClient7) beginStartApprovedUpgrades(
 		context = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginStartApprovedUpgrades,
+		v.vtable().BeginStartApprovedUpgrades,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(timeoutMilliseconds),
@@ -8666,7 +8666,7 @@ func (v *ComFabricClusterManagementClient7) endStartApprovedUpgrades(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndStartApprovedUpgrades,
+		v.vtable().EndStartApprovedUpgrades,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -8978,7 +8978,7 @@ type comFabricClusterManagementClient8Vtbl struct {
 	EndGetClusterManifest2   uintptr
 }
 
-func (v *ComFabricClusterManagementClient8) VTable() *comFabricClusterManagementClient8Vtbl {
+func (v *ComFabricClusterManagementClient8) vtable() *comFabricClusterManagementClient8Vtbl {
 	return (*comFabricClusterManagementClient8Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -8994,7 +8994,7 @@ func (v *ComFabricClusterManagementClient8) beginGetClusterManifest2(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetClusterManifest2,
+		v.vtable().BeginGetClusterManifest2,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -9017,7 +9017,7 @@ func (v *ComFabricClusterManagementClient8) endGetClusterManifest2(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetClusterManifest2,
+		v.vtable().EndGetClusterManifest2,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -9110,7 +9110,7 @@ type comFabricClusterManagementClient9Vtbl struct {
 	EndSetUpgradeOrchestrationServiceState   uintptr
 }
 
-func (v *ComFabricClusterManagementClient9) VTable() *comFabricClusterManagementClient9Vtbl {
+func (v *ComFabricClusterManagementClient9) vtable() *comFabricClusterManagementClient9Vtbl {
 	return (*comFabricClusterManagementClient9Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -9123,7 +9123,7 @@ func (v *ComFabricClusterManagementClient9) beginGetUpgradeOrchestrationServiceS
 		context = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetUpgradeOrchestrationServiceState,
+		v.vtable().BeginGetUpgradeOrchestrationServiceState,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(timeoutMilliseconds),
@@ -9146,7 +9146,7 @@ func (v *ComFabricClusterManagementClient9) endGetUpgradeOrchestrationServiceSta
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetUpgradeOrchestrationServiceState,
+		v.vtable().EndGetUpgradeOrchestrationServiceState,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -9172,7 +9172,7 @@ func (v *ComFabricClusterManagementClient9) beginSetUpgradeOrchestrationServiceS
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginSetUpgradeOrchestrationServiceState,
+		v.vtable().BeginSetUpgradeOrchestrationServiceState,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -9195,7 +9195,7 @@ func (v *ComFabricClusterManagementClient9) endSetUpgradeOrchestrationServiceSta
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndSetUpgradeOrchestrationServiceState,
+		v.vtable().EndSetUpgradeOrchestrationServiceState,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -9342,7 +9342,7 @@ type comFabricClusterManagementClient10Vtbl struct {
 	EndGetClusterConfiguration2   uintptr
 }
 
-func (v *ComFabricClusterManagementClient10) VTable() *comFabricClusterManagementClient10Vtbl {
+func (v *ComFabricClusterManagementClient10) vtable() *comFabricClusterManagementClient10Vtbl {
 	return (*comFabricClusterManagementClient10Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -9360,7 +9360,7 @@ func (v *ComFabricClusterManagementClient10) beginGetClusterConfiguration2(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetClusterConfiguration2,
+		v.vtable().BeginGetClusterConfiguration2,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -9383,7 +9383,7 @@ func (v *ComFabricClusterManagementClient10) endGetClusterConfiguration2(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetClusterConfiguration2,
+		v.vtable().EndGetClusterConfiguration2,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -9489,7 +9489,7 @@ type comFabricHealthClientVtbl struct {
 	EndGetDeployedServicePackageHealth   uintptr
 }
 
-func (v *ComFabricHealthClient) VTable() *comFabricHealthClientVtbl {
+func (v *ComFabricHealthClient) vtable() *comFabricHealthClientVtbl {
 	return (*comFabricHealthClientVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -9499,7 +9499,7 @@ func (v *ComFabricHealthClient) ReportHealth(
 	var p_0 *innerFabricHealthReport
 	p_0 = healthReport.toInnerStruct()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().ReportHealth,
+		v.vtable().ReportHealth,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -9523,7 +9523,7 @@ func (v *ComFabricHealthClient) beginGetClusterHealth(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetClusterHealth,
+		v.vtable().BeginGetClusterHealth,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -9546,7 +9546,7 @@ func (v *ComFabricHealthClient) endGetClusterHealth(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetClusterHealth,
+		v.vtable().EndGetClusterHealth,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -9575,7 +9575,7 @@ func (v *ComFabricHealthClient) beginGetNodeHealth(
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetNodeHealth,
+		v.vtable().BeginGetNodeHealth,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -9598,7 +9598,7 @@ func (v *ComFabricHealthClient) endGetNodeHealth(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetNodeHealth,
+		v.vtable().EndGetNodeHealth,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -9627,7 +9627,7 @@ func (v *ComFabricHealthClient) beginGetApplicationHealth(
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetApplicationHealth,
+		v.vtable().BeginGetApplicationHealth,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -9650,7 +9650,7 @@ func (v *ComFabricHealthClient) endGetApplicationHealth(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetApplicationHealth,
+		v.vtable().EndGetApplicationHealth,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -9679,7 +9679,7 @@ func (v *ComFabricHealthClient) beginGetServiceHealth(
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetServiceHealth,
+		v.vtable().BeginGetServiceHealth,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -9702,7 +9702,7 @@ func (v *ComFabricHealthClient) endGetServiceHealth(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetServiceHealth,
+		v.vtable().EndGetServiceHealth,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -9727,7 +9727,7 @@ func (v *ComFabricHealthClient) beginGetPartitionHealth(
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetPartitionHealth,
+		v.vtable().BeginGetPartitionHealth,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&partitionId)),
@@ -9750,7 +9750,7 @@ func (v *ComFabricHealthClient) endGetPartitionHealth(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetPartitionHealth,
+		v.vtable().EndGetPartitionHealth,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -9776,7 +9776,7 @@ func (v *ComFabricHealthClient) beginGetReplicaHealth(
 		context = p_5
 	}()
 	hr, _, err1 := syscall.Syscall9(
-		v.VTable().BeginGetReplicaHealth,
+		v.vtable().BeginGetReplicaHealth,
 		7,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&partitionId)),
@@ -9802,7 +9802,7 @@ func (v *ComFabricHealthClient) endGetReplicaHealth(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetReplicaHealth,
+		v.vtable().EndGetReplicaHealth,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -9836,7 +9836,7 @@ func (v *ComFabricHealthClient) beginGetDeployedApplicationHealth(
 		context = p_5
 	}()
 	hr, _, err1 := syscall.Syscall9(
-		v.VTable().BeginGetDeployedApplicationHealth,
+		v.vtable().BeginGetDeployedApplicationHealth,
 		7,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -9862,7 +9862,7 @@ func (v *ComFabricHealthClient) endGetDeployedApplicationHealth(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetDeployedApplicationHealth,
+		v.vtable().EndGetDeployedApplicationHealth,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -9901,7 +9901,7 @@ func (v *ComFabricHealthClient) beginGetDeployedServicePackageHealth(
 		context = p_6
 	}()
 	hr, _, err1 := syscall.Syscall9(
-		v.VTable().BeginGetDeployedServicePackageHealth,
+		v.vtable().BeginGetDeployedServicePackageHealth,
 		8,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -9927,7 +9927,7 @@ func (v *ComFabricHealthClient) endGetDeployedServicePackageHealth(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetDeployedServicePackageHealth,
+		v.vtable().EndGetDeployedServicePackageHealth,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -10460,7 +10460,7 @@ type comFabricHealthClient2Vtbl struct {
 	EndGetDeployedServicePackageHealth2   uintptr
 }
 
-func (v *ComFabricHealthClient2) VTable() *comFabricHealthClient2Vtbl {
+func (v *ComFabricHealthClient2) vtable() *comFabricHealthClient2Vtbl {
 	return (*comFabricHealthClient2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -10476,7 +10476,7 @@ func (v *ComFabricHealthClient2) beginGetClusterHealth2(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetClusterHealth2,
+		v.vtable().BeginGetClusterHealth2,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -10499,7 +10499,7 @@ func (v *ComFabricHealthClient2) endGetClusterHealth2(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetClusterHealth2,
+		v.vtable().EndGetClusterHealth2,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -10523,7 +10523,7 @@ func (v *ComFabricHealthClient2) beginGetNodeHealth2(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetNodeHealth2,
+		v.vtable().BeginGetNodeHealth2,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -10546,7 +10546,7 @@ func (v *ComFabricHealthClient2) endGetNodeHealth2(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetNodeHealth2,
+		v.vtable().EndGetNodeHealth2,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -10570,7 +10570,7 @@ func (v *ComFabricHealthClient2) beginGetApplicationHealth2(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetApplicationHealth2,
+		v.vtable().BeginGetApplicationHealth2,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -10593,7 +10593,7 @@ func (v *ComFabricHealthClient2) endGetApplicationHealth2(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetApplicationHealth2,
+		v.vtable().EndGetApplicationHealth2,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -10617,7 +10617,7 @@ func (v *ComFabricHealthClient2) beginGetServiceHealth2(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetServiceHealth2,
+		v.vtable().BeginGetServiceHealth2,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -10640,7 +10640,7 @@ func (v *ComFabricHealthClient2) endGetServiceHealth2(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetServiceHealth2,
+		v.vtable().EndGetServiceHealth2,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -10664,7 +10664,7 @@ func (v *ComFabricHealthClient2) beginGetPartitionHealth2(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetPartitionHealth2,
+		v.vtable().BeginGetPartitionHealth2,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -10687,7 +10687,7 @@ func (v *ComFabricHealthClient2) endGetPartitionHealth2(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetPartitionHealth2,
+		v.vtable().EndGetPartitionHealth2,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -10711,7 +10711,7 @@ func (v *ComFabricHealthClient2) beginGetReplicaHealth2(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetReplicaHealth2,
+		v.vtable().BeginGetReplicaHealth2,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -10734,7 +10734,7 @@ func (v *ComFabricHealthClient2) endGetReplicaHealth2(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetReplicaHealth2,
+		v.vtable().EndGetReplicaHealth2,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -10758,7 +10758,7 @@ func (v *ComFabricHealthClient2) beginGetDeployedApplicationHealth2(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetDeployedApplicationHealth2,
+		v.vtable().BeginGetDeployedApplicationHealth2,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -10781,7 +10781,7 @@ func (v *ComFabricHealthClient2) endGetDeployedApplicationHealth2(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetDeployedApplicationHealth2,
+		v.vtable().EndGetDeployedApplicationHealth2,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -10805,7 +10805,7 @@ func (v *ComFabricHealthClient2) beginGetDeployedServicePackageHealth2(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetDeployedServicePackageHealth2,
+		v.vtable().BeginGetDeployedServicePackageHealth2,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -10828,7 +10828,7 @@ func (v *ComFabricHealthClient2) endGetDeployedServicePackageHealth2(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetDeployedServicePackageHealth2,
+		v.vtable().EndGetDeployedServicePackageHealth2,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -11325,7 +11325,7 @@ type comFabricHealthClient3Vtbl struct {
 	EndGetClusterHealthChunk   uintptr
 }
 
-func (v *ComFabricHealthClient3) VTable() *comFabricHealthClient3Vtbl {
+func (v *ComFabricHealthClient3) vtable() *comFabricHealthClient3Vtbl {
 	return (*comFabricHealthClient3Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -11341,7 +11341,7 @@ func (v *ComFabricHealthClient3) beginGetClusterHealthChunk(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetClusterHealthChunk,
+		v.vtable().BeginGetClusterHealthChunk,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -11364,7 +11364,7 @@ func (v *ComFabricHealthClient3) endGetClusterHealthChunk(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetClusterHealthChunk,
+		v.vtable().EndGetClusterHealthChunk,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -11454,7 +11454,7 @@ type comFabricHealthClient4Vtbl struct {
 	ReportHealth2 uintptr
 }
 
-func (v *ComFabricHealthClient4) VTable() *comFabricHealthClient4Vtbl {
+func (v *ComFabricHealthClient4) vtable() *comFabricHealthClient4Vtbl {
 	return (*comFabricHealthClient4Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -11467,7 +11467,7 @@ func (v *ComFabricHealthClient4) ReportHealth2(
 	var p_1 *innerFabricHealthReportSendOptions
 	p_1 = sendOptions.toInnerStruct()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().ReportHealth2,
+		v.vtable().ReportHealth2,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -11522,7 +11522,7 @@ type comFabricQueryClientVtbl struct {
 	EndGetDeployedReplicaList          uintptr
 }
 
-func (v *ComFabricQueryClient) VTable() *comFabricQueryClientVtbl {
+func (v *ComFabricQueryClient) vtable() *comFabricQueryClientVtbl {
 	return (*comFabricQueryClientVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -11538,7 +11538,7 @@ func (v *ComFabricQueryClient) beginGetNodeList(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetNodeList,
+		v.vtable().BeginGetNodeList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -11561,7 +11561,7 @@ func (v *ComFabricQueryClient) endGetNodeList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetNodeList,
+		v.vtable().EndGetNodeList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -11585,7 +11585,7 @@ func (v *ComFabricQueryClient) beginGetApplicationTypeList(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetApplicationTypeList,
+		v.vtable().BeginGetApplicationTypeList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -11608,7 +11608,7 @@ func (v *ComFabricQueryClient) endGetApplicationTypeList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetApplicationTypeList,
+		v.vtable().EndGetApplicationTypeList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -11632,7 +11632,7 @@ func (v *ComFabricQueryClient) beginGetServiceTypeList(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetServiceTypeList,
+		v.vtable().BeginGetServiceTypeList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -11655,7 +11655,7 @@ func (v *ComFabricQueryClient) endGetServiceTypeList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetServiceTypeList,
+		v.vtable().EndGetServiceTypeList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -11679,7 +11679,7 @@ func (v *ComFabricQueryClient) beginGetApplicationList(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetApplicationList,
+		v.vtable().BeginGetApplicationList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -11702,7 +11702,7 @@ func (v *ComFabricQueryClient) endGetApplicationList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetApplicationList,
+		v.vtable().EndGetApplicationList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -11726,7 +11726,7 @@ func (v *ComFabricQueryClient) beginGetServiceList(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetServiceList,
+		v.vtable().BeginGetServiceList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -11749,7 +11749,7 @@ func (v *ComFabricQueryClient) endGetServiceList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetServiceList,
+		v.vtable().EndGetServiceList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -11773,7 +11773,7 @@ func (v *ComFabricQueryClient) beginGetPartitionList(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetPartitionList,
+		v.vtable().BeginGetPartitionList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -11796,7 +11796,7 @@ func (v *ComFabricQueryClient) endGetPartitionList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetPartitionList,
+		v.vtable().EndGetPartitionList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -11820,7 +11820,7 @@ func (v *ComFabricQueryClient) beginGetReplicaList(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetReplicaList,
+		v.vtable().BeginGetReplicaList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -11843,7 +11843,7 @@ func (v *ComFabricQueryClient) endGetReplicaList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetReplicaList,
+		v.vtable().EndGetReplicaList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -11867,7 +11867,7 @@ func (v *ComFabricQueryClient) beginGetDeployedApplicationList(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetDeployedApplicationList,
+		v.vtable().BeginGetDeployedApplicationList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -11890,7 +11890,7 @@ func (v *ComFabricQueryClient) endGetDeployedApplicationList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetDeployedApplicationList,
+		v.vtable().EndGetDeployedApplicationList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -11914,7 +11914,7 @@ func (v *ComFabricQueryClient) beginGetDeployedServicePackageList(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetDeployedServicePackageList,
+		v.vtable().BeginGetDeployedServicePackageList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -11937,7 +11937,7 @@ func (v *ComFabricQueryClient) endGetDeployedServicePackageList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetDeployedServicePackageList,
+		v.vtable().EndGetDeployedServicePackageList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -11961,7 +11961,7 @@ func (v *ComFabricQueryClient) beginGetDeployedServiceTypeList(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetDeployedServiceTypeList,
+		v.vtable().BeginGetDeployedServiceTypeList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -11984,7 +11984,7 @@ func (v *ComFabricQueryClient) endGetDeployedServiceTypeList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetDeployedServiceTypeList,
+		v.vtable().EndGetDeployedServiceTypeList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -12008,7 +12008,7 @@ func (v *ComFabricQueryClient) beginGetDeployedCodePackageList(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetDeployedCodePackageList,
+		v.vtable().BeginGetDeployedCodePackageList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -12031,7 +12031,7 @@ func (v *ComFabricQueryClient) endGetDeployedCodePackageList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetDeployedCodePackageList,
+		v.vtable().EndGetDeployedCodePackageList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -12055,7 +12055,7 @@ func (v *ComFabricQueryClient) beginGetDeployedReplicaList(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetDeployedReplicaList,
+		v.vtable().BeginGetDeployedReplicaList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -12078,7 +12078,7 @@ func (v *ComFabricQueryClient) endGetDeployedReplicaList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetDeployedReplicaList,
+		v.vtable().EndGetDeployedReplicaList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -12815,7 +12815,7 @@ type comFabricQueryClient2Vtbl struct {
 	EndGetProvisionedFabricConfigVersionList   uintptr
 }
 
-func (v *ComFabricQueryClient2) VTable() *comFabricQueryClient2Vtbl {
+func (v *ComFabricQueryClient2) vtable() *comFabricQueryClient2Vtbl {
 	return (*comFabricQueryClient2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -12831,7 +12831,7 @@ func (v *ComFabricQueryClient2) beginGetDeployedReplicaDetail(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetDeployedReplicaDetail,
+		v.vtable().BeginGetDeployedReplicaDetail,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -12854,7 +12854,7 @@ func (v *ComFabricQueryClient2) endGetDeployedReplicaDetail(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetDeployedReplicaDetail,
+		v.vtable().EndGetDeployedReplicaDetail,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -12875,7 +12875,7 @@ func (v *ComFabricQueryClient2) beginGetClusterLoadInformation(
 		context = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetClusterLoadInformation,
+		v.vtable().BeginGetClusterLoadInformation,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(timeoutMilliseconds),
@@ -12898,7 +12898,7 @@ func (v *ComFabricQueryClient2) endGetClusterLoadInformation(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetClusterLoadInformation,
+		v.vtable().EndGetClusterLoadInformation,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -12922,7 +12922,7 @@ func (v *ComFabricQueryClient2) beginGetPartitionLoadInformation(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetPartitionLoadInformation,
+		v.vtable().BeginGetPartitionLoadInformation,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -12945,7 +12945,7 @@ func (v *ComFabricQueryClient2) endGetPartitionLoadInformation(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetPartitionLoadInformation,
+		v.vtable().EndGetPartitionLoadInformation,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -12969,7 +12969,7 @@ func (v *ComFabricQueryClient2) beginGetProvisionedFabricCodeVersionList(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetProvisionedFabricCodeVersionList,
+		v.vtable().BeginGetProvisionedFabricCodeVersionList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -12992,7 +12992,7 @@ func (v *ComFabricQueryClient2) endGetProvisionedFabricCodeVersionList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetProvisionedFabricCodeVersionList,
+		v.vtable().EndGetProvisionedFabricCodeVersionList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -13016,7 +13016,7 @@ func (v *ComFabricQueryClient2) beginGetProvisionedFabricConfigVersionList(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetProvisionedFabricConfigVersionList,
+		v.vtable().BeginGetProvisionedFabricConfigVersionList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -13039,7 +13039,7 @@ func (v *ComFabricQueryClient2) endGetProvisionedFabricConfigVersionList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetProvisionedFabricConfigVersionList,
+		v.vtable().EndGetProvisionedFabricConfigVersionList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -13362,7 +13362,7 @@ type comFabricQueryClient3Vtbl struct {
 	EndGetReplicaLoadInformation   uintptr
 }
 
-func (v *ComFabricQueryClient3) VTable() *comFabricQueryClient3Vtbl {
+func (v *ComFabricQueryClient3) vtable() *comFabricQueryClient3Vtbl {
 	return (*comFabricQueryClient3Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -13378,7 +13378,7 @@ func (v *ComFabricQueryClient3) beginGetNodeLoadInformation(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetNodeLoadInformation,
+		v.vtable().BeginGetNodeLoadInformation,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -13401,7 +13401,7 @@ func (v *ComFabricQueryClient3) endGetNodeLoadInformation(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetNodeLoadInformation,
+		v.vtable().EndGetNodeLoadInformation,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -13425,7 +13425,7 @@ func (v *ComFabricQueryClient3) beginGetReplicaLoadInformation(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetReplicaLoadInformation,
+		v.vtable().BeginGetReplicaLoadInformation,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -13448,7 +13448,7 @@ func (v *ComFabricQueryClient3) endGetReplicaLoadInformation(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetReplicaLoadInformation,
+		v.vtable().EndGetReplicaLoadInformation,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -13599,7 +13599,7 @@ type comFabricQueryClient4Vtbl struct {
 	EndGetServiceGroupMemberTypeList   uintptr
 }
 
-func (v *ComFabricQueryClient4) VTable() *comFabricQueryClient4Vtbl {
+func (v *ComFabricQueryClient4) vtable() *comFabricQueryClient4Vtbl {
 	return (*comFabricQueryClient4Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -13615,7 +13615,7 @@ func (v *ComFabricQueryClient4) beginGetServiceGroupMemberList(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetServiceGroupMemberList,
+		v.vtable().BeginGetServiceGroupMemberList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -13638,7 +13638,7 @@ func (v *ComFabricQueryClient4) endGetServiceGroupMemberList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetServiceGroupMemberList,
+		v.vtable().EndGetServiceGroupMemberList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -13662,7 +13662,7 @@ func (v *ComFabricQueryClient4) beginGetServiceGroupMemberTypeList(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetServiceGroupMemberTypeList,
+		v.vtable().BeginGetServiceGroupMemberTypeList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -13685,7 +13685,7 @@ func (v *ComFabricQueryClient4) endGetServiceGroupMemberTypeList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetServiceGroupMemberTypeList,
+		v.vtable().EndGetServiceGroupMemberTypeList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -13834,7 +13834,7 @@ type comFabricQueryClient5Vtbl struct {
 	EndGetUnplacedReplicaInformation   uintptr
 }
 
-func (v *ComFabricQueryClient5) VTable() *comFabricQueryClient5Vtbl {
+func (v *ComFabricQueryClient5) vtable() *comFabricQueryClient5Vtbl {
 	return (*comFabricQueryClient5Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -13850,7 +13850,7 @@ func (v *ComFabricQueryClient5) beginGetUnplacedReplicaInformation(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetUnplacedReplicaInformation,
+		v.vtable().BeginGetUnplacedReplicaInformation,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -13873,7 +13873,7 @@ func (v *ComFabricQueryClient5) endGetUnplacedReplicaInformation(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetUnplacedReplicaInformation,
+		v.vtable().EndGetUnplacedReplicaInformation,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -13967,7 +13967,7 @@ type comFabricQueryClient6Vtbl struct {
 	EndGetReplicaList2     uintptr
 }
 
-func (v *ComFabricQueryClient6) VTable() *comFabricQueryClient6Vtbl {
+func (v *ComFabricQueryClient6) vtable() *comFabricQueryClient6Vtbl {
 	return (*comFabricQueryClient6Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -13991,7 +13991,7 @@ type comFabricQueryClient7Vtbl struct {
 	EndGetApplicationLoadInformation   uintptr
 }
 
-func (v *ComFabricQueryClient7) VTable() *comFabricQueryClient7Vtbl {
+func (v *ComFabricQueryClient7) vtable() *comFabricQueryClient7Vtbl {
 	return (*comFabricQueryClient7Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -14007,7 +14007,7 @@ func (v *ComFabricQueryClient7) beginGetApplicationLoadInformation(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetApplicationLoadInformation,
+		v.vtable().BeginGetApplicationLoadInformation,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -14030,7 +14030,7 @@ func (v *ComFabricQueryClient7) endGetApplicationLoadInformation(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetApplicationLoadInformation,
+		v.vtable().EndGetApplicationLoadInformation,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -14123,7 +14123,7 @@ type comFabricQueryClient8Vtbl struct {
 	EndGetApplicationName   uintptr
 }
 
-func (v *ComFabricQueryClient8) VTable() *comFabricQueryClient8Vtbl {
+func (v *ComFabricQueryClient8) vtable() *comFabricQueryClient8Vtbl {
 	return (*comFabricQueryClient8Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -14139,7 +14139,7 @@ func (v *ComFabricQueryClient8) beginGetServiceName(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetServiceName,
+		v.vtable().BeginGetServiceName,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -14162,7 +14162,7 @@ func (v *ComFabricQueryClient8) endGetServiceName(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetServiceName,
+		v.vtable().EndGetServiceName,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -14186,7 +14186,7 @@ func (v *ComFabricQueryClient8) beginGetApplicationName(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetApplicationName,
+		v.vtable().BeginGetApplicationName,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -14209,7 +14209,7 @@ func (v *ComFabricQueryClient8) endGetApplicationName(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetApplicationName,
+		v.vtable().EndGetApplicationName,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -14358,7 +14358,7 @@ type comFabricQueryClient9Vtbl struct {
 	EndGetApplicationTypePagedList   uintptr
 }
 
-func (v *ComFabricQueryClient9) VTable() *comFabricQueryClient9Vtbl {
+func (v *ComFabricQueryClient9) vtable() *comFabricQueryClient9Vtbl {
 	return (*comFabricQueryClient9Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -14374,7 +14374,7 @@ func (v *ComFabricQueryClient9) beginGetApplicationTypePagedList(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetApplicationTypePagedList,
+		v.vtable().BeginGetApplicationTypePagedList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -14397,7 +14397,7 @@ func (v *ComFabricQueryClient9) endGetApplicationTypePagedList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetApplicationTypePagedList,
+		v.vtable().EndGetApplicationTypePagedList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -14493,7 +14493,7 @@ type comFabricQueryClient10Vtbl struct {
 	EndGetDeployedApplicationPagedList   uintptr
 }
 
-func (v *ComFabricQueryClient10) VTable() *comFabricQueryClient10Vtbl {
+func (v *ComFabricQueryClient10) vtable() *comFabricQueryClient10Vtbl {
 	return (*comFabricQueryClient10Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -14509,7 +14509,7 @@ func (v *ComFabricQueryClient10) beginGetDeployedApplicationPagedList(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetDeployedApplicationPagedList,
+		v.vtable().BeginGetDeployedApplicationPagedList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -14532,7 +14532,7 @@ func (v *ComFabricQueryClient10) endGetDeployedApplicationPagedList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetDeployedApplicationPagedList,
+		v.vtable().EndGetDeployedApplicationPagedList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -14630,7 +14630,7 @@ type comFabricInfrastructureServiceClientVtbl struct {
 	EndInvokeInfrastructureQuery     uintptr
 }
 
-func (v *ComFabricInfrastructureServiceClient) VTable() *comFabricInfrastructureServiceClientVtbl {
+func (v *ComFabricInfrastructureServiceClient) vtable() *comFabricInfrastructureServiceClientVtbl {
 	return (*comFabricInfrastructureServiceClientVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -14653,7 +14653,7 @@ func (v *ComFabricInfrastructureServiceClient) beginInvokeInfrastructureCommand(
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginInvokeInfrastructureCommand,
+		v.vtable().BeginInvokeInfrastructureCommand,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -14676,7 +14676,7 @@ func (v *ComFabricInfrastructureServiceClient) endInvokeInfrastructureCommand(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndInvokeInfrastructureCommand,
+		v.vtable().EndInvokeInfrastructureCommand,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -14707,7 +14707,7 @@ func (v *ComFabricInfrastructureServiceClient) beginInvokeInfrastructureQuery(
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginInvokeInfrastructureQuery,
+		v.vtable().BeginInvokeInfrastructureQuery,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -14730,7 +14730,7 @@ func (v *ComFabricInfrastructureServiceClient) endInvokeInfrastructureQuery(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndInvokeInfrastructureQuery,
+		v.vtable().EndInvokeInfrastructureQuery,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -14893,7 +14893,7 @@ type comFabricRepairManagementClientVtbl struct {
 	EndGetRepairTaskList            uintptr
 }
 
-func (v *ComFabricRepairManagementClient) VTable() *comFabricRepairManagementClientVtbl {
+func (v *ComFabricRepairManagementClient) vtable() *comFabricRepairManagementClientVtbl {
 	return (*comFabricRepairManagementClientVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -14909,7 +14909,7 @@ func (v *ComFabricRepairManagementClient) beginCreateRepairTask(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginCreateRepairTask,
+		v.vtable().BeginCreateRepairTask,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -14932,7 +14932,7 @@ func (v *ComFabricRepairManagementClient) endCreateRepairTask(
 		commitVersion = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndCreateRepairTask,
+		v.vtable().EndCreateRepairTask,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -14956,7 +14956,7 @@ func (v *ComFabricRepairManagementClient) beginCancelRepairTask(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginCancelRepairTask,
+		v.vtable().BeginCancelRepairTask,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -14979,7 +14979,7 @@ func (v *ComFabricRepairManagementClient) endCancelRepairTask(
 		commitVersion = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndCancelRepairTask,
+		v.vtable().EndCancelRepairTask,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -15003,7 +15003,7 @@ func (v *ComFabricRepairManagementClient) beginForceApproveRepairTask(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginForceApproveRepairTask,
+		v.vtable().BeginForceApproveRepairTask,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -15026,7 +15026,7 @@ func (v *ComFabricRepairManagementClient) endForceApproveRepairTask(
 		commitVersion = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndForceApproveRepairTask,
+		v.vtable().EndForceApproveRepairTask,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -15050,7 +15050,7 @@ func (v *ComFabricRepairManagementClient) beginDeleteRepairTask(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginDeleteRepairTask,
+		v.vtable().BeginDeleteRepairTask,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -15069,7 +15069,7 @@ func (v *ComFabricRepairManagementClient) endDeleteRepairTask(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndDeleteRepairTask,
+		v.vtable().EndDeleteRepairTask,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -15093,7 +15093,7 @@ func (v *ComFabricRepairManagementClient) beginUpdateRepairExecutionState(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginUpdateRepairExecutionState,
+		v.vtable().BeginUpdateRepairExecutionState,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -15116,7 +15116,7 @@ func (v *ComFabricRepairManagementClient) endUpdateRepairExecutionState(
 		commitVersion = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndUpdateRepairExecutionState,
+		v.vtable().EndUpdateRepairExecutionState,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -15140,7 +15140,7 @@ func (v *ComFabricRepairManagementClient) beginGetRepairTaskList(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetRepairTaskList,
+		v.vtable().BeginGetRepairTaskList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -15163,7 +15163,7 @@ func (v *ComFabricRepairManagementClient) endGetRepairTaskList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetRepairTaskList,
+		v.vtable().EndGetRepairTaskList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -15543,7 +15543,7 @@ type comFabricRepairManagementClient2Vtbl struct {
 	EndUpdateRepairTaskHealthPolicy   uintptr
 }
 
-func (v *ComFabricRepairManagementClient2) VTable() *comFabricRepairManagementClient2Vtbl {
+func (v *ComFabricRepairManagementClient2) vtable() *comFabricRepairManagementClient2Vtbl {
 	return (*comFabricRepairManagementClient2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -15559,7 +15559,7 @@ func (v *ComFabricRepairManagementClient2) beginUpdateRepairTaskHealthPolicy(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginUpdateRepairTaskHealthPolicy,
+		v.vtable().BeginUpdateRepairTaskHealthPolicy,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -15582,7 +15582,7 @@ func (v *ComFabricRepairManagementClient2) endUpdateRepairTaskHealthPolicy(
 		commitVersion = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndUpdateRepairTaskHealthPolicy,
+		v.vtable().EndUpdateRepairTaskHealthPolicy,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -15683,7 +15683,7 @@ type comFabricFaultManagementClientVtbl struct {
 	EndMoveSecondary                uintptr
 }
 
-func (v *ComFabricFaultManagementClient) VTable() *comFabricFaultManagementClientVtbl {
+func (v *ComFabricFaultManagementClient) vtable() *comFabricFaultManagementClientVtbl {
 	return (*comFabricFaultManagementClientVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -15699,7 +15699,7 @@ func (v *ComFabricFaultManagementClient) beginRestartNode(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginRestartNode,
+		v.vtable().BeginRestartNode,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -15722,7 +15722,7 @@ func (v *ComFabricFaultManagementClient) endRestartNode(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndRestartNode,
+		v.vtable().EndRestartNode,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -15746,7 +15746,7 @@ func (v *ComFabricFaultManagementClient) beginStartNode(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginStartNode,
+		v.vtable().BeginStartNode,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -15769,7 +15769,7 @@ func (v *ComFabricFaultManagementClient) endStartNode(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndStartNode,
+		v.vtable().EndStartNode,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -15793,7 +15793,7 @@ func (v *ComFabricFaultManagementClient) beginStopNode(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginStopNode,
+		v.vtable().BeginStopNode,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -15816,7 +15816,7 @@ func (v *ComFabricFaultManagementClient) endStopNode(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndStopNode,
+		v.vtable().EndStopNode,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -15840,7 +15840,7 @@ func (v *ComFabricFaultManagementClient) beginRestartDeployedCodePackage(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginRestartDeployedCodePackage,
+		v.vtable().BeginRestartDeployedCodePackage,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -15863,7 +15863,7 @@ func (v *ComFabricFaultManagementClient) endRestartDeployedCodePackage(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndRestartDeployedCodePackage,
+		v.vtable().EndRestartDeployedCodePackage,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -15887,7 +15887,7 @@ func (v *ComFabricFaultManagementClient) beginMovePrimary(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginMovePrimary,
+		v.vtable().BeginMovePrimary,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -15910,7 +15910,7 @@ func (v *ComFabricFaultManagementClient) endMovePrimary(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndMovePrimary,
+		v.vtable().EndMovePrimary,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -15934,7 +15934,7 @@ func (v *ComFabricFaultManagementClient) beginMoveSecondary(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginMoveSecondary,
+		v.vtable().BeginMoveSecondary,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -15957,7 +15957,7 @@ func (v *ComFabricFaultManagementClient) endMoveSecondary(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndMoveSecondary,
+		v.vtable().EndMoveSecondary,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -16352,7 +16352,7 @@ type comFabricTestManagementClientVtbl struct {
 	EndCancelTestCommand                uintptr
 }
 
-func (v *ComFabricTestManagementClient) VTable() *comFabricTestManagementClientVtbl {
+func (v *ComFabricTestManagementClient) vtable() *comFabricTestManagementClientVtbl {
 	return (*comFabricTestManagementClientVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -16368,7 +16368,7 @@ func (v *ComFabricTestManagementClient) beginStartPartitionDataLoss(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginStartPartitionDataLoss,
+		v.vtable().BeginStartPartitionDataLoss,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -16387,7 +16387,7 @@ func (v *ComFabricTestManagementClient) endStartPartitionDataLoss(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndStartPartitionDataLoss,
+		v.vtable().EndStartPartitionDataLoss,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -16409,7 +16409,7 @@ func (v *ComFabricTestManagementClient) beginGetPartitionDataLossProgress(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetPartitionDataLossProgress,
+		v.vtable().BeginGetPartitionDataLossProgress,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&operationId)),
@@ -16432,7 +16432,7 @@ func (v *ComFabricTestManagementClient) endGetPartitionDataLossProgress(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetPartitionDataLossProgress,
+		v.vtable().EndGetPartitionDataLossProgress,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -16456,7 +16456,7 @@ func (v *ComFabricTestManagementClient) beginStartPartitionQuorumLoss(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginStartPartitionQuorumLoss,
+		v.vtable().BeginStartPartitionQuorumLoss,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -16475,7 +16475,7 @@ func (v *ComFabricTestManagementClient) endStartPartitionQuorumLoss(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndStartPartitionQuorumLoss,
+		v.vtable().EndStartPartitionQuorumLoss,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -16497,7 +16497,7 @@ func (v *ComFabricTestManagementClient) beginGetPartitionQuorumLossProgress(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetPartitionQuorumLossProgress,
+		v.vtable().BeginGetPartitionQuorumLossProgress,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&operationId)),
@@ -16520,7 +16520,7 @@ func (v *ComFabricTestManagementClient) endGetPartitionQuorumLossProgress(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetPartitionQuorumLossProgress,
+		v.vtable().EndGetPartitionQuorumLossProgress,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -16544,7 +16544,7 @@ func (v *ComFabricTestManagementClient) beginStartPartitionRestart(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginStartPartitionRestart,
+		v.vtable().BeginStartPartitionRestart,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -16563,7 +16563,7 @@ func (v *ComFabricTestManagementClient) endStartPartitionRestart(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndStartPartitionRestart,
+		v.vtable().EndStartPartitionRestart,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -16585,7 +16585,7 @@ func (v *ComFabricTestManagementClient) beginGetPartitionRestartProgress(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetPartitionRestartProgress,
+		v.vtable().BeginGetPartitionRestartProgress,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&operationId)),
@@ -16608,7 +16608,7 @@ func (v *ComFabricTestManagementClient) endGetPartitionRestartProgress(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetPartitionRestartProgress,
+		v.vtable().EndGetPartitionRestartProgress,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -16632,7 +16632,7 @@ func (v *ComFabricTestManagementClient) beginGetTestCommandStatusList(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetTestCommandStatusList,
+		v.vtable().BeginGetTestCommandStatusList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -16655,7 +16655,7 @@ func (v *ComFabricTestManagementClient) endGetTestCommandStatusList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetTestCommandStatusList,
+		v.vtable().EndGetTestCommandStatusList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -16679,7 +16679,7 @@ func (v *ComFabricTestManagementClient) beginCancelTestCommand(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginCancelTestCommand,
+		v.vtable().BeginCancelTestCommand,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -16698,7 +16698,7 @@ func (v *ComFabricTestManagementClient) endCancelTestCommand(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndCancelTestCommand,
+		v.vtable().EndCancelTestCommand,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -17195,7 +17195,7 @@ type comFabricTestManagementClient2Vtbl struct {
 	EndGetChaosReport   uintptr
 }
 
-func (v *ComFabricTestManagementClient2) VTable() *comFabricTestManagementClient2Vtbl {
+func (v *ComFabricTestManagementClient2) vtable() *comFabricTestManagementClient2Vtbl {
 	return (*comFabricTestManagementClient2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -17211,7 +17211,7 @@ func (v *ComFabricTestManagementClient2) beginStartChaos(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginStartChaos,
+		v.vtable().BeginStartChaos,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -17230,7 +17230,7 @@ func (v *ComFabricTestManagementClient2) endStartChaos(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndStartChaos,
+		v.vtable().EndStartChaos,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -17251,7 +17251,7 @@ func (v *ComFabricTestManagementClient2) beginStopChaos(
 		context = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginStopChaos,
+		v.vtable().BeginStopChaos,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(timeoutMilliseconds),
@@ -17270,7 +17270,7 @@ func (v *ComFabricTestManagementClient2) endStopChaos(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndStopChaos,
+		v.vtable().EndStopChaos,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -17294,7 +17294,7 @@ func (v *ComFabricTestManagementClient2) beginGetChaosReport(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetChaosReport,
+		v.vtable().BeginGetChaosReport,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -17317,7 +17317,7 @@ func (v *ComFabricTestManagementClient2) endGetChaosReport(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetChaosReport,
+		v.vtable().EndGetChaosReport,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -17522,7 +17522,7 @@ type comFabricTestManagementClient3Vtbl struct {
 	EndGetNodeTransitionProgress   uintptr
 }
 
-func (v *ComFabricTestManagementClient3) VTable() *comFabricTestManagementClient3Vtbl {
+func (v *ComFabricTestManagementClient3) vtable() *comFabricTestManagementClient3Vtbl {
 	return (*comFabricTestManagementClient3Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -17538,7 +17538,7 @@ func (v *ComFabricTestManagementClient3) beginStartNodeTransition(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginStartNodeTransition,
+		v.vtable().BeginStartNodeTransition,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -17557,7 +17557,7 @@ func (v *ComFabricTestManagementClient3) endStartNodeTransition(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndStartNodeTransition,
+		v.vtable().EndStartNodeTransition,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -17579,7 +17579,7 @@ func (v *ComFabricTestManagementClient3) beginGetNodeTransitionProgress(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetNodeTransitionProgress,
+		v.vtable().BeginGetNodeTransitionProgress,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&operationId)),
@@ -17602,7 +17602,7 @@ func (v *ComFabricTestManagementClient3) endGetNodeTransitionProgress(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetNodeTransitionProgress,
+		v.vtable().EndGetNodeTransitionProgress,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -17756,7 +17756,7 @@ type comFabricTestManagementClient4Vtbl struct {
 	EndGetChaosEvents     uintptr
 }
 
-func (v *ComFabricTestManagementClient4) VTable() *comFabricTestManagementClient4Vtbl {
+func (v *ComFabricTestManagementClient4) vtable() *comFabricTestManagementClient4Vtbl {
 	return (*comFabricTestManagementClient4Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -17769,7 +17769,7 @@ func (v *ComFabricTestManagementClient4) beginGetChaos(
 		context = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetChaos,
+		v.vtable().BeginGetChaos,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(timeoutMilliseconds),
@@ -17792,7 +17792,7 @@ func (v *ComFabricTestManagementClient4) endGetChaos(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetChaos,
+		v.vtable().EndGetChaos,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -17813,7 +17813,7 @@ func (v *ComFabricTestManagementClient4) beginGetChaosSchedule(
 		context = p_2
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetChaosSchedule,
+		v.vtable().BeginGetChaosSchedule,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(timeoutMilliseconds),
@@ -17836,7 +17836,7 @@ func (v *ComFabricTestManagementClient4) endGetChaosSchedule(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetChaosSchedule,
+		v.vtable().EndGetChaosSchedule,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -17860,7 +17860,7 @@ func (v *ComFabricTestManagementClient4) beginSetChaosSchedule(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginSetChaosSchedule,
+		v.vtable().BeginSetChaosSchedule,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -17879,7 +17879,7 @@ func (v *ComFabricTestManagementClient4) endSetChaosSchedule(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndSetChaosSchedule,
+		v.vtable().EndSetChaosSchedule,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -17903,7 +17903,7 @@ func (v *ComFabricTestManagementClient4) beginGetChaosEvents(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetChaosEvents,
+		v.vtable().BeginGetChaosEvents,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -17926,7 +17926,7 @@ func (v *ComFabricTestManagementClient4) endGetChaosEvents(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetChaosEvents,
+		v.vtable().EndGetChaosEvents,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -18200,7 +18200,7 @@ type comFabricNetworkManagementClientVtbl struct {
 	EndGetDeployedNetworkCodePackageList   uintptr
 }
 
-func (v *ComFabricNetworkManagementClient) VTable() *comFabricNetworkManagementClientVtbl {
+func (v *ComFabricNetworkManagementClient) vtable() *comFabricNetworkManagementClientVtbl {
 	return (*comFabricNetworkManagementClientVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -18221,7 +18221,7 @@ func (v *ComFabricNetworkManagementClient) beginCreateNetwork(
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginCreateNetwork,
+		v.vtable().BeginCreateNetwork,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -18240,7 +18240,7 @@ func (v *ComFabricNetworkManagementClient) endCreateNetwork(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndCreateNetwork,
+		v.vtable().EndCreateNetwork,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -18264,7 +18264,7 @@ func (v *ComFabricNetworkManagementClient) beginDeleteNetwork(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginDeleteNetwork,
+		v.vtable().BeginDeleteNetwork,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -18283,7 +18283,7 @@ func (v *ComFabricNetworkManagementClient) endDeleteNetwork(
 	context *comIFabricAsyncOperationContext,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndDeleteNetwork,
+		v.vtable().EndDeleteNetwork,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -18307,7 +18307,7 @@ func (v *ComFabricNetworkManagementClient) beginGetNetworkList(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetNetworkList,
+		v.vtable().BeginGetNetworkList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -18330,7 +18330,7 @@ func (v *ComFabricNetworkManagementClient) endGetNetworkList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetNetworkList,
+		v.vtable().EndGetNetworkList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -18354,7 +18354,7 @@ func (v *ComFabricNetworkManagementClient) beginGetNetworkApplicationList(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetNetworkApplicationList,
+		v.vtable().BeginGetNetworkApplicationList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -18377,7 +18377,7 @@ func (v *ComFabricNetworkManagementClient) endGetNetworkApplicationList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetNetworkApplicationList,
+		v.vtable().EndGetNetworkApplicationList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -18401,7 +18401,7 @@ func (v *ComFabricNetworkManagementClient) beginGetNetworkNodeList(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetNetworkNodeList,
+		v.vtable().BeginGetNetworkNodeList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -18424,7 +18424,7 @@ func (v *ComFabricNetworkManagementClient) endGetNetworkNodeList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetNetworkNodeList,
+		v.vtable().EndGetNetworkNodeList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -18448,7 +18448,7 @@ func (v *ComFabricNetworkManagementClient) beginGetApplicationNetworkList(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetApplicationNetworkList,
+		v.vtable().BeginGetApplicationNetworkList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -18471,7 +18471,7 @@ func (v *ComFabricNetworkManagementClient) endGetApplicationNetworkList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetApplicationNetworkList,
+		v.vtable().EndGetApplicationNetworkList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -18495,7 +18495,7 @@ func (v *ComFabricNetworkManagementClient) beginGetDeployedNetworkList(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetDeployedNetworkList,
+		v.vtable().BeginGetDeployedNetworkList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -18518,7 +18518,7 @@ func (v *ComFabricNetworkManagementClient) endGetDeployedNetworkList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetDeployedNetworkList,
+		v.vtable().EndGetDeployedNetworkList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -18542,7 +18542,7 @@ func (v *ComFabricNetworkManagementClient) beginGetDeployedNetworkCodePackageLis
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetDeployedNetworkCodePackageList,
+		v.vtable().BeginGetDeployedNetworkCodePackageList,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -18565,7 +18565,7 @@ func (v *ComFabricNetworkManagementClient) endGetDeployedNetworkCodePackageList(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetDeployedNetworkCodePackageList,
+		v.vtable().EndGetDeployedNetworkCodePackageList,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -19091,13 +19091,13 @@ type comFabricGetRepairTaskListResultVtbl struct {
 	get_Tasks uintptr
 }
 
-func (v *ComFabricGetRepairTaskListResult) VTable() *comFabricGetRepairTaskListResultVtbl {
+func (v *ComFabricGetRepairTaskListResult) vtable() *comFabricGetRepairTaskListResultVtbl {
 	return (*comFabricGetRepairTaskListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetRepairTaskListResult) GetTasks() (rt []FabricRepairTask, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Tasks,
+		v.vtable().get_Tasks,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -19155,13 +19155,13 @@ type comFabricServiceDescriptionResultVtbl struct {
 	get_Description uintptr
 }
 
-func (v *ComFabricServiceDescriptionResult) VTable() *comFabricServiceDescriptionResultVtbl {
+func (v *ComFabricServiceDescriptionResult) vtable() *comFabricServiceDescriptionResultVtbl {
 	return (*comFabricServiceDescriptionResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricServiceDescriptionResult) GetDescription() (rt *FabricServiceDescription, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Description,
+		v.vtable().get_Description,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -19197,13 +19197,13 @@ type comFabricServiceGroupDescriptionResultVtbl struct {
 	get_Description uintptr
 }
 
-func (v *ComFabricServiceGroupDescriptionResult) VTable() *comFabricServiceGroupDescriptionResultVtbl {
+func (v *ComFabricServiceGroupDescriptionResult) vtable() *comFabricServiceGroupDescriptionResultVtbl {
 	return (*comFabricServiceGroupDescriptionResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricServiceGroupDescriptionResult) GetDescription() (rt *FabricServiceGroupDescription, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Description,
+		v.vtable().get_Description,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -19241,13 +19241,13 @@ type comFabricResolvedServicePartitionResultVtbl struct {
 	CompareVersion uintptr
 }
 
-func (v *ComFabricResolvedServicePartitionResult) VTable() *comFabricResolvedServicePartitionResultVtbl {
+func (v *ComFabricResolvedServicePartitionResult) vtable() *comFabricResolvedServicePartitionResultVtbl {
 	return (*comFabricResolvedServicePartitionResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricResolvedServicePartitionResult) GetPartition() (rt *FabricResolvedServicePartition, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Partition,
+		v.vtable().get_Partition,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -19269,7 +19269,7 @@ func (v *ComFabricResolvedServicePartitionResult) GetEndpoint() (endpoint *Fabri
 		endpoint = p_0.toGoStruct()
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetEndpoint,
+		v.vtable().GetEndpoint,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -19289,7 +19289,7 @@ func (v *ComFabricResolvedServicePartitionResult) CompareVersion(
 		compareResult = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().CompareVersion,
+		v.vtable().CompareVersion,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(other)),
@@ -19321,7 +19321,7 @@ type comFabricServiceEndpointsVersionVtbl struct {
 	Compare uintptr
 }
 
-func (v *ComFabricServiceEndpointsVersion) VTable() *comFabricServiceEndpointsVersionVtbl {
+func (v *ComFabricServiceEndpointsVersion) vtable() *comFabricServiceEndpointsVersionVtbl {
 	return (*comFabricServiceEndpointsVersionVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -19333,7 +19333,7 @@ func (v *ComFabricServiceEndpointsVersion) Compare(
 		compareResult = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().Compare,
+		v.vtable().Compare,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(other)),
@@ -19366,13 +19366,13 @@ type comFabricServiceNotificationVtbl struct {
 	GetVersion       uintptr
 }
 
-func (v *ComFabricServiceNotification) VTable() *comFabricServiceNotificationVtbl {
+func (v *ComFabricServiceNotification) vtable() *comFabricServiceNotificationVtbl {
 	return (*comFabricServiceNotificationVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricServiceNotification) GetNotification() (rt *FabricServiceNotification, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Notification,
+		v.vtable().get_Notification,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -19394,7 +19394,7 @@ func (v *ComFabricServiceNotification) GetVersion() (result *ComFabricServiceEnd
 		result = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetVersion,
+		v.vtable().GetVersion,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -19427,13 +19427,13 @@ type comFabricNameEnumerationResultVtbl struct {
 	GetNames              uintptr
 }
 
-func (v *ComFabricNameEnumerationResult) VTable() *comFabricNameEnumerationResultVtbl {
+func (v *ComFabricNameEnumerationResult) vtable() *comFabricNameEnumerationResultVtbl {
 	return (*comFabricNameEnumerationResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricNameEnumerationResult) GetEnumerationStatus() (rt FabricErrornumerationStatus, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_EnumerationStatus,
+		v.vtable().get_EnumerationStatus,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -19463,13 +19463,13 @@ type comFabricPropertyMetadataResultVtbl struct {
 	get_Metadata uintptr
 }
 
-func (v *ComFabricPropertyMetadataResult) VTable() *comFabricPropertyMetadataResultVtbl {
+func (v *ComFabricPropertyMetadataResult) vtable() *comFabricPropertyMetadataResultVtbl {
 	return (*comFabricPropertyMetadataResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricPropertyMetadataResult) GetMetadata() (rt *FabricNamedPropertyMetadata, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Metadata,
+		v.vtable().get_Metadata,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -19510,13 +19510,13 @@ type comFabricPropertyValueResultVtbl struct {
 	GetValueAsGuid    uintptr
 }
 
-func (v *ComFabricPropertyValueResult) VTable() *comFabricPropertyValueResultVtbl {
+func (v *ComFabricPropertyValueResult) vtable() *comFabricPropertyValueResultVtbl {
 	return (*comFabricPropertyValueResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricPropertyValueResult) GetProperty() (rt *FabricNamedProperty, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Property,
+		v.vtable().get_Property,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -19542,7 +19542,7 @@ func (v *ComFabricPropertyValueResult) GetValueAsBinary() (byteCount uint32, buf
 		bufferedValue = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetValueAsBinary,
+		v.vtable().GetValueAsBinary,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -19560,7 +19560,7 @@ func (v *ComFabricPropertyValueResult) GetValueAsInt64() (value int64, err error
 		value = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetValueAsInt64,
+		v.vtable().GetValueAsInt64,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -19578,7 +19578,7 @@ func (v *ComFabricPropertyValueResult) GetValueAsDouble() (value float64, err er
 		value = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetValueAsDouble,
+		v.vtable().GetValueAsDouble,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -19596,7 +19596,7 @@ func (v *ComFabricPropertyValueResult) GetValueAsWString() (bufferedValue string
 		bufferedValue = windows.UTF16PtrToString(p_0)
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetValueAsWString,
+		v.vtable().GetValueAsWString,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -19614,7 +19614,7 @@ func (v *ComFabricPropertyValueResult) GetValueAsGuid() (value windows.GUID, err
 		value = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetValueAsGuid,
+		v.vtable().GetValueAsGuid,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -19646,7 +19646,7 @@ type comFabricPropertyBatchResultVtbl struct {
 	GetProperty uintptr
 }
 
-func (v *ComFabricPropertyBatchResult) VTable() *comFabricPropertyBatchResultVtbl {
+func (v *ComFabricPropertyBatchResult) vtable() *comFabricPropertyBatchResultVtbl {
 	return (*comFabricPropertyBatchResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -19658,7 +19658,7 @@ func (v *ComFabricPropertyBatchResult) GetProperty(
 		property = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetProperty,
+		v.vtable().GetProperty,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(operationIndexInRequest),
@@ -19692,13 +19692,13 @@ type comFabricPropertyEnumerationResultVtbl struct {
 	GetProperty           uintptr
 }
 
-func (v *ComFabricPropertyEnumerationResult) VTable() *comFabricPropertyEnumerationResultVtbl {
+func (v *ComFabricPropertyEnumerationResult) vtable() *comFabricPropertyEnumerationResultVtbl {
 	return (*comFabricPropertyEnumerationResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricPropertyEnumerationResult) GetEnumerationStatus() (rt FabricErrornumerationStatus, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_EnumerationStatus,
+		v.vtable().get_EnumerationStatus,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -19710,7 +19710,7 @@ func (v *ComFabricPropertyEnumerationResult) GetEnumerationStatus() (rt FabricEr
 }
 func (v *ComFabricPropertyEnumerationResult) GetPropertyCount() (rt uint32, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_PropertyCount,
+		v.vtable().get_PropertyCount,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -19728,7 +19728,7 @@ func (v *ComFabricPropertyEnumerationResult) GetProperty(
 		property = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetProperty,
+		v.vtable().GetProperty,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(index),
@@ -19765,13 +19765,13 @@ type comFabricApplicationUpgradeProgressResultVtbl struct {
 	GetChangedUpgradeDomains         uintptr
 }
 
-func (v *ComFabricApplicationUpgradeProgressResult) VTable() *comFabricApplicationUpgradeProgressResultVtbl {
+func (v *ComFabricApplicationUpgradeProgressResult) vtable() *comFabricApplicationUpgradeProgressResultVtbl {
 	return (*comFabricApplicationUpgradeProgressResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricApplicationUpgradeProgressResult) GetApplicationName() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ApplicationName,
+		v.vtable().get_ApplicationName,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -19789,7 +19789,7 @@ func (v *ComFabricApplicationUpgradeProgressResult) GetApplicationName() (rt str
 }
 func (v *ComFabricApplicationUpgradeProgressResult) GetApplicationTypeName() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ApplicationTypeName,
+		v.vtable().get_ApplicationTypeName,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -19807,7 +19807,7 @@ func (v *ComFabricApplicationUpgradeProgressResult) GetApplicationTypeName() (rt
 }
 func (v *ComFabricApplicationUpgradeProgressResult) GetTargetApplicationTypeVersion() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_TargetApplicationTypeVersion,
+		v.vtable().get_TargetApplicationTypeVersion,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -19825,7 +19825,7 @@ func (v *ComFabricApplicationUpgradeProgressResult) GetTargetApplicationTypeVers
 }
 func (v *ComFabricApplicationUpgradeProgressResult) GetUpgradeState() (rt FabricApplicationUpgradeState, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_UpgradeState,
+		v.vtable().get_UpgradeState,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -19856,13 +19856,13 @@ type comFabricApplicationUpgradeProgressResult2Vtbl struct {
 	get_NextUpgradeDomain  uintptr
 }
 
-func (v *ComFabricApplicationUpgradeProgressResult2) VTable() *comFabricApplicationUpgradeProgressResult2Vtbl {
+func (v *ComFabricApplicationUpgradeProgressResult2) vtable() *comFabricApplicationUpgradeProgressResult2Vtbl {
 	return (*comFabricApplicationUpgradeProgressResult2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricApplicationUpgradeProgressResult2) GetRollingUpgradeMode() (rt FabricRollingUpgradeMode, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_RollingUpgradeMode,
+		v.vtable().get_RollingUpgradeMode,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -19874,7 +19874,7 @@ func (v *ComFabricApplicationUpgradeProgressResult2) GetRollingUpgradeMode() (rt
 }
 func (v *ComFabricApplicationUpgradeProgressResult2) GetNextUpgradeDomain() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_NextUpgradeDomain,
+		v.vtable().get_NextUpgradeDomain,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -19910,13 +19910,13 @@ type comFabricApplicationUpgradeProgressResult3Vtbl struct {
 	get_UpgradeProgress uintptr
 }
 
-func (v *ComFabricApplicationUpgradeProgressResult3) VTable() *comFabricApplicationUpgradeProgressResult3Vtbl {
+func (v *ComFabricApplicationUpgradeProgressResult3) vtable() *comFabricApplicationUpgradeProgressResult3Vtbl {
 	return (*comFabricApplicationUpgradeProgressResult3Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricApplicationUpgradeProgressResult3) GetUpgradeProgress() (rt *FabricApplicationUpgradeProgress, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_UpgradeProgress,
+		v.vtable().get_UpgradeProgress,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -19956,13 +19956,13 @@ type comFabricUpgradeProgressResultVtbl struct {
 	GetChangedUpgradeDomains uintptr
 }
 
-func (v *ComFabricUpgradeProgressResult) VTable() *comFabricUpgradeProgressResultVtbl {
+func (v *ComFabricUpgradeProgressResult) vtable() *comFabricUpgradeProgressResultVtbl {
 	return (*comFabricUpgradeProgressResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricUpgradeProgressResult) GetTargetCodeVersion() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_TargetCodeVersion,
+		v.vtable().get_TargetCodeVersion,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -19980,7 +19980,7 @@ func (v *ComFabricUpgradeProgressResult) GetTargetCodeVersion() (rt string, err 
 }
 func (v *ComFabricUpgradeProgressResult) GetTargetConfigVersion() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_TargetConfigVersion,
+		v.vtable().get_TargetConfigVersion,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -19998,7 +19998,7 @@ func (v *ComFabricUpgradeProgressResult) GetTargetConfigVersion() (rt string, er
 }
 func (v *ComFabricUpgradeProgressResult) GetUpgradeState() (rt FabricUpgradeState, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_UpgradeState,
+		v.vtable().get_UpgradeState,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -20018,7 +20018,7 @@ func (v *ComFabricUpgradeProgressResult) GetUpgradeDomains() (itemCount uint32, 
 		bufferedItems = p_1.toGoStruct()
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().GetUpgradeDomains,
+		v.vtable().GetUpgradeDomains,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -20042,7 +20042,7 @@ func (v *ComFabricUpgradeProgressResult) GetChangedUpgradeDomains(
 		bufferedItems = p_2.toGoStruct()
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().GetChangedUpgradeDomains,
+		v.vtable().GetChangedUpgradeDomains,
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(previousProgress)),
@@ -20077,13 +20077,13 @@ type comFabricRestartNodeResultVtbl struct {
 	get_Result uintptr
 }
 
-func (v *ComFabricRestartNodeResult) VTable() *comFabricRestartNodeResultVtbl {
+func (v *ComFabricRestartNodeResult) vtable() *comFabricRestartNodeResultVtbl {
 	return (*comFabricRestartNodeResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricRestartNodeResult) GetResult() (rt *FabricNodeResult, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Result,
+		v.vtable().get_Result,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -20119,13 +20119,13 @@ type comFabricStartNodeResultVtbl struct {
 	get_Result uintptr
 }
 
-func (v *ComFabricStartNodeResult) VTable() *comFabricStartNodeResultVtbl {
+func (v *ComFabricStartNodeResult) vtable() *comFabricStartNodeResultVtbl {
 	return (*comFabricStartNodeResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricStartNodeResult) GetResult() (rt *FabricNodeResult, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Result,
+		v.vtable().get_Result,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -20161,13 +20161,13 @@ type comFabricStopNodeResultVtbl struct {
 	get_Result uintptr
 }
 
-func (v *ComFabricStopNodeResult) VTable() *comFabricStopNodeResultVtbl {
+func (v *ComFabricStopNodeResult) vtable() *comFabricStopNodeResultVtbl {
 	return (*comFabricStopNodeResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricStopNodeResult) GetResult() (rt *FabricNodeResult, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Result,
+		v.vtable().get_Result,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -20203,13 +20203,13 @@ type comFabricRestartDeployedCodePackageResultVtbl struct {
 	get_Result uintptr
 }
 
-func (v *ComFabricRestartDeployedCodePackageResult) VTable() *comFabricRestartDeployedCodePackageResultVtbl {
+func (v *ComFabricRestartDeployedCodePackageResult) vtable() *comFabricRestartDeployedCodePackageResultVtbl {
 	return (*comFabricRestartDeployedCodePackageResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricRestartDeployedCodePackageResult) GetResult() (rt *FabricDeployedCodePackageResult, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Result,
+		v.vtable().get_Result,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -20245,13 +20245,13 @@ type comFabricMovePrimaryResultVtbl struct {
 	get_Result uintptr
 }
 
-func (v *ComFabricMovePrimaryResult) VTable() *comFabricMovePrimaryResultVtbl {
+func (v *ComFabricMovePrimaryResult) vtable() *comFabricMovePrimaryResultVtbl {
 	return (*comFabricMovePrimaryResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricMovePrimaryResult) GetResult() (rt *FabricMovePrimaryResult, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Result,
+		v.vtable().get_Result,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -20287,13 +20287,13 @@ type comFabricMoveSecondaryResultVtbl struct {
 	get_Result uintptr
 }
 
-func (v *ComFabricMoveSecondaryResult) VTable() *comFabricMoveSecondaryResultVtbl {
+func (v *ComFabricMoveSecondaryResult) vtable() *comFabricMoveSecondaryResultVtbl {
 	return (*comFabricMoveSecondaryResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricMoveSecondaryResult) GetResult() (rt *FabricMoveSecondaryResult, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Result,
+		v.vtable().get_Result,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -20330,13 +20330,13 @@ type comFabricUpgradeProgressResult2Vtbl struct {
 	get_NextUpgradeDomain  uintptr
 }
 
-func (v *ComFabricUpgradeProgressResult2) VTable() *comFabricUpgradeProgressResult2Vtbl {
+func (v *ComFabricUpgradeProgressResult2) vtable() *comFabricUpgradeProgressResult2Vtbl {
 	return (*comFabricUpgradeProgressResult2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricUpgradeProgressResult2) GetRollingUpgradeMode() (rt FabricRollingUpgradeMode, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_RollingUpgradeMode,
+		v.vtable().get_RollingUpgradeMode,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -20348,7 +20348,7 @@ func (v *ComFabricUpgradeProgressResult2) GetRollingUpgradeMode() (rt FabricRoll
 }
 func (v *ComFabricUpgradeProgressResult2) GetNextUpgradeDomain() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_NextUpgradeDomain,
+		v.vtable().get_NextUpgradeDomain,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -20384,13 +20384,13 @@ type comFabricUpgradeProgressResult3Vtbl struct {
 	get_UpgradeProgress uintptr
 }
 
-func (v *ComFabricUpgradeProgressResult3) VTable() *comFabricUpgradeProgressResult3Vtbl {
+func (v *ComFabricUpgradeProgressResult3) vtable() *comFabricUpgradeProgressResult3Vtbl {
 	return (*comFabricUpgradeProgressResult3Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricUpgradeProgressResult3) GetUpgradeProgress() (rt *FabricUpgradeProgress, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_UpgradeProgress,
+		v.vtable().get_UpgradeProgress,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -20426,7 +20426,7 @@ type comFabricServicePartitionResolutionChangeHandlerVtbl struct {
 	OnChange uintptr
 }
 
-func (v *ComFabricServicePartitionResolutionChangeHandler) VTable() *comFabricServicePartitionResolutionChangeHandlerVtbl {
+func (v *ComFabricServicePartitionResolutionChangeHandler) vtable() *comFabricServicePartitionResolutionChangeHandlerVtbl {
 	return (*comFabricServicePartitionResolutionChangeHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -20437,7 +20437,7 @@ func (v *ComFabricServicePartitionResolutionChangeHandler) OnChange(
 	error FabricErrorCode,
 ) (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().OnChange,
+		v.vtable().OnChange,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(source)),
@@ -20476,7 +20476,7 @@ type comFabricServiceNotificationEventHandlerVtbl struct {
 	OnNotification uintptr
 }
 
-func (v *ComFabricServiceNotificationEventHandler) VTable() *comFabricServiceNotificationEventHandlerVtbl {
+func (v *ComFabricServiceNotificationEventHandler) vtable() *comFabricServiceNotificationEventHandlerVtbl {
 	return (*comFabricServiceNotificationEventHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -20484,7 +20484,7 @@ func (v *ComFabricServiceNotificationEventHandler) OnNotification(
 	param_0 *ComFabricServiceNotification,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().OnNotification,
+		v.vtable().OnNotification,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(param_0)),
@@ -20517,7 +20517,7 @@ type comFabricClientConnectionEventHandlerVtbl struct {
 	OnDisconnected uintptr
 }
 
-func (v *ComFabricClientConnectionEventHandler) VTable() *comFabricClientConnectionEventHandlerVtbl {
+func (v *ComFabricClientConnectionEventHandler) vtable() *comFabricClientConnectionEventHandlerVtbl {
 	return (*comFabricClientConnectionEventHandlerVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -20525,7 +20525,7 @@ func (v *ComFabricClientConnectionEventHandler) OnConnected(
 	param_0 *ComFabricGatewayInformationResult,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().OnConnected,
+		v.vtable().OnConnected,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(param_0)),
@@ -20541,7 +20541,7 @@ func (v *ComFabricClientConnectionEventHandler) OnDisconnected(
 	param_0 *ComFabricGatewayInformationResult,
 ) (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().OnDisconnected,
+		v.vtable().OnDisconnected,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(param_0)),
@@ -20573,7 +20573,7 @@ type comFabricClientConnectionEventHandler2Vtbl struct {
 	OnClaimsRetrieval uintptr
 }
 
-func (v *ComFabricClientConnectionEventHandler2) VTable() *comFabricClientConnectionEventHandler2Vtbl {
+func (v *ComFabricClientConnectionEventHandler2) vtable() *comFabricClientConnectionEventHandler2Vtbl {
 	return (*comFabricClientConnectionEventHandler2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -20587,7 +20587,7 @@ func (v *ComFabricClientConnectionEventHandler2) OnClaimsRetrieval(
 		token = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().OnClaimsRetrieval,
+		v.vtable().OnClaimsRetrieval,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -20619,13 +20619,13 @@ type comFabricClientSettingsResultVtbl struct {
 	get_Settings uintptr
 }
 
-func (v *ComFabricClientSettingsResult) VTable() *comFabricClientSettingsResultVtbl {
+func (v *ComFabricClientSettingsResult) vtable() *comFabricClientSettingsResultVtbl {
 	return (*comFabricClientSettingsResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricClientSettingsResult) GetSettings() (rt *FabricClientSettings, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Settings,
+		v.vtable().get_Settings,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -20661,13 +20661,13 @@ type comFabricClusterHealthResultVtbl struct {
 	get_ClusterHealth uintptr
 }
 
-func (v *ComFabricClusterHealthResult) VTable() *comFabricClusterHealthResultVtbl {
+func (v *ComFabricClusterHealthResult) vtable() *comFabricClusterHealthResultVtbl {
 	return (*comFabricClusterHealthResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricClusterHealthResult) GetClusterHealth() (rt *FabricClusterHealth, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ClusterHealth,
+		v.vtable().get_ClusterHealth,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -20703,13 +20703,13 @@ type comFabricNodeHealthResultVtbl struct {
 	get_NodeHealth uintptr
 }
 
-func (v *ComFabricNodeHealthResult) VTable() *comFabricNodeHealthResultVtbl {
+func (v *ComFabricNodeHealthResult) vtable() *comFabricNodeHealthResultVtbl {
 	return (*comFabricNodeHealthResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricNodeHealthResult) GetNodeHealth() (rt *FabricNodeHealth, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_NodeHealth,
+		v.vtable().get_NodeHealth,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -20745,13 +20745,13 @@ type comFabricApplicationHealthResultVtbl struct {
 	get_ApplicationHealth uintptr
 }
 
-func (v *ComFabricApplicationHealthResult) VTable() *comFabricApplicationHealthResultVtbl {
+func (v *ComFabricApplicationHealthResult) vtable() *comFabricApplicationHealthResultVtbl {
 	return (*comFabricApplicationHealthResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricApplicationHealthResult) GetApplicationHealth() (rt *FabricApplicationHealth, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ApplicationHealth,
+		v.vtable().get_ApplicationHealth,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -20787,13 +20787,13 @@ type comFabricServiceHealthResultVtbl struct {
 	get_ServiceHealth uintptr
 }
 
-func (v *ComFabricServiceHealthResult) VTable() *comFabricServiceHealthResultVtbl {
+func (v *ComFabricServiceHealthResult) vtable() *comFabricServiceHealthResultVtbl {
 	return (*comFabricServiceHealthResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricServiceHealthResult) GetServiceHealth() (rt *FabricServiceHealth, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ServiceHealth,
+		v.vtable().get_ServiceHealth,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -20829,13 +20829,13 @@ type comFabricPartitionHealthResultVtbl struct {
 	get_PartitionHealth uintptr
 }
 
-func (v *ComFabricPartitionHealthResult) VTable() *comFabricPartitionHealthResultVtbl {
+func (v *ComFabricPartitionHealthResult) vtable() *comFabricPartitionHealthResultVtbl {
 	return (*comFabricPartitionHealthResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricPartitionHealthResult) GetPartitionHealth() (rt *FabricPartitionHealth, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_PartitionHealth,
+		v.vtable().get_PartitionHealth,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -20871,13 +20871,13 @@ type comFabricReplicaHealthResultVtbl struct {
 	get_ReplicaHealth uintptr
 }
 
-func (v *ComFabricReplicaHealthResult) VTable() *comFabricReplicaHealthResultVtbl {
+func (v *ComFabricReplicaHealthResult) vtable() *comFabricReplicaHealthResultVtbl {
 	return (*comFabricReplicaHealthResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricReplicaHealthResult) GetReplicaHealth() (rt *FabricReplicaHealth, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ReplicaHealth,
+		v.vtable().get_ReplicaHealth,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -20913,13 +20913,13 @@ type comFabricDeployedApplicationHealthResultVtbl struct {
 	get_DeployedApplicationHealth uintptr
 }
 
-func (v *ComFabricDeployedApplicationHealthResult) VTable() *comFabricDeployedApplicationHealthResultVtbl {
+func (v *ComFabricDeployedApplicationHealthResult) vtable() *comFabricDeployedApplicationHealthResultVtbl {
 	return (*comFabricDeployedApplicationHealthResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricDeployedApplicationHealthResult) GetDeployedApplicationHealth() (rt *FabricDeployedApplicationHealth, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_DeployedApplicationHealth,
+		v.vtable().get_DeployedApplicationHealth,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -20955,13 +20955,13 @@ type comFabricDeployedServicePackageHealthResultVtbl struct {
 	get_DeployedServicePackageHealth uintptr
 }
 
-func (v *ComFabricDeployedServicePackageHealthResult) VTable() *comFabricDeployedServicePackageHealthResultVtbl {
+func (v *ComFabricDeployedServicePackageHealthResult) vtable() *comFabricDeployedServicePackageHealthResultVtbl {
 	return (*comFabricDeployedServicePackageHealthResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricDeployedServicePackageHealthResult) GetDeployedServicePackageHealth() (rt *FabricDeployedServicePackageHealth, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_DeployedServicePackageHealth,
+		v.vtable().get_DeployedServicePackageHealth,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -20997,13 +20997,13 @@ type comFabricGetNodeListResultVtbl struct {
 	get_NodeList uintptr
 }
 
-func (v *ComFabricGetNodeListResult) VTable() *comFabricGetNodeListResultVtbl {
+func (v *ComFabricGetNodeListResult) vtable() *comFabricGetNodeListResultVtbl {
 	return (*comFabricGetNodeListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetNodeListResult) GetNodeList() (rt []FabricNodeQueryResultItem, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_NodeList,
+		v.vtable().get_NodeList,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -21061,13 +21061,13 @@ type comFabricGetApplicationTypeListResultVtbl struct {
 	get_ApplicationTypeList uintptr
 }
 
-func (v *ComFabricGetApplicationTypeListResult) VTable() *comFabricGetApplicationTypeListResultVtbl {
+func (v *ComFabricGetApplicationTypeListResult) vtable() *comFabricGetApplicationTypeListResultVtbl {
 	return (*comFabricGetApplicationTypeListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetApplicationTypeListResult) GetApplicationTypeList() (rt []FabricApplicationTypeQueryResultItem, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ApplicationTypeList,
+		v.vtable().get_ApplicationTypeList,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -21126,13 +21126,13 @@ type comFabricGetApplicationTypePagedListResultVtbl struct {
 	get_PagingStatus             uintptr
 }
 
-func (v *ComFabricGetApplicationTypePagedListResult) VTable() *comFabricGetApplicationTypePagedListResultVtbl {
+func (v *ComFabricGetApplicationTypePagedListResult) vtable() *comFabricGetApplicationTypePagedListResultVtbl {
 	return (*comFabricGetApplicationTypePagedListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetApplicationTypePagedListResult) GetApplicationTypePagedList() (rt []FabricApplicationTypeQueryResultItem, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ApplicationTypePagedList,
+		v.vtable().get_ApplicationTypePagedList,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -21172,7 +21172,7 @@ func (v *ComFabricGetApplicationTypePagedListResult) GetApplicationTypePagedList
 }
 func (v *ComFabricGetApplicationTypePagedListResult) GetPagingStatus() (rt *FabricPagingStatus, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_PagingStatus,
+		v.vtable().get_PagingStatus,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -21208,13 +21208,13 @@ type comFabricGetApplicationListResultVtbl struct {
 	get_ApplicationList uintptr
 }
 
-func (v *ComFabricGetApplicationListResult) VTable() *comFabricGetApplicationListResultVtbl {
+func (v *ComFabricGetApplicationListResult) vtable() *comFabricGetApplicationListResultVtbl {
 	return (*comFabricGetApplicationListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetApplicationListResult) GetApplicationList() (rt []FabricApplicationQueryResultItem, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ApplicationList,
+		v.vtable().get_ApplicationList,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -21272,13 +21272,13 @@ type comFabricGetServiceTypeListResultVtbl struct {
 	get_ServiceTypeList uintptr
 }
 
-func (v *ComFabricGetServiceTypeListResult) VTable() *comFabricGetServiceTypeListResultVtbl {
+func (v *ComFabricGetServiceTypeListResult) vtable() *comFabricGetServiceTypeListResultVtbl {
 	return (*comFabricGetServiceTypeListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetServiceTypeListResult) GetServiceTypeList() (rt []FabricServiceTypeQueryResultItem, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ServiceTypeList,
+		v.vtable().get_ServiceTypeList,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -21336,13 +21336,13 @@ type comFabricGetServiceGroupMemberTypeListResultVtbl struct {
 	get_ServiceGroupMemberTypeList uintptr
 }
 
-func (v *ComFabricGetServiceGroupMemberTypeListResult) VTable() *comFabricGetServiceGroupMemberTypeListResultVtbl {
+func (v *ComFabricGetServiceGroupMemberTypeListResult) vtable() *comFabricGetServiceGroupMemberTypeListResultVtbl {
 	return (*comFabricGetServiceGroupMemberTypeListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetServiceGroupMemberTypeListResult) GetServiceGroupMemberTypeList() (rt []FabricServiceGroupMemberTypeQueryResultItem, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ServiceGroupMemberTypeList,
+		v.vtable().get_ServiceGroupMemberTypeList,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -21400,13 +21400,13 @@ type comFabricGetServiceListResultVtbl struct {
 	get_ServiceList uintptr
 }
 
-func (v *ComFabricGetServiceListResult) VTable() *comFabricGetServiceListResultVtbl {
+func (v *ComFabricGetServiceListResult) vtable() *comFabricGetServiceListResultVtbl {
 	return (*comFabricGetServiceListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetServiceListResult) GetServiceList() (rt []FabricServiceQueryResultItem, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ServiceList,
+		v.vtable().get_ServiceList,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -21464,13 +21464,13 @@ type comFabricGetServiceGroupMemberListResultVtbl struct {
 	get_ServiceGroupMemberList uintptr
 }
 
-func (v *ComFabricGetServiceGroupMemberListResult) VTable() *comFabricGetServiceGroupMemberListResultVtbl {
+func (v *ComFabricGetServiceGroupMemberListResult) vtable() *comFabricGetServiceGroupMemberListResultVtbl {
 	return (*comFabricGetServiceGroupMemberListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetServiceGroupMemberListResult) GetServiceGroupMemberList() (rt []FabricServiceGroupMemberQueryResultItem, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ServiceGroupMemberList,
+		v.vtable().get_ServiceGroupMemberList,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -21528,13 +21528,13 @@ type comFabricGetPartitionListResultVtbl struct {
 	get_PartitionList uintptr
 }
 
-func (v *ComFabricGetPartitionListResult) VTable() *comFabricGetPartitionListResultVtbl {
+func (v *ComFabricGetPartitionListResult) vtable() *comFabricGetPartitionListResultVtbl {
 	return (*comFabricGetPartitionListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetPartitionListResult) GetPartitionList() (rt []FabricServicePartitionQueryResultItem, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_PartitionList,
+		v.vtable().get_PartitionList,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -21592,13 +21592,13 @@ type comFabricGetPartitionLoadInformationResultVtbl struct {
 	get_PartitionLoadInformation uintptr
 }
 
-func (v *ComFabricGetPartitionLoadInformationResult) VTable() *comFabricGetPartitionLoadInformationResultVtbl {
+func (v *ComFabricGetPartitionLoadInformationResult) vtable() *comFabricGetPartitionLoadInformationResultVtbl {
 	return (*comFabricGetPartitionLoadInformationResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetPartitionLoadInformationResult) GetPartitionLoadInformation() (rt *FabricPartitionLoadInformation, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_PartitionLoadInformation,
+		v.vtable().get_PartitionLoadInformation,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -21634,13 +21634,13 @@ type comFabricGetReplicaListResultVtbl struct {
 	get_ReplicaList uintptr
 }
 
-func (v *ComFabricGetReplicaListResult) VTable() *comFabricGetReplicaListResultVtbl {
+func (v *ComFabricGetReplicaListResult) vtable() *comFabricGetReplicaListResultVtbl {
 	return (*comFabricGetReplicaListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetReplicaListResult) GetReplicaList() (rt []FabricServiceReplicaQueryResultItem, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ReplicaList,
+		v.vtable().get_ReplicaList,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -21698,13 +21698,13 @@ type comFabricGetDeployedApplicationListResultVtbl struct {
 	get_DeployedApplicationList uintptr
 }
 
-func (v *ComFabricGetDeployedApplicationListResult) VTable() *comFabricGetDeployedApplicationListResultVtbl {
+func (v *ComFabricGetDeployedApplicationListResult) vtable() *comFabricGetDeployedApplicationListResultVtbl {
 	return (*comFabricGetDeployedApplicationListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetDeployedApplicationListResult) GetDeployedApplicationList() (rt []FabricDeployedApplicationQueryResultItem, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_DeployedApplicationList,
+		v.vtable().get_DeployedApplicationList,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -21763,13 +21763,13 @@ type comFabricGetDeployedApplicationPagedListResultVtbl struct {
 	get_PagingStatus                 uintptr
 }
 
-func (v *ComFabricGetDeployedApplicationPagedListResult) VTable() *comFabricGetDeployedApplicationPagedListResultVtbl {
+func (v *ComFabricGetDeployedApplicationPagedListResult) vtable() *comFabricGetDeployedApplicationPagedListResultVtbl {
 	return (*comFabricGetDeployedApplicationPagedListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetDeployedApplicationPagedListResult) GetDeployedApplicationPagedList() (rt []FabricDeployedApplicationQueryResultItem, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_DeployedApplicationPagedList,
+		v.vtable().get_DeployedApplicationPagedList,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -21809,7 +21809,7 @@ func (v *ComFabricGetDeployedApplicationPagedListResult) GetDeployedApplicationP
 }
 func (v *ComFabricGetDeployedApplicationPagedListResult) GetPagingStatus() (rt *FabricPagingStatus, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_PagingStatus,
+		v.vtable().get_PagingStatus,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -21845,13 +21845,13 @@ type comFabricGetDeployedServicePackageListResultVtbl struct {
 	get_DeployedServicePackageList uintptr
 }
 
-func (v *ComFabricGetDeployedServicePackageListResult) VTable() *comFabricGetDeployedServicePackageListResultVtbl {
+func (v *ComFabricGetDeployedServicePackageListResult) vtable() *comFabricGetDeployedServicePackageListResultVtbl {
 	return (*comFabricGetDeployedServicePackageListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetDeployedServicePackageListResult) GetDeployedServicePackageList() (rt []FabricDeployedServicePackageQueryResultItem, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_DeployedServicePackageList,
+		v.vtable().get_DeployedServicePackageList,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -21909,13 +21909,13 @@ type comFabricGetDeployedServiceTypeListResultVtbl struct {
 	get_DeployedServiceTypeList uintptr
 }
 
-func (v *ComFabricGetDeployedServiceTypeListResult) VTable() *comFabricGetDeployedServiceTypeListResultVtbl {
+func (v *ComFabricGetDeployedServiceTypeListResult) vtable() *comFabricGetDeployedServiceTypeListResultVtbl {
 	return (*comFabricGetDeployedServiceTypeListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetDeployedServiceTypeListResult) GetDeployedServiceTypeList() (rt []FabricDeployedServiceTypeQueryResultItem, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_DeployedServiceTypeList,
+		v.vtable().get_DeployedServiceTypeList,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -21973,13 +21973,13 @@ type comFabricGetDeployedCodePackageListResultVtbl struct {
 	get_DeployedCodePackageList uintptr
 }
 
-func (v *ComFabricGetDeployedCodePackageListResult) VTable() *comFabricGetDeployedCodePackageListResultVtbl {
+func (v *ComFabricGetDeployedCodePackageListResult) vtable() *comFabricGetDeployedCodePackageListResultVtbl {
 	return (*comFabricGetDeployedCodePackageListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetDeployedCodePackageListResult) GetDeployedCodePackageList() (rt []FabricDeployedCodePackageQueryResultItem, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_DeployedCodePackageList,
+		v.vtable().get_DeployedCodePackageList,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -22037,13 +22037,13 @@ type comFabricGetDeployedReplicaListResultVtbl struct {
 	get_DeployedReplicaList uintptr
 }
 
-func (v *ComFabricGetDeployedReplicaListResult) VTable() *comFabricGetDeployedReplicaListResultVtbl {
+func (v *ComFabricGetDeployedReplicaListResult) vtable() *comFabricGetDeployedReplicaListResultVtbl {
 	return (*comFabricGetDeployedReplicaListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetDeployedReplicaListResult) GetDeployedReplicaList() (rt []FabricDeployedServiceReplicaQueryResultItem, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_DeployedReplicaList,
+		v.vtable().get_DeployedReplicaList,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -22101,13 +22101,13 @@ type comFabricGetDeployedServiceReplicaDetailResultVtbl struct {
 	get_ReplicaDetail uintptr
 }
 
-func (v *ComFabricGetDeployedServiceReplicaDetailResult) VTable() *comFabricGetDeployedServiceReplicaDetailResultVtbl {
+func (v *ComFabricGetDeployedServiceReplicaDetailResult) vtable() *comFabricGetDeployedServiceReplicaDetailResultVtbl {
 	return (*comFabricGetDeployedServiceReplicaDetailResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetDeployedServiceReplicaDetailResult) GetReplicaDetail() (rt *FabricDeployedServiceReplicaDetailQueryResultItem, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ReplicaDetail,
+		v.vtable().get_ReplicaDetail,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -22143,13 +22143,13 @@ type comFabricGetProvisionedCodeVersionListResultVtbl struct {
 	get_ProvisionedCodeVersionList uintptr
 }
 
-func (v *ComFabricGetProvisionedCodeVersionListResult) VTable() *comFabricGetProvisionedCodeVersionListResultVtbl {
+func (v *ComFabricGetProvisionedCodeVersionListResult) vtable() *comFabricGetProvisionedCodeVersionListResultVtbl {
 	return (*comFabricGetProvisionedCodeVersionListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetProvisionedCodeVersionListResult) GetProvisionedCodeVersionList() (rt []FabricProvisionedCodeVersionQueryResultItem, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ProvisionedCodeVersionList,
+		v.vtable().get_ProvisionedCodeVersionList,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -22207,13 +22207,13 @@ type comFabricGetClusterLoadInformationResultVtbl struct {
 	get_ClusterLoadInformation uintptr
 }
 
-func (v *ComFabricGetClusterLoadInformationResult) VTable() *comFabricGetClusterLoadInformationResultVtbl {
+func (v *ComFabricGetClusterLoadInformationResult) vtable() *comFabricGetClusterLoadInformationResultVtbl {
 	return (*comFabricGetClusterLoadInformationResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetClusterLoadInformationResult) GetClusterLoadInformation() (rt *FabricClusterLoadInformation, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ClusterLoadInformation,
+		v.vtable().get_ClusterLoadInformation,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -22249,13 +22249,13 @@ type comFabricGetProvisionedConfigVersionListResultVtbl struct {
 	get_ProvisionedConfigVersionList uintptr
 }
 
-func (v *ComFabricGetProvisionedConfigVersionListResult) VTable() *comFabricGetProvisionedConfigVersionListResultVtbl {
+func (v *ComFabricGetProvisionedConfigVersionListResult) vtable() *comFabricGetProvisionedConfigVersionListResultVtbl {
 	return (*comFabricGetProvisionedConfigVersionListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetProvisionedConfigVersionListResult) GetProvisionedConfigVersionList() (rt []FabricProvisionedConfigVersionQueryResultItem, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ProvisionedConfigVersionList,
+		v.vtable().get_ProvisionedConfigVersionList,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -22313,13 +22313,13 @@ type comFabricGetNodeLoadInformationResultVtbl struct {
 	get_NodeLoadInformation uintptr
 }
 
-func (v *ComFabricGetNodeLoadInformationResult) VTable() *comFabricGetNodeLoadInformationResultVtbl {
+func (v *ComFabricGetNodeLoadInformationResult) vtable() *comFabricGetNodeLoadInformationResultVtbl {
 	return (*comFabricGetNodeLoadInformationResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetNodeLoadInformationResult) GetNodeLoadInformation() (rt *FabricNodeLoadInformation, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_NodeLoadInformation,
+		v.vtable().get_NodeLoadInformation,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -22355,13 +22355,13 @@ type comFabricGetReplicaLoadInformationResultVtbl struct {
 	get_ReplicaLoadInformation uintptr
 }
 
-func (v *ComFabricGetReplicaLoadInformationResult) VTable() *comFabricGetReplicaLoadInformationResultVtbl {
+func (v *ComFabricGetReplicaLoadInformationResult) vtable() *comFabricGetReplicaLoadInformationResultVtbl {
 	return (*comFabricGetReplicaLoadInformationResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetReplicaLoadInformationResult) GetReplicaLoadInformation() (rt *FabricReplicaLoadInformation, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ReplicaLoadInformation,
+		v.vtable().get_ReplicaLoadInformation,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -22397,13 +22397,13 @@ type comFabricGetApplicationLoadInformationResultVtbl struct {
 	get_ApplicationLoadInformation uintptr
 }
 
-func (v *ComFabricGetApplicationLoadInformationResult) VTable() *comFabricGetApplicationLoadInformationResultVtbl {
+func (v *ComFabricGetApplicationLoadInformationResult) vtable() *comFabricGetApplicationLoadInformationResultVtbl {
 	return (*comFabricGetApplicationLoadInformationResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetApplicationLoadInformationResult) GetApplicationLoadInformation() (rt *FabricApplicationLoadInformation, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ApplicationLoadInformation,
+		v.vtable().get_ApplicationLoadInformation,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -22439,13 +22439,13 @@ type comFabricGatewayInformationResultVtbl struct {
 	get_GatewayInformation uintptr
 }
 
-func (v *ComFabricGatewayInformationResult) VTable() *comFabricGatewayInformationResultVtbl {
+func (v *ComFabricGatewayInformationResult) vtable() *comFabricGatewayInformationResultVtbl {
 	return (*comFabricGatewayInformationResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGatewayInformationResult) GetGatewayInformation() (rt *FabricGatewayInformation, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_GatewayInformation,
+		v.vtable().get_GatewayInformation,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -22481,13 +22481,13 @@ type comFabricGetRollingUpgradeMonitoringPolicyResultVtbl struct {
 	get_Policy uintptr
 }
 
-func (v *ComFabricGetRollingUpgradeMonitoringPolicyResult) VTable() *comFabricGetRollingUpgradeMonitoringPolicyResultVtbl {
+func (v *ComFabricGetRollingUpgradeMonitoringPolicyResult) vtable() *comFabricGetRollingUpgradeMonitoringPolicyResultVtbl {
 	return (*comFabricGetRollingUpgradeMonitoringPolicyResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetRollingUpgradeMonitoringPolicyResult) GetPolicy() (rt *FabricRollingUpgradeMonitoringPolicy, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Policy,
+		v.vtable().get_Policy,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -22523,13 +22523,13 @@ type comFabricGetUnplacedReplicaInformationResultVtbl struct {
 	get_UnplacedReplicaInformation uintptr
 }
 
-func (v *ComFabricGetUnplacedReplicaInformationResult) VTable() *comFabricGetUnplacedReplicaInformationResultVtbl {
+func (v *ComFabricGetUnplacedReplicaInformationResult) vtable() *comFabricGetUnplacedReplicaInformationResultVtbl {
 	return (*comFabricGetUnplacedReplicaInformationResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetUnplacedReplicaInformationResult) GetUnplacedReplicaInformation() (rt *FabricUnplacedReplicaInformation, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_UnplacedReplicaInformation,
+		v.vtable().get_UnplacedReplicaInformation,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -22565,13 +22565,13 @@ type comFabricGetNodeListResult2Vtbl struct {
 	get_PagingStatus uintptr
 }
 
-func (v *ComFabricGetNodeListResult2) VTable() *comFabricGetNodeListResult2Vtbl {
+func (v *ComFabricGetNodeListResult2) vtable() *comFabricGetNodeListResult2Vtbl {
 	return (*comFabricGetNodeListResult2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetNodeListResult2) GetPagingStatus() (rt *FabricPagingStatus, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_PagingStatus,
+		v.vtable().get_PagingStatus,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -22607,13 +22607,13 @@ type comFabricGetApplicationListResult2Vtbl struct {
 	get_PagingStatus uintptr
 }
 
-func (v *ComFabricGetApplicationListResult2) VTable() *comFabricGetApplicationListResult2Vtbl {
+func (v *ComFabricGetApplicationListResult2) vtable() *comFabricGetApplicationListResult2Vtbl {
 	return (*comFabricGetApplicationListResult2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetApplicationListResult2) GetPagingStatus() (rt *FabricPagingStatus, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_PagingStatus,
+		v.vtable().get_PagingStatus,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -22649,13 +22649,13 @@ type comFabricGetServiceListResult2Vtbl struct {
 	get_PagingStatus uintptr
 }
 
-func (v *ComFabricGetServiceListResult2) VTable() *comFabricGetServiceListResult2Vtbl {
+func (v *ComFabricGetServiceListResult2) vtable() *comFabricGetServiceListResult2Vtbl {
 	return (*comFabricGetServiceListResult2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetServiceListResult2) GetPagingStatus() (rt *FabricPagingStatus, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_PagingStatus,
+		v.vtable().get_PagingStatus,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -22691,13 +22691,13 @@ type comFabricGetPartitionListResult2Vtbl struct {
 	get_PagingStatus uintptr
 }
 
-func (v *ComFabricGetPartitionListResult2) VTable() *comFabricGetPartitionListResult2Vtbl {
+func (v *ComFabricGetPartitionListResult2) vtable() *comFabricGetPartitionListResult2Vtbl {
 	return (*comFabricGetPartitionListResult2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetPartitionListResult2) GetPagingStatus() (rt *FabricPagingStatus, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_PagingStatus,
+		v.vtable().get_PagingStatus,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -22733,13 +22733,13 @@ type comFabricGetReplicaListResult2Vtbl struct {
 	get_PagingStatus uintptr
 }
 
-func (v *ComFabricGetReplicaListResult2) VTable() *comFabricGetReplicaListResult2Vtbl {
+func (v *ComFabricGetReplicaListResult2) vtable() *comFabricGetReplicaListResult2Vtbl {
 	return (*comFabricGetReplicaListResult2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetReplicaListResult2) GetPagingStatus() (rt *FabricPagingStatus, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_PagingStatus,
+		v.vtable().get_PagingStatus,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -22775,13 +22775,13 @@ type comFabricGetClusterHealthChunkResultVtbl struct {
 	get_ClusterHealthChunk uintptr
 }
 
-func (v *ComFabricGetClusterHealthChunkResult) VTable() *comFabricGetClusterHealthChunkResultVtbl {
+func (v *ComFabricGetClusterHealthChunkResult) vtable() *comFabricGetClusterHealthChunkResultVtbl {
 	return (*comFabricGetClusterHealthChunkResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetClusterHealthChunkResult) GetClusterHealthChunk() (rt *FabricClusterHealthChunk, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ClusterHealthChunk,
+		v.vtable().get_ClusterHealthChunk,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -22817,13 +22817,13 @@ type comFabricPartitionDataLossProgressResultVtbl struct {
 	get_Progress uintptr
 }
 
-func (v *ComFabricPartitionDataLossProgressResult) VTable() *comFabricPartitionDataLossProgressResultVtbl {
+func (v *ComFabricPartitionDataLossProgressResult) vtable() *comFabricPartitionDataLossProgressResultVtbl {
 	return (*comFabricPartitionDataLossProgressResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricPartitionDataLossProgressResult) GetProgress() (rt *FabricPartitionDataLossProgress, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Progress,
+		v.vtable().get_Progress,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -22859,13 +22859,13 @@ type comFabricOrchestrationUpgradeStatusResultVtbl struct {
 	get_Progress uintptr
 }
 
-func (v *ComFabricOrchestrationUpgradeStatusResult) VTable() *comFabricOrchestrationUpgradeStatusResultVtbl {
+func (v *ComFabricOrchestrationUpgradeStatusResult) vtable() *comFabricOrchestrationUpgradeStatusResultVtbl {
 	return (*comFabricOrchestrationUpgradeStatusResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricOrchestrationUpgradeStatusResult) GetProgress() (rt *FabricOrchestrationUpgradeProgress, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Progress,
+		v.vtable().get_Progress,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -22901,13 +22901,13 @@ type comFabricUpgradeOrchestrationServiceStateResultVtbl struct {
 	get_State uintptr
 }
 
-func (v *ComFabricUpgradeOrchestrationServiceStateResult) VTable() *comFabricUpgradeOrchestrationServiceStateResultVtbl {
+func (v *ComFabricUpgradeOrchestrationServiceStateResult) vtable() *comFabricUpgradeOrchestrationServiceStateResultVtbl {
 	return (*comFabricUpgradeOrchestrationServiceStateResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricUpgradeOrchestrationServiceStateResult) GetState() (rt *FabricUpgradeOrchestrationServiceState, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_State,
+		v.vtable().get_State,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -22943,13 +22943,13 @@ type comFabricPartitionQuorumLossProgressResultVtbl struct {
 	get_Progress uintptr
 }
 
-func (v *ComFabricPartitionQuorumLossProgressResult) VTable() *comFabricPartitionQuorumLossProgressResultVtbl {
+func (v *ComFabricPartitionQuorumLossProgressResult) vtable() *comFabricPartitionQuorumLossProgressResultVtbl {
 	return (*comFabricPartitionQuorumLossProgressResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricPartitionQuorumLossProgressResult) GetProgress() (rt *FabricPartitionQuorumLossProgress, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Progress,
+		v.vtable().get_Progress,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -22985,13 +22985,13 @@ type comFabricPartitionRestartProgressResultVtbl struct {
 	get_Progress uintptr
 }
 
-func (v *ComFabricPartitionRestartProgressResult) VTable() *comFabricPartitionRestartProgressResultVtbl {
+func (v *ComFabricPartitionRestartProgressResult) vtable() *comFabricPartitionRestartProgressResultVtbl {
 	return (*comFabricPartitionRestartProgressResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricPartitionRestartProgressResult) GetProgress() (rt *FabricPartitionRestartProgress, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Progress,
+		v.vtable().get_Progress,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -23027,13 +23027,13 @@ type comFabricTestCommandStatusResultVtbl struct {
 	get_Result uintptr
 }
 
-func (v *ComFabricTestCommandStatusResult) VTable() *comFabricTestCommandStatusResultVtbl {
+func (v *ComFabricTestCommandStatusResult) vtable() *comFabricTestCommandStatusResultVtbl {
 	return (*comFabricTestCommandStatusResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricTestCommandStatusResult) GetResult() (rt []interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Result,
+		v.vtable().get_Result,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -23091,13 +23091,13 @@ type comFabricChaosEventsSegmentResultVtbl struct {
 	get_ChaosEventsSegmentResult uintptr
 }
 
-func (v *ComFabricChaosEventsSegmentResult) VTable() *comFabricChaosEventsSegmentResultVtbl {
+func (v *ComFabricChaosEventsSegmentResult) vtable() *comFabricChaosEventsSegmentResultVtbl {
 	return (*comFabricChaosEventsSegmentResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricChaosEventsSegmentResult) GetChaosEventsSegmentResult() (rt *FabricChaosEventsSegment, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ChaosEventsSegmentResult,
+		v.vtable().get_ChaosEventsSegmentResult,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -23133,13 +23133,13 @@ type comFabricChaosDescriptionResultVtbl struct {
 	get_ChaosDescriptionResult uintptr
 }
 
-func (v *ComFabricChaosDescriptionResult) VTable() *comFabricChaosDescriptionResultVtbl {
+func (v *ComFabricChaosDescriptionResult) vtable() *comFabricChaosDescriptionResultVtbl {
 	return (*comFabricChaosDescriptionResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricChaosDescriptionResult) GetChaosDescriptionResult() (rt *FabricChaosDescription, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ChaosDescriptionResult,
+		v.vtable().get_ChaosDescriptionResult,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -23175,13 +23175,13 @@ type comFabricChaosScheduleDescriptionResultVtbl struct {
 	get_ChaosScheduleDescriptionResult uintptr
 }
 
-func (v *ComFabricChaosScheduleDescriptionResult) VTable() *comFabricChaosScheduleDescriptionResultVtbl {
+func (v *ComFabricChaosScheduleDescriptionResult) vtable() *comFabricChaosScheduleDescriptionResultVtbl {
 	return (*comFabricChaosScheduleDescriptionResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricChaosScheduleDescriptionResult) GetChaosScheduleDescriptionResult() (rt *FabricChaosScheduleDescription, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ChaosScheduleDescriptionResult,
+		v.vtable().get_ChaosScheduleDescriptionResult,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -23217,13 +23217,13 @@ type comFabricChaosReportResultVtbl struct {
 	get_ChaosReportResult uintptr
 }
 
-func (v *ComFabricChaosReportResult) VTable() *comFabricChaosReportResultVtbl {
+func (v *ComFabricChaosReportResult) vtable() *comFabricChaosReportResultVtbl {
 	return (*comFabricChaosReportResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricChaosReportResult) GetChaosReportResult() (rt *FabricChaosReport, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ChaosReportResult,
+		v.vtable().get_ChaosReportResult,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -23259,13 +23259,13 @@ type comFabricNodeTransitionProgressResultVtbl struct {
 	get_Progress uintptr
 }
 
-func (v *ComFabricNodeTransitionProgressResult) VTable() *comFabricNodeTransitionProgressResultVtbl {
+func (v *ComFabricNodeTransitionProgressResult) vtable() *comFabricNodeTransitionProgressResultVtbl {
 	return (*comFabricNodeTransitionProgressResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricNodeTransitionProgressResult) GetProgress() (rt *FabricNodeTransitionProgress, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Progress,
+		v.vtable().get_Progress,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -23301,13 +23301,13 @@ type comFabricGetServiceNameResultVtbl struct {
 	get_ServiceName uintptr
 }
 
-func (v *ComFabricGetServiceNameResult) VTable() *comFabricGetServiceNameResultVtbl {
+func (v *ComFabricGetServiceNameResult) vtable() *comFabricGetServiceNameResultVtbl {
 	return (*comFabricGetServiceNameResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetServiceNameResult) GetServiceName() (rt *FabricServiceNameQueryResult, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ServiceName,
+		v.vtable().get_ServiceName,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -23343,13 +23343,13 @@ type comFabricGetApplicationNameResultVtbl struct {
 	get_ApplicationName uintptr
 }
 
-func (v *ComFabricGetApplicationNameResult) VTable() *comFabricGetApplicationNameResultVtbl {
+func (v *ComFabricGetApplicationNameResult) vtable() *comFabricGetApplicationNameResultVtbl {
 	return (*comFabricGetApplicationNameResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetApplicationNameResult) GetApplicationName() (rt *FabricApplicationNameQueryResult, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ApplicationName,
+		v.vtable().get_ApplicationName,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -23385,13 +23385,13 @@ type comFabricSecretsResultVtbl struct {
 	get_Secrets uintptr
 }
 
-func (v *ComFabricSecretsResult) VTable() *comFabricSecretsResultVtbl {
+func (v *ComFabricSecretsResult) vtable() *comFabricSecretsResultVtbl {
 	return (*comFabricSecretsResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricSecretsResult) GetSecrets() (rt []FabricSecret, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Secrets,
+		v.vtable().get_Secrets,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -23449,13 +23449,13 @@ type comFabricSecretReferencesResultVtbl struct {
 	get_SecretReferences uintptr
 }
 
-func (v *ComFabricSecretReferencesResult) VTable() *comFabricSecretReferencesResultVtbl {
+func (v *ComFabricSecretReferencesResult) vtable() *comFabricSecretReferencesResultVtbl {
 	return (*comFabricSecretReferencesResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricSecretReferencesResult) GetSecretReferences() (rt []FabricSecretReference, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_SecretReferences,
+		v.vtable().get_SecretReferences,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -23520,7 +23520,7 @@ type comFabricSecretStoreClientVtbl struct {
 	EndGetSecretVersions   uintptr
 }
 
-func (v *ComFabricSecretStoreClient) VTable() *comFabricSecretStoreClientVtbl {
+func (v *ComFabricSecretStoreClient) vtable() *comFabricSecretStoreClientVtbl {
 	return (*comFabricSecretStoreClientVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -23560,7 +23560,7 @@ func (v *ComFabricSecretStoreClient) beginGetSecrets(
 		context = p_4
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetSecrets,
+		v.vtable().BeginGetSecrets,
 		6,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -23583,7 +23583,7 @@ func (v *ComFabricSecretStoreClient) endGetSecrets(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetSecrets,
+		v.vtable().EndGetSecrets,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -23626,7 +23626,7 @@ func (v *ComFabricSecretStoreClient) beginSetSecrets(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginSetSecrets,
+		v.vtable().BeginSetSecrets,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -23649,7 +23649,7 @@ func (v *ComFabricSecretStoreClient) endSetSecrets(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndSetSecrets,
+		v.vtable().EndSetSecrets,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -23692,7 +23692,7 @@ func (v *ComFabricSecretStoreClient) beginRemoveSecrets(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginRemoveSecrets,
+		v.vtable().BeginRemoveSecrets,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -23715,7 +23715,7 @@ func (v *ComFabricSecretStoreClient) endRemoveSecrets(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndRemoveSecrets,
+		v.vtable().EndRemoveSecrets,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -23758,7 +23758,7 @@ func (v *ComFabricSecretStoreClient) beginGetSecretVersions(
 		context = p_3
 	}()
 	hr, _, err1 := syscall.Syscall6(
-		v.VTable().BeginGetSecretVersions,
+		v.vtable().BeginGetSecretVersions,
 		5,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
@@ -23781,7 +23781,7 @@ func (v *ComFabricSecretStoreClient) endGetSecretVersions(
 		result = p_1
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().EndGetSecretVersions,
+		v.vtable().EndGetSecretVersions,
 		3,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -24048,13 +24048,13 @@ type comFabricGetNetworkListResultVtbl struct {
 	get_PagingStatus uintptr
 }
 
-func (v *ComFabricGetNetworkListResult) VTable() *comFabricGetNetworkListResultVtbl {
+func (v *ComFabricGetNetworkListResult) vtable() *comFabricGetNetworkListResultVtbl {
 	return (*comFabricGetNetworkListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetNetworkListResult) GetNetworkList() (rt []FabricNetworkInformation, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_NetworkList,
+		v.vtable().get_NetworkList,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -24094,7 +24094,7 @@ func (v *ComFabricGetNetworkListResult) GetNetworkList() (rt []FabricNetworkInfo
 }
 func (v *ComFabricGetNetworkListResult) GetPagingStatus() (rt *FabricPagingStatus, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_PagingStatus,
+		v.vtable().get_PagingStatus,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -24131,13 +24131,13 @@ type comFabricGetNetworkApplicationListResultVtbl struct {
 	get_PagingStatus           uintptr
 }
 
-func (v *ComFabricGetNetworkApplicationListResult) VTable() *comFabricGetNetworkApplicationListResultVtbl {
+func (v *ComFabricGetNetworkApplicationListResult) vtable() *comFabricGetNetworkApplicationListResultVtbl {
 	return (*comFabricGetNetworkApplicationListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetNetworkApplicationListResult) GetNetworkApplicationList() (rt []FabricNetworkApplicationQueryResultItem, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_NetworkApplicationList,
+		v.vtable().get_NetworkApplicationList,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -24177,7 +24177,7 @@ func (v *ComFabricGetNetworkApplicationListResult) GetNetworkApplicationList() (
 }
 func (v *ComFabricGetNetworkApplicationListResult) GetPagingStatus() (rt *FabricPagingStatus, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_PagingStatus,
+		v.vtable().get_PagingStatus,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -24214,13 +24214,13 @@ type comFabricGetNetworkNodeListResultVtbl struct {
 	get_PagingStatus    uintptr
 }
 
-func (v *ComFabricGetNetworkNodeListResult) VTable() *comFabricGetNetworkNodeListResultVtbl {
+func (v *ComFabricGetNetworkNodeListResult) vtable() *comFabricGetNetworkNodeListResultVtbl {
 	return (*comFabricGetNetworkNodeListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetNetworkNodeListResult) GetNetworkNodeList() (rt []FabricNetworkNodeQueryResultItem, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_NetworkNodeList,
+		v.vtable().get_NetworkNodeList,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -24260,7 +24260,7 @@ func (v *ComFabricGetNetworkNodeListResult) GetNetworkNodeList() (rt []FabricNet
 }
 func (v *ComFabricGetNetworkNodeListResult) GetPagingStatus() (rt *FabricPagingStatus, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_PagingStatus,
+		v.vtable().get_PagingStatus,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -24297,13 +24297,13 @@ type comFabricGetApplicationNetworkListResultVtbl struct {
 	get_PagingStatus           uintptr
 }
 
-func (v *ComFabricGetApplicationNetworkListResult) VTable() *comFabricGetApplicationNetworkListResultVtbl {
+func (v *ComFabricGetApplicationNetworkListResult) vtable() *comFabricGetApplicationNetworkListResultVtbl {
 	return (*comFabricGetApplicationNetworkListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetApplicationNetworkListResult) GetApplicationNetworkList() (rt []FabricApplicationNetworkQueryResultItem, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ApplicationNetworkList,
+		v.vtable().get_ApplicationNetworkList,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -24343,7 +24343,7 @@ func (v *ComFabricGetApplicationNetworkListResult) GetApplicationNetworkList() (
 }
 func (v *ComFabricGetApplicationNetworkListResult) GetPagingStatus() (rt *FabricPagingStatus, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_PagingStatus,
+		v.vtable().get_PagingStatus,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -24380,13 +24380,13 @@ type comFabricGetDeployedNetworkListResultVtbl struct {
 	get_PagingStatus        uintptr
 }
 
-func (v *ComFabricGetDeployedNetworkListResult) VTable() *comFabricGetDeployedNetworkListResultVtbl {
+func (v *ComFabricGetDeployedNetworkListResult) vtable() *comFabricGetDeployedNetworkListResultVtbl {
 	return (*comFabricGetDeployedNetworkListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetDeployedNetworkListResult) GetDeployedNetworkList() (rt []FabricDeployedNetworkQueryResultItem, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_DeployedNetworkList,
+		v.vtable().get_DeployedNetworkList,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -24426,7 +24426,7 @@ func (v *ComFabricGetDeployedNetworkListResult) GetDeployedNetworkList() (rt []F
 }
 func (v *ComFabricGetDeployedNetworkListResult) GetPagingStatus() (rt *FabricPagingStatus, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_PagingStatus,
+		v.vtable().get_PagingStatus,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -24463,13 +24463,13 @@ type comFabricGetDeployedNetworkCodePackageListResultVtbl struct {
 	get_PagingStatus                   uintptr
 }
 
-func (v *ComFabricGetDeployedNetworkCodePackageListResult) VTable() *comFabricGetDeployedNetworkCodePackageListResultVtbl {
+func (v *ComFabricGetDeployedNetworkCodePackageListResult) vtable() *comFabricGetDeployedNetworkCodePackageListResultVtbl {
 	return (*comFabricGetDeployedNetworkCodePackageListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetDeployedNetworkCodePackageListResult) GetDeployedNetworkCodePackageList() (rt []FabricDeployedNetworkCodePackageQueryResultItem, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_DeployedNetworkCodePackageList,
+		v.vtable().get_DeployedNetworkCodePackageList,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -24509,7 +24509,7 @@ func (v *ComFabricGetDeployedNetworkCodePackageListResult) GetDeployedNetworkCod
 }
 func (v *ComFabricGetDeployedNetworkCodePackageListResult) GetPagingStatus() (rt *FabricPagingStatus, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_PagingStatus,
+		v.vtable().get_PagingStatus,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,

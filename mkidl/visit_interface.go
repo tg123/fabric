@@ -353,7 +353,7 @@ func (g *generator) generateMethods(n *ast.InterfaceNode) {
 		g.importpkg("syscall")
 
 		g.printfln("hr, _, err1 := syscall.%s(", syscallFunc)
-		g.printfln("v.VTable().%s,", m.Name)
+		g.printfln("v.vtable().%s,", m.Name)
 		g.printfln("%d,", actualSyscallParamLen+1)
 		g.printfln("uintptr(unsafe.Pointer(v)),")
 
@@ -464,7 +464,7 @@ func (g *generator) visitInterface(n *ast.InterfaceNode) {
 			{{ end }} 
 		}
 
-		func (v *{{.Name}}) VTable() *{{.InnerName}}Vtbl {
+		func (v *{{.Name}}) vtable() *{{.InnerName}}Vtbl {
 			return (*{{.InnerName}}Vtbl)(unsafe.Pointer(v.RawVTable))
 		}
 

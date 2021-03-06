@@ -27,7 +27,7 @@ type comFabricAsyncOperationCallbackVtbl struct {
 	Invoke uintptr
 }
 
-func (v *ComFabricAsyncOperationCallback) VTable() *comFabricAsyncOperationCallbackVtbl {
+func (v *ComFabricAsyncOperationCallback) vtable() *comFabricAsyncOperationCallbackVtbl {
 	return (*comFabricAsyncOperationCallbackVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -35,7 +35,7 @@ func (v *ComFabricAsyncOperationCallback) Invoke(
 	context *comIFabricAsyncOperationContext,
 ) (rt interface{}, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().Invoke,
+		v.vtable().Invoke,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(context)),
@@ -74,13 +74,13 @@ type comFabricAsyncOperationContextVtbl struct {
 	Cancel                 uintptr
 }
 
-func (v *ComFabricAsyncOperationContext) VTable() *comFabricAsyncOperationContextVtbl {
+func (v *ComFabricAsyncOperationContext) vtable() *comFabricAsyncOperationContextVtbl {
 	return (*comFabricAsyncOperationContextVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricAsyncOperationContext) IsCompleted() (rt bool, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().IsCompleted,
+		v.vtable().IsCompleted,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -92,7 +92,7 @@ func (v *ComFabricAsyncOperationContext) IsCompleted() (rt bool, err error) {
 }
 func (v *ComFabricAsyncOperationContext) CompletedSynchronously() (rt bool, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().CompletedSynchronously,
+		v.vtable().CompletedSynchronously,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -108,7 +108,7 @@ func (v *ComFabricAsyncOperationContext) GetCallback() (callback *comIFabricAsyn
 		callback = p_0
 	}()
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_Callback,
+		v.vtable().get_Callback,
 		2,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(&p_0)),
@@ -122,7 +122,7 @@ func (v *ComFabricAsyncOperationContext) GetCallback() (callback *comIFabricAsyn
 }
 func (v *ComFabricAsyncOperationContext) Cancel() (err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().Cancel,
+		v.vtable().Cancel,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -154,13 +154,13 @@ type comFabricStringResultVtbl struct {
 	get_String uintptr
 }
 
-func (v *ComFabricStringResult) VTable() *comFabricStringResultVtbl {
+func (v *ComFabricStringResult) vtable() *comFabricStringResultVtbl {
 	return (*comFabricStringResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricStringResult) GetString() (rt string, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_String,
+		v.vtable().get_String,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
@@ -196,7 +196,7 @@ type comFabricStringListResultVtbl struct {
 	GetStrings uintptr
 }
 
-func (v *ComFabricStringListResult) VTable() *comFabricStringListResultVtbl {
+func (v *ComFabricStringListResult) vtable() *comFabricStringListResultVtbl {
 	return (*comFabricStringListResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
@@ -219,13 +219,13 @@ type comFabricGetReplicatorStatusResultVtbl struct {
 	get_ReplicatorStatus uintptr
 }
 
-func (v *ComFabricGetReplicatorStatusResult) VTable() *comFabricGetReplicatorStatusResultVtbl {
+func (v *ComFabricGetReplicatorStatusResult) vtable() *comFabricGetReplicatorStatusResultVtbl {
 	return (*comFabricGetReplicatorStatusResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
 func (v *ComFabricGetReplicatorStatusResult) GetReplicatorStatus() (rt *FabricReplicatorStatusQueryResult, err error) {
 	hr, _, err1 := syscall.Syscall(
-		v.VTable().get_ReplicatorStatus,
+		v.vtable().get_ReplicatorStatus,
 		1,
 		uintptr(unsafe.Pointer(v)),
 		0,
