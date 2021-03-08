@@ -56,3 +56,13 @@ func waitch(ctx context.Context, ch <-chan error, sfctx *comIFabricAsyncOperatio
 		return
 	}
 }
+
+func toTimeout(ctx context.Context) time.Duration {
+	deadline, ok := ctx.Deadline()
+	if ok {
+		return deadline.Sub(time.Now())
+	}
+
+	// TODO move to sf client var
+	return 15 * time.Minute
+}

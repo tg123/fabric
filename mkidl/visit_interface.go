@@ -183,20 +183,7 @@ next:
 	g.printfln(`ch <- nil
 			})`)
 
-	// TODO timeout def
-	g.importpkg("time")
-	g.printfln(`
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}`)
+	g.printfln(`timeout := toTimeout(ctx)`)
 
 	var beginrt []string
 	for _, p := range begin.Params {

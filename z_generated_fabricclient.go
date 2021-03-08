@@ -7,7 +7,6 @@ import (
 	"golang.org/x/sys/windows"
 	"reflect"
 	"syscall"
-	"time"
 	"unsafe"
 )
 
@@ -1355,18 +1354,7 @@ func (v *comFabricPropertyManagementClient) CreateName(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginCreateName(
 		name,
 		uint32(timeout.Milliseconds()),
@@ -1401,18 +1389,7 @@ func (v *comFabricPropertyManagementClient) DeleteName(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginDeleteName(
 		name,
 		uint32(timeout.Milliseconds()),
@@ -1448,18 +1425,7 @@ func (v *comFabricPropertyManagementClient) NameExists(
 		result_0 = rt_1
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginNameExists(
 		name,
 		uint32(timeout.Milliseconds()),
@@ -1497,18 +1463,7 @@ func (v *comFabricPropertyManagementClient) PutPropertyBinary(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginPutPropertyBinary(
 		name,
 		propertyName,
@@ -1548,18 +1503,7 @@ func (v *comFabricPropertyManagementClient) PutPropertyInt64(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginPutPropertyInt64(
 		name,
 		propertyName,
@@ -1598,18 +1542,7 @@ func (v *comFabricPropertyManagementClient) PutPropertyDouble(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginPutPropertyDouble(
 		name,
 		propertyName,
@@ -1648,18 +1581,7 @@ func (v *comFabricPropertyManagementClient) PutPropertyWString(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginPutPropertyWString(
 		name,
 		propertyName,
@@ -1698,18 +1620,7 @@ func (v *comFabricPropertyManagementClient) PutPropertyGuid(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginPutPropertyGuid(
 		name,
 		propertyName,
@@ -1747,18 +1658,7 @@ func (v *comFabricPropertyManagementClient) DeleteProperty(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginDeleteProperty(
 		name,
 		propertyName,
@@ -1796,18 +1696,7 @@ func (v *comFabricPropertyManagementClient) GetPropertyMetadata(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetPropertyMetadata(
 		name,
 		propertyName,
@@ -1907,18 +1796,7 @@ func (v *ComFabricPropertyManagementClient2) PutCustomPropertyOperation(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginPutCustomPropertyOperation(
 		name,
 		propertyOperation,
@@ -2257,18 +2135,7 @@ func (v *ComFabricServiceManagementClient) CreateService(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginCreateService(
 		description,
 		uint32(timeout.Milliseconds()),
@@ -2307,18 +2174,7 @@ func (v *ComFabricServiceManagementClient) CreateServiceFromTemplate(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginCreateServiceFromTemplate(
 		applicationName,
 		serviceName,
@@ -2357,18 +2213,7 @@ func (v *ComFabricServiceManagementClient) DeleteService(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginDeleteService(
 		name,
 		uint32(timeout.Milliseconds()),
@@ -2404,18 +2249,7 @@ func (v *ComFabricServiceManagementClient) GetServiceDescription(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetServiceDescription(
 		name,
 		uint32(timeout.Milliseconds()),
@@ -2580,18 +2414,7 @@ func (v *ComFabricServiceManagementClient2) GetServiceManifest(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetServiceManifest(
 		applicationTypeName,
 		applicationTypeVersion,
@@ -2629,18 +2452,7 @@ func (v *ComFabricServiceManagementClient2) UpdateService(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginUpdateService(
 		name,
 		serviceUpdateDescription,
@@ -2779,18 +2591,7 @@ func (v *ComFabricServiceManagementClient3) RemoveReplica(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginRemoveReplica(
 		description,
 		uint32(timeout.Milliseconds()),
@@ -2825,18 +2626,7 @@ func (v *ComFabricServiceManagementClient3) RestartReplica(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginRestartReplica(
 		description,
 		uint32(timeout.Milliseconds()),
@@ -2977,18 +2767,7 @@ func (v *ComFabricServiceManagementClient4) RegisterServiceNotificationFilter(
 		result_0 = rt_1
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginRegisterServiceNotificationFilter(
 		description,
 		uint32(timeout.Milliseconds()),
@@ -3023,18 +2802,7 @@ func (v *ComFabricServiceManagementClient4) UnregisterServiceNotificationFilter(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginUnregisterServiceNotificationFilter(
 		filterId,
 		uint32(timeout.Milliseconds()),
@@ -3127,18 +2895,7 @@ func (v *ComFabricServiceManagementClient5) DeleteService2(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginDeleteService2(
 		deleteDescription,
 		uint32(timeout.Milliseconds()),
@@ -3231,18 +2988,7 @@ func (v *ComFabricServiceManagementClient6) CreateServiceFromTemplate2(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginCreateServiceFromTemplate2(
 		serviceFromTemplateDescription,
 		uint32(timeout.Milliseconds()),
@@ -3433,18 +3179,7 @@ func (v *ComFabricServiceGroupManagementClient) CreateServiceGroup(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginCreateServiceGroup(
 		description,
 		uint32(timeout.Milliseconds()),
@@ -3479,18 +3214,7 @@ func (v *ComFabricServiceGroupManagementClient) DeleteServiceGroup(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginDeleteServiceGroup(
 		name,
 		uint32(timeout.Milliseconds()),
@@ -3526,18 +3250,7 @@ func (v *ComFabricServiceGroupManagementClient) GetServiceGroupDescription(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetServiceGroupDescription(
 		name,
 		uint32(timeout.Milliseconds()),
@@ -3636,18 +3349,7 @@ func (v *ComFabricServiceGroupManagementClient2) UpdateServiceGroup(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginUpdateServiceGroup(
 		name,
 		serviceGroupUpdateDescription,
@@ -3762,18 +3464,7 @@ func (v *ComFabricServiceGroupManagementClient3) CreateServiceGroupFromTemplate(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginCreateServiceGroupFromTemplate(
 		applicationName,
 		serviceName,
@@ -3870,18 +3561,7 @@ func (v *ComFabricServiceGroupManagementClient4) CreateServiceGroupFromTemplate2
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginCreateServiceGroupFromTemplate2(
 		serviceGroupFromTemplateDescription,
 		uint32(timeout.Milliseconds()),
@@ -4259,18 +3939,7 @@ func (v *ComFabricApplicationManagementClient) ProvisionApplicationType(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginProvisionApplicationType(
 		applicationBuildPath,
 		uint32(timeout.Milliseconds()),
@@ -4305,18 +3974,7 @@ func (v *ComFabricApplicationManagementClient) CreateApplication(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginCreateApplication(
 		description,
 		uint32(timeout.Milliseconds()),
@@ -4351,18 +4009,7 @@ func (v *ComFabricApplicationManagementClient) UpgradeApplication(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginUpgradeApplication(
 		upgradeDescription,
 		uint32(timeout.Milliseconds()),
@@ -4403,18 +4050,7 @@ func (v *ComFabricApplicationManagementClient) GetApplicationUpgradeProgress(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetApplicationUpgradeProgress(
 		applicationName,
 		uint32(timeout.Milliseconds()),
@@ -4449,18 +4085,7 @@ func (v *ComFabricApplicationManagementClient) MoveNextApplicationUpgradeDomain(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginMoveNextApplicationUpgradeDomain(
 		progress,
 		uint32(timeout.Milliseconds()),
@@ -4495,18 +4120,7 @@ func (v *ComFabricApplicationManagementClient) DeleteApplication(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginDeleteApplication(
 		applicationName,
 		uint32(timeout.Milliseconds()),
@@ -4542,18 +4156,7 @@ func (v *ComFabricApplicationManagementClient) UnprovisionApplicationType(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginUnprovisionApplicationType(
 		applicationTypeName,
 		applicationTypeVersion,
@@ -4712,18 +4315,7 @@ func (v *ComFabricApplicationManagementClient2) GetApplicationManifest(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetApplicationManifest(
 		applicationTypeName,
 		applicationTypeVersion,
@@ -4760,18 +4352,7 @@ func (v *ComFabricApplicationManagementClient2) MoveNextApplicationUpgradeDomain
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginMoveNextApplicationUpgradeDomain2(
 		applicationName,
 		nextUpgradeDomain,
@@ -4970,18 +4551,7 @@ func (v *ComFabricApplicationManagementClient3) UpdateApplicationUpgrade(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginUpdateApplicationUpgrade(
 		description,
 		uint32(timeout.Milliseconds()),
@@ -5016,18 +4586,7 @@ func (v *ComFabricApplicationManagementClient3) RestartDeployedCodePackage(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginRestartDeployedCodePackage(
 		restartCodePackageDescription,
 		uint32(timeout.Milliseconds()),
@@ -5166,18 +4725,7 @@ func (v *ComFabricApplicationManagementClient4) DeployServicePackageToNode(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginDeployServicePackageToNode(
 		applicationTypeName,
 		applicationTypeVersion,
@@ -5276,18 +4824,7 @@ func (v *ComFabricApplicationManagementClient5) RollbackApplicationUpgrade(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginRollbackApplicationUpgrade(
 		applicationName,
 		uint32(timeout.Milliseconds()),
@@ -5380,18 +4917,7 @@ func (v *ComFabricApplicationManagementClient6) UpdateApplication(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginUpdateApplication(
 		applicationUpdateDescription,
 		uint32(timeout.Milliseconds()),
@@ -5484,18 +5010,7 @@ func (v *ComFabricApplicationManagementClient7) DeleteApplication2(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginDeleteApplication2(
 		deleteDescription,
 		uint32(timeout.Milliseconds()),
@@ -5588,18 +5103,7 @@ func (v *ComFabricApplicationManagementClient8) ProvisionApplicationType2(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginProvisionApplicationType2(
 		description,
 		uint32(timeout.Milliseconds()),
@@ -5692,18 +5196,7 @@ func (v *ComFabricApplicationManagementClient9) UnprovisionApplicationType2(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginUnprovisionApplicationType2(
 		description,
 		uint32(timeout.Milliseconds()),
@@ -5796,18 +5289,7 @@ func (v *ComFabricApplicationManagementClient10) ProvisionApplicationType3(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginProvisionApplicationType3(
 		description,
 		uint32(timeout.Milliseconds()),
@@ -5944,18 +5426,7 @@ func (v *ComFabricClusterManagementClient) NodeStateRemoved(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginNodeStateRemoved(
 		nodeName,
 		uint32(timeout.Milliseconds()),
@@ -5989,18 +5460,7 @@ func (v *ComFabricClusterManagementClient) RecoverPartitions(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginRecoverPartitions(
 		uint32(timeout.Milliseconds()),
 		callback,
@@ -6606,18 +6066,7 @@ func (v *ComFabricClusterManagementClient2) DeactivateNode(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginDeactivateNode(
 		nodeName,
 		intent,
@@ -6653,18 +6102,7 @@ func (v *ComFabricClusterManagementClient2) ActivateNode(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginActivateNode(
 		nodeName,
 		uint32(timeout.Milliseconds()),
@@ -6700,18 +6138,7 @@ func (v *ComFabricClusterManagementClient2) ProvisionFabric(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginProvisionFabric(
 		codeFilepath,
 		clusterManifestFilepath,
@@ -6747,18 +6174,7 @@ func (v *ComFabricClusterManagementClient2) UpgradeFabric(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginUpgradeFabric(
 		upgradeDescription,
 		uint32(timeout.Milliseconds()),
@@ -6798,18 +6214,7 @@ func (v *ComFabricClusterManagementClient2) GetFabricUpgradeProgress(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetFabricUpgradeProgress(
 		uint32(timeout.Milliseconds()),
 		callback,
@@ -6843,18 +6248,7 @@ func (v *ComFabricClusterManagementClient2) MoveNextFabricUpgradeDomain(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginMoveNextFabricUpgradeDomain(
 		progress,
 		uint32(timeout.Milliseconds()),
@@ -6889,18 +6283,7 @@ func (v *ComFabricClusterManagementClient2) MoveNextFabricUpgradeDomain2(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginMoveNextFabricUpgradeDomain2(
 		nextUpgradeDomain,
 		uint32(timeout.Milliseconds()),
@@ -6936,18 +6319,7 @@ func (v *ComFabricClusterManagementClient2) UnprovisionFabric(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginUnprovisionFabric(
 		codeVersion,
 		configVersion,
@@ -6983,18 +6355,7 @@ func (v *ComFabricClusterManagementClient2) GetClusterManifest(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetClusterManifest(
 		uint32(timeout.Milliseconds()),
 		callback,
@@ -7028,18 +6389,7 @@ func (v *ComFabricClusterManagementClient2) RecoverPartition(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginRecoverPartition(
 		partitionId,
 		uint32(timeout.Milliseconds()),
@@ -7074,18 +6424,7 @@ func (v *ComFabricClusterManagementClient2) RecoverServicePartitions(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginRecoverServicePartitions(
 		serviceName,
 		uint32(timeout.Milliseconds()),
@@ -7119,18 +6458,7 @@ func (v *ComFabricClusterManagementClient2) RecoverSystemPartitions(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginRecoverSystemPartitions(
 		uint32(timeout.Milliseconds()),
 		callback,
@@ -7435,18 +6763,7 @@ func (v *ComFabricClusterManagementClient3) UpdateFabricUpgrade(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginUpdateFabricUpgrade(
 		description,
 		uint32(timeout.Milliseconds()),
@@ -7481,18 +6798,7 @@ func (v *ComFabricClusterManagementClient3) StopNode(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginStopNode(
 		stopNodeDescription,
 		uint32(timeout.Milliseconds()),
@@ -7527,18 +6833,7 @@ func (v *ComFabricClusterManagementClient3) RestartNode(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginRestartNode(
 		restartNodeDescription,
 		uint32(timeout.Milliseconds()),
@@ -7573,18 +6868,7 @@ func (v *ComFabricClusterManagementClient3) StartNode(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginStartNode(
 		startNodeDescription,
 		uint32(timeout.Milliseconds()),
@@ -7673,18 +6957,7 @@ func (v *ComFabricClusterManagementClient4) RollbackFabricUpgrade(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginRollbackFabricUpgrade(
 		uint32(timeout.Milliseconds()),
 		callback,
@@ -7774,18 +7047,7 @@ func (v *ComFabricClusterManagementClient5) ResetPartitionLoad(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginResetPartitionLoad(
 		partitionId,
 		uint32(timeout.Milliseconds()),
@@ -7880,18 +7142,7 @@ func (v *ComFabricClusterManagementClient6) ToggleVerboseServicePlacementHealthR
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginToggleVerboseServicePlacementHealthReporting(
 		enabled,
 		uint32(timeout.Milliseconds()),
@@ -8160,18 +7411,7 @@ func (v *ComFabricClusterManagementClient7) UpgradeConfiguration(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginUpgradeConfiguration(
 		startUpgradeDescription,
 		uint32(timeout.Milliseconds()),
@@ -8206,18 +7446,7 @@ func (v *ComFabricClusterManagementClient7) GetClusterConfigurationUpgradeStatus
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetClusterConfigurationUpgradeStatus(
 		uint32(timeout.Milliseconds()),
 		callback,
@@ -8251,18 +7480,7 @@ func (v *ComFabricClusterManagementClient7) GetClusterConfiguration(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetClusterConfiguration(
 		uint32(timeout.Milliseconds()),
 		callback,
@@ -8295,18 +7513,7 @@ func (v *ComFabricClusterManagementClient7) GetUpgradesPendingApproval(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetUpgradesPendingApproval(
 		uint32(timeout.Milliseconds()),
 		callback,
@@ -8339,18 +7546,7 @@ func (v *ComFabricClusterManagementClient7) StartApprovedUpgrades(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginStartApprovedUpgrades(
 		uint32(timeout.Milliseconds()),
 		callback,
@@ -8447,18 +7643,7 @@ func (v *comFabricClusterManagementClient8) GetClusterManifest2(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetClusterManifest2(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -8603,18 +7788,7 @@ func (v *comFabricClusterManagementClient9) GetUpgradeOrchestrationServiceState(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetUpgradeOrchestrationServiceState(
 		uint32(timeout.Milliseconds()),
 		callback,
@@ -8649,18 +7823,7 @@ func (v *comFabricClusterManagementClient9) SetUpgradeOrchestrationServiceState(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginSetUpgradeOrchestrationServiceState(
 		state,
 		uint32(timeout.Milliseconds()),
@@ -8760,18 +7923,7 @@ func (v *comFabricClusterManagementClient10) GetClusterConfiguration2(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetClusterConfiguration2(
 		apiVersion,
 		uint32(timeout.Milliseconds()),
@@ -9283,18 +8435,7 @@ func (v *ComFabricHealthClient) GetClusterHealth(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetClusterHealth(
 		healthPolicy,
 		uint32(timeout.Milliseconds()),
@@ -9331,18 +8472,7 @@ func (v *ComFabricHealthClient) GetNodeHealth(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetNodeHealth(
 		nodeName,
 		healthPolicy,
@@ -9380,18 +8510,7 @@ func (v *ComFabricHealthClient) GetApplicationHealth(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetApplicationHealth(
 		applicationName,
 		healthPolicy,
@@ -9429,18 +8548,7 @@ func (v *ComFabricHealthClient) GetServiceHealth(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetServiceHealth(
 		serviceName,
 		healthPolicy,
@@ -9478,18 +8586,7 @@ func (v *ComFabricHealthClient) GetPartitionHealth(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetPartitionHealth(
 		partitionId,
 		healthPolicy,
@@ -9528,18 +8625,7 @@ func (v *ComFabricHealthClient) GetReplicaHealth(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetReplicaHealth(
 		partitionId,
 		replicaId,
@@ -9579,18 +8665,7 @@ func (v *ComFabricHealthClient) GetDeployedApplicationHealth(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetDeployedApplicationHealth(
 		applicationName,
 		nodeName,
@@ -9631,18 +8706,7 @@ func (v *ComFabricHealthClient) GetDeployedServicePackageHealth(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetDeployedServicePackageHealth(
 		applicationName,
 		serviceManifestName,
@@ -10086,18 +9150,7 @@ func (v *ComFabricHealthClient2) GetClusterHealth2(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetClusterHealth2(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -10133,18 +9186,7 @@ func (v *ComFabricHealthClient2) GetNodeHealth2(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetNodeHealth2(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -10180,18 +9222,7 @@ func (v *ComFabricHealthClient2) GetApplicationHealth2(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetApplicationHealth2(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -10227,18 +9258,7 @@ func (v *ComFabricHealthClient2) GetServiceHealth2(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetServiceHealth2(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -10274,18 +9294,7 @@ func (v *ComFabricHealthClient2) GetPartitionHealth2(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetPartitionHealth2(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -10321,18 +9330,7 @@ func (v *ComFabricHealthClient2) GetReplicaHealth2(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetReplicaHealth2(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -10368,18 +9366,7 @@ func (v *ComFabricHealthClient2) GetDeployedApplicationHealth2(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetDeployedApplicationHealth2(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -10415,18 +9402,7 @@ func (v *ComFabricHealthClient2) GetDeployedServicePackageHealth2(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetDeployedServicePackageHealth2(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -10524,18 +9500,7 @@ func (v *ComFabricHealthClient3) GetClusterHealthChunk(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetClusterHealthChunk(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -11207,18 +10172,7 @@ func (v *ComFabricQueryClient) GetNodeList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetNodeList(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -11254,18 +10208,7 @@ func (v *ComFabricQueryClient) GetApplicationTypeList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetApplicationTypeList(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -11301,18 +10244,7 @@ func (v *ComFabricQueryClient) GetServiceTypeList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetServiceTypeList(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -11348,18 +10280,7 @@ func (v *ComFabricQueryClient) GetApplicationList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetApplicationList(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -11395,18 +10316,7 @@ func (v *ComFabricQueryClient) GetServiceList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetServiceList(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -11442,18 +10352,7 @@ func (v *ComFabricQueryClient) GetPartitionList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetPartitionList(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -11489,18 +10388,7 @@ func (v *ComFabricQueryClient) GetReplicaList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetReplicaList(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -11536,18 +10424,7 @@ func (v *ComFabricQueryClient) GetDeployedApplicationList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetDeployedApplicationList(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -11583,18 +10460,7 @@ func (v *ComFabricQueryClient) GetDeployedServicePackageList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetDeployedServicePackageList(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -11630,18 +10496,7 @@ func (v *ComFabricQueryClient) GetDeployedServiceTypeList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetDeployedServiceTypeList(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -11677,18 +10532,7 @@ func (v *ComFabricQueryClient) GetDeployedCodePackageList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetDeployedCodePackageList(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -11724,18 +10568,7 @@ func (v *ComFabricQueryClient) GetDeployedReplicaList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetDeployedReplicaList(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -12026,18 +10859,7 @@ func (v *ComFabricQueryClient2) GetDeployedReplicaDetail(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetDeployedReplicaDetail(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -12072,18 +10894,7 @@ func (v *ComFabricQueryClient2) GetClusterLoadInformation(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetClusterLoadInformation(
 		uint32(timeout.Milliseconds()),
 		callback,
@@ -12118,18 +10929,7 @@ func (v *ComFabricQueryClient2) GetPartitionLoadInformation(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetPartitionLoadInformation(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -12165,18 +10965,7 @@ func (v *ComFabricQueryClient2) GetProvisionedFabricCodeVersionList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetProvisionedFabricCodeVersionList(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -12212,18 +11001,7 @@ func (v *ComFabricQueryClient2) GetProvisionedFabricConfigVersionList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetProvisionedFabricConfigVersionList(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -12370,18 +11148,7 @@ func (v *ComFabricQueryClient3) GetNodeLoadInformation(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetNodeLoadInformation(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -12417,18 +11184,7 @@ func (v *ComFabricQueryClient3) GetReplicaLoadInformation(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetReplicaLoadInformation(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -12575,18 +11331,7 @@ func (v *ComFabricQueryClient4) GetServiceGroupMemberList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetServiceGroupMemberList(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -12622,18 +11367,7 @@ func (v *ComFabricQueryClient4) GetServiceGroupMemberTypeList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetServiceGroupMemberTypeList(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -12731,18 +11465,7 @@ func (v *ComFabricQueryClient5) GetUnplacedReplicaInformation(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetUnplacedReplicaInformation(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -12857,18 +11580,7 @@ func (v *ComFabricQueryClient7) GetApplicationLoadInformation(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetApplicationLoadInformation(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -13015,18 +11727,7 @@ func (v *ComFabricQueryClient8) GetServiceName(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetServiceName(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -13062,18 +11763,7 @@ func (v *ComFabricQueryClient8) GetApplicationName(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetApplicationName(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -13176,18 +11866,7 @@ func (v *ComFabricQueryClient9) GetApplicationTypePagedList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetApplicationTypePagedList(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -13290,18 +11969,7 @@ func (v *ComFabricQueryClient10) GetDeployedApplicationPagedList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetDeployedApplicationPagedList(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -13463,18 +12131,7 @@ func (v *ComFabricInfrastructureServiceClient) InvokeInfrastructureCommand(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginInvokeInfrastructureCommand(
 		serviceName,
 		command,
@@ -13512,18 +12169,7 @@ func (v *ComFabricInfrastructureServiceClient) InvokeInfrastructureQuery(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginInvokeInfrastructureQuery(
 		serviceName,
 		command,
@@ -13863,18 +12509,7 @@ func (v *ComFabricRepairManagementClient) CreateRepairTask(
 		result_0 = rt_1
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginCreateRepairTask(
 		repairTask,
 		uint32(timeout.Milliseconds()),
@@ -13910,18 +12545,7 @@ func (v *ComFabricRepairManagementClient) CancelRepairTask(
 		result_0 = rt_1
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginCancelRepairTask(
 		requestDescription,
 		uint32(timeout.Milliseconds()),
@@ -13957,18 +12581,7 @@ func (v *ComFabricRepairManagementClient) ForceApproveRepairTask(
 		result_0 = rt_1
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginForceApproveRepairTask(
 		requestDescription,
 		uint32(timeout.Milliseconds()),
@@ -14003,18 +12616,7 @@ func (v *ComFabricRepairManagementClient) DeleteRepairTask(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginDeleteRepairTask(
 		requestDescription,
 		uint32(timeout.Milliseconds()),
@@ -14050,18 +12652,7 @@ func (v *ComFabricRepairManagementClient) UpdateRepairExecutionState(
 		result_0 = rt_1
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginUpdateRepairExecutionState(
 		repairTask,
 		uint32(timeout.Milliseconds()),
@@ -14097,18 +12688,7 @@ func (v *ComFabricRepairManagementClient) GetRepairTaskList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetRepairTaskList(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -14206,18 +12786,7 @@ func (v *ComFabricRepairManagementClient2) UpdateRepairTaskHealthPolicy(
 		result_0 = rt_1
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginUpdateRepairTaskHealthPolicy(
 		updateDescription,
 		uint32(timeout.Milliseconds()),
@@ -14560,18 +13129,7 @@ func (v *ComFabricFaultManagementClient) RestartNode(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginRestartNode(
 		description,
 		uint32(timeout.Milliseconds()),
@@ -14607,18 +13165,7 @@ func (v *ComFabricFaultManagementClient) StartNode(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginStartNode(
 		description,
 		uint32(timeout.Milliseconds()),
@@ -14654,18 +13201,7 @@ func (v *ComFabricFaultManagementClient) StopNode(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginStopNode(
 		description,
 		uint32(timeout.Milliseconds()),
@@ -14701,18 +13237,7 @@ func (v *ComFabricFaultManagementClient) RestartDeployedCodePackage(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginRestartDeployedCodePackage(
 		description,
 		uint32(timeout.Milliseconds()),
@@ -14748,18 +13273,7 @@ func (v *ComFabricFaultManagementClient) MovePrimary(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginMovePrimary(
 		description,
 		uint32(timeout.Milliseconds()),
@@ -14795,18 +13309,7 @@ func (v *ComFabricFaultManagementClient) MoveSecondary(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginMoveSecondary(
 		description,
 		uint32(timeout.Milliseconds()),
@@ -15224,18 +13727,7 @@ func (v *ComFabricTestManagementClient) StartPartitionDataLoss(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginStartPartitionDataLoss(
 		invokeDataLossDescription,
 		uint32(timeout.Milliseconds()),
@@ -15271,18 +13763,7 @@ func (v *ComFabricTestManagementClient) GetPartitionDataLossProgress(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetPartitionDataLossProgress(
 		operationId,
 		uint32(timeout.Milliseconds()),
@@ -15317,18 +13798,7 @@ func (v *ComFabricTestManagementClient) StartPartitionQuorumLoss(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginStartPartitionQuorumLoss(
 		invokeQuorumLossDescription,
 		uint32(timeout.Milliseconds()),
@@ -15364,18 +13834,7 @@ func (v *ComFabricTestManagementClient) GetPartitionQuorumLossProgress(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetPartitionQuorumLossProgress(
 		operationId,
 		uint32(timeout.Milliseconds()),
@@ -15410,18 +13869,7 @@ func (v *ComFabricTestManagementClient) StartPartitionRestart(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginStartPartitionRestart(
 		restartPartitionDescription,
 		uint32(timeout.Milliseconds()),
@@ -15457,18 +13905,7 @@ func (v *ComFabricTestManagementClient) GetPartitionRestartProgress(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetPartitionRestartProgress(
 		operationId,
 		uint32(timeout.Milliseconds()),
@@ -15504,18 +13941,7 @@ func (v *ComFabricTestManagementClient) GetTestCommandStatusList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetTestCommandStatusList(
 		operationId,
 		uint32(timeout.Milliseconds()),
@@ -15550,18 +13976,7 @@ func (v *ComFabricTestManagementClient) CancelTestCommand(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginCancelTestCommand(
 		invokeDataLossDescription,
 		uint32(timeout.Milliseconds()),
@@ -15745,18 +14160,7 @@ func (v *ComFabricTestManagementClient2) StartChaos(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginStartChaos(
 		restartPartitionDescription,
 		uint32(timeout.Milliseconds()),
@@ -15790,18 +14194,7 @@ func (v *ComFabricTestManagementClient2) StopChaos(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginStopChaos(
 		uint32(timeout.Milliseconds()),
 		callback,
@@ -15836,18 +14229,7 @@ func (v *ComFabricTestManagementClient2) GetChaosReport(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetChaosReport(
 		getChaosReportDescription,
 		uint32(timeout.Milliseconds()),
@@ -15987,18 +14369,7 @@ func (v *ComFabricTestManagementClient3) StartNodeTransition(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginStartNodeTransition(
 		description,
 		uint32(timeout.Milliseconds()),
@@ -16034,18 +14405,7 @@ func (v *ComFabricTestManagementClient3) GetNodeTransitionProgress(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetNodeTransitionProgress(
 		operationId,
 		uint32(timeout.Milliseconds()),
@@ -16279,18 +14639,7 @@ func (v *comFabricTestManagementClient4) GetChaos(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetChaos(
 		uint32(timeout.Milliseconds()),
 		callback,
@@ -16324,18 +14673,7 @@ func (v *comFabricTestManagementClient4) GetChaosSchedule(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetChaosSchedule(
 		uint32(timeout.Milliseconds()),
 		callback,
@@ -16369,18 +14707,7 @@ func (v *comFabricTestManagementClient4) SetChaosSchedule(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginSetChaosSchedule(
 		setChaosScheduleDescription,
 		uint32(timeout.Milliseconds()),
@@ -16416,18 +14743,7 @@ func (v *comFabricTestManagementClient4) GetChaosEvents(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetChaosEvents(
 		chaosEventsDescription,
 		uint32(timeout.Milliseconds()),
@@ -16865,18 +15181,7 @@ func (v *ComFabricNetworkManagementClient) CreateNetwork(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginCreateNetwork(
 		networkName,
 		description,
@@ -16912,18 +15217,7 @@ func (v *ComFabricNetworkManagementClient) DeleteNetwork(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginDeleteNetwork(
 		deleteDescription,
 		uint32(timeout.Milliseconds()),
@@ -16964,18 +15258,7 @@ func (v *ComFabricNetworkManagementClient) GetNetworkList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetNetworkList(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -17016,18 +15299,7 @@ func (v *ComFabricNetworkManagementClient) GetNetworkApplicationList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetNetworkApplicationList(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -17068,18 +15340,7 @@ func (v *ComFabricNetworkManagementClient) GetNetworkNodeList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetNetworkNodeList(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -17120,18 +15381,7 @@ func (v *ComFabricNetworkManagementClient) GetApplicationNetworkList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetApplicationNetworkList(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -17172,18 +15422,7 @@ func (v *ComFabricNetworkManagementClient) GetDeployedNetworkList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetDeployedNetworkList(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -17224,18 +15463,7 @@ func (v *ComFabricNetworkManagementClient) GetDeployedNetworkCodePackageList(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetDeployedNetworkCodePackageList(
 		queryDescription,
 		uint32(timeout.Milliseconds()),
@@ -21144,18 +19372,7 @@ func (v *ComFabricSecretStoreClient) GetSecrets(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetSecrets(
 		secretReferences,
 		includeValue,
@@ -21192,18 +19409,7 @@ func (v *ComFabricSecretStoreClient) SetSecrets(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginSetSecrets(
 		secrets,
 		uint32(timeout.Milliseconds()),
@@ -21239,18 +19445,7 @@ func (v *ComFabricSecretStoreClient) RemoveSecrets(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginRemoveSecrets(
 		secretReferences,
 		uint32(timeout.Milliseconds()),
@@ -21286,18 +19481,7 @@ func (v *ComFabricSecretStoreClient) GetSecretVersions(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginGetSecretVersions(
 		secretReferences,
 		uint32(timeout.Milliseconds()),

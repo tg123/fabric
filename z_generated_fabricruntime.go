@@ -7,7 +7,6 @@ import (
 	"golang.org/x/sys/windows"
 	"reflect"
 	"syscall"
-	"time"
 	"unsafe"
 )
 
@@ -382,18 +381,7 @@ func (v *comFabricStatelessServiceInstance) Close(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginClose(
 		callback,
 	)
@@ -830,18 +818,7 @@ func (v *comFabricStatefulServiceReplica) ChangeRole(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginChangeRole(
 		newRole,
 		callback,
@@ -874,18 +851,7 @@ func (v *comFabricStatefulServiceReplica) Close(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginClose(
 		callback,
 	)
@@ -1316,18 +1282,7 @@ func (v *comFabricStateReplicator) Replicate(
 		result_0 = rt_1
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	_, sfctx, err := v.beginReplicate(
 		operationData,
 		callback,
@@ -1557,18 +1512,7 @@ func (v *comFabricStateProvider) UpdateEpoch(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginUpdateEpoch(
 		epoch,
 		previousEpochLastSequenceNumber,
@@ -1603,18 +1547,7 @@ func (v *comFabricStateProvider) OnDataLoss(
 		result_0 = rt_1
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginOnDataLoss(
 		callback,
 	)
@@ -2073,18 +2006,7 @@ func (v *comFabricReplicator) ChangeRole(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginChangeRole(
 		epoch,
 		role,
@@ -2119,18 +2041,7 @@ func (v *comFabricReplicator) UpdateEpoch(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginUpdateEpoch(
 		epoch,
 		callback,
@@ -2163,18 +2074,7 @@ func (v *comFabricReplicator) Close(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginClose(
 		callback,
 	)
@@ -2406,18 +2306,7 @@ func (v *comFabricPrimaryReplicator) OnDataLoss(
 		result_0 = rt_1
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginOnDataLoss(
 		callback,
 	)
@@ -2450,18 +2339,7 @@ func (v *comFabricPrimaryReplicator) WaitForCatchUpQuorum(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginWaitForCatchUpQuorum(
 		catchUpMode,
 		callback,
@@ -2495,18 +2373,7 @@ func (v *comFabricPrimaryReplicator) BuildReplica(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginBuildReplica(
 		replica,
 		callback,
@@ -2738,18 +2605,7 @@ func (v *comFabricAtomicGroupStateReplicator) ReplicateAtomicGroupOperation(
 		result_0 = rt_1
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	_, sfctx, err := v.beginReplicateAtomicGroupOperation(
 		atomicGroupId,
 		operationData,
@@ -2786,18 +2642,7 @@ func (v *comFabricAtomicGroupStateReplicator) ReplicateAtomicGroupCommit(
 		result_0 = rt_1
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	_, sfctx, err := v.beginReplicateAtomicGroupCommit(
 		atomicGroupId,
 		callback,
@@ -2833,18 +2678,7 @@ func (v *comFabricAtomicGroupStateReplicator) ReplicateAtomicGroupRollback(
 		result_0 = rt_1
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	_, sfctx, err := v.beginReplicateAtomicGroupRollback(
 		atomicGroupId,
 		callback,
@@ -3020,18 +2854,7 @@ func (v *comFabricAtomicGroupStateProvider) AtomicGroupCommit(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginAtomicGroupCommit(
 		atomicGroupId,
 		commitSequenceNumber,
@@ -3067,18 +2890,7 @@ func (v *comFabricAtomicGroupStateProvider) AtomicGroupRollback(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginAtomicGroupRollback(
 		atomicGroupId,
 		rollbackequenceNumber,
@@ -3113,18 +2925,7 @@ func (v *comFabricAtomicGroupStateProvider) UndoProgress(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginUndoProgress(
 		fromCommitSequenceNumber,
 		callback,
@@ -4958,18 +4759,7 @@ func (v *comFabricTransaction) Commit(
 		result_0 = rt_1
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginCommit(
 		uint32(timeout.Milliseconds()),
 		callback,
@@ -5482,18 +5272,7 @@ func (v *comFabricKeyValueStoreReplica3) Backup(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginBackup(
 		backupDirectory,
 		backupOption,
@@ -5588,18 +5367,7 @@ func (v *comFabricKeyValueStoreReplica4) Restore(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginRestore(
 		backupDirectory,
 		callback,
@@ -6488,18 +6256,7 @@ func (v *comFabricStoreEventHandler2) OnDataLoss(
 		result_0 = rt_1
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginOnDataLoss(
 		callback,
 	)
@@ -6594,18 +6351,7 @@ func (v *comFabricStorePostBackupHandler) PostBackup(
 		result_0 = rt_1
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginPostBackup(
 		info,
 		callback,
@@ -7099,18 +6845,7 @@ func (v *comFabricCodePackageActivator) ActivateCodePackage(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginActivateCodePackage(
 		codePackageNames,
 		environment,
@@ -7146,18 +6881,7 @@ func (v *comFabricCodePackageActivator) DeactivateCodePackage(
 		}
 		ch <- nil
 	})
-
-	var timeout time.Duration
-	{
-		deadline, ok := ctx.Deadline()
-		if ok {
-			timeout = deadline.Sub(time.Now())
-		} else {
-			timeout = 15 * time.Minute
-		}
-
-		_ = timeout
-	}
+	timeout := toTimeout(ctx)
 	sfctx, err := v.beginDeactivateCodePackage(
 		codePackageNames,
 		uint32(timeout.Milliseconds()),
