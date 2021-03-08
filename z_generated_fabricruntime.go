@@ -402,19 +402,8 @@ func (v *comFabricStatelessServiceInstance) Close(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -862,19 +851,8 @@ func (v *comFabricStatefulServiceReplica) ChangeRole(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *comFabricStatefulServiceReplica) Close(
@@ -916,19 +894,8 @@ func (v *comFabricStatefulServiceReplica) Close(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -1370,19 +1337,8 @@ func (v *comFabricStateReplicator) Replicate(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -1623,19 +1579,8 @@ func (v *comFabricStateProvider) UpdateEpoch(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *comFabricStateProvider) OnDataLoss(
@@ -1678,19 +1623,8 @@ func (v *comFabricStateProvider) OnDataLoss(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -2161,19 +2095,8 @@ func (v *comFabricReplicator) ChangeRole(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *comFabricReplicator) UpdateEpoch(
@@ -2217,19 +2140,8 @@ func (v *comFabricReplicator) UpdateEpoch(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *comFabricReplicator) Close(
@@ -2271,19 +2183,8 @@ func (v *comFabricReplicator) Close(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -2525,19 +2426,8 @@ func (v *comFabricPrimaryReplicator) OnDataLoss(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *comFabricPrimaryReplicator) WaitForCatchUpQuorum(
@@ -2581,19 +2471,8 @@ func (v *comFabricPrimaryReplicator) WaitForCatchUpQuorum(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *comFabricPrimaryReplicator) BuildReplica(
@@ -2637,19 +2516,8 @@ func (v *comFabricPrimaryReplicator) BuildReplica(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -2892,19 +2760,8 @@ func (v *comFabricAtomicGroupStateReplicator) ReplicateAtomicGroupOperation(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *comFabricAtomicGroupStateReplicator) ReplicateAtomicGroupCommit(
@@ -2950,19 +2807,8 @@ func (v *comFabricAtomicGroupStateReplicator) ReplicateAtomicGroupCommit(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *comFabricAtomicGroupStateReplicator) ReplicateAtomicGroupRollback(
@@ -3008,19 +2854,8 @@ func (v *comFabricAtomicGroupStateReplicator) ReplicateAtomicGroupRollback(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -3207,19 +3042,8 @@ func (v *comFabricAtomicGroupStateProvider) AtomicGroupCommit(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *comFabricAtomicGroupStateProvider) AtomicGroupRollback(
@@ -3265,19 +3089,8 @@ func (v *comFabricAtomicGroupStateProvider) AtomicGroupRollback(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *comFabricAtomicGroupStateProvider) UndoProgress(
@@ -3321,19 +3134,8 @@ func (v *comFabricAtomicGroupStateProvider) UndoProgress(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -5177,19 +4979,8 @@ func (v *comFabricTransaction) Commit(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -5714,19 +5505,8 @@ func (v *comFabricKeyValueStoreReplica3) Backup(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -5829,19 +5609,8 @@ func (v *comFabricKeyValueStoreReplica4) Restore(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -6739,19 +6508,8 @@ func (v *comFabricStoreEventHandler2) OnDataLoss(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -6857,19 +6615,8 @@ func (v *comFabricStorePostBackupHandler) PostBackup(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -7375,19 +7122,8 @@ func (v *comFabricCodePackageActivator) ActivateCodePackage(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *comFabricCodePackageActivator) DeactivateCodePackage(
@@ -7432,19 +7168,8 @@ func (v *comFabricCodePackageActivator) DeactivateCodePackage(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 

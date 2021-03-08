@@ -238,19 +238,8 @@ next:
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 	`)
 
 	g.printfln("}")

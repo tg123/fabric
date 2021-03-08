@@ -1,7 +1,9 @@
 package fabric
 
 import (
+	"context"
 	"fmt"
+	"time"
 	"unsafe"
 
 	"golang.org/x/sys/windows"
@@ -38,4 +40,19 @@ func errno(hr uintptr, syserr error) error {
 	}
 
 	return FabricErrorCode(hr)
+}
+
+func waitch(ctx context.Context, ch <-chan error, sfctx *comIFabricAsyncOperationContext, timeout time.Duration) (err error) {
+	select {
+	case err = <-ch:
+		return
+	case <-ctx.Done():
+		sfctx.Cancel()
+		err = ctx.Err()
+		return
+	case <-time.After(timeout):
+		sfctx.Cancel()
+		err = FabricErrorTimeout
+		return
+	}
 }

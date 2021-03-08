@@ -1377,19 +1377,8 @@ func (v *comFabricPropertyManagementClient) CreateName(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *comFabricPropertyManagementClient) DeleteName(
@@ -1434,19 +1423,8 @@ func (v *comFabricPropertyManagementClient) DeleteName(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *comFabricPropertyManagementClient) NameExists(
@@ -1492,19 +1470,8 @@ func (v *comFabricPropertyManagementClient) NameExists(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *comFabricPropertyManagementClient) PutPropertyBinary(
@@ -1555,19 +1522,8 @@ func (v *comFabricPropertyManagementClient) PutPropertyBinary(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *comFabricPropertyManagementClient) PutPropertyInt64(
@@ -1616,19 +1572,8 @@ func (v *comFabricPropertyManagementClient) PutPropertyInt64(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *comFabricPropertyManagementClient) PutPropertyDouble(
@@ -1677,19 +1622,8 @@ func (v *comFabricPropertyManagementClient) PutPropertyDouble(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *comFabricPropertyManagementClient) PutPropertyWString(
@@ -1738,19 +1672,8 @@ func (v *comFabricPropertyManagementClient) PutPropertyWString(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *comFabricPropertyManagementClient) PutPropertyGuid(
@@ -1799,19 +1722,8 @@ func (v *comFabricPropertyManagementClient) PutPropertyGuid(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *comFabricPropertyManagementClient) DeleteProperty(
@@ -1858,19 +1770,8 @@ func (v *comFabricPropertyManagementClient) DeleteProperty(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *comFabricPropertyManagementClient) GetPropertyMetadata(
@@ -1918,19 +1819,8 @@ func (v *comFabricPropertyManagementClient) GetPropertyMetadata(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -2040,19 +1930,8 @@ func (v *ComFabricPropertyManagementClient2) PutCustomPropertyOperation(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -2400,19 +2279,8 @@ func (v *ComFabricServiceManagementClient) CreateService(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricServiceManagementClient) CreateServiceFromTemplate(
@@ -2465,19 +2333,8 @@ func (v *ComFabricServiceManagementClient) CreateServiceFromTemplate(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricServiceManagementClient) DeleteService(
@@ -2522,19 +2379,8 @@ func (v *ComFabricServiceManagementClient) DeleteService(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricServiceManagementClient) GetServiceDescription(
@@ -2580,19 +2426,8 @@ func (v *ComFabricServiceManagementClient) GetServiceDescription(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -2769,19 +2604,8 @@ func (v *ComFabricServiceManagementClient2) GetServiceManifest(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricServiceManagementClient2) UpdateService(
@@ -2828,19 +2652,8 @@ func (v *ComFabricServiceManagementClient2) UpdateService(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -2988,19 +2801,8 @@ func (v *ComFabricServiceManagementClient3) RemoveReplica(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricServiceManagementClient3) RestartReplica(
@@ -3045,19 +2847,8 @@ func (v *ComFabricServiceManagementClient3) RestartReplica(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -3208,19 +2999,8 @@ func (v *ComFabricServiceManagementClient4) RegisterServiceNotificationFilter(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricServiceManagementClient4) UnregisterServiceNotificationFilter(
@@ -3265,19 +3045,8 @@ func (v *ComFabricServiceManagementClient4) UnregisterServiceNotificationFilter(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -3380,19 +3149,8 @@ func (v *ComFabricServiceManagementClient5) DeleteService2(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -3495,19 +3253,8 @@ func (v *ComFabricServiceManagementClient6) CreateServiceFromTemplate2(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -3708,19 +3455,8 @@ func (v *ComFabricServiceGroupManagementClient) CreateServiceGroup(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricServiceGroupManagementClient) DeleteServiceGroup(
@@ -3765,19 +3501,8 @@ func (v *ComFabricServiceGroupManagementClient) DeleteServiceGroup(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricServiceGroupManagementClient) GetServiceGroupDescription(
@@ -3823,19 +3548,8 @@ func (v *ComFabricServiceGroupManagementClient) GetServiceGroupDescription(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -3945,19 +3659,8 @@ func (v *ComFabricServiceGroupManagementClient2) UpdateServiceGroup(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -4085,19 +3788,8 @@ func (v *ComFabricServiceGroupManagementClient3) CreateServiceGroupFromTemplate(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -4200,19 +3892,8 @@ func (v *ComFabricServiceGroupManagementClient4) CreateServiceGroupFromTemplate2
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -4600,19 +4281,8 @@ func (v *ComFabricApplicationManagementClient) ProvisionApplicationType(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricApplicationManagementClient) CreateApplication(
@@ -4657,19 +4327,8 @@ func (v *ComFabricApplicationManagementClient) CreateApplication(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricApplicationManagementClient) UpgradeApplication(
@@ -4714,19 +4373,8 @@ func (v *ComFabricApplicationManagementClient) UpgradeApplication(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricApplicationManagementClient) GetApplicationUpgradeProgress(
@@ -4777,19 +4425,8 @@ func (v *ComFabricApplicationManagementClient) GetApplicationUpgradeProgress(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricApplicationManagementClient) MoveNextApplicationUpgradeDomain(
@@ -4834,19 +4471,8 @@ func (v *ComFabricApplicationManagementClient) MoveNextApplicationUpgradeDomain(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricApplicationManagementClient) DeleteApplication(
@@ -4891,19 +4517,8 @@ func (v *ComFabricApplicationManagementClient) DeleteApplication(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricApplicationManagementClient) UnprovisionApplicationType(
@@ -4950,19 +4565,8 @@ func (v *ComFabricApplicationManagementClient) UnprovisionApplicationType(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -5131,19 +4735,8 @@ func (v *ComFabricApplicationManagementClient2) GetApplicationManifest(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricApplicationManagementClient2) MoveNextApplicationUpgradeDomain2(
@@ -5190,19 +4783,8 @@ func (v *ComFabricApplicationManagementClient2) MoveNextApplicationUpgradeDomain
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -5410,19 +4992,8 @@ func (v *ComFabricApplicationManagementClient3) UpdateApplicationUpgrade(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricApplicationManagementClient3) RestartDeployedCodePackage(
@@ -5467,19 +5038,8 @@ func (v *ComFabricApplicationManagementClient3) RestartDeployedCodePackage(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -5632,19 +5192,8 @@ func (v *ComFabricApplicationManagementClient4) DeployServicePackageToNode(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -5749,19 +5298,8 @@ func (v *ComFabricApplicationManagementClient5) RollbackApplicationUpgrade(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -5864,19 +5402,8 @@ func (v *ComFabricApplicationManagementClient6) UpdateApplication(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -5979,19 +5506,8 @@ func (v *ComFabricApplicationManagementClient7) DeleteApplication2(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -6094,19 +5610,8 @@ func (v *ComFabricApplicationManagementClient8) ProvisionApplicationType2(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -6209,19 +5714,8 @@ func (v *ComFabricApplicationManagementClient9) UnprovisionApplicationType2(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -6324,19 +5818,8 @@ func (v *ComFabricApplicationManagementClient10) ProvisionApplicationType3(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -6483,19 +5966,8 @@ func (v *ComFabricClusterManagementClient) NodeStateRemoved(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricClusterManagementClient) RecoverPartitions(
@@ -6538,19 +6010,8 @@ func (v *ComFabricClusterManagementClient) RecoverPartitions(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -7168,19 +6629,8 @@ func (v *ComFabricClusterManagementClient2) DeactivateNode(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricClusterManagementClient2) ActivateNode(
@@ -7225,19 +6675,8 @@ func (v *ComFabricClusterManagementClient2) ActivateNode(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricClusterManagementClient2) ProvisionFabric(
@@ -7284,19 +6723,8 @@ func (v *ComFabricClusterManagementClient2) ProvisionFabric(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricClusterManagementClient2) UpgradeFabric(
@@ -7341,19 +6769,8 @@ func (v *ComFabricClusterManagementClient2) UpgradeFabric(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricClusterManagementClient2) GetFabricUpgradeProgress(
@@ -7402,19 +6819,8 @@ func (v *ComFabricClusterManagementClient2) GetFabricUpgradeProgress(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricClusterManagementClient2) MoveNextFabricUpgradeDomain(
@@ -7459,19 +6865,8 @@ func (v *ComFabricClusterManagementClient2) MoveNextFabricUpgradeDomain(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricClusterManagementClient2) MoveNextFabricUpgradeDomain2(
@@ -7516,19 +6911,8 @@ func (v *ComFabricClusterManagementClient2) MoveNextFabricUpgradeDomain2(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricClusterManagementClient2) UnprovisionFabric(
@@ -7575,19 +6959,8 @@ func (v *ComFabricClusterManagementClient2) UnprovisionFabric(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricClusterManagementClient2) GetClusterManifest(
@@ -7631,19 +7004,8 @@ func (v *ComFabricClusterManagementClient2) GetClusterManifest(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricClusterManagementClient2) RecoverPartition(
@@ -7688,19 +7050,8 @@ func (v *ComFabricClusterManagementClient2) RecoverPartition(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricClusterManagementClient2) RecoverServicePartitions(
@@ -7745,19 +7096,8 @@ func (v *ComFabricClusterManagementClient2) RecoverServicePartitions(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricClusterManagementClient2) RecoverSystemPartitions(
@@ -7800,19 +7140,8 @@ func (v *ComFabricClusterManagementClient2) RecoverSystemPartitions(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -8128,19 +7457,8 @@ func (v *ComFabricClusterManagementClient3) UpdateFabricUpgrade(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricClusterManagementClient3) StopNode(
@@ -8185,19 +7503,8 @@ func (v *ComFabricClusterManagementClient3) StopNode(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricClusterManagementClient3) RestartNode(
@@ -8242,19 +7549,8 @@ func (v *ComFabricClusterManagementClient3) RestartNode(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricClusterManagementClient3) StartNode(
@@ -8299,19 +7595,8 @@ func (v *ComFabricClusterManagementClient3) StartNode(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -8409,19 +7694,8 @@ func (v *ComFabricClusterManagementClient4) RollbackFabricUpgrade(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -8522,19 +7796,8 @@ func (v *ComFabricClusterManagementClient5) ResetPartitionLoad(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -8639,19 +7902,8 @@ func (v *ComFabricClusterManagementClient6) ToggleVerboseServicePlacementHealthR
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -8930,19 +8182,8 @@ func (v *ComFabricClusterManagementClient7) UpgradeConfiguration(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricClusterManagementClient7) GetClusterConfigurationUpgradeStatus(
@@ -8986,19 +8227,8 @@ func (v *ComFabricClusterManagementClient7) GetClusterConfigurationUpgradeStatus
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricClusterManagementClient7) GetClusterConfiguration(
@@ -9042,19 +8272,8 @@ func (v *ComFabricClusterManagementClient7) GetClusterConfiguration(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricClusterManagementClient7) GetUpgradesPendingApproval(
@@ -9097,19 +8316,8 @@ func (v *ComFabricClusterManagementClient7) GetUpgradesPendingApproval(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricClusterManagementClient7) StartApprovedUpgrades(
@@ -9152,19 +8360,8 @@ func (v *ComFabricClusterManagementClient7) StartApprovedUpgrades(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -9272,19 +8469,8 @@ func (v *comFabricClusterManagementClient8) GetClusterManifest2(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -9438,19 +8624,8 @@ func (v *comFabricClusterManagementClient9) GetUpgradeOrchestrationServiceState(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *comFabricClusterManagementClient9) SetUpgradeOrchestrationServiceState(
@@ -9496,19 +8671,8 @@ func (v *comFabricClusterManagementClient9) SetUpgradeOrchestrationServiceState(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -9618,19 +8782,8 @@ func (v *comFabricClusterManagementClient10) GetClusterConfiguration2(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -10152,19 +9305,8 @@ func (v *ComFabricHealthClient) GetClusterHealth(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricHealthClient) GetNodeHealth(
@@ -10212,19 +9354,8 @@ func (v *ComFabricHealthClient) GetNodeHealth(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricHealthClient) GetApplicationHealth(
@@ -10272,19 +9403,8 @@ func (v *ComFabricHealthClient) GetApplicationHealth(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricHealthClient) GetServiceHealth(
@@ -10332,19 +9452,8 @@ func (v *ComFabricHealthClient) GetServiceHealth(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricHealthClient) GetPartitionHealth(
@@ -10392,19 +9501,8 @@ func (v *ComFabricHealthClient) GetPartitionHealth(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricHealthClient) GetReplicaHealth(
@@ -10454,19 +9552,8 @@ func (v *ComFabricHealthClient) GetReplicaHealth(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricHealthClient) GetDeployedApplicationHealth(
@@ -10516,19 +9603,8 @@ func (v *ComFabricHealthClient) GetDeployedApplicationHealth(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricHealthClient) GetDeployedServicePackageHealth(
@@ -10580,19 +9656,8 @@ func (v *ComFabricHealthClient) GetDeployedServicePackageHealth(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -11043,19 +10108,8 @@ func (v *ComFabricHealthClient2) GetClusterHealth2(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricHealthClient2) GetNodeHealth2(
@@ -11101,19 +10155,8 @@ func (v *ComFabricHealthClient2) GetNodeHealth2(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricHealthClient2) GetApplicationHealth2(
@@ -11159,19 +10202,8 @@ func (v *ComFabricHealthClient2) GetApplicationHealth2(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricHealthClient2) GetServiceHealth2(
@@ -11217,19 +10249,8 @@ func (v *ComFabricHealthClient2) GetServiceHealth2(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricHealthClient2) GetPartitionHealth2(
@@ -11275,19 +10296,8 @@ func (v *ComFabricHealthClient2) GetPartitionHealth2(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricHealthClient2) GetReplicaHealth2(
@@ -11333,19 +10343,8 @@ func (v *ComFabricHealthClient2) GetReplicaHealth2(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricHealthClient2) GetDeployedApplicationHealth2(
@@ -11391,19 +10390,8 @@ func (v *ComFabricHealthClient2) GetDeployedApplicationHealth2(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricHealthClient2) GetDeployedServicePackageHealth2(
@@ -11449,19 +10437,8 @@ func (v *ComFabricHealthClient2) GetDeployedServicePackageHealth2(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -11569,19 +10546,8 @@ func (v *ComFabricHealthClient3) GetClusterHealthChunk(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -12263,19 +11229,8 @@ func (v *ComFabricQueryClient) GetNodeList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricQueryClient) GetApplicationTypeList(
@@ -12321,19 +11276,8 @@ func (v *ComFabricQueryClient) GetApplicationTypeList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricQueryClient) GetServiceTypeList(
@@ -12379,19 +11323,8 @@ func (v *ComFabricQueryClient) GetServiceTypeList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricQueryClient) GetApplicationList(
@@ -12437,19 +11370,8 @@ func (v *ComFabricQueryClient) GetApplicationList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricQueryClient) GetServiceList(
@@ -12495,19 +11417,8 @@ func (v *ComFabricQueryClient) GetServiceList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricQueryClient) GetPartitionList(
@@ -12553,19 +11464,8 @@ func (v *ComFabricQueryClient) GetPartitionList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricQueryClient) GetReplicaList(
@@ -12611,19 +11511,8 @@ func (v *ComFabricQueryClient) GetReplicaList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricQueryClient) GetDeployedApplicationList(
@@ -12669,19 +11558,8 @@ func (v *ComFabricQueryClient) GetDeployedApplicationList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricQueryClient) GetDeployedServicePackageList(
@@ -12727,19 +11605,8 @@ func (v *ComFabricQueryClient) GetDeployedServicePackageList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricQueryClient) GetDeployedServiceTypeList(
@@ -12785,19 +11652,8 @@ func (v *ComFabricQueryClient) GetDeployedServiceTypeList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricQueryClient) GetDeployedCodePackageList(
@@ -12843,19 +11699,8 @@ func (v *ComFabricQueryClient) GetDeployedCodePackageList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricQueryClient) GetDeployedReplicaList(
@@ -12901,19 +11746,8 @@ func (v *ComFabricQueryClient) GetDeployedReplicaList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -13214,19 +12048,8 @@ func (v *ComFabricQueryClient2) GetDeployedReplicaDetail(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricQueryClient2) GetClusterLoadInformation(
@@ -13270,19 +12093,8 @@ func (v *ComFabricQueryClient2) GetClusterLoadInformation(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricQueryClient2) GetPartitionLoadInformation(
@@ -13328,19 +12140,8 @@ func (v *ComFabricQueryClient2) GetPartitionLoadInformation(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricQueryClient2) GetProvisionedFabricCodeVersionList(
@@ -13386,19 +12187,8 @@ func (v *ComFabricQueryClient2) GetProvisionedFabricCodeVersionList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricQueryClient2) GetProvisionedFabricConfigVersionList(
@@ -13444,19 +12234,8 @@ func (v *ComFabricQueryClient2) GetProvisionedFabricConfigVersionList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -13613,19 +12392,8 @@ func (v *ComFabricQueryClient3) GetNodeLoadInformation(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricQueryClient3) GetReplicaLoadInformation(
@@ -13671,19 +12439,8 @@ func (v *ComFabricQueryClient3) GetReplicaLoadInformation(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -13840,19 +12597,8 @@ func (v *ComFabricQueryClient4) GetServiceGroupMemberList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricQueryClient4) GetServiceGroupMemberTypeList(
@@ -13898,19 +12644,8 @@ func (v *ComFabricQueryClient4) GetServiceGroupMemberTypeList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -14018,19 +12753,8 @@ func (v *ComFabricQueryClient5) GetUnplacedReplicaInformation(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -14155,19 +12879,8 @@ func (v *ComFabricQueryClient7) GetApplicationLoadInformation(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -14324,19 +13037,8 @@ func (v *ComFabricQueryClient8) GetServiceName(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricQueryClient8) GetApplicationName(
@@ -14382,19 +13084,8 @@ func (v *ComFabricQueryClient8) GetApplicationName(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -14507,19 +13198,8 @@ func (v *ComFabricQueryClient9) GetApplicationTypePagedList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -14632,19 +13312,8 @@ func (v *ComFabricQueryClient10) GetDeployedApplicationPagedList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -14817,19 +13486,8 @@ func (v *ComFabricInfrastructureServiceClient) InvokeInfrastructureCommand(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricInfrastructureServiceClient) InvokeInfrastructureQuery(
@@ -14877,19 +13535,8 @@ func (v *ComFabricInfrastructureServiceClient) InvokeInfrastructureQuery(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -15238,19 +13885,8 @@ func (v *ComFabricRepairManagementClient) CreateRepairTask(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricRepairManagementClient) CancelRepairTask(
@@ -15296,19 +13932,8 @@ func (v *ComFabricRepairManagementClient) CancelRepairTask(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricRepairManagementClient) ForceApproveRepairTask(
@@ -15354,19 +13979,8 @@ func (v *ComFabricRepairManagementClient) ForceApproveRepairTask(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricRepairManagementClient) DeleteRepairTask(
@@ -15411,19 +14025,8 @@ func (v *ComFabricRepairManagementClient) DeleteRepairTask(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricRepairManagementClient) UpdateRepairExecutionState(
@@ -15469,19 +14072,8 @@ func (v *ComFabricRepairManagementClient) UpdateRepairExecutionState(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricRepairManagementClient) GetRepairTaskList(
@@ -15527,19 +14119,8 @@ func (v *ComFabricRepairManagementClient) GetRepairTaskList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -15647,19 +14228,8 @@ func (v *ComFabricRepairManagementClient2) UpdateRepairTaskHealthPolicy(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -16012,19 +14582,8 @@ func (v *ComFabricFaultManagementClient) RestartNode(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricFaultManagementClient) StartNode(
@@ -16070,19 +14629,8 @@ func (v *ComFabricFaultManagementClient) StartNode(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricFaultManagementClient) StopNode(
@@ -16128,19 +14676,8 @@ func (v *ComFabricFaultManagementClient) StopNode(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricFaultManagementClient) RestartDeployedCodePackage(
@@ -16186,19 +14723,8 @@ func (v *ComFabricFaultManagementClient) RestartDeployedCodePackage(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricFaultManagementClient) MovePrimary(
@@ -16244,19 +14770,8 @@ func (v *ComFabricFaultManagementClient) MovePrimary(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricFaultManagementClient) MoveSecondary(
@@ -16302,19 +14817,8 @@ func (v *ComFabricFaultManagementClient) MoveSecondary(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -16742,19 +15246,8 @@ func (v *ComFabricTestManagementClient) StartPartitionDataLoss(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricTestManagementClient) GetPartitionDataLossProgress(
@@ -16800,19 +15293,8 @@ func (v *ComFabricTestManagementClient) GetPartitionDataLossProgress(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricTestManagementClient) StartPartitionQuorumLoss(
@@ -16857,19 +15339,8 @@ func (v *ComFabricTestManagementClient) StartPartitionQuorumLoss(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricTestManagementClient) GetPartitionQuorumLossProgress(
@@ -16915,19 +15386,8 @@ func (v *ComFabricTestManagementClient) GetPartitionQuorumLossProgress(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricTestManagementClient) StartPartitionRestart(
@@ -16972,19 +15432,8 @@ func (v *ComFabricTestManagementClient) StartPartitionRestart(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricTestManagementClient) GetPartitionRestartProgress(
@@ -17030,19 +15479,8 @@ func (v *ComFabricTestManagementClient) GetPartitionRestartProgress(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricTestManagementClient) GetTestCommandStatusList(
@@ -17088,19 +15526,8 @@ func (v *ComFabricTestManagementClient) GetTestCommandStatusList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricTestManagementClient) CancelTestCommand(
@@ -17145,19 +15572,8 @@ func (v *ComFabricTestManagementClient) CancelTestCommand(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -17351,19 +15767,8 @@ func (v *ComFabricTestManagementClient2) StartChaos(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricTestManagementClient2) StopChaos(
@@ -17406,19 +15811,8 @@ func (v *ComFabricTestManagementClient2) StopChaos(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricTestManagementClient2) GetChaosReport(
@@ -17464,19 +15858,8 @@ func (v *ComFabricTestManagementClient2) GetChaosReport(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -17626,19 +16009,8 @@ func (v *ComFabricTestManagementClient3) StartNodeTransition(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricTestManagementClient3) GetNodeTransitionProgress(
@@ -17684,19 +16056,8 @@ func (v *ComFabricTestManagementClient3) GetNodeTransitionProgress(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -17939,19 +16300,8 @@ func (v *comFabricTestManagementClient4) GetChaos(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *comFabricTestManagementClient4) GetChaosSchedule(
@@ -17995,19 +16345,8 @@ func (v *comFabricTestManagementClient4) GetChaosSchedule(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *comFabricTestManagementClient4) SetChaosSchedule(
@@ -18052,19 +16391,8 @@ func (v *comFabricTestManagementClient4) SetChaosSchedule(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *comFabricTestManagementClient4) GetChaosEvents(
@@ -18110,19 +16438,8 @@ func (v *comFabricTestManagementClient4) GetChaosEvents(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -18571,19 +16888,8 @@ func (v *ComFabricNetworkManagementClient) CreateNetwork(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricNetworkManagementClient) DeleteNetwork(
@@ -18628,19 +16934,8 @@ func (v *ComFabricNetworkManagementClient) DeleteNetwork(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricNetworkManagementClient) GetNetworkList(
@@ -18691,19 +16986,8 @@ func (v *ComFabricNetworkManagementClient) GetNetworkList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricNetworkManagementClient) GetNetworkApplicationList(
@@ -18754,19 +17038,8 @@ func (v *ComFabricNetworkManagementClient) GetNetworkApplicationList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricNetworkManagementClient) GetNetworkNodeList(
@@ -18817,19 +17090,8 @@ func (v *ComFabricNetworkManagementClient) GetNetworkNodeList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricNetworkManagementClient) GetApplicationNetworkList(
@@ -18880,19 +17142,8 @@ func (v *ComFabricNetworkManagementClient) GetApplicationNetworkList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricNetworkManagementClient) GetDeployedNetworkList(
@@ -18943,19 +17194,8 @@ func (v *ComFabricNetworkManagementClient) GetDeployedNetworkList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricNetworkManagementClient) GetDeployedNetworkCodePackageList(
@@ -19006,19 +17246,8 @@ func (v *ComFabricNetworkManagementClient) GetDeployedNetworkCodePackageList(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
@@ -22938,19 +21167,8 @@ func (v *ComFabricSecretStoreClient) GetSecrets(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricSecretStoreClient) SetSecrets(
@@ -22996,19 +21214,8 @@ func (v *ComFabricSecretStoreClient) SetSecrets(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricSecretStoreClient) RemoveSecrets(
@@ -23054,19 +21261,8 @@ func (v *ComFabricSecretStoreClient) RemoveSecrets(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 func (v *ComFabricSecretStoreClient) GetSecretVersions(
@@ -23112,19 +21308,8 @@ func (v *ComFabricSecretStoreClient) GetSecretVersions(
 		return
 	}
 
-	select {
-	case err = <-ch:
-		return
-
-	case <-ctx.Done():
-		sfctx.Cancel()
-		err = ctx.Err()
-		return
-	case <-time.After(timeout):
-		sfctx.Cancel()
-		err = FabricErrorTimeout
-		return
-	}
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
 
 }
 
