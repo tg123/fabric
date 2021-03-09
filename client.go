@@ -66,40 +66,29 @@ func createClient(connectionStrings []string, iid string, p unsafe.Pointer) erro
 }
 
 type FabricClient struct {
-	createComObject func(iid string, outptr unsafe.Pointer) error
+	hub *fabricClientComHub
 }
 
 const (
 	comIFabricClientSettingsIID = "{b0e7dee0-cf64-11e0-9572-0800200c9a66}" // Lowest ver Service Fabric 6.0
 )
 
-func queryObject(com *ole.IUnknown, iid string, outptr unsafe.Pointer) error {
-	clzid, err := ole.IIDFromString(iid)
-	if err != nil {
-		return err
-	}
-
-	c, err := com.QueryInterface(clzid)
-	if err != nil {
-		return err
-	}
-
-	*(**ole.IUnknown)(outptr) = &c.IUnknown
-
-	return nil
+func clientFromComClientSetting(com *comFabricClientSettings) *FabricClient {
+	hub := &fabricClientComHub{}
+	hub.init(func(iid string, outptr unsafe.Pointer) error {
+		return queryObject(&com.IUnknown, iid, outptr)
+	})
+	return &FabricClient{hub}
 }
 
 func NewLocalClient() (*FabricClient, error) {
-
 	var com *comFabricClientSettings
 	err := createLocalClient(comIFabricClientSettingsIID, unsafe.Pointer(&com))
 	if err != nil {
 		return nil, err
 	}
 
-	return &FabricClient{func(iid string, outptr unsafe.Pointer) error {
-		return queryObject(&com.IUnknown, iid, outptr)
-	}}, nil
+	return clientFromComClientSetting(com), nil
 }
 
 func NewInsecureClient(conn string) (*FabricClient, error) {
@@ -108,10 +97,7 @@ func NewInsecureClient(conn string) (*FabricClient, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	return &FabricClient{func(iid string, outptr unsafe.Pointer) error {
-		return queryObject(&com.IUnknown, iid, outptr)
-	}}, nil
+	return clientFromComClientSetting(com), nil
 }
 
 func NewX509Client(conn string, cred X509Credentials) (*FabricClient, error) {
@@ -126,8 +112,5 @@ func NewX509Client(conn string, cred X509Credentials) (*FabricClient, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	return &FabricClient{func(iid string, outptr unsafe.Pointer) error {
-		return queryObject(&com.IUnknown, iid, outptr)
-	}}, nil
+	return clientFromComClientSetting(com), nil
 }

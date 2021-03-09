@@ -55,6 +55,12 @@ var methodblacklist = map[string]bool{
 	"IFabricReplicator.EndOpen":               true,
 	"IFabricOperationStream.EndGetOperation":  true,
 	"IFabricOperationDataStream.EndGetNext":   true,
+
+	// TODO Name Duplicate
+	"IFabricFaultManagementClient.EndRestartDeployedCodePackage": true,
+	"IFabricFaultManagementClient.EndStartNode":                  true,
+	"IFabricFaultManagementClient.EndStopNode":                   true,
+	"IFabricFaultManagementClient.EndRestartNode":                true,
 }
 
 func goMethodName(m string) string {
@@ -75,11 +81,14 @@ func isOutParam(p *ast.ParamNode) bool {
 	return false
 }
 
-func (g *generator) generateAsyncCall(n *ast.InterfaceNode, begin, end *ast.MethodNode) {
+func (g *generator) generateAsyncCallSig(receiver string, begin, end *ast.MethodNode, namedRt bool) (*ast.InterfaceNode, []string, string) {
+	var paramNames []string
+	methodName := strings.TrimPrefix(begin.Name, "Begin")
 
-	g.printfln("func (v *%s) %s(", g.goInterfaceName(n.Name), strings.TrimPrefix(begin.Name, "Begin"))
+	g.printfln("func (v *%s) %s(", receiver, methodName)
 	g.importpkg("context")
 	g.printfln("ctx context.Context,")
+	paramNames = append(paramNames, "ctx")
 
 	for i, p := range begin.Params {
 
@@ -101,6 +110,7 @@ func (g *generator) generateAsyncCall(n *ast.InterfaceNode, begin, end *ast.Meth
 			paramName = fmt.Sprintf("param_%v", i)
 		}
 		g.printfln("%v %v,", paramName, g.toGolangType(p.Type, p.Indirections, false))
+		paramNames = append(paramNames, paramName)
 	}
 
 	var rt []string
@@ -113,26 +123,47 @@ func (g *generator) generateAsyncCall(n *ast.InterfaceNode, begin, end *ast.Meth
 				asyncrt = g.ctx.definedInterface[g.unwrapTypedef(p.Type)]
 
 				if asyncrt == nil {
-					rt = append(rt, fmt.Sprintf("result_%v %v", 0, g.toGolangType(p.Type, p.Indirections-1, false)))
+					if namedRt {
+						rt = append(rt, fmt.Sprintf("result_%v %v", 0, g.toGolangType(p.Type, p.Indirections-1, false)))
+					} else {
+						rt = append(rt, fmt.Sprintf("%v", g.toGolangType(p.Type, p.Indirections-1, false)))
+					}
 					break
 				}
 
 				for i, m := range g.ctx.definedInterface[g.unwrapTypedef(p.Type)].Methods {
-					rt = append(rt, fmt.Sprintf("result_%v %v", i, g.toGolangType(m.ReturnType.Type, m.ReturnType.Indirections, false)))
+					if namedRt {
+						rt = append(rt, fmt.Sprintf("result_%v %v", i, g.toGolangType(m.ReturnType.Type, m.ReturnType.Indirections, false)))
+
+					} else {
+						rt = append(rt, fmt.Sprintf("%v", g.toGolangType(m.ReturnType.Type, m.ReturnType.Indirections, false)))
+
+					}
 				}
 
 			}
 		}
 	}
-	rt = append(rt, "err error")
+
+	if namedRt {
+		rt = append(rt, "err error")
+	} else {
+		rt = append(rt, "error")
+	}
 	g.printfln(") (%v) {", strings.Join(rt, ","))
+
+	return asyncrt, paramNames, methodName
+}
+
+func (g *generator) generateAsyncCall(n *ast.InterfaceNode, begin, end *ast.MethodNode) {
+	asyncrt, _, _ := g.generateAsyncCallSig(g.goInterfaceName(n.Name), begin, end, true)
 
 	g.printfln(`ch := make(chan error, 1)
 	defer close(ch)
 	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
 `)
 
-	rt = nil
+	var rt []string
 next:
 	for i, p := range end.Params {
 		if p.Type == "IFabricAsyncOperationContext" {
@@ -232,6 +263,48 @@ next:
 	g.printfln("}")
 }
 
+func (g *generator) generateMethodSig(receiver string, m *ast.MethodNode, namedRt bool) ([]string, string) {
+	methodName := goMethodName(m.Name)
+	g.printfln("func (v *%s) %s(", receiver, methodName)
+
+	var rt []string
+	var paramNames []string
+
+	if m.ReturnType.Type != "HRESULT" {
+		if namedRt {
+			rt = append(rt, fmt.Sprintf("rt %v", g.toGolangType(m.ReturnType.Type, m.ReturnType.Indirections, false)))
+		} else {
+			rt = append(rt, fmt.Sprintf("%v", g.toGolangType(m.ReturnType.Type, m.ReturnType.Indirections, false)))
+		}
+	}
+
+	for i, p := range m.Params {
+		paramName := p.Name
+		if paramName == "" {
+			paramName = fmt.Sprintf("param_%v", i)
+		}
+
+		if isOutParam(p) {
+			if namedRt {
+				rt = append(rt, fmt.Sprintf("%v %v", paramName, g.toGolangType(p.Type, p.Indirections-1, false)))
+			} else {
+				rt = append(rt, fmt.Sprintf("%v", g.toGolangType(p.Type, p.Indirections-1, false)))
+			}
+		} else {
+			g.printfln("%v %v,", paramName, g.toGolangType(p.Type, p.Indirections, false))
+			paramNames = append(paramNames, paramName)
+		}
+	}
+	if namedRt {
+		rt = append(rt, "err error")
+	} else {
+		rt = append(rt, "error")
+	}
+	g.printfln(") (%v) {", strings.Join(rt, ","))
+
+	return paramNames, methodName
+}
+
 func (g *generator) generateMethods(n *ast.InterfaceNode) {
 	interfaceName := g.goInterfaceName(n.Name)
 
@@ -242,29 +315,8 @@ func (g *generator) generateMethods(n *ast.InterfaceNode) {
 			continue
 		}
 
-		g.printfln("func (v *%s) %s(", interfaceName, goMethodName(m.Name))
-
-		var rt []string
+		g.generateMethodSig(interfaceName, m, true)
 		syscallParams := make([]string, 0, len(m.Params))
-
-		if m.ReturnType.Type != "HRESULT" {
-			rt = append(rt, fmt.Sprintf("rt %v", g.toGolangType(m.ReturnType.Type, m.ReturnType.Indirections, false)))
-		}
-
-		for i, p := range m.Params {
-			paramName := p.Name
-			if paramName == "" {
-				paramName = fmt.Sprintf("param_%v", i)
-			}
-
-			if isOutParam(p) {
-				rt = append(rt, fmt.Sprintf("%v %v", paramName, g.toGolangType(p.Type, p.Indirections-1, false)))
-			} else {
-				g.printfln("%v %v,", paramName, g.toGolangType(p.Type, p.Indirections, false))
-			}
-		}
-		rt = append(rt, "err error")
-		g.printfln(") (%v) {", strings.Join(rt, ","))
 
 		// TODO dup code, but i did not find better way to make it more clear
 		for i, p := range m.Params {
@@ -397,28 +449,6 @@ func (g *generator) generateMethods(n *ast.InterfaceNode) {
 			}
 
 			g.generateAsyncCall(n, begin, end)
-		}
-	}
-}
-
-func (g *generator) generateCoClzInterface(n *ast.InterfaceNode) {
-	interfaceName := g.goInterfaceName(n.Name)
-
-	// generate client
-	// TODO combine client1 client2
-	for _, attr := range n.Attributes {
-		if attr.Type == scanner.UUID {
-			g.printfln(`
-			func (c *FabricClient) Create%v() (*%v, error) {
-				var com *%v
-				err := c.createComObject("{%v}", unsafe.Pointer(&com))
-				if err != nil {
-					return nil, err
-				}
-			
-				return com, nil
-			}
-			`, strings.TrimPrefix(n.Name, "I"), interfaceName, interfaceName, attr.Val)
 		}
 	}
 }

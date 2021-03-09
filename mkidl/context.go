@@ -85,6 +85,10 @@ func newDefContext(idls ...string) (*defContext, error) {
 		queue = append(queue, i)
 	}
 
+	// TODO this is not temp way: clear the map to hide all com clients
+	// since they are now moved to client com hub
+	c.publicReturnedInterfaces = make(map[string]bool)
+
 	for ; len(queue) > 0; queue = queue[1:] {
 		ifc := c.definedInterface[queue[0]]
 

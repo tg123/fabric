@@ -25,12 +25,7 @@ func ExampleNewX509Client() {
 		panic(err)
 	}
 
-	q, err := client.CreateFabricQueryClient8()
-	if err != nil {
-		panic(err)
-	}
-
-	nodes, err := q.GetNodeList(context.TODO(), &FabricNodeQueryDescription{
+	nodes, err := client.GetNodeList(context.TODO(), &FabricNodeQueryDescription{
 		NodeNameFilter: "",
 	})
 

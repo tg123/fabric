@@ -6,6 +6,7 @@ import (
 	"time"
 	"unsafe"
 
+	ole "github.com/go-ole/go-ole"
 	"golang.org/x/sys/windows"
 )
 
@@ -13,6 +14,24 @@ var (
 	fabricCommonDll               = windows.MustLoadDLL("FabricCommon.dll")
 	fabricGetLastErrorMessageProc = fabricCommonDll.MustFindProc("FabricGetLastErrorMessage")
 )
+
+type comCreator func(iid string, outptr unsafe.Pointer) error
+
+func queryObject(com *ole.IUnknown, iid string, outptr unsafe.Pointer) error {
+	clzid, err := ole.IIDFromString(iid)
+	if err != nil {
+		return err
+	}
+
+	c, err := com.QueryInterface(clzid)
+	if err != nil {
+		return err
+	}
+
+	*(**ole.IUnknown)(outptr) = &c.IUnknown
+
+	return nil
+}
 
 func fabricGetLastError() string {
 	var result *comFabricStringResult
@@ -65,4 +84,8 @@ func toTimeout(ctx context.Context) time.Duration {
 
 	// TODO move to sf client var
 	return 15 * time.Minute
+}
+
+type dummyComErrorClient struct {
+	err error
 }
