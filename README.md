@@ -49,14 +49,9 @@ func main() {
 		panic(err)
 	}
 
-	q, err := client.CreateFabricQueryClient8()
-	if err != nil {
-		panic(err)
-	}
-
-	nodes, err := q.GetNodeList(&fabric.FabricNodeQueryDescription{
+	nodes, err := client.GetNodeList(context.TODO(), &fabric.FabricNodeQueryDescription{
 		NodeNameFilter: "",
-	}, time.Second*30)
+	})
 
 	if err != nil {
 		panic(err)
