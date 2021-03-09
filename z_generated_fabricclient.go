@@ -119,25 +119,41 @@ func (v *fabricClientComHub) init(createComObject comCreator) {
 	createComObject("{fdb754c6-69c5-4bcf-bba5-cb70c84a4398}", unsafe.Pointer(&v.FabricNetworkManagementClient))
 	createComObject("{38c4c723-3815-49d8-bdf2-68bfb536b8c9}", unsafe.Pointer(&v.FabricSecretStoreClient))
 }
-func (v *FabricClient) GetSettings() (*ComFabricClientSettingsResult, error) {
+func (v *FabricClient) GetSettings() (result *ComFabricClientSettingsResult, err error) {
+	if v.hub.FabricClientSettings2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClientSettings2.GetSettings()
 }
 func (v *FabricClient) SetSettings(
 	fabricClientSettings *FabricClientSettings,
-) error {
+) (err error) {
+	if v.hub.FabricClientSettings2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClientSettings2.SetSettings(fabricClientSettings)
 }
 func (v *FabricClient) PutCustomPropertyOperation(
 	ctx context.Context,
 	name string,
 	propertyOperation *FabricPutCustomPropertyOperation,
-) error {
+) (err error) {
+	if v.hub.FabricPropertyManagementClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricPropertyManagementClient2.PutCustomPropertyOperation(ctx, name, propertyOperation)
 }
 func (v *FabricClient) CreateService(
 	ctx context.Context,
 	description *FabricServiceDescription,
-) error {
+) (err error) {
+	if v.hub.FabricServiceManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricServiceManagementClient.CreateService(ctx, description)
 }
 func (v *FabricClient) CreateServiceFromTemplate(
@@ -147,19 +163,31 @@ func (v *FabricClient) CreateServiceFromTemplate(
 	serviceTypeName string,
 	InitializationDataSize uint32,
 	InitializationData *byte,
-) error {
+) (err error) {
+	if v.hub.FabricServiceManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricServiceManagementClient.CreateServiceFromTemplate(ctx, applicationName, serviceName, serviceTypeName, InitializationDataSize, InitializationData)
 }
 func (v *FabricClient) DeleteService(
 	ctx context.Context,
 	name string,
-) error {
+) (err error) {
+	if v.hub.FabricServiceManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricServiceManagementClient.DeleteService(ctx, name)
 }
 func (v *FabricClient) GetServiceDescription(
 	ctx context.Context,
 	name string,
-) (*FabricServiceDescription, error) {
+) (result_0 *FabricServiceDescription, err error) {
+	if v.hub.FabricServiceManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricServiceManagementClient.GetServiceDescription(ctx, name)
 }
 func (v *FabricClient) RegisterServicePartitionResolutionChangeHandler(
@@ -167,12 +195,20 @@ func (v *FabricClient) RegisterServicePartitionResolutionChangeHandler(
 	keyType FabricPartitionKeyType,
 	partitionKey interface{},
 	callback *comFabricServicePartitionResolutionChangeHandler,
-) (int64, error) {
+) (callbackHandle int64, err error) {
+	if v.hub.FabricServiceManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricServiceManagementClient.RegisterServicePartitionResolutionChangeHandler(name, keyType, partitionKey, callback)
 }
 func (v *FabricClient) UnregisterServicePartitionResolutionChangeHandler(
 	callbackHandle int64,
-) error {
+) (err error) {
+	if v.hub.FabricServiceManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricServiceManagementClient.UnregisterServicePartitionResolutionChangeHandler(callbackHandle)
 }
 func (v *FabricClient) GetServiceManifest(
@@ -180,75 +216,123 @@ func (v *FabricClient) GetServiceManifest(
 	applicationTypeName string,
 	applicationTypeVersion string,
 	serviceManifestName string,
-) (string, error) {
+) (result_0 string, err error) {
+	if v.hub.FabricServiceManagementClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricServiceManagementClient2.GetServiceManifest(ctx, applicationTypeName, applicationTypeVersion, serviceManifestName)
 }
 func (v *FabricClient) UpdateService(
 	ctx context.Context,
 	name string,
 	serviceUpdateDescription *FabricServiceUpdateDescription,
-) error {
+) (err error) {
+	if v.hub.FabricServiceManagementClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricServiceManagementClient2.UpdateService(ctx, name, serviceUpdateDescription)
 }
 func (v *FabricClient) RemoveReplica(
 	ctx context.Context,
 	description *FabricRemoveReplicaDescription,
-) error {
+) (err error) {
+	if v.hub.FabricServiceManagementClient3 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricServiceManagementClient3.RemoveReplica(ctx, description)
 }
 func (v *FabricClient) RestartReplica(
 	ctx context.Context,
 	description *FabricRestartReplicaDescription,
-) error {
+) (err error) {
+	if v.hub.FabricServiceManagementClient3 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricServiceManagementClient3.RestartReplica(ctx, description)
 }
 func (v *FabricClient) RegisterServiceNotificationFilter(
 	ctx context.Context,
 	description *FabricServiceNotificationFilterDescription,
-) (int64, error) {
+) (result_0 int64, err error) {
+	if v.hub.FabricServiceManagementClient4 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricServiceManagementClient4.RegisterServiceNotificationFilter(ctx, description)
 }
 func (v *FabricClient) UnregisterServiceNotificationFilter(
 	ctx context.Context,
 	filterId int64,
-) error {
+) (err error) {
+	if v.hub.FabricServiceManagementClient4 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricServiceManagementClient4.UnregisterServiceNotificationFilter(ctx, filterId)
 }
 func (v *FabricClient) DeleteService2(
 	ctx context.Context,
 	deleteDescription *FabricDeleteServiceDescription,
-) error {
+) (err error) {
+	if v.hub.FabricServiceManagementClient5 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricServiceManagementClient5.DeleteService2(ctx, deleteDescription)
 }
 func (v *FabricClient) CreateServiceFromTemplate2(
 	ctx context.Context,
 	serviceFromTemplateDescription *FabricServiceFromTemplateDescription,
-) error {
+) (err error) {
+	if v.hub.FabricServiceManagementClient6 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricServiceManagementClient6.CreateServiceFromTemplate2(ctx, serviceFromTemplateDescription)
 }
 func (v *FabricClient) CreateServiceGroup(
 	ctx context.Context,
 	description *FabricServiceGroupDescription,
-) error {
+) (err error) {
+	if v.hub.FabricServiceGroupManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricServiceGroupManagementClient.CreateServiceGroup(ctx, description)
 }
 func (v *FabricClient) DeleteServiceGroup(
 	ctx context.Context,
 	name string,
-) error {
+) (err error) {
+	if v.hub.FabricServiceGroupManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricServiceGroupManagementClient.DeleteServiceGroup(ctx, name)
 }
 func (v *FabricClient) GetServiceGroupDescription(
 	ctx context.Context,
 	name string,
-) (*FabricServiceGroupDescription, error) {
+) (result_0 *FabricServiceGroupDescription, err error) {
+	if v.hub.FabricServiceGroupManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricServiceGroupManagementClient.GetServiceGroupDescription(ctx, name)
 }
 func (v *FabricClient) UpdateServiceGroup(
 	ctx context.Context,
 	name string,
 	serviceGroupUpdateDescription *FabricServiceGroupUpdateDescription,
-) error {
+) (err error) {
+	if v.hub.FabricServiceGroupManagementClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricServiceGroupManagementClient2.UpdateServiceGroup(ctx, name, serviceGroupUpdateDescription)
 }
 func (v *FabricClient) CreateServiceGroupFromTemplate(
@@ -258,95 +342,155 @@ func (v *FabricClient) CreateServiceGroupFromTemplate(
 	serviceTypeName string,
 	InitializationDataSize uint32,
 	InitializationData *byte,
-) error {
+) (err error) {
+	if v.hub.FabricServiceGroupManagementClient3 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricServiceGroupManagementClient3.CreateServiceGroupFromTemplate(ctx, applicationName, serviceName, serviceTypeName, InitializationDataSize, InitializationData)
 }
 func (v *FabricClient) CreateServiceGroupFromTemplate2(
 	ctx context.Context,
 	serviceGroupFromTemplateDescription *FabricServiceGroupFromTemplateDescription,
-) error {
+) (err error) {
+	if v.hub.FabricServiceGroupManagementClient4 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricServiceGroupManagementClient4.CreateServiceGroupFromTemplate2(ctx, serviceGroupFromTemplateDescription)
 }
 func (v *FabricClient) ProvisionApplicationType(
 	ctx context.Context,
 	applicationBuildPath string,
-) error {
+) (err error) {
+	if v.hub.FabricApplicationManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricApplicationManagementClient.ProvisionApplicationType(ctx, applicationBuildPath)
 }
 func (v *FabricClient) CreateApplication(
 	ctx context.Context,
 	description *FabricApplicationDescription,
-) error {
+) (err error) {
+	if v.hub.FabricApplicationManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricApplicationManagementClient.CreateApplication(ctx, description)
 }
 func (v *FabricClient) UpgradeApplication(
 	ctx context.Context,
 	upgradeDescription *FabricApplicationUpgradeDescription,
-) error {
+) (err error) {
+	if v.hub.FabricApplicationManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricApplicationManagementClient.UpgradeApplication(ctx, upgradeDescription)
 }
 func (v *FabricClient) GetApplicationUpgradeProgress(
 	ctx context.Context,
 	applicationName string,
-) (FabricRollingUpgradeMode, string, error) {
+) (result_0 FabricRollingUpgradeMode, result_1 string, err error) {
+	if v.hub.FabricApplicationManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricApplicationManagementClient.GetApplicationUpgradeProgress(ctx, applicationName)
 }
 func (v *FabricClient) MoveNextApplicationUpgradeDomain(
 	ctx context.Context,
 	progress *comFabricApplicationUpgradeProgressResult2,
-) error {
+) (err error) {
+	if v.hub.FabricApplicationManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricApplicationManagementClient.MoveNextApplicationUpgradeDomain(ctx, progress)
 }
 func (v *FabricClient) DeleteApplication(
 	ctx context.Context,
 	applicationName string,
-) error {
+) (err error) {
+	if v.hub.FabricApplicationManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricApplicationManagementClient.DeleteApplication(ctx, applicationName)
 }
 func (v *FabricClient) UnprovisionApplicationType(
 	ctx context.Context,
 	applicationTypeName string,
 	applicationTypeVersion string,
-) error {
+) (err error) {
+	if v.hub.FabricApplicationManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricApplicationManagementClient.UnprovisionApplicationType(ctx, applicationTypeName, applicationTypeVersion)
 }
 func (v *FabricClient) GetApplicationManifest(
 	ctx context.Context,
 	applicationTypeName string,
 	applicationTypeVersion string,
-) (string, error) {
+) (result_0 string, err error) {
+	if v.hub.FabricApplicationManagementClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricApplicationManagementClient2.GetApplicationManifest(ctx, applicationTypeName, applicationTypeVersion)
 }
 func (v *FabricClient) MoveNextApplicationUpgradeDomain2(
 	ctx context.Context,
 	applicationName string,
 	nextUpgradeDomain string,
-) error {
+) (err error) {
+	if v.hub.FabricApplicationManagementClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricApplicationManagementClient2.MoveNextApplicationUpgradeDomain2(ctx, applicationName, nextUpgradeDomain)
 }
 func (v *FabricClient) UpdateApplicationUpgrade(
 	ctx context.Context,
 	description *FabricApplicationUpgradeUpdateDescription,
-) error {
+) (err error) {
+	if v.hub.FabricApplicationManagementClient3 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricApplicationManagementClient3.UpdateApplicationUpgrade(ctx, description)
 }
 func (v *FabricClient) RestartDeployedCodePackage(
 	ctx context.Context,
 	restartCodePackageDescription *FabricRestartDeployedCodePackageDescription,
-) error {
+) (err error) {
+	if v.hub.FabricApplicationManagementClient3 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricApplicationManagementClient3.RestartDeployedCodePackage(ctx, restartCodePackageDescription)
 }
 func (v *FabricClient) CopyApplicationPackage(
 	imageStoreConnectionString string,
 	applicationPackagePath string,
 	applicationPackagePathInImageStore string,
-) error {
+) (err error) {
+	if v.hub.FabricApplicationManagementClient3 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricApplicationManagementClient3.CopyApplicationPackage(imageStoreConnectionString, applicationPackagePath, applicationPackagePathInImageStore)
 }
 func (v *FabricClient) RemoveApplicationPackage(
 	imageStoreConnectionString string,
 	applicationPackagePathInImageStore string,
-) error {
+) (err error) {
+	if v.hub.FabricApplicationManagementClient3 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricApplicationManagementClient3.RemoveApplicationPackage(imageStoreConnectionString, applicationPackagePathInImageStore)
 }
 func (v *FabricClient) DeployServicePackageToNode(
@@ -356,150 +500,250 @@ func (v *FabricClient) DeployServicePackageToNode(
 	serviceManifestName string,
 	sharingPolicy []FabricPackageSharingPolicy,
 	nodeName string,
-) error {
+) (err error) {
+	if v.hub.FabricApplicationManagementClient4 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricApplicationManagementClient4.DeployServicePackageToNode(ctx, applicationTypeName, applicationTypeVersion, serviceManifestName, sharingPolicy, nodeName)
 }
 func (v *FabricClient) RollbackApplicationUpgrade(
 	ctx context.Context,
 	applicationName string,
-) error {
+) (err error) {
+	if v.hub.FabricApplicationManagementClient5 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricApplicationManagementClient5.RollbackApplicationUpgrade(ctx, applicationName)
 }
 func (v *FabricClient) UpdateApplication(
 	ctx context.Context,
 	applicationUpdateDescription *FabricApplicationUpdateDescription,
-) error {
+) (err error) {
+	if v.hub.FabricApplicationManagementClient6 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricApplicationManagementClient6.UpdateApplication(ctx, applicationUpdateDescription)
 }
 func (v *FabricClient) DeleteApplication2(
 	ctx context.Context,
 	deleteDescription *FabricDeleteApplicationDescription,
-) error {
+) (err error) {
+	if v.hub.FabricApplicationManagementClient7 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricApplicationManagementClient7.DeleteApplication2(ctx, deleteDescription)
 }
 func (v *FabricClient) ProvisionApplicationType2(
 	ctx context.Context,
 	description *FabricProvisionApplicationTypeDescription,
-) error {
+) (err error) {
+	if v.hub.FabricApplicationManagementClient8 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricApplicationManagementClient8.ProvisionApplicationType2(ctx, description)
 }
 func (v *FabricClient) UnprovisionApplicationType2(
 	ctx context.Context,
 	description *FabricUnprovisionApplicationTypeDescription,
-) error {
+) (err error) {
+	if v.hub.FabricApplicationManagementClient9 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricApplicationManagementClient9.UnprovisionApplicationType2(ctx, description)
 }
 func (v *FabricClient) ProvisionApplicationType3(
 	ctx context.Context,
 	description *FabricProvisionApplicationTypeDescriptionBase,
-) error {
+) (err error) {
+	if v.hub.FabricApplicationManagementClient10 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricApplicationManagementClient10.ProvisionApplicationType3(ctx, description)
 }
 func (v *FabricClient) NodeStateRemoved(
 	ctx context.Context,
 	nodeName string,
-) error {
+) (err error) {
+	if v.hub.FabricClusterManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient.NodeStateRemoved(ctx, nodeName)
 }
 func (v *FabricClient) RecoverPartitions(
 	ctx context.Context,
-) error {
+) (err error) {
+	if v.hub.FabricClusterManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient.RecoverPartitions(ctx)
 }
 func (v *FabricClient) DeactivateNode(
 	ctx context.Context,
 	nodeName string,
 	intent FabricNodeDeactivationIntent,
-) error {
+) (err error) {
+	if v.hub.FabricClusterManagementClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient2.DeactivateNode(ctx, nodeName, intent)
 }
 func (v *FabricClient) ActivateNode(
 	ctx context.Context,
 	nodeName string,
-) error {
+) (err error) {
+	if v.hub.FabricClusterManagementClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient2.ActivateNode(ctx, nodeName)
 }
 func (v *FabricClient) ProvisionFabric(
 	ctx context.Context,
 	codeFilepath string,
 	clusterManifestFilepath string,
-) error {
+) (err error) {
+	if v.hub.FabricClusterManagementClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient2.ProvisionFabric(ctx, codeFilepath, clusterManifestFilepath)
 }
 func (v *FabricClient) UpgradeFabric(
 	ctx context.Context,
 	upgradeDescription *FabricUpgradeDescription,
-) error {
+) (err error) {
+	if v.hub.FabricClusterManagementClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient2.UpgradeFabric(ctx, upgradeDescription)
 }
 func (v *FabricClient) GetFabricUpgradeProgress(
 	ctx context.Context,
-) (FabricRollingUpgradeMode, string, error) {
+) (result_0 FabricRollingUpgradeMode, result_1 string, err error) {
+	if v.hub.FabricClusterManagementClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient2.GetFabricUpgradeProgress(ctx)
 }
 func (v *FabricClient) MoveNextFabricUpgradeDomain(
 	ctx context.Context,
 	progress *comFabricUpgradeProgressResult2,
-) error {
+) (err error) {
+	if v.hub.FabricClusterManagementClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient2.MoveNextFabricUpgradeDomain(ctx, progress)
 }
 func (v *FabricClient) MoveNextFabricUpgradeDomain2(
 	ctx context.Context,
 	nextUpgradeDomain string,
-) error {
+) (err error) {
+	if v.hub.FabricClusterManagementClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient2.MoveNextFabricUpgradeDomain2(ctx, nextUpgradeDomain)
 }
 func (v *FabricClient) UnprovisionFabric(
 	ctx context.Context,
 	codeVersion string,
 	configVersion string,
-) error {
+) (err error) {
+	if v.hub.FabricClusterManagementClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient2.UnprovisionFabric(ctx, codeVersion, configVersion)
 }
 func (v *FabricClient) GetClusterManifest(
 	ctx context.Context,
-) (string, error) {
+) (result_0 string, err error) {
+	if v.hub.FabricClusterManagementClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient2.GetClusterManifest(ctx)
 }
 func (v *FabricClient) RecoverPartition(
 	ctx context.Context,
 	partitionId windows.GUID,
-) error {
+) (err error) {
+	if v.hub.FabricClusterManagementClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient2.RecoverPartition(ctx, partitionId)
 }
 func (v *FabricClient) RecoverServicePartitions(
 	ctx context.Context,
 	serviceName string,
-) error {
+) (err error) {
+	if v.hub.FabricClusterManagementClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient2.RecoverServicePartitions(ctx, serviceName)
 }
 func (v *FabricClient) RecoverSystemPartitions(
 	ctx context.Context,
-) error {
+) (err error) {
+	if v.hub.FabricClusterManagementClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient2.RecoverSystemPartitions(ctx)
 }
 func (v *FabricClient) UpdateFabricUpgrade(
 	ctx context.Context,
 	description *FabricUpgradeUpdateDescription,
-) error {
+) (err error) {
+	if v.hub.FabricClusterManagementClient3 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient3.UpdateFabricUpgrade(ctx, description)
 }
 func (v *FabricClient) StopNode(
 	ctx context.Context,
 	stopNodeDescription *FabricStopNodeDescription,
-) error {
+) (err error) {
+	if v.hub.FabricClusterManagementClient3 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient3.StopNode(ctx, stopNodeDescription)
 }
 func (v *FabricClient) RestartNode(
 	ctx context.Context,
 	restartNodeDescription *FabricRestartNodeDescription,
-) error {
+) (err error) {
+	if v.hub.FabricClusterManagementClient3 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient3.RestartNode(ctx, restartNodeDescription)
 }
 func (v *FabricClient) StartNode(
 	ctx context.Context,
 	startNodeDescription *FabricStartNodeDescription,
-) error {
+) (err error) {
+	if v.hub.FabricClusterManagementClient3 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient3.StartNode(ctx, startNodeDescription)
 }
 func (v *FabricClient) CopyClusterPackage(
@@ -508,96 +752,160 @@ func (v *FabricClient) CopyClusterPackage(
 	clusterManifestPathInImageStore string,
 	codePackagePath string,
 	codePackagePathInImageStore string,
-) error {
+) (err error) {
+	if v.hub.FabricClusterManagementClient3 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient3.CopyClusterPackage(imageStoreConnectionString, clusterManifestPath, clusterManifestPathInImageStore, codePackagePath, codePackagePathInImageStore)
 }
 func (v *FabricClient) RemoveClusterPackage(
 	imageStoreConnectionString string,
 	clusterManifestPathInImageStore string,
 	codePackagePathInImageStore string,
-) error {
+) (err error) {
+	if v.hub.FabricClusterManagementClient3 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient3.RemoveClusterPackage(imageStoreConnectionString, clusterManifestPathInImageStore, codePackagePathInImageStore)
 }
 func (v *FabricClient) RollbackFabricUpgrade(
 	ctx context.Context,
-) error {
+) (err error) {
+	if v.hub.FabricClusterManagementClient4 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient4.RollbackFabricUpgrade(ctx)
 }
 func (v *FabricClient) ResetPartitionLoad(
 	ctx context.Context,
 	partitionId windows.GUID,
-) error {
+) (err error) {
+	if v.hub.FabricClusterManagementClient5 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient5.ResetPartitionLoad(ctx, partitionId)
 }
 func (v *FabricClient) ToggleVerboseServicePlacementHealthReporting(
 	ctx context.Context,
 	enabled bool,
-) error {
+) (err error) {
+	if v.hub.FabricClusterManagementClient6 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient6.ToggleVerboseServicePlacementHealthReporting(ctx, enabled)
 }
 func (v *FabricClient) UpgradeConfiguration(
 	ctx context.Context,
 	startUpgradeDescription *FabricStartUpgradeDescription,
-) error {
+) (err error) {
+	if v.hub.FabricClusterManagementClient7 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient7.UpgradeConfiguration(ctx, startUpgradeDescription)
 }
 func (v *FabricClient) GetClusterConfigurationUpgradeStatus(
 	ctx context.Context,
-) (*FabricOrchestrationUpgradeProgress, error) {
+) (result_0 *FabricOrchestrationUpgradeProgress, err error) {
+	if v.hub.FabricClusterManagementClient7 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient7.GetClusterConfigurationUpgradeStatus(ctx)
 }
 func (v *FabricClient) GetClusterConfiguration(
 	ctx context.Context,
-) (string, error) {
+) (result_0 string, err error) {
+	if v.hub.FabricClusterManagementClient7 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient7.GetClusterConfiguration(ctx)
 }
 func (v *FabricClient) GetUpgradesPendingApproval(
 	ctx context.Context,
-) error {
+) (err error) {
+	if v.hub.FabricClusterManagementClient7 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient7.GetUpgradesPendingApproval(ctx)
 }
 func (v *FabricClient) StartApprovedUpgrades(
 	ctx context.Context,
-) error {
+) (err error) {
+	if v.hub.FabricClusterManagementClient7 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricClusterManagementClient7.StartApprovedUpgrades(ctx)
 }
 func (v *FabricClient) ReportHealth(
 	healthReport *FabricHealthReport,
-) error {
+) (err error) {
+	if v.hub.FabricHealthClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricHealthClient.ReportHealth(healthReport)
 }
 func (v *FabricClient) GetClusterHealth(
 	ctx context.Context,
 	healthPolicy *FabricClusterHealthPolicy,
-) (*FabricClusterHealth, error) {
+) (result_0 *FabricClusterHealth, err error) {
+	if v.hub.FabricHealthClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricHealthClient.GetClusterHealth(ctx, healthPolicy)
 }
 func (v *FabricClient) GetNodeHealth(
 	ctx context.Context,
 	nodeName string,
 	healthPolicy *FabricClusterHealthPolicy,
-) (*FabricNodeHealth, error) {
+) (result_0 *FabricNodeHealth, err error) {
+	if v.hub.FabricHealthClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricHealthClient.GetNodeHealth(ctx, nodeName, healthPolicy)
 }
 func (v *FabricClient) GetApplicationHealth(
 	ctx context.Context,
 	applicationName string,
 	healthPolicy *FabricApplicationHealthPolicy,
-) (*FabricApplicationHealth, error) {
+) (result_0 *FabricApplicationHealth, err error) {
+	if v.hub.FabricHealthClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricHealthClient.GetApplicationHealth(ctx, applicationName, healthPolicy)
 }
 func (v *FabricClient) GetServiceHealth(
 	ctx context.Context,
 	serviceName string,
 	healthPolicy *FabricApplicationHealthPolicy,
-) (*FabricServiceHealth, error) {
+) (result_0 *FabricServiceHealth, err error) {
+	if v.hub.FabricHealthClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricHealthClient.GetServiceHealth(ctx, serviceName, healthPolicy)
 }
 func (v *FabricClient) GetPartitionHealth(
 	ctx context.Context,
 	partitionId windows.GUID,
 	healthPolicy *FabricApplicationHealthPolicy,
-) (*FabricPartitionHealth, error) {
+) (result_0 *FabricPartitionHealth, err error) {
+	if v.hub.FabricHealthClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricHealthClient.GetPartitionHealth(ctx, partitionId, healthPolicy)
 }
 func (v *FabricClient) GetReplicaHealth(
@@ -605,7 +913,11 @@ func (v *FabricClient) GetReplicaHealth(
 	partitionId windows.GUID,
 	replicaId int64,
 	healthPolicy *FabricApplicationHealthPolicy,
-) (*FabricReplicaHealth, error) {
+) (result_0 *FabricReplicaHealth, err error) {
+	if v.hub.FabricHealthClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricHealthClient.GetReplicaHealth(ctx, partitionId, replicaId, healthPolicy)
 }
 func (v *FabricClient) GetDeployedApplicationHealth(
@@ -613,7 +925,11 @@ func (v *FabricClient) GetDeployedApplicationHealth(
 	applicationName string,
 	nodeName string,
 	healthPolicy *FabricApplicationHealthPolicy,
-) (*FabricDeployedApplicationHealth, error) {
+) (result_0 *FabricDeployedApplicationHealth, err error) {
+	if v.hub.FabricHealthClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricHealthClient.GetDeployedApplicationHealth(ctx, applicationName, nodeName, healthPolicy)
 }
 func (v *FabricClient) GetDeployedServicePackageHealth(
@@ -622,447 +938,743 @@ func (v *FabricClient) GetDeployedServicePackageHealth(
 	serviceManifestName string,
 	nodeName string,
 	healthPolicy *FabricApplicationHealthPolicy,
-) (*FabricDeployedServicePackageHealth, error) {
+) (result_0 *FabricDeployedServicePackageHealth, err error) {
+	if v.hub.FabricHealthClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricHealthClient.GetDeployedServicePackageHealth(ctx, applicationName, serviceManifestName, nodeName, healthPolicy)
 }
 func (v *FabricClient) GetClusterHealth2(
 	ctx context.Context,
 	queryDescription *FabricClusterHealthQueryDescription,
-) (*FabricClusterHealth, error) {
+) (result_0 *FabricClusterHealth, err error) {
+	if v.hub.FabricHealthClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricHealthClient2.GetClusterHealth2(ctx, queryDescription)
 }
 func (v *FabricClient) GetNodeHealth2(
 	ctx context.Context,
 	queryDescription *FabricNodeHealthQueryDescription,
-) (*FabricNodeHealth, error) {
+) (result_0 *FabricNodeHealth, err error) {
+	if v.hub.FabricHealthClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricHealthClient2.GetNodeHealth2(ctx, queryDescription)
 }
 func (v *FabricClient) GetApplicationHealth2(
 	ctx context.Context,
 	queryDescription *FabricApplicationHealthQueryDescription,
-) (*FabricApplicationHealth, error) {
+) (result_0 *FabricApplicationHealth, err error) {
+	if v.hub.FabricHealthClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricHealthClient2.GetApplicationHealth2(ctx, queryDescription)
 }
 func (v *FabricClient) GetServiceHealth2(
 	ctx context.Context,
 	queryDescription *FabricServiceHealthQueryDescription,
-) (*FabricServiceHealth, error) {
+) (result_0 *FabricServiceHealth, err error) {
+	if v.hub.FabricHealthClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricHealthClient2.GetServiceHealth2(ctx, queryDescription)
 }
 func (v *FabricClient) GetPartitionHealth2(
 	ctx context.Context,
 	queryDescription *FabricPartitionHealthQueryDescription,
-) (*FabricPartitionHealth, error) {
+) (result_0 *FabricPartitionHealth, err error) {
+	if v.hub.FabricHealthClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricHealthClient2.GetPartitionHealth2(ctx, queryDescription)
 }
 func (v *FabricClient) GetReplicaHealth2(
 	ctx context.Context,
 	queryDescription *FabricReplicaHealthQueryDescription,
-) (*FabricReplicaHealth, error) {
+) (result_0 *FabricReplicaHealth, err error) {
+	if v.hub.FabricHealthClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricHealthClient2.GetReplicaHealth2(ctx, queryDescription)
 }
 func (v *FabricClient) GetDeployedApplicationHealth2(
 	ctx context.Context,
 	queryDescription *FabricDeployedApplicationHealthQueryDescription,
-) (*FabricDeployedApplicationHealth, error) {
+) (result_0 *FabricDeployedApplicationHealth, err error) {
+	if v.hub.FabricHealthClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricHealthClient2.GetDeployedApplicationHealth2(ctx, queryDescription)
 }
 func (v *FabricClient) GetDeployedServicePackageHealth2(
 	ctx context.Context,
 	queryDescription *FabricDeployedServicePackageHealthQueryDescription,
-) (*FabricDeployedServicePackageHealth, error) {
+) (result_0 *FabricDeployedServicePackageHealth, err error) {
+	if v.hub.FabricHealthClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricHealthClient2.GetDeployedServicePackageHealth2(ctx, queryDescription)
 }
 func (v *FabricClient) GetClusterHealthChunk(
 	ctx context.Context,
 	queryDescription *FabricClusterHealthChunkQueryDescription,
-) (*FabricClusterHealthChunk, error) {
+) (result_0 *FabricClusterHealthChunk, err error) {
+	if v.hub.FabricHealthClient3 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricHealthClient3.GetClusterHealthChunk(ctx, queryDescription)
 }
 func (v *FabricClient) ReportHealth2(
 	healthReport *FabricHealthReport,
 	sendOptions *FabricHealthReportSendOptions,
-) error {
+) (err error) {
+	if v.hub.FabricHealthClient4 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricHealthClient4.ReportHealth2(healthReport, sendOptions)
 }
 func (v *FabricClient) GetNodeList(
 	ctx context.Context,
 	queryDescription *FabricNodeQueryDescription,
-) ([]FabricNodeQueryResultItem, error) {
+) (result_0 []FabricNodeQueryResultItem, err error) {
+	if v.hub.FabricQueryClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient.GetNodeList(ctx, queryDescription)
 }
 func (v *FabricClient) GetApplicationTypeList(
 	ctx context.Context,
 	queryDescription *FabricApplicationTypeQueryDescription,
-) ([]FabricApplicationTypeQueryResultItem, error) {
+) (result_0 []FabricApplicationTypeQueryResultItem, err error) {
+	if v.hub.FabricQueryClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient.GetApplicationTypeList(ctx, queryDescription)
 }
 func (v *FabricClient) GetServiceTypeList(
 	ctx context.Context,
 	queryDescription *FabricServiceTypeQueryDescription,
-) ([]FabricServiceTypeQueryResultItem, error) {
+) (result_0 []FabricServiceTypeQueryResultItem, err error) {
+	if v.hub.FabricQueryClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient.GetServiceTypeList(ctx, queryDescription)
 }
 func (v *FabricClient) GetApplicationList(
 	ctx context.Context,
 	queryDescription *FabricApplicationQueryDescription,
-) ([]FabricApplicationQueryResultItem, error) {
+) (result_0 []FabricApplicationQueryResultItem, err error) {
+	if v.hub.FabricQueryClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient.GetApplicationList(ctx, queryDescription)
 }
 func (v *FabricClient) GetServiceList(
 	ctx context.Context,
 	queryDescription *FabricServiceQueryDescription,
-) ([]FabricServiceQueryResultItem, error) {
+) (result_0 []FabricServiceQueryResultItem, err error) {
+	if v.hub.FabricQueryClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient.GetServiceList(ctx, queryDescription)
 }
 func (v *FabricClient) GetPartitionList(
 	ctx context.Context,
 	queryDescription *FabricServicePartitionQueryDescription,
-) ([]FabricServicePartitionQueryResultItem, error) {
+) (result_0 []FabricServicePartitionQueryResultItem, err error) {
+	if v.hub.FabricQueryClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient.GetPartitionList(ctx, queryDescription)
 }
 func (v *FabricClient) GetReplicaList(
 	ctx context.Context,
 	queryDescription *FabricServiceReplicaQueryDescription,
-) ([]FabricServiceReplicaQueryResultItem, error) {
+) (result_0 []FabricServiceReplicaQueryResultItem, err error) {
+	if v.hub.FabricQueryClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient.GetReplicaList(ctx, queryDescription)
 }
 func (v *FabricClient) GetDeployedApplicationList(
 	ctx context.Context,
 	queryDescription *FabricDeployedApplicationQueryDescription,
-) ([]FabricDeployedApplicationQueryResultItem, error) {
+) (result_0 []FabricDeployedApplicationQueryResultItem, err error) {
+	if v.hub.FabricQueryClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient.GetDeployedApplicationList(ctx, queryDescription)
 }
 func (v *FabricClient) GetDeployedServicePackageList(
 	ctx context.Context,
 	queryDescription *FabricDeployedServicePackageQueryDescription,
-) ([]FabricDeployedServicePackageQueryResultItem, error) {
+) (result_0 []FabricDeployedServicePackageQueryResultItem, err error) {
+	if v.hub.FabricQueryClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient.GetDeployedServicePackageList(ctx, queryDescription)
 }
 func (v *FabricClient) GetDeployedServiceTypeList(
 	ctx context.Context,
 	queryDescription *FabricDeployedServiceTypeQueryDescription,
-) ([]FabricDeployedServiceTypeQueryResultItem, error) {
+) (result_0 []FabricDeployedServiceTypeQueryResultItem, err error) {
+	if v.hub.FabricQueryClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient.GetDeployedServiceTypeList(ctx, queryDescription)
 }
 func (v *FabricClient) GetDeployedCodePackageList(
 	ctx context.Context,
 	queryDescription *FabricDeployedCodePackageQueryDescription,
-) ([]FabricDeployedCodePackageQueryResultItem, error) {
+) (result_0 []FabricDeployedCodePackageQueryResultItem, err error) {
+	if v.hub.FabricQueryClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient.GetDeployedCodePackageList(ctx, queryDescription)
 }
 func (v *FabricClient) GetDeployedReplicaList(
 	ctx context.Context,
 	queryDescription *FabricDeployedServiceReplicaQueryDescription,
-) ([]FabricDeployedServiceReplicaQueryResultItem, error) {
+) (result_0 []FabricDeployedServiceReplicaQueryResultItem, err error) {
+	if v.hub.FabricQueryClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient.GetDeployedReplicaList(ctx, queryDescription)
 }
 func (v *FabricClient) GetDeployedReplicaDetail(
 	ctx context.Context,
 	queryDescription *FabricDeployedServiceReplicaDetailQueryDescription,
-) (*FabricDeployedServiceReplicaDetailQueryResultItem, error) {
+) (result_0 *FabricDeployedServiceReplicaDetailQueryResultItem, err error) {
+	if v.hub.FabricQueryClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient2.GetDeployedReplicaDetail(ctx, queryDescription)
 }
 func (v *FabricClient) GetClusterLoadInformation(
 	ctx context.Context,
-) (*FabricClusterLoadInformation, error) {
+) (result_0 *FabricClusterLoadInformation, err error) {
+	if v.hub.FabricQueryClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient2.GetClusterLoadInformation(ctx)
 }
 func (v *FabricClient) GetPartitionLoadInformation(
 	ctx context.Context,
 	queryDescription *FabricPartitionLoadInformationQueryDescription,
-) (*FabricPartitionLoadInformation, error) {
+) (result_0 *FabricPartitionLoadInformation, err error) {
+	if v.hub.FabricQueryClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient2.GetPartitionLoadInformation(ctx, queryDescription)
 }
 func (v *FabricClient) GetProvisionedFabricCodeVersionList(
 	ctx context.Context,
 	queryDescription *FabricProvisionedCodeVersionQueryDescription,
-) ([]FabricProvisionedCodeVersionQueryResultItem, error) {
+) (result_0 []FabricProvisionedCodeVersionQueryResultItem, err error) {
+	if v.hub.FabricQueryClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient2.GetProvisionedFabricCodeVersionList(ctx, queryDescription)
 }
 func (v *FabricClient) GetProvisionedFabricConfigVersionList(
 	ctx context.Context,
 	queryDescription *FabricProvisionedConfigVersionQueryDescription,
-) ([]FabricProvisionedConfigVersionQueryResultItem, error) {
+) (result_0 []FabricProvisionedConfigVersionQueryResultItem, err error) {
+	if v.hub.FabricQueryClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient2.GetProvisionedFabricConfigVersionList(ctx, queryDescription)
 }
 func (v *FabricClient) GetNodeLoadInformation(
 	ctx context.Context,
 	queryDescription *FabricNodeLoadInformationQueryDescription,
-) (*FabricNodeLoadInformation, error) {
+) (result_0 *FabricNodeLoadInformation, err error) {
+	if v.hub.FabricQueryClient3 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient3.GetNodeLoadInformation(ctx, queryDescription)
 }
 func (v *FabricClient) GetReplicaLoadInformation(
 	ctx context.Context,
 	queryDescription *FabricReplicaLoadInformationQueryDescription,
-) (*FabricReplicaLoadInformation, error) {
+) (result_0 *FabricReplicaLoadInformation, err error) {
+	if v.hub.FabricQueryClient3 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient3.GetReplicaLoadInformation(ctx, queryDescription)
 }
 func (v *FabricClient) GetServiceGroupMemberList(
 	ctx context.Context,
 	queryDescription *FabricServiceGroupMemberQueryDescription,
-) ([]FabricServiceGroupMemberQueryResultItem, error) {
+) (result_0 []FabricServiceGroupMemberQueryResultItem, err error) {
+	if v.hub.FabricQueryClient4 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient4.GetServiceGroupMemberList(ctx, queryDescription)
 }
 func (v *FabricClient) GetServiceGroupMemberTypeList(
 	ctx context.Context,
 	queryDescription *FabricServiceGroupMemberTypeQueryDescription,
-) ([]FabricServiceGroupMemberTypeQueryResultItem, error) {
+) (result_0 []FabricServiceGroupMemberTypeQueryResultItem, err error) {
+	if v.hub.FabricQueryClient4 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient4.GetServiceGroupMemberTypeList(ctx, queryDescription)
 }
 func (v *FabricClient) GetUnplacedReplicaInformation(
 	ctx context.Context,
 	queryDescription *FabricUnplacedReplicaInformationQueryDescription,
-) (*FabricUnplacedReplicaInformation, error) {
+) (result_0 *FabricUnplacedReplicaInformation, err error) {
+	if v.hub.FabricQueryClient5 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient5.GetUnplacedReplicaInformation(ctx, queryDescription)
 }
 func (v *FabricClient) GetApplicationLoadInformation(
 	ctx context.Context,
 	queryDescription *FabricApplicationLoadInformationQueryDescription,
-) (*FabricApplicationLoadInformation, error) {
+) (result_0 *FabricApplicationLoadInformation, err error) {
+	if v.hub.FabricQueryClient7 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient7.GetApplicationLoadInformation(ctx, queryDescription)
 }
 func (v *FabricClient) GetServiceName(
 	ctx context.Context,
 	queryDescription *FabricServiceNameQueryDescription,
-) (*FabricServiceNameQueryResult, error) {
+) (result_0 *FabricServiceNameQueryResult, err error) {
+	if v.hub.FabricQueryClient8 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient8.GetServiceName(ctx, queryDescription)
 }
 func (v *FabricClient) GetApplicationName(
 	ctx context.Context,
 	queryDescription *FabricApplicationNameQueryDescription,
-) (*FabricApplicationNameQueryResult, error) {
+) (result_0 *FabricApplicationNameQueryResult, err error) {
+	if v.hub.FabricQueryClient8 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient8.GetApplicationName(ctx, queryDescription)
 }
 func (v *FabricClient) GetApplicationTypePagedList(
 	ctx context.Context,
 	queryDescription *PagedFabricApplicationTypeQueryDescription,
-) ([]FabricApplicationTypeQueryResultItem, *FabricPagingStatus, error) {
+) (result_0 []FabricApplicationTypeQueryResultItem, result_1 *FabricPagingStatus, err error) {
+	if v.hub.FabricQueryClient9 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient9.GetApplicationTypePagedList(ctx, queryDescription)
 }
 func (v *FabricClient) GetDeployedApplicationPagedList(
 	ctx context.Context,
 	queryDescription *FabricPagedDeployedApplicationQueryDescription,
-) ([]FabricDeployedApplicationQueryResultItem, *FabricPagingStatus, error) {
+) (result_0 []FabricDeployedApplicationQueryResultItem, result_1 *FabricPagingStatus, err error) {
+	if v.hub.FabricQueryClient10 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricQueryClient10.GetDeployedApplicationPagedList(ctx, queryDescription)
 }
 func (v *FabricClient) InvokeInfrastructureCommand(
 	ctx context.Context,
 	serviceName string,
 	command string,
-) (string, error) {
+) (result_0 string, err error) {
+	if v.hub.FabricInfrastructureServiceClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricInfrastructureServiceClient.InvokeInfrastructureCommand(ctx, serviceName, command)
 }
 func (v *FabricClient) InvokeInfrastructureQuery(
 	ctx context.Context,
 	serviceName string,
 	command string,
-) (string, error) {
+) (result_0 string, err error) {
+	if v.hub.FabricInfrastructureServiceClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricInfrastructureServiceClient.InvokeInfrastructureQuery(ctx, serviceName, command)
 }
 func (v *FabricClient) CreateRepairTask(
 	ctx context.Context,
 	repairTask *FabricRepairTask,
-) (int64, error) {
+) (result_0 int64, err error) {
+	if v.hub.FabricRepairManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricRepairManagementClient.CreateRepairTask(ctx, repairTask)
 }
 func (v *FabricClient) CancelRepairTask(
 	ctx context.Context,
 	requestDescription *FabricRepairCancelDescription,
-) (int64, error) {
+) (result_0 int64, err error) {
+	if v.hub.FabricRepairManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricRepairManagementClient.CancelRepairTask(ctx, requestDescription)
 }
 func (v *FabricClient) ForceApproveRepairTask(
 	ctx context.Context,
 	requestDescription *FabricRepairApproveDescription,
-) (int64, error) {
+) (result_0 int64, err error) {
+	if v.hub.FabricRepairManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricRepairManagementClient.ForceApproveRepairTask(ctx, requestDescription)
 }
 func (v *FabricClient) DeleteRepairTask(
 	ctx context.Context,
 	requestDescription *FabricRepairDeleteDescription,
-) error {
+) (err error) {
+	if v.hub.FabricRepairManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricRepairManagementClient.DeleteRepairTask(ctx, requestDescription)
 }
 func (v *FabricClient) UpdateRepairExecutionState(
 	ctx context.Context,
 	repairTask *FabricRepairTask,
-) (int64, error) {
+) (result_0 int64, err error) {
+	if v.hub.FabricRepairManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricRepairManagementClient.UpdateRepairExecutionState(ctx, repairTask)
 }
 func (v *FabricClient) GetRepairTaskList(
 	ctx context.Context,
 	queryDescription *FabricRepairTaskQueryDescription,
-) ([]FabricRepairTask, error) {
+) (result_0 []FabricRepairTask, err error) {
+	if v.hub.FabricRepairManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricRepairManagementClient.GetRepairTaskList(ctx, queryDescription)
 }
 func (v *FabricClient) UpdateRepairTaskHealthPolicy(
 	ctx context.Context,
 	updateDescription *FabricRepairTaskHealthPolicyUpdateDescription,
-) (int64, error) {
+) (result_0 int64, err error) {
+	if v.hub.FabricRepairManagementClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricRepairManagementClient2.UpdateRepairTaskHealthPolicy(ctx, updateDescription)
 }
 func (v *FabricClient) StartPartitionDataLoss(
 	ctx context.Context,
 	invokeDataLossDescription *FabricStartPartitionDataLossDescription,
-) error {
+) (err error) {
+	if v.hub.FabricTestManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricTestManagementClient.StartPartitionDataLoss(ctx, invokeDataLossDescription)
 }
 func (v *FabricClient) GetPartitionDataLossProgress(
 	ctx context.Context,
 	operationId windows.GUID,
-) (*FabricPartitionDataLossProgress, error) {
+) (result_0 *FabricPartitionDataLossProgress, err error) {
+	if v.hub.FabricTestManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricTestManagementClient.GetPartitionDataLossProgress(ctx, operationId)
 }
 func (v *FabricClient) StartPartitionQuorumLoss(
 	ctx context.Context,
 	invokeQuorumLossDescription *FabricStartPartitionQuorumLossDescription,
-) error {
+) (err error) {
+	if v.hub.FabricTestManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricTestManagementClient.StartPartitionQuorumLoss(ctx, invokeQuorumLossDescription)
 }
 func (v *FabricClient) GetPartitionQuorumLossProgress(
 	ctx context.Context,
 	operationId windows.GUID,
-) (*FabricPartitionQuorumLossProgress, error) {
+) (result_0 *FabricPartitionQuorumLossProgress, err error) {
+	if v.hub.FabricTestManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricTestManagementClient.GetPartitionQuorumLossProgress(ctx, operationId)
 }
 func (v *FabricClient) StartPartitionRestart(
 	ctx context.Context,
 	restartPartitionDescription *FabricStartPartitionRestartDescription,
-) error {
+) (err error) {
+	if v.hub.FabricTestManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricTestManagementClient.StartPartitionRestart(ctx, restartPartitionDescription)
 }
 func (v *FabricClient) GetPartitionRestartProgress(
 	ctx context.Context,
 	operationId windows.GUID,
-) (*FabricPartitionRestartProgress, error) {
+) (result_0 *FabricPartitionRestartProgress, err error) {
+	if v.hub.FabricTestManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricTestManagementClient.GetPartitionRestartProgress(ctx, operationId)
 }
 func (v *FabricClient) GetTestCommandStatusList(
 	ctx context.Context,
 	operationId *FabricTestCommandListDescription,
-) ([]interface{}, error) {
+) (result_0 []interface{}, err error) {
+	if v.hub.FabricTestManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricTestManagementClient.GetTestCommandStatusList(ctx, operationId)
 }
 func (v *FabricClient) CancelTestCommand(
 	ctx context.Context,
 	invokeDataLossDescription *FabricCancelTestCommandDescription,
-) error {
+) (err error) {
+	if v.hub.FabricTestManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricTestManagementClient.CancelTestCommand(ctx, invokeDataLossDescription)
 }
 func (v *FabricClient) StartChaos(
 	ctx context.Context,
 	restartPartitionDescription *FabricStartChaosDescription,
-) error {
+) (err error) {
+	if v.hub.FabricTestManagementClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricTestManagementClient2.StartChaos(ctx, restartPartitionDescription)
 }
 func (v *FabricClient) StopChaos(
 	ctx context.Context,
-) error {
+) (err error) {
+	if v.hub.FabricTestManagementClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricTestManagementClient2.StopChaos(ctx)
 }
 func (v *FabricClient) GetChaosReport(
 	ctx context.Context,
 	getChaosReportDescription *FabricGetChaosReportDescription,
-) (*FabricChaosReport, error) {
+) (result_0 *FabricChaosReport, err error) {
+	if v.hub.FabricTestManagementClient2 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricTestManagementClient2.GetChaosReport(ctx, getChaosReportDescription)
 }
 func (v *FabricClient) StartNodeTransition(
 	ctx context.Context,
 	description *FabricNodeTransitionDescription,
-) error {
+) (err error) {
+	if v.hub.FabricTestManagementClient3 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricTestManagementClient3.StartNodeTransition(ctx, description)
 }
 func (v *FabricClient) GetNodeTransitionProgress(
 	ctx context.Context,
 	operationId windows.GUID,
-) (*FabricNodeTransitionProgress, error) {
+) (result_0 *FabricNodeTransitionProgress, err error) {
+	if v.hub.FabricTestManagementClient3 == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricTestManagementClient3.GetNodeTransitionProgress(ctx, operationId)
 }
 func (v *FabricClient) MovePrimary(
 	ctx context.Context,
 	description *FabricMovePrimaryDescription2,
-) (*FabricMovePrimaryResult, error) {
+) (result_0 *FabricMovePrimaryResult, err error) {
+	if v.hub.FabricFaultManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricFaultManagementClient.MovePrimary(ctx, description)
 }
 func (v *FabricClient) MoveSecondary(
 	ctx context.Context,
 	description *FabricMoveSecondaryDescription2,
-) (*FabricMoveSecondaryResult, error) {
+) (result_0 *FabricMoveSecondaryResult, err error) {
+	if v.hub.FabricFaultManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricFaultManagementClient.MoveSecondary(ctx, description)
 }
 func (v *FabricClient) CreateNetwork(
 	ctx context.Context,
 	networkName string,
 	description *FabricNetworkDescription,
-) error {
+) (err error) {
+	if v.hub.FabricNetworkManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricNetworkManagementClient.CreateNetwork(ctx, networkName, description)
 }
 func (v *FabricClient) DeleteNetwork(
 	ctx context.Context,
 	deleteDescription *FabricDeleteNetworkDescription,
-) error {
+) (err error) {
+	if v.hub.FabricNetworkManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricNetworkManagementClient.DeleteNetwork(ctx, deleteDescription)
 }
 func (v *FabricClient) GetNetworkList(
 	ctx context.Context,
 	queryDescription *FabricNetworkQueryDescription,
-) ([]FabricNetworkInformation, *FabricPagingStatus, error) {
+) (result_0 []FabricNetworkInformation, result_1 *FabricPagingStatus, err error) {
+	if v.hub.FabricNetworkManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricNetworkManagementClient.GetNetworkList(ctx, queryDescription)
 }
 func (v *FabricClient) GetNetworkApplicationList(
 	ctx context.Context,
 	queryDescription *FabricNetworkApplicationQueryDescription,
-) ([]FabricNetworkApplicationQueryResultItem, *FabricPagingStatus, error) {
+) (result_0 []FabricNetworkApplicationQueryResultItem, result_1 *FabricPagingStatus, err error) {
+	if v.hub.FabricNetworkManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricNetworkManagementClient.GetNetworkApplicationList(ctx, queryDescription)
 }
 func (v *FabricClient) GetNetworkNodeList(
 	ctx context.Context,
 	queryDescription *FabricNetworkNodeQueryDescription,
-) ([]FabricNetworkNodeQueryResultItem, *FabricPagingStatus, error) {
+) (result_0 []FabricNetworkNodeQueryResultItem, result_1 *FabricPagingStatus, err error) {
+	if v.hub.FabricNetworkManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricNetworkManagementClient.GetNetworkNodeList(ctx, queryDescription)
 }
 func (v *FabricClient) GetApplicationNetworkList(
 	ctx context.Context,
 	queryDescription *FabricApplicationNetworkQueryDescription,
-) ([]FabricApplicationNetworkQueryResultItem, *FabricPagingStatus, error) {
+) (result_0 []FabricApplicationNetworkQueryResultItem, result_1 *FabricPagingStatus, err error) {
+	if v.hub.FabricNetworkManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricNetworkManagementClient.GetApplicationNetworkList(ctx, queryDescription)
 }
 func (v *FabricClient) GetDeployedNetworkList(
 	ctx context.Context,
 	queryDescription *FabricDeployedNetworkQueryDescription,
-) ([]FabricDeployedNetworkQueryResultItem, *FabricPagingStatus, error) {
+) (result_0 []FabricDeployedNetworkQueryResultItem, result_1 *FabricPagingStatus, err error) {
+	if v.hub.FabricNetworkManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricNetworkManagementClient.GetDeployedNetworkList(ctx, queryDescription)
 }
 func (v *FabricClient) GetDeployedNetworkCodePackageList(
 	ctx context.Context,
 	queryDescription *FabricDeployedNetworkCodePackageQueryDescription,
-) ([]FabricDeployedNetworkCodePackageQueryResultItem, *FabricPagingStatus, error) {
+) (result_0 []FabricDeployedNetworkCodePackageQueryResultItem, result_1 *FabricPagingStatus, err error) {
+	if v.hub.FabricNetworkManagementClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricNetworkManagementClient.GetDeployedNetworkCodePackageList(ctx, queryDescription)
 }
 func (v *FabricClient) GetSecrets(
 	ctx context.Context,
 	secretReferences []FabricSecretReference,
 	includeValue bool,
-) ([]FabricSecret, error) {
+) (result_0 []FabricSecret, err error) {
+	if v.hub.FabricSecretStoreClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricSecretStoreClient.GetSecrets(ctx, secretReferences, includeValue)
 }
 func (v *FabricClient) SetSecrets(
 	ctx context.Context,
 	secrets []FabricSecret,
-) ([]FabricSecret, error) {
+) (result_0 []FabricSecret, err error) {
+	if v.hub.FabricSecretStoreClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricSecretStoreClient.SetSecrets(ctx, secrets)
 }
 func (v *FabricClient) RemoveSecrets(
 	ctx context.Context,
 	secretReferences []FabricSecretReference,
-) ([]FabricSecretReference, error) {
+) (result_0 []FabricSecretReference, err error) {
+	if v.hub.FabricSecretStoreClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricSecretStoreClient.RemoveSecrets(ctx, secretReferences)
 }
 func (v *FabricClient) GetSecretVersions(
 	ctx context.Context,
 	secretReferences []FabricSecretReference,
-) ([]FabricSecretReference, error) {
+) (result_0 []FabricSecretReference, err error) {
+	if v.hub.FabricSecretStoreClient == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricSecretStoreClient.GetSecretVersions(ctx, secretReferences)
 }
 

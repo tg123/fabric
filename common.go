@@ -7,6 +7,7 @@ import (
 	"unsafe"
 
 	ole "github.com/go-ole/go-ole"
+	"github.com/pkg/errors"
 	"golang.org/x/sys/windows"
 )
 
@@ -14,6 +15,8 @@ var (
 	fabricCommonDll               = windows.MustLoadDLL("FabricCommon.dll")
 	fabricGetLastErrorMessageProc = fabricCommonDll.MustFindProc("FabricGetLastErrorMessage")
 )
+
+var errComNotImpl = fmt.Errorf("operation not supported on this fabric version")
 
 type comCreator func(iid string, outptr unsafe.Pointer) error
 
@@ -50,7 +53,7 @@ func (c FabricErrorCode) Error() string {
 		return ""
 	}
 
-	return fmt.Sprintf("error [%v] [0x%x] msg: [%v]", c.String(), uint64(c), fabricGetLastError())
+	return fmt.Sprintf("error [%v] [0x%x]", c.String(), uint64(c))
 }
 
 func errno(hr uintptr, syserr error) error {
@@ -58,7 +61,7 @@ func errno(hr uintptr, syserr error) error {
 		return nil
 	}
 
-	return FabricErrorCode(hr)
+	return errors.Wrap(FabricErrorCode(hr), fabricGetLastError())
 }
 
 func waitch(ctx context.Context, ch <-chan error, sfctx *comIFabricAsyncOperationContext, timeout time.Duration) (err error) {

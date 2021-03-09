@@ -37,6 +37,7 @@ next:
 	// methods
 	for _, ifc := range n.Interfaces {
 		ifc = g.ctx.definedInterface[ifc.Name]
+		hubFieldName := strings.TrimPrefix(ifc.Name, "I")
 
 		for i, m := range ifc.Methods {
 			if methodblacklist[fmt.Sprintf("%v.%v", ifc.Name, m.Name)] {
@@ -54,12 +55,16 @@ next:
 			if strings.HasPrefix(m.Name, "End") {
 				begin := ifc.Methods[i-1]
 				end := m
-				_, params, method = g.generateAsyncCallSig(clzName, begin, end, false)
+				_, params, method = g.generateAsyncCallSig(clzName, begin, end, true)
 			} else {
-				params, method = g.generateMethodSig(clzName, m, false)
+				params, method = g.generateMethodSig(clzName, m, true)
 			}
 
-			g.printfln("return v.hub.%v.%v(%v)", strings.TrimPrefix(ifc.Name, "I"), method, strings.Join(params, ","))
+			g.printfln(`if v.hub.%v == nil {
+				err = errComNotImpl
+				return
+			}`, hubFieldName)
+			g.printfln("return v.hub.%v.%v(%v)", hubFieldName, method, strings.Join(params, ","))
 			g.printfln("}")
 		}
 	}

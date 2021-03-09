@@ -20,22 +20,38 @@ func (v *fabricRuntimeComHub) init(createComObject comCreator) {
 func (v *FabricRuntime) RegisterStatelessServiceFactory(
 	serviceTypeName string,
 	factory *comFabricStatelessServiceFactory,
-) error {
+) (err error) {
+	if v.hub.FabricRuntime == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricRuntime.RegisterStatelessServiceFactory(serviceTypeName, factory)
 }
 func (v *FabricRuntime) RegisterStatefulServiceFactory(
 	serviceTypeName string,
 	factory *comFabricStatefulServiceFactory,
-) error {
+) (err error) {
+	if v.hub.FabricRuntime == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricRuntime.RegisterStatefulServiceFactory(serviceTypeName, factory)
 }
-func (v *FabricRuntime) CreateServiceGroupFactoryBuilder() (*ComFabricServiceGroupFactoryBuilder, error) {
+func (v *FabricRuntime) CreateServiceGroupFactoryBuilder() (builder *ComFabricServiceGroupFactoryBuilder, err error) {
+	if v.hub.FabricRuntime == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricRuntime.CreateServiceGroupFactoryBuilder()
 }
 func (v *FabricRuntime) RegisterServiceGroupFactory(
 	groupServiceType string,
 	factory *ComFabricServiceGroupFactory,
-) error {
+) (err error) {
+	if v.hub.FabricRuntime == nil {
+		err = errComNotImpl
+		return
+	}
 	return v.hub.FabricRuntime.RegisterServiceGroupFactory(groupServiceType, factory)
 }
 

@@ -6,6 +6,8 @@ github.com/go-ole/go-ole v1.2.5/go.mod h1:pprOEPIfldk/42T2oK7lQ4v4JSDwmV0As9GaiU
 github.com/golang/protobuf v1.2.0/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
 github.com/pinzolo/casee v0.0.0-20191019093852-17765ba5eb57 h1:+L+4v944M0gpghDH39uAzZlwe/OrbnpOa7uvZ4LslII=
 github.com/pinzolo/casee v0.0.0-20191019093852-17765ba5eb57/go.mod h1:dNs9tp0e1Tst75lQVHa7QJNLdGOaddO3fdyEMHkMKxQ=
+github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
+github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/tg123/gomidl v0.0.0-20210304002522-ed7c89d210ec h1:EZr/bxfddscQbQUm8PRqDpBLrEpvHZCbg527eOa/Wd0=
 github.com/tg123/gomidl v0.0.0-20210304002522-ed7c89d210ec/go.mod h1:bQrax11obqJwAI0Uq0RsclsU5MjT5CQ26jCfpf1Nxn0=
 golang.org/x/net v0.0.0-20180724234803-3673e40ba225/go.mod h1:mL1N/T3taQHkDXs73rZJwtUhF3w3ftmwwsq0BUmARs4=
