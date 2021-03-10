@@ -5,7 +5,6 @@ import (
 	"context"
 	"github.com/go-ole/go-ole"
 	"golang.org/x/sys/windows"
-	"reflect"
 	"syscall"
 	"unsafe"
 )
@@ -3288,14 +3287,7 @@ func (v *comFabricCodePackageActivationContext) GetServiceTypes() (rt []FabricSe
 		var lst []FabricServiceTypeDescription
 
 		var innerlst []innerFabricServiceTypeDescription
-
-		{
-			srclst := tmp
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceTypeDescription
@@ -3328,14 +3320,7 @@ func (v *comFabricCodePackageActivationContext) GetServiceGroupTypes() (rt []Fab
 		var lst []FabricServiceGroupTypeDescription
 
 		var innerlst []innerFabricServiceGroupTypeDescription
-
-		{
-			srclst := tmp
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceGroupTypeDescription
@@ -3386,14 +3371,7 @@ func (v *comFabricCodePackageActivationContext) GetServiceEndpointResources() (r
 		var lst []FabricEndpointResourceDescription
 
 		var innerlst []innerFabricEndpointResourceDescription
-
-		{
-			srclst := tmp
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricEndpointResourceDescription
@@ -4283,14 +4261,7 @@ func (v *comFabricConfigurationPackage2) GetValues(
 			var lst []FabricConfigurationParameter
 
 			var innerlst []innerFabricConfigurationParameter
-
-			{
-				srclst := p_2
-				slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-				slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-				slice.Len = int(srclst.Count)
-				slice.Cap = int(srclst.Count)
-			}
+			sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(p_2.Items), int(p_2.Count))
 
 			for _, item := range innerlst {
 				var tmpitem FabricConfigurationParameter

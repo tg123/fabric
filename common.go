@@ -3,6 +3,7 @@ package fabric
 import (
 	"context"
 	"fmt"
+	"reflect"
 	"time"
 	"unsafe"
 
@@ -87,4 +88,11 @@ func toTimeout(ctx context.Context) time.Duration {
 
 	// TODO move to sf client var
 	return 15 * time.Minute
+}
+
+func sliceCast(dst, src unsafe.Pointer, len int) {
+	slice := (*reflect.SliceHeader)(dst)
+	slice.Data = uintptr(src)
+	slice.Len = len
+	slice.Cap = len
 }

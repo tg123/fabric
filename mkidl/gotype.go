@@ -264,7 +264,7 @@ func (g *generator) generateToGolangObject(srcvar, dstvar, rawtype string, indir
 }
 
 func (g *generator) generateListObjectToGolangSlice(srcvar, dstvar, listType string) {
-	g.importpkg("reflect")
+	// g.importpkg("reflect")
 
 	golangTypeName := g.toGolangStructType(listType, false)
 	itemType := g.ctx.definedStruct[g.unwrapTypedef(listType)]
@@ -296,14 +296,7 @@ func (g *generator) generateListObjectToGolangSlice(srcvar, dstvar, listType str
 		var lst {{.GolangTypeName}}
 
 		var innerlst []{{.ItemTypeName}}
-
-		{
-			srclst := {{.Srcvar}}
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.{{.ItemFieldName}}))
-			slice.Len = int(srclst.{{.CountFieldName}})
-			slice.Cap = int(srclst.{{.CountFieldName}})
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer({{.Srcvar}}.{{.ItemFieldName}}), int({{.Srcvar}}.{{.CountFieldName}}))
 
 		for _, item := range innerlst {
 			var tmpitem {{.GolangItemTypeName}}
@@ -320,7 +313,7 @@ func (g *generator) generateListObjectToGolangSlice(srcvar, dstvar, listType str
 }
 
 func (g *generator) generateMapObjectToGolangMap(srcvar, dstvar, mapType string) {
-	g.importpkg("reflect")
+	// g.importpkg("reflect")
 
 	golangTypeName := g.toGolangStructType(mapType, false)
 	itemType := g.ctx.definedStruct[g.unwrapTypedef(mapType)]
@@ -358,14 +351,8 @@ func (g *generator) generateMapObjectToGolangMap(srcvar, dstvar, mapType string)
 		var mapvar = make({{.GolangTypeName}})
 
 		var innerlst []{{.ItemTypeName}}
-
-		{
-			srclst := {{.Srcvar}}
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.{{.ItemFieldName}}))
-			slice.Len = int(srclst.{{.CountFieldName}})
-			slice.Cap = int(srclst.{{.CountFieldName}})
-		}
+		
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer({{.Srcvar}}.{{.ItemFieldName}}), int({{.Srcvar}}.{{.CountFieldName}}))
 
 		for _, kv := range innerlst {
 			var k {{.KeyTypeName}}

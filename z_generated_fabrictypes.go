@@ -3,7 +3,6 @@ package fabric
 
 import (
 	"golang.org/x/sys/windows"
-	"reflect"
 	"time"
 	"unsafe"
 )
@@ -1931,14 +1930,7 @@ func (obj *innerTestCommandQueryResultList) toGoStruct() []interface{} {
 		var lst []interface{}
 
 		var innerlst []unsafe.Pointer
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem interface{}
@@ -2074,14 +2066,7 @@ func (obj *innerFabricServiceLoadMetricDescriptionList) toGoStruct() []FabricSer
 		var lst []FabricServiceLoadMetricDescription
 
 		var innerlst []innerFabricServiceLoadMetricDescription
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceLoadMetricDescription
@@ -2447,14 +2432,7 @@ func (obj *innerFabricServicePlacementPolicyList) toGoStruct() []FabricServicePl
 		var lst []FabricServicePlacementPolicyDescription
 
 		var innerlst []innerFabricServicePlacementPolicyDescription
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Policies))
-			slice.Len = int(srclst.PolicyCount)
-			slice.Cap = int(srclst.PolicyCount)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Policies), int(obj.PolicyCount))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServicePlacementPolicyDescription
@@ -2761,14 +2739,7 @@ func (obj *innerFabricDllhostHostedDllDescriptionList) toGoStruct() []FabricDllh
 		var lst []FabricDllhostHostedDllDescription
 
 		var innerlst []innerFabricDllhostHostedDllDescription
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricDllhostHostedDllDescription
@@ -2833,14 +2804,7 @@ func (obj *innerFabricDllhostEntryPointDescription) toGoStruct() *FabricDllhostE
 		var lst []FabricDllhostHostedDllDescription
 
 		var innerlst []innerFabricDllhostHostedDllDescription
-
-		{
-			srclst := obj.HostedDlls
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.HostedDlls.Items), int(obj.HostedDlls.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricDllhostHostedDllDescription
@@ -3063,14 +3027,7 @@ func (obj *innerFabricServiceTypeDescriptionList) toGoStruct() []FabricServiceTy
 		var lst []FabricServiceTypeDescription
 
 		var innerlst []innerFabricServiceTypeDescription
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceTypeDescription
@@ -3131,14 +3088,7 @@ func (obj *innerFabricServiceTypeDescriptionExtensionList) toGoStruct() []Fabric
 		var lst []FabricServiceTypeDescriptionExtension
 
 		var innerlst []innerFabricServiceTypeDescriptionExtension
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceTypeDescriptionExtension
@@ -3236,14 +3186,7 @@ func (obj *innerFabricStatelessServiceTypeDescription) toGoStruct() *FabricState
 		var lst []FabricServiceLoadMetricDescription
 
 		var innerlst []innerFabricServiceLoadMetricDescription
-
-		{
-			srclst := obj.LoadMetrics
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.LoadMetrics.Items), int(obj.LoadMetrics.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceLoadMetricDescription
@@ -3259,14 +3202,7 @@ func (obj *innerFabricStatelessServiceTypeDescription) toGoStruct() *FabricState
 		var lst []FabricServiceTypeDescriptionExtension
 
 		var innerlst []innerFabricServiceTypeDescriptionExtension
-
-		{
-			srclst := obj.Extensions
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Extensions.Items), int(obj.Extensions.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceTypeDescriptionExtension
@@ -3328,14 +3264,7 @@ func (obj *innerFabricStatelessServiceTypeDescriptionEx1) toGoStruct() *FabricSt
 		var lst []FabricServicePlacementPolicyDescription
 
 		var innerlst []innerFabricServicePlacementPolicyDescription
-
-		{
-			srclst := obj.PolicyList
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Policies))
-			slice.Len = int(srclst.PolicyCount)
-			slice.Cap = int(srclst.PolicyCount)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.PolicyList.Policies), int(obj.PolicyList.PolicyCount))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServicePlacementPolicyDescription
@@ -3433,14 +3362,7 @@ func (obj *innerFabricStatefulServiceTypeDescription) toGoStruct() *FabricStatef
 		var lst []FabricServiceLoadMetricDescription
 
 		var innerlst []innerFabricServiceLoadMetricDescription
-
-		{
-			srclst := obj.LoadMetrics
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.LoadMetrics.Items), int(obj.LoadMetrics.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceLoadMetricDescription
@@ -3456,14 +3378,7 @@ func (obj *innerFabricStatefulServiceTypeDescription) toGoStruct() *FabricStatef
 		var lst []FabricServiceTypeDescriptionExtension
 
 		var innerlst []innerFabricServiceTypeDescriptionExtension
-
-		{
-			srclst := obj.Extensions
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Extensions.Items), int(obj.Extensions.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceTypeDescriptionExtension
@@ -3525,14 +3440,7 @@ func (obj *innerFabricStatefulServiceTypeDescriptionEx1) toGoStruct() *FabricSta
 		var lst []FabricServicePlacementPolicyDescription
 
 		var innerlst []innerFabricServicePlacementPolicyDescription
-
-		{
-			srclst := obj.PolicyList
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Policies))
-			slice.Len = int(srclst.PolicyCount)
-			slice.Cap = int(srclst.PolicyCount)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.PolicyList.Policies), int(obj.PolicyList.PolicyCount))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServicePlacementPolicyDescription
@@ -3599,14 +3507,7 @@ func (obj *innerFabricServiceGroupTypeMemberDescription) toGoStruct() *FabricSer
 		var lst []FabricServiceLoadMetricDescription
 
 		var innerlst []innerFabricServiceLoadMetricDescription
-
-		{
-			srclst := obj.LoadMetrics
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.LoadMetrics.Items), int(obj.LoadMetrics.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceLoadMetricDescription
@@ -3632,14 +3533,7 @@ func (obj *innerFabricServiceGroupTypeMemberDescriptionList) toGoStruct() []Fabr
 		var lst []FabricServiceGroupTypeMemberDescription
 
 		var innerlst []innerFabricServiceGroupTypeMemberDescription
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceGroupTypeMemberDescription
@@ -3707,14 +3601,7 @@ func (obj *innerFabricServiceGroupTypeDescription) toGoStruct() *FabricServiceGr
 		var lst []FabricServiceGroupTypeMemberDescription
 
 		var innerlst []innerFabricServiceGroupTypeMemberDescription
-
-		{
-			srclst := obj.Members
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Members.Items), int(obj.Members.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceGroupTypeMemberDescription
@@ -3741,14 +3628,7 @@ func (obj *innerFabricServiceGroupTypeDescriptionList) toGoStruct() []FabricServ
 		var lst []FabricServiceGroupTypeDescription
 
 		var innerlst []innerFabricServiceGroupTypeDescription
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceGroupTypeDescription
@@ -3895,14 +3775,7 @@ func (obj *innerFabricEndpointResourceDescriptionList) toGoStruct() []FabricEndp
 		var lst []FabricEndpointResourceDescription
 
 		var innerlst []innerFabricEndpointResourceDescription
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricEndpointResourceDescription
@@ -3928,14 +3801,7 @@ func (obj *innerFabricCodePackageDescriptionList) toGoStruct() []FabricCodePacka
 		var lst []FabricCodePackageDescription
 
 		var innerlst []innerFabricCodePackageDescription
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricCodePackageDescription
@@ -3961,14 +3827,7 @@ func (obj *innerFabricConfigurationPackageDescriptionList) toGoStruct() []Fabric
 		var lst []FabricConfigurationPackageDescription
 
 		var innerlst []innerFabricConfigurationPackageDescription
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricConfigurationPackageDescription
@@ -3994,14 +3853,7 @@ func (obj *innerFabricDataPackageDescriptionList) toGoStruct() []FabricDataPacka
 		var lst []FabricDataPackageDescription
 
 		var innerlst []innerFabricDataPackageDescription
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricDataPackageDescription
@@ -4099,14 +3951,7 @@ func (obj *innerFabricConfigurationParameterList) toGoStruct() []FabricConfigura
 		var lst []FabricConfigurationParameter
 
 		var innerlst []innerFabricConfigurationParameter
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricConfigurationParameter
@@ -4173,14 +4018,7 @@ func (obj *innerFabricConfigurationSection) toGoStruct() *FabricConfigurationSec
 		var lst []FabricConfigurationParameter
 
 		var innerlst []innerFabricConfigurationParameter
-
-		{
-			srclst := obj.Parameters
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Parameters.Items), int(obj.Parameters.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricConfigurationParameter
@@ -4206,14 +4044,7 @@ func (obj *innerFabricConfigurationSectionList) toGoStruct() []FabricConfigurati
 		var lst []FabricConfigurationSection
 
 		var innerlst []innerFabricConfigurationSection
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricConfigurationSection
@@ -4274,14 +4105,7 @@ func (obj *innerFabricConfigurationSettings) toGoStruct() *FabricConfigurationSe
 		var lst []FabricConfigurationSection
 
 		var innerlst []innerFabricConfigurationSection
-
-		{
-			srclst := obj.Sections
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Sections.Items), int(obj.Sections.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricConfigurationSection
@@ -4307,14 +4131,7 @@ func (obj *innerFabricStringList) toGoStruct() []string {
 		var lst []string
 
 		var innerlst []*uint16
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem string
@@ -5312,14 +5129,7 @@ func (obj *innerFabricUpgradeDomainStatusDescriptionList) toGoStruct() []FabricU
 		var lst []FabricUpgradeDomainStatusDescription
 
 		var innerlst []innerFabricUpgradeDomainStatusDescription
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricUpgradeDomainStatusDescription
@@ -5389,14 +5199,7 @@ func (obj *innerFabricUpgradeSafetyCheckList) toGoStruct() []FabricUpgradeSafety
 		var lst []FabricUpgradeSafetyCheck
 
 		var innerlst []innerFabricUpgradeSafetyCheck
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricUpgradeSafetyCheck
@@ -5467,14 +5270,7 @@ func (obj *innerFabricNodeUpgradeProgress) toGoStruct() *FabricNodeUpgradeProgre
 		var lst []FabricUpgradeSafetyCheck
 
 		var innerlst []innerFabricUpgradeSafetyCheck
-
-		{
-			srclst := obj.PendingSafetyChecks
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.PendingSafetyChecks.Items), int(obj.PendingSafetyChecks.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricUpgradeSafetyCheck
@@ -5500,14 +5296,7 @@ func (obj *innerFabricNodeUpgradeProgressList) toGoStruct() []FabricNodeUpgradeP
 		var lst []FabricNodeUpgradeProgress
 
 		var innerlst []innerFabricNodeUpgradeProgress
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricNodeUpgradeProgress
@@ -5574,14 +5363,7 @@ func (obj *innerFabricUpgradeDomainProgress) toGoStruct() *FabricUpgradeDomainPr
 		var lst []FabricNodeUpgradeProgress
 
 		var innerlst []innerFabricNodeUpgradeProgress
-
-		{
-			srclst := obj.NodeProgressList
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.NodeProgressList.Items), int(obj.NodeProgressList.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricNodeUpgradeProgress
@@ -5725,14 +5507,7 @@ func (obj *innerFabricStatelessServiceDescriptionEx1) toGoStruct() *FabricStatel
 		var lst []FabricServicePlacementPolicyDescription
 
 		var innerlst []innerFabricServicePlacementPolicyDescription
-
-		{
-			srclst := obj.PolicyList
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Policies))
-			slice.Len = int(srclst.PolicyCount)
-			slice.Cap = int(srclst.PolicyCount)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.PolicyList.Policies), int(obj.PolicyList.PolicyCount))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServicePlacementPolicyDescription
@@ -5892,14 +5667,7 @@ func (obj *innerFabricStatelessServiceUpdateDescriptionEx1) toGoStruct() *Fabric
 		var lst []FabricServicePlacementPolicyDescription
 
 		var innerlst []innerFabricServicePlacementPolicyDescription
-
-		{
-			srclst := obj.PolicyList
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Policies))
-			slice.Len = int(srclst.PolicyCount)
-			slice.Cap = int(srclst.PolicyCount)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.PolicyList.Policies), int(obj.PolicyList.PolicyCount))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServicePlacementPolicyDescription
@@ -6144,14 +5912,7 @@ func (obj *innerFabricStatefulServiceDescriptionEx1) toGoStruct() *FabricStatefu
 		var lst []FabricServicePlacementPolicyDescription
 
 		var innerlst []innerFabricServicePlacementPolicyDescription
-
-		{
-			srclst := obj.PolicyList
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Policies))
-			slice.Len = int(srclst.PolicyCount)
-			slice.Cap = int(srclst.PolicyCount)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.PolicyList.Policies), int(obj.PolicyList.PolicyCount))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServicePlacementPolicyDescription
@@ -6344,14 +6105,7 @@ func (obj *innerFabricStatefulServiceUpdateDescriptionEx3) toGoStruct() *FabricS
 		var lst []FabricServicePlacementPolicyDescription
 
 		var innerlst []innerFabricServicePlacementPolicyDescription
-
-		{
-			srclst := obj.PolicyList
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Policies))
-			slice.Len = int(srclst.PolicyCount)
-			slice.Cap = int(srclst.PolicyCount)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.PolicyList.Policies), int(obj.PolicyList.PolicyCount))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServicePlacementPolicyDescription
@@ -6651,14 +6405,7 @@ func (obj *innerFabricApplicationParameterList) toGoStruct() []FabricApplication
 		var lst []FabricApplicationParameter
 
 		var innerlst []innerFabricApplicationParameter
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricApplicationParameter
@@ -6685,13 +6432,7 @@ func (obj *innerFabricStringMap) toGoStruct() map[string]string {
 
 		var innerlst []innerFabricApplicationParameter
 
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, kv := range innerlst {
 			var k string
@@ -6772,14 +6513,7 @@ func (obj *innerFabricApplicationDescription) toGoStruct() *FabricApplicationDes
 		var lst []FabricApplicationParameter
 
 		var innerlst []innerFabricApplicationParameter
-
-		{
-			srclst := obj.ApplicationParameters
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ApplicationParameters.Items), int(obj.ApplicationParameters.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricApplicationParameter
@@ -6846,14 +6580,7 @@ func (obj *innerFabricApplicationMetricList) toGoStruct() []FabricApplicationMet
 		var lst []FabricApplicationMetricDescription
 
 		var innerlst []innerFabricApplicationMetricDescription
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Capacities))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Capacities), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricApplicationMetricDescription
@@ -6922,14 +6649,7 @@ func (obj *innerFabricApplicationCapacityDescription) toGoStruct() *FabricApplic
 		var lst []FabricApplicationMetricDescription
 
 		var innerlst []innerFabricApplicationMetricDescription
-
-		{
-			srclst := obj.Metrics
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Capacities))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Metrics.Capacities), int(obj.Metrics.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricApplicationMetricDescription
@@ -7027,14 +6747,7 @@ func (obj *innerFabricApplicationUpdateDescription) toGoStruct() *FabricApplicat
 		var lst []FabricApplicationMetricDescription
 
 		var innerlst []innerFabricApplicationMetricDescription
-
-		{
-			srclst := obj.Metrics
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Capacities))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Metrics.Capacities), int(obj.Metrics.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricApplicationMetricDescription
@@ -7226,14 +6939,7 @@ func (obj *innerFabricApplicationUpgradeDescription) toGoStruct() *FabricApplica
 		var lst []FabricApplicationParameter
 
 		var innerlst []innerFabricApplicationParameter
-
-		{
-			srclst := obj.ApplicationParameters
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ApplicationParameters.Items), int(obj.ApplicationParameters.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricApplicationParameter
@@ -8197,14 +7903,7 @@ func (obj *innerFabricNodeDeactivationTaskList) toGoStruct() []FabricNodeDeactiv
 		var lst []FabricNodeDeactivationTask
 
 		var innerlst []innerFabricNodeDeactivationTask
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricNodeDeactivationTask
@@ -8273,14 +7972,7 @@ func (obj *innerFabricNodeDeactivationQueryResultItem) toGoStruct() *FabricNodeD
 		var lst []FabricNodeDeactivationTask
 
 		var innerlst []innerFabricNodeDeactivationTask
-
-		{
-			srclst := obj.Tasks
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Tasks.Items), int(obj.Tasks.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricNodeDeactivationTask
@@ -8350,14 +8042,7 @@ func (obj *innerFabricSafetyCheckList) toGoStruct() []FabricSafetyCheck {
 		var lst []FabricSafetyCheck
 
 		var innerlst []innerFabricSafetyCheck
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricSafetyCheck
@@ -8418,14 +8103,7 @@ func (obj *innerFabricNodeDeactivationQueryResultItemEx1) toGoStruct() *FabricNo
 		var lst []FabricSafetyCheck
 
 		var innerlst []innerFabricSafetyCheck
-
-		{
-			srclst := obj.PendingSafetyChecks
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.PendingSafetyChecks.Items), int(obj.PendingSafetyChecks.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricSafetyCheck
@@ -8527,14 +8205,7 @@ func (obj *innerFabricNodeQueryResultList) toGoStruct() []FabricNodeQueryResultI
 		var lst []FabricNodeQueryResultItem
 
 		var innerlst []innerFabricNodeQueryResultItem
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricNodeQueryResultItem
@@ -8723,14 +8394,7 @@ func (obj *innerFabricApplicationTypeQueryResultItem) toGoStruct() *FabricApplic
 		var lst []FabricApplicationParameter
 
 		var innerlst []innerFabricApplicationParameter
-
-		{
-			srclst := obj.DefaultParameters
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.DefaultParameters.Items), int(obj.DefaultParameters.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricApplicationParameter
@@ -8804,14 +8468,7 @@ func (obj *innerFabricApplicationTypeQueryResultList) toGoStruct() []FabricAppli
 		var lst []FabricApplicationTypeQueryResultItem
 
 		var innerlst []innerFabricApplicationTypeQueryResultItem
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricApplicationTypeQueryResultItem
@@ -8996,14 +8653,7 @@ func (obj *innerFabricServiceTypeQueryResultList) toGoStruct() []FabricServiceTy
 		var lst []FabricServiceTypeQueryResultItem
 
 		var innerlst []innerFabricServiceTypeQueryResultItem
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceTypeQueryResultItem
@@ -9074,14 +8724,7 @@ func (obj *innerFabricServiceGroupMemberTypeQueryResultItem) toGoStruct() *Fabri
 		var lst []FabricServiceGroupTypeMemberDescription
 
 		var innerlst []innerFabricServiceGroupTypeMemberDescription
-
-		{
-			srclst := obj.ServiceGroupMemberTypeDescription
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ServiceGroupMemberTypeDescription.Items), int(obj.ServiceGroupMemberTypeDescription.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceGroupTypeMemberDescription
@@ -9109,14 +8752,7 @@ func (obj *innerFabricServiceGroupMemberTypeQueryResultList) toGoStruct() []Fabr
 		var lst []FabricServiceGroupMemberTypeQueryResultItem
 
 		var innerlst []innerFabricServiceGroupMemberTypeQueryResultItem
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceGroupMemberTypeQueryResultItem
@@ -9324,14 +8960,7 @@ func (obj *innerFabricApplicationQueryResultItem) toGoStruct() *FabricApplicatio
 		var lst []FabricApplicationParameter
 
 		var innerlst []innerFabricApplicationParameter
-
-		{
-			srclst := obj.ApplicationParameters
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ApplicationParameters.Items), int(obj.ApplicationParameters.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricApplicationParameter
@@ -9398,14 +9027,7 @@ func (obj *innerFabricApplicationQueryResultItemEx1) toGoStruct() *FabricApplica
 		var lst []FabricApplicationParameter
 
 		var innerlst []innerFabricApplicationParameter
-
-		{
-			srclst := obj.UpgradeParameters
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UpgradeParameters.Items), int(obj.UpgradeParameters.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricApplicationParameter
@@ -9446,14 +9068,7 @@ func (obj *innerFabricApplicationQueryResultList) toGoStruct() []FabricApplicati
 		var lst []FabricApplicationQueryResultItem
 
 		var innerlst []innerFabricApplicationQueryResultItem
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricApplicationQueryResultItem
@@ -9631,14 +9246,7 @@ func (obj *innerFabricServiceQueryResultList) toGoStruct() []FabricServiceQueryR
 		var lst []FabricServiceQueryResultItem
 
 		var innerlst []innerFabricServiceQueryResultItem
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceQueryResultItem
@@ -9888,14 +9496,7 @@ func (obj *innerFabricServiceGroupMemberMemberQueryResultList) toGoStruct() []Fa
 		var lst []FabricServiceGroupMemberMemberQueryResultItem
 
 		var innerlst []innerFabricServiceGroupMemberMemberQueryResultItem
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceGroupMemberMemberQueryResultItem
@@ -9962,14 +9563,7 @@ func (obj *innerFabricServiceGroupMemberQueryResultItem) toGoStruct() *FabricSer
 		var lst []FabricServiceGroupMemberMemberQueryResultItem
 
 		var innerlst []innerFabricServiceGroupMemberMemberQueryResultItem
-
-		{
-			srclst := obj.Members
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Members.Items), int(obj.Members.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceGroupMemberMemberQueryResultItem
@@ -9995,14 +9589,7 @@ func (obj *innerFabricServiceGroupMemberQueryResultList) toGoStruct() []FabricSe
 		var lst []FabricServiceGroupMemberQueryResultItem
 
 		var innerlst []innerFabricServiceGroupMemberQueryResultItem
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceGroupMemberQueryResultItem
@@ -10202,14 +9789,7 @@ func (obj *innerFabricServicePartitionQueryResultList) toGoStruct() []FabricServ
 		var lst []FabricServicePartitionQueryResultItem
 
 		var innerlst []innerFabricServicePartitionQueryResultItem
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServicePartitionQueryResultItem
@@ -10334,14 +9914,7 @@ func (obj *innerFabricServiceReplicaQueryResultList) toGoStruct() []FabricServic
 		var lst []FabricServiceReplicaQueryResultItem
 
 		var innerlst []innerFabricServiceReplicaQueryResultItem
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceReplicaQueryResultItem
@@ -10646,14 +10219,7 @@ func (obj *innerFabricDeployedApplicationQueryResultList) toGoStruct() []FabricD
 		var lst []FabricDeployedApplicationQueryResultItem
 
 		var innerlst []innerFabricDeployedApplicationQueryResultItem
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricDeployedApplicationQueryResultItem
@@ -10788,14 +10354,7 @@ func (obj *innerFabricDeployedServicePackageQueryResultList) toGoStruct() []Fabr
 		var lst []FabricDeployedServicePackageQueryResultItem
 
 		var innerlst []innerFabricDeployedServicePackageQueryResultItem
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricDeployedServicePackageQueryResultItem
@@ -10942,14 +10501,7 @@ func (obj *innerFabricDeployedServiceTypeQueryResultList) toGoStruct() []FabricD
 		var lst []FabricDeployedServiceTypeQueryResultItem
 
 		var innerlst []innerFabricDeployedServiceTypeQueryResultItem
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricDeployedServiceTypeQueryResultItem
@@ -11249,14 +10801,7 @@ func (obj *innerFabricDeployedCodePackageQueryResultList) toGoStruct() []FabricD
 		var lst []FabricDeployedCodePackageQueryResultItem
 
 		var innerlst []innerFabricDeployedCodePackageQueryResultItem
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricDeployedCodePackageQueryResultItem
@@ -11381,14 +10926,7 @@ func (obj *innerFabricDeployedServiceReplicaQueryResultList) toGoStruct() []Fabr
 		var lst []FabricDeployedServiceReplicaQueryResultItem
 
 		var innerlst []innerFabricDeployedServiceReplicaQueryResultItem
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricDeployedServiceReplicaQueryResultItem
@@ -11747,14 +11285,7 @@ func (obj *innerFabricLoadMetricReportList) toGoStruct() []FabricLoadMetricRepor
 		var lst []FabricLoadMetricReport
 
 		var innerlst []innerFabricLoadMetricReport
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricLoadMetricReport
@@ -11780,14 +11311,7 @@ func (obj *innerFabricUnplacedReplicaInformationList) toGoStruct() []string {
 		var lst []string
 
 		var innerlst []*uint16
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem string
@@ -11922,14 +11446,7 @@ func (obj *innerFabricDeployedStatelessServiceInstanceDetailQueryResultItem) toG
 		var lst []FabricLoadMetricReport
 
 		var innerlst []innerFabricLoadMetricReport
-
-		{
-			srclst := obj.ReportedLoad
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ReportedLoad.Items), int(obj.ReportedLoad.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricLoadMetricReport
@@ -12055,14 +11572,7 @@ func (obj *innerFabricRemoteReplicatorStatusList) toGoStruct() []FabricRemoteRep
 		var lst []FabricRemoteReplicatorStatus
 
 		var innerlst []innerFabricRemoteReplicatorStatus
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricRemoteReplicatorStatus
@@ -12147,14 +11657,7 @@ func (obj *innerFabricPrimaryReplicatorStatusQueryResult) toGoStruct() *FabricPr
 		var lst []FabricRemoteReplicatorStatus
 
 		var innerlst []innerFabricRemoteReplicatorStatus
-
-		{
-			srclst := obj.RemoteReplicators
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.RemoteReplicators.Items), int(obj.RemoteReplicators.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricRemoteReplicatorStatus
@@ -12345,14 +11848,7 @@ func (obj *innerFabricDeployedStatefulServiceReplicaDetailQueryResultItem) toGoS
 		var lst []FabricLoadMetricReport
 
 		var innerlst []innerFabricLoadMetricReport
-
-		{
-			srclst := obj.ReportedLoad
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ReportedLoad.Items), int(obj.ReportedLoad.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricLoadMetricReport
@@ -12547,14 +12043,7 @@ func (obj *innerFabricProvisionedCodeVersionQueryResultList) toGoStruct() []Fabr
 		var lst []FabricProvisionedCodeVersionQueryResultItem
 
 		var innerlst []innerFabricProvisionedCodeVersionQueryResultItem
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricProvisionedCodeVersionQueryResultItem
@@ -12638,14 +12127,7 @@ func (obj *innerFabricProvisionedConfigVersionQueryResultList) toGoStruct() []Fa
 		var lst []FabricProvisionedConfigVersionQueryResultItem
 
 		var innerlst []innerFabricProvisionedConfigVersionQueryResultItem
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricProvisionedConfigVersionQueryResultItem
@@ -13990,13 +13472,7 @@ func (obj *innerFabricServiceTypeHealthPolicyMap) toGoStruct() map[string]Fabric
 
 		var innerlst []innerFabricServiceTypeHealthPolicyMapItem
 
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, kv := range innerlst {
 			var k string
@@ -14075,13 +13551,7 @@ func (obj *innerFabricApplicationHealthPolicy) toGoStruct() *FabricApplicationHe
 
 		var innerlst []innerFabricServiceTypeHealthPolicyMapItem
 
-		{
-			srclst := obj.ServiceTypeHealthPolicyMap
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ServiceTypeHealthPolicyMap.Items), int(obj.ServiceTypeHealthPolicyMap.Count))
 
 		for _, kv := range innerlst {
 			var k string
@@ -14142,13 +13612,7 @@ func (obj *innerFabricApplicationHealthPolicyMap) toGoStruct() map[string]Fabric
 
 		var innerlst []innerFabricApplicationHealthPolicyMapItem
 
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, kv := range innerlst {
 			var k string
@@ -14323,14 +13787,7 @@ func (obj *innerFabricLoadMetricInformationList) toGoStruct() []FabricLoadMetric
 		var lst []FabricLoadMetricInformation
 
 		var innerlst []innerFabricLoadMetricInformation
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricLoadMetricInformation
@@ -14399,14 +13856,7 @@ func (obj *innerFabricClusterLoadInformation) toGoStruct() *FabricClusterLoadInf
 		var lst []FabricLoadMetricInformation
 
 		var innerlst []innerFabricLoadMetricInformation
-
-		{
-			srclst := obj.LoadMetricInformation
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.LoadMetricInformation.Items), int(obj.LoadMetricInformation.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricLoadMetricInformation
@@ -14493,14 +13943,7 @@ func (obj *innerFabricPartitionLoadInformation) toGoStruct() *FabricPartitionLoa
 		var lst []FabricLoadMetricReport
 
 		var innerlst []innerFabricLoadMetricReport
-
-		{
-			srclst := obj.PrimaryLoadMetricReports
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.PrimaryLoadMetricReports.Items), int(obj.PrimaryLoadMetricReports.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricLoadMetricReport
@@ -14516,14 +13959,7 @@ func (obj *innerFabricPartitionLoadInformation) toGoStruct() *FabricPartitionLoa
 		var lst []FabricLoadMetricReport
 
 		var innerlst []innerFabricLoadMetricReport
-
-		{
-			srclst := obj.SecondaryLoadMetricReports
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.SecondaryLoadMetricReports.Items), int(obj.SecondaryLoadMetricReports.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricLoadMetricReport
@@ -14592,14 +14028,7 @@ func (obj *innerFabricReplicaLoadInformation) toGoStruct() *FabricReplicaLoadInf
 		var lst []FabricLoadMetricReport
 
 		var innerlst []innerFabricLoadMetricReport
-
-		{
-			srclst := obj.LoadMetricReports
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.LoadMetricReports.Items), int(obj.LoadMetricReports.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricLoadMetricReport
@@ -14671,14 +14100,7 @@ func (obj *innerFabricUnplacedReplicaInformation) toGoStruct() *FabricUnplacedRe
 		var lst []string
 
 		var innerlst []*uint16
-
-		{
-			srclst := obj.UnplacedReplicaReasons
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnplacedReplicaReasons.Items), int(obj.UnplacedReplicaReasons.Count))
 
 		for _, item := range innerlst {
 			var tmpitem string
@@ -14782,14 +14204,7 @@ func (obj *innerFabricNodeLoadMetricInformationList) toGoStruct() []FabricNodeLo
 		var lst []FabricNodeLoadMetricInformation
 
 		var innerlst []innerFabricNodeLoadMetricInformation
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricNodeLoadMetricInformation
@@ -14856,14 +14271,7 @@ func (obj *innerFabricNodeLoadInformation) toGoStruct() *FabricNodeLoadInformati
 		var lst []FabricNodeLoadMetricInformation
 
 		var innerlst []innerFabricNodeLoadMetricInformation
-
-		{
-			srclst := obj.NodeLoadMetricInformation
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.NodeLoadMetricInformation.Items), int(obj.NodeLoadMetricInformation.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricNodeLoadMetricInformation
@@ -14931,14 +14339,7 @@ func (obj *innerFabricApplicationLoadMetricInformationList) toGoStruct() []Fabri
 		var lst []FabricApplicationLoadMetricInformation
 
 		var innerlst []innerFabricApplicationLoadMetricInformation
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.LoadMetrics))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.LoadMetrics), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricApplicationLoadMetricInformation
@@ -15017,14 +14418,7 @@ func (obj *innerFabricApplicationLoadInformation) toGoStruct() *FabricApplicatio
 		var lst []FabricApplicationLoadMetricInformation
 
 		var innerlst []innerFabricApplicationLoadMetricInformation
-
-		{
-			srclst := obj.ApplicationLoadMetricInformation
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.LoadMetrics))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ApplicationLoadMetricInformation.LoadMetrics), int(obj.ApplicationLoadMetricInformation.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricApplicationLoadMetricInformation
@@ -15234,13 +14628,7 @@ func (obj *innerFabricStartUpgradeDescriptionEx1) toGoStruct() *FabricStartUpgra
 
 		var innerlst []innerFabricApplicationHealthPolicyMapItem
 
-		{
-			srclst := obj.ApplicationHealthPolicyMap
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ApplicationHealthPolicyMap.Items), int(obj.ApplicationHealthPolicyMap.Count))
 
 		for _, kv := range innerlst {
 			var k string
@@ -15395,14 +14783,7 @@ func (obj *innerFabricHealthEventList) toGoStruct() []FabricHealthEvent {
 		var lst []FabricHealthEvent
 
 		var innerlst []innerFabricHealthEvent
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvent
@@ -15443,14 +14824,7 @@ func (obj *innerFabricHealthEvaluationList) toGoStruct() []FabricHealthEvaluatio
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -15587,14 +14961,7 @@ func (obj *innerFabricStatefulServiceReplicaHealth) toGoStruct() *FabricStateful
 		var lst []FabricHealthEvent
 
 		var innerlst []innerFabricHealthEvent
-
-		{
-			srclst := obj.HealthEvents
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.HealthEvents.Items), int(obj.HealthEvents.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvent
@@ -15655,14 +15022,7 @@ func (obj *innerFabricStatefulServiceReplicaHealthEx1) toGoStruct() *FabricState
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -15735,14 +15095,7 @@ func (obj *innerFabricStatelessServiceInstanceHealth) toGoStruct() *FabricStatel
 		var lst []FabricHealthEvent
 
 		var innerlst []innerFabricHealthEvent
-
-		{
-			srclst := obj.HealthEvents
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.HealthEvents.Items), int(obj.HealthEvents.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvent
@@ -15803,14 +15156,7 @@ func (obj *innerFabricStatelessServiceInstanceHealthEx1) toGoStruct() *FabricSta
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -15851,14 +15197,7 @@ func (obj *innerFabricReplicaHealthStateList) toGoStruct() []FabricReplicaHealth
 		var lst []FabricReplicaHealthState
 
 		var innerlst []innerFabricReplicaHealthState
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricReplicaHealthState
@@ -15936,14 +15275,7 @@ func (obj *innerFabricStatelessServiceInstanceHealthStateEx1) toGoStruct() *Fabr
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -16021,14 +15353,7 @@ func (obj *innerFabricStatefulServiceReplicaHealthStateEx1) toGoStruct() *Fabric
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -16119,14 +15444,7 @@ func (obj *innerFabricPartitionHealth) toGoStruct() *FabricPartitionHealth {
 		var lst []FabricHealthEvent
 
 		var innerlst []innerFabricHealthEvent
-
-		{
-			srclst := obj.HealthEvents
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.HealthEvents.Items), int(obj.HealthEvents.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvent
@@ -16142,14 +15460,7 @@ func (obj *innerFabricPartitionHealth) toGoStruct() *FabricPartitionHealth {
 		var lst []FabricReplicaHealthState
 
 		var innerlst []innerFabricReplicaHealthState
-
-		{
-			srclst := obj.ReplicaHealthStates
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ReplicaHealthStates.Items), int(obj.ReplicaHealthStates.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricReplicaHealthState
@@ -16210,14 +15521,7 @@ func (obj *innerFabricPartitionHealthEx1) toGoStruct() *FabricPartitionHealthEx1
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -16274,14 +15578,7 @@ func (obj *innerFabricPartitionHealthStateList) toGoStruct() []FabricPartitionHe
 		var lst []FabricPartitionHealthState
 
 		var innerlst []innerFabricPartitionHealthState
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricPartitionHealthState
@@ -16364,14 +15661,7 @@ func (obj *innerFabricDeployedServicePackageHealth) toGoStruct() *FabricDeployed
 		var lst []FabricHealthEvent
 
 		var innerlst []innerFabricHealthEvent
-
-		{
-			srclst := obj.HealthEvents
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.HealthEvents.Items), int(obj.HealthEvents.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvent
@@ -16432,14 +15722,7 @@ func (obj *innerFabricDeployedServicePackageHealthEx1) toGoStruct() *FabricDeplo
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -16568,14 +15851,7 @@ func (obj *innerFabricDeployedServicePackageHealthStateList) toGoStruct() []Fabr
 		var lst []FabricDeployedServicePackageHealthState
 
 		var innerlst []innerFabricDeployedServicePackageHealthState
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricDeployedServicePackageHealthState
@@ -16674,14 +15950,7 @@ func (obj *innerFabricDeployedApplicationHealth) toGoStruct() *FabricDeployedApp
 		var lst []FabricHealthEvent
 
 		var innerlst []innerFabricHealthEvent
-
-		{
-			srclst := obj.HealthEvents
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.HealthEvents.Items), int(obj.HealthEvents.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvent
@@ -16697,14 +15966,7 @@ func (obj *innerFabricDeployedApplicationHealth) toGoStruct() *FabricDeployedApp
 		var lst []FabricDeployedServicePackageHealthState
 
 		var innerlst []innerFabricDeployedServicePackageHealthState
-
-		{
-			srclst := obj.DeployedServicePackageHealthStates
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.DeployedServicePackageHealthStates.Items), int(obj.DeployedServicePackageHealthStates.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricDeployedServicePackageHealthState
@@ -16765,14 +16027,7 @@ func (obj *innerFabricDeployedApplicationHealthEx1) toGoStruct() *FabricDeployed
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -16852,14 +16107,7 @@ func (obj *innerFabricDeployedApplicationHealthStateList) toGoStruct() []FabricD
 		var lst []FabricDeployedApplicationHealthState
 
 		var innerlst []innerFabricDeployedApplicationHealthState
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricDeployedApplicationHealthState
@@ -16952,14 +16200,7 @@ func (obj *innerFabricServiceHealth) toGoStruct() *FabricServiceHealth {
 		var lst []FabricHealthEvent
 
 		var innerlst []innerFabricHealthEvent
-
-		{
-			srclst := obj.HealthEvents
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.HealthEvents.Items), int(obj.HealthEvents.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvent
@@ -16975,14 +16216,7 @@ func (obj *innerFabricServiceHealth) toGoStruct() *FabricServiceHealth {
 		var lst []FabricPartitionHealthState
 
 		var innerlst []innerFabricPartitionHealthState
-
-		{
-			srclst := obj.PartitionHealthStates
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.PartitionHealthStates.Items), int(obj.PartitionHealthStates.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricPartitionHealthState
@@ -17043,14 +16277,7 @@ func (obj *innerFabricServiceHealthEx1) toGoStruct() *FabricServiceHealthEx1 {
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -17124,14 +16351,7 @@ func (obj *innerFabricServiceHealthStateList) toGoStruct() []FabricServiceHealth
 		var lst []FabricServiceHealthState
 
 		var innerlst []innerFabricServiceHealthState
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceHealthState
@@ -17246,14 +16466,7 @@ func (obj *innerFabricApplicationHealth) toGoStruct() *FabricApplicationHealth {
 		var lst []FabricHealthEvent
 
 		var innerlst []innerFabricHealthEvent
-
-		{
-			srclst := obj.HealthEvents
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.HealthEvents.Items), int(obj.HealthEvents.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvent
@@ -17269,14 +16482,7 @@ func (obj *innerFabricApplicationHealth) toGoStruct() *FabricApplicationHealth {
 		var lst []FabricDeployedApplicationHealthState
 
 		var innerlst []innerFabricDeployedApplicationHealthState
-
-		{
-			srclst := obj.DeployedApplicationHealthStates
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.DeployedApplicationHealthStates.Items), int(obj.DeployedApplicationHealthStates.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricDeployedApplicationHealthState
@@ -17292,14 +16498,7 @@ func (obj *innerFabricApplicationHealth) toGoStruct() *FabricApplicationHealth {
 		var lst []FabricServiceHealthState
 
 		var innerlst []innerFabricServiceHealthState
-
-		{
-			srclst := obj.ServiceHealthStates
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ServiceHealthStates.Items), int(obj.ServiceHealthStates.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceHealthState
@@ -17360,14 +16559,7 @@ func (obj *innerFabricApplicationHealthEx1) toGoStruct() *FabricApplicationHealt
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -17453,14 +16645,7 @@ func (obj *innerFabricNodeHealth) toGoStruct() *FabricNodeHealth {
 		var lst []FabricHealthEvent
 
 		var innerlst []innerFabricHealthEvent
-
-		{
-			srclst := obj.HealthEvents
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.HealthEvents.Items), int(obj.HealthEvents.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvent
@@ -17521,14 +16706,7 @@ func (obj *innerFabricNodeHealthEx1) toGoStruct() *FabricNodeHealthEx1 {
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -17602,14 +16780,7 @@ func (obj *innerFabricNodeHealthStateList) toGoStruct() []FabricNodeHealthState 
 		var lst []FabricNodeHealthState
 
 		var innerlst []innerFabricNodeHealthState
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricNodeHealthState
@@ -17668,14 +16839,7 @@ func (obj *innerFabricApplicationHealthStateList) toGoStruct() []FabricApplicati
 		var lst []FabricApplicationHealthState
 
 		var innerlst []innerFabricApplicationHealthState
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricApplicationHealthState
@@ -17780,14 +16944,7 @@ func (obj *innerFabricClusterHealthEx1) toGoStruct() *FabricClusterHealthEx1 {
 		var lst []FabricNodeHealthState
 
 		var innerlst []innerFabricNodeHealthState
-
-		{
-			srclst := obj.NodeHealthStates
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.NodeHealthStates.Items), int(obj.NodeHealthStates.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricNodeHealthState
@@ -17803,14 +16960,7 @@ func (obj *innerFabricClusterHealthEx1) toGoStruct() *FabricClusterHealthEx1 {
 		var lst []FabricApplicationHealthState
 
 		var innerlst []innerFabricApplicationHealthState
-
-		{
-			srclst := obj.ApplicationHealthStates
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ApplicationHealthStates.Items), int(obj.ApplicationHealthStates.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricApplicationHealthState
@@ -17826,14 +16976,7 @@ func (obj *innerFabricClusterHealthEx1) toGoStruct() *FabricClusterHealthEx1 {
 		var lst []FabricHealthEvent
 
 		var innerlst []innerFabricHealthEvent
-
-		{
-			srclst := obj.HealthEvents
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.HealthEvents.Items), int(obj.HealthEvents.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvent
@@ -17894,14 +17037,7 @@ func (obj *innerFabricClusterHealthEx2) toGoStruct() *FabricClusterHealthEx2 {
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -18034,14 +17170,7 @@ func (obj *innerFabricReplicasHealthEvaluation) toGoStruct() *FabricReplicasHeal
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -18120,14 +17249,7 @@ func (obj *innerFabricPartitionsHealthEvaluation) toGoStruct() *FabricPartitions
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -18203,14 +17325,7 @@ func (obj *innerFabricDeployedServicePackagesHealthEvaluation) toGoStruct() *Fab
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -18288,14 +17403,7 @@ func (obj *innerFabricDeployedApplicationsHealthEvaluation) toGoStruct() *Fabric
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -18380,14 +17488,7 @@ func (obj *innerFabricServicesHealthEvaluation) toGoStruct() *FabricServicesHeal
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -18466,14 +17567,7 @@ func (obj *innerFabricNodesHealthEvaluation) toGoStruct() *FabricNodesHealthEval
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -18552,14 +17646,7 @@ func (obj *innerFabricApplicationsHealthEvaluation) toGoStruct() *FabricApplicat
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -18644,14 +17731,7 @@ func (obj *innerFabricUpgradeDomainNodesHealthEvaluation) toGoStruct() *FabricUp
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -18736,14 +17816,7 @@ func (obj *innerFabricUpgradeDomainDeployedApplicationsHealthEvaluation) toGoStr
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -18816,14 +17889,7 @@ func (obj *innerFabricSystemApplicationHealthEvaluation) toGoStruct() *FabricSys
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -18900,14 +17966,7 @@ func (obj *innerFabricNodeHealthEvaluation) toGoStruct() *FabricNodeHealthEvalua
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -18986,14 +18045,7 @@ func (obj *innerFabricReplicaHealthEvaluation) toGoStruct() *FabricReplicaHealth
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -19068,14 +18120,7 @@ func (obj *innerFabricPartitionHealthEvaluation) toGoStruct() *FabricPartitionHe
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -19152,14 +18197,7 @@ func (obj *innerFabricServiceHealthEvaluation) toGoStruct() *FabricServiceHealth
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -19248,14 +18286,7 @@ func (obj *innerFabricDeployedServicePackageHealthEvaluation) toGoStruct() *Fabr
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -19367,14 +18398,7 @@ func (obj *innerFabricDeployedApplicationHealthEvaluation) toGoStruct() *FabricD
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -19451,14 +18475,7 @@ func (obj *innerFabricApplicationHealthEvaluation) toGoStruct() *FabricApplicati
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -19721,14 +18738,7 @@ func (obj *innerFabricSecurityUserDescription) toGoStruct() *FabricSecurityUserD
 		var lst []string
 
 		var innerlst []*uint16
-
-		{
-			srclst := obj.ParentSystemGroups
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ParentSystemGroups.Items), int(obj.ParentSystemGroups.Count))
 
 		for _, item := range innerlst {
 			var tmpitem string
@@ -19744,14 +18754,7 @@ func (obj *innerFabricSecurityUserDescription) toGoStruct() *FabricSecurityUserD
 		var lst []string
 
 		var innerlst []*uint16
-
-		{
-			srclst := obj.ParentApplicationGroups
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ParentApplicationGroups.Items), int(obj.ParentApplicationGroups.Count))
 
 		for _, item := range innerlst {
 			var tmpitem string
@@ -19777,14 +18780,7 @@ func (obj *innerFabricSecurityUserDescriptionList) toGoStruct() []FabricSecurity
 		var lst []FabricSecurityUserDescription
 
 		var innerlst []innerFabricSecurityUserDescription
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricSecurityUserDescription
@@ -19904,14 +18900,7 @@ func (obj *innerFabricSecurityGroupDescription) toGoStruct() *FabricSecurityGrou
 		var lst []string
 
 		var innerlst []*uint16
-
-		{
-			srclst := obj.DomainGroupMembers
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.DomainGroupMembers.Items), int(obj.DomainGroupMembers.Count))
 
 		for _, item := range innerlst {
 			var tmpitem string
@@ -19927,14 +18916,7 @@ func (obj *innerFabricSecurityGroupDescription) toGoStruct() *FabricSecurityGrou
 		var lst []string
 
 		var innerlst []*uint16
-
-		{
-			srclst := obj.SystemGroupMembers
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.SystemGroupMembers.Items), int(obj.SystemGroupMembers.Count))
 
 		for _, item := range innerlst {
 			var tmpitem string
@@ -19950,14 +18932,7 @@ func (obj *innerFabricSecurityGroupDescription) toGoStruct() *FabricSecurityGrou
 		var lst []string
 
 		var innerlst []*uint16
-
-		{
-			srclst := obj.DomainUserMembers
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.DomainUserMembers.Items), int(obj.DomainUserMembers.Count))
 
 		for _, item := range innerlst {
 			var tmpitem string
@@ -19983,14 +18958,7 @@ func (obj *innerFabricSecurityGroupDescriptionList) toGoStruct() []FabricSecurit
 		var lst []FabricSecurityGroupDescription
 
 		var innerlst []innerFabricSecurityGroupDescription
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricSecurityGroupDescription
@@ -20073,14 +19041,7 @@ func (obj *innerFabricApplicationPrincipalsDescription) toGoStruct() *FabricAppl
 		var lst []FabricSecurityUserDescription
 
 		var innerlst []innerFabricSecurityUserDescription
-
-		{
-			srclst := obj.Users
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Users.Items), int(obj.Users.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricSecurityUserDescription
@@ -20096,14 +19057,7 @@ func (obj *innerFabricApplicationPrincipalsDescription) toGoStruct() *FabricAppl
 		var lst []FabricSecurityGroupDescription
 
 		var innerlst []innerFabricSecurityGroupDescription
-
-		{
-			srclst := obj.Groups
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Groups.Items), int(obj.Groups.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricSecurityGroupDescription
@@ -20213,14 +19167,7 @@ func (obj *innerFabricApplicationUpgradeProgress) toGoStruct() *FabricApplicatio
 		var lst []FabricUpgradeDomainStatusDescription
 
 		var innerlst []innerFabricUpgradeDomainStatusDescription
-
-		{
-			srclst := obj.UpgradeDomains
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UpgradeDomains.Items), int(obj.UpgradeDomains.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricUpgradeDomainStatusDescription
@@ -20238,14 +19185,7 @@ func (obj *innerFabricApplicationUpgradeProgress) toGoStruct() *FabricApplicatio
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -20604,14 +19544,7 @@ func (obj *innerFabricUpgradeProgress) toGoStruct() *FabricUpgradeProgress {
 		var lst []FabricUpgradeDomainStatusDescription
 
 		var innerlst []innerFabricUpgradeDomainStatusDescription
-
-		{
-			srclst := obj.UpgradeDomains
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UpgradeDomains.Items), int(obj.UpgradeDomains.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricUpgradeDomainStatusDescription
@@ -20629,14 +19562,7 @@ func (obj *innerFabricUpgradeProgress) toGoStruct() *FabricUpgradeProgress {
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -20735,14 +19661,7 @@ func (obj *innerFabricPackageSharingPolicyList) toGoStruct() []FabricPackageShar
 		var lst []FabricPackageSharingPolicy
 
 		var innerlst []innerFabricPackageSharingPolicy
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricPackageSharingPolicy
@@ -20940,13 +19859,7 @@ func (obj *innerFabricClusterHealthQueryDescription) toGoStruct() *FabricCluster
 
 		var innerlst []innerFabricApplicationHealthPolicyMapItem
 
-		{
-			srclst := obj.ApplicationHealthPolicyMap
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ApplicationHealthPolicyMap.Items), int(obj.ApplicationHealthPolicyMap.Count))
 
 		for _, kv := range innerlst {
 			var k string
@@ -21475,14 +20388,7 @@ func (obj *innerFabricRepairNodeImpactList) toGoStruct() []FabricRepairNodeImpac
 		var lst []FabricRepairNodeImpact
 
 		var innerlst []innerFabricRepairNodeImpact
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricRepairNodeImpact
@@ -21829,14 +20735,7 @@ func (obj *innerFabricRepairTaskList) toGoStruct() []FabricRepairTask {
 		var lst []FabricRepairTask
 
 		var innerlst []innerFabricRepairTask
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricRepairTask
@@ -22138,14 +21037,7 @@ func (obj *innerFabricDeltaNodesCheckHealthEvaluation) toGoStruct() *FabricDelta
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -22238,14 +21130,7 @@ func (obj *innerFabricUpgradeDomainDeltaNodesCheckHealthEvaluation) toGoStruct()
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -22450,13 +21335,7 @@ func (obj *innerFabricApplicationTypeHealthPolicyMap) toGoStruct() map[string]by
 
 		var innerlst []innerFabricApplicationTypeHealthPolicyMapItem
 
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, kv := range innerlst {
 			var k string
@@ -22523,13 +21402,7 @@ func (obj *innerFabricClusterHealthPolicyEx1) toGoStruct() *FabricClusterHealthP
 
 		var innerlst []innerFabricApplicationTypeHealthPolicyMapItem
 
-		{
-			srclst := obj.ApplicationTypeHealthPolicyMap
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ApplicationTypeHealthPolicyMap.Items), int(obj.ApplicationTypeHealthPolicyMap.Count))
 
 		for _, kv := range innerlst {
 			var k string
@@ -22614,14 +21487,7 @@ func (obj *innerFabricApplicationTypeApplicationsHealthEvaluation) toGoStruct() 
 		var lst []FabricHealthEvaluation
 
 		var innerlst []innerFabricHealthEvaluation
-
-		{
-			srclst := obj.UnhealthyEvaluations
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricHealthEvaluation
@@ -22682,14 +21548,7 @@ func (obj *innerFabricNodeHealthStateFilterList) toGoStruct() []FabricNodeHealth
 		var lst []FabricNodeHealthStateFilter
 
 		var innerlst []innerFabricNodeHealthStateFilter
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricNodeHealthStateFilter
@@ -22777,14 +21636,7 @@ func (obj *innerFabricDeployedServicePackageHealthStateFilterList) toGoStruct() 
 		var lst []FabricDeployedServicePackageHealthStateFilter
 
 		var innerlst []innerFabricDeployedServicePackageHealthStateFilter
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricDeployedServicePackageHealthStateFilter
@@ -22855,14 +21707,7 @@ func (obj *innerFabricDeployedApplicationHealthStateFilter) toGoStruct() *Fabric
 		var lst []FabricDeployedServicePackageHealthStateFilter
 
 		var innerlst []innerFabricDeployedServicePackageHealthStateFilter
-
-		{
-			srclst := obj.DeployedServicePackageFilters
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.DeployedServicePackageFilters.Items), int(obj.DeployedServicePackageFilters.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricDeployedServicePackageHealthStateFilter
@@ -22888,14 +21733,7 @@ func (obj *innerFabricDeployedApplicationHealthStateFilterList) toGoStruct() []F
 		var lst []FabricDeployedApplicationHealthStateFilter
 
 		var innerlst []innerFabricDeployedApplicationHealthStateFilter
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricDeployedApplicationHealthStateFilter
@@ -22937,14 +21775,7 @@ func (obj *innerFabricReplicaHealthStateFilterList) toGoStruct() []FabricReplica
 		var lst []FabricReplicaHealthStateFilter
 
 		var innerlst []innerFabricReplicaHealthStateFilter
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricReplicaHealthStateFilter
@@ -23013,14 +21844,7 @@ func (obj *innerFabricPartitionHealthStateFilter) toGoStruct() *FabricPartitionH
 		var lst []FabricReplicaHealthStateFilter
 
 		var innerlst []innerFabricReplicaHealthStateFilter
-
-		{
-			srclst := obj.ReplicaFilters
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ReplicaFilters.Items), int(obj.ReplicaFilters.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricReplicaHealthStateFilter
@@ -23046,14 +21870,7 @@ func (obj *innerFabricPartitionHealthStateFilterList) toGoStruct() []FabricParti
 		var lst []FabricPartitionHealthStateFilter
 
 		var innerlst []innerFabricPartitionHealthStateFilter
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricPartitionHealthStateFilter
@@ -23124,14 +21941,7 @@ func (obj *innerFabricServiceHealthStateFilter) toGoStruct() *FabricServiceHealt
 		var lst []FabricPartitionHealthStateFilter
 
 		var innerlst []innerFabricPartitionHealthStateFilter
-
-		{
-			srclst := obj.PartitionFilters
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.PartitionFilters.Items), int(obj.PartitionFilters.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricPartitionHealthStateFilter
@@ -23157,14 +21967,7 @@ func (obj *innerFabricServiceHealthStateFilterList) toGoStruct() []FabricService
 		var lst []FabricServiceHealthStateFilter
 
 		var innerlst []innerFabricServiceHealthStateFilter
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceHealthStateFilter
@@ -23257,14 +22060,7 @@ func (obj *innerFabricApplicationHealthStateFilter) toGoStruct() *FabricApplicat
 		var lst []FabricServiceHealthStateFilter
 
 		var innerlst []innerFabricServiceHealthStateFilter
-
-		{
-			srclst := obj.ServiceFilters
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ServiceFilters.Items), int(obj.ServiceFilters.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceHealthStateFilter
@@ -23280,14 +22076,7 @@ func (obj *innerFabricApplicationHealthStateFilter) toGoStruct() *FabricApplicat
 		var lst []FabricDeployedApplicationHealthStateFilter
 
 		var innerlst []innerFabricDeployedApplicationHealthStateFilter
-
-		{
-			srclst := obj.DeployedApplicationFilters
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.DeployedApplicationFilters.Items), int(obj.DeployedApplicationFilters.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricDeployedApplicationHealthStateFilter
@@ -23342,14 +22131,7 @@ func (obj *innerFabricApplicationHealthStateFilterList) toGoStruct() []FabricApp
 		var lst []FabricApplicationHealthStateFilter
 
 		var innerlst []innerFabricApplicationHealthStateFilter
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricApplicationHealthStateFilter
@@ -23462,13 +22244,7 @@ func (obj *innerFabricClusterHealthChunkQueryDescription) toGoStruct() *FabricCl
 
 		var innerlst []innerFabricApplicationHealthPolicyMapItem
 
-		{
-			srclst := obj.ApplicationHealthPolicyMap
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ApplicationHealthPolicyMap.Items), int(obj.ApplicationHealthPolicyMap.Count))
 
 		for _, kv := range innerlst {
 			var k string
@@ -23486,14 +22262,7 @@ func (obj *innerFabricClusterHealthChunkQueryDescription) toGoStruct() *FabricCl
 		var lst []FabricApplicationHealthStateFilter
 
 		var innerlst []innerFabricApplicationHealthStateFilter
-
-		{
-			srclst := obj.ApplicationFilters
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ApplicationFilters.Items), int(obj.ApplicationFilters.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricApplicationHealthStateFilter
@@ -23509,14 +22278,7 @@ func (obj *innerFabricClusterHealthChunkQueryDescription) toGoStruct() *FabricCl
 		var lst []FabricNodeHealthStateFilter
 
 		var innerlst []innerFabricNodeHealthStateFilter
-
-		{
-			srclst := obj.NodeFilters
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.NodeFilters.Items), int(obj.NodeFilters.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricNodeHealthStateFilter
@@ -23577,14 +22339,7 @@ func (obj *innerFabricNodeHealthStateChunkList) toGoStruct() []FabricNodeHealthS
 		var lst []FabricNodeHealthStateChunk
 
 		var innerlst []innerFabricNodeHealthStateChunk
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricNodeHealthStateChunk
@@ -23628,14 +22383,7 @@ func (obj *innerFabricReplicaHealthStateChunkList) toGoStruct() []FabricReplicaH
 		var lst []FabricReplicaHealthStateChunk
 
 		var innerlst []innerFabricReplicaHealthStateChunk
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricReplicaHealthStateChunk
@@ -23704,14 +22452,7 @@ func (obj *innerFabricPartitionHealthStateChunk) toGoStruct() *FabricPartitionHe
 		var lst []FabricReplicaHealthStateChunk
 
 		var innerlst []innerFabricReplicaHealthStateChunk
-
-		{
-			srclst := obj.ReplicaHealthStateChunks
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ReplicaHealthStateChunks.Items), int(obj.ReplicaHealthStateChunks.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricReplicaHealthStateChunk
@@ -23739,14 +22480,7 @@ func (obj *innerFabricPartitionHealthStateChunkList) toGoStruct() []FabricPartit
 		var lst []FabricPartitionHealthStateChunk
 
 		var innerlst []innerFabricPartitionHealthStateChunk
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricPartitionHealthStateChunk
@@ -23817,14 +22551,7 @@ func (obj *innerFabricServiceHealthStateChunk) toGoStruct() *FabricServiceHealth
 		var lst []FabricPartitionHealthStateChunk
 
 		var innerlst []innerFabricPartitionHealthStateChunk
-
-		{
-			srclst := obj.PartitionHealthStateChunks
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.PartitionHealthStateChunks.Items), int(obj.PartitionHealthStateChunks.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricPartitionHealthStateChunk
@@ -23852,14 +22579,7 @@ func (obj *innerFabricServiceHealthStateChunkList) toGoStruct() []FabricServiceH
 		var lst []FabricServiceHealthStateChunk
 
 		var innerlst []innerFabricServiceHealthStateChunk
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceHealthStateChunk
@@ -23949,14 +22669,7 @@ func (obj *innerFabricDeployedServicePackageHealthStateChunkList) toGoStruct() [
 		var lst []FabricDeployedServicePackageHealthStateChunk
 
 		var innerlst []innerFabricDeployedServicePackageHealthStateChunk
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricDeployedServicePackageHealthStateChunk
@@ -24027,14 +22740,7 @@ func (obj *innerFabricDeployedApplicationHealthStateChunk) toGoStruct() *FabricD
 		var lst []FabricDeployedServicePackageHealthStateChunk
 
 		var innerlst []innerFabricDeployedServicePackageHealthStateChunk
-
-		{
-			srclst := obj.DeployedServicePackageHealthStateChunks
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.DeployedServicePackageHealthStateChunks.Items), int(obj.DeployedServicePackageHealthStateChunks.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricDeployedServicePackageHealthStateChunk
@@ -24062,14 +22768,7 @@ func (obj *innerFabricDeployedApplicationHealthStateChunkList) toGoStruct() []Fa
 		var lst []FabricDeployedApplicationHealthStateChunk
 
 		var innerlst []innerFabricDeployedApplicationHealthStateChunk
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricDeployedApplicationHealthStateChunk
@@ -24162,14 +22861,7 @@ func (obj *innerFabricApplicationHealthStateChunk) toGoStruct() *FabricApplicati
 		var lst []FabricServiceHealthStateChunk
 
 		var innerlst []innerFabricServiceHealthStateChunk
-
-		{
-			srclst := obj.ServiceHealthStateChunks
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ServiceHealthStateChunks.Items), int(obj.ServiceHealthStateChunks.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceHealthStateChunk
@@ -24185,14 +22877,7 @@ func (obj *innerFabricApplicationHealthStateChunk) toGoStruct() *FabricApplicati
 		var lst []FabricDeployedApplicationHealthStateChunk
 
 		var innerlst []innerFabricDeployedApplicationHealthStateChunk
-
-		{
-			srclst := obj.DeployedApplicationHealthStateChunks
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.DeployedApplicationHealthStateChunks.Items), int(obj.DeployedApplicationHealthStateChunks.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricDeployedApplicationHealthStateChunk
@@ -24249,14 +22934,7 @@ func (obj *innerFabricApplicationHealthStateChunkList) toGoStruct() []FabricAppl
 		var lst []FabricApplicationHealthStateChunk
 
 		var innerlst []innerFabricApplicationHealthStateChunk
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricApplicationHealthStateChunk
@@ -24343,14 +23021,7 @@ func (obj *innerFabricClusterHealthChunk) toGoStruct() *FabricClusterHealthChunk
 		var lst []FabricNodeHealthStateChunk
 
 		var innerlst []innerFabricNodeHealthStateChunk
-
-		{
-			srclst := obj.NodeHealthStateChunks
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.NodeHealthStateChunks.Items), int(obj.NodeHealthStateChunks.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricNodeHealthStateChunk
@@ -24366,14 +23037,7 @@ func (obj *innerFabricClusterHealthChunk) toGoStruct() *FabricClusterHealthChunk
 		var lst []FabricApplicationHealthStateChunk
 
 		var innerlst []innerFabricApplicationHealthStateChunk
-
-		{
-			srclst := obj.ApplicationHealthStateChunks
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ApplicationHealthStateChunks.Items), int(obj.ApplicationHealthStateChunks.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricApplicationHealthStateChunk
@@ -24438,13 +23102,7 @@ func (obj *innerFabricRollingUpgradePolicyDescriptionEx3) toGoStruct() *FabricRo
 
 		var innerlst []innerFabricApplicationHealthPolicyMapItem
 
-		{
-			srclst := obj.ApplicationHealthPolicyMap
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ApplicationHealthPolicyMap.Items), int(obj.ApplicationHealthPolicyMap.Count))
 
 		for _, kv := range innerlst {
 			var k string
@@ -24507,13 +23165,7 @@ func (obj *innerFabricEventContextMap) toGoStruct() map[string]string {
 
 		var innerlst []innerFabricEventContextMapItem
 
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, kv := range innerlst {
 			var k string
@@ -24605,13 +23257,7 @@ func (obj *innerFabricChaosParameters) toGoStruct() *FabricChaosParameters {
 
 		var innerlst []innerFabricEventContextMapItem
 
-		{
-			srclst := obj.Context
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Context.Items), int(obj.Context.Count))
 
 		for _, kv := range innerlst {
 			var k string
@@ -24713,14 +23359,7 @@ func (obj *innerFabricChaosTargetFilter) toGoStruct() *FabricChaosTargetFilter {
 		var lst []string
 
 		var innerlst []*uint16
-
-		{
-			srclst := obj.NodeTypeInclusionList
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.NodeTypeInclusionList.Items), int(obj.NodeTypeInclusionList.Count))
 
 		for _, item := range innerlst {
 			var tmpitem string
@@ -24736,14 +23375,7 @@ func (obj *innerFabricChaosTargetFilter) toGoStruct() *FabricChaosTargetFilter {
 		var lst []string
 
 		var innerlst []*uint16
-
-		{
-			srclst := obj.ApplicationInclusionList
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ApplicationInclusionList.Items), int(obj.ApplicationInclusionList.Count))
 
 		for _, item := range innerlst {
 			var tmpitem string
@@ -24996,14 +23628,7 @@ func (obj *innerFabricExecutingFaultsEvent) toGoStruct() *FabricExecutingFaultsE
 		var lst []string
 
 		var innerlst []*uint16
-
-		{
-			srclst := obj.Faults
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Faults.Items), int(obj.Faults.Count))
 
 		for _, item := range innerlst {
 			var tmpitem string
@@ -25161,14 +23786,7 @@ func (obj *innerFabricChaosEventList) toGoStruct() []FabricChaosEvent {
 		var lst []FabricChaosEvent
 
 		var innerlst []innerFabricChaosEvent
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricChaosEvent
@@ -25243,14 +23861,7 @@ func (obj *innerFabricChaosReport) toGoStruct() *FabricChaosReport {
 		var lst []FabricChaosEvent
 
 		var innerlst []innerFabricChaosEvent
-
-		{
-			srclst := obj.History
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.History.Items), int(obj.History.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricChaosEvent
@@ -25317,14 +23928,7 @@ func (obj *innerFabricChaosEventsSegment) toGoStruct() *FabricChaosEventsSegment
 		var lst []FabricChaosEvent
 
 		var innerlst []innerFabricChaosEvent
-
-		{
-			srclst := obj.History
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.History.Items), int(obj.History.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricChaosEvent
@@ -25399,14 +24003,7 @@ func (obj *innerFabricChaosScheduleTimeRangeUtcList) toGoStruct() []FabricChaosS
 		var lst []FabricChaosScheduleTimeRangeUtc
 
 		var innerlst []innerFabricChaosScheduleTimeRangeUtc
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricChaosScheduleTimeRangeUtc
@@ -25498,14 +24095,7 @@ func (obj *innerFabricChaosScheduleJob) toGoStruct() *FabricChaosScheduleJob {
 		var lst []FabricChaosScheduleTimeRangeUtc
 
 		var innerlst []innerFabricChaosScheduleTimeRangeUtc
-
-		{
-			srclst := obj.Times
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Times.Items), int(obj.Times.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricChaosScheduleTimeRangeUtc
@@ -25531,14 +24121,7 @@ func (obj *innerFabricChaosScheduleJobList) toGoStruct() []FabricChaosScheduleJo
 		var lst []FabricChaosScheduleJob
 
 		var innerlst []innerFabricChaosScheduleJob
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricChaosScheduleJob
@@ -25597,13 +24180,7 @@ func (obj *innerFabricChaosScheduleChaosParametersMap) toGoStruct() map[string]F
 
 		var innerlst []innerFabricChaosScheduleChaosParametersMapItem
 
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, kv := range innerlst {
 			var k string
@@ -25700,13 +24277,7 @@ func (obj *innerFabricChaosSchedule) toGoStruct() *FabricChaosSchedule {
 
 		var innerlst []innerFabricChaosScheduleChaosParametersMapItem
 
-		{
-			srclst := obj.ChaosParametersMap
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ChaosParametersMap.Items), int(obj.ChaosParametersMap.Count))
 
 		for _, kv := range innerlst {
 			var k string
@@ -25724,14 +24295,7 @@ func (obj *innerFabricChaosSchedule) toGoStruct() *FabricChaosSchedule {
 		var lst []FabricChaosScheduleJob
 
 		var innerlst []innerFabricChaosScheduleJob
-
-		{
-			srclst := obj.Jobs
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Jobs.Items), int(obj.Jobs.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricChaosScheduleJob
@@ -25840,14 +24404,7 @@ func (obj *innerFabricSecretList) toGoStruct() []FabricSecret {
 		var lst []FabricSecret
 
 		var innerlst []innerFabricSecret
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricSecret
@@ -25907,14 +24464,7 @@ func (obj *innerFabricSecretReferenceList) toGoStruct() []FabricSecretReference 
 		var lst []FabricSecretReference
 
 		var innerlst []innerFabricSecretReference
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricSecretReference
@@ -26018,13 +24568,7 @@ func (obj *innerFabricCodePackageEventDescription) toGoStruct() *FabricCodePacka
 
 		var innerlst []innerFabricApplicationParameter
 
-		{
-			srclst := obj.Properties
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Properties.Items), int(obj.Properties.Count))
 
 		for _, kv := range innerlst {
 			var k string
@@ -26229,14 +24773,7 @@ func (obj *innerFabricNetworkQueryResultList) toGoStruct() []FabricNetworkInform
 		var lst []FabricNetworkInformation
 
 		var innerlst []innerFabricNetworkInformation
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricNetworkInformation
@@ -26330,14 +24867,7 @@ func (obj *innerFabricNetworkApplicationQueryResultList) toGoStruct() []FabricNe
 		var lst []FabricNetworkApplicationQueryResultItem
 
 		var innerlst []innerFabricNetworkApplicationQueryResultItem
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricNetworkApplicationQueryResultItem
@@ -26431,14 +24961,7 @@ func (obj *innerFabricNetworkNodeQueryResultList) toGoStruct() []FabricNetworkNo
 		var lst []FabricNetworkNodeQueryResultItem
 
 		var innerlst []innerFabricNetworkNodeQueryResultItem
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricNetworkNodeQueryResultItem
@@ -26526,14 +25049,7 @@ func (obj *innerFabricApplicationNetworkQueryResultList) toGoStruct() []FabricAp
 		var lst []FabricApplicationNetworkQueryResultItem
 
 		var innerlst []innerFabricApplicationNetworkQueryResultItem
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricApplicationNetworkQueryResultItem
@@ -26621,14 +25137,7 @@ func (obj *innerFabricDeployedNetworkQueryResultList) toGoStruct() []FabricDeplo
 		var lst []FabricDeployedNetworkQueryResultItem
 
 		var innerlst []innerFabricDeployedNetworkQueryResultItem
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricDeployedNetworkQueryResultItem
@@ -26782,14 +25291,7 @@ func (obj *innerFabricDeployedNetworkCodePackageQueryResultList) toGoStruct() []
 		var lst []FabricDeployedNetworkCodePackageQueryResultItem
 
 		var innerlst []innerFabricDeployedNetworkCodePackageQueryResultItem
-
-		{
-			srclst := obj
-			slice := (*reflect.SliceHeader)(unsafe.Pointer(&innerlst))
-			slice.Data = uintptr(unsafe.Pointer(srclst.Items))
-			slice.Len = int(srclst.Count)
-			slice.Cap = int(srclst.Count)
-		}
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
 		for _, item := range innerlst {
 			var tmpitem FabricDeployedNetworkCodePackageQueryResultItem
