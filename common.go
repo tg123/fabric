@@ -12,8 +12,8 @@ import (
 )
 
 var (
-	fabricCommonDll               = windows.MustLoadDLL("FabricCommon.dll")
-	fabricGetLastErrorMessageProc = fabricCommonDll.MustFindProc("FabricGetLastErrorMessage")
+	fabricCommonDll               = windows.NewLazyDLL("FabricCommon.dll")
+	fabricGetLastErrorMessageProc = fabricCommonDll.NewProc("FabricGetLastErrorMessage")
 )
 
 var errComNotImpl = fmt.Errorf("operation not supported on this fabric version")
@@ -87,8 +87,4 @@ func toTimeout(ctx context.Context) time.Duration {
 
 	// TODO move to sf client var
 	return 15 * time.Minute
-}
-
-type dummyComErrorClient struct {
-	err error
 }

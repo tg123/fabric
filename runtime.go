@@ -8,10 +8,10 @@ import (
 )
 
 var (
-	fabricRuntimeDll              = windows.MustLoadDLL("FabricRuntime.dll")
-	fabricFabricCreateRuntimeProc = fabricRuntimeDll.MustFindProc("FabricCreateRuntime")
+	fabricRuntimeDll              = windows.NewLazyDLL("FabricRuntime.dll")
+	fabricFabricCreateRuntimeProc = fabricRuntimeDll.NewProc("FabricCreateRuntime")
 	// TODO support this
-	fabricFabricGetActivationContextProc = fabricRuntimeDll.MustFindProc("FabricGetActivationContext")
+	fabricFabricGetActivationContextProc = fabricRuntimeDll.NewProc("FabricGetActivationContext")
 )
 
 type FabricRuntime struct {

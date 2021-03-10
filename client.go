@@ -9,9 +9,9 @@ import (
 )
 
 var (
-	fabricClientDll             = windows.MustLoadDLL("FabricClient.dll")
-	fabricCreateLocalClientProc = fabricClientDll.MustFindProc("FabricCreateLocalClient")
-	fabricCreateClientProc      = fabricClientDll.MustFindProc("FabricCreateClient")
+	fabricClientDll             = windows.NewLazyDLL("FabricClient.dll")
+	fabricCreateLocalClientProc = fabricClientDll.NewProc("FabricCreateLocalClient")
+	fabricCreateClientProc      = fabricClientDll.NewProc("FabricCreateClient")
 )
 
 func createLocalClient(iid string, p unsafe.Pointer) error {
