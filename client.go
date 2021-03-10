@@ -2,6 +2,7 @@ package fabric
 
 import (
 	"fmt"
+	"time"
 	"unsafe"
 
 	ole "github.com/go-ole/go-ole"
@@ -66,7 +67,16 @@ func createClient(connectionStrings []string, iid string, p unsafe.Pointer) erro
 }
 
 type FabricClient struct {
-	hub *fabricClientComHub
+	hub            *fabricClientComHub
+	defaultTimeout time.Duration
+}
+
+func (v *FabricClient) GetTimeout() time.Duration {
+	return v.defaultTimeout
+}
+
+func (v *FabricClient) SetDefaultTimeout(t time.Duration) {
+	v.defaultTimeout = t
 }
 
 const (
@@ -78,7 +88,7 @@ func clientFromComClientSetting(com *comFabricClientSettings) *FabricClient {
 	hub.init(func(iid string, outptr unsafe.Pointer) error {
 		return queryObject(&com.IUnknown, iid, outptr)
 	})
-	return &FabricClient{hub}
+	return &FabricClient{hub, 5 * time.Minute}
 }
 
 func NewLocalClient() (*FabricClient, error) {

@@ -9,6 +9,193 @@ import (
 	"github.com/pinzolo/casee"
 )
 
+func (g *generator) generateAsyncCallSig(receiver string, begin, end *ast.MethodNode, namedRt bool) (*ast.InterfaceNode, []string, string) {
+	var paramNames []string
+	methodName := strings.TrimPrefix(begin.Name, "Begin")
+
+	g.printfln("func (v *%s) %s(", receiver, methodName)
+	g.importpkg("context")
+	g.printfln("ctx context.Context,")
+	paramNames = append(paramNames, "ctx")
+
+	for i, p := range begin.Params {
+
+		if p.Type == "IFabricAsyncOperationCallback" {
+			continue
+		}
+
+		if p.Type == "IFabricAsyncOperationContext" {
+			continue
+		}
+
+		// replace by context.Context
+		if p.Name == "timeoutMilliseconds" {
+			continue
+		}
+
+		paramName := p.Name
+		if paramName == "" {
+			paramName = fmt.Sprintf("param_%v", i)
+		}
+		g.printfln("%v %v,", paramName, g.toGolangType(p.Type, p.Indirections, false))
+		paramNames = append(paramNames, paramName)
+	}
+
+	var rt []string
+
+	var asyncrt *ast.InterfaceNode
+	for _, p := range end.Params {
+		for _, a := range p.Attributes {
+			if a.Type == scanner.RETVAL {
+
+				asyncrt = g.ctx.definedInterface[g.unwrapTypedef(p.Type)]
+
+				if asyncrt == nil {
+					if namedRt {
+						rt = append(rt, fmt.Sprintf("result_%v %v", 0, g.toGolangType(p.Type, p.Indirections-1, false)))
+					} else {
+						rt = append(rt, fmt.Sprintf("%v", g.toGolangType(p.Type, p.Indirections-1, false)))
+					}
+					break
+				}
+
+				for i, m := range g.ctx.definedInterface[g.unwrapTypedef(p.Type)].Methods {
+					if namedRt {
+						rt = append(rt, fmt.Sprintf("result_%v %v", i, g.toGolangType(m.ReturnType.Type, m.ReturnType.Indirections, false)))
+
+					} else {
+						rt = append(rt, fmt.Sprintf("%v", g.toGolangType(m.ReturnType.Type, m.ReturnType.Indirections, false)))
+
+					}
+				}
+
+			}
+		}
+	}
+
+	if namedRt {
+		rt = append(rt, "err error")
+	} else {
+		rt = append(rt, "error")
+	}
+	g.printfln(") (%v) {", strings.Join(rt, ","))
+
+	return asyncrt, paramNames, methodName
+}
+
+// TODO moved from interface, should clean up for coclz
+func (g *generator) generateAsyncCall(hubFieldName string, asyncrt *ast.InterfaceNode, n *ast.InterfaceNode, begin, end *ast.MethodNode) {
+	// asyncrt, _, _ := g.generateAsyncCallSig(g.goInterfaceName(n.Name), begin, end, true)
+	g.printfln(`if v.hub.%v == nil {
+		err = errComNotImpl
+		return
+	}`, hubFieldName)
+
+	g.printfln(`ch := make(chan error, 1)
+		defer close(ch)
+		callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+	`)
+
+	var rt []string
+next:
+	for i, p := range end.Params {
+		if p.Type == "IFabricAsyncOperationContext" {
+			continue
+		}
+
+		if isOutParam(p) {
+			rt = append(rt, fmt.Sprintf("rt_%v", i))
+			continue next
+		}
+
+		panic("non out end param")
+	}
+
+	rt = append(rt, "err")
+	g.printfln("%v := v.hub.%v.%v(sfctx)", strings.Join(rt, ","), hubFieldName, casee.ToCamelCase(end.Name))
+	g.printfln(`
+	if err != nil {
+		ch <- err
+		return
+	}`)
+
+	if len(rt) > 3 {
+		panic(fmt.Sprintf("too many end rt %v", end.Name))
+	}
+
+	if asyncrt != nil {
+		for i, m := range asyncrt.Methods {
+			g.printfln("result_%v, err = %v.%v()", i, rt[0], casee.ToPascalCase(m.Name))
+
+			g.printfln(`if err != nil {
+				ch <- err
+				return
+			}`)
+		}
+
+	} else {
+		g.printfln(`if err != nil {
+			ch <- err
+			return
+		}`)
+
+		if len(rt) == 2 {
+			g.printfln("result_%v = %v", 0, rt[0])
+		}
+	}
+
+	g.printfln(`ch <- nil
+			})`)
+
+	g.printfln(`timeout := toTimeout(ctx, v)`)
+
+	var beginrt []string
+	for _, p := range begin.Params {
+		if p.Type == "IFabricAsyncOperationContext" {
+			beginrt = append(beginrt, "sfctx")
+		} else if isOutParam(p) {
+			beginrt = append(beginrt, "_")
+		}
+	}
+
+	beginrt = append(beginrt, "err")
+
+	g.printfln("%v := v.hub.%v.%v(", strings.Join(beginrt, ","), hubFieldName, casee.ToCamelCase(begin.Name))
+	for _, p := range begin.Params {
+		if p.Type == "IFabricAsyncOperationContext" {
+			continue
+		}
+
+		if isOutParam(p) {
+			continue
+		}
+
+		if p.Type == "IFabricAsyncOperationCallback" {
+			g.printfln("callback,")
+			continue
+		}
+
+		if p.Name == "timeoutMilliseconds" {
+			g.printfln("uint32(timeout.Milliseconds()),")
+			continue
+		}
+
+		g.printfln("%s, ", p.Name)
+	}
+	g.printfln(") ")
+
+	g.printfln(`
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+	`)
+
+	g.printfln("}")
+}
+
 func (g *generator) generateCoClz(n *ast.CoClassNode) {
 	hubName := casee.ToCamelCase(n.Name)
 	clzName := n.Name
@@ -55,17 +242,21 @@ next:
 			if strings.HasPrefix(m.Name, "End") {
 				begin := ifc.Methods[i-1]
 				end := m
-				_, params, method = g.generateAsyncCallSig(clzName, begin, end, true)
+				var asyncrt *ast.InterfaceNode
+				asyncrt, params, method = g.generateAsyncCallSig(clzName, begin, end, true)
+
+				g.generateAsyncCall(hubFieldName, asyncrt, ifc, begin, end)
+
 			} else {
 				params, method = g.generateMethodSig(clzName, m, true)
+				g.printfln(`if v.hub.%v == nil {
+					err = errComNotImpl
+					return
+				}`, hubFieldName)
+				g.printfln("return v.hub.%v.%v(%v)", hubFieldName, method, strings.Join(params, ","))
+				g.printfln("}")
 			}
 
-			g.printfln(`if v.hub.%v == nil {
-				err = errComNotImpl
-				return
-			}`, hubFieldName)
-			g.printfln("return v.hub.%v.%v(%v)", hubFieldName, method, strings.Join(params, ","))
-			g.printfln("}")
 		}
 	}
 

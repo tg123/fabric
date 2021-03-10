@@ -1,6 +1,7 @@
 package fabric
 
 import (
+	"time"
 	"unsafe"
 
 	ole "github.com/go-ole/go-ole"
@@ -15,7 +16,16 @@ var (
 )
 
 type FabricRuntime struct {
-	hub *fabricRuntimeComHub
+	hub            *fabricRuntimeComHub
+	defaultTimeout time.Duration
+}
+
+func (v *FabricRuntime) GetTimeout() time.Duration {
+	return v.defaultTimeout
+}
+
+func (v *FabricRuntime) SetDefaultTimeout(t time.Duration) {
+	v.defaultTimeout = t
 }
 
 func NewFabricRuntime() (*FabricRuntime, error) {
@@ -33,5 +43,6 @@ func NewFabricRuntime() (*FabricRuntime, error) {
 		hub: &fabricRuntimeComHub{
 			FabricRuntime: com,
 		},
+		defaultTimeout: 5 * time.Minute,
 	}, nil
 }

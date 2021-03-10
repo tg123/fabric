@@ -80,14 +80,18 @@ func waitch(ctx context.Context, ch <-chan error, sfctx *comIFabricAsyncOperatio
 	}
 }
 
-func toTimeout(ctx context.Context) time.Duration {
+type withTimeout interface {
+	GetTimeout() time.Duration
+	SetDefaultTimeout(time.Duration)
+}
+
+func toTimeout(ctx context.Context, v withTimeout) time.Duration {
 	deadline, ok := ctx.Deadline()
 	if ok {
 		return deadline.Sub(time.Now())
 	}
 
-	// TODO move to sf client var
-	return 15 * time.Minute
+	return v.GetTimeout()
 }
 
 func sliceCast(dst, src unsafe.Pointer, len int) {

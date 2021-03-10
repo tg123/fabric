@@ -2,7 +2,6 @@
 package fabric
 
 import (
-	"context"
 	"github.com/go-ole/go-ole"
 	"golang.org/x/sys/windows"
 	"syscall"
@@ -395,38 +394,6 @@ func (v *comFabricStatelessServiceInstance) Abort() (rt interface{}, err error) 
 
 	rt = fromUnsafePointer(tmp)
 	return
-}
-func (v *comFabricStatelessServiceInstance) Close(
-	ctx context.Context,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endClose(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginClose(
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricStatelessServicePartition struct {
@@ -831,73 +798,6 @@ func (v *comFabricStatefulServiceReplica) Abort() (rt interface{}, err error) {
 	rt = fromUnsafePointer(tmp)
 	return
 }
-func (v *comFabricStatefulServiceReplica) ChangeRole(
-	ctx context.Context,
-	newRole FabricReplicaRole,
-) (result_0 string, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endChangeRole(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetString()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginChangeRole(
-		newRole,
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricStatefulServiceReplica) Close(
-	ctx context.Context,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endClose(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginClose(
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricStatefulServicePartition struct {
 	ole.IUnknown
@@ -1294,42 +1194,6 @@ func (v *comFabricStateReplicator) UpdateReplicatorSettings(
 	}
 	return
 }
-func (v *comFabricStateReplicator) Replicate(
-	ctx context.Context,
-	operationData *comFabricOperationData,
-	sequenceNumber *int64,
-) (result_0 int64, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endReplicate(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0 = rt_1
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	_, sfctx, err := v.beginReplicate(
-		operationData,
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricStateReplicator2 struct {
 	comFabricStateReplicator
@@ -1524,75 +1388,6 @@ func (v *comFabricStateProvider) GetCopyState(
 		return
 	}
 	return
-}
-func (v *comFabricStateProvider) UpdateEpoch(
-	ctx context.Context,
-	epoch *FabricEpoch,
-	previousEpochLastSequenceNumber int64,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endUpdateEpoch(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginUpdateEpoch(
-		epoch,
-		previousEpochLastSequenceNumber,
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricStateProvider) OnDataLoss(
-	ctx context.Context,
-) (result_0 bool, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endOnDataLoss(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0 = rt_1
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginOnDataLoss(
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricOperation struct {
@@ -2019,108 +1814,6 @@ func (v *comFabricReplicator) GetCatchUpCapability() (fromSequenceNumber int64, 
 	}
 	return
 }
-func (v *comFabricReplicator) ChangeRole(
-	ctx context.Context,
-	epoch *FabricEpoch,
-	role FabricReplicaRole,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endChangeRole(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginChangeRole(
-		epoch,
-		role,
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricReplicator) UpdateEpoch(
-	ctx context.Context,
-	epoch *FabricEpoch,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endUpdateEpoch(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginUpdateEpoch(
-		epoch,
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricReplicator) Close(
-	ctx context.Context,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endClose(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginClose(
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricPrimaryReplicator struct {
 	comFabricReplicator
@@ -2320,107 +2013,6 @@ func (v *comFabricPrimaryReplicator) RemoveReplica(
 	}
 	return
 }
-func (v *comFabricPrimaryReplicator) OnDataLoss(
-	ctx context.Context,
-) (result_0 bool, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endOnDataLoss(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0 = rt_1
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginOnDataLoss(
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricPrimaryReplicator) WaitForCatchUpQuorum(
-	ctx context.Context,
-	catchUpMode FabricReplicaSetQuorumMode,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endWaitForCatchUpQuorum(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginWaitForCatchUpQuorum(
-		catchUpMode,
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricPrimaryReplicator) BuildReplica(
-	ctx context.Context,
-	replica *FabricReplicaInformation,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endBuildReplica(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginBuildReplica(
-		replica,
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricReplicatorCatchupSpecificQuorum struct {
 	ole.IUnknown
@@ -2616,116 +2208,6 @@ func (v *comFabricAtomicGroupStateReplicator) endReplicateAtomicGroupRollback(
 	}
 	return
 }
-func (v *comFabricAtomicGroupStateReplicator) ReplicateAtomicGroupOperation(
-	ctx context.Context,
-	atomicGroupId int64,
-	operationData *comFabricOperationData,
-	operationSequenceNumber *int64,
-) (result_0 int64, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endReplicateAtomicGroupOperation(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0 = rt_1
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	_, sfctx, err := v.beginReplicateAtomicGroupOperation(
-		atomicGroupId,
-		operationData,
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricAtomicGroupStateReplicator) ReplicateAtomicGroupCommit(
-	ctx context.Context,
-	atomicGroupId int64,
-	commitSequenceNumber *int64,
-) (result_0 int64, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endReplicateAtomicGroupCommit(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0 = rt_1
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	_, sfctx, err := v.beginReplicateAtomicGroupCommit(
-		atomicGroupId,
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricAtomicGroupStateReplicator) ReplicateAtomicGroupRollback(
-	ctx context.Context,
-	atomicGroupId int64,
-	rollbackSequenceNumber *int64,
-) (result_0 int64, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endReplicateAtomicGroupRollback(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0 = rt_1
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	_, sfctx, err := v.beginReplicateAtomicGroupRollback(
-		atomicGroupId,
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricAtomicGroupStateProvider struct {
 	ole.IUnknown
@@ -2866,112 +2348,6 @@ func (v *comFabricAtomicGroupStateProvider) endUndoProgress(
 		return
 	}
 	return
-}
-func (v *comFabricAtomicGroupStateProvider) AtomicGroupCommit(
-	ctx context.Context,
-	atomicGroupId int64,
-	commitSequenceNumber int64,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endAtomicGroupCommit(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginAtomicGroupCommit(
-		atomicGroupId,
-		commitSequenceNumber,
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricAtomicGroupStateProvider) AtomicGroupRollback(
-	ctx context.Context,
-	atomicGroupId int64,
-	rollbackequenceNumber int64,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endAtomicGroupRollback(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginAtomicGroupRollback(
-		atomicGroupId,
-		rollbackequenceNumber,
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricAtomicGroupStateProvider) UndoProgress(
-	ctx context.Context,
-	fromCommitSequenceNumber int64,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endUndoProgress(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginUndoProgress(
-		fromCommitSequenceNumber,
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type ComFabricServiceGroupFactory struct {
@@ -4745,40 +4121,6 @@ func (v *comFabricTransaction) Rollback() (rt interface{}, err error) {
 	rt = fromUnsafePointer(tmp)
 	return
 }
-func (v *comFabricTransaction) Commit(
-	ctx context.Context,
-) (result_0 int64, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endCommit(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0 = rt_1
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginCommit(
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricKeyValueStoreReplica struct {
 	comFabricStatefulServiceReplica
@@ -5256,44 +4598,6 @@ func (v *comFabricKeyValueStoreReplica3) endBackup(
 	}
 	return
 }
-func (v *comFabricKeyValueStoreReplica3) Backup(
-	ctx context.Context,
-	backupDirectory string,
-	backupOption FabricStoreBackupOption,
-	postBackupHandler *comFabricStorePostBackupHandler,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endBackup(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginBackup(
-		backupDirectory,
-		backupOption,
-		postBackupHandler,
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricKeyValueStoreReplica4 struct {
 	comFabricKeyValueStoreReplica3
@@ -5352,40 +4656,6 @@ func (v *comFabricKeyValueStoreReplica4) endRestore(
 		return
 	}
 	return
-}
-func (v *comFabricKeyValueStoreReplica4) Restore(
-	ctx context.Context,
-	backupDirectory string,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endRestore(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginRestore(
-		backupDirectory,
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricKeyValueStoreReplica5 struct {
@@ -6242,39 +5512,6 @@ func (v *comFabricStoreEventHandler2) endOnDataLoss(
 	}
 	return
 }
-func (v *comFabricStoreEventHandler2) OnDataLoss(
-	ctx context.Context,
-) (result_0 bool, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endOnDataLoss(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0 = rt_1
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginOnDataLoss(
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricStorePostBackupHandler struct {
 	ole.IUnknown
@@ -6335,41 +5572,6 @@ func (v *comFabricStorePostBackupHandler) endPostBackup(
 		return
 	}
 	return
-}
-func (v *comFabricStorePostBackupHandler) PostBackup(
-	ctx context.Context,
-	info *FabricStoreBackupInfo,
-) (result_0 bool, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endPostBackup(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0 = rt_1
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginPostBackup(
-		info,
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricSecondaryEventHandler struct {
@@ -6829,78 +6031,6 @@ func (v *comFabricCodePackageActivator) UnregisterCodePackageEventHandler(
 		return
 	}
 	return
-}
-func (v *comFabricCodePackageActivator) ActivateCodePackage(
-	ctx context.Context,
-	codePackageNames []string,
-	environment map[string]string,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endActivateCodePackage(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginActivateCodePackage(
-		codePackageNames,
-		environment,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricCodePackageActivator) DeactivateCodePackage(
-	ctx context.Context,
-	codePackageNames []string,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endDeactivateCodePackage(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginDeactivateCodePackage(
-		codePackageNames,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricCodePackageEventHandler struct {

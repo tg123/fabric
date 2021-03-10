@@ -143,7 +143,37 @@ func (v *FabricClient) PutCustomPropertyOperation(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricPropertyManagementClient2.PutCustomPropertyOperation(ctx, name, propertyOperation)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricPropertyManagementClient2.endPutCustomPropertyOperation(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricPropertyManagementClient2.beginPutCustomPropertyOperation(
+		name,
+		propertyOperation,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) CreateService(
 	ctx context.Context,
@@ -153,7 +183,36 @@ func (v *FabricClient) CreateService(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricServiceManagementClient.CreateService(ctx, description)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricServiceManagementClient.endCreateService(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricServiceManagementClient.beginCreateService(
+		description,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) CreateServiceFromTemplate(
 	ctx context.Context,
@@ -167,7 +226,40 @@ func (v *FabricClient) CreateServiceFromTemplate(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricServiceManagementClient.CreateServiceFromTemplate(ctx, applicationName, serviceName, serviceTypeName, InitializationDataSize, InitializationData)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricServiceManagementClient.endCreateServiceFromTemplate(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricServiceManagementClient.beginCreateServiceFromTemplate(
+		applicationName,
+		serviceName,
+		serviceTypeName,
+		InitializationDataSize,
+		InitializationData,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) DeleteService(
 	ctx context.Context,
@@ -177,7 +269,36 @@ func (v *FabricClient) DeleteService(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricServiceManagementClient.DeleteService(ctx, name)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricServiceManagementClient.endDeleteService(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricServiceManagementClient.beginDeleteService(
+		name,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetServiceDescription(
 	ctx context.Context,
@@ -187,7 +308,37 @@ func (v *FabricClient) GetServiceDescription(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricServiceManagementClient.GetServiceDescription(ctx, name)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricServiceManagementClient.endGetServiceDescription(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetDescription()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricServiceManagementClient.beginGetServiceDescription(
+		name,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) RegisterServicePartitionResolutionChangeHandler(
 	name string,
@@ -220,7 +371,39 @@ func (v *FabricClient) GetServiceManifest(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricServiceManagementClient2.GetServiceManifest(ctx, applicationTypeName, applicationTypeVersion, serviceManifestName)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricServiceManagementClient2.endGetServiceManifest(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetString()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricServiceManagementClient2.beginGetServiceManifest(
+		applicationTypeName,
+		applicationTypeVersion,
+		serviceManifestName,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) UpdateService(
 	ctx context.Context,
@@ -231,7 +414,37 @@ func (v *FabricClient) UpdateService(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricServiceManagementClient2.UpdateService(ctx, name, serviceUpdateDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricServiceManagementClient2.endUpdateService(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricServiceManagementClient2.beginUpdateService(
+		name,
+		serviceUpdateDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) RemoveReplica(
 	ctx context.Context,
@@ -241,7 +454,36 @@ func (v *FabricClient) RemoveReplica(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricServiceManagementClient3.RemoveReplica(ctx, description)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricServiceManagementClient3.endRemoveReplica(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricServiceManagementClient3.beginRemoveReplica(
+		description,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) RestartReplica(
 	ctx context.Context,
@@ -251,7 +493,36 @@ func (v *FabricClient) RestartReplica(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricServiceManagementClient3.RestartReplica(ctx, description)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricServiceManagementClient3.endRestartReplica(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricServiceManagementClient3.beginRestartReplica(
+		description,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) RegisterServiceNotificationFilter(
 	ctx context.Context,
@@ -261,7 +532,37 @@ func (v *FabricClient) RegisterServiceNotificationFilter(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricServiceManagementClient4.RegisterServiceNotificationFilter(ctx, description)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricServiceManagementClient4.endRegisterServiceNotificationFilter(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0 = rt_1
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricServiceManagementClient4.beginRegisterServiceNotificationFilter(
+		description,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) UnregisterServiceNotificationFilter(
 	ctx context.Context,
@@ -271,7 +572,36 @@ func (v *FabricClient) UnregisterServiceNotificationFilter(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricServiceManagementClient4.UnregisterServiceNotificationFilter(ctx, filterId)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricServiceManagementClient4.endUnregisterServiceNotificationFilter(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricServiceManagementClient4.beginUnregisterServiceNotificationFilter(
+		filterId,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) DeleteService2(
 	ctx context.Context,
@@ -281,7 +611,36 @@ func (v *FabricClient) DeleteService2(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricServiceManagementClient5.DeleteService2(ctx, deleteDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricServiceManagementClient5.endDeleteService2(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricServiceManagementClient5.beginDeleteService2(
+		deleteDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) CreateServiceFromTemplate2(
 	ctx context.Context,
@@ -291,7 +650,36 @@ func (v *FabricClient) CreateServiceFromTemplate2(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricServiceManagementClient6.CreateServiceFromTemplate2(ctx, serviceFromTemplateDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricServiceManagementClient6.endCreateServiceFromTemplate2(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricServiceManagementClient6.beginCreateServiceFromTemplate2(
+		serviceFromTemplateDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) CreateServiceGroup(
 	ctx context.Context,
@@ -301,7 +689,36 @@ func (v *FabricClient) CreateServiceGroup(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricServiceGroupManagementClient.CreateServiceGroup(ctx, description)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricServiceGroupManagementClient.endCreateServiceGroup(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricServiceGroupManagementClient.beginCreateServiceGroup(
+		description,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) DeleteServiceGroup(
 	ctx context.Context,
@@ -311,7 +728,36 @@ func (v *FabricClient) DeleteServiceGroup(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricServiceGroupManagementClient.DeleteServiceGroup(ctx, name)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricServiceGroupManagementClient.endDeleteServiceGroup(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricServiceGroupManagementClient.beginDeleteServiceGroup(
+		name,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetServiceGroupDescription(
 	ctx context.Context,
@@ -321,7 +767,37 @@ func (v *FabricClient) GetServiceGroupDescription(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricServiceGroupManagementClient.GetServiceGroupDescription(ctx, name)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricServiceGroupManagementClient.endGetServiceGroupDescription(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetDescription()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricServiceGroupManagementClient.beginGetServiceGroupDescription(
+		name,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) UpdateServiceGroup(
 	ctx context.Context,
@@ -332,7 +808,37 @@ func (v *FabricClient) UpdateServiceGroup(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricServiceGroupManagementClient2.UpdateServiceGroup(ctx, name, serviceGroupUpdateDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricServiceGroupManagementClient2.endUpdateServiceGroup(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricServiceGroupManagementClient2.beginUpdateServiceGroup(
+		name,
+		serviceGroupUpdateDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) CreateServiceGroupFromTemplate(
 	ctx context.Context,
@@ -346,7 +852,40 @@ func (v *FabricClient) CreateServiceGroupFromTemplate(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricServiceGroupManagementClient3.CreateServiceGroupFromTemplate(ctx, applicationName, serviceName, serviceTypeName, InitializationDataSize, InitializationData)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricServiceGroupManagementClient3.endCreateServiceGroupFromTemplate(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricServiceGroupManagementClient3.beginCreateServiceGroupFromTemplate(
+		applicationName,
+		serviceName,
+		serviceTypeName,
+		InitializationDataSize,
+		InitializationData,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) CreateServiceGroupFromTemplate2(
 	ctx context.Context,
@@ -356,7 +895,36 @@ func (v *FabricClient) CreateServiceGroupFromTemplate2(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricServiceGroupManagementClient4.CreateServiceGroupFromTemplate2(ctx, serviceGroupFromTemplateDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricServiceGroupManagementClient4.endCreateServiceGroupFromTemplate2(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricServiceGroupManagementClient4.beginCreateServiceGroupFromTemplate2(
+		serviceGroupFromTemplateDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) ProvisionApplicationType(
 	ctx context.Context,
@@ -366,7 +934,36 @@ func (v *FabricClient) ProvisionApplicationType(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricApplicationManagementClient.ProvisionApplicationType(ctx, applicationBuildPath)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricApplicationManagementClient.endProvisionApplicationType(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricApplicationManagementClient.beginProvisionApplicationType(
+		applicationBuildPath,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) CreateApplication(
 	ctx context.Context,
@@ -376,7 +973,36 @@ func (v *FabricClient) CreateApplication(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricApplicationManagementClient.CreateApplication(ctx, description)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricApplicationManagementClient.endCreateApplication(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricApplicationManagementClient.beginCreateApplication(
+		description,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) UpgradeApplication(
 	ctx context.Context,
@@ -386,7 +1012,36 @@ func (v *FabricClient) UpgradeApplication(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricApplicationManagementClient.UpgradeApplication(ctx, upgradeDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricApplicationManagementClient.endUpgradeApplication(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricApplicationManagementClient.beginUpgradeApplication(
+		upgradeDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetApplicationUpgradeProgress(
 	ctx context.Context,
@@ -396,7 +1051,42 @@ func (v *FabricClient) GetApplicationUpgradeProgress(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricApplicationManagementClient.GetApplicationUpgradeProgress(ctx, applicationName)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricApplicationManagementClient.endGetApplicationUpgradeProgress(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetRollingUpgradeMode()
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_1, err = rt_1.GetNextUpgradeDomain()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricApplicationManagementClient.beginGetApplicationUpgradeProgress(
+		applicationName,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) MoveNextApplicationUpgradeDomain(
 	ctx context.Context,
@@ -406,7 +1096,36 @@ func (v *FabricClient) MoveNextApplicationUpgradeDomain(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricApplicationManagementClient.MoveNextApplicationUpgradeDomain(ctx, progress)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricApplicationManagementClient.endMoveNextApplicationUpgradeDomain(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricApplicationManagementClient.beginMoveNextApplicationUpgradeDomain(
+		progress,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) DeleteApplication(
 	ctx context.Context,
@@ -416,7 +1135,36 @@ func (v *FabricClient) DeleteApplication(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricApplicationManagementClient.DeleteApplication(ctx, applicationName)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricApplicationManagementClient.endDeleteApplication(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricApplicationManagementClient.beginDeleteApplication(
+		applicationName,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) UnprovisionApplicationType(
 	ctx context.Context,
@@ -427,7 +1175,37 @@ func (v *FabricClient) UnprovisionApplicationType(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricApplicationManagementClient.UnprovisionApplicationType(ctx, applicationTypeName, applicationTypeVersion)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricApplicationManagementClient.endUnprovisionApplicationType(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricApplicationManagementClient.beginUnprovisionApplicationType(
+		applicationTypeName,
+		applicationTypeVersion,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetApplicationManifest(
 	ctx context.Context,
@@ -438,7 +1216,38 @@ func (v *FabricClient) GetApplicationManifest(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricApplicationManagementClient2.GetApplicationManifest(ctx, applicationTypeName, applicationTypeVersion)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricApplicationManagementClient2.endGetApplicationManifest(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetString()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricApplicationManagementClient2.beginGetApplicationManifest(
+		applicationTypeName,
+		applicationTypeVersion,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) MoveNextApplicationUpgradeDomain2(
 	ctx context.Context,
@@ -449,7 +1258,37 @@ func (v *FabricClient) MoveNextApplicationUpgradeDomain2(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricApplicationManagementClient2.MoveNextApplicationUpgradeDomain2(ctx, applicationName, nextUpgradeDomain)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricApplicationManagementClient2.endMoveNextApplicationUpgradeDomain2(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricApplicationManagementClient2.beginMoveNextApplicationUpgradeDomain2(
+		applicationName,
+		nextUpgradeDomain,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) UpdateApplicationUpgrade(
 	ctx context.Context,
@@ -459,7 +1298,36 @@ func (v *FabricClient) UpdateApplicationUpgrade(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricApplicationManagementClient3.UpdateApplicationUpgrade(ctx, description)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricApplicationManagementClient3.endUpdateApplicationUpgrade(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricApplicationManagementClient3.beginUpdateApplicationUpgrade(
+		description,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) RestartDeployedCodePackage(
 	ctx context.Context,
@@ -469,7 +1337,36 @@ func (v *FabricClient) RestartDeployedCodePackage(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricApplicationManagementClient3.RestartDeployedCodePackage(ctx, restartCodePackageDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricApplicationManagementClient3.endRestartDeployedCodePackage(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricApplicationManagementClient3.beginRestartDeployedCodePackage(
+		restartCodePackageDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) CopyApplicationPackage(
 	imageStoreConnectionString string,
@@ -504,7 +1401,40 @@ func (v *FabricClient) DeployServicePackageToNode(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricApplicationManagementClient4.DeployServicePackageToNode(ctx, applicationTypeName, applicationTypeVersion, serviceManifestName, sharingPolicy, nodeName)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricApplicationManagementClient4.endDeployServicePackageToNode(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricApplicationManagementClient4.beginDeployServicePackageToNode(
+		applicationTypeName,
+		applicationTypeVersion,
+		serviceManifestName,
+		sharingPolicy,
+		nodeName,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) RollbackApplicationUpgrade(
 	ctx context.Context,
@@ -514,7 +1444,36 @@ func (v *FabricClient) RollbackApplicationUpgrade(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricApplicationManagementClient5.RollbackApplicationUpgrade(ctx, applicationName)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricApplicationManagementClient5.endRollbackApplicationUpgrade(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricApplicationManagementClient5.beginRollbackApplicationUpgrade(
+		applicationName,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) UpdateApplication(
 	ctx context.Context,
@@ -524,7 +1483,36 @@ func (v *FabricClient) UpdateApplication(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricApplicationManagementClient6.UpdateApplication(ctx, applicationUpdateDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricApplicationManagementClient6.endUpdateApplication(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricApplicationManagementClient6.beginUpdateApplication(
+		applicationUpdateDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) DeleteApplication2(
 	ctx context.Context,
@@ -534,7 +1522,36 @@ func (v *FabricClient) DeleteApplication2(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricApplicationManagementClient7.DeleteApplication2(ctx, deleteDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricApplicationManagementClient7.endDeleteApplication2(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricApplicationManagementClient7.beginDeleteApplication2(
+		deleteDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) ProvisionApplicationType2(
 	ctx context.Context,
@@ -544,7 +1561,36 @@ func (v *FabricClient) ProvisionApplicationType2(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricApplicationManagementClient8.ProvisionApplicationType2(ctx, description)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricApplicationManagementClient8.endProvisionApplicationType2(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricApplicationManagementClient8.beginProvisionApplicationType2(
+		description,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) UnprovisionApplicationType2(
 	ctx context.Context,
@@ -554,7 +1600,36 @@ func (v *FabricClient) UnprovisionApplicationType2(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricApplicationManagementClient9.UnprovisionApplicationType2(ctx, description)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricApplicationManagementClient9.endUnprovisionApplicationType2(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricApplicationManagementClient9.beginUnprovisionApplicationType2(
+		description,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) ProvisionApplicationType3(
 	ctx context.Context,
@@ -564,7 +1639,36 @@ func (v *FabricClient) ProvisionApplicationType3(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricApplicationManagementClient10.ProvisionApplicationType3(ctx, description)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricApplicationManagementClient10.endProvisionApplicationType3(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricApplicationManagementClient10.beginProvisionApplicationType3(
+		description,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) NodeStateRemoved(
 	ctx context.Context,
@@ -574,7 +1678,36 @@ func (v *FabricClient) NodeStateRemoved(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient.NodeStateRemoved(ctx, nodeName)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricClusterManagementClient.endNodeStateRemoved(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient.beginNodeStateRemoved(
+		nodeName,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) RecoverPartitions(
 	ctx context.Context,
@@ -583,7 +1716,35 @@ func (v *FabricClient) RecoverPartitions(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient.RecoverPartitions(ctx)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricClusterManagementClient.endRecoverPartitions(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient.beginRecoverPartitions(
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) DeactivateNode(
 	ctx context.Context,
@@ -594,7 +1755,37 @@ func (v *FabricClient) DeactivateNode(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient2.DeactivateNode(ctx, nodeName, intent)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricClusterManagementClient2.endDeactivateNode(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient2.beginDeactivateNode(
+		nodeName,
+		intent,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) ActivateNode(
 	ctx context.Context,
@@ -604,7 +1795,36 @@ func (v *FabricClient) ActivateNode(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient2.ActivateNode(ctx, nodeName)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricClusterManagementClient2.endActivateNode(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient2.beginActivateNode(
+		nodeName,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) ProvisionFabric(
 	ctx context.Context,
@@ -615,7 +1835,37 @@ func (v *FabricClient) ProvisionFabric(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient2.ProvisionFabric(ctx, codeFilepath, clusterManifestFilepath)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricClusterManagementClient2.endProvisionFabric(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient2.beginProvisionFabric(
+		codeFilepath,
+		clusterManifestFilepath,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) UpgradeFabric(
 	ctx context.Context,
@@ -625,7 +1875,36 @@ func (v *FabricClient) UpgradeFabric(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient2.UpgradeFabric(ctx, upgradeDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricClusterManagementClient2.endUpgradeFabric(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient2.beginUpgradeFabric(
+		upgradeDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetFabricUpgradeProgress(
 	ctx context.Context,
@@ -634,7 +1913,41 @@ func (v *FabricClient) GetFabricUpgradeProgress(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient2.GetFabricUpgradeProgress(ctx)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricClusterManagementClient2.endGetFabricUpgradeProgress(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetRollingUpgradeMode()
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_1, err = rt_1.GetNextUpgradeDomain()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient2.beginGetFabricUpgradeProgress(
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) MoveNextFabricUpgradeDomain(
 	ctx context.Context,
@@ -644,7 +1957,36 @@ func (v *FabricClient) MoveNextFabricUpgradeDomain(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient2.MoveNextFabricUpgradeDomain(ctx, progress)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricClusterManagementClient2.endMoveNextFabricUpgradeDomain(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient2.beginMoveNextFabricUpgradeDomain(
+		progress,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) MoveNextFabricUpgradeDomain2(
 	ctx context.Context,
@@ -654,7 +1996,36 @@ func (v *FabricClient) MoveNextFabricUpgradeDomain2(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient2.MoveNextFabricUpgradeDomain2(ctx, nextUpgradeDomain)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricClusterManagementClient2.endMoveNextFabricUpgradeDomain2(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient2.beginMoveNextFabricUpgradeDomain2(
+		nextUpgradeDomain,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) UnprovisionFabric(
 	ctx context.Context,
@@ -665,7 +2036,37 @@ func (v *FabricClient) UnprovisionFabric(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient2.UnprovisionFabric(ctx, codeVersion, configVersion)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricClusterManagementClient2.endUnprovisionFabric(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient2.beginUnprovisionFabric(
+		codeVersion,
+		configVersion,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetClusterManifest(
 	ctx context.Context,
@@ -674,7 +2075,36 @@ func (v *FabricClient) GetClusterManifest(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient2.GetClusterManifest(ctx)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricClusterManagementClient2.endGetClusterManifest(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetString()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient2.beginGetClusterManifest(
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) RecoverPartition(
 	ctx context.Context,
@@ -684,7 +2114,36 @@ func (v *FabricClient) RecoverPartition(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient2.RecoverPartition(ctx, partitionId)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricClusterManagementClient2.endRecoverPartition(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient2.beginRecoverPartition(
+		partitionId,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) RecoverServicePartitions(
 	ctx context.Context,
@@ -694,7 +2153,36 @@ func (v *FabricClient) RecoverServicePartitions(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient2.RecoverServicePartitions(ctx, serviceName)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricClusterManagementClient2.endRecoverServicePartitions(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient2.beginRecoverServicePartitions(
+		serviceName,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) RecoverSystemPartitions(
 	ctx context.Context,
@@ -703,7 +2191,35 @@ func (v *FabricClient) RecoverSystemPartitions(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient2.RecoverSystemPartitions(ctx)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricClusterManagementClient2.endRecoverSystemPartitions(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient2.beginRecoverSystemPartitions(
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) UpdateFabricUpgrade(
 	ctx context.Context,
@@ -713,7 +2229,36 @@ func (v *FabricClient) UpdateFabricUpgrade(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient3.UpdateFabricUpgrade(ctx, description)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricClusterManagementClient3.endUpdateFabricUpgrade(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient3.beginUpdateFabricUpgrade(
+		description,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) StopNode(
 	ctx context.Context,
@@ -723,7 +2268,36 @@ func (v *FabricClient) StopNode(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient3.StopNode(ctx, stopNodeDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricClusterManagementClient3.endStopNode(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient3.beginStopNode(
+		stopNodeDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) RestartNode(
 	ctx context.Context,
@@ -733,7 +2307,36 @@ func (v *FabricClient) RestartNode(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient3.RestartNode(ctx, restartNodeDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricClusterManagementClient3.endRestartNode(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient3.beginRestartNode(
+		restartNodeDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) StartNode(
 	ctx context.Context,
@@ -743,7 +2346,36 @@ func (v *FabricClient) StartNode(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient3.StartNode(ctx, startNodeDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricClusterManagementClient3.endStartNode(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient3.beginStartNode(
+		startNodeDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) CopyClusterPackage(
 	imageStoreConnectionString string,
@@ -776,7 +2408,35 @@ func (v *FabricClient) RollbackFabricUpgrade(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient4.RollbackFabricUpgrade(ctx)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricClusterManagementClient4.endRollbackFabricUpgrade(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient4.beginRollbackFabricUpgrade(
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) ResetPartitionLoad(
 	ctx context.Context,
@@ -786,7 +2446,36 @@ func (v *FabricClient) ResetPartitionLoad(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient5.ResetPartitionLoad(ctx, partitionId)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricClusterManagementClient5.endResetPartitionLoad(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient5.beginResetPartitionLoad(
+		partitionId,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) ToggleVerboseServicePlacementHealthReporting(
 	ctx context.Context,
@@ -796,7 +2485,36 @@ func (v *FabricClient) ToggleVerboseServicePlacementHealthReporting(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient6.ToggleVerboseServicePlacementHealthReporting(ctx, enabled)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricClusterManagementClient6.endToggleVerboseServicePlacementHealthReporting(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient6.beginToggleVerboseServicePlacementHealthReporting(
+		enabled,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) UpgradeConfiguration(
 	ctx context.Context,
@@ -806,7 +2524,36 @@ func (v *FabricClient) UpgradeConfiguration(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient7.UpgradeConfiguration(ctx, startUpgradeDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricClusterManagementClient7.endUpgradeConfiguration(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient7.beginUpgradeConfiguration(
+		startUpgradeDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetClusterConfigurationUpgradeStatus(
 	ctx context.Context,
@@ -815,7 +2562,36 @@ func (v *FabricClient) GetClusterConfigurationUpgradeStatus(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient7.GetClusterConfigurationUpgradeStatus(ctx)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricClusterManagementClient7.endGetClusterConfigurationUpgradeStatus(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetProgress()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient7.beginGetClusterConfigurationUpgradeStatus(
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetClusterConfiguration(
 	ctx context.Context,
@@ -824,7 +2600,36 @@ func (v *FabricClient) GetClusterConfiguration(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient7.GetClusterConfiguration(ctx)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricClusterManagementClient7.endGetClusterConfiguration(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetString()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient7.beginGetClusterConfiguration(
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetUpgradesPendingApproval(
 	ctx context.Context,
@@ -833,7 +2638,35 @@ func (v *FabricClient) GetUpgradesPendingApproval(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient7.GetUpgradesPendingApproval(ctx)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricClusterManagementClient7.endGetUpgradesPendingApproval(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient7.beginGetUpgradesPendingApproval(
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) StartApprovedUpgrades(
 	ctx context.Context,
@@ -842,7 +2675,35 @@ func (v *FabricClient) StartApprovedUpgrades(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricClusterManagementClient7.StartApprovedUpgrades(ctx)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricClusterManagementClient7.endStartApprovedUpgrades(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricClusterManagementClient7.beginStartApprovedUpgrades(
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) ReportHealth(
 	healthReport *FabricHealthReport,
@@ -861,7 +2722,37 @@ func (v *FabricClient) GetClusterHealth(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricHealthClient.GetClusterHealth(ctx, healthPolicy)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricHealthClient.endGetClusterHealth(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetClusterHealth()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricHealthClient.beginGetClusterHealth(
+		healthPolicy,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetNodeHealth(
 	ctx context.Context,
@@ -872,7 +2763,38 @@ func (v *FabricClient) GetNodeHealth(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricHealthClient.GetNodeHealth(ctx, nodeName, healthPolicy)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricHealthClient.endGetNodeHealth(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetNodeHealth()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricHealthClient.beginGetNodeHealth(
+		nodeName,
+		healthPolicy,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetApplicationHealth(
 	ctx context.Context,
@@ -883,7 +2805,38 @@ func (v *FabricClient) GetApplicationHealth(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricHealthClient.GetApplicationHealth(ctx, applicationName, healthPolicy)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricHealthClient.endGetApplicationHealth(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetApplicationHealth()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricHealthClient.beginGetApplicationHealth(
+		applicationName,
+		healthPolicy,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetServiceHealth(
 	ctx context.Context,
@@ -894,7 +2847,38 @@ func (v *FabricClient) GetServiceHealth(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricHealthClient.GetServiceHealth(ctx, serviceName, healthPolicy)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricHealthClient.endGetServiceHealth(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetServiceHealth()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricHealthClient.beginGetServiceHealth(
+		serviceName,
+		healthPolicy,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetPartitionHealth(
 	ctx context.Context,
@@ -905,7 +2889,38 @@ func (v *FabricClient) GetPartitionHealth(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricHealthClient.GetPartitionHealth(ctx, partitionId, healthPolicy)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricHealthClient.endGetPartitionHealth(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetPartitionHealth()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricHealthClient.beginGetPartitionHealth(
+		partitionId,
+		healthPolicy,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetReplicaHealth(
 	ctx context.Context,
@@ -917,7 +2932,39 @@ func (v *FabricClient) GetReplicaHealth(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricHealthClient.GetReplicaHealth(ctx, partitionId, replicaId, healthPolicy)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricHealthClient.endGetReplicaHealth(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetReplicaHealth()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricHealthClient.beginGetReplicaHealth(
+		partitionId,
+		replicaId,
+		healthPolicy,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetDeployedApplicationHealth(
 	ctx context.Context,
@@ -929,7 +2976,39 @@ func (v *FabricClient) GetDeployedApplicationHealth(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricHealthClient.GetDeployedApplicationHealth(ctx, applicationName, nodeName, healthPolicy)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricHealthClient.endGetDeployedApplicationHealth(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetDeployedApplicationHealth()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricHealthClient.beginGetDeployedApplicationHealth(
+		applicationName,
+		nodeName,
+		healthPolicy,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetDeployedServicePackageHealth(
 	ctx context.Context,
@@ -942,7 +3021,40 @@ func (v *FabricClient) GetDeployedServicePackageHealth(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricHealthClient.GetDeployedServicePackageHealth(ctx, applicationName, serviceManifestName, nodeName, healthPolicy)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricHealthClient.endGetDeployedServicePackageHealth(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetDeployedServicePackageHealth()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricHealthClient.beginGetDeployedServicePackageHealth(
+		applicationName,
+		serviceManifestName,
+		nodeName,
+		healthPolicy,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetClusterHealth2(
 	ctx context.Context,
@@ -952,7 +3064,37 @@ func (v *FabricClient) GetClusterHealth2(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricHealthClient2.GetClusterHealth2(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricHealthClient2.endGetClusterHealth2(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetClusterHealth()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricHealthClient2.beginGetClusterHealth2(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetNodeHealth2(
 	ctx context.Context,
@@ -962,7 +3104,37 @@ func (v *FabricClient) GetNodeHealth2(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricHealthClient2.GetNodeHealth2(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricHealthClient2.endGetNodeHealth2(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetNodeHealth()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricHealthClient2.beginGetNodeHealth2(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetApplicationHealth2(
 	ctx context.Context,
@@ -972,7 +3144,37 @@ func (v *FabricClient) GetApplicationHealth2(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricHealthClient2.GetApplicationHealth2(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricHealthClient2.endGetApplicationHealth2(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetApplicationHealth()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricHealthClient2.beginGetApplicationHealth2(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetServiceHealth2(
 	ctx context.Context,
@@ -982,7 +3184,37 @@ func (v *FabricClient) GetServiceHealth2(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricHealthClient2.GetServiceHealth2(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricHealthClient2.endGetServiceHealth2(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetServiceHealth()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricHealthClient2.beginGetServiceHealth2(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetPartitionHealth2(
 	ctx context.Context,
@@ -992,7 +3224,37 @@ func (v *FabricClient) GetPartitionHealth2(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricHealthClient2.GetPartitionHealth2(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricHealthClient2.endGetPartitionHealth2(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetPartitionHealth()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricHealthClient2.beginGetPartitionHealth2(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetReplicaHealth2(
 	ctx context.Context,
@@ -1002,7 +3264,37 @@ func (v *FabricClient) GetReplicaHealth2(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricHealthClient2.GetReplicaHealth2(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricHealthClient2.endGetReplicaHealth2(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetReplicaHealth()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricHealthClient2.beginGetReplicaHealth2(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetDeployedApplicationHealth2(
 	ctx context.Context,
@@ -1012,7 +3304,37 @@ func (v *FabricClient) GetDeployedApplicationHealth2(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricHealthClient2.GetDeployedApplicationHealth2(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricHealthClient2.endGetDeployedApplicationHealth2(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetDeployedApplicationHealth()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricHealthClient2.beginGetDeployedApplicationHealth2(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetDeployedServicePackageHealth2(
 	ctx context.Context,
@@ -1022,7 +3344,37 @@ func (v *FabricClient) GetDeployedServicePackageHealth2(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricHealthClient2.GetDeployedServicePackageHealth2(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricHealthClient2.endGetDeployedServicePackageHealth2(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetDeployedServicePackageHealth()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricHealthClient2.beginGetDeployedServicePackageHealth2(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetClusterHealthChunk(
 	ctx context.Context,
@@ -1032,7 +3384,37 @@ func (v *FabricClient) GetClusterHealthChunk(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricHealthClient3.GetClusterHealthChunk(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricHealthClient3.endGetClusterHealthChunk(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetClusterHealthChunk()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricHealthClient3.beginGetClusterHealthChunk(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) ReportHealth2(
 	healthReport *FabricHealthReport,
@@ -1052,7 +3434,37 @@ func (v *FabricClient) GetNodeList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient.GetNodeList(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient.endGetNodeList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetNodeList()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient.beginGetNodeList(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetApplicationTypeList(
 	ctx context.Context,
@@ -1062,7 +3474,37 @@ func (v *FabricClient) GetApplicationTypeList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient.GetApplicationTypeList(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient.endGetApplicationTypeList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetApplicationTypeList()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient.beginGetApplicationTypeList(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetServiceTypeList(
 	ctx context.Context,
@@ -1072,7 +3514,37 @@ func (v *FabricClient) GetServiceTypeList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient.GetServiceTypeList(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient.endGetServiceTypeList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetServiceTypeList()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient.beginGetServiceTypeList(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetApplicationList(
 	ctx context.Context,
@@ -1082,7 +3554,37 @@ func (v *FabricClient) GetApplicationList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient.GetApplicationList(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient.endGetApplicationList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetApplicationList()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient.beginGetApplicationList(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetServiceList(
 	ctx context.Context,
@@ -1092,7 +3594,37 @@ func (v *FabricClient) GetServiceList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient.GetServiceList(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient.endGetServiceList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetServiceList()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient.beginGetServiceList(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetPartitionList(
 	ctx context.Context,
@@ -1102,7 +3634,37 @@ func (v *FabricClient) GetPartitionList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient.GetPartitionList(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient.endGetPartitionList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetPartitionList()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient.beginGetPartitionList(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetReplicaList(
 	ctx context.Context,
@@ -1112,7 +3674,37 @@ func (v *FabricClient) GetReplicaList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient.GetReplicaList(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient.endGetReplicaList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetReplicaList()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient.beginGetReplicaList(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetDeployedApplicationList(
 	ctx context.Context,
@@ -1122,7 +3714,37 @@ func (v *FabricClient) GetDeployedApplicationList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient.GetDeployedApplicationList(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient.endGetDeployedApplicationList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetDeployedApplicationList()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient.beginGetDeployedApplicationList(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetDeployedServicePackageList(
 	ctx context.Context,
@@ -1132,7 +3754,37 @@ func (v *FabricClient) GetDeployedServicePackageList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient.GetDeployedServicePackageList(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient.endGetDeployedServicePackageList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetDeployedServicePackageList()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient.beginGetDeployedServicePackageList(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetDeployedServiceTypeList(
 	ctx context.Context,
@@ -1142,7 +3794,37 @@ func (v *FabricClient) GetDeployedServiceTypeList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient.GetDeployedServiceTypeList(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient.endGetDeployedServiceTypeList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetDeployedServiceTypeList()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient.beginGetDeployedServiceTypeList(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetDeployedCodePackageList(
 	ctx context.Context,
@@ -1152,7 +3834,37 @@ func (v *FabricClient) GetDeployedCodePackageList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient.GetDeployedCodePackageList(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient.endGetDeployedCodePackageList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetDeployedCodePackageList()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient.beginGetDeployedCodePackageList(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetDeployedReplicaList(
 	ctx context.Context,
@@ -1162,7 +3874,37 @@ func (v *FabricClient) GetDeployedReplicaList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient.GetDeployedReplicaList(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient.endGetDeployedReplicaList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetDeployedReplicaList()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient.beginGetDeployedReplicaList(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetDeployedReplicaDetail(
 	ctx context.Context,
@@ -1172,7 +3914,37 @@ func (v *FabricClient) GetDeployedReplicaDetail(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient2.GetDeployedReplicaDetail(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient2.endGetDeployedReplicaDetail(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetReplicaDetail()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient2.beginGetDeployedReplicaDetail(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetClusterLoadInformation(
 	ctx context.Context,
@@ -1181,7 +3953,36 @@ func (v *FabricClient) GetClusterLoadInformation(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient2.GetClusterLoadInformation(ctx)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient2.endGetClusterLoadInformation(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetClusterLoadInformation()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient2.beginGetClusterLoadInformation(
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetPartitionLoadInformation(
 	ctx context.Context,
@@ -1191,7 +3992,37 @@ func (v *FabricClient) GetPartitionLoadInformation(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient2.GetPartitionLoadInformation(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient2.endGetPartitionLoadInformation(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetPartitionLoadInformation()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient2.beginGetPartitionLoadInformation(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetProvisionedFabricCodeVersionList(
 	ctx context.Context,
@@ -1201,7 +4032,37 @@ func (v *FabricClient) GetProvisionedFabricCodeVersionList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient2.GetProvisionedFabricCodeVersionList(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient2.endGetProvisionedFabricCodeVersionList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetProvisionedCodeVersionList()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient2.beginGetProvisionedFabricCodeVersionList(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetProvisionedFabricConfigVersionList(
 	ctx context.Context,
@@ -1211,7 +4072,37 @@ func (v *FabricClient) GetProvisionedFabricConfigVersionList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient2.GetProvisionedFabricConfigVersionList(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient2.endGetProvisionedFabricConfigVersionList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetProvisionedConfigVersionList()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient2.beginGetProvisionedFabricConfigVersionList(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetNodeLoadInformation(
 	ctx context.Context,
@@ -1221,7 +4112,37 @@ func (v *FabricClient) GetNodeLoadInformation(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient3.GetNodeLoadInformation(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient3.endGetNodeLoadInformation(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetNodeLoadInformation()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient3.beginGetNodeLoadInformation(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetReplicaLoadInformation(
 	ctx context.Context,
@@ -1231,7 +4152,37 @@ func (v *FabricClient) GetReplicaLoadInformation(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient3.GetReplicaLoadInformation(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient3.endGetReplicaLoadInformation(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetReplicaLoadInformation()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient3.beginGetReplicaLoadInformation(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetServiceGroupMemberList(
 	ctx context.Context,
@@ -1241,7 +4192,37 @@ func (v *FabricClient) GetServiceGroupMemberList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient4.GetServiceGroupMemberList(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient4.endGetServiceGroupMemberList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetServiceGroupMemberList()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient4.beginGetServiceGroupMemberList(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetServiceGroupMemberTypeList(
 	ctx context.Context,
@@ -1251,7 +4232,37 @@ func (v *FabricClient) GetServiceGroupMemberTypeList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient4.GetServiceGroupMemberTypeList(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient4.endGetServiceGroupMemberTypeList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetServiceGroupMemberTypeList()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient4.beginGetServiceGroupMemberTypeList(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetUnplacedReplicaInformation(
 	ctx context.Context,
@@ -1261,7 +4272,37 @@ func (v *FabricClient) GetUnplacedReplicaInformation(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient5.GetUnplacedReplicaInformation(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient5.endGetUnplacedReplicaInformation(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetUnplacedReplicaInformation()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient5.beginGetUnplacedReplicaInformation(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetApplicationLoadInformation(
 	ctx context.Context,
@@ -1271,7 +4312,37 @@ func (v *FabricClient) GetApplicationLoadInformation(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient7.GetApplicationLoadInformation(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient7.endGetApplicationLoadInformation(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetApplicationLoadInformation()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient7.beginGetApplicationLoadInformation(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetServiceName(
 	ctx context.Context,
@@ -1281,7 +4352,37 @@ func (v *FabricClient) GetServiceName(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient8.GetServiceName(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient8.endGetServiceName(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetServiceName()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient8.beginGetServiceName(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetApplicationName(
 	ctx context.Context,
@@ -1291,7 +4392,37 @@ func (v *FabricClient) GetApplicationName(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient8.GetApplicationName(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient8.endGetApplicationName(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetApplicationName()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient8.beginGetApplicationName(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetApplicationTypePagedList(
 	ctx context.Context,
@@ -1301,7 +4432,42 @@ func (v *FabricClient) GetApplicationTypePagedList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient9.GetApplicationTypePagedList(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient9.endGetApplicationTypePagedList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetApplicationTypePagedList()
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_1, err = rt_1.GetPagingStatus()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient9.beginGetApplicationTypePagedList(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetDeployedApplicationPagedList(
 	ctx context.Context,
@@ -1311,7 +4477,42 @@ func (v *FabricClient) GetDeployedApplicationPagedList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricQueryClient10.GetDeployedApplicationPagedList(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricQueryClient10.endGetDeployedApplicationPagedList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetDeployedApplicationPagedList()
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_1, err = rt_1.GetPagingStatus()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricQueryClient10.beginGetDeployedApplicationPagedList(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) InvokeInfrastructureCommand(
 	ctx context.Context,
@@ -1322,7 +4523,38 @@ func (v *FabricClient) InvokeInfrastructureCommand(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricInfrastructureServiceClient.InvokeInfrastructureCommand(ctx, serviceName, command)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricInfrastructureServiceClient.endInvokeInfrastructureCommand(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetString()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricInfrastructureServiceClient.beginInvokeInfrastructureCommand(
+		serviceName,
+		command,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) InvokeInfrastructureQuery(
 	ctx context.Context,
@@ -1333,7 +4565,38 @@ func (v *FabricClient) InvokeInfrastructureQuery(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricInfrastructureServiceClient.InvokeInfrastructureQuery(ctx, serviceName, command)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricInfrastructureServiceClient.endInvokeInfrastructureQuery(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetString()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricInfrastructureServiceClient.beginInvokeInfrastructureQuery(
+		serviceName,
+		command,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) CreateRepairTask(
 	ctx context.Context,
@@ -1343,7 +4606,37 @@ func (v *FabricClient) CreateRepairTask(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricRepairManagementClient.CreateRepairTask(ctx, repairTask)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricRepairManagementClient.endCreateRepairTask(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0 = rt_1
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricRepairManagementClient.beginCreateRepairTask(
+		repairTask,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) CancelRepairTask(
 	ctx context.Context,
@@ -1353,7 +4646,37 @@ func (v *FabricClient) CancelRepairTask(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricRepairManagementClient.CancelRepairTask(ctx, requestDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricRepairManagementClient.endCancelRepairTask(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0 = rt_1
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricRepairManagementClient.beginCancelRepairTask(
+		requestDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) ForceApproveRepairTask(
 	ctx context.Context,
@@ -1363,7 +4686,37 @@ func (v *FabricClient) ForceApproveRepairTask(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricRepairManagementClient.ForceApproveRepairTask(ctx, requestDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricRepairManagementClient.endForceApproveRepairTask(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0 = rt_1
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricRepairManagementClient.beginForceApproveRepairTask(
+		requestDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) DeleteRepairTask(
 	ctx context.Context,
@@ -1373,7 +4726,36 @@ func (v *FabricClient) DeleteRepairTask(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricRepairManagementClient.DeleteRepairTask(ctx, requestDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricRepairManagementClient.endDeleteRepairTask(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricRepairManagementClient.beginDeleteRepairTask(
+		requestDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) UpdateRepairExecutionState(
 	ctx context.Context,
@@ -1383,7 +4765,37 @@ func (v *FabricClient) UpdateRepairExecutionState(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricRepairManagementClient.UpdateRepairExecutionState(ctx, repairTask)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricRepairManagementClient.endUpdateRepairExecutionState(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0 = rt_1
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricRepairManagementClient.beginUpdateRepairExecutionState(
+		repairTask,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetRepairTaskList(
 	ctx context.Context,
@@ -1393,7 +4805,37 @@ func (v *FabricClient) GetRepairTaskList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricRepairManagementClient.GetRepairTaskList(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricRepairManagementClient.endGetRepairTaskList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetTasks()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricRepairManagementClient.beginGetRepairTaskList(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) UpdateRepairTaskHealthPolicy(
 	ctx context.Context,
@@ -1403,7 +4845,37 @@ func (v *FabricClient) UpdateRepairTaskHealthPolicy(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricRepairManagementClient2.UpdateRepairTaskHealthPolicy(ctx, updateDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricRepairManagementClient2.endUpdateRepairTaskHealthPolicy(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0 = rt_1
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricRepairManagementClient2.beginUpdateRepairTaskHealthPolicy(
+		updateDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) StartPartitionDataLoss(
 	ctx context.Context,
@@ -1413,7 +4885,36 @@ func (v *FabricClient) StartPartitionDataLoss(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricTestManagementClient.StartPartitionDataLoss(ctx, invokeDataLossDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricTestManagementClient.endStartPartitionDataLoss(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricTestManagementClient.beginStartPartitionDataLoss(
+		invokeDataLossDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetPartitionDataLossProgress(
 	ctx context.Context,
@@ -1423,7 +4924,37 @@ func (v *FabricClient) GetPartitionDataLossProgress(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricTestManagementClient.GetPartitionDataLossProgress(ctx, operationId)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricTestManagementClient.endGetPartitionDataLossProgress(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetProgress()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricTestManagementClient.beginGetPartitionDataLossProgress(
+		operationId,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) StartPartitionQuorumLoss(
 	ctx context.Context,
@@ -1433,7 +4964,36 @@ func (v *FabricClient) StartPartitionQuorumLoss(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricTestManagementClient.StartPartitionQuorumLoss(ctx, invokeQuorumLossDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricTestManagementClient.endStartPartitionQuorumLoss(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricTestManagementClient.beginStartPartitionQuorumLoss(
+		invokeQuorumLossDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetPartitionQuorumLossProgress(
 	ctx context.Context,
@@ -1443,7 +5003,37 @@ func (v *FabricClient) GetPartitionQuorumLossProgress(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricTestManagementClient.GetPartitionQuorumLossProgress(ctx, operationId)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricTestManagementClient.endGetPartitionQuorumLossProgress(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetProgress()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricTestManagementClient.beginGetPartitionQuorumLossProgress(
+		operationId,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) StartPartitionRestart(
 	ctx context.Context,
@@ -1453,7 +5043,36 @@ func (v *FabricClient) StartPartitionRestart(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricTestManagementClient.StartPartitionRestart(ctx, restartPartitionDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricTestManagementClient.endStartPartitionRestart(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricTestManagementClient.beginStartPartitionRestart(
+		restartPartitionDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetPartitionRestartProgress(
 	ctx context.Context,
@@ -1463,7 +5082,37 @@ func (v *FabricClient) GetPartitionRestartProgress(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricTestManagementClient.GetPartitionRestartProgress(ctx, operationId)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricTestManagementClient.endGetPartitionRestartProgress(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetProgress()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricTestManagementClient.beginGetPartitionRestartProgress(
+		operationId,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetTestCommandStatusList(
 	ctx context.Context,
@@ -1473,7 +5122,37 @@ func (v *FabricClient) GetTestCommandStatusList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricTestManagementClient.GetTestCommandStatusList(ctx, operationId)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricTestManagementClient.endGetTestCommandStatusList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetResult()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricTestManagementClient.beginGetTestCommandStatusList(
+		operationId,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) CancelTestCommand(
 	ctx context.Context,
@@ -1483,7 +5162,36 @@ func (v *FabricClient) CancelTestCommand(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricTestManagementClient.CancelTestCommand(ctx, invokeDataLossDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricTestManagementClient.endCancelTestCommand(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricTestManagementClient.beginCancelTestCommand(
+		invokeDataLossDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) StartChaos(
 	ctx context.Context,
@@ -1493,7 +5201,36 @@ func (v *FabricClient) StartChaos(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricTestManagementClient2.StartChaos(ctx, restartPartitionDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricTestManagementClient2.endStartChaos(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricTestManagementClient2.beginStartChaos(
+		restartPartitionDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) StopChaos(
 	ctx context.Context,
@@ -1502,7 +5239,35 @@ func (v *FabricClient) StopChaos(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricTestManagementClient2.StopChaos(ctx)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricTestManagementClient2.endStopChaos(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricTestManagementClient2.beginStopChaos(
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetChaosReport(
 	ctx context.Context,
@@ -1512,7 +5277,37 @@ func (v *FabricClient) GetChaosReport(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricTestManagementClient2.GetChaosReport(ctx, getChaosReportDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricTestManagementClient2.endGetChaosReport(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetChaosReportResult()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricTestManagementClient2.beginGetChaosReport(
+		getChaosReportDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) StartNodeTransition(
 	ctx context.Context,
@@ -1522,7 +5317,36 @@ func (v *FabricClient) StartNodeTransition(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricTestManagementClient3.StartNodeTransition(ctx, description)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricTestManagementClient3.endStartNodeTransition(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricTestManagementClient3.beginStartNodeTransition(
+		description,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetNodeTransitionProgress(
 	ctx context.Context,
@@ -1532,7 +5356,37 @@ func (v *FabricClient) GetNodeTransitionProgress(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricTestManagementClient3.GetNodeTransitionProgress(ctx, operationId)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricTestManagementClient3.endGetNodeTransitionProgress(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetProgress()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricTestManagementClient3.beginGetNodeTransitionProgress(
+		operationId,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) MovePrimary(
 	ctx context.Context,
@@ -1542,7 +5396,37 @@ func (v *FabricClient) MovePrimary(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricFaultManagementClient.MovePrimary(ctx, description)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricFaultManagementClient.endMovePrimary(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetResult()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricFaultManagementClient.beginMovePrimary(
+		description,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) MoveSecondary(
 	ctx context.Context,
@@ -1552,7 +5436,37 @@ func (v *FabricClient) MoveSecondary(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricFaultManagementClient.MoveSecondary(ctx, description)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricFaultManagementClient.endMoveSecondary(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetResult()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricFaultManagementClient.beginMoveSecondary(
+		description,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) CreateNetwork(
 	ctx context.Context,
@@ -1563,7 +5477,37 @@ func (v *FabricClient) CreateNetwork(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricNetworkManagementClient.CreateNetwork(ctx, networkName, description)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricNetworkManagementClient.endCreateNetwork(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricNetworkManagementClient.beginCreateNetwork(
+		networkName,
+		description,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) DeleteNetwork(
 	ctx context.Context,
@@ -1573,7 +5517,36 @@ func (v *FabricClient) DeleteNetwork(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricNetworkManagementClient.DeleteNetwork(ctx, deleteDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		err := v.hub.FabricNetworkManagementClient.endDeleteNetwork(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricNetworkManagementClient.beginDeleteNetwork(
+		deleteDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetNetworkList(
 	ctx context.Context,
@@ -1583,7 +5556,42 @@ func (v *FabricClient) GetNetworkList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricNetworkManagementClient.GetNetworkList(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricNetworkManagementClient.endGetNetworkList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetNetworkList()
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_1, err = rt_1.GetPagingStatus()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricNetworkManagementClient.beginGetNetworkList(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetNetworkApplicationList(
 	ctx context.Context,
@@ -1593,7 +5601,42 @@ func (v *FabricClient) GetNetworkApplicationList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricNetworkManagementClient.GetNetworkApplicationList(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricNetworkManagementClient.endGetNetworkApplicationList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetNetworkApplicationList()
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_1, err = rt_1.GetPagingStatus()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricNetworkManagementClient.beginGetNetworkApplicationList(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetNetworkNodeList(
 	ctx context.Context,
@@ -1603,7 +5646,42 @@ func (v *FabricClient) GetNetworkNodeList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricNetworkManagementClient.GetNetworkNodeList(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricNetworkManagementClient.endGetNetworkNodeList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetNetworkNodeList()
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_1, err = rt_1.GetPagingStatus()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricNetworkManagementClient.beginGetNetworkNodeList(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetApplicationNetworkList(
 	ctx context.Context,
@@ -1613,7 +5691,42 @@ func (v *FabricClient) GetApplicationNetworkList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricNetworkManagementClient.GetApplicationNetworkList(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricNetworkManagementClient.endGetApplicationNetworkList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetApplicationNetworkList()
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_1, err = rt_1.GetPagingStatus()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricNetworkManagementClient.beginGetApplicationNetworkList(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetDeployedNetworkList(
 	ctx context.Context,
@@ -1623,7 +5736,42 @@ func (v *FabricClient) GetDeployedNetworkList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricNetworkManagementClient.GetDeployedNetworkList(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricNetworkManagementClient.endGetDeployedNetworkList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetDeployedNetworkList()
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_1, err = rt_1.GetPagingStatus()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricNetworkManagementClient.beginGetDeployedNetworkList(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetDeployedNetworkCodePackageList(
 	ctx context.Context,
@@ -1633,7 +5781,42 @@ func (v *FabricClient) GetDeployedNetworkCodePackageList(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricNetworkManagementClient.GetDeployedNetworkCodePackageList(ctx, queryDescription)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricNetworkManagementClient.endGetDeployedNetworkCodePackageList(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetDeployedNetworkCodePackageList()
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_1, err = rt_1.GetPagingStatus()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricNetworkManagementClient.beginGetDeployedNetworkCodePackageList(
+		queryDescription,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetSecrets(
 	ctx context.Context,
@@ -1644,7 +5827,38 @@ func (v *FabricClient) GetSecrets(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricSecretStoreClient.GetSecrets(ctx, secretReferences, includeValue)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricSecretStoreClient.endGetSecrets(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetSecrets()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricSecretStoreClient.beginGetSecrets(
+		secretReferences,
+		includeValue,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) SetSecrets(
 	ctx context.Context,
@@ -1654,7 +5868,37 @@ func (v *FabricClient) SetSecrets(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricSecretStoreClient.SetSecrets(ctx, secrets)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricSecretStoreClient.endSetSecrets(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetSecrets()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricSecretStoreClient.beginSetSecrets(
+		secrets,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) RemoveSecrets(
 	ctx context.Context,
@@ -1664,7 +5908,37 @@ func (v *FabricClient) RemoveSecrets(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricSecretStoreClient.RemoveSecrets(ctx, secretReferences)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricSecretStoreClient.endRemoveSecrets(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetSecretReferences()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricSecretStoreClient.beginRemoveSecrets(
+		secretReferences,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 func (v *FabricClient) GetSecretVersions(
 	ctx context.Context,
@@ -1674,7 +5948,37 @@ func (v *FabricClient) GetSecretVersions(
 		err = errComNotImpl
 		return
 	}
-	return v.hub.FabricSecretStoreClient.GetSecretVersions(ctx, secretReferences)
+	ch := make(chan error, 1)
+	defer close(ch)
+	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+
+		rt_1, err := v.hub.FabricSecretStoreClient.endGetSecretVersions(sfctx)
+
+		if err != nil {
+			ch <- err
+			return
+		}
+		result_0, err = rt_1.GetSecretReferences()
+		if err != nil {
+			ch <- err
+			return
+		}
+		ch <- nil
+	})
+	timeout := toTimeout(ctx, v)
+	sfctx, err := v.hub.FabricSecretStoreClient.beginGetSecretVersions(
+		secretReferences,
+		uint32(timeout.Milliseconds()),
+		callback,
+	)
+
+	if err != nil {
+		return
+	}
+
+	err = waitch(ctx, ch, sfctx, timeout)
+	return
+
 }
 
 type comFabricClientSettings struct {
@@ -2481,384 +6785,6 @@ func (v *comFabricPropertyManagementClient) beginEnumerateProperties(
 	}
 	return
 }
-func (v *comFabricPropertyManagementClient) CreateName(
-	ctx context.Context,
-	name string,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endCreateName(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginCreateName(
-		name,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricPropertyManagementClient) DeleteName(
-	ctx context.Context,
-	name string,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endDeleteName(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginDeleteName(
-		name,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricPropertyManagementClient) NameExists(
-	ctx context.Context,
-	name string,
-) (result_0 bool, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endNameExists(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0 = rt_1
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginNameExists(
-		name,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricPropertyManagementClient) PutPropertyBinary(
-	ctx context.Context,
-	name string,
-	propertyName string,
-	dataLength uint32,
-	data *byte,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endPutPropertyBinary(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginPutPropertyBinary(
-		name,
-		propertyName,
-		dataLength,
-		data,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricPropertyManagementClient) PutPropertyInt64(
-	ctx context.Context,
-	name string,
-	propertyName string,
-	data int64,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endPutPropertyInt64(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginPutPropertyInt64(
-		name,
-		propertyName,
-		data,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricPropertyManagementClient) PutPropertyDouble(
-	ctx context.Context,
-	name string,
-	propertyName string,
-	data float64,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endPutPropertyDouble(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginPutPropertyDouble(
-		name,
-		propertyName,
-		data,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricPropertyManagementClient) PutPropertyWString(
-	ctx context.Context,
-	name string,
-	propertyName string,
-	data string,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endPutPropertyWString(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginPutPropertyWString(
-		name,
-		propertyName,
-		data,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricPropertyManagementClient) PutPropertyGuid(
-	ctx context.Context,
-	name string,
-	propertyName string,
-	data *windows.GUID,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endPutPropertyGuid(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginPutPropertyGuid(
-		name,
-		propertyName,
-		data,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricPropertyManagementClient) DeleteProperty(
-	ctx context.Context,
-	name string,
-	propertyName string,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endDeleteProperty(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginDeleteProperty(
-		name,
-		propertyName,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricPropertyManagementClient) GetPropertyMetadata(
-	ctx context.Context,
-	name string,
-	propertyName string,
-) (result_0 *FabricNamedPropertyMetadata, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetPropertyMetadata(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetMetadata()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetPropertyMetadata(
-		name,
-		propertyName,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricPropertyManagementClient2 struct {
 	comFabricPropertyManagementClient
@@ -2921,43 +6847,6 @@ func (v *comFabricPropertyManagementClient2) endPutCustomPropertyOperation(
 		return
 	}
 	return
-}
-func (v *comFabricPropertyManagementClient2) PutCustomPropertyOperation(
-	ctx context.Context,
-	name string,
-	propertyOperation *FabricPutCustomPropertyOperation,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endPutCustomPropertyOperation(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginPutCustomPropertyOperation(
-		name,
-		propertyOperation,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricServiceManagementClient struct {
@@ -3262,155 +7151,6 @@ func (v *comFabricServiceManagementClient) beginResolveServicePartition(
 	}
 	return
 }
-func (v *comFabricServiceManagementClient) CreateService(
-	ctx context.Context,
-	description *FabricServiceDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endCreateService(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginCreateService(
-		description,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricServiceManagementClient) CreateServiceFromTemplate(
-	ctx context.Context,
-	applicationName string,
-	serviceName string,
-	serviceTypeName string,
-	InitializationDataSize uint32,
-	InitializationData *byte,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endCreateServiceFromTemplate(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginCreateServiceFromTemplate(
-		applicationName,
-		serviceName,
-		serviceTypeName,
-		InitializationDataSize,
-		InitializationData,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricServiceManagementClient) DeleteService(
-	ctx context.Context,
-	name string,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endDeleteService(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginDeleteService(
-		name,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricServiceManagementClient) GetServiceDescription(
-	ctx context.Context,
-	name string,
-) (result_0 *FabricServiceDescription, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetServiceDescription(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetDescription()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetServiceDescription(
-		name,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricServiceManagementClient2 struct {
 	comFabricServiceManagementClient
@@ -3538,83 +7278,6 @@ func (v *comFabricServiceManagementClient2) endUpdateService(
 	}
 	return
 }
-func (v *comFabricServiceManagementClient2) GetServiceManifest(
-	ctx context.Context,
-	applicationTypeName string,
-	applicationTypeVersion string,
-	serviceManifestName string,
-) (result_0 string, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetServiceManifest(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetString()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetServiceManifest(
-		applicationTypeName,
-		applicationTypeVersion,
-		serviceManifestName,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricServiceManagementClient2) UpdateService(
-	ctx context.Context,
-	name string,
-	serviceUpdateDescription *FabricServiceUpdateDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endUpdateService(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginUpdateService(
-		name,
-		serviceUpdateDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricServiceManagementClient3 struct {
 	comFabricServiceManagementClient2
@@ -3717,76 +7380,6 @@ func (v *comFabricServiceManagementClient3) endRestartReplica(
 		return
 	}
 	return
-}
-func (v *comFabricServiceManagementClient3) RemoveReplica(
-	ctx context.Context,
-	description *FabricRemoveReplicaDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endRemoveReplica(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginRemoveReplica(
-		description,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricServiceManagementClient3) RestartReplica(
-	ctx context.Context,
-	description *FabricRestartReplicaDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endRestartReplica(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginRestartReplica(
-		description,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricServiceManagementClient4 struct {
@@ -3893,77 +7486,6 @@ func (v *comFabricServiceManagementClient4) endUnregisterServiceNotificationFilt
 	}
 	return
 }
-func (v *comFabricServiceManagementClient4) RegisterServiceNotificationFilter(
-	ctx context.Context,
-	description *FabricServiceNotificationFilterDescription,
-) (result_0 int64, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endRegisterServiceNotificationFilter(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0 = rt_1
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginRegisterServiceNotificationFilter(
-		description,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricServiceManagementClient4) UnregisterServiceNotificationFilter(
-	ctx context.Context,
-	filterId int64,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endUnregisterServiceNotificationFilter(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginUnregisterServiceNotificationFilter(
-		filterId,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricServiceManagementClient5 struct {
 	comFabricServiceManagementClient4
@@ -4022,41 +7544,6 @@ func (v *comFabricServiceManagementClient5) endDeleteService2(
 	}
 	return
 }
-func (v *comFabricServiceManagementClient5) DeleteService2(
-	ctx context.Context,
-	deleteDescription *FabricDeleteServiceDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endDeleteService2(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginDeleteService2(
-		deleteDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricServiceManagementClient6 struct {
 	comFabricServiceManagementClient5
@@ -4114,41 +7601,6 @@ func (v *comFabricServiceManagementClient6) endCreateServiceFromTemplate2(
 		return
 	}
 	return
-}
-func (v *comFabricServiceManagementClient6) CreateServiceFromTemplate2(
-	ctx context.Context,
-	serviceFromTemplateDescription *FabricServiceFromTemplateDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endCreateServiceFromTemplate2(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginCreateServiceFromTemplate2(
-		serviceFromTemplateDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricServiceGroupManagementClient struct {
@@ -4306,112 +7758,6 @@ func (v *comFabricServiceGroupManagementClient) endGetServiceGroupDescription(
 	}
 	return
 }
-func (v *comFabricServiceGroupManagementClient) CreateServiceGroup(
-	ctx context.Context,
-	description *FabricServiceGroupDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endCreateServiceGroup(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginCreateServiceGroup(
-		description,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricServiceGroupManagementClient) DeleteServiceGroup(
-	ctx context.Context,
-	name string,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endDeleteServiceGroup(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginDeleteServiceGroup(
-		name,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricServiceGroupManagementClient) GetServiceGroupDescription(
-	ctx context.Context,
-	name string,
-) (result_0 *FabricServiceGroupDescription, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetServiceGroupDescription(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetDescription()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetServiceGroupDescription(
-		name,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricServiceGroupManagementClient2 struct {
 	comFabricServiceGroupManagementClient
@@ -4474,43 +7820,6 @@ func (v *comFabricServiceGroupManagementClient2) endUpdateServiceGroup(
 		return
 	}
 	return
-}
-func (v *comFabricServiceGroupManagementClient2) UpdateServiceGroup(
-	ctx context.Context,
-	name string,
-	serviceGroupUpdateDescription *FabricServiceGroupUpdateDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endUpdateServiceGroup(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginUpdateServiceGroup(
-		name,
-		serviceGroupUpdateDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricServiceGroupManagementClient3 struct {
@@ -4587,49 +7896,6 @@ func (v *comFabricServiceGroupManagementClient3) endCreateServiceGroupFromTempla
 	}
 	return
 }
-func (v *comFabricServiceGroupManagementClient3) CreateServiceGroupFromTemplate(
-	ctx context.Context,
-	applicationName string,
-	serviceName string,
-	serviceTypeName string,
-	InitializationDataSize uint32,
-	InitializationData *byte,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endCreateServiceGroupFromTemplate(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginCreateServiceGroupFromTemplate(
-		applicationName,
-		serviceName,
-		serviceTypeName,
-		InitializationDataSize,
-		InitializationData,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricServiceGroupManagementClient4 struct {
 	comFabricServiceGroupManagementClient3
@@ -4687,41 +7953,6 @@ func (v *comFabricServiceGroupManagementClient4) endCreateServiceGroupFromTempla
 		return
 	}
 	return
-}
-func (v *comFabricServiceGroupManagementClient4) CreateServiceGroupFromTemplate2(
-	ctx context.Context,
-	serviceGroupFromTemplateDescription *FabricServiceGroupFromTemplateDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endCreateServiceGroupFromTemplate2(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginCreateServiceGroupFromTemplate2(
-		serviceGroupFromTemplateDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricApplicationManagementClient struct {
@@ -5066,259 +8297,6 @@ func (v *comFabricApplicationManagementClient) endUnprovisionApplicationType(
 	}
 	return
 }
-func (v *comFabricApplicationManagementClient) ProvisionApplicationType(
-	ctx context.Context,
-	applicationBuildPath string,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endProvisionApplicationType(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginProvisionApplicationType(
-		applicationBuildPath,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricApplicationManagementClient) CreateApplication(
-	ctx context.Context,
-	description *FabricApplicationDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endCreateApplication(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginCreateApplication(
-		description,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricApplicationManagementClient) UpgradeApplication(
-	ctx context.Context,
-	upgradeDescription *FabricApplicationUpgradeDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endUpgradeApplication(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginUpgradeApplication(
-		upgradeDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricApplicationManagementClient) GetApplicationUpgradeProgress(
-	ctx context.Context,
-	applicationName string,
-) (result_0 FabricRollingUpgradeMode, result_1 string, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetApplicationUpgradeProgress(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetRollingUpgradeMode()
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_1, err = rt_1.GetNextUpgradeDomain()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetApplicationUpgradeProgress(
-		applicationName,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricApplicationManagementClient) MoveNextApplicationUpgradeDomain(
-	ctx context.Context,
-	progress *comFabricApplicationUpgradeProgressResult2,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endMoveNextApplicationUpgradeDomain(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginMoveNextApplicationUpgradeDomain(
-		progress,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricApplicationManagementClient) DeleteApplication(
-	ctx context.Context,
-	applicationName string,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endDeleteApplication(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginDeleteApplication(
-		applicationName,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricApplicationManagementClient) UnprovisionApplicationType(
-	ctx context.Context,
-	applicationTypeName string,
-	applicationTypeVersion string,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endUnprovisionApplicationType(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginUnprovisionApplicationType(
-		applicationTypeName,
-		applicationTypeVersion,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricApplicationManagementClient2 struct {
 	comFabricApplicationManagementClient
@@ -5439,81 +8417,6 @@ func (v *comFabricApplicationManagementClient2) endMoveNextApplicationUpgradeDom
 		return
 	}
 	return
-}
-func (v *comFabricApplicationManagementClient2) GetApplicationManifest(
-	ctx context.Context,
-	applicationTypeName string,
-	applicationTypeVersion string,
-) (result_0 string, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetApplicationManifest(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetString()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetApplicationManifest(
-		applicationTypeName,
-		applicationTypeVersion,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricApplicationManagementClient2) MoveNextApplicationUpgradeDomain2(
-	ctx context.Context,
-	applicationName string,
-	nextUpgradeDomain string,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endMoveNextApplicationUpgradeDomain2(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginMoveNextApplicationUpgradeDomain2(
-		applicationName,
-		nextUpgradeDomain,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricApplicationManagementClient3 struct {
@@ -5678,76 +8581,6 @@ func (v *comFabricApplicationManagementClient3) RemoveApplicationPackage(
 	}
 	return
 }
-func (v *comFabricApplicationManagementClient3) UpdateApplicationUpgrade(
-	ctx context.Context,
-	description *FabricApplicationUpgradeUpdateDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endUpdateApplicationUpgrade(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginUpdateApplicationUpgrade(
-		description,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricApplicationManagementClient3) RestartDeployedCodePackage(
-	ctx context.Context,
-	restartCodePackageDescription *FabricRestartDeployedCodePackageDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endRestartDeployedCodePackage(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginRestartDeployedCodePackage(
-		restartCodePackageDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricApplicationManagementClient4 struct {
 	comFabricApplicationManagementClient3
@@ -5848,49 +8681,6 @@ func (v *comFabricApplicationManagementClient4) endDeployServicePackageToNode(
 	}
 	return
 }
-func (v *comFabricApplicationManagementClient4) DeployServicePackageToNode(
-	ctx context.Context,
-	applicationTypeName string,
-	applicationTypeVersion string,
-	serviceManifestName string,
-	sharingPolicy []FabricPackageSharingPolicy,
-	nodeName string,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endDeployServicePackageToNode(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginDeployServicePackageToNode(
-		applicationTypeName,
-		applicationTypeVersion,
-		serviceManifestName,
-		sharingPolicy,
-		nodeName,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricApplicationManagementClient5 struct {
 	comFabricApplicationManagementClient4
@@ -5951,41 +8741,6 @@ func (v *comFabricApplicationManagementClient5) endRollbackApplicationUpgrade(
 	}
 	return
 }
-func (v *comFabricApplicationManagementClient5) RollbackApplicationUpgrade(
-	ctx context.Context,
-	applicationName string,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endRollbackApplicationUpgrade(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginRollbackApplicationUpgrade(
-		applicationName,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricApplicationManagementClient6 struct {
 	comFabricApplicationManagementClient5
@@ -6043,41 +8798,6 @@ func (v *comFabricApplicationManagementClient6) endUpdateApplication(
 		return
 	}
 	return
-}
-func (v *comFabricApplicationManagementClient6) UpdateApplication(
-	ctx context.Context,
-	applicationUpdateDescription *FabricApplicationUpdateDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endUpdateApplication(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginUpdateApplication(
-		applicationUpdateDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricApplicationManagementClient7 struct {
@@ -6137,41 +8857,6 @@ func (v *comFabricApplicationManagementClient7) endDeleteApplication2(
 	}
 	return
 }
-func (v *comFabricApplicationManagementClient7) DeleteApplication2(
-	ctx context.Context,
-	deleteDescription *FabricDeleteApplicationDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endDeleteApplication2(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginDeleteApplication2(
-		deleteDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricApplicationManagementClient8 struct {
 	comFabricApplicationManagementClient7
@@ -6229,41 +8914,6 @@ func (v *comFabricApplicationManagementClient8) endProvisionApplicationType2(
 		return
 	}
 	return
-}
-func (v *comFabricApplicationManagementClient8) ProvisionApplicationType2(
-	ctx context.Context,
-	description *FabricProvisionApplicationTypeDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endProvisionApplicationType2(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginProvisionApplicationType2(
-		description,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricApplicationManagementClient9 struct {
@@ -6323,41 +8973,6 @@ func (v *comFabricApplicationManagementClient9) endUnprovisionApplicationType2(
 	}
 	return
 }
-func (v *comFabricApplicationManagementClient9) UnprovisionApplicationType2(
-	ctx context.Context,
-	description *FabricUnprovisionApplicationTypeDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endUnprovisionApplicationType2(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginUnprovisionApplicationType2(
-		description,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricApplicationManagementClient10 struct {
 	comFabricApplicationManagementClient9
@@ -6415,41 +9030,6 @@ func (v *comFabricApplicationManagementClient10) endProvisionApplicationType3(
 		return
 	}
 	return
-}
-func (v *comFabricApplicationManagementClient10) ProvisionApplicationType3(
-	ctx context.Context,
-	description *FabricProvisionApplicationTypeDescriptionBase,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endProvisionApplicationType3(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginProvisionApplicationType3(
-		description,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricClusterManagementClient struct {
@@ -6552,74 +9132,6 @@ func (v *comFabricClusterManagementClient) endRecoverPartitions(
 		return
 	}
 	return
-}
-func (v *comFabricClusterManagementClient) NodeStateRemoved(
-	ctx context.Context,
-	nodeName string,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endNodeStateRemoved(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginNodeStateRemoved(
-		nodeName,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricClusterManagementClient) RecoverPartitions(
-	ctx context.Context,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endRecoverPartitions(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginRecoverPartitions(
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricClusterManagementClient2 struct {
@@ -7192,433 +9704,6 @@ func (v *comFabricClusterManagementClient2) endRecoverSystemPartitions(
 	}
 	return
 }
-func (v *comFabricClusterManagementClient2) DeactivateNode(
-	ctx context.Context,
-	nodeName string,
-	intent FabricNodeDeactivationIntent,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endDeactivateNode(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginDeactivateNode(
-		nodeName,
-		intent,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricClusterManagementClient2) ActivateNode(
-	ctx context.Context,
-	nodeName string,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endActivateNode(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginActivateNode(
-		nodeName,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricClusterManagementClient2) ProvisionFabric(
-	ctx context.Context,
-	codeFilepath string,
-	clusterManifestFilepath string,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endProvisionFabric(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginProvisionFabric(
-		codeFilepath,
-		clusterManifestFilepath,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricClusterManagementClient2) UpgradeFabric(
-	ctx context.Context,
-	upgradeDescription *FabricUpgradeDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endUpgradeFabric(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginUpgradeFabric(
-		upgradeDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricClusterManagementClient2) GetFabricUpgradeProgress(
-	ctx context.Context,
-) (result_0 FabricRollingUpgradeMode, result_1 string, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetFabricUpgradeProgress(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetRollingUpgradeMode()
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_1, err = rt_1.GetNextUpgradeDomain()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetFabricUpgradeProgress(
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricClusterManagementClient2) MoveNextFabricUpgradeDomain(
-	ctx context.Context,
-	progress *comFabricUpgradeProgressResult2,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endMoveNextFabricUpgradeDomain(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginMoveNextFabricUpgradeDomain(
-		progress,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricClusterManagementClient2) MoveNextFabricUpgradeDomain2(
-	ctx context.Context,
-	nextUpgradeDomain string,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endMoveNextFabricUpgradeDomain2(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginMoveNextFabricUpgradeDomain2(
-		nextUpgradeDomain,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricClusterManagementClient2) UnprovisionFabric(
-	ctx context.Context,
-	codeVersion string,
-	configVersion string,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endUnprovisionFabric(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginUnprovisionFabric(
-		codeVersion,
-		configVersion,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricClusterManagementClient2) GetClusterManifest(
-	ctx context.Context,
-) (result_0 string, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetClusterManifest(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetString()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetClusterManifest(
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricClusterManagementClient2) RecoverPartition(
-	ctx context.Context,
-	partitionId windows.GUID,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endRecoverPartition(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginRecoverPartition(
-		partitionId,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricClusterManagementClient2) RecoverServicePartitions(
-	ctx context.Context,
-	serviceName string,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endRecoverServicePartitions(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginRecoverServicePartitions(
-		serviceName,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricClusterManagementClient2) RecoverSystemPartitions(
-	ctx context.Context,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endRecoverSystemPartitions(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginRecoverSystemPartitions(
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricClusterManagementClient3 struct {
 	comFabricClusterManagementClient2
@@ -7890,146 +9975,6 @@ func (v *comFabricClusterManagementClient3) RemoveClusterPackage(
 	}
 	return
 }
-func (v *comFabricClusterManagementClient3) UpdateFabricUpgrade(
-	ctx context.Context,
-	description *FabricUpgradeUpdateDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endUpdateFabricUpgrade(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginUpdateFabricUpgrade(
-		description,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricClusterManagementClient3) StopNode(
-	ctx context.Context,
-	stopNodeDescription *FabricStopNodeDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endStopNode(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginStopNode(
-		stopNodeDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricClusterManagementClient3) RestartNode(
-	ctx context.Context,
-	restartNodeDescription *FabricRestartNodeDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endRestartNode(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginRestartNode(
-		restartNodeDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricClusterManagementClient3) StartNode(
-	ctx context.Context,
-	startNodeDescription *FabricStartNodeDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endStartNode(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginStartNode(
-		startNodeDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricClusterManagementClient4 struct {
 	comFabricClusterManagementClient3
@@ -8084,39 +10029,6 @@ func (v *comFabricClusterManagementClient4) endRollbackFabricUpgrade(
 		return
 	}
 	return
-}
-func (v *comFabricClusterManagementClient4) RollbackFabricUpgrade(
-	ctx context.Context,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endRollbackFabricUpgrade(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginRollbackFabricUpgrade(
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricClusterManagementClient5 struct {
@@ -8173,41 +10085,6 @@ func (v *comFabricClusterManagementClient5) endResetPartitionLoad(
 		return
 	}
 	return
-}
-func (v *comFabricClusterManagementClient5) ResetPartitionLoad(
-	ctx context.Context,
-	partitionId windows.GUID,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endResetPartitionLoad(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginResetPartitionLoad(
-		partitionId,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricClusterManagementClient6 struct {
@@ -8268,41 +10145,6 @@ func (v *comFabricClusterManagementClient6) endToggleVerboseServicePlacementHeal
 		return
 	}
 	return
-}
-func (v *comFabricClusterManagementClient6) ToggleVerboseServicePlacementHealthReporting(
-	ctx context.Context,
-	enabled bool,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endToggleVerboseServicePlacementHealthReporting(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginToggleVerboseServicePlacementHealthReporting(
-		enabled,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricClusterManagementClient7 struct {
@@ -8538,175 +10380,6 @@ func (v *comFabricClusterManagementClient7) endStartApprovedUpgrades(
 	}
 	return
 }
-func (v *comFabricClusterManagementClient7) UpgradeConfiguration(
-	ctx context.Context,
-	startUpgradeDescription *FabricStartUpgradeDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endUpgradeConfiguration(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginUpgradeConfiguration(
-		startUpgradeDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricClusterManagementClient7) GetClusterConfigurationUpgradeStatus(
-	ctx context.Context,
-) (result_0 *FabricOrchestrationUpgradeProgress, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetClusterConfigurationUpgradeStatus(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetProgress()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetClusterConfigurationUpgradeStatus(
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricClusterManagementClient7) GetClusterConfiguration(
-	ctx context.Context,
-) (result_0 string, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetClusterConfiguration(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetString()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetClusterConfiguration(
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricClusterManagementClient7) GetUpgradesPendingApproval(
-	ctx context.Context,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endGetUpgradesPendingApproval(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetUpgradesPendingApproval(
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricClusterManagementClient7) StartApprovedUpgrades(
-	ctx context.Context,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endStartApprovedUpgrades(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginStartApprovedUpgrades(
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricClusterManagementClient8 struct {
 	comFabricClusterManagementClient7
@@ -8768,42 +10441,6 @@ func (v *comFabricClusterManagementClient8) endGetClusterManifest2(
 		return
 	}
 	return
-}
-func (v *comFabricClusterManagementClient8) GetClusterManifest2(
-	ctx context.Context,
-	queryDescription *FabricClusterManifestQueryDescription,
-) (result_0 string, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetClusterManifest2(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetString()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetClusterManifest2(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricClusterManagementClient9 struct {
@@ -8915,76 +10552,6 @@ func (v *comFabricClusterManagementClient9) endSetUpgradeOrchestrationServiceSta
 	}
 	return
 }
-func (v *comFabricClusterManagementClient9) GetUpgradeOrchestrationServiceState(
-	ctx context.Context,
-) (result_0 string, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetUpgradeOrchestrationServiceState(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetString()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetUpgradeOrchestrationServiceState(
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricClusterManagementClient9) SetUpgradeOrchestrationServiceState(
-	ctx context.Context,
-	state string,
-) (result_0 *FabricUpgradeOrchestrationServiceState, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endSetUpgradeOrchestrationServiceState(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetState()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginSetUpgradeOrchestrationServiceState(
-		state,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricClusterManagementClient10 struct {
 	comFabricClusterManagementClient9
@@ -9048,42 +10615,6 @@ func (v *comFabricClusterManagementClient10) endGetClusterConfiguration2(
 		return
 	}
 	return
-}
-func (v *comFabricClusterManagementClient10) GetClusterConfiguration2(
-	ctx context.Context,
-	apiVersion string,
-) (result_0 string, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetClusterConfiguration2(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetString()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetClusterConfiguration2(
-		apiVersion,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricHealthClient struct {
@@ -9561,316 +11092,6 @@ func (v *comFabricHealthClient) endGetDeployedServicePackageHealth(
 	}
 	return
 }
-func (v *comFabricHealthClient) GetClusterHealth(
-	ctx context.Context,
-	healthPolicy *FabricClusterHealthPolicy,
-) (result_0 *FabricClusterHealth, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetClusterHealth(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetClusterHealth()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetClusterHealth(
-		healthPolicy,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricHealthClient) GetNodeHealth(
-	ctx context.Context,
-	nodeName string,
-	healthPolicy *FabricClusterHealthPolicy,
-) (result_0 *FabricNodeHealth, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetNodeHealth(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetNodeHealth()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetNodeHealth(
-		nodeName,
-		healthPolicy,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricHealthClient) GetApplicationHealth(
-	ctx context.Context,
-	applicationName string,
-	healthPolicy *FabricApplicationHealthPolicy,
-) (result_0 *FabricApplicationHealth, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetApplicationHealth(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetApplicationHealth()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetApplicationHealth(
-		applicationName,
-		healthPolicy,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricHealthClient) GetServiceHealth(
-	ctx context.Context,
-	serviceName string,
-	healthPolicy *FabricApplicationHealthPolicy,
-) (result_0 *FabricServiceHealth, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetServiceHealth(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetServiceHealth()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetServiceHealth(
-		serviceName,
-		healthPolicy,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricHealthClient) GetPartitionHealth(
-	ctx context.Context,
-	partitionId windows.GUID,
-	healthPolicy *FabricApplicationHealthPolicy,
-) (result_0 *FabricPartitionHealth, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetPartitionHealth(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetPartitionHealth()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetPartitionHealth(
-		partitionId,
-		healthPolicy,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricHealthClient) GetReplicaHealth(
-	ctx context.Context,
-	partitionId windows.GUID,
-	replicaId int64,
-	healthPolicy *FabricApplicationHealthPolicy,
-) (result_0 *FabricReplicaHealth, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetReplicaHealth(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetReplicaHealth()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetReplicaHealth(
-		partitionId,
-		replicaId,
-		healthPolicy,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricHealthClient) GetDeployedApplicationHealth(
-	ctx context.Context,
-	applicationName string,
-	nodeName string,
-	healthPolicy *FabricApplicationHealthPolicy,
-) (result_0 *FabricDeployedApplicationHealth, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetDeployedApplicationHealth(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetDeployedApplicationHealth()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetDeployedApplicationHealth(
-		applicationName,
-		nodeName,
-		healthPolicy,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricHealthClient) GetDeployedServicePackageHealth(
-	ctx context.Context,
-	applicationName string,
-	serviceManifestName string,
-	nodeName string,
-	healthPolicy *FabricApplicationHealthPolicy,
-) (result_0 *FabricDeployedServicePackageHealth, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetDeployedServicePackageHealth(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetDeployedServicePackageHealth()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetDeployedServicePackageHealth(
-		applicationName,
-		serviceManifestName,
-		nodeName,
-		healthPolicy,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricHealthClient2 struct {
 	comFabricHealthClient
@@ -10276,294 +11497,6 @@ func (v *comFabricHealthClient2) endGetDeployedServicePackageHealth2(
 	}
 	return
 }
-func (v *comFabricHealthClient2) GetClusterHealth2(
-	ctx context.Context,
-	queryDescription *FabricClusterHealthQueryDescription,
-) (result_0 *FabricClusterHealth, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetClusterHealth2(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetClusterHealth()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetClusterHealth2(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricHealthClient2) GetNodeHealth2(
-	ctx context.Context,
-	queryDescription *FabricNodeHealthQueryDescription,
-) (result_0 *FabricNodeHealth, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetNodeHealth2(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetNodeHealth()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetNodeHealth2(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricHealthClient2) GetApplicationHealth2(
-	ctx context.Context,
-	queryDescription *FabricApplicationHealthQueryDescription,
-) (result_0 *FabricApplicationHealth, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetApplicationHealth2(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetApplicationHealth()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetApplicationHealth2(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricHealthClient2) GetServiceHealth2(
-	ctx context.Context,
-	queryDescription *FabricServiceHealthQueryDescription,
-) (result_0 *FabricServiceHealth, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetServiceHealth2(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetServiceHealth()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetServiceHealth2(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricHealthClient2) GetPartitionHealth2(
-	ctx context.Context,
-	queryDescription *FabricPartitionHealthQueryDescription,
-) (result_0 *FabricPartitionHealth, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetPartitionHealth2(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetPartitionHealth()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetPartitionHealth2(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricHealthClient2) GetReplicaHealth2(
-	ctx context.Context,
-	queryDescription *FabricReplicaHealthQueryDescription,
-) (result_0 *FabricReplicaHealth, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetReplicaHealth2(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetReplicaHealth()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetReplicaHealth2(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricHealthClient2) GetDeployedApplicationHealth2(
-	ctx context.Context,
-	queryDescription *FabricDeployedApplicationHealthQueryDescription,
-) (result_0 *FabricDeployedApplicationHealth, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetDeployedApplicationHealth2(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetDeployedApplicationHealth()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetDeployedApplicationHealth2(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricHealthClient2) GetDeployedServicePackageHealth2(
-	ctx context.Context,
-	queryDescription *FabricDeployedServicePackageHealthQueryDescription,
-) (result_0 *FabricDeployedServicePackageHealth, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetDeployedServicePackageHealth2(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetDeployedServicePackageHealth()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetDeployedServicePackageHealth2(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricHealthClient3 struct {
 	comFabricHealthClient2
@@ -10625,42 +11558,6 @@ func (v *comFabricHealthClient3) endGetClusterHealthChunk(
 		return
 	}
 	return
-}
-func (v *comFabricHealthClient3) GetClusterHealthChunk(
-	ctx context.Context,
-	queryDescription *FabricClusterHealthChunkQueryDescription,
-) (result_0 *FabricClusterHealthChunk, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetClusterHealthChunk(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetClusterHealthChunk()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetClusterHealthChunk(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricHealthClient4 struct {
@@ -11298,438 +12195,6 @@ func (v *comFabricQueryClient) endGetDeployedReplicaList(
 	}
 	return
 }
-func (v *comFabricQueryClient) GetNodeList(
-	ctx context.Context,
-	queryDescription *FabricNodeQueryDescription,
-) (result_0 []FabricNodeQueryResultItem, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetNodeList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetNodeList()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetNodeList(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricQueryClient) GetApplicationTypeList(
-	ctx context.Context,
-	queryDescription *FabricApplicationTypeQueryDescription,
-) (result_0 []FabricApplicationTypeQueryResultItem, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetApplicationTypeList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetApplicationTypeList()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetApplicationTypeList(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricQueryClient) GetServiceTypeList(
-	ctx context.Context,
-	queryDescription *FabricServiceTypeQueryDescription,
-) (result_0 []FabricServiceTypeQueryResultItem, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetServiceTypeList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetServiceTypeList()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetServiceTypeList(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricQueryClient) GetApplicationList(
-	ctx context.Context,
-	queryDescription *FabricApplicationQueryDescription,
-) (result_0 []FabricApplicationQueryResultItem, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetApplicationList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetApplicationList()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetApplicationList(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricQueryClient) GetServiceList(
-	ctx context.Context,
-	queryDescription *FabricServiceQueryDescription,
-) (result_0 []FabricServiceQueryResultItem, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetServiceList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetServiceList()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetServiceList(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricQueryClient) GetPartitionList(
-	ctx context.Context,
-	queryDescription *FabricServicePartitionQueryDescription,
-) (result_0 []FabricServicePartitionQueryResultItem, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetPartitionList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetPartitionList()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetPartitionList(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricQueryClient) GetReplicaList(
-	ctx context.Context,
-	queryDescription *FabricServiceReplicaQueryDescription,
-) (result_0 []FabricServiceReplicaQueryResultItem, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetReplicaList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetReplicaList()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetReplicaList(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricQueryClient) GetDeployedApplicationList(
-	ctx context.Context,
-	queryDescription *FabricDeployedApplicationQueryDescription,
-) (result_0 []FabricDeployedApplicationQueryResultItem, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetDeployedApplicationList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetDeployedApplicationList()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetDeployedApplicationList(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricQueryClient) GetDeployedServicePackageList(
-	ctx context.Context,
-	queryDescription *FabricDeployedServicePackageQueryDescription,
-) (result_0 []FabricDeployedServicePackageQueryResultItem, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetDeployedServicePackageList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetDeployedServicePackageList()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetDeployedServicePackageList(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricQueryClient) GetDeployedServiceTypeList(
-	ctx context.Context,
-	queryDescription *FabricDeployedServiceTypeQueryDescription,
-) (result_0 []FabricDeployedServiceTypeQueryResultItem, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetDeployedServiceTypeList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetDeployedServiceTypeList()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetDeployedServiceTypeList(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricQueryClient) GetDeployedCodePackageList(
-	ctx context.Context,
-	queryDescription *FabricDeployedCodePackageQueryDescription,
-) (result_0 []FabricDeployedCodePackageQueryResultItem, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetDeployedCodePackageList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetDeployedCodePackageList()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetDeployedCodePackageList(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricQueryClient) GetDeployedReplicaList(
-	ctx context.Context,
-	queryDescription *FabricDeployedServiceReplicaQueryDescription,
-) (result_0 []FabricDeployedServiceReplicaQueryResultItem, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetDeployedReplicaList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetDeployedReplicaList()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetDeployedReplicaList(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricQueryClient2 struct {
 	comFabricQueryClient
@@ -11985,184 +12450,6 @@ func (v *comFabricQueryClient2) endGetProvisionedFabricConfigVersionList(
 	}
 	return
 }
-func (v *comFabricQueryClient2) GetDeployedReplicaDetail(
-	ctx context.Context,
-	queryDescription *FabricDeployedServiceReplicaDetailQueryDescription,
-) (result_0 *FabricDeployedServiceReplicaDetailQueryResultItem, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetDeployedReplicaDetail(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetReplicaDetail()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetDeployedReplicaDetail(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricQueryClient2) GetClusterLoadInformation(
-	ctx context.Context,
-) (result_0 *FabricClusterLoadInformation, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetClusterLoadInformation(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetClusterLoadInformation()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetClusterLoadInformation(
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricQueryClient2) GetPartitionLoadInformation(
-	ctx context.Context,
-	queryDescription *FabricPartitionLoadInformationQueryDescription,
-) (result_0 *FabricPartitionLoadInformation, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetPartitionLoadInformation(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetPartitionLoadInformation()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetPartitionLoadInformation(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricQueryClient2) GetProvisionedFabricCodeVersionList(
-	ctx context.Context,
-	queryDescription *FabricProvisionedCodeVersionQueryDescription,
-) (result_0 []FabricProvisionedCodeVersionQueryResultItem, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetProvisionedFabricCodeVersionList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetProvisionedCodeVersionList()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetProvisionedFabricCodeVersionList(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricQueryClient2) GetProvisionedFabricConfigVersionList(
-	ctx context.Context,
-	queryDescription *FabricProvisionedConfigVersionQueryDescription,
-) (result_0 []FabricProvisionedConfigVersionQueryResultItem, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetProvisionedFabricConfigVersionList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetProvisionedConfigVersionList()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetProvisionedFabricConfigVersionList(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricQueryClient3 struct {
 	comFabricQueryClient2
@@ -12273,78 +12560,6 @@ func (v *comFabricQueryClient3) endGetReplicaLoadInformation(
 		return
 	}
 	return
-}
-func (v *comFabricQueryClient3) GetNodeLoadInformation(
-	ctx context.Context,
-	queryDescription *FabricNodeLoadInformationQueryDescription,
-) (result_0 *FabricNodeLoadInformation, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetNodeLoadInformation(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetNodeLoadInformation()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetNodeLoadInformation(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricQueryClient3) GetReplicaLoadInformation(
-	ctx context.Context,
-	queryDescription *FabricReplicaLoadInformationQueryDescription,
-) (result_0 *FabricReplicaLoadInformation, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetReplicaLoadInformation(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetReplicaLoadInformation()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetReplicaLoadInformation(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricQueryClient4 struct {
@@ -12457,78 +12672,6 @@ func (v *comFabricQueryClient4) endGetServiceGroupMemberTypeList(
 	}
 	return
 }
-func (v *comFabricQueryClient4) GetServiceGroupMemberList(
-	ctx context.Context,
-	queryDescription *FabricServiceGroupMemberQueryDescription,
-) (result_0 []FabricServiceGroupMemberQueryResultItem, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetServiceGroupMemberList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetServiceGroupMemberList()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetServiceGroupMemberList(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricQueryClient4) GetServiceGroupMemberTypeList(
-	ctx context.Context,
-	queryDescription *FabricServiceGroupMemberTypeQueryDescription,
-) (result_0 []FabricServiceGroupMemberTypeQueryResultItem, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetServiceGroupMemberTypeList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetServiceGroupMemberTypeList()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetServiceGroupMemberTypeList(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricQueryClient5 struct {
 	comFabricQueryClient4
@@ -12590,42 +12733,6 @@ func (v *comFabricQueryClient5) endGetUnplacedReplicaInformation(
 		return
 	}
 	return
-}
-func (v *comFabricQueryClient5) GetUnplacedReplicaInformation(
-	ctx context.Context,
-	queryDescription *FabricUnplacedReplicaInformationQueryDescription,
-) (result_0 *FabricUnplacedReplicaInformation, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetUnplacedReplicaInformation(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetUnplacedReplicaInformation()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetUnplacedReplicaInformation(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricQueryClient6 struct {
@@ -12705,42 +12812,6 @@ func (v *comFabricQueryClient7) endGetApplicationLoadInformation(
 		return
 	}
 	return
-}
-func (v *comFabricQueryClient7) GetApplicationLoadInformation(
-	ctx context.Context,
-	queryDescription *FabricApplicationLoadInformationQueryDescription,
-) (result_0 *FabricApplicationLoadInformation, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetApplicationLoadInformation(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetApplicationLoadInformation()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetApplicationLoadInformation(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricQueryClient8 struct {
@@ -12853,78 +12924,6 @@ func (v *comFabricQueryClient8) endGetApplicationName(
 	}
 	return
 }
-func (v *comFabricQueryClient8) GetServiceName(
-	ctx context.Context,
-	queryDescription *FabricServiceNameQueryDescription,
-) (result_0 *FabricServiceNameQueryResult, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetServiceName(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetServiceName()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetServiceName(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricQueryClient8) GetApplicationName(
-	ctx context.Context,
-	queryDescription *FabricApplicationNameQueryDescription,
-) (result_0 *FabricApplicationNameQueryResult, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetApplicationName(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetApplicationName()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetApplicationName(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricQueryClient9 struct {
 	comFabricQueryClient8
@@ -12987,47 +12986,6 @@ func (v *comFabricQueryClient9) endGetApplicationTypePagedList(
 	}
 	return
 }
-func (v *comFabricQueryClient9) GetApplicationTypePagedList(
-	ctx context.Context,
-	queryDescription *PagedFabricApplicationTypeQueryDescription,
-) (result_0 []FabricApplicationTypeQueryResultItem, result_1 *FabricPagingStatus, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetApplicationTypePagedList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetApplicationTypePagedList()
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_1, err = rt_1.GetPagingStatus()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetApplicationTypePagedList(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricQueryClient10 struct {
 	comFabricQueryClient9
@@ -13089,47 +13047,6 @@ func (v *comFabricQueryClient10) endGetDeployedApplicationPagedList(
 		return
 	}
 	return
-}
-func (v *comFabricQueryClient10) GetDeployedApplicationPagedList(
-	ctx context.Context,
-	queryDescription *FabricPagedDeployedApplicationQueryDescription,
-) (result_0 []FabricDeployedApplicationQueryResultItem, result_1 *FabricPagingStatus, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetDeployedApplicationPagedList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetDeployedApplicationPagedList()
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_1, err = rt_1.GetPagingStatus()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetDeployedApplicationPagedList(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricInfrastructureServiceClient struct {
@@ -13255,82 +13172,6 @@ func (v *comFabricInfrastructureServiceClient) endInvokeInfrastructureQuery(
 		return
 	}
 	return
-}
-func (v *comFabricInfrastructureServiceClient) InvokeInfrastructureCommand(
-	ctx context.Context,
-	serviceName string,
-	command string,
-) (result_0 string, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endInvokeInfrastructureCommand(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetString()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginInvokeInfrastructureCommand(
-		serviceName,
-		command,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricInfrastructureServiceClient) InvokeInfrastructureQuery(
-	ctx context.Context,
-	serviceName string,
-	command string,
-) (result_0 string, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endInvokeInfrastructureQuery(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetString()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginInvokeInfrastructureQuery(
-		serviceName,
-		command,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricRepairManagementClient struct {
@@ -13635,221 +13476,6 @@ func (v *comFabricRepairManagementClient) endGetRepairTaskList(
 	}
 	return
 }
-func (v *comFabricRepairManagementClient) CreateRepairTask(
-	ctx context.Context,
-	repairTask *FabricRepairTask,
-) (result_0 int64, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endCreateRepairTask(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0 = rt_1
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginCreateRepairTask(
-		repairTask,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricRepairManagementClient) CancelRepairTask(
-	ctx context.Context,
-	requestDescription *FabricRepairCancelDescription,
-) (result_0 int64, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endCancelRepairTask(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0 = rt_1
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginCancelRepairTask(
-		requestDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricRepairManagementClient) ForceApproveRepairTask(
-	ctx context.Context,
-	requestDescription *FabricRepairApproveDescription,
-) (result_0 int64, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endForceApproveRepairTask(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0 = rt_1
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginForceApproveRepairTask(
-		requestDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricRepairManagementClient) DeleteRepairTask(
-	ctx context.Context,
-	requestDescription *FabricRepairDeleteDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endDeleteRepairTask(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginDeleteRepairTask(
-		requestDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricRepairManagementClient) UpdateRepairExecutionState(
-	ctx context.Context,
-	repairTask *FabricRepairTask,
-) (result_0 int64, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endUpdateRepairExecutionState(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0 = rt_1
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginUpdateRepairExecutionState(
-		repairTask,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricRepairManagementClient) GetRepairTaskList(
-	ctx context.Context,
-	queryDescription *FabricRepairTaskQueryDescription,
-) (result_0 []FabricRepairTask, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetRepairTaskList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetTasks()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetRepairTaskList(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricRepairManagementClient2 struct {
 	comFabricRepairManagementClient
@@ -13911,42 +13537,6 @@ func (v *comFabricRepairManagementClient2) endUpdateRepairTaskHealthPolicy(
 		return
 	}
 	return
-}
-func (v *comFabricRepairManagementClient2) UpdateRepairTaskHealthPolicy(
-	ctx context.Context,
-	updateDescription *FabricRepairTaskHealthPolicyUpdateDescription,
-) (result_0 int64, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endUpdateRepairTaskHealthPolicy(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0 = rt_1
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginUpdateRepairTaskHealthPolicy(
-		updateDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricFaultManagementClient struct {
@@ -14174,78 +13764,6 @@ func (v *comFabricFaultManagementClient) endMoveSecondary(
 		return
 	}
 	return
-}
-func (v *comFabricFaultManagementClient) MovePrimary(
-	ctx context.Context,
-	description *FabricMovePrimaryDescription2,
-) (result_0 *FabricMovePrimaryResult, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endMovePrimary(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetResult()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginMovePrimary(
-		description,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricFaultManagementClient) MoveSecondary(
-	ctx context.Context,
-	description *FabricMoveSecondaryDescription2,
-) (result_0 *FabricMoveSecondaryResult, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endMoveSecondary(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetResult()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginMoveSecondary(
-		description,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricTestManagementClient struct {
@@ -14630,290 +14148,6 @@ func (v *comFabricTestManagementClient) endCancelTestCommand(
 	}
 	return
 }
-func (v *comFabricTestManagementClient) StartPartitionDataLoss(
-	ctx context.Context,
-	invokeDataLossDescription *FabricStartPartitionDataLossDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endStartPartitionDataLoss(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginStartPartitionDataLoss(
-		invokeDataLossDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricTestManagementClient) GetPartitionDataLossProgress(
-	ctx context.Context,
-	operationId windows.GUID,
-) (result_0 *FabricPartitionDataLossProgress, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetPartitionDataLossProgress(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetProgress()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetPartitionDataLossProgress(
-		operationId,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricTestManagementClient) StartPartitionQuorumLoss(
-	ctx context.Context,
-	invokeQuorumLossDescription *FabricStartPartitionQuorumLossDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endStartPartitionQuorumLoss(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginStartPartitionQuorumLoss(
-		invokeQuorumLossDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricTestManagementClient) GetPartitionQuorumLossProgress(
-	ctx context.Context,
-	operationId windows.GUID,
-) (result_0 *FabricPartitionQuorumLossProgress, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetPartitionQuorumLossProgress(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetProgress()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetPartitionQuorumLossProgress(
-		operationId,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricTestManagementClient) StartPartitionRestart(
-	ctx context.Context,
-	restartPartitionDescription *FabricStartPartitionRestartDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endStartPartitionRestart(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginStartPartitionRestart(
-		restartPartitionDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricTestManagementClient) GetPartitionRestartProgress(
-	ctx context.Context,
-	operationId windows.GUID,
-) (result_0 *FabricPartitionRestartProgress, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetPartitionRestartProgress(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetProgress()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetPartitionRestartProgress(
-		operationId,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricTestManagementClient) GetTestCommandStatusList(
-	ctx context.Context,
-	operationId *FabricTestCommandListDescription,
-) (result_0 []interface{}, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetTestCommandStatusList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetResult()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetTestCommandStatusList(
-		operationId,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricTestManagementClient) CancelTestCommand(
-	ctx context.Context,
-	invokeDataLossDescription *FabricCancelTestCommandDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endCancelTestCommand(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginCancelTestCommand(
-		invokeDataLossDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricTestManagementClient2 struct {
 	comFabricTestManagementClient
@@ -15063,110 +14297,6 @@ func (v *comFabricTestManagementClient2) endGetChaosReport(
 	}
 	return
 }
-func (v *comFabricTestManagementClient2) StartChaos(
-	ctx context.Context,
-	restartPartitionDescription *FabricStartChaosDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endStartChaos(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginStartChaos(
-		restartPartitionDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricTestManagementClient2) StopChaos(
-	ctx context.Context,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endStopChaos(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginStopChaos(
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricTestManagementClient2) GetChaosReport(
-	ctx context.Context,
-	getChaosReportDescription *FabricGetChaosReportDescription,
-) (result_0 *FabricChaosReport, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetChaosReport(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetChaosReportResult()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetChaosReport(
-		getChaosReportDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
 
 type comFabricTestManagementClient3 struct {
 	comFabricTestManagementClient2
@@ -15271,77 +14401,6 @@ func (v *comFabricTestManagementClient3) endGetNodeTransitionProgress(
 		return
 	}
 	return
-}
-func (v *comFabricTestManagementClient3) StartNodeTransition(
-	ctx context.Context,
-	description *FabricNodeTransitionDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endStartNodeTransition(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginStartNodeTransition(
-		description,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricTestManagementClient3) GetNodeTransitionProgress(
-	ctx context.Context,
-	operationId windows.GUID,
-) (result_0 *FabricNodeTransitionProgress, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetNodeTransitionProgress(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetProgress()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetNodeTransitionProgress(
-		operationId,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricTestManagementClient4 struct {
@@ -15541,145 +14600,6 @@ func (v *comFabricTestManagementClient4) endGetChaosEvents(
 		return
 	}
 	return
-}
-func (v *comFabricTestManagementClient4) GetChaos(
-	ctx context.Context,
-) (result_0 *FabricChaosDescription, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetChaos(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetChaosDescriptionResult()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetChaos(
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricTestManagementClient4) GetChaosSchedule(
-	ctx context.Context,
-) (result_0 *FabricChaosScheduleDescription, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetChaosSchedule(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetChaosScheduleDescriptionResult()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetChaosSchedule(
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricTestManagementClient4) SetChaosSchedule(
-	ctx context.Context,
-	setChaosScheduleDescription *FabricChaosServiceScheduleDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endSetChaosSchedule(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginSetChaosSchedule(
-		setChaosScheduleDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricTestManagementClient4) GetChaosEvents(
-	ctx context.Context,
-	chaosEventsDescription *FabricChaosEventsSegmentDescription,
-) (result_0 *FabricChaosEventsSegment, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetChaosEvents(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetChaosEventsSegmentResult()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetChaosEvents(
-		chaosEventsDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricNetworkManagementClient struct {
@@ -16082,324 +15002,6 @@ func (v *comFabricNetworkManagementClient) endGetDeployedNetworkCodePackageList(
 		return
 	}
 	return
-}
-func (v *comFabricNetworkManagementClient) CreateNetwork(
-	ctx context.Context,
-	networkName string,
-	description *FabricNetworkDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endCreateNetwork(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginCreateNetwork(
-		networkName,
-		description,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricNetworkManagementClient) DeleteNetwork(
-	ctx context.Context,
-	deleteDescription *FabricDeleteNetworkDescription,
-) (err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		err := v.endDeleteNetwork(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginDeleteNetwork(
-		deleteDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricNetworkManagementClient) GetNetworkList(
-	ctx context.Context,
-	queryDescription *FabricNetworkQueryDescription,
-) (result_0 []FabricNetworkInformation, result_1 *FabricPagingStatus, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetNetworkList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetNetworkList()
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_1, err = rt_1.GetPagingStatus()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetNetworkList(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricNetworkManagementClient) GetNetworkApplicationList(
-	ctx context.Context,
-	queryDescription *FabricNetworkApplicationQueryDescription,
-) (result_0 []FabricNetworkApplicationQueryResultItem, result_1 *FabricPagingStatus, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetNetworkApplicationList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetNetworkApplicationList()
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_1, err = rt_1.GetPagingStatus()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetNetworkApplicationList(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricNetworkManagementClient) GetNetworkNodeList(
-	ctx context.Context,
-	queryDescription *FabricNetworkNodeQueryDescription,
-) (result_0 []FabricNetworkNodeQueryResultItem, result_1 *FabricPagingStatus, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetNetworkNodeList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetNetworkNodeList()
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_1, err = rt_1.GetPagingStatus()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetNetworkNodeList(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricNetworkManagementClient) GetApplicationNetworkList(
-	ctx context.Context,
-	queryDescription *FabricApplicationNetworkQueryDescription,
-) (result_0 []FabricApplicationNetworkQueryResultItem, result_1 *FabricPagingStatus, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetApplicationNetworkList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetApplicationNetworkList()
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_1, err = rt_1.GetPagingStatus()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetApplicationNetworkList(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricNetworkManagementClient) GetDeployedNetworkList(
-	ctx context.Context,
-	queryDescription *FabricDeployedNetworkQueryDescription,
-) (result_0 []FabricDeployedNetworkQueryResultItem, result_1 *FabricPagingStatus, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetDeployedNetworkList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetDeployedNetworkList()
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_1, err = rt_1.GetPagingStatus()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetDeployedNetworkList(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricNetworkManagementClient) GetDeployedNetworkCodePackageList(
-	ctx context.Context,
-	queryDescription *FabricDeployedNetworkCodePackageQueryDescription,
-) (result_0 []FabricDeployedNetworkCodePackageQueryResultItem, result_1 *FabricPagingStatus, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetDeployedNetworkCodePackageList(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetDeployedNetworkCodePackageList()
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_1, err = rt_1.GetPagingStatus()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetDeployedNetworkCodePackageList(
-		queryDescription,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricGetRepairTaskListResult struct {
@@ -20118,152 +18720,6 @@ func (v *comFabricSecretStoreClient) endGetSecretVersions(
 		return
 	}
 	return
-}
-func (v *comFabricSecretStoreClient) GetSecrets(
-	ctx context.Context,
-	secretReferences []FabricSecretReference,
-	includeValue bool,
-) (result_0 []FabricSecret, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetSecrets(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetSecrets()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetSecrets(
-		secretReferences,
-		includeValue,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricSecretStoreClient) SetSecrets(
-	ctx context.Context,
-	secrets []FabricSecret,
-) (result_0 []FabricSecret, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endSetSecrets(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetSecrets()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginSetSecrets(
-		secrets,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricSecretStoreClient) RemoveSecrets(
-	ctx context.Context,
-	secretReferences []FabricSecretReference,
-) (result_0 []FabricSecretReference, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endRemoveSecrets(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetSecretReferences()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginRemoveSecrets(
-		secretReferences,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
-}
-func (v *comFabricSecretStoreClient) GetSecretVersions(
-	ctx context.Context,
-	secretReferences []FabricSecretReference,
-) (result_0 []FabricSecretReference, err error) {
-	ch := make(chan error, 1)
-	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
-
-		rt_1, err := v.endGetSecretVersions(sfctx)
-
-		if err != nil {
-			ch <- err
-			return
-		}
-		result_0, err = rt_1.GetSecretReferences()
-		if err != nil {
-			ch <- err
-			return
-		}
-		ch <- nil
-	})
-	timeout := toTimeout(ctx)
-	sfctx, err := v.beginGetSecretVersions(
-		secretReferences,
-		uint32(timeout.Milliseconds()),
-		callback,
-	)
-
-	if err != nil {
-		return
-	}
-
-	err = waitch(ctx, ch, sfctx, timeout)
-	return
-
 }
 
 type comFabricGetNetworkListResult struct {
