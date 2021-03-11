@@ -1,6 +1,7 @@
 package fabric
 
 import (
+	"sync"
 	"time"
 	"unsafe"
 
@@ -18,6 +19,9 @@ var (
 type FabricRuntime struct {
 	hub            *fabricRuntimeComHub
 	defaultTimeout time.Duration
+
+	closed    bool
+	closelock sync.Mutex
 }
 
 func (v *FabricRuntime) GetTimeout() time.Duration {
@@ -26,6 +30,18 @@ func (v *FabricRuntime) GetTimeout() time.Duration {
 
 func (v *FabricRuntime) SetDefaultTimeout(t time.Duration) {
 	v.defaultTimeout = t
+}
+
+func (v *FabricRuntime) Close() error {
+	v.closelock.Lock()
+	defer v.closelock.Unlock()
+	if v.closed {
+		return nil
+	}
+	v.closed = true
+
+	v.hub.Close()
+	return nil
 }
 
 func NewFabricRuntime() (*FabricRuntime, error) {

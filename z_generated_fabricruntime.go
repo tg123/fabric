@@ -15,6 +15,11 @@ type fabricRuntimeComHub struct {
 func (v *fabricRuntimeComHub) init(createComObject comCreator) {
 	createComObject("{cc53af8e-74cd-11df-ac3e-0024811e3892}", unsafe.Pointer(&v.FabricRuntime))
 }
+func (v *fabricRuntimeComHub) Close() {
+	if v.FabricRuntime != nil {
+		releaseComObject(&v.FabricRuntime.IUnknown)
+	}
+}
 func (v *FabricRuntime) RegisterStatelessServiceFactory(
 	serviceTypeName string,
 	factory *comFabricStatelessServiceFactory,

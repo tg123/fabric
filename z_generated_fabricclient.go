@@ -118,6 +118,164 @@ func (v *fabricClientComHub) init(createComObject comCreator) {
 	createComObject("{fdb754c6-69c5-4bcf-bba5-cb70c84a4398}", unsafe.Pointer(&v.FabricNetworkManagementClient))
 	createComObject("{38c4c723-3815-49d8-bdf2-68bfb536b8c9}", unsafe.Pointer(&v.FabricSecretStoreClient))
 }
+func (v *fabricClientComHub) Close() {
+	if v.FabricClientSettings2 != nil {
+		releaseComObject(&v.FabricClientSettings2.IUnknown)
+	}
+	if v.FabricPropertyManagementClient2 != nil {
+		releaseComObject(&v.FabricPropertyManagementClient2.IUnknown)
+	}
+	if v.FabricServiceManagementClient != nil {
+		releaseComObject(&v.FabricServiceManagementClient.IUnknown)
+	}
+	if v.FabricServiceManagementClient2 != nil {
+		releaseComObject(&v.FabricServiceManagementClient2.IUnknown)
+	}
+	if v.FabricServiceManagementClient3 != nil {
+		releaseComObject(&v.FabricServiceManagementClient3.IUnknown)
+	}
+	if v.FabricServiceManagementClient4 != nil {
+		releaseComObject(&v.FabricServiceManagementClient4.IUnknown)
+	}
+	if v.FabricServiceManagementClient5 != nil {
+		releaseComObject(&v.FabricServiceManagementClient5.IUnknown)
+	}
+	if v.FabricServiceManagementClient6 != nil {
+		releaseComObject(&v.FabricServiceManagementClient6.IUnknown)
+	}
+	if v.FabricServiceGroupManagementClient != nil {
+		releaseComObject(&v.FabricServiceGroupManagementClient.IUnknown)
+	}
+	if v.FabricServiceGroupManagementClient2 != nil {
+		releaseComObject(&v.FabricServiceGroupManagementClient2.IUnknown)
+	}
+	if v.FabricServiceGroupManagementClient3 != nil {
+		releaseComObject(&v.FabricServiceGroupManagementClient3.IUnknown)
+	}
+	if v.FabricServiceGroupManagementClient4 != nil {
+		releaseComObject(&v.FabricServiceGroupManagementClient4.IUnknown)
+	}
+	if v.FabricApplicationManagementClient != nil {
+		releaseComObject(&v.FabricApplicationManagementClient.IUnknown)
+	}
+	if v.FabricApplicationManagementClient2 != nil {
+		releaseComObject(&v.FabricApplicationManagementClient2.IUnknown)
+	}
+	if v.FabricApplicationManagementClient3 != nil {
+		releaseComObject(&v.FabricApplicationManagementClient3.IUnknown)
+	}
+	if v.FabricApplicationManagementClient4 != nil {
+		releaseComObject(&v.FabricApplicationManagementClient4.IUnknown)
+	}
+	if v.FabricApplicationManagementClient5 != nil {
+		releaseComObject(&v.FabricApplicationManagementClient5.IUnknown)
+	}
+	if v.FabricApplicationManagementClient6 != nil {
+		releaseComObject(&v.FabricApplicationManagementClient6.IUnknown)
+	}
+	if v.FabricApplicationManagementClient7 != nil {
+		releaseComObject(&v.FabricApplicationManagementClient7.IUnknown)
+	}
+	if v.FabricApplicationManagementClient8 != nil {
+		releaseComObject(&v.FabricApplicationManagementClient8.IUnknown)
+	}
+	if v.FabricApplicationManagementClient9 != nil {
+		releaseComObject(&v.FabricApplicationManagementClient9.IUnknown)
+	}
+	if v.FabricApplicationManagementClient10 != nil {
+		releaseComObject(&v.FabricApplicationManagementClient10.IUnknown)
+	}
+	if v.FabricClusterManagementClient != nil {
+		releaseComObject(&v.FabricClusterManagementClient.IUnknown)
+	}
+	if v.FabricClusterManagementClient2 != nil {
+		releaseComObject(&v.FabricClusterManagementClient2.IUnknown)
+	}
+	if v.FabricClusterManagementClient3 != nil {
+		releaseComObject(&v.FabricClusterManagementClient3.IUnknown)
+	}
+	if v.FabricClusterManagementClient4 != nil {
+		releaseComObject(&v.FabricClusterManagementClient4.IUnknown)
+	}
+	if v.FabricClusterManagementClient5 != nil {
+		releaseComObject(&v.FabricClusterManagementClient5.IUnknown)
+	}
+	if v.FabricClusterManagementClient6 != nil {
+		releaseComObject(&v.FabricClusterManagementClient6.IUnknown)
+	}
+	if v.FabricClusterManagementClient7 != nil {
+		releaseComObject(&v.FabricClusterManagementClient7.IUnknown)
+	}
+	if v.FabricHealthClient != nil {
+		releaseComObject(&v.FabricHealthClient.IUnknown)
+	}
+	if v.FabricHealthClient2 != nil {
+		releaseComObject(&v.FabricHealthClient2.IUnknown)
+	}
+	if v.FabricHealthClient3 != nil {
+		releaseComObject(&v.FabricHealthClient3.IUnknown)
+	}
+	if v.FabricHealthClient4 != nil {
+		releaseComObject(&v.FabricHealthClient4.IUnknown)
+	}
+	if v.FabricQueryClient != nil {
+		releaseComObject(&v.FabricQueryClient.IUnknown)
+	}
+	if v.FabricQueryClient2 != nil {
+		releaseComObject(&v.FabricQueryClient2.IUnknown)
+	}
+	if v.FabricQueryClient3 != nil {
+		releaseComObject(&v.FabricQueryClient3.IUnknown)
+	}
+	if v.FabricQueryClient4 != nil {
+		releaseComObject(&v.FabricQueryClient4.IUnknown)
+	}
+	if v.FabricQueryClient5 != nil {
+		releaseComObject(&v.FabricQueryClient5.IUnknown)
+	}
+	if v.FabricQueryClient6 != nil {
+		releaseComObject(&v.FabricQueryClient6.IUnknown)
+	}
+	if v.FabricQueryClient7 != nil {
+		releaseComObject(&v.FabricQueryClient7.IUnknown)
+	}
+	if v.FabricQueryClient8 != nil {
+		releaseComObject(&v.FabricQueryClient8.IUnknown)
+	}
+	if v.FabricQueryClient9 != nil {
+		releaseComObject(&v.FabricQueryClient9.IUnknown)
+	}
+	if v.FabricQueryClient10 != nil {
+		releaseComObject(&v.FabricQueryClient10.IUnknown)
+	}
+	if v.FabricInfrastructureServiceClient != nil {
+		releaseComObject(&v.FabricInfrastructureServiceClient.IUnknown)
+	}
+	if v.FabricRepairManagementClient != nil {
+		releaseComObject(&v.FabricRepairManagementClient.IUnknown)
+	}
+	if v.FabricRepairManagementClient2 != nil {
+		releaseComObject(&v.FabricRepairManagementClient2.IUnknown)
+	}
+	if v.FabricTestManagementClient != nil {
+		releaseComObject(&v.FabricTestManagementClient.IUnknown)
+	}
+	if v.FabricTestManagementClient2 != nil {
+		releaseComObject(&v.FabricTestManagementClient2.IUnknown)
+	}
+	if v.FabricTestManagementClient3 != nil {
+		releaseComObject(&v.FabricTestManagementClient3.IUnknown)
+	}
+	if v.FabricFaultManagementClient != nil {
+		releaseComObject(&v.FabricFaultManagementClient.IUnknown)
+	}
+	if v.FabricNetworkManagementClient != nil {
+		releaseComObject(&v.FabricNetworkManagementClient.IUnknown)
+	}
+	if v.FabricSecretStoreClient != nil {
+		releaseComObject(&v.FabricSecretStoreClient.IUnknown)
+	}
+}
 func (v *FabricClient) GetSettings() (result *ComFabricClientSettingsResult, err error) {
 	if v.hub.FabricClientSettings2 == nil {
 		err = errComNotImpl
@@ -318,6 +476,7 @@ func (v *FabricClient) GetServiceDescription(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetDescription()
 		if err != nil {
 			ch <- err
@@ -381,6 +540,7 @@ func (v *FabricClient) GetServiceManifest(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetString()
 		if err != nil {
 			ch <- err
@@ -777,6 +937,7 @@ func (v *FabricClient) GetServiceGroupDescription(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetDescription()
 		if err != nil {
 			ch <- err
@@ -1061,6 +1222,7 @@ func (v *FabricClient) GetApplicationUpgradeProgress(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetRollingUpgradeMode()
 		if err != nil {
 			ch <- err
@@ -1226,6 +1388,7 @@ func (v *FabricClient) GetApplicationManifest(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetString()
 		if err != nil {
 			ch <- err
@@ -1923,6 +2086,7 @@ func (v *FabricClient) GetFabricUpgradeProgress(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetRollingUpgradeMode()
 		if err != nil {
 			ch <- err
@@ -2085,6 +2249,7 @@ func (v *FabricClient) GetClusterManifest(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetString()
 		if err != nil {
 			ch <- err
@@ -2572,6 +2737,7 @@ func (v *FabricClient) GetClusterConfigurationUpgradeStatus(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetProgress()
 		if err != nil {
 			ch <- err
@@ -2610,6 +2776,7 @@ func (v *FabricClient) GetClusterConfiguration(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetString()
 		if err != nil {
 			ch <- err
@@ -2732,6 +2899,7 @@ func (v *FabricClient) GetClusterHealth(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetClusterHealth()
 		if err != nil {
 			ch <- err
@@ -2773,6 +2941,7 @@ func (v *FabricClient) GetNodeHealth(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetNodeHealth()
 		if err != nil {
 			ch <- err
@@ -2815,6 +2984,7 @@ func (v *FabricClient) GetApplicationHealth(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetApplicationHealth()
 		if err != nil {
 			ch <- err
@@ -2857,6 +3027,7 @@ func (v *FabricClient) GetServiceHealth(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetServiceHealth()
 		if err != nil {
 			ch <- err
@@ -2899,6 +3070,7 @@ func (v *FabricClient) GetPartitionHealth(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetPartitionHealth()
 		if err != nil {
 			ch <- err
@@ -2942,6 +3114,7 @@ func (v *FabricClient) GetReplicaHealth(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetReplicaHealth()
 		if err != nil {
 			ch <- err
@@ -2986,6 +3159,7 @@ func (v *FabricClient) GetDeployedApplicationHealth(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetDeployedApplicationHealth()
 		if err != nil {
 			ch <- err
@@ -3031,6 +3205,7 @@ func (v *FabricClient) GetDeployedServicePackageHealth(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetDeployedServicePackageHealth()
 		if err != nil {
 			ch <- err
@@ -3074,6 +3249,7 @@ func (v *FabricClient) GetClusterHealth2(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetClusterHealth()
 		if err != nil {
 			ch <- err
@@ -3114,6 +3290,7 @@ func (v *FabricClient) GetNodeHealth2(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetNodeHealth()
 		if err != nil {
 			ch <- err
@@ -3154,6 +3331,7 @@ func (v *FabricClient) GetApplicationHealth2(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetApplicationHealth()
 		if err != nil {
 			ch <- err
@@ -3194,6 +3372,7 @@ func (v *FabricClient) GetServiceHealth2(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetServiceHealth()
 		if err != nil {
 			ch <- err
@@ -3234,6 +3413,7 @@ func (v *FabricClient) GetPartitionHealth2(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetPartitionHealth()
 		if err != nil {
 			ch <- err
@@ -3274,6 +3454,7 @@ func (v *FabricClient) GetReplicaHealth2(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetReplicaHealth()
 		if err != nil {
 			ch <- err
@@ -3314,6 +3495,7 @@ func (v *FabricClient) GetDeployedApplicationHealth2(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetDeployedApplicationHealth()
 		if err != nil {
 			ch <- err
@@ -3354,6 +3536,7 @@ func (v *FabricClient) GetDeployedServicePackageHealth2(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetDeployedServicePackageHealth()
 		if err != nil {
 			ch <- err
@@ -3394,6 +3577,7 @@ func (v *FabricClient) GetClusterHealthChunk(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetClusterHealthChunk()
 		if err != nil {
 			ch <- err
@@ -3444,6 +3628,7 @@ func (v *FabricClient) GetNodeList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetNodeList()
 		if err != nil {
 			ch <- err
@@ -3484,6 +3669,7 @@ func (v *FabricClient) GetApplicationTypeList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetApplicationTypeList()
 		if err != nil {
 			ch <- err
@@ -3524,6 +3710,7 @@ func (v *FabricClient) GetServiceTypeList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetServiceTypeList()
 		if err != nil {
 			ch <- err
@@ -3564,6 +3751,7 @@ func (v *FabricClient) GetApplicationList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetApplicationList()
 		if err != nil {
 			ch <- err
@@ -3604,6 +3792,7 @@ func (v *FabricClient) GetServiceList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetServiceList()
 		if err != nil {
 			ch <- err
@@ -3644,6 +3833,7 @@ func (v *FabricClient) GetPartitionList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetPartitionList()
 		if err != nil {
 			ch <- err
@@ -3684,6 +3874,7 @@ func (v *FabricClient) GetReplicaList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetReplicaList()
 		if err != nil {
 			ch <- err
@@ -3724,6 +3915,7 @@ func (v *FabricClient) GetDeployedApplicationList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetDeployedApplicationList()
 		if err != nil {
 			ch <- err
@@ -3764,6 +3956,7 @@ func (v *FabricClient) GetDeployedServicePackageList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetDeployedServicePackageList()
 		if err != nil {
 			ch <- err
@@ -3804,6 +3997,7 @@ func (v *FabricClient) GetDeployedServiceTypeList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetDeployedServiceTypeList()
 		if err != nil {
 			ch <- err
@@ -3844,6 +4038,7 @@ func (v *FabricClient) GetDeployedCodePackageList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetDeployedCodePackageList()
 		if err != nil {
 			ch <- err
@@ -3884,6 +4079,7 @@ func (v *FabricClient) GetDeployedReplicaList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetDeployedReplicaList()
 		if err != nil {
 			ch <- err
@@ -3924,6 +4120,7 @@ func (v *FabricClient) GetDeployedReplicaDetail(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetReplicaDetail()
 		if err != nil {
 			ch <- err
@@ -3963,6 +4160,7 @@ func (v *FabricClient) GetClusterLoadInformation(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetClusterLoadInformation()
 		if err != nil {
 			ch <- err
@@ -4002,6 +4200,7 @@ func (v *FabricClient) GetPartitionLoadInformation(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetPartitionLoadInformation()
 		if err != nil {
 			ch <- err
@@ -4042,6 +4241,7 @@ func (v *FabricClient) GetProvisionedFabricCodeVersionList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetProvisionedCodeVersionList()
 		if err != nil {
 			ch <- err
@@ -4082,6 +4282,7 @@ func (v *FabricClient) GetProvisionedFabricConfigVersionList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetProvisionedConfigVersionList()
 		if err != nil {
 			ch <- err
@@ -4122,6 +4323,7 @@ func (v *FabricClient) GetNodeLoadInformation(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetNodeLoadInformation()
 		if err != nil {
 			ch <- err
@@ -4162,6 +4364,7 @@ func (v *FabricClient) GetReplicaLoadInformation(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetReplicaLoadInformation()
 		if err != nil {
 			ch <- err
@@ -4202,6 +4405,7 @@ func (v *FabricClient) GetServiceGroupMemberList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetServiceGroupMemberList()
 		if err != nil {
 			ch <- err
@@ -4242,6 +4446,7 @@ func (v *FabricClient) GetServiceGroupMemberTypeList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetServiceGroupMemberTypeList()
 		if err != nil {
 			ch <- err
@@ -4282,6 +4487,7 @@ func (v *FabricClient) GetUnplacedReplicaInformation(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetUnplacedReplicaInformation()
 		if err != nil {
 			ch <- err
@@ -4322,6 +4528,7 @@ func (v *FabricClient) GetApplicationLoadInformation(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetApplicationLoadInformation()
 		if err != nil {
 			ch <- err
@@ -4362,6 +4569,7 @@ func (v *FabricClient) GetServiceName(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetServiceName()
 		if err != nil {
 			ch <- err
@@ -4402,6 +4610,7 @@ func (v *FabricClient) GetApplicationName(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetApplicationName()
 		if err != nil {
 			ch <- err
@@ -4442,6 +4651,7 @@ func (v *FabricClient) GetApplicationTypePagedList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetApplicationTypePagedList()
 		if err != nil {
 			ch <- err
@@ -4487,6 +4697,7 @@ func (v *FabricClient) GetDeployedApplicationPagedList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetDeployedApplicationPagedList()
 		if err != nil {
 			ch <- err
@@ -4533,6 +4744,7 @@ func (v *FabricClient) InvokeInfrastructureCommand(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetString()
 		if err != nil {
 			ch <- err
@@ -4575,6 +4787,7 @@ func (v *FabricClient) InvokeInfrastructureQuery(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetString()
 		if err != nil {
 			ch <- err
@@ -4815,6 +5028,7 @@ func (v *FabricClient) GetRepairTaskList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetTasks()
 		if err != nil {
 			ch <- err
@@ -4934,6 +5148,7 @@ func (v *FabricClient) GetPartitionDataLossProgress(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetProgress()
 		if err != nil {
 			ch <- err
@@ -5013,6 +5228,7 @@ func (v *FabricClient) GetPartitionQuorumLossProgress(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetProgress()
 		if err != nil {
 			ch <- err
@@ -5092,6 +5308,7 @@ func (v *FabricClient) GetPartitionRestartProgress(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetProgress()
 		if err != nil {
 			ch <- err
@@ -5132,6 +5349,7 @@ func (v *FabricClient) GetTestCommandStatusList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetResult()
 		if err != nil {
 			ch <- err
@@ -5287,6 +5505,7 @@ func (v *FabricClient) GetChaosReport(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetChaosReportResult()
 		if err != nil {
 			ch <- err
@@ -5366,6 +5585,7 @@ func (v *FabricClient) GetNodeTransitionProgress(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetProgress()
 		if err != nil {
 			ch <- err
@@ -5406,6 +5626,7 @@ func (v *FabricClient) MovePrimary(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetResult()
 		if err != nil {
 			ch <- err
@@ -5446,6 +5667,7 @@ func (v *FabricClient) MoveSecondary(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetResult()
 		if err != nil {
 			ch <- err
@@ -5566,6 +5788,7 @@ func (v *FabricClient) GetNetworkList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetNetworkList()
 		if err != nil {
 			ch <- err
@@ -5611,6 +5834,7 @@ func (v *FabricClient) GetNetworkApplicationList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetNetworkApplicationList()
 		if err != nil {
 			ch <- err
@@ -5656,6 +5880,7 @@ func (v *FabricClient) GetNetworkNodeList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetNetworkNodeList()
 		if err != nil {
 			ch <- err
@@ -5701,6 +5926,7 @@ func (v *FabricClient) GetApplicationNetworkList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetApplicationNetworkList()
 		if err != nil {
 			ch <- err
@@ -5746,6 +5972,7 @@ func (v *FabricClient) GetDeployedNetworkList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetDeployedNetworkList()
 		if err != nil {
 			ch <- err
@@ -5791,6 +6018,7 @@ func (v *FabricClient) GetDeployedNetworkCodePackageList(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetDeployedNetworkCodePackageList()
 		if err != nil {
 			ch <- err
@@ -5837,6 +6065,7 @@ func (v *FabricClient) GetSecrets(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetSecrets()
 		if err != nil {
 			ch <- err
@@ -5878,6 +6107,7 @@ func (v *FabricClient) SetSecrets(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetSecrets()
 		if err != nil {
 			ch <- err
@@ -5918,6 +6148,7 @@ func (v *FabricClient) RemoveSecrets(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetSecretReferences()
 		if err != nil {
 			ch <- err
@@ -5958,6 +6189,7 @@ func (v *FabricClient) GetSecretVersions(
 			ch <- err
 			return
 		}
+		defer releaseComObject(&rt_1.IUnknown)
 		result_0, err = rt_1.GetSecretReferences()
 		if err != nil {
 			ch <- err

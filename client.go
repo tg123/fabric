@@ -2,6 +2,7 @@ package fabric
 
 import (
 	"fmt"
+	"sync"
 	"time"
 	"unsafe"
 
@@ -69,6 +70,9 @@ func createClient(connectionStrings []string, iid string, p unsafe.Pointer) erro
 type FabricClient struct {
 	hub            *fabricClientComHub
 	defaultTimeout time.Duration
+
+	closed    bool
+	closelock sync.Mutex
 }
 
 func (v *FabricClient) GetTimeout() time.Duration {
@@ -79,6 +83,19 @@ func (v *FabricClient) SetDefaultTimeout(t time.Duration) {
 	v.defaultTimeout = t
 }
 
+func (v *FabricClient) Close() error {
+	// TODO calling func to a closing client is undefined
+	v.closelock.Lock()
+	defer v.closelock.Unlock()
+	if v.closed {
+		return nil
+	}
+	v.closed = true
+
+	v.hub.Close()
+	return nil
+}
+
 const (
 	comIFabricClientSettingsIID = "{b0e7dee0-cf64-11e0-9572-0800200c9a66}" // Lowest ver Service Fabric 6.0
 )
@@ -86,9 +103,13 @@ const (
 func clientFromComClientSetting(com *comFabricClientSettings) *FabricClient {
 	hub := &fabricClientComHub{}
 	hub.init(func(iid string, outptr unsafe.Pointer) error {
-		return queryObject(&com.IUnknown, iid, outptr)
+		return queryComObject(&com.IUnknown, iid, outptr)
 	})
-	return &FabricClient{hub, 5 * time.Minute}
+	releaseComObject(&com.IUnknown)
+	return &FabricClient{
+		hub:            hub,
+		defaultTimeout: 5 * time.Minute,
+	}
 }
 
 func NewLocalClient() (*FabricClient, error) {

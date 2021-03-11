@@ -21,7 +21,7 @@ var errComNotImpl = fmt.Errorf("operation not supported on this fabric version")
 
 type comCreator func(iid string, outptr unsafe.Pointer) error
 
-func queryObject(com *ole.IUnknown, iid string, outptr unsafe.Pointer) error {
+func queryComObject(com *ole.IUnknown, iid string, outptr unsafe.Pointer) error {
 	clzid, err := ole.IIDFromString(iid)
 	if err != nil {
 		return err
@@ -34,6 +34,19 @@ func queryObject(com *ole.IUnknown, iid string, outptr unsafe.Pointer) error {
 
 	*(**ole.IUnknown)(outptr) = &c.IUnknown
 
+	return nil
+}
+
+// not thread safe lock before use
+func releaseComObject(com *ole.IUnknown) error {
+
+	// TODO
+	// according to the doc https://docs.microsoft.com/en-us/windows/win32/api/unknwn/nf-unknwn-iunknown-release
+	// the return should be only for test
+	// here we assume all our objects will ref == 0 eventually
+	// however
+	// now some com objects exposed and calling release is not guaranteed
+	com.Release()
 	return nil
 }
 
@@ -66,6 +79,7 @@ func errno(hr uintptr, syserr error) error {
 }
 
 func waitch(ctx context.Context, ch <-chan error, sfctx *comIFabricAsyncOperationContext, timeout time.Duration) (err error) {
+	defer releaseComObject(&sfctx.IUnknown)
 	select {
 	case err = <-ch:
 		return

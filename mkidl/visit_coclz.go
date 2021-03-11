@@ -124,6 +124,7 @@ next:
 	}
 
 	if asyncrt != nil {
+		g.printfln(`defer releaseComObject(&%v.IUnknown)`, rt[0])
 		for i, m := range asyncrt.Methods {
 			g.printfln("result_%v, err = %v.%v()", i, rt[0], casee.ToPascalCase(m.Name))
 
@@ -209,13 +210,32 @@ func (g *generator) generateCoClz(n *ast.CoClassNode) {
 	// init
 	g.printfln("func (v *%vComHub) init(createComObject comCreator) {", hubName)
 
-next:
+nextinit:
 	for _, ifc := range n.Interfaces {
 		ifc = g.ctx.definedInterface[ifc.Name]
+		hubFieldName := strings.TrimPrefix(ifc.Name, "I")
+
 		for _, attr := range ifc.Attributes {
 			if attr.Type == scanner.UUID {
-				g.printfln(`createComObject("{%v}", unsafe.Pointer(&v.%v))`, attr.Val, strings.TrimPrefix(ifc.Name, "I"))
-				continue next
+				g.printfln(`createComObject("{%v}", unsafe.Pointer(&v.%v))`, attr.Val, hubFieldName)
+				continue nextinit
+			}
+		}
+	}
+	g.printfln("}")
+
+	g.printfln("func (v *%vComHub) Close() {", hubName)
+nextclose:
+	for _, ifc := range n.Interfaces {
+		ifc = g.ctx.definedInterface[ifc.Name]
+		hubFieldName := strings.TrimPrefix(ifc.Name, "I")
+
+		for _, attr := range ifc.Attributes {
+			if attr.Type == scanner.UUID {
+				g.printfln(`if v.%v != nil {`, hubFieldName)
+				g.printfln(`releaseComObject(&v.%v.IUnknown)`, hubFieldName)
+				g.printfln("}")
+				continue nextclose
 			}
 		}
 	}

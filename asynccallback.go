@@ -1,6 +1,7 @@
 package fabric
 
 import (
+	"sync"
 	"syscall"
 	"unsafe"
 
@@ -63,6 +64,7 @@ func (v *comIFabricAsyncOperationContext) Cancel() (err error) {
 type comIFabricAsyncOperationCallback struct {
 	vtbl     *comIFabricAsyncOperationCallbackVtbl
 	ref      int32
+	reflock  sync.Mutex
 	callback func(ctx *comIFabricAsyncOperationContext)
 }
 
@@ -102,12 +104,16 @@ func (v *comIFabricAsyncOperationCallback) queryInterface(this *ole.IUnknown, ii
 
 func (v *comIFabricAsyncOperationCallback) addRef(this *ole.IUnknown) uintptr {
 	pthis := (*comIFabricAsyncOperationCallback)(unsafe.Pointer(this))
+	pthis.reflock.Lock()
+	defer pthis.reflock.Unlock()
 	pthis.ref++
 	return uintptr(pthis.ref)
 }
 
 func (v *comIFabricAsyncOperationCallback) release(this *ole.IUnknown) uintptr {
 	pthis := (*comIFabricAsyncOperationCallback)(unsafe.Pointer(this))
+	pthis.reflock.Lock()
+	defer pthis.reflock.Unlock()
 	pthis.ref--
 	return uintptr(pthis.ref)
 }
