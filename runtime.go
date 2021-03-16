@@ -62,3 +62,12 @@ func NewFabricRuntime() (*FabricRuntime, error) {
 		defaultTimeout: 5 * time.Minute,
 	}, nil
 }
+
+// type ServiceContext struct {
+// }
+
+// type StatelessUserServiceInstance interface {
+// 	Run(ctx context.Context) error
+// 	Close(ctx context.Context) error
+// 	Abort() error
+// }

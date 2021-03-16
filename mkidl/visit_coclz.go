@@ -185,12 +185,14 @@ next:
 	}
 	g.printfln(") ")
 
+	g.importpkg("runtime")
 	g.printfln(`
 	if err != nil {
 		return
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 	`)
 

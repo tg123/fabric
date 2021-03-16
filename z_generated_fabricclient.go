@@ -5,6 +5,7 @@ import (
 	"context"
 	"github.com/go-ole/go-ole"
 	"golang.org/x/sys/windows"
+	"runtime"
 	"syscall"
 	"unsafe"
 )
@@ -330,6 +331,7 @@ func (v *FabricClient) PutCustomPropertyOperation(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -369,6 +371,7 @@ func (v *FabricClient) CreateService(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -416,6 +419,7 @@ func (v *FabricClient) CreateServiceFromTemplate(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -455,6 +459,7 @@ func (v *FabricClient) DeleteService(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -496,6 +501,7 @@ func (v *FabricClient) GetServiceDescription(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -562,6 +568,7 @@ func (v *FabricClient) GetServiceManifest(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -603,6 +610,7 @@ func (v *FabricClient) UpdateService(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -642,6 +650,7 @@ func (v *FabricClient) RemoveReplica(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -681,6 +690,7 @@ func (v *FabricClient) RestartReplica(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -721,6 +731,7 @@ func (v *FabricClient) RegisterServiceNotificationFilter(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -760,6 +771,7 @@ func (v *FabricClient) UnregisterServiceNotificationFilter(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -799,6 +811,7 @@ func (v *FabricClient) DeleteService2(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -838,6 +851,7 @@ func (v *FabricClient) CreateServiceFromTemplate2(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -877,6 +891,7 @@ func (v *FabricClient) CreateServiceGroup(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -916,6 +931,7 @@ func (v *FabricClient) DeleteServiceGroup(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -957,6 +973,7 @@ func (v *FabricClient) GetServiceGroupDescription(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -998,6 +1015,7 @@ func (v *FabricClient) UpdateServiceGroup(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -1045,6 +1063,7 @@ func (v *FabricClient) CreateServiceGroupFromTemplate(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -1084,6 +1103,7 @@ func (v *FabricClient) CreateServiceGroupFromTemplate2(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -1123,6 +1143,7 @@ func (v *FabricClient) ProvisionApplicationType(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -1162,6 +1183,7 @@ func (v *FabricClient) CreateApplication(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -1201,6 +1223,7 @@ func (v *FabricClient) UpgradeApplication(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -1247,6 +1270,7 @@ func (v *FabricClient) GetApplicationUpgradeProgress(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -1286,6 +1310,7 @@ func (v *FabricClient) MoveNextApplicationUpgradeDomain(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -1325,6 +1350,7 @@ func (v *FabricClient) DeleteApplication(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -1366,6 +1392,7 @@ func (v *FabricClient) UnprovisionApplicationType(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -1409,6 +1436,7 @@ func (v *FabricClient) GetApplicationManifest(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -1450,6 +1478,7 @@ func (v *FabricClient) MoveNextApplicationUpgradeDomain2(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -1489,6 +1518,7 @@ func (v *FabricClient) UpdateApplicationUpgrade(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -1528,6 +1558,7 @@ func (v *FabricClient) RestartDeployedCodePackage(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -1596,6 +1627,7 @@ func (v *FabricClient) DeployServicePackageToNode(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -1635,6 +1667,7 @@ func (v *FabricClient) RollbackApplicationUpgrade(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -1674,6 +1707,7 @@ func (v *FabricClient) UpdateApplication(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -1713,6 +1747,7 @@ func (v *FabricClient) DeleteApplication2(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -1752,6 +1787,7 @@ func (v *FabricClient) ProvisionApplicationType2(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -1791,6 +1827,7 @@ func (v *FabricClient) UnprovisionApplicationType2(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -1830,6 +1867,7 @@ func (v *FabricClient) ProvisionApplicationType3(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -1869,6 +1907,7 @@ func (v *FabricClient) NodeStateRemoved(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -1906,6 +1945,7 @@ func (v *FabricClient) RecoverPartitions(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -1947,6 +1987,7 @@ func (v *FabricClient) DeactivateNode(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -1986,6 +2027,7 @@ func (v *FabricClient) ActivateNode(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -2027,6 +2069,7 @@ func (v *FabricClient) ProvisionFabric(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -2066,6 +2109,7 @@ func (v *FabricClient) UpgradeFabric(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -2110,6 +2154,7 @@ func (v *FabricClient) GetFabricUpgradeProgress(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -2149,6 +2194,7 @@ func (v *FabricClient) MoveNextFabricUpgradeDomain(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -2188,6 +2234,7 @@ func (v *FabricClient) MoveNextFabricUpgradeDomain2(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -2229,6 +2276,7 @@ func (v *FabricClient) UnprovisionFabric(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -2268,6 +2316,7 @@ func (v *FabricClient) GetClusterManifest(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -2307,6 +2356,7 @@ func (v *FabricClient) RecoverPartition(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -2346,6 +2396,7 @@ func (v *FabricClient) RecoverServicePartitions(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -2383,6 +2434,7 @@ func (v *FabricClient) RecoverSystemPartitions(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -2422,6 +2474,7 @@ func (v *FabricClient) UpdateFabricUpgrade(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -2461,6 +2514,7 @@ func (v *FabricClient) StopNode(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -2500,6 +2554,7 @@ func (v *FabricClient) RestartNode(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -2539,6 +2594,7 @@ func (v *FabricClient) StartNode(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -2600,6 +2656,7 @@ func (v *FabricClient) RollbackFabricUpgrade(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -2639,6 +2696,7 @@ func (v *FabricClient) ResetPartitionLoad(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -2678,6 +2736,7 @@ func (v *FabricClient) ToggleVerboseServicePlacementHealthReporting(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -2717,6 +2776,7 @@ func (v *FabricClient) UpgradeConfiguration(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -2756,6 +2816,7 @@ func (v *FabricClient) GetClusterConfigurationUpgradeStatus(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -2795,6 +2856,7 @@ func (v *FabricClient) GetClusterConfiguration(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -2832,6 +2894,7 @@ func (v *FabricClient) GetUpgradesPendingApproval(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -2869,6 +2932,7 @@ func (v *FabricClient) StartApprovedUpgrades(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -2919,6 +2983,7 @@ func (v *FabricClient) GetClusterHealth(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -2962,6 +3027,7 @@ func (v *FabricClient) GetNodeHealth(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -3005,6 +3071,7 @@ func (v *FabricClient) GetApplicationHealth(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -3048,6 +3115,7 @@ func (v *FabricClient) GetServiceHealth(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -3091,6 +3159,7 @@ func (v *FabricClient) GetPartitionHealth(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -3136,6 +3205,7 @@ func (v *FabricClient) GetReplicaHealth(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -3181,6 +3251,7 @@ func (v *FabricClient) GetDeployedApplicationHealth(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -3228,6 +3299,7 @@ func (v *FabricClient) GetDeployedServicePackageHealth(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -3269,6 +3341,7 @@ func (v *FabricClient) GetClusterHealth2(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -3310,6 +3383,7 @@ func (v *FabricClient) GetNodeHealth2(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -3351,6 +3425,7 @@ func (v *FabricClient) GetApplicationHealth2(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -3392,6 +3467,7 @@ func (v *FabricClient) GetServiceHealth2(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -3433,6 +3509,7 @@ func (v *FabricClient) GetPartitionHealth2(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -3474,6 +3551,7 @@ func (v *FabricClient) GetReplicaHealth2(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -3515,6 +3593,7 @@ func (v *FabricClient) GetDeployedApplicationHealth2(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -3556,6 +3635,7 @@ func (v *FabricClient) GetDeployedServicePackageHealth2(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -3597,6 +3677,7 @@ func (v *FabricClient) GetClusterHealthChunk(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -3648,6 +3729,7 @@ func (v *FabricClient) GetNodeList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -3689,6 +3771,7 @@ func (v *FabricClient) GetApplicationTypeList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -3730,6 +3813,7 @@ func (v *FabricClient) GetServiceTypeList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -3771,6 +3855,7 @@ func (v *FabricClient) GetApplicationList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -3812,6 +3897,7 @@ func (v *FabricClient) GetServiceList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -3853,6 +3939,7 @@ func (v *FabricClient) GetPartitionList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -3894,6 +3981,7 @@ func (v *FabricClient) GetReplicaList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -3935,6 +4023,7 @@ func (v *FabricClient) GetDeployedApplicationList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -3976,6 +4065,7 @@ func (v *FabricClient) GetDeployedServicePackageList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -4017,6 +4107,7 @@ func (v *FabricClient) GetDeployedServiceTypeList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -4058,6 +4149,7 @@ func (v *FabricClient) GetDeployedCodePackageList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -4099,6 +4191,7 @@ func (v *FabricClient) GetDeployedReplicaList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -4140,6 +4233,7 @@ func (v *FabricClient) GetDeployedReplicaDetail(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -4179,6 +4273,7 @@ func (v *FabricClient) GetClusterLoadInformation(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -4220,6 +4315,7 @@ func (v *FabricClient) GetPartitionLoadInformation(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -4261,6 +4357,7 @@ func (v *FabricClient) GetProvisionedFabricCodeVersionList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -4302,6 +4399,7 @@ func (v *FabricClient) GetProvisionedFabricConfigVersionList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -4343,6 +4441,7 @@ func (v *FabricClient) GetNodeLoadInformation(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -4384,6 +4483,7 @@ func (v *FabricClient) GetReplicaLoadInformation(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -4425,6 +4525,7 @@ func (v *FabricClient) GetServiceGroupMemberList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -4466,6 +4567,7 @@ func (v *FabricClient) GetServiceGroupMemberTypeList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -4507,6 +4609,7 @@ func (v *FabricClient) GetUnplacedReplicaInformation(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -4548,6 +4651,7 @@ func (v *FabricClient) GetApplicationLoadInformation(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -4589,6 +4693,7 @@ func (v *FabricClient) GetServiceName(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -4630,6 +4735,7 @@ func (v *FabricClient) GetApplicationName(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -4676,6 +4782,7 @@ func (v *FabricClient) GetApplicationTypePagedList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -4722,6 +4829,7 @@ func (v *FabricClient) GetDeployedApplicationPagedList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -4765,6 +4873,7 @@ func (v *FabricClient) InvokeInfrastructureCommand(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -4808,6 +4917,7 @@ func (v *FabricClient) InvokeInfrastructureQuery(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -4848,6 +4958,7 @@ func (v *FabricClient) CreateRepairTask(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -4888,6 +4999,7 @@ func (v *FabricClient) CancelRepairTask(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -4928,6 +5040,7 @@ func (v *FabricClient) ForceApproveRepairTask(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -4967,6 +5080,7 @@ func (v *FabricClient) DeleteRepairTask(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -5007,6 +5121,7 @@ func (v *FabricClient) UpdateRepairExecutionState(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -5048,6 +5163,7 @@ func (v *FabricClient) GetRepairTaskList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -5088,6 +5204,7 @@ func (v *FabricClient) UpdateRepairTaskHealthPolicy(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -5127,6 +5244,7 @@ func (v *FabricClient) StartPartitionDataLoss(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -5168,6 +5286,7 @@ func (v *FabricClient) GetPartitionDataLossProgress(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -5207,6 +5326,7 @@ func (v *FabricClient) StartPartitionQuorumLoss(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -5248,6 +5368,7 @@ func (v *FabricClient) GetPartitionQuorumLossProgress(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -5287,6 +5408,7 @@ func (v *FabricClient) StartPartitionRestart(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -5328,6 +5450,7 @@ func (v *FabricClient) GetPartitionRestartProgress(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -5369,6 +5492,7 @@ func (v *FabricClient) GetTestCommandStatusList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -5408,6 +5532,7 @@ func (v *FabricClient) CancelTestCommand(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -5447,6 +5572,7 @@ func (v *FabricClient) StartChaos(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -5484,6 +5610,7 @@ func (v *FabricClient) StopChaos(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -5525,6 +5652,7 @@ func (v *FabricClient) GetChaosReport(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -5564,6 +5692,7 @@ func (v *FabricClient) StartNodeTransition(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -5605,6 +5734,7 @@ func (v *FabricClient) GetNodeTransitionProgress(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -5646,6 +5776,7 @@ func (v *FabricClient) MovePrimary(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -5687,6 +5818,7 @@ func (v *FabricClient) MoveSecondary(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -5728,6 +5860,7 @@ func (v *FabricClient) CreateNetwork(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -5767,6 +5900,7 @@ func (v *FabricClient) DeleteNetwork(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -5813,6 +5947,7 @@ func (v *FabricClient) GetNetworkList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -5859,6 +5994,7 @@ func (v *FabricClient) GetNetworkApplicationList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -5905,6 +6041,7 @@ func (v *FabricClient) GetNetworkNodeList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -5951,6 +6088,7 @@ func (v *FabricClient) GetApplicationNetworkList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -5997,6 +6135,7 @@ func (v *FabricClient) GetDeployedNetworkList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -6043,6 +6182,7 @@ func (v *FabricClient) GetDeployedNetworkCodePackageList(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -6086,6 +6226,7 @@ func (v *FabricClient) GetSecrets(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -6127,6 +6268,7 @@ func (v *FabricClient) SetSecrets(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -6168,6 +6310,7 @@ func (v *FabricClient) RemoveSecrets(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }
@@ -6209,6 +6352,7 @@ func (v *FabricClient) GetSecretVersions(
 	}
 
 	err = waitch(ctx, ch, sfctx, timeout)
+	runtime.KeepAlive(callback)
 	return
 
 }

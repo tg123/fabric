@@ -1,7 +1,6 @@
 package fabric
 
 import (
-	"sync"
 	"syscall"
 	"unsafe"
 
@@ -62,68 +61,28 @@ func (v *comIFabricAsyncOperationContext) Cancel() (err error) {
 }
 
 type comIFabricAsyncOperationCallback struct {
-	vtbl     *comIFabricAsyncOperationCallbackVtbl
-	ref      int32
-	reflock  sync.Mutex
-	callback func(ctx *comIFabricAsyncOperationContext)
+	vtbl       *comIFabricAsyncOperationCallbackVtbl
+	callback   func(ctx *comIFabricAsyncOperationContext)
+	unknownref *goIUnknown
 }
 
 type comIFabricAsyncOperationCallbackVtbl struct {
-	QueryInterface uintptr
-	AddRef         uintptr
-	Release        uintptr
-	Invoke         uintptr
+	goIUnknownVtbl
+	Invoke uintptr
 }
 
 func newFabricAsyncOperationCallback(fn func(ctx *comIFabricAsyncOperationContext)) *comIFabricAsyncOperationCallback {
 	cb := &comIFabricAsyncOperationCallback{}
 	cb.vtbl = &comIFabricAsyncOperationCallbackVtbl{}
-	cb.vtbl.QueryInterface = syscall.NewCallback(cb.queryInterface)
-	cb.vtbl.AddRef = syscall.NewCallback(cb.addRef)
-	cb.vtbl.Release = syscall.NewCallback(cb.release)
+	cb.unknownref = attachIUnknown("{86F08D7E-14DD-4575-8489-B1D5D679029C}", &cb.vtbl.goIUnknownVtbl)
 	cb.vtbl.Invoke = syscall.NewCallback(cb.invoke)
 	cb.callback = fn
 	return cb
 }
 
-func (v *comIFabricAsyncOperationCallback) queryInterface(this *ole.IUnknown, iid *ole.GUID, punk **ole.IUnknown) uintptr {
-	s, _ := ole.StringFromCLSID(iid)
-	*punk = nil
-	if ole.IsEqualGUID(iid, ole.IID_IUnknown) {
-		v.addRef(this)
-		*punk = this
-		return ole.S_OK
-	}
-	if s == "{86F08D7E-14DD-4575-8489-B1D5D679029C}" {
-		v.addRef(this)
-		*punk = this
-		return ole.S_OK
-	}
-	return ole.E_NOINTERFACE
-}
-
-func (v *comIFabricAsyncOperationCallback) addRef(this *ole.IUnknown) uintptr {
-	pthis := (*comIFabricAsyncOperationCallback)(unsafe.Pointer(this))
-	pthis.reflock.Lock()
-	defer pthis.reflock.Unlock()
-	pthis.ref++
-	return uintptr(pthis.ref)
-}
-
-func (v *comIFabricAsyncOperationCallback) release(this *ole.IUnknown) uintptr {
-	pthis := (*comIFabricAsyncOperationCallback)(unsafe.Pointer(this))
-	pthis.reflock.Lock()
-	defer pthis.reflock.Unlock()
-	pthis.ref--
-	return uintptr(pthis.ref)
-}
-
 func (v *comIFabricAsyncOperationCallback) invoke(this *ole.IUnknown, ctx *ole.IUnknown) uintptr {
-	pthis := (*comIFabricAsyncOperationCallback)(unsafe.Pointer(this))
-
 	ctx.AddRef()
 	defer ctx.Release()
-	pthis.callback((*comIFabricAsyncOperationContext)(unsafe.Pointer(ctx)))
-
+	v.callback((*comIFabricAsyncOperationContext)(unsafe.Pointer(ctx)))
 	return ole.S_OK
 }
