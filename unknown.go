@@ -1,8 +1,6 @@
 package fabric
 
 import (
-	"fmt"
-	"reflect"
 	"sync"
 	"syscall"
 	"unsafe"

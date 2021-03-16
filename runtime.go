@@ -1,6 +1,7 @@
 package fabric
 
 import (
+	"context"
 	"sync"
 	"time"
 	"unsafe"
@@ -63,11 +64,11 @@ func NewFabricRuntime() (*FabricRuntime, error) {
 	}, nil
 }
 
-// type ServiceContext struct {
-// }
+type ServiceContext struct {
+}
 
-// type StatelessUserServiceInstance interface {
-// 	Run(ctx context.Context) error
-// 	Close(ctx context.Context) error
-// 	Abort() error
-// }
+type StatelessUserServiceInstance interface {
+	Run(ctx context.Context) error
+	Close(ctx context.Context) error
+	Abort() error
+}
