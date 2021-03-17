@@ -1506,8 +1506,7 @@ func (obj *FabricNodeId) toInnerStruct() *innerFabricNodeId {
 }
 
 type FabricOperationDataBuffer struct {
-	BufferSize uint32
-	Buffer     *byte
+	Buffer *byte
 }
 type innerFabricOperationDataBuffer struct {
 	FabricOperationDataBuffer
@@ -1927,8 +1926,6 @@ type innerTestCommandQueryResultList struct {
 func (obj *innerTestCommandQueryResultList) toGoStruct() []interface{} {
 	var dst []interface{}
 	{
-		var lst []interface{}
-
 		var innerlst []unsafe.Pointer
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -1937,10 +1934,9 @@ func (obj *innerTestCommandQueryResultList) toGoStruct() []interface{} {
 
 			tmpitem = fromUnsafePointer(item)
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -1955,8 +1951,8 @@ func (obj *FabricNodeResult) toInnerStruct() *innerFabricNodeResult {
 		return nil
 	}
 	dst := innerFabricNodeResult{}
-	s_8, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_8
+	s_7, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_7
 
 	dst.NodeInstance = obj.NodeInstance
 	return &dst
@@ -2063,8 +2059,6 @@ type innerFabricServiceLoadMetricDescriptionList struct {
 func (obj *innerFabricServiceLoadMetricDescriptionList) toGoStruct() []FabricServiceLoadMetricDescription {
 	var dst []FabricServiceLoadMetricDescription
 	{
-		var lst []FabricServiceLoadMetricDescription
-
 		var innerlst []innerFabricServiceLoadMetricDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -2073,10 +2067,9 @@ func (obj *innerFabricServiceLoadMetricDescriptionList) toGoStruct() []FabricSer
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -2091,8 +2084,8 @@ func (obj *FabricServiceCorrelationDescription) toInnerStruct() *innerFabricServ
 		return nil
 	}
 	dst := innerFabricServiceCorrelationDescription{}
-	s_10, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_10
+	s_8, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_8
 
 	dst.Scheme = obj.Scheme
 	return &dst
@@ -2172,8 +2165,8 @@ func (obj *FabricScalingTriggerAveragePartitionLoad) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := innerFabricScalingTriggerAveragePartitionLoad{}
-	s_11, _ := windows.UTF16PtrFromString(obj.MetricName)
-	dst.MetricName = s_11
+	s_9, _ := windows.UTF16PtrFromString(obj.MetricName)
+	dst.MetricName = s_9
 
 	dst.LowerLoadThreshold = obj.LowerLoadThreshold
 	dst.UpperLoadThreshold = obj.UpperLoadThreshold
@@ -2213,8 +2206,8 @@ func (obj *FabricScalingTriggerAverageServiceLoad) toInnerStruct() *innerFabricS
 		return nil
 	}
 	dst := innerFabricScalingTriggerAverageServiceLoad{}
-	s_12, _ := windows.UTF16PtrFromString(obj.MetricName)
-	dst.MetricName = s_12
+	s_10, _ := windows.UTF16PtrFromString(obj.MetricName)
+	dst.MetricName = s_10
 
 	dst.LowerLoadThreshold = obj.LowerLoadThreshold
 	dst.UpperLoadThreshold = obj.UpperLoadThreshold
@@ -2300,8 +2293,8 @@ func (obj *FabricPlacementPolicyInvalidDomainDescription) toInnerStruct() *inner
 		return nil
 	}
 	dst := innerFabricPlacementPolicyInvalidDomainDescription{}
-	s_13, _ := windows.UTF16PtrFromString(obj.InvalidFaultDomain)
-	dst.InvalidFaultDomain = s_13
+	s_11, _ := windows.UTF16PtrFromString(obj.InvalidFaultDomain)
+	dst.InvalidFaultDomain = s_11
 
 	return &dst
 }
@@ -2329,8 +2322,8 @@ func (obj *FabricPlacementPolicyRequiredDomainDescription) toInnerStruct() *inne
 		return nil
 	}
 	dst := innerFabricPlacementPolicyRequiredDomainDescription{}
-	s_14, _ := windows.UTF16PtrFromString(obj.RequiredFaultDomain)
-	dst.RequiredFaultDomain = s_14
+	s_12, _ := windows.UTF16PtrFromString(obj.RequiredFaultDomain)
+	dst.RequiredFaultDomain = s_12
 
 	return &dst
 }
@@ -2358,8 +2351,8 @@ func (obj *FabricPlacementPolicyPreferredPrimaryDomainDescription) toInnerStruct
 		return nil
 	}
 	dst := innerFabricPlacementPolicyPreferredPrimaryDomainDescription{}
-	s_15, _ := windows.UTF16PtrFromString(obj.PreferredPrimaryFaultDomain)
-	dst.PreferredPrimaryFaultDomain = s_15
+	s_13, _ := windows.UTF16PtrFromString(obj.PreferredPrimaryFaultDomain)
+	dst.PreferredPrimaryFaultDomain = s_13
 
 	return &dst
 }
@@ -2429,8 +2422,6 @@ type innerFabricServicePlacementPolicyList struct {
 func (obj *innerFabricServicePlacementPolicyList) toGoStruct() []FabricServicePlacementPolicyDescription {
 	var dst []FabricServicePlacementPolicyDescription
 	{
-		var lst []FabricServicePlacementPolicyDescription
-
 		var innerlst []innerFabricServicePlacementPolicyDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Policies), int(obj.PolicyCount))
 
@@ -2439,10 +2430,9 @@ func (obj *innerFabricServicePlacementPolicyList) toGoStruct() []FabricServicePl
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -2505,8 +2495,8 @@ func (obj *FabricNamedPartitionInformation) toInnerStruct() *innerFabricNamedPar
 	}
 	dst := innerFabricNamedPartitionInformation{}
 	dst.Id = obj.Id
-	s_17, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_17
+	s_14, _ := windows.UTF16PtrFromString(obj.Name)
+	dst.Name = s_14
 
 	return &dst
 }
@@ -2553,14 +2543,14 @@ func (obj *FabricContainerhostEntryPointDescription) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := innerFabricContainerhostEntryPointDescription{}
-	s_18, _ := windows.UTF16PtrFromString(obj.ImageName)
-	dst.ImageName = s_18
+	s_15, _ := windows.UTF16PtrFromString(obj.ImageName)
+	dst.ImageName = s_15
 
-	s_19, _ := windows.UTF16PtrFromString(obj.Commands)
-	dst.Commands = s_19
+	s_16, _ := windows.UTF16PtrFromString(obj.Commands)
+	dst.Commands = s_16
 
-	s_20, _ := windows.UTF16PtrFromString(obj.EntryPoint)
-	dst.EntryPoint = s_20
+	s_17, _ := windows.UTF16PtrFromString(obj.EntryPoint)
+	dst.EntryPoint = s_17
 
 	return &dst
 }
@@ -2594,11 +2584,11 @@ func (obj *FabricExehostEntryPointDescription) toInnerStruct() *innerFabricExeho
 		return nil
 	}
 	dst := innerFabricExehostEntryPointDescription{}
-	s_21, _ := windows.UTF16PtrFromString(obj.Program)
-	dst.Program = s_21
+	s_18, _ := windows.UTF16PtrFromString(obj.Program)
+	dst.Program = s_18
 
-	s_22, _ := windows.UTF16PtrFromString(obj.Arguments)
-	dst.Arguments = s_22
+	s_19, _ := windows.UTF16PtrFromString(obj.Arguments)
+	dst.Arguments = s_19
 
 	dst.WorkingFolder = obj.WorkingFolder
 	return &dst
@@ -2679,8 +2669,8 @@ func (obj *FabricDllhostHostedUnmanagedDllDescription) toInnerStruct() *innerFab
 		return nil
 	}
 	dst := innerFabricDllhostHostedUnmanagedDllDescription{}
-	s_23, _ := windows.UTF16PtrFromString(obj.DllName)
-	dst.DllName = s_23
+	s_20, _ := windows.UTF16PtrFromString(obj.DllName)
+	dst.DllName = s_20
 
 	return &dst
 }
@@ -2708,8 +2698,8 @@ func (obj *FabricDllhostHostedManagedDllDescription) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := innerFabricDllhostHostedManagedDllDescription{}
-	s_24, _ := windows.UTF16PtrFromString(obj.AssemblyName)
-	dst.AssemblyName = s_24
+	s_21, _ := windows.UTF16PtrFromString(obj.AssemblyName)
+	dst.AssemblyName = s_21
 
 	return &dst
 }
@@ -2736,8 +2726,6 @@ type innerFabricDllhostHostedDllDescriptionList struct {
 func (obj *innerFabricDllhostHostedDllDescriptionList) toGoStruct() []FabricDllhostHostedDllDescription {
 	var dst []FabricDllhostHostedDllDescription
 	{
-		var lst []FabricDllhostHostedDllDescription
-
 		var innerlst []innerFabricDllhostHostedDllDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -2746,10 +2734,9 @@ func (obj *innerFabricDllhostHostedDllDescriptionList) toGoStruct() []FabricDllh
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -2765,8 +2752,8 @@ func (obj *FabricDllhostEntryPointDescription) toInnerStruct() *innerFabricDllho
 	}
 	dst := innerFabricDllhostEntryPointDescription{}
 	dst.IsolationPolicyType = obj.IsolationPolicyType
+	lst_22 := &innerFabricDllhostHostedDllDescriptionList{}
 	{
-		lst := &innerFabricDllhostHostedDllDescriptionList{}
 
 		var tmp []innerFabricDllhostHostedDllDescription
 
@@ -2778,13 +2765,13 @@ func (obj *FabricDllhostEntryPointDescription) toInnerStruct() *innerFabricDllho
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_22.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_22.Items = &tmp[0]
 		}
 
-		dst.HostedDlls = lst
 	}
+	dst.HostedDlls = lst_22
 	return &dst
 }
 
@@ -2801,8 +2788,6 @@ func (obj *innerFabricDllhostEntryPointDescription) toGoStruct() *FabricDllhostE
 	dst := FabricDllhostEntryPointDescription{}
 	dst.IsolationPolicyType = obj.IsolationPolicyType
 	{
-		var lst []FabricDllhostHostedDllDescription
-
 		var innerlst []innerFabricDllhostHostedDllDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.HostedDlls.Items), int(obj.HostedDlls.Count))
 
@@ -2811,10 +2796,9 @@ func (obj *innerFabricDllhostEntryPointDescription) toGoStruct() *FabricDllhostE
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.HostedDlls = append(dst.HostedDlls, tmpitem)
 		}
 
-		dst.HostedDlls = lst
 	}
 	return &dst
 }
@@ -2834,17 +2818,17 @@ func (obj *FabricCodePackageDescription) toInnerStruct() *innerFabricCodePackage
 		return nil
 	}
 	dst := innerFabricCodePackageDescription{}
-	s_28, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_28
+	s_23, _ := windows.UTF16PtrFromString(obj.Name)
+	dst.Name = s_23
 
-	s_29, _ := windows.UTF16PtrFromString(obj.Version)
-	dst.Version = s_29
+	s_24, _ := windows.UTF16PtrFromString(obj.Version)
+	dst.Version = s_24
 
-	s_30, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_30
+	s_25, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
+	dst.ServiceManifestName = s_25
 
-	s_31, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
-	dst.ServiceManifestVersion = s_31
+	s_26, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
+	dst.ServiceManifestVersion = s_26
 
 	dst.IsShared = obj.IsShared
 	dst.SetupEntryPoint = obj.SetupEntryPoint.toInnerStruct()
@@ -2887,8 +2871,8 @@ func (obj *FabricRunasPolicyDescription) toInnerStruct() *innerFabricRunasPolicy
 		return nil
 	}
 	dst := innerFabricRunasPolicyDescription{}
-	s_32, _ := windows.UTF16PtrFromString(obj.UserName)
-	dst.UserName = s_32
+	s_27, _ := windows.UTF16PtrFromString(obj.UserName)
+	dst.UserName = s_27
 
 	return &dst
 }
@@ -2919,17 +2903,17 @@ func (obj *FabricConfigurationPackageDescription) toInnerStruct() *innerFabricCo
 		return nil
 	}
 	dst := innerFabricConfigurationPackageDescription{}
-	s_33, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_33
+	s_28, _ := windows.UTF16PtrFromString(obj.Name)
+	dst.Name = s_28
 
-	s_34, _ := windows.UTF16PtrFromString(obj.Version)
-	dst.Version = s_34
+	s_29, _ := windows.UTF16PtrFromString(obj.Version)
+	dst.Version = s_29
 
-	s_35, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_35
+	s_30, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
+	dst.ServiceManifestName = s_30
 
-	s_36, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
-	dst.ServiceManifestVersion = s_36
+	s_31, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
+	dst.ServiceManifestVersion = s_31
 
 	return &dst
 }
@@ -2966,17 +2950,17 @@ func (obj *FabricDataPackageDescription) toInnerStruct() *innerFabricDataPackage
 		return nil
 	}
 	dst := innerFabricDataPackageDescription{}
-	s_37, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_37
+	s_32, _ := windows.UTF16PtrFromString(obj.Name)
+	dst.Name = s_32
 
-	s_38, _ := windows.UTF16PtrFromString(obj.Version)
-	dst.Version = s_38
+	s_33, _ := windows.UTF16PtrFromString(obj.Version)
+	dst.Version = s_33
 
-	s_39, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_39
+	s_34, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
+	dst.ServiceManifestName = s_34
 
-	s_40, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
-	dst.ServiceManifestVersion = s_40
+	s_35, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
+	dst.ServiceManifestVersion = s_35
 
 	return &dst
 }
@@ -3024,8 +3008,6 @@ type innerFabricServiceTypeDescriptionList struct {
 func (obj *innerFabricServiceTypeDescriptionList) toGoStruct() []FabricServiceTypeDescription {
 	var dst []FabricServiceTypeDescription
 	{
-		var lst []FabricServiceTypeDescription
-
 		var innerlst []innerFabricServiceTypeDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -3034,10 +3016,9 @@ func (obj *innerFabricServiceTypeDescriptionList) toGoStruct() []FabricServiceTy
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -3052,11 +3033,11 @@ func (obj *FabricServiceTypeDescriptionExtension) toInnerStruct() *innerFabricSe
 		return nil
 	}
 	dst := innerFabricServiceTypeDescriptionExtension{}
-	s_42, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_42
+	s_36, _ := windows.UTF16PtrFromString(obj.Name)
+	dst.Name = s_36
 
-	s_43, _ := windows.UTF16PtrFromString(obj.Value)
-	dst.Value = s_43
+	s_37, _ := windows.UTF16PtrFromString(obj.Value)
+	dst.Value = s_37
 
 	return &dst
 }
@@ -3085,8 +3066,6 @@ type innerFabricServiceTypeDescriptionExtensionList struct {
 func (obj *innerFabricServiceTypeDescriptionExtensionList) toGoStruct() []FabricServiceTypeDescriptionExtension {
 	var dst []FabricServiceTypeDescriptionExtension
 	{
-		var lst []FabricServiceTypeDescriptionExtension
-
 		var innerlst []innerFabricServiceTypeDescriptionExtension
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -3095,10 +3074,9 @@ func (obj *innerFabricServiceTypeDescriptionExtensionList) toGoStruct() []Fabric
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -3116,14 +3094,14 @@ func (obj *FabricStatelessServiceTypeDescription) toInnerStruct() *innerFabricSt
 		return nil
 	}
 	dst := innerFabricStatelessServiceTypeDescription{}
-	s_45, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_45
+	s_38, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
+	dst.ServiceTypeName = s_38
 
-	s_46, _ := windows.UTF16PtrFromString(obj.PlacementConstraints)
-	dst.PlacementConstraints = s_46
+	s_39, _ := windows.UTF16PtrFromString(obj.PlacementConstraints)
+	dst.PlacementConstraints = s_39
 
+	lst_40 := &innerFabricServiceLoadMetricDescriptionList{}
 	{
-		lst := &innerFabricServiceLoadMetricDescriptionList{}
 
 		var tmp []innerFabricServiceLoadMetricDescription
 
@@ -3135,15 +3113,15 @@ func (obj *FabricStatelessServiceTypeDescription) toInnerStruct() *innerFabricSt
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_40.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_40.Items = &tmp[0]
 		}
 
-		dst.LoadMetrics = lst
 	}
+	dst.LoadMetrics = lst_40
+	lst_41 := &innerFabricServiceTypeDescriptionExtensionList{}
 	{
-		lst := &innerFabricServiceTypeDescriptionExtensionList{}
 
 		var tmp []innerFabricServiceTypeDescriptionExtension
 
@@ -3155,13 +3133,13 @@ func (obj *FabricStatelessServiceTypeDescription) toInnerStruct() *innerFabricSt
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_41.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_41.Items = &tmp[0]
 		}
 
-		dst.Extensions = lst
 	}
+	dst.Extensions = lst_41
 	dst.UseImplicitHost = obj.UseImplicitHost
 	return &dst
 }
@@ -3183,8 +3161,6 @@ func (obj *innerFabricStatelessServiceTypeDescription) toGoStruct() *FabricState
 	dst.ServiceTypeName = windows.UTF16PtrToString(obj.ServiceTypeName)
 	dst.PlacementConstraints = windows.UTF16PtrToString(obj.PlacementConstraints)
 	{
-		var lst []FabricServiceLoadMetricDescription
-
 		var innerlst []innerFabricServiceLoadMetricDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.LoadMetrics.Items), int(obj.LoadMetrics.Count))
 
@@ -3193,14 +3169,11 @@ func (obj *innerFabricStatelessServiceTypeDescription) toGoStruct() *FabricState
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.LoadMetrics = append(dst.LoadMetrics, tmpitem)
 		}
 
-		dst.LoadMetrics = lst
 	}
 	{
-		var lst []FabricServiceTypeDescriptionExtension
-
 		var innerlst []innerFabricServiceTypeDescriptionExtension
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Extensions.Items), int(obj.Extensions.Count))
 
@@ -3209,10 +3182,9 @@ func (obj *innerFabricStatelessServiceTypeDescription) toGoStruct() *FabricState
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.Extensions = append(dst.Extensions, tmpitem)
 		}
 
-		dst.Extensions = lst
 	}
 	dst.UseImplicitHost = obj.UseImplicitHost
 	return &dst
@@ -3227,8 +3199,8 @@ func (obj *FabricStatelessServiceTypeDescriptionEx1) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := innerFabricStatelessServiceTypeDescriptionEx1{}
+	lst_42 := &innerFabricServicePlacementPolicyList{}
 	{
-		lst := &innerFabricServicePlacementPolicyList{}
 
 		var tmp []innerFabricServicePlacementPolicyDescription
 
@@ -3240,13 +3212,13 @@ func (obj *FabricStatelessServiceTypeDescriptionEx1) toInnerStruct() *innerFabri
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.PolicyCount = uint32(len(tmp))
+		lst_42.PolicyCount = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Policies = &tmp[0]
+			lst_42.Policies = &tmp[0]
 		}
 
-		dst.PolicyList = lst
 	}
+	dst.PolicyList = lst_42
 	return &dst
 }
 
@@ -3261,8 +3233,6 @@ func (obj *innerFabricStatelessServiceTypeDescriptionEx1) toGoStruct() *FabricSt
 	}
 	dst := FabricStatelessServiceTypeDescriptionEx1{}
 	{
-		var lst []FabricServicePlacementPolicyDescription
-
 		var innerlst []innerFabricServicePlacementPolicyDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.PolicyList.Policies), int(obj.PolicyList.PolicyCount))
 
@@ -3271,10 +3241,9 @@ func (obj *innerFabricStatelessServiceTypeDescriptionEx1) toGoStruct() *FabricSt
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.PolicyList = append(dst.PolicyList, tmpitem)
 		}
 
-		dst.PolicyList = lst
 	}
 	return &dst
 }
@@ -3292,14 +3261,14 @@ func (obj *FabricStatefulServiceTypeDescription) toInnerStruct() *innerFabricSta
 		return nil
 	}
 	dst := innerFabricStatefulServiceTypeDescription{}
-	s_53, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_53
+	s_43, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
+	dst.ServiceTypeName = s_43
 
-	s_54, _ := windows.UTF16PtrFromString(obj.PlacementConstraints)
-	dst.PlacementConstraints = s_54
+	s_44, _ := windows.UTF16PtrFromString(obj.PlacementConstraints)
+	dst.PlacementConstraints = s_44
 
+	lst_45 := &innerFabricServiceLoadMetricDescriptionList{}
 	{
-		lst := &innerFabricServiceLoadMetricDescriptionList{}
 
 		var tmp []innerFabricServiceLoadMetricDescription
 
@@ -3311,15 +3280,15 @@ func (obj *FabricStatefulServiceTypeDescription) toInnerStruct() *innerFabricSta
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_45.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_45.Items = &tmp[0]
 		}
 
-		dst.LoadMetrics = lst
 	}
+	dst.LoadMetrics = lst_45
+	lst_46 := &innerFabricServiceTypeDescriptionExtensionList{}
 	{
-		lst := &innerFabricServiceTypeDescriptionExtensionList{}
 
 		var tmp []innerFabricServiceTypeDescriptionExtension
 
@@ -3331,13 +3300,13 @@ func (obj *FabricStatefulServiceTypeDescription) toInnerStruct() *innerFabricSta
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_46.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_46.Items = &tmp[0]
 		}
 
-		dst.Extensions = lst
 	}
+	dst.Extensions = lst_46
 	dst.HasPersistedState = obj.HasPersistedState
 	return &dst
 }
@@ -3359,8 +3328,6 @@ func (obj *innerFabricStatefulServiceTypeDescription) toGoStruct() *FabricStatef
 	dst.ServiceTypeName = windows.UTF16PtrToString(obj.ServiceTypeName)
 	dst.PlacementConstraints = windows.UTF16PtrToString(obj.PlacementConstraints)
 	{
-		var lst []FabricServiceLoadMetricDescription
-
 		var innerlst []innerFabricServiceLoadMetricDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.LoadMetrics.Items), int(obj.LoadMetrics.Count))
 
@@ -3369,14 +3336,11 @@ func (obj *innerFabricStatefulServiceTypeDescription) toGoStruct() *FabricStatef
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.LoadMetrics = append(dst.LoadMetrics, tmpitem)
 		}
 
-		dst.LoadMetrics = lst
 	}
 	{
-		var lst []FabricServiceTypeDescriptionExtension
-
 		var innerlst []innerFabricServiceTypeDescriptionExtension
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Extensions.Items), int(obj.Extensions.Count))
 
@@ -3385,10 +3349,9 @@ func (obj *innerFabricStatefulServiceTypeDescription) toGoStruct() *FabricStatef
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.Extensions = append(dst.Extensions, tmpitem)
 		}
 
-		dst.Extensions = lst
 	}
 	dst.HasPersistedState = obj.HasPersistedState
 	return &dst
@@ -3403,8 +3366,8 @@ func (obj *FabricStatefulServiceTypeDescriptionEx1) toInnerStruct() *innerFabric
 		return nil
 	}
 	dst := innerFabricStatefulServiceTypeDescriptionEx1{}
+	lst_47 := &innerFabricServicePlacementPolicyList{}
 	{
-		lst := &innerFabricServicePlacementPolicyList{}
 
 		var tmp []innerFabricServicePlacementPolicyDescription
 
@@ -3416,13 +3379,13 @@ func (obj *FabricStatefulServiceTypeDescriptionEx1) toInnerStruct() *innerFabric
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.PolicyCount = uint32(len(tmp))
+		lst_47.PolicyCount = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Policies = &tmp[0]
+			lst_47.Policies = &tmp[0]
 		}
 
-		dst.PolicyList = lst
 	}
+	dst.PolicyList = lst_47
 	return &dst
 }
 
@@ -3437,8 +3400,6 @@ func (obj *innerFabricStatefulServiceTypeDescriptionEx1) toGoStruct() *FabricSta
 	}
 	dst := FabricStatefulServiceTypeDescriptionEx1{}
 	{
-		var lst []FabricServicePlacementPolicyDescription
-
 		var innerlst []innerFabricServicePlacementPolicyDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.PolicyList.Policies), int(obj.PolicyList.PolicyCount))
 
@@ -3447,10 +3408,9 @@ func (obj *innerFabricStatefulServiceTypeDescriptionEx1) toGoStruct() *FabricSta
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.PolicyList = append(dst.PolicyList, tmpitem)
 		}
 
-		dst.PolicyList = lst
 	}
 	return &dst
 }
@@ -3465,11 +3425,11 @@ func (obj *FabricServiceGroupTypeMemberDescription) toInnerStruct() *innerFabric
 		return nil
 	}
 	dst := innerFabricServiceGroupTypeMemberDescription{}
-	s_61, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_61
+	s_48, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
+	dst.ServiceTypeName = s_48
 
+	lst_49 := &innerFabricServiceLoadMetricDescriptionList{}
 	{
-		lst := &innerFabricServiceLoadMetricDescriptionList{}
 
 		var tmp []innerFabricServiceLoadMetricDescription
 
@@ -3481,13 +3441,13 @@ func (obj *FabricServiceGroupTypeMemberDescription) toInnerStruct() *innerFabric
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_49.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_49.Items = &tmp[0]
 		}
 
-		dst.LoadMetrics = lst
 	}
+	dst.LoadMetrics = lst_49
 	return &dst
 }
 
@@ -3504,8 +3464,6 @@ func (obj *innerFabricServiceGroupTypeMemberDescription) toGoStruct() *FabricSer
 	dst := FabricServiceGroupTypeMemberDescription{}
 	dst.ServiceTypeName = windows.UTF16PtrToString(obj.ServiceTypeName)
 	{
-		var lst []FabricServiceLoadMetricDescription
-
 		var innerlst []innerFabricServiceLoadMetricDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.LoadMetrics.Items), int(obj.LoadMetrics.Count))
 
@@ -3514,10 +3472,9 @@ func (obj *innerFabricServiceGroupTypeMemberDescription) toGoStruct() *FabricSer
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.LoadMetrics = append(dst.LoadMetrics, tmpitem)
 		}
 
-		dst.LoadMetrics = lst
 	}
 	return &dst
 }
@@ -3530,8 +3487,6 @@ type innerFabricServiceGroupTypeMemberDescriptionList struct {
 func (obj *innerFabricServiceGroupTypeMemberDescriptionList) toGoStruct() []FabricServiceGroupTypeMemberDescription {
 	var dst []FabricServiceGroupTypeMemberDescription
 	{
-		var lst []FabricServiceGroupTypeMemberDescription
-
 		var innerlst []innerFabricServiceGroupTypeMemberDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -3540,10 +3495,9 @@ func (obj *innerFabricServiceGroupTypeMemberDescriptionList) toGoStruct() []Fabr
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -3560,8 +3514,8 @@ func (obj *FabricServiceGroupTypeDescription) toInnerStruct() *innerFabricServic
 	}
 	dst := innerFabricServiceGroupTypeDescription{}
 	dst.Description = obj.Description.toInnerStruct()
+	lst_50 := &innerFabricServiceGroupTypeMemberDescriptionList{}
 	{
-		lst := &innerFabricServiceGroupTypeMemberDescriptionList{}
 
 		var tmp []innerFabricServiceGroupTypeMemberDescription
 
@@ -3573,13 +3527,13 @@ func (obj *FabricServiceGroupTypeDescription) toInnerStruct() *innerFabricServic
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_50.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_50.Items = &tmp[0]
 		}
 
-		dst.Members = lst
 	}
+	dst.Members = lst_50
 	dst.UseImplicitFactory = obj.UseImplicitFactory
 	return &dst
 }
@@ -3598,8 +3552,6 @@ func (obj *innerFabricServiceGroupTypeDescription) toGoStruct() *FabricServiceGr
 	dst := FabricServiceGroupTypeDescription{}
 	dst.Description = obj.Description.toGoStruct()
 	{
-		var lst []FabricServiceGroupTypeMemberDescription
-
 		var innerlst []innerFabricServiceGroupTypeMemberDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Members.Items), int(obj.Members.Count))
 
@@ -3608,10 +3560,9 @@ func (obj *innerFabricServiceGroupTypeDescription) toGoStruct() *FabricServiceGr
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.Members = append(dst.Members, tmpitem)
 		}
 
-		dst.Members = lst
 	}
 	dst.UseImplicitFactory = obj.UseImplicitFactory
 	return &dst
@@ -3625,8 +3576,6 @@ type innerFabricServiceGroupTypeDescriptionList struct {
 func (obj *innerFabricServiceGroupTypeDescriptionList) toGoStruct() []FabricServiceGroupTypeDescription {
 	var dst []FabricServiceGroupTypeDescription
 	{
-		var lst []FabricServiceGroupTypeDescription
-
 		var innerlst []innerFabricServiceGroupTypeDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -3635,10 +3584,9 @@ func (obj *innerFabricServiceGroupTypeDescriptionList) toGoStruct() []FabricServ
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -3656,18 +3604,18 @@ func (obj *FabricEndpointResourceDescription) toInnerStruct() *innerFabricEndpoi
 		return nil
 	}
 	dst := innerFabricEndpointResourceDescription{}
-	s_68, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_68
+	s_51, _ := windows.UTF16PtrFromString(obj.Name)
+	dst.Name = s_51
 
-	s_69, _ := windows.UTF16PtrFromString(obj.Protocol)
-	dst.Protocol = s_69
+	s_52, _ := windows.UTF16PtrFromString(obj.Protocol)
+	dst.Protocol = s_52
 
-	s_70, _ := windows.UTF16PtrFromString(obj.Type)
-	dst.Type = s_70
+	s_53, _ := windows.UTF16PtrFromString(obj.Type)
+	dst.Type = s_53
 
 	dst.Port = obj.Port
-	s_71, _ := windows.UTF16PtrFromString(obj.CertificateName)
-	dst.CertificateName = s_71
+	s_54, _ := windows.UTF16PtrFromString(obj.CertificateName)
+	dst.CertificateName = s_54
 
 	return &dst
 }
@@ -3704,11 +3652,11 @@ func (obj *FabricEndpointResourceDescriptionEx1) toInnerStruct() *innerFabricEnd
 		return nil
 	}
 	dst := innerFabricEndpointResourceDescriptionEx1{}
-	s_72, _ := windows.UTF16PtrFromString(obj.UriScheme)
-	dst.UriScheme = s_72
+	s_55, _ := windows.UTF16PtrFromString(obj.UriScheme)
+	dst.UriScheme = s_55
 
-	s_73, _ := windows.UTF16PtrFromString(obj.PathSuffix)
-	dst.PathSuffix = s_73
+	s_56, _ := windows.UTF16PtrFromString(obj.PathSuffix)
+	dst.PathSuffix = s_56
 
 	return &dst
 }
@@ -3739,11 +3687,11 @@ func (obj *FabricEndpointResourceDescriptionEx2) toInnerStruct() *innerFabricEnd
 		return nil
 	}
 	dst := innerFabricEndpointResourceDescriptionEx2{}
-	s_74, _ := windows.UTF16PtrFromString(obj.CodePackageName)
-	dst.CodePackageName = s_74
+	s_57, _ := windows.UTF16PtrFromString(obj.CodePackageName)
+	dst.CodePackageName = s_57
 
-	s_75, _ := windows.UTF16PtrFromString(obj.IpAddressOrFqdn)
-	dst.IpAddressOrFqdn = s_75
+	s_58, _ := windows.UTF16PtrFromString(obj.IpAddressOrFqdn)
+	dst.IpAddressOrFqdn = s_58
 
 	return &dst
 }
@@ -3772,8 +3720,6 @@ type innerFabricEndpointResourceDescriptionList struct {
 func (obj *innerFabricEndpointResourceDescriptionList) toGoStruct() []FabricEndpointResourceDescription {
 	var dst []FabricEndpointResourceDescription
 	{
-		var lst []FabricEndpointResourceDescription
-
 		var innerlst []innerFabricEndpointResourceDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -3782,10 +3728,9 @@ func (obj *innerFabricEndpointResourceDescriptionList) toGoStruct() []FabricEndp
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -3798,8 +3743,6 @@ type innerFabricCodePackageDescriptionList struct {
 func (obj *innerFabricCodePackageDescriptionList) toGoStruct() []FabricCodePackageDescription {
 	var dst []FabricCodePackageDescription
 	{
-		var lst []FabricCodePackageDescription
-
 		var innerlst []innerFabricCodePackageDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -3808,10 +3751,9 @@ func (obj *innerFabricCodePackageDescriptionList) toGoStruct() []FabricCodePacka
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -3824,8 +3766,6 @@ type innerFabricConfigurationPackageDescriptionList struct {
 func (obj *innerFabricConfigurationPackageDescriptionList) toGoStruct() []FabricConfigurationPackageDescription {
 	var dst []FabricConfigurationPackageDescription
 	{
-		var lst []FabricConfigurationPackageDescription
-
 		var innerlst []innerFabricConfigurationPackageDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -3834,10 +3774,9 @@ func (obj *innerFabricConfigurationPackageDescriptionList) toGoStruct() []Fabric
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -3850,8 +3789,6 @@ type innerFabricDataPackageDescriptionList struct {
 func (obj *innerFabricDataPackageDescriptionList) toGoStruct() []FabricDataPackageDescription {
 	var dst []FabricDataPackageDescription
 	{
-		var lst []FabricDataPackageDescription
-
 		var innerlst []innerFabricDataPackageDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -3860,10 +3797,9 @@ func (obj *innerFabricDataPackageDescriptionList) toGoStruct() []FabricDataPacka
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -3880,11 +3816,11 @@ func (obj *FabricConfigurationParameter) toInnerStruct() *innerFabricConfigurati
 		return nil
 	}
 	dst := innerFabricConfigurationParameter{}
-	s_80, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_80
+	s_59, _ := windows.UTF16PtrFromString(obj.Name)
+	dst.Name = s_59
 
-	s_81, _ := windows.UTF16PtrFromString(obj.Value)
-	dst.Value = s_81
+	s_60, _ := windows.UTF16PtrFromString(obj.Value)
+	dst.Value = s_60
 
 	dst.MustOverride = obj.MustOverride
 	dst.IsEncrypted = obj.IsEncrypted
@@ -3920,8 +3856,8 @@ func (obj *FabricConfigurationParameterEx1) toInnerStruct() *innerFabricConfigur
 		return nil
 	}
 	dst := innerFabricConfigurationParameterEx1{}
-	s_82, _ := windows.UTF16PtrFromString(obj.Type)
-	dst.Type = s_82
+	s_61, _ := windows.UTF16PtrFromString(obj.Type)
+	dst.Type = s_61
 
 	return &dst
 }
@@ -3948,8 +3884,6 @@ type innerFabricConfigurationParameterList struct {
 func (obj *innerFabricConfigurationParameterList) toGoStruct() []FabricConfigurationParameter {
 	var dst []FabricConfigurationParameter
 	{
-		var lst []FabricConfigurationParameter
-
 		var innerlst []innerFabricConfigurationParameter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -3958,10 +3892,9 @@ func (obj *innerFabricConfigurationParameterList) toGoStruct() []FabricConfigura
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -3976,11 +3909,11 @@ func (obj *FabricConfigurationSection) toInnerStruct() *innerFabricConfiguration
 		return nil
 	}
 	dst := innerFabricConfigurationSection{}
-	s_84, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_84
+	s_62, _ := windows.UTF16PtrFromString(obj.Name)
+	dst.Name = s_62
 
+	lst_63 := &innerFabricConfigurationParameterList{}
 	{
-		lst := &innerFabricConfigurationParameterList{}
 
 		var tmp []innerFabricConfigurationParameter
 
@@ -3992,13 +3925,13 @@ func (obj *FabricConfigurationSection) toInnerStruct() *innerFabricConfiguration
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_63.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_63.Items = &tmp[0]
 		}
 
-		dst.Parameters = lst
 	}
+	dst.Parameters = lst_63
 	return &dst
 }
 
@@ -4015,8 +3948,6 @@ func (obj *innerFabricConfigurationSection) toGoStruct() *FabricConfigurationSec
 	dst := FabricConfigurationSection{}
 	dst.Name = windows.UTF16PtrToString(obj.Name)
 	{
-		var lst []FabricConfigurationParameter
-
 		var innerlst []innerFabricConfigurationParameter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Parameters.Items), int(obj.Parameters.Count))
 
@@ -4025,10 +3956,9 @@ func (obj *innerFabricConfigurationSection) toGoStruct() *FabricConfigurationSec
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.Parameters = append(dst.Parameters, tmpitem)
 		}
 
-		dst.Parameters = lst
 	}
 	return &dst
 }
@@ -4041,8 +3971,6 @@ type innerFabricConfigurationSectionList struct {
 func (obj *innerFabricConfigurationSectionList) toGoStruct() []FabricConfigurationSection {
 	var dst []FabricConfigurationSection
 	{
-		var lst []FabricConfigurationSection
-
 		var innerlst []innerFabricConfigurationSection
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -4051,10 +3979,9 @@ func (obj *innerFabricConfigurationSectionList) toGoStruct() []FabricConfigurati
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -4068,8 +3995,8 @@ func (obj *FabricConfigurationSettings) toInnerStruct() *innerFabricConfiguratio
 		return nil
 	}
 	dst := innerFabricConfigurationSettings{}
+	lst_64 := &innerFabricConfigurationSectionList{}
 	{
-		lst := &innerFabricConfigurationSectionList{}
 
 		var tmp []innerFabricConfigurationSection
 
@@ -4081,13 +4008,13 @@ func (obj *FabricConfigurationSettings) toInnerStruct() *innerFabricConfiguratio
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_64.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_64.Items = &tmp[0]
 		}
 
-		dst.Sections = lst
 	}
+	dst.Sections = lst_64
 	return &dst
 }
 
@@ -4102,8 +4029,6 @@ func (obj *innerFabricConfigurationSettings) toGoStruct() *FabricConfigurationSe
 	}
 	dst := FabricConfigurationSettings{}
 	{
-		var lst []FabricConfigurationSection
-
 		var innerlst []innerFabricConfigurationSection
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Sections.Items), int(obj.Sections.Count))
 
@@ -4112,10 +4037,9 @@ func (obj *innerFabricConfigurationSettings) toGoStruct() *FabricConfigurationSe
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.Sections = append(dst.Sections, tmpitem)
 		}
 
-		dst.Sections = lst
 	}
 	return &dst
 }
@@ -4128,8 +4052,6 @@ type innerFabricStringList struct {
 func (obj *innerFabricStringList) toGoStruct() []string {
 	var dst []string
 	{
-		var lst []string
-
 		var innerlst []*uint16
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -4138,10 +4060,9 @@ func (obj *innerFabricStringList) toGoStruct() []string {
 
 			tmpitem = windows.UTF16PtrToString(item)
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -4196,8 +4117,8 @@ func (obj *FabricReplicaInformation) toInnerStruct() *innerFabricReplicaInformat
 	dst.Id = obj.Id
 	dst.Role = obj.Role
 	dst.Status = obj.Status
-	s_91, _ := windows.UTF16PtrFromString(obj.ReplicatorAddress)
-	dst.ReplicatorAddress = s_91
+	s_65, _ := windows.UTF16PtrFromString(obj.ReplicatorAddress)
+	dst.ReplicatorAddress = s_65
 
 	dst.CurrentProgress = obj.CurrentProgress
 	dst.CatchUpCapability = obj.CatchUpCapability
@@ -4244,9 +4165,8 @@ func (obj *FabricReplicaInformationEx1) toInnerStruct() *innerFabricReplicaInfor
 }
 
 type FabricReplicaSetConfiguration struct {
-	ReplicaCount uint32
-	Replicas     *FabricReplicaInformation
-	WriteQuorum  uint32
+	Replicas    []FabricReplicaInformation
+	WriteQuorum uint32
 }
 type innerFabricReplicaSetConfiguration struct {
 	FabricReplicaSetConfiguration
@@ -4270,8 +4190,8 @@ func (obj *FabricLoadMetric) toInnerStruct() *innerFabricLoadMetric {
 		return nil
 	}
 	dst := innerFabricLoadMetric{}
-	s_92, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_92
+	s_66, _ := windows.UTF16PtrFromString(obj.Name)
+	dst.Name = s_66
 
 	dst.Value = obj.Value
 	return &dst
@@ -4329,8 +4249,8 @@ func (obj *FabricReplicatorSettings) toInnerStruct() *innerFabricReplicatorSetti
 	dst.Flags = obj.Flags
 	dst.RetryIntervalMilliseconds = obj.RetryIntervalMilliseconds
 	dst.BatchAcknowledgementIntervalMilliseconds = obj.BatchAcknowledgementIntervalMilliseconds
-	s_93, _ := windows.UTF16PtrFromString(obj.ReplicatorAddress)
-	dst.ReplicatorAddress = s_93
+	s_67, _ := windows.UTF16PtrFromString(obj.ReplicatorAddress)
+	dst.ReplicatorAddress = s_67
 
 	dst.RequireServiceAck = obj.RequireServiceAck
 	dst.InitialReplicationQueueSize = obj.InitialReplicationQueueSize
@@ -4436,11 +4356,11 @@ func (obj *FabricReplicatorSettingsEx4) toInnerStruct() *innerFabricReplicatorSe
 		return nil
 	}
 	dst := innerFabricReplicatorSettingsEx4{}
-	s_94, _ := windows.UTF16PtrFromString(obj.ReplicatorListenAddress)
-	dst.ReplicatorListenAddress = s_94
+	s_68, _ := windows.UTF16PtrFromString(obj.ReplicatorListenAddress)
+	dst.ReplicatorListenAddress = s_68
 
-	s_95, _ := windows.UTF16PtrFromString(obj.ReplicatorPublishAddress)
-	dst.ReplicatorPublishAddress = s_95
+	s_69, _ := windows.UTF16PtrFromString(obj.ReplicatorPublishAddress)
+	dst.ReplicatorPublishAddress = s_69
 
 	return &dst
 }
@@ -4475,15 +4395,15 @@ func (obj *FabricNamedPropertyMetadata) toInnerStruct() *innerFabricNamedPropert
 		return nil
 	}
 	dst := innerFabricNamedPropertyMetadata{}
-	s_96, _ := windows.UTF16PtrFromString(obj.PropertyName)
-	dst.PropertyName = s_96
+	s_70, _ := windows.UTF16PtrFromString(obj.PropertyName)
+	dst.PropertyName = s_70
 
 	dst.TypeId = obj.TypeId
 	dst.ValueSize = obj.ValueSize
 	dst.SequenceNumber = obj.SequenceNumber
 	dst.LastModifiedUtc = windows.NsecToFiletime(obj.LastModifiedUtc.UnixNano())
-	s_97, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_97
+	s_71, _ := windows.UTF16PtrFromString(obj.Name)
+	dst.Name = s_71
 
 	return &dst
 }
@@ -4521,8 +4441,8 @@ func (obj *FabricNamedPropertyMetadataEx1) toInnerStruct() *innerFabricNamedProp
 		return nil
 	}
 	dst := innerFabricNamedPropertyMetadataEx1{}
-	s_98, _ := windows.UTF16PtrFromString(obj.CustomTypeId)
-	dst.CustomTypeId = s_98
+	s_72, _ := windows.UTF16PtrFromString(obj.CustomTypeId)
+	dst.CustomTypeId = s_72
 
 	return &dst
 }
@@ -4568,8 +4488,8 @@ func (obj *FabricPutPropertyOperation) toInnerStruct() *innerFabricPutPropertyOp
 		return nil
 	}
 	dst := innerFabricPutPropertyOperation{}
-	s_99, _ := windows.UTF16PtrFromString(obj.PropertyName)
-	dst.PropertyName = s_99
+	s_73, _ := windows.UTF16PtrFromString(obj.PropertyName)
+	dst.PropertyName = s_73
 
 	dst.PropertyTypeId = obj.PropertyTypeId
 	dst.PropertyValue = toUnsafePointer(obj.PropertyValue)
@@ -4606,13 +4526,13 @@ func (obj *FabricPutCustomPropertyOperation) toInnerStruct() *innerFabricPutCust
 		return nil
 	}
 	dst := innerFabricPutCustomPropertyOperation{}
-	s_100, _ := windows.UTF16PtrFromString(obj.PropertyName)
-	dst.PropertyName = s_100
+	s_74, _ := windows.UTF16PtrFromString(obj.PropertyName)
+	dst.PropertyName = s_74
 
 	dst.PropertyTypeId = obj.PropertyTypeId
 	dst.PropertyValue = toUnsafePointer(obj.PropertyValue)
-	s_101, _ := windows.UTF16PtrFromString(obj.PropertyCustomTypeId)
-	dst.PropertyCustomTypeId = s_101
+	s_75, _ := windows.UTF16PtrFromString(obj.PropertyCustomTypeId)
+	dst.PropertyCustomTypeId = s_75
 
 	return &dst
 }
@@ -4647,8 +4567,8 @@ func (obj *FabricGetPropertyOperation) toInnerStruct() *innerFabricGetPropertyOp
 		return nil
 	}
 	dst := innerFabricGetPropertyOperation{}
-	s_102, _ := windows.UTF16PtrFromString(obj.PropertyName)
-	dst.PropertyName = s_102
+	s_76, _ := windows.UTF16PtrFromString(obj.PropertyName)
+	dst.PropertyName = s_76
 
 	dst.IncludeValue = obj.IncludeValue
 	return &dst
@@ -4679,8 +4599,8 @@ func (obj *FabricDeletePropertyOperation) toInnerStruct() *innerFabricDeleteProp
 		return nil
 	}
 	dst := innerFabricDeletePropertyOperation{}
-	s_103, _ := windows.UTF16PtrFromString(obj.PropertyName)
-	dst.PropertyName = s_103
+	s_77, _ := windows.UTF16PtrFromString(obj.PropertyName)
+	dst.PropertyName = s_77
 
 	return &dst
 }
@@ -4709,8 +4629,8 @@ func (obj *FabricCheckSequencePropertyOperation) toInnerStruct() *innerFabricChe
 		return nil
 	}
 	dst := innerFabricCheckSequencePropertyOperation{}
-	s_104, _ := windows.UTF16PtrFromString(obj.PropertyName)
-	dst.PropertyName = s_104
+	s_78, _ := windows.UTF16PtrFromString(obj.PropertyName)
+	dst.PropertyName = s_78
 
 	dst.SequenceNumber = obj.SequenceNumber
 	return &dst
@@ -4742,8 +4662,8 @@ func (obj *FabricCheckExistsPropertyOperation) toInnerStruct() *innerFabricCheck
 		return nil
 	}
 	dst := innerFabricCheckExistsPropertyOperation{}
-	s_105, _ := windows.UTF16PtrFromString(obj.PropertyName)
-	dst.PropertyName = s_105
+	s_79, _ := windows.UTF16PtrFromString(obj.PropertyName)
+	dst.PropertyName = s_79
 
 	dst.ExistenceCheck = obj.ExistenceCheck
 	return &dst
@@ -4776,8 +4696,8 @@ func (obj *FabricCheckValuePropertyOperation) toInnerStruct() *innerFabricCheckV
 		return nil
 	}
 	dst := innerFabricCheckValuePropertyOperation{}
-	s_106, _ := windows.UTF16PtrFromString(obj.PropertyName)
-	dst.PropertyName = s_106
+	s_80, _ := windows.UTF16PtrFromString(obj.PropertyName)
+	dst.PropertyName = s_80
 
 	dst.PropertyTypeId = obj.PropertyTypeId
 	dst.PropertyValue = toUnsafePointer(obj.PropertyValue)
@@ -4860,8 +4780,8 @@ func (obj *FabricNodeStopDescription) toInnerStruct() *innerFabricNodeStopDescri
 	}
 	dst := innerFabricNodeStopDescription{}
 	dst.OperationId = obj.OperationId
-	s_107, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_107
+	s_81, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_81
 
 	dst.NodeInstanceId = obj.NodeInstanceId
 	dst.StopDurationInSeconds = obj.StopDurationInSeconds
@@ -4900,8 +4820,8 @@ func (obj *FabricNodeStartDescription) toInnerStruct() *innerFabricNodeStartDesc
 	}
 	dst := innerFabricNodeStartDescription{}
 	dst.OperationId = obj.OperationId
-	s_108, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_108
+	s_82, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_82
 
 	dst.NodeInstanceId = obj.NodeInstanceId
 	return &dst
@@ -4950,8 +4870,8 @@ func (obj *FabricDeleteServiceDescription) toInnerStruct() *innerFabricDeleteSer
 		return nil
 	}
 	dst := innerFabricDeleteServiceDescription{}
-	s_109, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_109
+	s_83, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_83
 
 	dst.ForceDelete = obj.ForceDelete
 	return &dst
@@ -4988,17 +4908,17 @@ func (obj *FabricServiceFromTemplateDescription) toInnerStruct() *innerFabricSer
 		return nil
 	}
 	dst := innerFabricServiceFromTemplateDescription{}
-	s_110, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_110
+	s_84, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_84
 
-	s_111, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_111
+	s_85, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_85
 
-	s_112, _ := windows.UTF16PtrFromString(obj.ServiceDnsName)
-	dst.ServiceDnsName = s_112
+	s_86, _ := windows.UTF16PtrFromString(obj.ServiceDnsName)
+	dst.ServiceDnsName = s_86
 
-	s_113, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_113
+	s_87, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
+	dst.ServiceTypeName = s_87
 
 	dst.ServicePackageActivationMode = obj.ServicePackageActivationMode
 	dst.InitializationDataSize = obj.InitializationDataSize
@@ -5046,14 +4966,14 @@ func (obj *FabricServiceGroupFromTemplateDescription) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := innerFabricServiceGroupFromTemplateDescription{}
-	s_114, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_114
+	s_88, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_88
 
-	s_115, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_115
+	s_89, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_89
 
-	s_116, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_116
+	s_90, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
+	dst.ServiceTypeName = s_90
 
 	dst.ServicePackageActivationMode = obj.ServicePackageActivationMode
 	dst.InitializationDataSize = obj.InitializationDataSize
@@ -5095,8 +5015,8 @@ func (obj *FabricUpgradeDomainStatusDescription) toInnerStruct() *innerFabricUpg
 		return nil
 	}
 	dst := innerFabricUpgradeDomainStatusDescription{}
-	s_117, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_117
+	s_91, _ := windows.UTF16PtrFromString(obj.Name)
+	dst.Name = s_91
 
 	dst.State = obj.State
 	return &dst
@@ -5126,8 +5046,6 @@ type innerFabricUpgradeDomainStatusDescriptionList struct {
 func (obj *innerFabricUpgradeDomainStatusDescriptionList) toGoStruct() []FabricUpgradeDomainStatusDescription {
 	var dst []FabricUpgradeDomainStatusDescription
 	{
-		var lst []FabricUpgradeDomainStatusDescription
-
 		var innerlst []innerFabricUpgradeDomainStatusDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -5136,10 +5054,9 @@ func (obj *innerFabricUpgradeDomainStatusDescriptionList) toGoStruct() []FabricU
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -5196,8 +5113,6 @@ type innerFabricUpgradeSafetyCheckList struct {
 func (obj *innerFabricUpgradeSafetyCheckList) toGoStruct() []FabricUpgradeSafetyCheck {
 	var dst []FabricUpgradeSafetyCheck
 	{
-		var lst []FabricUpgradeSafetyCheck
-
 		var innerlst []innerFabricUpgradeSafetyCheck
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -5206,10 +5121,9 @@ func (obj *innerFabricUpgradeSafetyCheckList) toGoStruct() []FabricUpgradeSafety
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -5225,12 +5139,12 @@ func (obj *FabricNodeUpgradeProgress) toInnerStruct() *innerFabricNodeUpgradePro
 		return nil
 	}
 	dst := innerFabricNodeUpgradeProgress{}
-	s_120, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_120
+	s_92, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_92
 
 	dst.UpgradePhase = obj.UpgradePhase
+	lst_93 := &innerFabricUpgradeSafetyCheckList{}
 	{
-		lst := &innerFabricUpgradeSafetyCheckList{}
 
 		var tmp []innerFabricUpgradeSafetyCheck
 
@@ -5242,13 +5156,13 @@ func (obj *FabricNodeUpgradeProgress) toInnerStruct() *innerFabricNodeUpgradePro
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_93.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_93.Items = &tmp[0]
 		}
 
-		dst.PendingSafetyChecks = lst
 	}
+	dst.PendingSafetyChecks = lst_93
 	return &dst
 }
 
@@ -5267,8 +5181,6 @@ func (obj *innerFabricNodeUpgradeProgress) toGoStruct() *FabricNodeUpgradeProgre
 	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
 	dst.UpgradePhase = obj.UpgradePhase
 	{
-		var lst []FabricUpgradeSafetyCheck
-
 		var innerlst []innerFabricUpgradeSafetyCheck
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.PendingSafetyChecks.Items), int(obj.PendingSafetyChecks.Count))
 
@@ -5277,10 +5189,9 @@ func (obj *innerFabricNodeUpgradeProgress) toGoStruct() *FabricNodeUpgradeProgre
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.PendingSafetyChecks = append(dst.PendingSafetyChecks, tmpitem)
 		}
 
-		dst.PendingSafetyChecks = lst
 	}
 	return &dst
 }
@@ -5293,8 +5204,6 @@ type innerFabricNodeUpgradeProgressList struct {
 func (obj *innerFabricNodeUpgradeProgressList) toGoStruct() []FabricNodeUpgradeProgress {
 	var dst []FabricNodeUpgradeProgress
 	{
-		var lst []FabricNodeUpgradeProgress
-
 		var innerlst []innerFabricNodeUpgradeProgress
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -5303,10 +5212,9 @@ func (obj *innerFabricNodeUpgradeProgressList) toGoStruct() []FabricNodeUpgradeP
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -5321,11 +5229,11 @@ func (obj *FabricUpgradeDomainProgress) toInnerStruct() *innerFabricUpgradeDomai
 		return nil
 	}
 	dst := innerFabricUpgradeDomainProgress{}
-	s_124, _ := windows.UTF16PtrFromString(obj.UpgradeDomainName)
-	dst.UpgradeDomainName = s_124
+	s_94, _ := windows.UTF16PtrFromString(obj.UpgradeDomainName)
+	dst.UpgradeDomainName = s_94
 
+	lst_95 := &innerFabricNodeUpgradeProgressList{}
 	{
-		lst := &innerFabricNodeUpgradeProgressList{}
 
 		var tmp []innerFabricNodeUpgradeProgress
 
@@ -5337,13 +5245,13 @@ func (obj *FabricUpgradeDomainProgress) toInnerStruct() *innerFabricUpgradeDomai
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_95.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_95.Items = &tmp[0]
 		}
 
-		dst.NodeProgressList = lst
 	}
+	dst.NodeProgressList = lst_95
 	return &dst
 }
 
@@ -5360,8 +5268,6 @@ func (obj *innerFabricUpgradeDomainProgress) toGoStruct() *FabricUpgradeDomainPr
 	dst := FabricUpgradeDomainProgress{}
 	dst.UpgradeDomainName = windows.UTF16PtrToString(obj.UpgradeDomainName)
 	{
-		var lst []FabricNodeUpgradeProgress
-
 		var innerlst []innerFabricNodeUpgradeProgress
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.NodeProgressList.Items), int(obj.NodeProgressList.Count))
 
@@ -5370,10 +5276,9 @@ func (obj *innerFabricUpgradeDomainProgress) toGoStruct() *FabricUpgradeDomainPr
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.NodeProgressList = append(dst.NodeProgressList, tmpitem)
 		}
 
-		dst.NodeProgressList = lst
 	}
 	return &dst
 }
@@ -5382,8 +5287,7 @@ type FabricStatelessServiceDescription struct {
 	ApplicationName            string
 	ServiceName                string
 	ServiceTypeName            string
-	InitializationDataSize     uint32
-	InitializationData         *byte
+	InitializationData         []byte
 	PartitionScheme            FabricPartitionScheme
 	PartitionSchemeDescription interface{}
 	InstanceCount              int32
@@ -5399,22 +5303,38 @@ func (obj *FabricStatelessServiceDescription) toInnerStruct() *innerFabricStatel
 		return nil
 	}
 	dst := innerFabricStatelessServiceDescription{}
-	s_127, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_127
+	s_96, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_96
 
-	s_128, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_128
+	s_97, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_97
 
-	s_129, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_129
+	s_98, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
+	dst.ServiceTypeName = s_98
 
-	dst.InitializationDataSize = obj.InitializationDataSize
-	dst.InitializationData = obj.InitializationData
+	{
+
+		var tmp []byte
+
+		for _, item := range obj.InitializationData {
+			var tmpitem byte
+
+			tmpitem = item
+
+			tmp = append(tmp, tmpitem)
+		}
+
+		dst.InitializationDataSize = uint32(len(tmp))
+		if len(tmp) > 0 {
+			dst.InitializationData = &tmp[0]
+		}
+
+	}
 	dst.PartitionScheme = obj.PartitionScheme
 	dst.PartitionSchemeDescription = toUnsafePointer(obj.PartitionSchemeDescription)
 	dst.InstanceCount = obj.InstanceCount
-	s_130, _ := windows.UTF16PtrFromString(obj.PlacementConstraints)
-	dst.PlacementConstraints = s_130
+	s_99, _ := windows.UTF16PtrFromString(obj.PlacementConstraints)
+	dst.PlacementConstraints = s_99
 
 	dst.CorrelationCount = obj.CorrelationCount
 	dst.Correlations = obj.Correlations.toInnerStruct()
@@ -5448,8 +5368,19 @@ func (obj *innerFabricStatelessServiceDescription) toGoStruct() *FabricStateless
 	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
 	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
 	dst.ServiceTypeName = windows.UTF16PtrToString(obj.ServiceTypeName)
-	dst.InitializationDataSize = obj.InitializationDataSize
-	dst.InitializationData = obj.InitializationData
+	{
+		var innerlst []byte
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.InitializationData), int(obj.InitializationDataSize))
+
+		for _, item := range innerlst {
+			var tmpitem byte
+
+			tmpitem = item
+
+			dst.InitializationData = append(dst.InitializationData, tmpitem)
+		}
+
+	}
 	dst.PartitionScheme = obj.PartitionScheme
 	dst.PartitionSchemeDescription = fromUnsafePointer(obj.PartitionSchemeDescription)
 	dst.InstanceCount = obj.InstanceCount
@@ -5470,8 +5401,8 @@ func (obj *FabricStatelessServiceDescriptionEx1) toInnerStruct() *innerFabricSta
 		return nil
 	}
 	dst := innerFabricStatelessServiceDescriptionEx1{}
+	lst_100 := &innerFabricServicePlacementPolicyList{}
 	{
-		lst := &innerFabricServicePlacementPolicyList{}
 
 		var tmp []innerFabricServicePlacementPolicyDescription
 
@@ -5483,13 +5414,13 @@ func (obj *FabricStatelessServiceDescriptionEx1) toInnerStruct() *innerFabricSta
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.PolicyCount = uint32(len(tmp))
+		lst_100.PolicyCount = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Policies = &tmp[0]
+			lst_100.Policies = &tmp[0]
 		}
 
-		dst.PolicyList = lst
 	}
+	dst.PolicyList = lst_100
 	return &dst
 }
 
@@ -5504,8 +5435,6 @@ func (obj *innerFabricStatelessServiceDescriptionEx1) toGoStruct() *FabricStatel
 	}
 	dst := FabricStatelessServiceDescriptionEx1{}
 	{
-		var lst []FabricServicePlacementPolicyDescription
-
 		var innerlst []innerFabricServicePlacementPolicyDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.PolicyList.Policies), int(obj.PolicyList.PolicyCount))
 
@@ -5514,10 +5443,9 @@ func (obj *innerFabricStatelessServiceDescriptionEx1) toGoStruct() *FabricStatel
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.PolicyList = append(dst.PolicyList, tmpitem)
 		}
 
-		dst.PolicyList = lst
 	}
 	return &dst
 }
@@ -5549,8 +5477,8 @@ func (obj *FabricStatelessServiceDescriptionEx3) toInnerStruct() *innerFabricSta
 	}
 	dst := innerFabricStatelessServiceDescriptionEx3{}
 	dst.ServicePackageActivationMode = obj.ServicePackageActivationMode
-	s_133, _ := windows.UTF16PtrFromString(obj.ServiceDnsName)
-	dst.ServiceDnsName = s_133
+	s_101, _ := windows.UTF16PtrFromString(obj.ServiceDnsName)
+	dst.ServiceDnsName = s_101
 
 	return &dst
 }
@@ -5572,8 +5500,7 @@ func (obj *innerFabricStatelessServiceDescriptionEx3) toGoStruct() *FabricStatel
 }
 
 type FabricStatelessServiceDescriptionEx4 struct {
-	ScalingPolicyCount     uint32
-	ServiceScalingPolicies *FabricServiceScalingPolicy
+	ServiceScalingPolicies []FabricServiceScalingPolicy
 }
 type innerFabricStatelessServiceDescriptionEx4 struct {
 	FabricStatelessServiceDescriptionEx4
@@ -5606,8 +5533,7 @@ func (obj *FabricStatelessServiceUpdateDescription) toInnerStruct() *innerFabric
 type FabricStatelessServiceUpdateDescriptionEx1 struct {
 	PlacementConstraints string
 	PolicyList           []FabricServicePlacementPolicyDescription
-	CorrelationCount     uint32
-	Correlations         *FabricServiceCorrelationDescription
+	Correlations         []FabricServiceCorrelationDescription
 	MetricCount          uint32
 	Metrics              *FabricServiceLoadMetricDescription
 }
@@ -5617,11 +5543,11 @@ func (obj *FabricStatelessServiceUpdateDescriptionEx1) toInnerStruct() *innerFab
 		return nil
 	}
 	dst := innerFabricStatelessServiceUpdateDescriptionEx1{}
-	s_134, _ := windows.UTF16PtrFromString(obj.PlacementConstraints)
-	dst.PlacementConstraints = s_134
+	s_102, _ := windows.UTF16PtrFromString(obj.PlacementConstraints)
+	dst.PlacementConstraints = s_102
 
+	lst_103 := &innerFabricServicePlacementPolicyList{}
 	{
-		lst := &innerFabricServicePlacementPolicyList{}
 
 		var tmp []innerFabricServicePlacementPolicyDescription
 
@@ -5633,15 +5559,31 @@ func (obj *FabricStatelessServiceUpdateDescriptionEx1) toInnerStruct() *innerFab
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.PolicyCount = uint32(len(tmp))
+		lst_103.PolicyCount = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Policies = &tmp[0]
+			lst_103.Policies = &tmp[0]
 		}
 
-		dst.PolicyList = lst
 	}
-	dst.CorrelationCount = obj.CorrelationCount
-	dst.Correlations = obj.Correlations.toInnerStruct()
+	dst.PolicyList = lst_103
+	{
+
+		var tmp []innerFabricServiceCorrelationDescription
+
+		for _, item := range obj.Correlations {
+			var tmpitem innerFabricServiceCorrelationDescription
+
+			tmpitem = *item.toInnerStruct()
+
+			tmp = append(tmp, tmpitem)
+		}
+
+		dst.CorrelationCount = uint32(len(tmp))
+		if len(tmp) > 0 {
+			dst.Correlations = &tmp[0]
+		}
+
+	}
 	dst.MetricCount = obj.MetricCount
 	dst.Metrics = obj.Metrics.toInnerStruct()
 	return &dst
@@ -5664,8 +5606,6 @@ func (obj *innerFabricStatelessServiceUpdateDescriptionEx1) toGoStruct() *Fabric
 	dst := FabricStatelessServiceUpdateDescriptionEx1{}
 	dst.PlacementConstraints = windows.UTF16PtrToString(obj.PlacementConstraints)
 	{
-		var lst []FabricServicePlacementPolicyDescription
-
 		var innerlst []innerFabricServicePlacementPolicyDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.PolicyList.Policies), int(obj.PolicyList.PolicyCount))
 
@@ -5674,13 +5614,23 @@ func (obj *innerFabricStatelessServiceUpdateDescriptionEx1) toGoStruct() *Fabric
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.PolicyList = append(dst.PolicyList, tmpitem)
 		}
 
-		dst.PolicyList = lst
 	}
-	dst.CorrelationCount = obj.CorrelationCount
-	dst.Correlations = obj.Correlations.toGoStruct()
+	{
+		var innerlst []innerFabricServiceCorrelationDescription
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Correlations), int(obj.CorrelationCount))
+
+		for _, item := range innerlst {
+			var tmpitem FabricServiceCorrelationDescription
+
+			tmpitem = *item.toGoStruct()
+
+			dst.Correlations = append(dst.Correlations, tmpitem)
+		}
+
+	}
 	dst.MetricCount = obj.MetricCount
 	dst.Metrics = obj.Metrics.toGoStruct()
 	return &dst
@@ -5704,8 +5654,7 @@ func (obj *FabricStatelessServiceUpdateDescriptionEx2) toInnerStruct() *innerFab
 type FabricStatelessServiceUpdateDescriptionEx3 struct {
 	RepartitionKind        FabricServicePartitionKind
 	RepartitionDescription interface{}
-	ScalingPolicyCount     uint32
-	ServiceScalingPolicies *FabricServiceScalingPolicy
+	ServiceScalingPolicies []FabricServiceScalingPolicy
 }
 
 func (obj *FabricStatelessServiceUpdateDescriptionEx3) toInnerStruct() *innerFabricStatelessServiceUpdateDescriptionEx3 {
@@ -5715,8 +5664,24 @@ func (obj *FabricStatelessServiceUpdateDescriptionEx3) toInnerStruct() *innerFab
 	dst := innerFabricStatelessServiceUpdateDescriptionEx3{}
 	dst.RepartitionKind = obj.RepartitionKind
 	dst.RepartitionDescription = toUnsafePointer(obj.RepartitionDescription)
-	dst.ScalingPolicyCount = obj.ScalingPolicyCount
-	dst.ServiceScalingPolicies = obj.ServiceScalingPolicies.toInnerStruct()
+	{
+
+		var tmp []innerFabricServiceScalingPolicy
+
+		for _, item := range obj.ServiceScalingPolicies {
+			var tmpitem innerFabricServiceScalingPolicy
+
+			tmpitem = *item.toInnerStruct()
+
+			tmp = append(tmp, tmpitem)
+		}
+
+		dst.ScalingPolicyCount = uint32(len(tmp))
+		if len(tmp) > 0 {
+			dst.ServiceScalingPolicies = &tmp[0]
+		}
+
+	}
 	return &dst
 }
 
@@ -5735,8 +5700,19 @@ func (obj *innerFabricStatelessServiceUpdateDescriptionEx3) toGoStruct() *Fabric
 	dst := FabricStatelessServiceUpdateDescriptionEx3{}
 	dst.RepartitionKind = obj.RepartitionKind
 	dst.RepartitionDescription = fromUnsafePointer(obj.RepartitionDescription)
-	dst.ScalingPolicyCount = obj.ScalingPolicyCount
-	dst.ServiceScalingPolicies = obj.ServiceScalingPolicies.toGoStruct()
+	{
+		var innerlst []innerFabricServiceScalingPolicy
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ServiceScalingPolicies), int(obj.ScalingPolicyCount))
+
+		for _, item := range innerlst {
+			var tmpitem FabricServiceScalingPolicy
+
+			tmpitem = *item.toGoStruct()
+
+			dst.ServiceScalingPolicies = append(dst.ServiceScalingPolicies, tmpitem)
+		}
+
+	}
 	return &dst
 }
 
@@ -5744,8 +5720,7 @@ type FabricStatefulServiceDescription struct {
 	ApplicationName            string
 	ServiceName                string
 	ServiceTypeName            string
-	InitializationDataSize     uint32
-	InitializationData         *byte
+	InitializationData         []byte
 	PartitionScheme            FabricPartitionScheme
 	PartitionSchemeDescription interface{}
 	TargetReplicaSetSize       int32
@@ -5763,23 +5738,39 @@ func (obj *FabricStatefulServiceDescription) toInnerStruct() *innerFabricStatefu
 		return nil
 	}
 	dst := innerFabricStatefulServiceDescription{}
-	s_137, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_137
+	s_104, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_104
 
-	s_138, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_138
+	s_105, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_105
 
-	s_139, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_139
+	s_106, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
+	dst.ServiceTypeName = s_106
 
-	dst.InitializationDataSize = obj.InitializationDataSize
-	dst.InitializationData = obj.InitializationData
+	{
+
+		var tmp []byte
+
+		for _, item := range obj.InitializationData {
+			var tmpitem byte
+
+			tmpitem = item
+
+			tmp = append(tmp, tmpitem)
+		}
+
+		dst.InitializationDataSize = uint32(len(tmp))
+		if len(tmp) > 0 {
+			dst.InitializationData = &tmp[0]
+		}
+
+	}
 	dst.PartitionScheme = obj.PartitionScheme
 	dst.PartitionSchemeDescription = toUnsafePointer(obj.PartitionSchemeDescription)
 	dst.TargetReplicaSetSize = obj.TargetReplicaSetSize
 	dst.MinReplicaSetSize = obj.MinReplicaSetSize
-	s_140, _ := windows.UTF16PtrFromString(obj.PlacementConstraints)
-	dst.PlacementConstraints = s_140
+	s_107, _ := windows.UTF16PtrFromString(obj.PlacementConstraints)
+	dst.PlacementConstraints = s_107
 
 	dst.CorrelationCount = obj.CorrelationCount
 	dst.Correlations = obj.Correlations.toInnerStruct()
@@ -5816,8 +5807,19 @@ func (obj *innerFabricStatefulServiceDescription) toGoStruct() *FabricStatefulSe
 	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
 	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
 	dst.ServiceTypeName = windows.UTF16PtrToString(obj.ServiceTypeName)
-	dst.InitializationDataSize = obj.InitializationDataSize
-	dst.InitializationData = obj.InitializationData
+	{
+		var innerlst []byte
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.InitializationData), int(obj.InitializationDataSize))
+
+		for _, item := range innerlst {
+			var tmpitem byte
+
+			tmpitem = item
+
+			dst.InitializationData = append(dst.InitializationData, tmpitem)
+		}
+
+	}
 	dst.PartitionScheme = obj.PartitionScheme
 	dst.PartitionSchemeDescription = fromUnsafePointer(obj.PartitionSchemeDescription)
 	dst.TargetReplicaSetSize = obj.TargetReplicaSetSize
@@ -5873,8 +5875,8 @@ func (obj *FabricStatefulServiceDescriptionEx1) toInnerStruct() *innerFabricStat
 		return nil
 	}
 	dst := innerFabricStatefulServiceDescriptionEx1{}
+	lst_108 := &innerFabricServicePlacementPolicyList{}
 	{
-		lst := &innerFabricServicePlacementPolicyList{}
 
 		var tmp []innerFabricServicePlacementPolicyDescription
 
@@ -5886,13 +5888,13 @@ func (obj *FabricStatefulServiceDescriptionEx1) toInnerStruct() *innerFabricStat
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.PolicyCount = uint32(len(tmp))
+		lst_108.PolicyCount = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Policies = &tmp[0]
+			lst_108.Policies = &tmp[0]
 		}
 
-		dst.PolicyList = lst
 	}
+	dst.PolicyList = lst_108
 	dst.FailoverSettings = obj.FailoverSettings.toInnerStruct()
 	return &dst
 }
@@ -5909,8 +5911,6 @@ func (obj *innerFabricStatefulServiceDescriptionEx1) toGoStruct() *FabricStatefu
 	}
 	dst := FabricStatefulServiceDescriptionEx1{}
 	{
-		var lst []FabricServicePlacementPolicyDescription
-
 		var innerlst []innerFabricServicePlacementPolicyDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.PolicyList.Policies), int(obj.PolicyList.PolicyCount))
 
@@ -5919,10 +5919,9 @@ func (obj *innerFabricStatefulServiceDescriptionEx1) toGoStruct() *FabricStatefu
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.PolicyList = append(dst.PolicyList, tmpitem)
 		}
 
-		dst.PolicyList = lst
 	}
 	dst.FailoverSettings = obj.FailoverSettings.toGoStruct()
 	return &dst
@@ -5955,8 +5954,8 @@ func (obj *FabricStatefulServiceDescriptionEx3) toInnerStruct() *innerFabricStat
 	}
 	dst := innerFabricStatefulServiceDescriptionEx3{}
 	dst.ServicePackageActivationMode = obj.ServicePackageActivationMode
-	s_143, _ := windows.UTF16PtrFromString(obj.ServiceDnsName)
-	dst.ServiceDnsName = s_143
+	s_109, _ := windows.UTF16PtrFromString(obj.ServiceDnsName)
+	dst.ServiceDnsName = s_109
 
 	return &dst
 }
@@ -5978,8 +5977,7 @@ func (obj *innerFabricStatefulServiceDescriptionEx3) toGoStruct() *FabricStatefu
 }
 
 type FabricStatefulServiceDescriptionEx4 struct {
-	ScalingPolicyCount     uint32
-	ServiceScalingPolicies *FabricServiceScalingPolicy
+	ServiceScalingPolicies []FabricServiceScalingPolicy
 }
 type innerFabricStatefulServiceDescriptionEx4 struct {
 	FabricStatefulServiceDescriptionEx4
@@ -6044,8 +6042,7 @@ func (obj *FabricStatefulServiceUpdateDescriptionEx2) toInnerStruct() *innerFabr
 type FabricStatefulServiceUpdateDescriptionEx3 struct {
 	PlacementConstraints string
 	PolicyList           []FabricServicePlacementPolicyDescription
-	CorrelationCount     uint32
-	Correlations         *FabricServiceCorrelationDescription
+	Correlations         []FabricServiceCorrelationDescription
 	MetricCount          uint32
 	Metrics              *FabricServiceLoadMetricDescription
 }
@@ -6055,11 +6052,11 @@ func (obj *FabricStatefulServiceUpdateDescriptionEx3) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := innerFabricStatefulServiceUpdateDescriptionEx3{}
-	s_144, _ := windows.UTF16PtrFromString(obj.PlacementConstraints)
-	dst.PlacementConstraints = s_144
+	s_110, _ := windows.UTF16PtrFromString(obj.PlacementConstraints)
+	dst.PlacementConstraints = s_110
 
+	lst_111 := &innerFabricServicePlacementPolicyList{}
 	{
-		lst := &innerFabricServicePlacementPolicyList{}
 
 		var tmp []innerFabricServicePlacementPolicyDescription
 
@@ -6071,15 +6068,31 @@ func (obj *FabricStatefulServiceUpdateDescriptionEx3) toInnerStruct() *innerFabr
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.PolicyCount = uint32(len(tmp))
+		lst_111.PolicyCount = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Policies = &tmp[0]
+			lst_111.Policies = &tmp[0]
 		}
 
-		dst.PolicyList = lst
 	}
-	dst.CorrelationCount = obj.CorrelationCount
-	dst.Correlations = obj.Correlations.toInnerStruct()
+	dst.PolicyList = lst_111
+	{
+
+		var tmp []innerFabricServiceCorrelationDescription
+
+		for _, item := range obj.Correlations {
+			var tmpitem innerFabricServiceCorrelationDescription
+
+			tmpitem = *item.toInnerStruct()
+
+			tmp = append(tmp, tmpitem)
+		}
+
+		dst.CorrelationCount = uint32(len(tmp))
+		if len(tmp) > 0 {
+			dst.Correlations = &tmp[0]
+		}
+
+	}
 	dst.MetricCount = obj.MetricCount
 	dst.Metrics = obj.Metrics.toInnerStruct()
 	return &dst
@@ -6102,8 +6115,6 @@ func (obj *innerFabricStatefulServiceUpdateDescriptionEx3) toGoStruct() *FabricS
 	dst := FabricStatefulServiceUpdateDescriptionEx3{}
 	dst.PlacementConstraints = windows.UTF16PtrToString(obj.PlacementConstraints)
 	{
-		var lst []FabricServicePlacementPolicyDescription
-
 		var innerlst []innerFabricServicePlacementPolicyDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.PolicyList.Policies), int(obj.PolicyList.PolicyCount))
 
@@ -6112,13 +6123,23 @@ func (obj *innerFabricStatefulServiceUpdateDescriptionEx3) toGoStruct() *FabricS
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.PolicyList = append(dst.PolicyList, tmpitem)
 		}
 
-		dst.PolicyList = lst
 	}
-	dst.CorrelationCount = obj.CorrelationCount
-	dst.Correlations = obj.Correlations.toGoStruct()
+	{
+		var innerlst []innerFabricServiceCorrelationDescription
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Correlations), int(obj.CorrelationCount))
+
+		for _, item := range innerlst {
+			var tmpitem FabricServiceCorrelationDescription
+
+			tmpitem = *item.toGoStruct()
+
+			dst.Correlations = append(dst.Correlations, tmpitem)
+		}
+
+	}
 	dst.MetricCount = obj.MetricCount
 	dst.Metrics = obj.Metrics.toGoStruct()
 	return &dst
@@ -6142,8 +6163,7 @@ func (obj *FabricStatefulServiceUpdateDescriptionEx4) toInnerStruct() *innerFabr
 type FabricStatefulServiceUpdateDescriptionEx5 struct {
 	RepartitionKind        FabricServicePartitionKind
 	RepartitionDescription interface{}
-	ScalingPolicyCount     uint32
-	ServiceScalingPolicies *FabricServiceScalingPolicy
+	ServiceScalingPolicies []FabricServiceScalingPolicy
 }
 
 func (obj *FabricStatefulServiceUpdateDescriptionEx5) toInnerStruct() *innerFabricStatefulServiceUpdateDescriptionEx5 {
@@ -6153,8 +6173,24 @@ func (obj *FabricStatefulServiceUpdateDescriptionEx5) toInnerStruct() *innerFabr
 	dst := innerFabricStatefulServiceUpdateDescriptionEx5{}
 	dst.RepartitionKind = obj.RepartitionKind
 	dst.RepartitionDescription = toUnsafePointer(obj.RepartitionDescription)
-	dst.ScalingPolicyCount = obj.ScalingPolicyCount
-	dst.ServiceScalingPolicies = obj.ServiceScalingPolicies.toInnerStruct()
+	{
+
+		var tmp []innerFabricServiceScalingPolicy
+
+		for _, item := range obj.ServiceScalingPolicies {
+			var tmpitem innerFabricServiceScalingPolicy
+
+			tmpitem = *item.toInnerStruct()
+
+			tmp = append(tmp, tmpitem)
+		}
+
+		dst.ScalingPolicyCount = uint32(len(tmp))
+		if len(tmp) > 0 {
+			dst.ServiceScalingPolicies = &tmp[0]
+		}
+
+	}
 	return &dst
 }
 
@@ -6173,8 +6209,19 @@ func (obj *innerFabricStatefulServiceUpdateDescriptionEx5) toGoStruct() *FabricS
 	dst := FabricStatefulServiceUpdateDescriptionEx5{}
 	dst.RepartitionKind = obj.RepartitionKind
 	dst.RepartitionDescription = fromUnsafePointer(obj.RepartitionDescription)
-	dst.ScalingPolicyCount = obj.ScalingPolicyCount
-	dst.ServiceScalingPolicies = obj.ServiceScalingPolicies.toGoStruct()
+	{
+		var innerlst []innerFabricServiceScalingPolicy
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ServiceScalingPolicies), int(obj.ScalingPolicyCount))
+
+		for _, item := range innerlst {
+			var tmpitem FabricServiceScalingPolicy
+
+			tmpitem = *item.toGoStruct()
+
+			dst.ServiceScalingPolicies = append(dst.ServiceScalingPolicies, tmpitem)
+		}
+
+	}
 	return &dst
 }
 
@@ -6217,8 +6264,8 @@ func (obj *FabricResolvedServiceEndpoint) toInnerStruct() *innerFabricResolvedSe
 		return nil
 	}
 	dst := innerFabricResolvedServiceEndpoint{}
-	s_147, _ := windows.UTF16PtrFromString(obj.Address)
-	dst.Address = s_147
+	s_112, _ := windows.UTF16PtrFromString(obj.Address)
+	dst.Address = s_112
 
 	dst.Role = obj.Role
 	return &dst
@@ -6241,10 +6288,9 @@ func (obj *innerFabricResolvedServiceEndpoint) toGoStruct() *FabricResolvedServi
 }
 
 type FabricResolvedServicePartition struct {
-	Info          FabricServicePartitionInformation
-	EndpointCount uint32
-	Endpoints     *FabricResolvedServiceEndpoint
-	ServiceName   string
+	Info        FabricServicePartitionInformation
+	Endpoints   []FabricResolvedServiceEndpoint
+	ServiceName string
 }
 
 func (obj *FabricResolvedServicePartition) toInnerStruct() *innerFabricResolvedServicePartition {
@@ -6253,10 +6299,26 @@ func (obj *FabricResolvedServicePartition) toInnerStruct() *innerFabricResolvedS
 	}
 	dst := innerFabricResolvedServicePartition{}
 	dst.Info = *obj.Info.toInnerStruct()
-	dst.EndpointCount = obj.EndpointCount
-	dst.Endpoints = obj.Endpoints.toInnerStruct()
-	s_148, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_148
+	{
+
+		var tmp []innerFabricResolvedServiceEndpoint
+
+		for _, item := range obj.Endpoints {
+			var tmpitem innerFabricResolvedServiceEndpoint
+
+			tmpitem = *item.toInnerStruct()
+
+			tmp = append(tmp, tmpitem)
+		}
+
+		dst.EndpointCount = uint32(len(tmp))
+		if len(tmp) > 0 {
+			dst.Endpoints = &tmp[0]
+		}
+
+	}
+	s_113, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_113
 
 	return &dst
 }
@@ -6275,8 +6337,19 @@ func (obj *innerFabricResolvedServicePartition) toGoStruct() *FabricResolvedServ
 	}
 	dst := FabricResolvedServicePartition{}
 	dst.Info = *obj.Info.toGoStruct()
-	dst.EndpointCount = obj.EndpointCount
-	dst.Endpoints = obj.Endpoints.toGoStruct()
+	{
+		var innerlst []innerFabricResolvedServiceEndpoint
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Endpoints), int(obj.EndpointCount))
+
+		for _, item := range innerlst {
+			var tmpitem FabricResolvedServiceEndpoint
+
+			tmpitem = *item.toGoStruct()
+
+			dst.Endpoints = append(dst.Endpoints, tmpitem)
+		}
+
+	}
 	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
 	return &dst
 }
@@ -6284,8 +6357,7 @@ func (obj *innerFabricResolvedServicePartition) toGoStruct() *FabricResolvedServ
 type FabricServiceNotification struct {
 	ServiceName   string
 	PartitionId   windows.GUID
-	EndpointCount uint32
-	Endpoints     *FabricResolvedServiceEndpoint
+	Endpoints     []FabricResolvedServiceEndpoint
 	PartitionInfo *FabricServicePartitionInformation
 }
 
@@ -6294,12 +6366,28 @@ func (obj *FabricServiceNotification) toInnerStruct() *innerFabricServiceNotific
 		return nil
 	}
 	dst := innerFabricServiceNotification{}
-	s_149, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_149
+	s_114, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_114
 
 	dst.PartitionId = obj.PartitionId
-	dst.EndpointCount = obj.EndpointCount
-	dst.Endpoints = obj.Endpoints.toInnerStruct()
+	{
+
+		var tmp []innerFabricResolvedServiceEndpoint
+
+		for _, item := range obj.Endpoints {
+			var tmpitem innerFabricResolvedServiceEndpoint
+
+			tmpitem = *item.toInnerStruct()
+
+			tmp = append(tmp, tmpitem)
+		}
+
+		dst.EndpointCount = uint32(len(tmp))
+		if len(tmp) > 0 {
+			dst.Endpoints = &tmp[0]
+		}
+
+	}
 	dst.PartitionInfo = obj.PartitionInfo.toInnerStruct()
 	return &dst
 }
@@ -6320,8 +6408,19 @@ func (obj *innerFabricServiceNotification) toGoStruct() *FabricServiceNotificati
 	dst := FabricServiceNotification{}
 	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
 	dst.PartitionId = obj.PartitionId
-	dst.EndpointCount = obj.EndpointCount
-	dst.Endpoints = obj.Endpoints.toGoStruct()
+	{
+		var innerlst []innerFabricResolvedServiceEndpoint
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Endpoints), int(obj.EndpointCount))
+
+		for _, item := range innerlst {
+			var tmpitem FabricResolvedServiceEndpoint
+
+			tmpitem = *item.toGoStruct()
+
+			dst.Endpoints = append(dst.Endpoints, tmpitem)
+		}
+
+	}
 	dst.PartitionInfo = obj.PartitionInfo.toGoStruct()
 	return &dst
 }
@@ -6336,8 +6435,8 @@ func (obj *FabricServiceNotificationFilterDescription) toInnerStruct() *innerFab
 		return nil
 	}
 	dst := innerFabricServiceNotificationFilterDescription{}
-	s_150, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_150
+	s_115, _ := windows.UTF16PtrFromString(obj.Name)
+	dst.Name = s_115
 
 	dst.Flags = obj.Flags
 	return &dst
@@ -6369,11 +6468,11 @@ func (obj *FabricApplicationParameter) toInnerStruct() *innerFabricApplicationPa
 		return nil
 	}
 	dst := innerFabricApplicationParameter{}
-	s_151, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_151
+	s_116, _ := windows.UTF16PtrFromString(obj.Name)
+	dst.Name = s_116
 
-	s_152, _ := windows.UTF16PtrFromString(obj.Value)
-	dst.Value = s_152
+	s_117, _ := windows.UTF16PtrFromString(obj.Value)
+	dst.Value = s_117
 
 	return &dst
 }
@@ -6402,8 +6501,6 @@ type innerFabricApplicationParameterList struct {
 func (obj *innerFabricApplicationParameterList) toGoStruct() []FabricApplicationParameter {
 	var dst []FabricApplicationParameter
 	{
-		var lst []FabricApplicationParameter
-
 		var innerlst []innerFabricApplicationParameter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -6412,10 +6509,9 @@ func (obj *innerFabricApplicationParameterList) toGoStruct() []FabricApplication
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -6461,17 +6557,17 @@ func (obj *FabricApplicationDescription) toInnerStruct() *innerFabricApplication
 		return nil
 	}
 	dst := innerFabricApplicationDescription{}
-	s_155, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_155
+	s_119, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_119
 
-	s_156, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
-	dst.ApplicationTypeName = s_156
+	s_120, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
+	dst.ApplicationTypeName = s_120
 
-	s_157, _ := windows.UTF16PtrFromString(obj.ApplicationTypeVersion)
-	dst.ApplicationTypeVersion = s_157
+	s_121, _ := windows.UTF16PtrFromString(obj.ApplicationTypeVersion)
+	dst.ApplicationTypeVersion = s_121
 
+	lst_122 := &innerFabricApplicationParameterList{}
 	{
-		lst := &innerFabricApplicationParameterList{}
 
 		var tmp []innerFabricApplicationParameter
 
@@ -6483,13 +6579,13 @@ func (obj *FabricApplicationDescription) toInnerStruct() *innerFabricApplication
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_122.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_122.Items = &tmp[0]
 		}
 
-		dst.ApplicationParameters = lst
 	}
+	dst.ApplicationParameters = lst_122
 	return &dst
 }
 
@@ -6510,8 +6606,6 @@ func (obj *innerFabricApplicationDescription) toGoStruct() *FabricApplicationDes
 	dst.ApplicationTypeName = windows.UTF16PtrToString(obj.ApplicationTypeName)
 	dst.ApplicationTypeVersion = windows.UTF16PtrToString(obj.ApplicationTypeVersion)
 	{
-		var lst []FabricApplicationParameter
-
 		var innerlst []innerFabricApplicationParameter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ApplicationParameters.Items), int(obj.ApplicationParameters.Count))
 
@@ -6520,10 +6614,9 @@ func (obj *innerFabricApplicationDescription) toGoStruct() *FabricApplicationDes
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.ApplicationParameters = append(dst.ApplicationParameters, tmpitem)
 		}
 
-		dst.ApplicationParameters = lst
 	}
 	return &dst
 }
@@ -6540,8 +6633,8 @@ func (obj *FabricApplicationMetricDescription) toInnerStruct() *innerFabricAppli
 		return nil
 	}
 	dst := innerFabricApplicationMetricDescription{}
-	s_160, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_160
+	s_123, _ := windows.UTF16PtrFromString(obj.Name)
+	dst.Name = s_123
 
 	dst.NodeReservationCapacity = obj.NodeReservationCapacity
 	dst.MaximumNodeCapacity = obj.MaximumNodeCapacity
@@ -6577,8 +6670,6 @@ type innerFabricApplicationMetricList struct {
 func (obj *innerFabricApplicationMetricList) toGoStruct() []FabricApplicationMetricDescription {
 	var dst []FabricApplicationMetricDescription
 	{
-		var lst []FabricApplicationMetricDescription
-
 		var innerlst []innerFabricApplicationMetricDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Capacities), int(obj.Count))
 
@@ -6587,10 +6678,9 @@ func (obj *innerFabricApplicationMetricList) toGoStruct() []FabricApplicationMet
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -6608,8 +6698,8 @@ func (obj *FabricApplicationCapacityDescription) toInnerStruct() *innerFabricApp
 	dst := innerFabricApplicationCapacityDescription{}
 	dst.MaximumNodes = obj.MaximumNodes
 	dst.MinimumNodes = obj.MinimumNodes
+	lst_124 := &innerFabricApplicationMetricList{}
 	{
-		lst := &innerFabricApplicationMetricList{}
 
 		var tmp []innerFabricApplicationMetricDescription
 
@@ -6621,13 +6711,13 @@ func (obj *FabricApplicationCapacityDescription) toInnerStruct() *innerFabricApp
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_124.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Capacities = &tmp[0]
+			lst_124.Capacities = &tmp[0]
 		}
 
-		dst.Metrics = lst
 	}
+	dst.Metrics = lst_124
 	return &dst
 }
 
@@ -6646,8 +6736,6 @@ func (obj *innerFabricApplicationCapacityDescription) toGoStruct() *FabricApplic
 	dst.MaximumNodes = obj.MaximumNodes
 	dst.MinimumNodes = obj.MinimumNodes
 	{
-		var lst []FabricApplicationMetricDescription
-
 		var innerlst []innerFabricApplicationMetricDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Metrics.Capacities), int(obj.Metrics.Count))
 
@@ -6656,10 +6744,9 @@ func (obj *innerFabricApplicationCapacityDescription) toGoStruct() *FabricApplic
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.Metrics = append(dst.Metrics, tmpitem)
 		}
 
-		dst.Metrics = lst
 	}
 	return &dst
 }
@@ -6694,14 +6781,14 @@ func (obj *FabricApplicationUpdateDescription) toInnerStruct() *innerFabricAppli
 	}
 	dst := innerFabricApplicationUpdateDescription{}
 	dst.Flags = obj.Flags
-	s_164, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_164
+	s_125, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_125
 
 	dst.RemoveApplicationCapacity = obj.RemoveApplicationCapacity
 	dst.MaximumNodes = obj.MaximumNodes
 	dst.MinimumNodes = obj.MinimumNodes
+	lst_126 := &innerFabricApplicationMetricList{}
 	{
-		lst := &innerFabricApplicationMetricList{}
 
 		var tmp []innerFabricApplicationMetricDescription
 
@@ -6713,13 +6800,13 @@ func (obj *FabricApplicationUpdateDescription) toInnerStruct() *innerFabricAppli
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_126.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Capacities = &tmp[0]
+			lst_126.Capacities = &tmp[0]
 		}
 
-		dst.Metrics = lst
 	}
+	dst.Metrics = lst_126
 	return &dst
 }
 
@@ -6744,8 +6831,6 @@ func (obj *innerFabricApplicationUpdateDescription) toGoStruct() *FabricApplicat
 	dst.MaximumNodes = obj.MaximumNodes
 	dst.MinimumNodes = obj.MinimumNodes
 	{
-		var lst []FabricApplicationMetricDescription
-
 		var innerlst []innerFabricApplicationMetricDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Metrics.Capacities), int(obj.Metrics.Count))
 
@@ -6754,10 +6839,9 @@ func (obj *innerFabricApplicationUpdateDescription) toGoStruct() *FabricApplicat
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.Metrics = append(dst.Metrics, tmpitem)
 		}
 
-		dst.Metrics = lst
 	}
 	return &dst
 }
@@ -6888,14 +6972,14 @@ func (obj *FabricApplicationUpgradeDescription) toInnerStruct() *innerFabricAppl
 		return nil
 	}
 	dst := innerFabricApplicationUpgradeDescription{}
-	s_167, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_167
+	s_127, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_127
 
-	s_168, _ := windows.UTF16PtrFromString(obj.TargetApplicationTypeVersion)
-	dst.TargetApplicationTypeVersion = s_168
+	s_128, _ := windows.UTF16PtrFromString(obj.TargetApplicationTypeVersion)
+	dst.TargetApplicationTypeVersion = s_128
 
+	lst_129 := &innerFabricApplicationParameterList{}
 	{
-		lst := &innerFabricApplicationParameterList{}
 
 		var tmp []innerFabricApplicationParameter
 
@@ -6907,13 +6991,13 @@ func (obj *FabricApplicationUpgradeDescription) toInnerStruct() *innerFabricAppl
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_129.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_129.Items = &tmp[0]
 		}
 
-		dst.ApplicationParameters = lst
 	}
+	dst.ApplicationParameters = lst_129
 	dst.UpgradeKind = obj.UpgradeKind
 	dst.UpgradePolicyDescription = toUnsafePointer(obj.UpgradePolicyDescription)
 	return &dst
@@ -6936,8 +7020,6 @@ func (obj *innerFabricApplicationUpgradeDescription) toGoStruct() *FabricApplica
 	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
 	dst.TargetApplicationTypeVersion = windows.UTF16PtrToString(obj.TargetApplicationTypeVersion)
 	{
-		var lst []FabricApplicationParameter
-
 		var innerlst []innerFabricApplicationParameter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ApplicationParameters.Items), int(obj.ApplicationParameters.Count))
 
@@ -6946,10 +7028,9 @@ func (obj *innerFabricApplicationUpgradeDescription) toGoStruct() *FabricApplica
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.ApplicationParameters = append(dst.ApplicationParameters, tmpitem)
 		}
 
-		dst.ApplicationParameters = lst
 	}
 	dst.UpgradeKind = obj.UpgradeKind
 	dst.UpgradePolicyDescription = fromUnsafePointer(obj.UpgradePolicyDescription)
@@ -6968,8 +7049,8 @@ func (obj *FabricApplicationUpgradeUpdateDescription) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := innerFabricApplicationUpgradeUpdateDescription{}
-	s_171, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_171
+	s_130, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_130
 
 	dst.UpgradeKind = obj.UpgradeKind
 	dst.UpdateFlags = obj.UpdateFlags
@@ -7009,11 +7090,11 @@ func (obj *FabricUpgradeDescription) toInnerStruct() *innerFabricUpgradeDescript
 		return nil
 	}
 	dst := innerFabricUpgradeDescription{}
-	s_172, _ := windows.UTF16PtrFromString(obj.CodeVersion)
-	dst.CodeVersion = s_172
+	s_131, _ := windows.UTF16PtrFromString(obj.CodeVersion)
+	dst.CodeVersion = s_131
 
-	s_173, _ := windows.UTF16PtrFromString(obj.ConfigVersion)
-	dst.ConfigVersion = s_173
+	s_132, _ := windows.UTF16PtrFromString(obj.ConfigVersion)
+	dst.ConfigVersion = s_132
 
 	dst.UpgradeKind = obj.UpgradeKind
 	dst.UpgradePolicyDescription = toUnsafePointer(obj.UpgradePolicyDescription)
@@ -7076,12 +7157,11 @@ func (obj *innerFabricUpgradeUpdateDescription) toGoStruct() *FabricUpgradeUpdat
 }
 
 type FabricServiceGroupMemberDescription struct {
-	ServiceType            string
-	ServiceName            string
-	InitializationDataSize uint32
-	InitializationData     *byte
-	MetricCount            uint32
-	Metrics                *FabricServiceLoadMetricDescription
+	ServiceType        string
+	ServiceName        string
+	InitializationData []byte
+	MetricCount        uint32
+	Metrics            *FabricServiceLoadMetricDescription
 }
 
 func (obj *FabricServiceGroupMemberDescription) toInnerStruct() *innerFabricServiceGroupMemberDescription {
@@ -7089,14 +7169,30 @@ func (obj *FabricServiceGroupMemberDescription) toInnerStruct() *innerFabricServ
 		return nil
 	}
 	dst := innerFabricServiceGroupMemberDescription{}
-	s_174, _ := windows.UTF16PtrFromString(obj.ServiceType)
-	dst.ServiceType = s_174
+	s_133, _ := windows.UTF16PtrFromString(obj.ServiceType)
+	dst.ServiceType = s_133
 
-	s_175, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_175
+	s_134, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_134
 
-	dst.InitializationDataSize = obj.InitializationDataSize
-	dst.InitializationData = obj.InitializationData
+	{
+
+		var tmp []byte
+
+		for _, item := range obj.InitializationData {
+			var tmpitem byte
+
+			tmpitem = item
+
+			tmp = append(tmp, tmpitem)
+		}
+
+		dst.InitializationDataSize = uint32(len(tmp))
+		if len(tmp) > 0 {
+			dst.InitializationData = &tmp[0]
+		}
+
+	}
 	dst.MetricCount = obj.MetricCount
 	dst.Metrics = obj.Metrics.toInnerStruct()
 	return &dst
@@ -7119,8 +7215,19 @@ func (obj *innerFabricServiceGroupMemberDescription) toGoStruct() *FabricService
 	dst := FabricServiceGroupMemberDescription{}
 	dst.ServiceType = windows.UTF16PtrToString(obj.ServiceType)
 	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
-	dst.InitializationDataSize = obj.InitializationDataSize
-	dst.InitializationData = obj.InitializationData
+	{
+		var innerlst []byte
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.InitializationData), int(obj.InitializationDataSize))
+
+		for _, item := range innerlst {
+			var tmpitem byte
+
+			tmpitem = item
+
+			dst.InitializationData = append(dst.InitializationData, tmpitem)
+		}
+
+	}
 	dst.MetricCount = obj.MetricCount
 	dst.Metrics = obj.Metrics.toGoStruct()
 	return &dst
@@ -7128,8 +7235,7 @@ func (obj *innerFabricServiceGroupMemberDescription) toGoStruct() *FabricService
 
 type FabricServiceGroupDescription struct {
 	Description        *FabricServiceDescription
-	MemberCount        uint32
-	MemberDescriptions *FabricServiceGroupMemberDescription
+	MemberDescriptions []FabricServiceGroupMemberDescription
 }
 type innerFabricServiceGroupDescription struct {
 	FabricServiceGroupDescription
@@ -7170,8 +7276,8 @@ func (obj *FabricKeyValueStoreItemMetadata) toInnerStruct() *innerFabricKeyValue
 		return nil
 	}
 	dst := innerFabricKeyValueStoreItemMetadata{}
-	s_176, _ := windows.UTF16PtrFromString(obj.Key)
-	dst.Key = s_176
+	s_135, _ := windows.UTF16PtrFromString(obj.Key)
+	dst.Key = s_135
 
 	dst.ValueSizeInBytes = obj.ValueSizeInBytes
 	dst.SequenceNumber = obj.SequenceNumber
@@ -7362,8 +7468,8 @@ func (obj *FabricEseLocalStoreSettings) toInnerStruct() *innerFabricEseLocalStor
 		return nil
 	}
 	dst := innerFabricEseLocalStoreSettings{}
-	s_177, _ := windows.UTF16PtrFromString(obj.DbFolderPath)
-	dst.DbFolderPath = s_177
+	s_136, _ := windows.UTF16PtrFromString(obj.DbFolderPath)
+	dst.DbFolderPath = s_136
 
 	dst.LogFileSizeInKB = obj.LogFileSizeInKB
 	dst.LogBufferSizeInKB = obj.LogBufferSizeInKB
@@ -7502,14 +7608,14 @@ func (obj *FabricNodeContext) toInnerStruct() *innerFabricNodeContext {
 		return nil
 	}
 	dst := innerFabricNodeContext{}
-	s_178, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_178
+	s_137, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_137
 
-	s_179, _ := windows.UTF16PtrFromString(obj.NodeType)
-	dst.NodeType = s_179
+	s_138, _ := windows.UTF16PtrFromString(obj.NodeType)
+	dst.NodeType = s_138
 
-	s_180, _ := windows.UTF16PtrFromString(obj.IPAddressOrFQDN)
-	dst.IPAddressOrFQDN = s_180
+	s_139, _ := windows.UTF16PtrFromString(obj.IPAddressOrFQDN)
+	dst.IPAddressOrFQDN = s_139
 
 	dst.NodeInstanceId = obj.NodeInstanceId
 	dst.NodeId = *obj.NodeId.toInnerStruct()
@@ -7569,8 +7675,8 @@ func (obj *FabricClientSettingsEx1) toInnerStruct() *innerFabricClientSettingsEx
 		return nil
 	}
 	dst := innerFabricClientSettingsEx1{}
-	s_181, _ := windows.UTF16PtrFromString(obj.ClientFriendlyName)
-	dst.ClientFriendlyName = s_181
+	s_140, _ := windows.UTF16PtrFromString(obj.ClientFriendlyName)
+	dst.ClientFriendlyName = s_140
 
 	dst.PartitionLocationCacheBucketCount = obj.PartitionLocationCacheBucketCount
 	dst.HealthReportRetrySendIntervalInSeconds = obj.HealthReportRetrySendIntervalInSeconds
@@ -7651,8 +7757,8 @@ func (obj *FabricQueryPagingDescription) toInnerStruct() *innerFabricQueryPaging
 		return nil
 	}
 	dst := innerFabricQueryPagingDescription{}
-	s_182, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
-	dst.ContinuationToken = s_182
+	s_141, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
+	dst.ContinuationToken = s_141
 
 	dst.MaxResults = obj.MaxResults
 	return &dst
@@ -7683,8 +7789,8 @@ func (obj *FabricClusterManifestQueryDescription) toInnerStruct() *innerFabricCl
 		return nil
 	}
 	dst := innerFabricClusterManifestQueryDescription{}
-	s_183, _ := windows.UTF16PtrFromString(obj.ClusterManifestVersion)
-	dst.ClusterManifestVersion = s_183
+	s_142, _ := windows.UTF16PtrFromString(obj.ClusterManifestVersion)
+	dst.ClusterManifestVersion = s_142
 
 	return &dst
 }
@@ -7712,8 +7818,8 @@ func (obj *FabricNodeQueryDescription) toInnerStruct() *innerFabricNodeQueryDesc
 		return nil
 	}
 	dst := innerFabricNodeQueryDescription{}
-	s_184, _ := windows.UTF16PtrFromString(obj.NodeNameFilter)
-	dst.NodeNameFilter = s_184
+	s_143, _ := windows.UTF16PtrFromString(obj.NodeNameFilter)
+	dst.NodeNameFilter = s_143
 
 	return &dst
 }
@@ -7751,30 +7857,30 @@ func (obj *FabricNodeQueryResultItem) toInnerStruct() *innerFabricNodeQueryResul
 		return nil
 	}
 	dst := innerFabricNodeQueryResultItem{}
-	s_185, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_185
+	s_144, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_144
 
-	s_186, _ := windows.UTF16PtrFromString(obj.IpAddressOrFQDN)
-	dst.IpAddressOrFQDN = s_186
+	s_145, _ := windows.UTF16PtrFromString(obj.IpAddressOrFQDN)
+	dst.IpAddressOrFQDN = s_145
 
-	s_187, _ := windows.UTF16PtrFromString(obj.NodeType)
-	dst.NodeType = s_187
+	s_146, _ := windows.UTF16PtrFromString(obj.NodeType)
+	dst.NodeType = s_146
 
-	s_188, _ := windows.UTF16PtrFromString(obj.CodeVersion)
-	dst.CodeVersion = s_188
+	s_147, _ := windows.UTF16PtrFromString(obj.CodeVersion)
+	dst.CodeVersion = s_147
 
-	s_189, _ := windows.UTF16PtrFromString(obj.ConfigVersion)
-	dst.ConfigVersion = s_189
+	s_148, _ := windows.UTF16PtrFromString(obj.ConfigVersion)
+	dst.ConfigVersion = s_148
 
 	dst.NodeStatus = obj.NodeStatus
 	dst.NodeUpTimeInSeconds = obj.NodeUpTimeInSeconds
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	dst.IsSeedNode = obj.IsSeedNode
-	s_190, _ := windows.UTF16PtrFromString(obj.UpgradeDomain)
-	dst.UpgradeDomain = s_190
+	s_149, _ := windows.UTF16PtrFromString(obj.UpgradeDomain)
+	dst.UpgradeDomain = s_149
 
-	s_191, _ := windows.UTF16PtrFromString(obj.FaultDomain)
-	dst.FaultDomain = s_191
+	s_150, _ := windows.UTF16PtrFromString(obj.FaultDomain)
+	dst.FaultDomain = s_150
 
 	return &dst
 }
@@ -7853,8 +7959,8 @@ func (obj *FabricNodeDeactivationTaskId) toInnerStruct() *innerFabricNodeDeactiv
 		return nil
 	}
 	dst := innerFabricNodeDeactivationTaskId{}
-	s_192, _ := windows.UTF16PtrFromString(obj.Id)
-	dst.Id = s_192
+	s_151, _ := windows.UTF16PtrFromString(obj.Id)
+	dst.Id = s_151
 
 	dst.Type = obj.Type
 	return &dst
@@ -7900,8 +8006,6 @@ type innerFabricNodeDeactivationTaskList struct {
 func (obj *innerFabricNodeDeactivationTaskList) toGoStruct() []FabricNodeDeactivationTask {
 	var dst []FabricNodeDeactivationTask
 	{
-		var lst []FabricNodeDeactivationTask
-
 		var innerlst []innerFabricNodeDeactivationTask
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -7910,10 +8014,9 @@ func (obj *innerFabricNodeDeactivationTaskList) toGoStruct() []FabricNodeDeactiv
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -7931,8 +8034,8 @@ func (obj *FabricNodeDeactivationQueryResultItem) toInnerStruct() *innerFabricNo
 	dst := innerFabricNodeDeactivationQueryResultItem{}
 	dst.EffectiveIntent = obj.EffectiveIntent
 	dst.Status = obj.Status
+	lst_152 := &innerFabricNodeDeactivationTaskList{}
 	{
-		lst := &innerFabricNodeDeactivationTaskList{}
 
 		var tmp []innerFabricNodeDeactivationTask
 
@@ -7944,13 +8047,13 @@ func (obj *FabricNodeDeactivationQueryResultItem) toInnerStruct() *innerFabricNo
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_152.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_152.Items = &tmp[0]
 		}
 
-		dst.Tasks = lst
 	}
+	dst.Tasks = lst_152
 	return &dst
 }
 
@@ -7969,8 +8072,6 @@ func (obj *innerFabricNodeDeactivationQueryResultItem) toGoStruct() *FabricNodeD
 	dst.EffectiveIntent = obj.EffectiveIntent
 	dst.Status = obj.Status
 	{
-		var lst []FabricNodeDeactivationTask
-
 		var innerlst []innerFabricNodeDeactivationTask
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Tasks.Items), int(obj.Tasks.Count))
 
@@ -7979,10 +8080,9 @@ func (obj *innerFabricNodeDeactivationQueryResultItem) toGoStruct() *FabricNodeD
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.Tasks = append(dst.Tasks, tmpitem)
 		}
 
-		dst.Tasks = lst
 	}
 	return &dst
 }
@@ -8039,8 +8139,6 @@ type innerFabricSafetyCheckList struct {
 func (obj *innerFabricSafetyCheckList) toGoStruct() []FabricSafetyCheck {
 	var dst []FabricSafetyCheck
 	{
-		var lst []FabricSafetyCheck
-
 		var innerlst []innerFabricSafetyCheck
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -8049,10 +8147,9 @@ func (obj *innerFabricSafetyCheckList) toGoStruct() []FabricSafetyCheck {
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -8066,8 +8163,8 @@ func (obj *FabricNodeDeactivationQueryResultItemEx1) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := innerFabricNodeDeactivationQueryResultItemEx1{}
+	lst_153 := &innerFabricSafetyCheckList{}
 	{
-		lst := &innerFabricSafetyCheckList{}
 
 		var tmp []innerFabricSafetyCheck
 
@@ -8079,13 +8176,13 @@ func (obj *FabricNodeDeactivationQueryResultItemEx1) toInnerStruct() *innerFabri
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_153.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_153.Items = &tmp[0]
 		}
 
-		dst.PendingSafetyChecks = lst
 	}
+	dst.PendingSafetyChecks = lst_153
 	return &dst
 }
 
@@ -8100,8 +8197,6 @@ func (obj *innerFabricNodeDeactivationQueryResultItemEx1) toGoStruct() *FabricNo
 	}
 	dst := FabricNodeDeactivationQueryResultItemEx1{}
 	{
-		var lst []FabricSafetyCheck
-
 		var innerlst []innerFabricSafetyCheck
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.PendingSafetyChecks.Items), int(obj.PendingSafetyChecks.Count))
 
@@ -8110,10 +8205,9 @@ func (obj *innerFabricNodeDeactivationQueryResultItemEx1) toGoStruct() *FabricNo
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.PendingSafetyChecks = append(dst.PendingSafetyChecks, tmpitem)
 		}
 
-		dst.PendingSafetyChecks = lst
 	}
 	return &dst
 }
@@ -8202,8 +8296,6 @@ type innerFabricNodeQueryResultList struct {
 func (obj *innerFabricNodeQueryResultList) toGoStruct() []FabricNodeQueryResultItem {
 	var dst []FabricNodeQueryResultItem
 	{
-		var lst []FabricNodeQueryResultItem
-
 		var innerlst []innerFabricNodeQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -8212,10 +8304,9 @@ func (obj *innerFabricNodeQueryResultList) toGoStruct() []FabricNodeQueryResultI
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -8229,8 +8320,8 @@ func (obj *FabricApplicationTypeQueryDescription) toInnerStruct() *innerFabricAp
 		return nil
 	}
 	dst := innerFabricApplicationTypeQueryDescription{}
-	s_200, _ := windows.UTF16PtrFromString(obj.ApplicationTypeNameFilter)
-	dst.ApplicationTypeNameFilter = s_200
+	s_154, _ := windows.UTF16PtrFromString(obj.ApplicationTypeNameFilter)
+	dst.ApplicationTypeNameFilter = s_154
 
 	return &dst
 }
@@ -8261,12 +8352,12 @@ func (obj *PagedFabricApplicationTypeQueryDescription) toInnerStruct() *innerPag
 		return nil
 	}
 	dst := innerPagedFabricApplicationTypeQueryDescription{}
-	s_201, _ := windows.UTF16PtrFromString(obj.ApplicationTypeNameFilter)
-	dst.ApplicationTypeNameFilter = s_201
+	s_155, _ := windows.UTF16PtrFromString(obj.ApplicationTypeNameFilter)
+	dst.ApplicationTypeNameFilter = s_155
 
 	dst.MaxResults = obj.MaxResults
-	s_202, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
-	dst.ContinuationToken = s_202
+	s_156, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
+	dst.ContinuationToken = s_156
 
 	dst.ExcludeApplicationParameters = obj.ExcludeApplicationParameters
 	return &dst
@@ -8301,8 +8392,8 @@ func (obj *PagedFabricApplicationTypeQueryDescriptionEx1) toInnerStruct() *inner
 		return nil
 	}
 	dst := innerPagedFabricApplicationTypeQueryDescriptionEx1{}
-	s_203, _ := windows.UTF16PtrFromString(obj.ApplicationTypeVersionFilter)
-	dst.ApplicationTypeVersionFilter = s_203
+	s_157, _ := windows.UTF16PtrFromString(obj.ApplicationTypeVersionFilter)
+	dst.ApplicationTypeVersionFilter = s_157
 
 	return &dst
 }
@@ -8347,14 +8438,14 @@ func (obj *FabricApplicationTypeQueryResultItem) toInnerStruct() *innerFabricApp
 		return nil
 	}
 	dst := innerFabricApplicationTypeQueryResultItem{}
-	s_204, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
-	dst.ApplicationTypeName = s_204
+	s_158, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
+	dst.ApplicationTypeName = s_158
 
-	s_205, _ := windows.UTF16PtrFromString(obj.ApplicationTypeVersion)
-	dst.ApplicationTypeVersion = s_205
+	s_159, _ := windows.UTF16PtrFromString(obj.ApplicationTypeVersion)
+	dst.ApplicationTypeVersion = s_159
 
+	lst_160 := &innerFabricApplicationParameterList{}
 	{
-		lst := &innerFabricApplicationParameterList{}
 
 		var tmp []innerFabricApplicationParameter
 
@@ -8366,13 +8457,13 @@ func (obj *FabricApplicationTypeQueryResultItem) toInnerStruct() *innerFabricApp
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_160.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_160.Items = &tmp[0]
 		}
 
-		dst.DefaultParameters = lst
 	}
+	dst.DefaultParameters = lst_160
 	return &dst
 }
 
@@ -8391,8 +8482,6 @@ func (obj *innerFabricApplicationTypeQueryResultItem) toGoStruct() *FabricApplic
 	dst.ApplicationTypeName = windows.UTF16PtrToString(obj.ApplicationTypeName)
 	dst.ApplicationTypeVersion = windows.UTF16PtrToString(obj.ApplicationTypeVersion)
 	{
-		var lst []FabricApplicationParameter
-
 		var innerlst []innerFabricApplicationParameter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.DefaultParameters.Items), int(obj.DefaultParameters.Count))
 
@@ -8401,10 +8490,9 @@ func (obj *innerFabricApplicationTypeQueryResultItem) toGoStruct() *FabricApplic
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.DefaultParameters = append(dst.DefaultParameters, tmpitem)
 		}
 
-		dst.DefaultParameters = lst
 	}
 	return &dst
 }
@@ -8420,8 +8508,8 @@ func (obj *FabricApplicationTypeQueryResultItemEx1) toInnerStruct() *innerFabric
 	}
 	dst := innerFabricApplicationTypeQueryResultItemEx1{}
 	dst.Status = obj.Status
-	s_208, _ := windows.UTF16PtrFromString(obj.StatusDetails)
-	dst.StatusDetails = s_208
+	s_161, _ := windows.UTF16PtrFromString(obj.StatusDetails)
+	dst.StatusDetails = s_161
 
 	return &dst
 }
@@ -8465,8 +8553,6 @@ type innerFabricApplicationTypeQueryResultList struct {
 func (obj *innerFabricApplicationTypeQueryResultList) toGoStruct() []FabricApplicationTypeQueryResultItem {
 	var dst []FabricApplicationTypeQueryResultItem
 	{
-		var lst []FabricApplicationTypeQueryResultItem
-
 		var innerlst []innerFabricApplicationTypeQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -8475,10 +8561,9 @@ func (obj *innerFabricApplicationTypeQueryResultList) toGoStruct() []FabricAppli
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -8494,14 +8579,14 @@ func (obj *FabricServiceTypeQueryDescription) toInnerStruct() *innerFabricServic
 		return nil
 	}
 	dst := innerFabricServiceTypeQueryDescription{}
-	s_210, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
-	dst.ApplicationTypeName = s_210
+	s_162, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
+	dst.ApplicationTypeName = s_162
 
-	s_211, _ := windows.UTF16PtrFromString(obj.ApplicationTypeVersion)
-	dst.ApplicationTypeVersion = s_211
+	s_163, _ := windows.UTF16PtrFromString(obj.ApplicationTypeVersion)
+	dst.ApplicationTypeVersion = s_163
 
-	s_212, _ := windows.UTF16PtrFromString(obj.ServiceTypeNameFilter)
-	dst.ServiceTypeNameFilter = s_212
+	s_164, _ := windows.UTF16PtrFromString(obj.ServiceTypeNameFilter)
+	dst.ServiceTypeNameFilter = s_164
 
 	return &dst
 }
@@ -8535,14 +8620,14 @@ func (obj *FabricServiceGroupMemberTypeQueryDescription) toInnerStruct() *innerF
 		return nil
 	}
 	dst := innerFabricServiceGroupMemberTypeQueryDescription{}
-	s_213, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
-	dst.ApplicationTypeName = s_213
+	s_165, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
+	dst.ApplicationTypeName = s_165
 
-	s_214, _ := windows.UTF16PtrFromString(obj.ApplicationTypeVersion)
-	dst.ApplicationTypeVersion = s_214
+	s_166, _ := windows.UTF16PtrFromString(obj.ApplicationTypeVersion)
+	dst.ApplicationTypeVersion = s_166
 
-	s_215, _ := windows.UTF16PtrFromString(obj.ServiceGroupTypeNameFilter)
-	dst.ServiceGroupTypeNameFilter = s_215
+	s_167, _ := windows.UTF16PtrFromString(obj.ServiceGroupTypeNameFilter)
+	dst.ServiceGroupTypeNameFilter = s_167
 
 	return &dst
 }
@@ -8576,8 +8661,8 @@ func (obj *FabricServiceTypeQueryResultItem) toInnerStruct() *innerFabricService
 	}
 	dst := innerFabricServiceTypeQueryResultItem{}
 	dst.ServiceTypeDescription = obj.ServiceTypeDescription.toInnerStruct()
-	s_216, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
-	dst.ServiceManifestVersion = s_216
+	s_168, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
+	dst.ServiceManifestVersion = s_168
 
 	return &dst
 }
@@ -8607,8 +8692,8 @@ func (obj *FabricServiceTypeQueryResultItemEx1) toInnerStruct() *innerFabricServ
 		return nil
 	}
 	dst := innerFabricServiceTypeQueryResultItemEx1{}
-	s_217, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_217
+	s_169, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
+	dst.ServiceManifestName = s_169
 
 	return &dst
 }
@@ -8650,8 +8735,6 @@ type innerFabricServiceTypeQueryResultList struct {
 func (obj *innerFabricServiceTypeQueryResultList) toGoStruct() []FabricServiceTypeQueryResultItem {
 	var dst []FabricServiceTypeQueryResultItem
 	{
-		var lst []FabricServiceTypeQueryResultItem
-
 		var innerlst []innerFabricServiceTypeQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -8660,10 +8743,9 @@ func (obj *innerFabricServiceTypeQueryResultList) toGoStruct() []FabricServiceTy
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -8679,8 +8761,8 @@ func (obj *FabricServiceGroupMemberTypeQueryResultItem) toInnerStruct() *innerFa
 		return nil
 	}
 	dst := innerFabricServiceGroupMemberTypeQueryResultItem{}
+	lst_170 := &innerFabricServiceGroupTypeMemberDescriptionList{}
 	{
-		lst := &innerFabricServiceGroupTypeMemberDescriptionList{}
 
 		var tmp []innerFabricServiceGroupTypeMemberDescription
 
@@ -8692,18 +8774,18 @@ func (obj *FabricServiceGroupMemberTypeQueryResultItem) toInnerStruct() *innerFa
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_170.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_170.Items = &tmp[0]
 		}
 
-		dst.ServiceGroupMemberTypeDescription = lst
 	}
-	s_220, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
-	dst.ServiceManifestVersion = s_220
+	dst.ServiceGroupMemberTypeDescription = lst_170
+	s_171, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
+	dst.ServiceManifestVersion = s_171
 
-	s_221, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_221
+	s_172, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
+	dst.ServiceManifestName = s_172
 
 	return &dst
 }
@@ -8721,8 +8803,6 @@ func (obj *innerFabricServiceGroupMemberTypeQueryResultItem) toGoStruct() *Fabri
 	}
 	dst := FabricServiceGroupMemberTypeQueryResultItem{}
 	{
-		var lst []FabricServiceGroupTypeMemberDescription
-
 		var innerlst []innerFabricServiceGroupTypeMemberDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ServiceGroupMemberTypeDescription.Items), int(obj.ServiceGroupMemberTypeDescription.Count))
 
@@ -8731,10 +8811,9 @@ func (obj *innerFabricServiceGroupMemberTypeQueryResultItem) toGoStruct() *Fabri
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.ServiceGroupMemberTypeDescription = append(dst.ServiceGroupMemberTypeDescription, tmpitem)
 		}
 
-		dst.ServiceGroupMemberTypeDescription = lst
 	}
 	dst.ServiceManifestVersion = windows.UTF16PtrToString(obj.ServiceManifestVersion)
 	dst.ServiceManifestName = windows.UTF16PtrToString(obj.ServiceManifestName)
@@ -8749,8 +8828,6 @@ type innerFabricServiceGroupMemberTypeQueryResultList struct {
 func (obj *innerFabricServiceGroupMemberTypeQueryResultList) toGoStruct() []FabricServiceGroupMemberTypeQueryResultItem {
 	var dst []FabricServiceGroupMemberTypeQueryResultItem
 	{
-		var lst []FabricServiceGroupMemberTypeQueryResultItem
-
 		var innerlst []innerFabricServiceGroupMemberTypeQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -8759,10 +8836,9 @@ func (obj *innerFabricServiceGroupMemberTypeQueryResultList) toGoStruct() []Fabr
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -8776,8 +8852,8 @@ func (obj *FabricApplicationQueryDescription) toInnerStruct() *innerFabricApplic
 		return nil
 	}
 	dst := innerFabricApplicationQueryDescription{}
-	s_224, _ := windows.UTF16PtrFromString(obj.ApplicationNameFilter)
-	dst.ApplicationNameFilter = s_224
+	s_173, _ := windows.UTF16PtrFromString(obj.ApplicationNameFilter)
+	dst.ApplicationNameFilter = s_173
 
 	return &dst
 }
@@ -8805,8 +8881,8 @@ func (obj *FabricApplicationQueryDescriptionEx1) toInnerStruct() *innerFabricApp
 		return nil
 	}
 	dst := innerFabricApplicationQueryDescriptionEx1{}
-	s_225, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
-	dst.ContinuationToken = s_225
+	s_174, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
+	dst.ContinuationToken = s_174
 
 	return &dst
 }
@@ -8835,8 +8911,8 @@ func (obj *FabricApplicationQueryDescriptionEx2) toInnerStruct() *innerFabricApp
 		return nil
 	}
 	dst := innerFabricApplicationQueryDescriptionEx2{}
-	s_226, _ := windows.UTF16PtrFromString(obj.ApplicationTypeNameFilter)
-	dst.ApplicationTypeNameFilter = s_226
+	s_175, _ := windows.UTF16PtrFromString(obj.ApplicationTypeNameFilter)
+	dst.ApplicationTypeNameFilter = s_175
 
 	dst.ExcludeApplicationParameters = obj.ExcludeApplicationParameters
 	return &dst
@@ -8902,19 +8978,19 @@ func (obj *FabricApplicationQueryResultItem) toInnerStruct() *innerFabricApplica
 		return nil
 	}
 	dst := innerFabricApplicationQueryResultItem{}
-	s_227, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_227
+	s_176, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_176
 
-	s_228, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
-	dst.ApplicationTypeName = s_228
+	s_177, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
+	dst.ApplicationTypeName = s_177
 
-	s_229, _ := windows.UTF16PtrFromString(obj.ApplicationTypeVersion)
-	dst.ApplicationTypeVersion = s_229
+	s_178, _ := windows.UTF16PtrFromString(obj.ApplicationTypeVersion)
+	dst.ApplicationTypeVersion = s_178
 
 	dst.Status = obj.Status
 	dst.HealthState = obj.HealthState
+	lst_179 := &innerFabricApplicationParameterList{}
 	{
-		lst := &innerFabricApplicationParameterList{}
 
 		var tmp []innerFabricApplicationParameter
 
@@ -8926,13 +9002,13 @@ func (obj *FabricApplicationQueryResultItem) toInnerStruct() *innerFabricApplica
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_179.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_179.Items = &tmp[0]
 		}
 
-		dst.ApplicationParameters = lst
 	}
+	dst.ApplicationParameters = lst_179
 	return &dst
 }
 
@@ -8957,8 +9033,6 @@ func (obj *innerFabricApplicationQueryResultItem) toGoStruct() *FabricApplicatio
 	dst.Status = obj.Status
 	dst.HealthState = obj.HealthState
 	{
-		var lst []FabricApplicationParameter
-
 		var innerlst []innerFabricApplicationParameter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ApplicationParameters.Items), int(obj.ApplicationParameters.Count))
 
@@ -8967,10 +9041,9 @@ func (obj *innerFabricApplicationQueryResultItem) toGoStruct() *FabricApplicatio
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.ApplicationParameters = append(dst.ApplicationParameters, tmpitem)
 		}
 
-		dst.ApplicationParameters = lst
 	}
 	return &dst
 }
@@ -8985,11 +9058,11 @@ func (obj *FabricApplicationQueryResultItemEx1) toInnerStruct() *innerFabricAppl
 		return nil
 	}
 	dst := innerFabricApplicationQueryResultItemEx1{}
-	s_232, _ := windows.UTF16PtrFromString(obj.UpgradeTypeVersion)
-	dst.UpgradeTypeVersion = s_232
+	s_180, _ := windows.UTF16PtrFromString(obj.UpgradeTypeVersion)
+	dst.UpgradeTypeVersion = s_180
 
+	lst_181 := &innerFabricApplicationParameterList{}
 	{
-		lst := &innerFabricApplicationParameterList{}
 
 		var tmp []innerFabricApplicationParameter
 
@@ -9001,13 +9074,13 @@ func (obj *FabricApplicationQueryResultItemEx1) toInnerStruct() *innerFabricAppl
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_181.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_181.Items = &tmp[0]
 		}
 
-		dst.UpgradeParameters = lst
 	}
+	dst.UpgradeParameters = lst_181
 	return &dst
 }
 
@@ -9024,8 +9097,6 @@ func (obj *innerFabricApplicationQueryResultItemEx1) toGoStruct() *FabricApplica
 	dst := FabricApplicationQueryResultItemEx1{}
 	dst.UpgradeTypeVersion = windows.UTF16PtrToString(obj.UpgradeTypeVersion)
 	{
-		var lst []FabricApplicationParameter
-
 		var innerlst []innerFabricApplicationParameter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UpgradeParameters.Items), int(obj.UpgradeParameters.Count))
 
@@ -9034,10 +9105,9 @@ func (obj *innerFabricApplicationQueryResultItemEx1) toGoStruct() *FabricApplica
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UpgradeParameters = append(dst.UpgradeParameters, tmpitem)
 		}
 
-		dst.UpgradeParameters = lst
 	}
 	return &dst
 }
@@ -9065,8 +9135,6 @@ type innerFabricApplicationQueryResultList struct {
 func (obj *innerFabricApplicationQueryResultList) toGoStruct() []FabricApplicationQueryResultItem {
 	var dst []FabricApplicationQueryResultItem
 	{
-		var lst []FabricApplicationQueryResultItem
-
 		var innerlst []innerFabricApplicationQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -9075,10 +9143,9 @@ func (obj *innerFabricApplicationQueryResultList) toGoStruct() []FabricApplicati
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -9093,11 +9160,11 @@ func (obj *FabricServiceQueryDescription) toInnerStruct() *innerFabricServiceQue
 		return nil
 	}
 	dst := innerFabricServiceQueryDescription{}
-	s_236, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_236
+	s_182, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_182
 
-	s_237, _ := windows.UTF16PtrFromString(obj.ServiceNameFilter)
-	dst.ServiceNameFilter = s_237
+	s_183, _ := windows.UTF16PtrFromString(obj.ServiceNameFilter)
+	dst.ServiceNameFilter = s_183
 
 	return &dst
 }
@@ -9127,8 +9194,8 @@ func (obj *FabricServiceQueryDescriptionEx1) toInnerStruct() *innerFabricService
 		return nil
 	}
 	dst := innerFabricServiceQueryDescriptionEx1{}
-	s_238, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
-	dst.ContinuationToken = s_238
+	s_184, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
+	dst.ContinuationToken = s_184
 
 	return &dst
 }
@@ -9156,8 +9223,8 @@ func (obj *FabricServiceQueryDescriptionEx2) toInnerStruct() *innerFabricService
 		return nil
 	}
 	dst := innerFabricServiceQueryDescriptionEx2{}
-	s_239, _ := windows.UTF16PtrFromString(obj.ServiceTypeNameFilter)
-	dst.ServiceTypeNameFilter = s_239
+	s_185, _ := windows.UTF16PtrFromString(obj.ServiceTypeNameFilter)
+	dst.ServiceTypeNameFilter = s_185
 
 	return &dst
 }
@@ -9200,8 +9267,8 @@ func (obj *FabricSystemServiceQueryDescription) toInnerStruct() *innerFabricSyst
 		return nil
 	}
 	dst := innerFabricSystemServiceQueryDescription{}
-	s_240, _ := windows.UTF16PtrFromString(obj.SystemServiceNameFilter)
-	dst.SystemServiceNameFilter = s_240
+	s_186, _ := windows.UTF16PtrFromString(obj.SystemServiceNameFilter)
+	dst.SystemServiceNameFilter = s_186
 
 	return &dst
 }
@@ -9243,8 +9310,6 @@ type innerFabricServiceQueryResultList struct {
 func (obj *innerFabricServiceQueryResultList) toGoStruct() []FabricServiceQueryResultItem {
 	var dst []FabricServiceQueryResultItem
 	{
-		var lst []FabricServiceQueryResultItem
-
 		var innerlst []innerFabricServiceQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -9253,10 +9318,9 @@ func (obj *innerFabricServiceQueryResultList) toGoStruct() []FabricServiceQueryR
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -9273,14 +9337,14 @@ func (obj *FabricStatelessServiceQueryResultItem) toInnerStruct() *innerFabricSt
 		return nil
 	}
 	dst := innerFabricStatelessServiceQueryResultItem{}
-	s_242, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_242
+	s_187, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_187
 
-	s_243, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_243
+	s_188, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
+	dst.ServiceTypeName = s_188
 
-	s_244, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
-	dst.ServiceManifestVersion = s_244
+	s_189, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
+	dst.ServiceManifestVersion = s_189
 
 	dst.HealthState = obj.HealthState
 	return &dst
@@ -9349,14 +9413,14 @@ func (obj *FabricStatefulServiceQueryResultItem) toInnerStruct() *innerFabricSta
 		return nil
 	}
 	dst := innerFabricStatefulServiceQueryResultItem{}
-	s_245, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_245
+	s_190, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_190
 
-	s_246, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_246
+	s_191, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
+	dst.ServiceTypeName = s_191
 
-	s_247, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
-	dst.ServiceManifestVersion = s_247
+	s_192, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
+	dst.ServiceManifestVersion = s_192
 
 	dst.HasPersistedState = obj.HasPersistedState
 	dst.HealthState = obj.HealthState
@@ -9425,11 +9489,11 @@ func (obj *FabricServiceGroupMemberQueryDescription) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := innerFabricServiceGroupMemberQueryDescription{}
-	s_248, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_248
+	s_193, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_193
 
-	s_249, _ := windows.UTF16PtrFromString(obj.ServiceNameFilter)
-	dst.ServiceNameFilter = s_249
+	s_194, _ := windows.UTF16PtrFromString(obj.ServiceNameFilter)
+	dst.ServiceNameFilter = s_194
 
 	return &dst
 }
@@ -9460,11 +9524,11 @@ func (obj *FabricServiceGroupMemberMemberQueryResultItem) toInnerStruct() *inner
 		return nil
 	}
 	dst := innerFabricServiceGroupMemberMemberQueryResultItem{}
-	s_250, _ := windows.UTF16PtrFromString(obj.ServiceType)
-	dst.ServiceType = s_250
+	s_195, _ := windows.UTF16PtrFromString(obj.ServiceType)
+	dst.ServiceType = s_195
 
-	s_251, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_251
+	s_196, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_196
 
 	return &dst
 }
@@ -9493,8 +9557,6 @@ type innerFabricServiceGroupMemberMemberQueryResultList struct {
 func (obj *innerFabricServiceGroupMemberMemberQueryResultList) toGoStruct() []FabricServiceGroupMemberMemberQueryResultItem {
 	var dst []FabricServiceGroupMemberMemberQueryResultItem
 	{
-		var lst []FabricServiceGroupMemberMemberQueryResultItem
-
 		var innerlst []innerFabricServiceGroupMemberMemberQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -9503,10 +9565,9 @@ func (obj *innerFabricServiceGroupMemberMemberQueryResultList) toGoStruct() []Fa
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -9521,11 +9582,11 @@ func (obj *FabricServiceGroupMemberQueryResultItem) toInnerStruct() *innerFabric
 		return nil
 	}
 	dst := innerFabricServiceGroupMemberQueryResultItem{}
-	s_253, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_253
+	s_197, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_197
 
+	lst_198 := &innerFabricServiceGroupMemberMemberQueryResultList{}
 	{
-		lst := &innerFabricServiceGroupMemberMemberQueryResultList{}
 
 		var tmp []innerFabricServiceGroupMemberMemberQueryResultItem
 
@@ -9537,13 +9598,13 @@ func (obj *FabricServiceGroupMemberQueryResultItem) toInnerStruct() *innerFabric
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_198.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_198.Items = &tmp[0]
 		}
 
-		dst.Members = lst
 	}
+	dst.Members = lst_198
 	return &dst
 }
 
@@ -9560,8 +9621,6 @@ func (obj *innerFabricServiceGroupMemberQueryResultItem) toGoStruct() *FabricSer
 	dst := FabricServiceGroupMemberQueryResultItem{}
 	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
 	{
-		var lst []FabricServiceGroupMemberMemberQueryResultItem
-
 		var innerlst []innerFabricServiceGroupMemberMemberQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Members.Items), int(obj.Members.Count))
 
@@ -9570,10 +9629,9 @@ func (obj *innerFabricServiceGroupMemberQueryResultItem) toGoStruct() *FabricSer
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.Members = append(dst.Members, tmpitem)
 		}
 
-		dst.Members = lst
 	}
 	return &dst
 }
@@ -9586,8 +9644,6 @@ type innerFabricServiceGroupMemberQueryResultList struct {
 func (obj *innerFabricServiceGroupMemberQueryResultList) toGoStruct() []FabricServiceGroupMemberQueryResultItem {
 	var dst []FabricServiceGroupMemberQueryResultItem
 	{
-		var lst []FabricServiceGroupMemberQueryResultItem
-
 		var innerlst []innerFabricServiceGroupMemberQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -9596,10 +9652,9 @@ func (obj *innerFabricServiceGroupMemberQueryResultList) toGoStruct() []FabricSe
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -9646,8 +9701,8 @@ func (obj *FabricUnplacedReplicaInformationQueryDescription) toInnerStruct() *in
 		return nil
 	}
 	dst := innerFabricUnplacedReplicaInformationQueryDescription{}
-	s_257, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_257
+	s_199, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_199
 
 	dst.PartitionId = obj.PartitionId
 	dst.OnlyQueryPrimaries = obj.OnlyQueryPrimaries
@@ -9682,8 +9737,8 @@ func (obj *FabricServicePartitionQueryDescription) toInnerStruct() *innerFabricS
 		return nil
 	}
 	dst := innerFabricServicePartitionQueryDescription{}
-	s_258, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_258
+	s_200, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_200
 
 	dst.PartitionIdFilter = obj.PartitionIdFilter
 	return &dst
@@ -9714,8 +9769,8 @@ func (obj *FabricNodeLoadInformationQueryDescription) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := innerFabricNodeLoadInformationQueryDescription{}
-	s_259, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_259
+	s_201, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_201
 
 	return &dst
 }
@@ -9743,8 +9798,8 @@ func (obj *FabricApplicationLoadInformationQueryDescription) toInnerStruct() *in
 		return nil
 	}
 	dst := innerFabricApplicationLoadInformationQueryDescription{}
-	s_260, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_260
+	s_202, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_202
 
 	return &dst
 }
@@ -9786,8 +9841,6 @@ type innerFabricServicePartitionQueryResultList struct {
 func (obj *innerFabricServicePartitionQueryResultList) toGoStruct() []FabricServicePartitionQueryResultItem {
 	var dst []FabricServicePartitionQueryResultItem
 	{
-		var lst []FabricServicePartitionQueryResultItem
-
 		var innerlst []innerFabricServicePartitionQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -9796,10 +9849,9 @@ func (obj *innerFabricServicePartitionQueryResultList) toGoStruct() []FabricServ
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -9911,8 +9963,6 @@ type innerFabricServiceReplicaQueryResultList struct {
 func (obj *innerFabricServiceReplicaQueryResultList) toGoStruct() []FabricServiceReplicaQueryResultItem {
 	var dst []FabricServiceReplicaQueryResultItem
 	{
-		var lst []FabricServiceReplicaQueryResultItem
-
 		var innerlst []innerFabricServiceReplicaQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -9921,10 +9971,9 @@ func (obj *innerFabricServiceReplicaQueryResultList) toGoStruct() []FabricServic
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -9948,11 +9997,11 @@ func (obj *FabricStatefulServiceReplicaQueryResultItem) toInnerStruct() *innerFa
 	dst.ReplicaRole = obj.ReplicaRole
 	dst.ReplicaStatus = obj.ReplicaStatus
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	s_263, _ := windows.UTF16PtrFromString(obj.ReplicaAddress)
-	dst.ReplicaAddress = s_263
+	s_203, _ := windows.UTF16PtrFromString(obj.ReplicaAddress)
+	dst.ReplicaAddress = s_203
 
-	s_264, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_264
+	s_204, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_204
 
 	dst.LastInBuildDurationInSeconds = obj.LastInBuildDurationInSeconds
 	return &dst
@@ -10001,11 +10050,11 @@ func (obj *FabricStatelessServiceInstanceQueryResultItem) toInnerStruct() *inner
 	dst.InstanceId = obj.InstanceId
 	dst.ReplicaStatus = obj.ReplicaStatus
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	s_265, _ := windows.UTF16PtrFromString(obj.ReplicaAddress)
-	dst.ReplicaAddress = s_265
+	s_205, _ := windows.UTF16PtrFromString(obj.ReplicaAddress)
+	dst.ReplicaAddress = s_205
 
-	s_266, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_266
+	s_206, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_206
 
 	dst.LastInBuildDurationInSeconds = obj.LastInBuildDurationInSeconds
 	return &dst
@@ -10045,11 +10094,11 @@ func (obj *FabricDeployedApplicationQueryDescription) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := innerFabricDeployedApplicationQueryDescription{}
-	s_267, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_267
+	s_207, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_207
 
-	s_268, _ := windows.UTF16PtrFromString(obj.ApplicationNameFilter)
-	dst.ApplicationNameFilter = s_268
+	s_208, _ := windows.UTF16PtrFromString(obj.ApplicationNameFilter)
+	dst.ApplicationNameFilter = s_208
 
 	return &dst
 }
@@ -10082,11 +10131,11 @@ func (obj *FabricPagedDeployedApplicationQueryDescription) toInnerStruct() *inne
 		return nil
 	}
 	dst := innerFabricPagedDeployedApplicationQueryDescription{}
-	s_269, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_269
+	s_209, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_209
 
-	s_270, _ := windows.UTF16PtrFromString(obj.ApplicationNameFilter)
-	dst.ApplicationNameFilter = s_270
+	s_210, _ := windows.UTF16PtrFromString(obj.ApplicationNameFilter)
+	dst.ApplicationNameFilter = s_210
 
 	dst.IncludeHealthState = obj.IncludeHealthState
 	dst.PagingDescription = obj.PagingDescription.toInnerStruct()
@@ -10124,11 +10173,11 @@ func (obj *FabricDeployedApplicationQueryResultItem) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := innerFabricDeployedApplicationQueryResultItem{}
-	s_271, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_271
+	s_211, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_211
 
-	s_272, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
-	dst.ApplicationTypeName = s_272
+	s_212, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
+	dst.ApplicationTypeName = s_212
 
 	dst.DeployedApplicationStatus = obj.DeployedApplicationStatus
 	return &dst
@@ -10163,14 +10212,14 @@ func (obj *FabricDeployedApplicationQueryResultItemEx) toInnerStruct() *innerFab
 		return nil
 	}
 	dst := innerFabricDeployedApplicationQueryResultItemEx{}
-	s_273, _ := windows.UTF16PtrFromString(obj.WorkDirectory)
-	dst.WorkDirectory = s_273
+	s_213, _ := windows.UTF16PtrFromString(obj.WorkDirectory)
+	dst.WorkDirectory = s_213
 
-	s_274, _ := windows.UTF16PtrFromString(obj.LogDirectory)
-	dst.LogDirectory = s_274
+	s_214, _ := windows.UTF16PtrFromString(obj.LogDirectory)
+	dst.LogDirectory = s_214
 
-	s_275, _ := windows.UTF16PtrFromString(obj.TempDirectory)
-	dst.TempDirectory = s_275
+	s_215, _ := windows.UTF16PtrFromString(obj.TempDirectory)
+	dst.TempDirectory = s_215
 
 	return &dst
 }
@@ -10216,8 +10265,6 @@ type innerFabricDeployedApplicationQueryResultList struct {
 func (obj *innerFabricDeployedApplicationQueryResultList) toGoStruct() []FabricDeployedApplicationQueryResultItem {
 	var dst []FabricDeployedApplicationQueryResultItem
 	{
-		var lst []FabricDeployedApplicationQueryResultItem
-
 		var innerlst []innerFabricDeployedApplicationQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -10226,10 +10273,9 @@ func (obj *innerFabricDeployedApplicationQueryResultList) toGoStruct() []FabricD
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -10245,14 +10291,14 @@ func (obj *FabricDeployedServicePackageQueryDescription) toInnerStruct() *innerF
 		return nil
 	}
 	dst := innerFabricDeployedServicePackageQueryDescription{}
-	s_277, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_277
+	s_216, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_216
 
-	s_278, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_278
+	s_217, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_217
 
-	s_279, _ := windows.UTF16PtrFromString(obj.ServiceManifestNameFilter)
-	dst.ServiceManifestNameFilter = s_279
+	s_218, _ := windows.UTF16PtrFromString(obj.ServiceManifestNameFilter)
+	dst.ServiceManifestNameFilter = s_218
 
 	return &dst
 }
@@ -10286,11 +10332,11 @@ func (obj *FabricDeployedServicePackageQueryResultItem) toInnerStruct() *innerFa
 		return nil
 	}
 	dst := innerFabricDeployedServicePackageQueryResultItem{}
-	s_280, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_280
+	s_219, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
+	dst.ServiceManifestName = s_219
 
-	s_281, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
-	dst.ServiceManifestVersion = s_281
+	s_220, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
+	dst.ServiceManifestVersion = s_220
 
 	dst.DeployedServicePackageStatus = obj.DeployedServicePackageStatus
 	return &dst
@@ -10323,8 +10369,8 @@ func (obj *FabricDeployedServicePackageQueryResultItemEx1) toInnerStruct() *inne
 		return nil
 	}
 	dst := innerFabricDeployedServicePackageQueryResultItemEx1{}
-	s_282, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	dst.ServicePackageActivationId = s_282
+	s_221, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
+	dst.ServicePackageActivationId = s_221
 
 	return &dst
 }
@@ -10351,8 +10397,6 @@ type innerFabricDeployedServicePackageQueryResultList struct {
 func (obj *innerFabricDeployedServicePackageQueryResultList) toGoStruct() []FabricDeployedServicePackageQueryResultItem {
 	var dst []FabricDeployedServicePackageQueryResultItem
 	{
-		var lst []FabricDeployedServicePackageQueryResultItem
-
 		var innerlst []innerFabricDeployedServicePackageQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -10361,10 +10405,9 @@ func (obj *innerFabricDeployedServicePackageQueryResultList) toGoStruct() []Fabr
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -10381,17 +10424,17 @@ func (obj *FabricDeployedServiceTypeQueryDescription) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := innerFabricDeployedServiceTypeQueryDescription{}
-	s_284, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_284
+	s_222, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_222
 
-	s_285, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_285
+	s_223, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_223
 
-	s_286, _ := windows.UTF16PtrFromString(obj.ServiceManifestNameFilter)
-	dst.ServiceManifestNameFilter = s_286
+	s_224, _ := windows.UTF16PtrFromString(obj.ServiceManifestNameFilter)
+	dst.ServiceManifestNameFilter = s_224
 
-	s_287, _ := windows.UTF16PtrFromString(obj.ServiceTypeNameFilter)
-	dst.ServiceTypeNameFilter = s_287
+	s_225, _ := windows.UTF16PtrFromString(obj.ServiceTypeNameFilter)
+	dst.ServiceTypeNameFilter = s_225
 
 	return &dst
 }
@@ -10428,14 +10471,14 @@ func (obj *FabricDeployedServiceTypeQueryResultItem) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := innerFabricDeployedServiceTypeQueryResultItem{}
-	s_288, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_288
+	s_226, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
+	dst.ServiceTypeName = s_226
 
-	s_289, _ := windows.UTF16PtrFromString(obj.CodePackageName)
-	dst.CodePackageName = s_289
+	s_227, _ := windows.UTF16PtrFromString(obj.CodePackageName)
+	dst.CodePackageName = s_227
 
-	s_290, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_290
+	s_228, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
+	dst.ServiceManifestName = s_228
 
 	dst.Status = obj.Status
 	return &dst
@@ -10470,8 +10513,8 @@ func (obj *FabricDeployedServiceTypeQueryResultItemEx1) toInnerStruct() *innerFa
 		return nil
 	}
 	dst := innerFabricDeployedServiceTypeQueryResultItemEx1{}
-	s_291, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	dst.ServicePackageActivationId = s_291
+	s_229, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
+	dst.ServicePackageActivationId = s_229
 
 	return &dst
 }
@@ -10498,8 +10541,6 @@ type innerFabricDeployedServiceTypeQueryResultList struct {
 func (obj *innerFabricDeployedServiceTypeQueryResultList) toGoStruct() []FabricDeployedServiceTypeQueryResultItem {
 	var dst []FabricDeployedServiceTypeQueryResultItem
 	{
-		var lst []FabricDeployedServiceTypeQueryResultItem
-
 		var innerlst []innerFabricDeployedServiceTypeQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -10508,10 +10549,9 @@ func (obj *innerFabricDeployedServiceTypeQueryResultList) toGoStruct() []FabricD
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -10597,12 +10637,12 @@ func (obj *FabricCodePackageEntryPoint) toInnerStruct() *innerFabricCodePackageE
 		return nil
 	}
 	dst := innerFabricCodePackageEntryPoint{}
-	s_293, _ := windows.UTF16PtrFromString(obj.EntryPointLocation)
-	dst.EntryPointLocation = s_293
+	s_230, _ := windows.UTF16PtrFromString(obj.EntryPointLocation)
+	dst.EntryPointLocation = s_230
 
 	dst.ProcessId = obj.ProcessId
-	s_294, _ := windows.UTF16PtrFromString(obj.RunAsUserName)
-	dst.RunAsUserName = s_294
+	s_231, _ := windows.UTF16PtrFromString(obj.RunAsUserName)
+	dst.RunAsUserName = s_231
 
 	dst.EntryPointStatus = obj.EntryPointStatus
 	dst.NextActivationUtc = windows.NsecToFiletime(obj.NextActivationUtc.UnixNano())
@@ -10661,17 +10701,17 @@ func (obj *FabricDeployedCodePackageQueryDescription) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := innerFabricDeployedCodePackageQueryDescription{}
-	s_295, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_295
+	s_232, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_232
 
-	s_296, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_296
+	s_233, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_233
 
-	s_297, _ := windows.UTF16PtrFromString(obj.ServiceManifestNameFilter)
-	dst.ServiceManifestNameFilter = s_297
+	s_234, _ := windows.UTF16PtrFromString(obj.ServiceManifestNameFilter)
+	dst.ServiceManifestNameFilter = s_234
 
-	s_298, _ := windows.UTF16PtrFromString(obj.CodePackageNameFilter)
-	dst.CodePackageNameFilter = s_298
+	s_235, _ := windows.UTF16PtrFromString(obj.CodePackageNameFilter)
+	dst.CodePackageNameFilter = s_235
 
 	return &dst
 }
@@ -10711,14 +10751,14 @@ func (obj *FabricDeployedCodePackageQueryResultItem) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := innerFabricDeployedCodePackageQueryResultItem{}
-	s_299, _ := windows.UTF16PtrFromString(obj.CodePackageName)
-	dst.CodePackageName = s_299
+	s_236, _ := windows.UTF16PtrFromString(obj.CodePackageName)
+	dst.CodePackageName = s_236
 
-	s_300, _ := windows.UTF16PtrFromString(obj.CodePackageVersion)
-	dst.CodePackageVersion = s_300
+	s_237, _ := windows.UTF16PtrFromString(obj.CodePackageVersion)
+	dst.CodePackageVersion = s_237
 
-	s_301, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_301
+	s_238, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
+	dst.ServiceManifestName = s_238
 
 	dst.RunFrequencyInterval = obj.RunFrequencyInterval
 	dst.DeployedCodePackageStatus = obj.DeployedCodePackageStatus
@@ -10764,8 +10804,8 @@ func (obj *FabricDeployedCodePackageQueryResultItemEx1) toInnerStruct() *innerFa
 		return nil
 	}
 	dst := innerFabricDeployedCodePackageQueryResultItemEx1{}
-	s_302, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	dst.ServicePackageActivationId = s_302
+	s_239, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
+	dst.ServicePackageActivationId = s_239
 
 	dst.HostType = obj.HostType
 	dst.HostIsolationMode = obj.HostIsolationMode
@@ -10798,8 +10838,6 @@ type innerFabricDeployedCodePackageQueryResultList struct {
 func (obj *innerFabricDeployedCodePackageQueryResultList) toGoStruct() []FabricDeployedCodePackageQueryResultItem {
 	var dst []FabricDeployedCodePackageQueryResultItem
 	{
-		var lst []FabricDeployedCodePackageQueryResultItem
-
 		var innerlst []innerFabricDeployedCodePackageQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -10808,10 +10846,9 @@ func (obj *innerFabricDeployedCodePackageQueryResultList) toGoStruct() []FabricD
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -10828,14 +10865,14 @@ func (obj *FabricDeployedServiceReplicaQueryDescription) toInnerStruct() *innerF
 		return nil
 	}
 	dst := innerFabricDeployedServiceReplicaQueryDescription{}
-	s_304, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_304
+	s_240, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_240
 
-	s_305, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_305
+	s_241, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_241
 
-	s_306, _ := windows.UTF16PtrFromString(obj.ServiceManifestNameFilter)
-	dst.ServiceManifestNameFilter = s_306
+	s_242, _ := windows.UTF16PtrFromString(obj.ServiceManifestNameFilter)
+	dst.ServiceManifestNameFilter = s_242
 
 	dst.PartitionIdFilter = obj.PartitionIdFilter
 	return &dst
@@ -10923,8 +10960,6 @@ type innerFabricDeployedServiceReplicaQueryResultList struct {
 func (obj *innerFabricDeployedServiceReplicaQueryResultList) toGoStruct() []FabricDeployedServiceReplicaQueryResultItem {
 	var dst []FabricDeployedServiceReplicaQueryResultItem
 	{
-		var lst []FabricDeployedServiceReplicaQueryResultItem
-
 		var innerlst []innerFabricDeployedServiceReplicaQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -10933,10 +10968,9 @@ func (obj *innerFabricDeployedServiceReplicaQueryResultList) toGoStruct() []Fabr
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -10958,24 +10992,24 @@ func (obj *FabricDeployedStatefulServiceReplicaQueryResultItem) toInnerStruct() 
 		return nil
 	}
 	dst := innerFabricDeployedStatefulServiceReplicaQueryResultItem{}
-	s_308, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_308
+	s_243, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_243
 
-	s_309, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_309
+	s_244, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
+	dst.ServiceTypeName = s_244
 
-	s_310, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
-	dst.ServiceManifestVersion = s_310
+	s_245, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
+	dst.ServiceManifestVersion = s_245
 
-	s_311, _ := windows.UTF16PtrFromString(obj.CodePackageName)
-	dst.CodePackageName = s_311
+	s_246, _ := windows.UTF16PtrFromString(obj.CodePackageName)
+	dst.CodePackageName = s_246
 
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaId = obj.ReplicaId
 	dst.ReplicaRole = obj.ReplicaRole
 	dst.ReplicaStatus = obj.ReplicaStatus
-	s_312, _ := windows.UTF16PtrFromString(obj.Address)
-	dst.Address = s_312
+	s_247, _ := windows.UTF16PtrFromString(obj.Address)
+	dst.Address = s_247
 
 	return &dst
 }
@@ -11019,8 +11053,8 @@ func (obj *FabricDeployedStatefulServiceReplicaQueryResultItemEx1) toInnerStruct
 		return nil
 	}
 	dst := innerFabricDeployedStatefulServiceReplicaQueryResultItemEx1{}
-	s_313, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_313
+	s_248, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
+	dst.ServiceManifestName = s_248
 
 	return &dst
 }
@@ -11048,8 +11082,8 @@ func (obj *FabricDeployedStatefulServiceReplicaQueryResultItemEx2) toInnerStruct
 		return nil
 	}
 	dst := innerFabricDeployedStatefulServiceReplicaQueryResultItemEx2{}
-	s_314, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	dst.ServicePackageActivationId = s_314
+	s_249, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
+	dst.ServicePackageActivationId = s_249
 
 	return &dst
 }
@@ -11100,23 +11134,23 @@ func (obj *FabricDeployedStatelessServiceInstanceQueryResultItem) toInnerStruct(
 		return nil
 	}
 	dst := innerFabricDeployedStatelessServiceInstanceQueryResultItem{}
-	s_315, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_315
+	s_250, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_250
 
-	s_316, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_316
+	s_251, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
+	dst.ServiceTypeName = s_251
 
-	s_317, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
-	dst.ServiceManifestVersion = s_317
+	s_252, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
+	dst.ServiceManifestVersion = s_252
 
-	s_318, _ := windows.UTF16PtrFromString(obj.CodePackageName)
-	dst.CodePackageName = s_318
+	s_253, _ := windows.UTF16PtrFromString(obj.CodePackageName)
+	dst.CodePackageName = s_253
 
 	dst.PartitionId = obj.PartitionId
 	dst.InstanceId = obj.InstanceId
 	dst.ReplicaStatus = obj.ReplicaStatus
-	s_319, _ := windows.UTF16PtrFromString(obj.Address)
-	dst.Address = s_319
+	s_254, _ := windows.UTF16PtrFromString(obj.Address)
+	dst.Address = s_254
 
 	return &dst
 }
@@ -11158,8 +11192,8 @@ func (obj *FabricDeployedStatelessServiceInstanceQueryResultItemEx1) toInnerStru
 		return nil
 	}
 	dst := innerFabricDeployedStatelessServiceInstanceQueryResultItemEx1{}
-	s_320, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_320
+	s_255, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
+	dst.ServiceManifestName = s_255
 
 	return &dst
 }
@@ -11187,8 +11221,8 @@ func (obj *FabricDeployedStatelessServiceInstanceQueryResultItemEx2) toInnerStru
 		return nil
 	}
 	dst := innerFabricDeployedStatelessServiceInstanceQueryResultItemEx2{}
-	s_321, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	dst.ServicePackageActivationId = s_321
+	s_256, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
+	dst.ServicePackageActivationId = s_256
 
 	return &dst
 }
@@ -11233,8 +11267,8 @@ func (obj *FabricLoadMetricReport) toInnerStruct() *innerFabricLoadMetricReport 
 		return nil
 	}
 	dst := innerFabricLoadMetricReport{}
-	s_322, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_322
+	s_257, _ := windows.UTF16PtrFromString(obj.Name)
+	dst.Name = s_257
 
 	dst.Value = obj.Value
 	dst.LastReportedUtc = windows.NsecToFiletime(obj.LastReportedUtc.UnixNano())
@@ -11282,8 +11316,6 @@ type innerFabricLoadMetricReportList struct {
 func (obj *innerFabricLoadMetricReportList) toGoStruct() []FabricLoadMetricReport {
 	var dst []FabricLoadMetricReport
 	{
-		var lst []FabricLoadMetricReport
-
 		var innerlst []innerFabricLoadMetricReport
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -11292,10 +11324,9 @@ func (obj *innerFabricLoadMetricReportList) toGoStruct() []FabricLoadMetricRepor
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -11308,8 +11339,6 @@ type innerFabricUnplacedReplicaInformationList struct {
 func (obj *innerFabricUnplacedReplicaInformationList) toGoStruct() []string {
 	var dst []string
 	{
-		var lst []string
-
 		var innerlst []*uint16
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -11318,10 +11347,9 @@ func (obj *innerFabricUnplacedReplicaInformationList) toGoStruct() []string {
 
 			tmpitem = windows.UTF16PtrToString(item)
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -11337,8 +11365,8 @@ func (obj *FabricDeployedServiceReplicaDetailQueryDescription) toInnerStruct() *
 		return nil
 	}
 	dst := innerFabricDeployedServiceReplicaDetailQueryDescription{}
-	s_325, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_325
+	s_258, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_258
 
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaId = obj.ReplicaId
@@ -11392,15 +11420,15 @@ func (obj *FabricDeployedStatelessServiceInstanceDetailQueryResultItem) toInnerS
 		return nil
 	}
 	dst := innerFabricDeployedStatelessServiceInstanceDetailQueryResultItem{}
-	s_326, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_326
+	s_259, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_259
 
 	dst.PartitionId = obj.PartitionId
 	dst.InstanceId = obj.InstanceId
 	dst.CurrentServiceOperation = obj.CurrentServiceOperation
 	dst.CurrentServiceOperationStartTimeUtc = windows.NsecToFiletime(obj.CurrentServiceOperationStartTimeUtc.UnixNano())
+	lst_260 := &innerFabricLoadMetricReportList{}
 	{
-		lst := &innerFabricLoadMetricReportList{}
 
 		var tmp []innerFabricLoadMetricReport
 
@@ -11412,13 +11440,13 @@ func (obj *FabricDeployedStatelessServiceInstanceDetailQueryResultItem) toInnerS
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_260.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_260.Items = &tmp[0]
 		}
 
-		dst.ReportedLoad = lst
 	}
+	dst.ReportedLoad = lst_260
 	return &dst
 }
 
@@ -11443,8 +11471,6 @@ func (obj *innerFabricDeployedStatelessServiceInstanceDetailQueryResultItem) toG
 	dst.CurrentServiceOperation = obj.CurrentServiceOperation
 	dst.CurrentServiceOperationStartTimeUtc = time.Unix(0, obj.CurrentServiceOperationStartTimeUtc.Nanoseconds())
 	{
-		var lst []FabricLoadMetricReport
-
 		var innerlst []innerFabricLoadMetricReport
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ReportedLoad.Items), int(obj.ReportedLoad.Count))
 
@@ -11453,10 +11479,9 @@ func (obj *innerFabricDeployedStatelessServiceInstanceDetailQueryResultItem) toG
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.ReportedLoad = append(dst.ReportedLoad, tmpitem)
 		}
 
-		dst.ReportedLoad = lst
 	}
 	return &dst
 }
@@ -11569,8 +11594,6 @@ type innerFabricRemoteReplicatorStatusList struct {
 func (obj *innerFabricRemoteReplicatorStatusList) toGoStruct() []FabricRemoteReplicatorStatus {
 	var dst []FabricRemoteReplicatorStatus
 	{
-		var lst []FabricRemoteReplicatorStatus
-
 		var innerlst []innerFabricRemoteReplicatorStatus
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -11579,10 +11602,9 @@ func (obj *innerFabricRemoteReplicatorStatusList) toGoStruct() []FabricRemoteRep
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -11618,8 +11640,8 @@ func (obj *FabricPrimaryReplicatorStatusQueryResult) toInnerStruct() *innerFabri
 	}
 	dst := innerFabricPrimaryReplicatorStatusQueryResult{}
 	dst.ReplicationQueueStatus = obj.ReplicationQueueStatus.toInnerStruct()
+	lst_261 := &innerFabricRemoteReplicatorStatusList{}
 	{
-		lst := &innerFabricRemoteReplicatorStatusList{}
 
 		var tmp []innerFabricRemoteReplicatorStatus
 
@@ -11631,13 +11653,13 @@ func (obj *FabricPrimaryReplicatorStatusQueryResult) toInnerStruct() *innerFabri
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_261.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_261.Items = &tmp[0]
 		}
 
-		dst.RemoteReplicators = lst
 	}
+	dst.RemoteReplicators = lst_261
 	return &dst
 }
 
@@ -11654,8 +11676,6 @@ func (obj *innerFabricPrimaryReplicatorStatusQueryResult) toGoStruct() *FabricPr
 	dst := FabricPrimaryReplicatorStatusQueryResult{}
 	dst.ReplicationQueueStatus = obj.ReplicationQueueStatus.toGoStruct()
 	{
-		var lst []FabricRemoteReplicatorStatus
-
 		var innerlst []innerFabricRemoteReplicatorStatus
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.RemoteReplicators.Items), int(obj.RemoteReplicators.Count))
 
@@ -11664,10 +11684,9 @@ func (obj *innerFabricPrimaryReplicatorStatusQueryResult) toGoStruct() *FabricPr
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.RemoteReplicators = append(dst.RemoteReplicators, tmpitem)
 		}
 
-		dst.RemoteReplicators = lst
 	}
 	return &dst
 }
@@ -11783,8 +11802,8 @@ func (obj *FabricDeployedStatefulServiceReplicaDetailQueryResultItem) toInnerStr
 		return nil
 	}
 	dst := innerFabricDeployedStatefulServiceReplicaDetailQueryResultItem{}
-	s_332, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_332
+	s_262, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_262
 
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaId = obj.ReplicaId
@@ -11793,8 +11812,8 @@ func (obj *FabricDeployedStatefulServiceReplicaDetailQueryResultItem) toInnerStr
 	dst.CurrentReplicatorOperation = obj.CurrentReplicatorOperation
 	dst.ReadStatus = obj.ReadStatus
 	dst.WriteStatus = obj.WriteStatus
+	lst_263 := &innerFabricLoadMetricReportList{}
 	{
-		lst := &innerFabricLoadMetricReportList{}
 
 		var tmp []innerFabricLoadMetricReport
 
@@ -11806,13 +11825,13 @@ func (obj *FabricDeployedStatefulServiceReplicaDetailQueryResultItem) toInnerStr
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_263.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_263.Items = &tmp[0]
 		}
 
-		dst.ReportedLoad = lst
 	}
+	dst.ReportedLoad = lst_263
 	dst.ReplicatorStatus = obj.ReplicatorStatus.toInnerStruct()
 	return &dst
 }
@@ -11845,8 +11864,6 @@ func (obj *innerFabricDeployedStatefulServiceReplicaDetailQueryResultItem) toGoS
 	dst.ReadStatus = obj.ReadStatus
 	dst.WriteStatus = obj.WriteStatus
 	{
-		var lst []FabricLoadMetricReport
-
 		var innerlst []innerFabricLoadMetricReport
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ReportedLoad.Items), int(obj.ReportedLoad.Count))
 
@@ -11855,10 +11872,9 @@ func (obj *innerFabricDeployedStatefulServiceReplicaDetailQueryResultItem) toGoS
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.ReportedLoad = append(dst.ReportedLoad, tmpitem)
 		}
 
-		dst.ReportedLoad = lst
 	}
 	dst.ReplicatorStatus = obj.ReplicatorStatus.toGoStruct()
 	return &dst
@@ -11926,12 +11942,12 @@ func (obj *FabricKeyValueStoreStatusQueryResult) toInnerStruct() *innerFabricKey
 	dst := innerFabricKeyValueStoreStatusQueryResult{}
 	dst.DatabaseRowCountEstimate = obj.DatabaseRowCountEstimate
 	dst.DatabaseLogicalSizeEstimate = obj.DatabaseLogicalSizeEstimate
-	s_335, _ := windows.UTF16PtrFromString(obj.CopyNotificationCurrentKeyFilter)
-	dst.CopyNotificationCurrentKeyFilter = s_335
+	s_264, _ := windows.UTF16PtrFromString(obj.CopyNotificationCurrentKeyFilter)
+	dst.CopyNotificationCurrentKeyFilter = s_264
 
 	dst.CopyNotificationCurrentProgress = obj.CopyNotificationCurrentProgress
-	s_336, _ := windows.UTF16PtrFromString(obj.StatusDetails)
-	dst.StatusDetails = s_336
+	s_265, _ := windows.UTF16PtrFromString(obj.StatusDetails)
+	dst.StatusDetails = s_265
 
 	return &dst
 }
@@ -11983,8 +11999,8 @@ func (obj *FabricProvisionedCodeVersionQueryDescription) toInnerStruct() *innerF
 		return nil
 	}
 	dst := innerFabricProvisionedCodeVersionQueryDescription{}
-	s_337, _ := windows.UTF16PtrFromString(obj.CodeVersionFilter)
-	dst.CodeVersionFilter = s_337
+	s_266, _ := windows.UTF16PtrFromString(obj.CodeVersionFilter)
+	dst.CodeVersionFilter = s_266
 
 	return &dst
 }
@@ -12012,8 +12028,8 @@ func (obj *FabricProvisionedCodeVersionQueryResultItem) toInnerStruct() *innerFa
 		return nil
 	}
 	dst := innerFabricProvisionedCodeVersionQueryResultItem{}
-	s_338, _ := windows.UTF16PtrFromString(obj.CodeVersion)
-	dst.CodeVersion = s_338
+	s_267, _ := windows.UTF16PtrFromString(obj.CodeVersion)
+	dst.CodeVersion = s_267
 
 	return &dst
 }
@@ -12040,8 +12056,6 @@ type innerFabricProvisionedCodeVersionQueryResultList struct {
 func (obj *innerFabricProvisionedCodeVersionQueryResultList) toGoStruct() []FabricProvisionedCodeVersionQueryResultItem {
 	var dst []FabricProvisionedCodeVersionQueryResultItem
 	{
-		var lst []FabricProvisionedCodeVersionQueryResultItem
-
 		var innerlst []innerFabricProvisionedCodeVersionQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -12050,10 +12064,9 @@ func (obj *innerFabricProvisionedCodeVersionQueryResultList) toGoStruct() []Fabr
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -12067,8 +12080,8 @@ func (obj *FabricProvisionedConfigVersionQueryDescription) toInnerStruct() *inne
 		return nil
 	}
 	dst := innerFabricProvisionedConfigVersionQueryDescription{}
-	s_340, _ := windows.UTF16PtrFromString(obj.ConfigVersionFilter)
-	dst.ConfigVersionFilter = s_340
+	s_268, _ := windows.UTF16PtrFromString(obj.ConfigVersionFilter)
+	dst.ConfigVersionFilter = s_268
 
 	return &dst
 }
@@ -12096,8 +12109,8 @@ func (obj *FabricProvisionedConfigVersionQueryResultItem) toInnerStruct() *inner
 		return nil
 	}
 	dst := innerFabricProvisionedConfigVersionQueryResultItem{}
-	s_341, _ := windows.UTF16PtrFromString(obj.ConfigVersion)
-	dst.ConfigVersion = s_341
+	s_269, _ := windows.UTF16PtrFromString(obj.ConfigVersion)
+	dst.ConfigVersion = s_269
 
 	return &dst
 }
@@ -12124,8 +12137,6 @@ type innerFabricProvisionedConfigVersionQueryResultList struct {
 func (obj *innerFabricProvisionedConfigVersionQueryResultList) toGoStruct() []FabricProvisionedConfigVersionQueryResultItem {
 	var dst []FabricProvisionedConfigVersionQueryResultItem
 	{
-		var lst []FabricProvisionedConfigVersionQueryResultItem
-
 		var innerlst []innerFabricProvisionedConfigVersionQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -12134,10 +12145,9 @@ func (obj *innerFabricProvisionedConfigVersionQueryResultList) toGoStruct() []Fa
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -12166,8 +12176,8 @@ func (obj *FabricServiceNameQueryResult) toInnerStruct() *innerFabricServiceName
 		return nil
 	}
 	dst := innerFabricServiceNameQueryResult{}
-	s_343, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_343
+	s_270, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_270
 
 	return &dst
 }
@@ -12195,8 +12205,8 @@ func (obj *FabricApplicationNameQueryDescription) toInnerStruct() *innerFabricAp
 		return nil
 	}
 	dst := innerFabricApplicationNameQueryDescription{}
-	s_344, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_344
+	s_271, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_271
 
 	return &dst
 }
@@ -12224,8 +12234,8 @@ func (obj *FabricApplicationNameQueryResult) toInnerStruct() *innerFabricApplica
 		return nil
 	}
 	dst := innerFabricApplicationNameQueryResult{}
-	s_345, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_345
+	s_272, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_272
 
 	return &dst
 }
@@ -12257,17 +12267,17 @@ func (obj *FabricRestartDeployedCodePackageDescription) toInnerStruct() *innerFa
 		return nil
 	}
 	dst := innerFabricRestartDeployedCodePackageDescription{}
-	s_346, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_346
+	s_273, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_273
 
-	s_347, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_347
+	s_274, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_274
 
-	s_348, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_348
+	s_275, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
+	dst.ServiceManifestName = s_275
 
-	s_349, _ := windows.UTF16PtrFromString(obj.CodePackageName)
-	dst.CodePackageName = s_349
+	s_276, _ := windows.UTF16PtrFromString(obj.CodePackageName)
+	dst.CodePackageName = s_276
 
 	dst.CodePackageInstanceId = obj.CodePackageInstanceId
 	return &dst
@@ -12305,8 +12315,8 @@ func (obj *FabricRestartNodeDescription) toInnerStruct() *innerFabricRestartNode
 		return nil
 	}
 	dst := innerFabricRestartNodeDescription{}
-	s_350, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_350
+	s_277, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_277
 
 	dst.NodeInstanceId = obj.NodeInstanceId
 	return &dst
@@ -12339,8 +12349,8 @@ func (obj *FabricRestartNodeDescriptionUsingNodeName) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := innerFabricRestartNodeDescriptionUsingNodeName{}
-	s_351, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_351
+	s_278, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_278
 
 	dst.NodeInstanceId = obj.NodeInstanceId
 	dst.ShouldCreateFabricDump = obj.ShouldCreateFabricDump
@@ -12405,8 +12415,8 @@ func (obj *FabricStopNodeDescription) toInnerStruct() *innerFabricStopNodeDescri
 		return nil
 	}
 	dst := innerFabricStopNodeDescription{}
-	s_352, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_352
+	s_279, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_279
 
 	dst.NodeInstanceId = obj.NodeInstanceId
 	return &dst
@@ -12440,12 +12450,12 @@ func (obj *FabricStartNodeDescription) toInnerStruct() *innerFabricStartNodeDesc
 		return nil
 	}
 	dst := innerFabricStartNodeDescription{}
-	s_353, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_353
+	s_280, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_280
 
 	dst.NodeInstanceId = obj.NodeInstanceId
-	s_354, _ := windows.UTF16PtrFromString(obj.IPAddressOrFQDN)
-	dst.IPAddressOrFQDN = s_354
+	s_281, _ := windows.UTF16PtrFromString(obj.IPAddressOrFQDN)
+	dst.IPAddressOrFQDN = s_281
 
 	dst.ClusterConnectionPort = obj.ClusterConnectionPort
 	return &dst
@@ -12498,12 +12508,12 @@ func (obj *FabricStartNodeDescriptionUsingNodeName) toInnerStruct() *innerFabric
 		return nil
 	}
 	dst := innerFabricStartNodeDescriptionUsingNodeName{}
-	s_355, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_355
+	s_282, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_282
 
 	dst.NodeInstanceId = obj.NodeInstanceId
-	s_356, _ := windows.UTF16PtrFromString(obj.IPAddressOrFQDN)
-	dst.IPAddressOrFQDN = s_356
+	s_283, _ := windows.UTF16PtrFromString(obj.IPAddressOrFQDN)
+	dst.IPAddressOrFQDN = s_283
 
 	dst.ClusterConnectionPort = obj.ClusterConnectionPort
 	return &dst
@@ -12554,8 +12564,8 @@ func (obj *FabricStopNodeDescriptionUsingNodeName) toInnerStruct() *innerFabricS
 		return nil
 	}
 	dst := innerFabricStopNodeDescriptionUsingNodeName{}
-	s_357, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_357
+	s_284, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_284
 
 	dst.NodeInstanceId = obj.NodeInstanceId
 	return &dst
@@ -12605,17 +12615,17 @@ func (obj *FabricRestartDeployedCodePackageDescriptionUsingNodeName) toInnerStru
 		return nil
 	}
 	dst := innerFabricRestartDeployedCodePackageDescriptionUsingNodeName{}
-	s_358, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_358
+	s_285, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_285
 
-	s_359, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_359
+	s_286, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_286
 
-	s_360, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_360
+	s_287, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
+	dst.ServiceManifestName = s_287
 
-	s_361, _ := windows.UTF16PtrFromString(obj.CodePackageName)
-	dst.CodePackageName = s_361
+	s_288, _ := windows.UTF16PtrFromString(obj.CodePackageName)
+	dst.CodePackageName = s_288
 
 	dst.CodePackageInstanceId = obj.CodePackageInstanceId
 	return &dst
@@ -12652,8 +12662,8 @@ func (obj *FabricRestartDeployedCodePackageDescriptionUsingNodeNameEx1) toInnerS
 		return nil
 	}
 	dst := innerFabricRestartDeployedCodePackageDescriptionUsingNodeNameEx1{}
-	s_362, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	dst.ServicePackageActivationId = s_362
+	s_289, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
+	dst.ServicePackageActivationId = s_289
 
 	return &dst
 }
@@ -12685,17 +12695,17 @@ func (obj *FabricDeployedCodePackageResult) toInnerStruct() *innerFabricDeployed
 		return nil
 	}
 	dst := innerFabricDeployedCodePackageResult{}
-	s_363, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_363
+	s_290, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_290
 
-	s_364, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_364
+	s_291, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_291
 
-	s_365, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_365
+	s_292, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
+	dst.ServiceManifestName = s_292
 
-	s_366, _ := windows.UTF16PtrFromString(obj.CodePackageName)
-	dst.CodePackageName = s_366
+	s_293, _ := windows.UTF16PtrFromString(obj.CodePackageName)
+	dst.CodePackageName = s_293
 
 	dst.CodePackageInstanceId = obj.CodePackageInstanceId
 	return &dst
@@ -12732,8 +12742,8 @@ func (obj *FabricDeployedCodePackageResultEx1) toInnerStruct() *innerFabricDeplo
 		return nil
 	}
 	dst := innerFabricDeployedCodePackageResultEx1{}
-	s_367, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	dst.ServicePackageActivationId = s_367
+	s_294, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
+	dst.ServicePackageActivationId = s_294
 
 	return &dst
 }
@@ -12779,11 +12789,11 @@ func (obj *FabricMovePrimaryDescriptionUsingNodeName) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := innerFabricMovePrimaryDescriptionUsingNodeName{}
-	s_368, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_368
+	s_295, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_295
 
-	s_369, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_369
+	s_296, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_296
 
 	dst.PartitionId = obj.PartitionId
 	dst.IgnoreConstraints = obj.IgnoreConstraints
@@ -12821,11 +12831,11 @@ func (obj *FabricMovePrimaryResult) toInnerStruct() *innerFabricMovePrimaryResul
 		return nil
 	}
 	dst := innerFabricMovePrimaryResult{}
-	s_370, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_370
+	s_297, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_297
 
-	s_371, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_371
+	s_298, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_298
 
 	dst.PartitionId = obj.PartitionId
 	return &dst
@@ -12877,14 +12887,14 @@ func (obj *FabricMoveSecondaryDescriptionUsingNodeName) toInnerStruct() *innerFa
 		return nil
 	}
 	dst := innerFabricMoveSecondaryDescriptionUsingNodeName{}
-	s_372, _ := windows.UTF16PtrFromString(obj.CurrentNodeName)
-	dst.CurrentNodeName = s_372
+	s_299, _ := windows.UTF16PtrFromString(obj.CurrentNodeName)
+	dst.CurrentNodeName = s_299
 
-	s_373, _ := windows.UTF16PtrFromString(obj.NewNodeName)
-	dst.NewNodeName = s_373
+	s_300, _ := windows.UTF16PtrFromString(obj.NewNodeName)
+	dst.NewNodeName = s_300
 
-	s_374, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_374
+	s_301, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_301
 
 	dst.PartitionId = obj.PartitionId
 	dst.IgnoreConstraints = obj.IgnoreConstraints
@@ -12925,14 +12935,14 @@ func (obj *FabricMoveSecondaryResult) toInnerStruct() *innerFabricMoveSecondaryR
 		return nil
 	}
 	dst := innerFabricMoveSecondaryResult{}
-	s_375, _ := windows.UTF16PtrFromString(obj.CurrentNodeName)
-	dst.CurrentNodeName = s_375
+	s_302, _ := windows.UTF16PtrFromString(obj.CurrentNodeName)
+	dst.CurrentNodeName = s_302
 
-	s_376, _ := windows.UTF16PtrFromString(obj.NewNodeName)
-	dst.NewNodeName = s_376
+	s_303, _ := windows.UTF16PtrFromString(obj.NewNodeName)
+	dst.NewNodeName = s_303
 
-	s_377, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_377
+	s_304, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_304
 
 	dst.PartitionId = obj.PartitionId
 	return &dst
@@ -12969,8 +12979,8 @@ func (obj *FabricRestartReplicaDescription) toInnerStruct() *innerFabricRestartR
 		return nil
 	}
 	dst := innerFabricRestartReplicaDescription{}
-	s_378, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_378
+	s_305, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_305
 
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaOrInstanceId = obj.ReplicaOrInstanceId
@@ -13006,8 +13016,8 @@ func (obj *FabricRemoveReplicaDescription) toInnerStruct() *innerFabricRemoveRep
 		return nil
 	}
 	dst := innerFabricRemoveReplicaDescription{}
-	s_379, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_379
+	s_306, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_306
 
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaOrInstanceId = obj.ReplicaOrInstanceId
@@ -13077,16 +13087,16 @@ func (obj *FabricHealthInformation) toInnerStruct() *innerFabricHealthInformatio
 		return nil
 	}
 	dst := innerFabricHealthInformation{}
-	s_380, _ := windows.UTF16PtrFromString(obj.SourceId)
-	dst.SourceId = s_380
+	s_307, _ := windows.UTF16PtrFromString(obj.SourceId)
+	dst.SourceId = s_307
 
-	s_381, _ := windows.UTF16PtrFromString(obj.Property)
-	dst.Property = s_381
+	s_308, _ := windows.UTF16PtrFromString(obj.Property)
+	dst.Property = s_308
 
 	dst.TimeToLiveSeconds = obj.TimeToLiveSeconds
 	dst.State = obj.State
-	s_382, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_382
+	s_309, _ := windows.UTF16PtrFromString(obj.Description)
+	dst.Description = s_309
 
 	dst.SequenceNumber = obj.SequenceNumber
 	dst.RemoveWhenExpired = obj.RemoveWhenExpired
@@ -13209,8 +13219,8 @@ func (obj *FabricNodeHealthReport) toInnerStruct() *innerFabricNodeHealthReport 
 		return nil
 	}
 	dst := innerFabricNodeHealthReport{}
-	s_383, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_383
+	s_310, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_310
 
 	dst.HealthInformation = obj.HealthInformation.toInnerStruct()
 	return &dst
@@ -13242,8 +13252,8 @@ func (obj *FabricApplicationHealthReport) toInnerStruct() *innerFabricApplicatio
 		return nil
 	}
 	dst := innerFabricApplicationHealthReport{}
-	s_384, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_384
+	s_311, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_311
 
 	dst.HealthInformation = obj.HealthInformation.toInnerStruct()
 	return &dst
@@ -13275,8 +13285,8 @@ func (obj *FabricServiceHealthReport) toInnerStruct() *innerFabricServiceHealthR
 		return nil
 	}
 	dst := innerFabricServiceHealthReport{}
-	s_385, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_385
+	s_312, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_312
 
 	dst.HealthInformation = obj.HealthInformation.toInnerStruct()
 	return &dst
@@ -13310,14 +13320,14 @@ func (obj *FabricDeployedServicePackageHealthReport) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := innerFabricDeployedServicePackageHealthReport{}
-	s_386, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_386
+	s_313, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_313
 
-	s_387, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_387
+	s_314, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
+	dst.ServiceManifestName = s_314
 
-	s_388, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_388
+	s_315, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_315
 
 	dst.HealthInformation = obj.HealthInformation.toInnerStruct()
 	return &dst
@@ -13352,8 +13362,8 @@ func (obj *FabricDeployedServicePackageHealthReportEx1) toInnerStruct() *innerFa
 		return nil
 	}
 	dst := innerFabricDeployedServicePackageHealthReportEx1{}
-	s_389, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	dst.ServicePackageActivationId = s_389
+	s_316, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
+	dst.ServicePackageActivationId = s_316
 
 	return &dst
 }
@@ -13383,11 +13393,11 @@ func (obj *FabricDeployedApplicationHealthReport) toInnerStruct() *innerFabricDe
 		return nil
 	}
 	dst := innerFabricDeployedApplicationHealthReport{}
-	s_390, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_390
+	s_317, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_317
 
-	s_391, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_391
+	s_318, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_318
 
 	dst.HealthInformation = obj.HealthInformation.toInnerStruct()
 	return &dst
@@ -13438,8 +13448,8 @@ func (obj *FabricServiceTypeHealthPolicyMapItem) toInnerStruct() *innerFabricSer
 		return nil
 	}
 	dst := innerFabricServiceTypeHealthPolicyMapItem{}
-	s_392, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_392
+	s_319, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
+	dst.ServiceTypeName = s_319
 
 	dst.ServiceTypeHealthPolicy = obj.ServiceTypeHealthPolicy.toInnerStruct()
 	return &dst
@@ -13512,8 +13522,8 @@ func (obj *FabricApplicationHealthPolicy) toInnerStruct() *innerFabricApplicatio
 		for k, v := range obj.ServiceTypeHealthPolicyMap {
 			kv := innerFabricServiceTypeHealthPolicyMapItem{}
 
-			s_395, _ := windows.UTF16PtrFromString(k)
-			kv.ServiceTypeName = s_395
+			s_322, _ := windows.UTF16PtrFromString(k)
+			kv.ServiceTypeName = s_322
 
 			kv.ServiceTypeHealthPolicy = v.toInnerStruct()
 
@@ -13578,8 +13588,8 @@ func (obj *FabricApplicationHealthPolicyMapItem) toInnerStruct() *innerFabricApp
 		return nil
 	}
 	dst := innerFabricApplicationHealthPolicyMapItem{}
-	s_397, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_397
+	s_324, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_324
 
 	dst.HealthPolicy = obj.HealthPolicy.toInnerStruct()
 	return &dst
@@ -13677,16 +13687,16 @@ func (obj *FabricLoadMetricInformation) toInnerStruct() *innerFabricLoadMetricIn
 		return nil
 	}
 	dst := innerFabricLoadMetricInformation{}
-	s_399, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_399
+	s_326, _ := windows.UTF16PtrFromString(obj.Name)
+	dst.Name = s_326
 
 	dst.IsBalancedBefore = obj.IsBalancedBefore
 	dst.IsBalancedAfter = obj.IsBalancedAfter
 	dst.DeviationBefore = obj.DeviationBefore
 	dst.DeviationAfter = obj.DeviationAfter
 	dst.BalancingThreshold = obj.BalancingThreshold
-	s_400, _ := windows.UTF16PtrFromString(obj.Action)
-	dst.Action = s_400
+	s_327, _ := windows.UTF16PtrFromString(obj.Action)
+	dst.Action = s_327
 
 	return &dst
 }
@@ -13784,8 +13794,6 @@ type innerFabricLoadMetricInformationList struct {
 func (obj *innerFabricLoadMetricInformationList) toGoStruct() []FabricLoadMetricInformation {
 	var dst []FabricLoadMetricInformation
 	{
-		var lst []FabricLoadMetricInformation
-
 		var innerlst []innerFabricLoadMetricInformation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -13794,10 +13802,9 @@ func (obj *innerFabricLoadMetricInformationList) toGoStruct() []FabricLoadMetric
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -13815,8 +13822,8 @@ func (obj *FabricClusterLoadInformation) toInnerStruct() *innerFabricClusterLoad
 	dst := innerFabricClusterLoadInformation{}
 	dst.LastBalancingStartTimeUtc = windows.NsecToFiletime(obj.LastBalancingStartTimeUtc.UnixNano())
 	dst.LastBalancingEndTimeUtc = windows.NsecToFiletime(obj.LastBalancingEndTimeUtc.UnixNano())
+	lst_328 := &innerFabricLoadMetricInformationList{}
 	{
-		lst := &innerFabricLoadMetricInformationList{}
 
 		var tmp []innerFabricLoadMetricInformation
 
@@ -13828,13 +13835,13 @@ func (obj *FabricClusterLoadInformation) toInnerStruct() *innerFabricClusterLoad
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_328.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_328.Items = &tmp[0]
 		}
 
-		dst.LoadMetricInformation = lst
 	}
+	dst.LoadMetricInformation = lst_328
 	return &dst
 }
 
@@ -13853,8 +13860,6 @@ func (obj *innerFabricClusterLoadInformation) toGoStruct() *FabricClusterLoadInf
 	dst.LastBalancingStartTimeUtc = time.Unix(0, obj.LastBalancingStartTimeUtc.Nanoseconds())
 	dst.LastBalancingEndTimeUtc = time.Unix(0, obj.LastBalancingEndTimeUtc.Nanoseconds())
 	{
-		var lst []FabricLoadMetricInformation
-
 		var innerlst []innerFabricLoadMetricInformation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.LoadMetricInformation.Items), int(obj.LoadMetricInformation.Count))
 
@@ -13863,10 +13868,9 @@ func (obj *innerFabricClusterLoadInformation) toGoStruct() *FabricClusterLoadInf
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.LoadMetricInformation = append(dst.LoadMetricInformation, tmpitem)
 		}
 
-		dst.LoadMetricInformation = lst
 	}
 	return &dst
 }
@@ -13883,8 +13887,8 @@ func (obj *FabricPartitionLoadInformation) toInnerStruct() *innerFabricPartition
 	}
 	dst := innerFabricPartitionLoadInformation{}
 	dst.PartitionId = obj.PartitionId
+	lst_329 := &innerFabricLoadMetricReportList{}
 	{
-		lst := &innerFabricLoadMetricReportList{}
 
 		var tmp []innerFabricLoadMetricReport
 
@@ -13896,15 +13900,15 @@ func (obj *FabricPartitionLoadInformation) toInnerStruct() *innerFabricPartition
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_329.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_329.Items = &tmp[0]
 		}
 
-		dst.PrimaryLoadMetricReports = lst
 	}
+	dst.PrimaryLoadMetricReports = lst_329
+	lst_330 := &innerFabricLoadMetricReportList{}
 	{
-		lst := &innerFabricLoadMetricReportList{}
 
 		var tmp []innerFabricLoadMetricReport
 
@@ -13916,13 +13920,13 @@ func (obj *FabricPartitionLoadInformation) toInnerStruct() *innerFabricPartition
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_330.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_330.Items = &tmp[0]
 		}
 
-		dst.SecondaryLoadMetricReports = lst
 	}
+	dst.SecondaryLoadMetricReports = lst_330
 	return &dst
 }
 
@@ -13940,8 +13944,6 @@ func (obj *innerFabricPartitionLoadInformation) toGoStruct() *FabricPartitionLoa
 	dst := FabricPartitionLoadInformation{}
 	dst.PartitionId = obj.PartitionId
 	{
-		var lst []FabricLoadMetricReport
-
 		var innerlst []innerFabricLoadMetricReport
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.PrimaryLoadMetricReports.Items), int(obj.PrimaryLoadMetricReports.Count))
 
@@ -13950,14 +13952,11 @@ func (obj *innerFabricPartitionLoadInformation) toGoStruct() *FabricPartitionLoa
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.PrimaryLoadMetricReports = append(dst.PrimaryLoadMetricReports, tmpitem)
 		}
 
-		dst.PrimaryLoadMetricReports = lst
 	}
 	{
-		var lst []FabricLoadMetricReport
-
 		var innerlst []innerFabricLoadMetricReport
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.SecondaryLoadMetricReports.Items), int(obj.SecondaryLoadMetricReports.Count))
 
@@ -13966,10 +13965,9 @@ func (obj *innerFabricPartitionLoadInformation) toGoStruct() *FabricPartitionLoa
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.SecondaryLoadMetricReports = append(dst.SecondaryLoadMetricReports, tmpitem)
 		}
 
-		dst.SecondaryLoadMetricReports = lst
 	}
 	return &dst
 }
@@ -13987,8 +13985,8 @@ func (obj *FabricReplicaLoadInformation) toInnerStruct() *innerFabricReplicaLoad
 	dst := innerFabricReplicaLoadInformation{}
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaOrInstanceId = obj.ReplicaOrInstanceId
+	lst_331 := &innerFabricLoadMetricReportList{}
 	{
-		lst := &innerFabricLoadMetricReportList{}
 
 		var tmp []innerFabricLoadMetricReport
 
@@ -14000,13 +13998,13 @@ func (obj *FabricReplicaLoadInformation) toInnerStruct() *innerFabricReplicaLoad
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_331.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_331.Items = &tmp[0]
 		}
 
-		dst.LoadMetricReports = lst
 	}
+	dst.LoadMetricReports = lst_331
 	return &dst
 }
 
@@ -14025,8 +14023,6 @@ func (obj *innerFabricReplicaLoadInformation) toGoStruct() *FabricReplicaLoadInf
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaOrInstanceId = obj.ReplicaOrInstanceId
 	{
-		var lst []FabricLoadMetricReport
-
 		var innerlst []innerFabricLoadMetricReport
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.LoadMetricReports.Items), int(obj.LoadMetricReports.Count))
 
@@ -14035,10 +14031,9 @@ func (obj *innerFabricReplicaLoadInformation) toGoStruct() *FabricReplicaLoadInf
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.LoadMetricReports = append(dst.LoadMetricReports, tmpitem)
 		}
 
-		dst.LoadMetricReports = lst
 	}
 	return &dst
 }
@@ -14054,31 +14049,31 @@ func (obj *FabricUnplacedReplicaInformation) toInnerStruct() *innerFabricUnplace
 		return nil
 	}
 	dst := innerFabricUnplacedReplicaInformation{}
-	s_410, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_410
+	s_332, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_332
 
 	dst.PartitionId = obj.PartitionId
+	lst_333 := &innerFabricStringList{}
 	{
-		lst := &innerFabricStringList{}
 
 		var tmp []*uint16
 
 		for _, item := range obj.UnplacedReplicaReasons {
 			var tmpitem *uint16
 
-			s_412, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_412
+			s_334, _ := windows.UTF16PtrFromString(item)
+			tmpitem = s_334
 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_333.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_333.Items = &tmp[0]
 		}
 
-		dst.UnplacedReplicaReasons = lst
 	}
+	dst.UnplacedReplicaReasons = lst_333
 	return &dst
 }
 
@@ -14097,8 +14092,6 @@ func (obj *innerFabricUnplacedReplicaInformation) toGoStruct() *FabricUnplacedRe
 	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
 	dst.PartitionId = obj.PartitionId
 	{
-		var lst []string
-
 		var innerlst []*uint16
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnplacedReplicaReasons.Items), int(obj.UnplacedReplicaReasons.Count))
 
@@ -14107,10 +14100,9 @@ func (obj *innerFabricUnplacedReplicaInformation) toGoStruct() *FabricUnplacedRe
 
 			tmpitem = windows.UTF16PtrToString(item)
 
-			lst = append(lst, tmpitem)
+			dst.UnplacedReplicaReasons = append(dst.UnplacedReplicaReasons, tmpitem)
 		}
 
-		dst.UnplacedReplicaReasons = lst
 	}
 	return &dst
 }
@@ -14128,8 +14120,8 @@ func (obj *FabricNodeLoadMetricInformation) toInnerStruct() *innerFabricNodeLoad
 		return nil
 	}
 	dst := innerFabricNodeLoadMetricInformation{}
-	s_414, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_414
+	s_335, _ := windows.UTF16PtrFromString(obj.Name)
+	dst.Name = s_335
 
 	dst.NodeCapacity = obj.NodeCapacity
 	dst.NodeLoad = obj.NodeLoad
@@ -14201,8 +14193,6 @@ type innerFabricNodeLoadMetricInformationList struct {
 func (obj *innerFabricNodeLoadMetricInformationList) toGoStruct() []FabricNodeLoadMetricInformation {
 	var dst []FabricNodeLoadMetricInformation
 	{
-		var lst []FabricNodeLoadMetricInformation
-
 		var innerlst []innerFabricNodeLoadMetricInformation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -14211,10 +14201,9 @@ func (obj *innerFabricNodeLoadMetricInformationList) toGoStruct() []FabricNodeLo
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -14229,11 +14218,11 @@ func (obj *FabricNodeLoadInformation) toInnerStruct() *innerFabricNodeLoadInform
 		return nil
 	}
 	dst := innerFabricNodeLoadInformation{}
-	s_416, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_416
+	s_336, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_336
 
+	lst_337 := &innerFabricNodeLoadMetricInformationList{}
 	{
-		lst := &innerFabricNodeLoadMetricInformationList{}
 
 		var tmp []innerFabricNodeLoadMetricInformation
 
@@ -14245,13 +14234,13 @@ func (obj *FabricNodeLoadInformation) toInnerStruct() *innerFabricNodeLoadInform
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_337.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_337.Items = &tmp[0]
 		}
 
-		dst.NodeLoadMetricInformation = lst
 	}
+	dst.NodeLoadMetricInformation = lst_337
 	return &dst
 }
 
@@ -14268,8 +14257,6 @@ func (obj *innerFabricNodeLoadInformation) toGoStruct() *FabricNodeLoadInformati
 	dst := FabricNodeLoadInformation{}
 	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
 	{
-		var lst []FabricNodeLoadMetricInformation
-
 		var innerlst []innerFabricNodeLoadMetricInformation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.NodeLoadMetricInformation.Items), int(obj.NodeLoadMetricInformation.Count))
 
@@ -14278,10 +14265,9 @@ func (obj *innerFabricNodeLoadInformation) toGoStruct() *FabricNodeLoadInformati
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.NodeLoadMetricInformation = append(dst.NodeLoadMetricInformation, tmpitem)
 		}
 
-		dst.NodeLoadMetricInformation = lst
 	}
 	return &dst
 }
@@ -14298,8 +14284,8 @@ func (obj *FabricApplicationLoadMetricInformation) toInnerStruct() *innerFabricA
 		return nil
 	}
 	dst := innerFabricApplicationLoadMetricInformation{}
-	s_419, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_419
+	s_338, _ := windows.UTF16PtrFromString(obj.Name)
+	dst.Name = s_338
 
 	dst.ReservationCapacity = obj.ReservationCapacity
 	dst.ApplicationCapacity = obj.ApplicationCapacity
@@ -14336,8 +14322,6 @@ type innerFabricApplicationLoadMetricInformationList struct {
 func (obj *innerFabricApplicationLoadMetricInformationList) toGoStruct() []FabricApplicationLoadMetricInformation {
 	var dst []FabricApplicationLoadMetricInformation
 	{
-		var lst []FabricApplicationLoadMetricInformation
-
 		var innerlst []innerFabricApplicationLoadMetricInformation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.LoadMetrics), int(obj.Count))
 
@@ -14346,10 +14330,9 @@ func (obj *innerFabricApplicationLoadMetricInformationList) toGoStruct() []Fabri
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -14367,14 +14350,14 @@ func (obj *FabricApplicationLoadInformation) toInnerStruct() *innerFabricApplica
 		return nil
 	}
 	dst := innerFabricApplicationLoadInformation{}
-	s_421, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_421
+	s_339, _ := windows.UTF16PtrFromString(obj.Name)
+	dst.Name = s_339
 
 	dst.MinimumNodes = obj.MinimumNodes
 	dst.MaximumNodes = obj.MaximumNodes
 	dst.NodeCount = obj.NodeCount
+	lst_340 := &innerFabricApplicationLoadMetricInformationList{}
 	{
-		lst := &innerFabricApplicationLoadMetricInformationList{}
 
 		var tmp []innerFabricApplicationLoadMetricInformation
 
@@ -14386,13 +14369,13 @@ func (obj *FabricApplicationLoadInformation) toInnerStruct() *innerFabricApplica
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_340.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.LoadMetrics = &tmp[0]
+			lst_340.LoadMetrics = &tmp[0]
 		}
 
-		dst.ApplicationLoadMetricInformation = lst
 	}
+	dst.ApplicationLoadMetricInformation = lst_340
 	return &dst
 }
 
@@ -14415,8 +14398,6 @@ func (obj *innerFabricApplicationLoadInformation) toGoStruct() *FabricApplicatio
 	dst.MaximumNodes = obj.MaximumNodes
 	dst.NodeCount = obj.NodeCount
 	{
-		var lst []FabricApplicationLoadMetricInformation
-
 		var innerlst []innerFabricApplicationLoadMetricInformation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ApplicationLoadMetricInformation.LoadMetrics), int(obj.ApplicationLoadMetricInformation.Count))
 
@@ -14425,10 +14406,9 @@ func (obj *innerFabricApplicationLoadInformation) toGoStruct() *FabricApplicatio
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.ApplicationLoadMetricInformation = append(dst.ApplicationLoadMetricInformation, tmpitem)
 		}
 
-		dst.ApplicationLoadMetricInformation = lst
 	}
 	return &dst
 }
@@ -14445,13 +14425,13 @@ func (obj *FabricGatewayInformation) toInnerStruct() *innerFabricGatewayInformat
 		return nil
 	}
 	dst := innerFabricGatewayInformation{}
-	s_424, _ := windows.UTF16PtrFromString(obj.NodeAddress)
-	dst.NodeAddress = s_424
+	s_341, _ := windows.UTF16PtrFromString(obj.NodeAddress)
+	dst.NodeAddress = s_341
 
 	dst.NodeId = *obj.NodeId.toInnerStruct()
 	dst.NodeInstanceId = obj.NodeInstanceId
-	s_425, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_425
+	s_342, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_342
 
 	return &dst
 }
@@ -14488,8 +14468,8 @@ func (obj *FabricStartApprovedUpgradesDescription) toInnerStruct() *innerFabricS
 	}
 	dst := innerFabricStartApprovedUpgradesDescription{}
 	dst.OperationId = obj.OperationId
-	s_426, _ := windows.UTF16PtrFromString(obj.ClusterConfigPath)
-	dst.ClusterConfigPath = s_426
+	s_343, _ := windows.UTF16PtrFromString(obj.ClusterConfigPath)
+	dst.ClusterConfigPath = s_343
 
 	dst.RollbackOnFailure = obj.RollbackOnFailure
 	return &dst
@@ -14531,8 +14511,8 @@ func (obj *FabricStartUpgradeDescription) toInnerStruct() *innerFabricStartUpgra
 		return nil
 	}
 	dst := innerFabricStartUpgradeDescription{}
-	s_427, _ := windows.UTF16PtrFromString(obj.ClusterConfig)
-	dst.ClusterConfig = s_427
+	s_344, _ := windows.UTF16PtrFromString(obj.ClusterConfig)
+	dst.ClusterConfig = s_344
 
 	dst.HealthCheckRetryTimeoutInSeconds = obj.HealthCheckRetryTimeoutInSeconds
 	dst.HealthCheckWaitDurationInSeconds = obj.HealthCheckWaitDurationInSeconds
@@ -14595,8 +14575,8 @@ func (obj *FabricStartUpgradeDescriptionEx1) toInnerStruct() *innerFabricStartUp
 		for k, v := range obj.ApplicationHealthPolicyMap {
 			kv := innerFabricApplicationHealthPolicyMapItem{}
 
-			s_429, _ := windows.UTF16PtrFromString(k)
-			kv.ApplicationName = s_429
+			s_346, _ := windows.UTF16PtrFromString(k)
+			kv.ApplicationName = s_346
 
 			kv.HealthPolicy = v.toInnerStruct()
 
@@ -14658,20 +14638,20 @@ func (obj *FabricUpgradeOrchestrationServiceState) toInnerStruct() *innerFabricU
 		return nil
 	}
 	dst := innerFabricUpgradeOrchestrationServiceState{}
-	s_431, _ := windows.UTF16PtrFromString(obj.CurrentCodeVersion)
-	dst.CurrentCodeVersion = s_431
+	s_348, _ := windows.UTF16PtrFromString(obj.CurrentCodeVersion)
+	dst.CurrentCodeVersion = s_348
 
-	s_432, _ := windows.UTF16PtrFromString(obj.CurrentManifestVersion)
-	dst.CurrentManifestVersion = s_432
+	s_349, _ := windows.UTF16PtrFromString(obj.CurrentManifestVersion)
+	dst.CurrentManifestVersion = s_349
 
-	s_433, _ := windows.UTF16PtrFromString(obj.TargetCodeVersion)
-	dst.TargetCodeVersion = s_433
+	s_350, _ := windows.UTF16PtrFromString(obj.TargetCodeVersion)
+	dst.TargetCodeVersion = s_350
 
-	s_434, _ := windows.UTF16PtrFromString(obj.TargetManifestVersion)
-	dst.TargetManifestVersion = s_434
+	s_351, _ := windows.UTF16PtrFromString(obj.TargetManifestVersion)
+	dst.TargetManifestVersion = s_351
 
-	s_435, _ := windows.UTF16PtrFromString(obj.PendingUpgradeType)
-	dst.PendingUpgradeType = s_435
+	s_352, _ := windows.UTF16PtrFromString(obj.PendingUpgradeType)
+	dst.PendingUpgradeType = s_352
 
 	return &dst
 }
@@ -14780,8 +14760,6 @@ type innerFabricHealthEventList struct {
 func (obj *innerFabricHealthEventList) toGoStruct() []FabricHealthEvent {
 	var dst []FabricHealthEvent
 	{
-		var lst []FabricHealthEvent
-
 		var innerlst []innerFabricHealthEvent
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -14790,10 +14768,9 @@ func (obj *innerFabricHealthEventList) toGoStruct() []FabricHealthEvent {
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -14821,8 +14798,6 @@ type innerFabricHealthEvaluationList struct {
 func (obj *innerFabricHealthEvaluationList) toGoStruct() []FabricHealthEvaluation {
 	var dst []FabricHealthEvaluation
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -14831,10 +14806,9 @@ func (obj *innerFabricHealthEvaluationList) toGoStruct() []FabricHealthEvaluatio
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -14873,8 +14847,7 @@ func (obj *FabricEntityKindHealthStateCount) toInnerStruct() *innerFabricEntityK
 }
 
 type FabricHealthStatistics struct {
-	Count uint32
-	Items *FabricEntityKindHealthStateCount
+	Items []FabricEntityKindHealthStateCount
 }
 type innerFabricHealthStatistics struct {
 	FabricHealthStatistics
@@ -14918,8 +14891,8 @@ func (obj *FabricStatefulServiceReplicaHealth) toInnerStruct() *innerFabricState
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaId = obj.ReplicaId
 	dst.AggregatedHealthState = obj.AggregatedHealthState
+	lst_353 := &innerFabricHealthEventList{}
 	{
-		lst := &innerFabricHealthEventList{}
 
 		var tmp []innerFabricHealthEvent
 
@@ -14931,13 +14904,13 @@ func (obj *FabricStatefulServiceReplicaHealth) toInnerStruct() *innerFabricState
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_353.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_353.Items = &tmp[0]
 		}
 
-		dst.HealthEvents = lst
 	}
+	dst.HealthEvents = lst_353
 	return &dst
 }
 
@@ -14958,8 +14931,6 @@ func (obj *innerFabricStatefulServiceReplicaHealth) toGoStruct() *FabricStateful
 	dst.ReplicaId = obj.ReplicaId
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
-		var lst []FabricHealthEvent
-
 		var innerlst []innerFabricHealthEvent
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.HealthEvents.Items), int(obj.HealthEvents.Count))
 
@@ -14968,10 +14939,9 @@ func (obj *innerFabricStatefulServiceReplicaHealth) toGoStruct() *FabricStateful
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.HealthEvents = append(dst.HealthEvents, tmpitem)
 		}
 
-		dst.HealthEvents = lst
 	}
 	return &dst
 }
@@ -14985,8 +14955,8 @@ func (obj *FabricStatefulServiceReplicaHealthEx1) toInnerStruct() *innerFabricSt
 		return nil
 	}
 	dst := innerFabricStatefulServiceReplicaHealthEx1{}
+	lst_354 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -14998,13 +14968,13 @@ func (obj *FabricStatefulServiceReplicaHealthEx1) toInnerStruct() *innerFabricSt
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_354.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_354.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_354
 	return &dst
 }
 
@@ -15019,8 +14989,6 @@ func (obj *innerFabricStatefulServiceReplicaHealthEx1) toGoStruct() *FabricState
 	}
 	dst := FabricStatefulServiceReplicaHealthEx1{}
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -15029,10 +14997,9 @@ func (obj *innerFabricStatefulServiceReplicaHealthEx1) toGoStruct() *FabricState
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	return &dst
 }
@@ -15052,8 +15019,8 @@ func (obj *FabricStatelessServiceInstanceHealth) toInnerStruct() *innerFabricSta
 	dst.PartitionId = obj.PartitionId
 	dst.InstanceId = obj.InstanceId
 	dst.AggregatedHealthState = obj.AggregatedHealthState
+	lst_355 := &innerFabricHealthEventList{}
 	{
-		lst := &innerFabricHealthEventList{}
 
 		var tmp []innerFabricHealthEvent
 
@@ -15065,13 +15032,13 @@ func (obj *FabricStatelessServiceInstanceHealth) toInnerStruct() *innerFabricSta
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_355.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_355.Items = &tmp[0]
 		}
 
-		dst.HealthEvents = lst
 	}
+	dst.HealthEvents = lst_355
 	return &dst
 }
 
@@ -15092,8 +15059,6 @@ func (obj *innerFabricStatelessServiceInstanceHealth) toGoStruct() *FabricStatel
 	dst.InstanceId = obj.InstanceId
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
-		var lst []FabricHealthEvent
-
 		var innerlst []innerFabricHealthEvent
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.HealthEvents.Items), int(obj.HealthEvents.Count))
 
@@ -15102,10 +15067,9 @@ func (obj *innerFabricStatelessServiceInstanceHealth) toGoStruct() *FabricStatel
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.HealthEvents = append(dst.HealthEvents, tmpitem)
 		}
 
-		dst.HealthEvents = lst
 	}
 	return &dst
 }
@@ -15119,8 +15083,8 @@ func (obj *FabricStatelessServiceInstanceHealthEx1) toInnerStruct() *innerFabric
 		return nil
 	}
 	dst := innerFabricStatelessServiceInstanceHealthEx1{}
+	lst_356 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -15132,13 +15096,13 @@ func (obj *FabricStatelessServiceInstanceHealthEx1) toInnerStruct() *innerFabric
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_356.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_356.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_356
 	return &dst
 }
 
@@ -15153,8 +15117,6 @@ func (obj *innerFabricStatelessServiceInstanceHealthEx1) toGoStruct() *FabricSta
 	}
 	dst := FabricStatelessServiceInstanceHealthEx1{}
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -15163,10 +15125,9 @@ func (obj *innerFabricStatelessServiceInstanceHealthEx1) toGoStruct() *FabricSta
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	return &dst
 }
@@ -15194,8 +15155,6 @@ type innerFabricReplicaHealthStateList struct {
 func (obj *innerFabricReplicaHealthStateList) toGoStruct() []FabricReplicaHealthState {
 	var dst []FabricReplicaHealthState
 	{
-		var lst []FabricReplicaHealthState
-
 		var innerlst []innerFabricReplicaHealthState
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -15204,10 +15163,9 @@ func (obj *innerFabricReplicaHealthStateList) toGoStruct() []FabricReplicaHealth
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -15238,8 +15196,8 @@ func (obj *FabricStatelessServiceInstanceHealthStateEx1) toInnerStruct() *innerF
 		return nil
 	}
 	dst := innerFabricStatelessServiceInstanceHealthStateEx1{}
+	lst_357 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -15251,13 +15209,13 @@ func (obj *FabricStatelessServiceInstanceHealthStateEx1) toInnerStruct() *innerF
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_357.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_357.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_357
 	return &dst
 }
 
@@ -15272,8 +15230,6 @@ func (obj *innerFabricStatelessServiceInstanceHealthStateEx1) toGoStruct() *Fabr
 	}
 	dst := FabricStatelessServiceInstanceHealthStateEx1{}
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -15282,10 +15238,9 @@ func (obj *innerFabricStatelessServiceInstanceHealthStateEx1) toGoStruct() *Fabr
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	return &dst
 }
@@ -15316,8 +15271,8 @@ func (obj *FabricStatefulServiceReplicaHealthStateEx1) toInnerStruct() *innerFab
 		return nil
 	}
 	dst := innerFabricStatefulServiceReplicaHealthStateEx1{}
+	lst_358 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -15329,13 +15284,13 @@ func (obj *FabricStatefulServiceReplicaHealthStateEx1) toInnerStruct() *innerFab
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_358.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_358.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_358
 	return &dst
 }
 
@@ -15350,8 +15305,6 @@ func (obj *innerFabricStatefulServiceReplicaHealthStateEx1) toGoStruct() *Fabric
 	}
 	dst := FabricStatefulServiceReplicaHealthStateEx1{}
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -15360,10 +15313,9 @@ func (obj *innerFabricStatefulServiceReplicaHealthStateEx1) toGoStruct() *Fabric
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	return &dst
 }
@@ -15382,8 +15334,8 @@ func (obj *FabricPartitionHealth) toInnerStruct() *innerFabricPartitionHealth {
 	dst := innerFabricPartitionHealth{}
 	dst.PartitionId = obj.PartitionId
 	dst.AggregatedHealthState = obj.AggregatedHealthState
+	lst_359 := &innerFabricHealthEventList{}
 	{
-		lst := &innerFabricHealthEventList{}
 
 		var tmp []innerFabricHealthEvent
 
@@ -15395,15 +15347,15 @@ func (obj *FabricPartitionHealth) toInnerStruct() *innerFabricPartitionHealth {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_359.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_359.Items = &tmp[0]
 		}
 
-		dst.HealthEvents = lst
 	}
+	dst.HealthEvents = lst_359
+	lst_360 := &innerFabricReplicaHealthStateList{}
 	{
-		lst := &innerFabricReplicaHealthStateList{}
 
 		var tmp []innerFabricReplicaHealthState
 
@@ -15415,13 +15367,13 @@ func (obj *FabricPartitionHealth) toInnerStruct() *innerFabricPartitionHealth {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_360.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_360.Items = &tmp[0]
 		}
 
-		dst.ReplicaHealthStates = lst
 	}
+	dst.ReplicaHealthStates = lst_360
 	return &dst
 }
 
@@ -15441,8 +15393,6 @@ func (obj *innerFabricPartitionHealth) toGoStruct() *FabricPartitionHealth {
 	dst.PartitionId = obj.PartitionId
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
-		var lst []FabricHealthEvent
-
 		var innerlst []innerFabricHealthEvent
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.HealthEvents.Items), int(obj.HealthEvents.Count))
 
@@ -15451,14 +15401,11 @@ func (obj *innerFabricPartitionHealth) toGoStruct() *FabricPartitionHealth {
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.HealthEvents = append(dst.HealthEvents, tmpitem)
 		}
 
-		dst.HealthEvents = lst
 	}
 	{
-		var lst []FabricReplicaHealthState
-
 		var innerlst []innerFabricReplicaHealthState
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ReplicaHealthStates.Items), int(obj.ReplicaHealthStates.Count))
 
@@ -15467,10 +15414,9 @@ func (obj *innerFabricPartitionHealth) toGoStruct() *FabricPartitionHealth {
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.ReplicaHealthStates = append(dst.ReplicaHealthStates, tmpitem)
 		}
 
-		dst.ReplicaHealthStates = lst
 	}
 	return &dst
 }
@@ -15484,8 +15430,8 @@ func (obj *FabricPartitionHealthEx1) toInnerStruct() *innerFabricPartitionHealth
 		return nil
 	}
 	dst := innerFabricPartitionHealthEx1{}
+	lst_361 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -15497,13 +15443,13 @@ func (obj *FabricPartitionHealthEx1) toInnerStruct() *innerFabricPartitionHealth
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_361.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_361.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_361
 	return &dst
 }
 
@@ -15518,8 +15464,6 @@ func (obj *innerFabricPartitionHealthEx1) toGoStruct() *FabricPartitionHealthEx1
 	}
 	dst := FabricPartitionHealthEx1{}
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -15528,10 +15472,9 @@ func (obj *innerFabricPartitionHealthEx1) toGoStruct() *FabricPartitionHealthEx1
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	return &dst
 }
@@ -15575,8 +15518,6 @@ type innerFabricPartitionHealthStateList struct {
 func (obj *innerFabricPartitionHealthStateList) toGoStruct() []FabricPartitionHealthState {
 	var dst []FabricPartitionHealthState
 	{
-		var lst []FabricPartitionHealthState
-
 		var innerlst []innerFabricPartitionHealthState
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -15585,10 +15526,9 @@ func (obj *innerFabricPartitionHealthStateList) toGoStruct() []FabricPartitionHe
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -15606,18 +15546,18 @@ func (obj *FabricDeployedServicePackageHealth) toInnerStruct() *innerFabricDeplo
 		return nil
 	}
 	dst := innerFabricDeployedServicePackageHealth{}
-	s_458, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_458
+	s_362, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_362
 
-	s_459, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_459
+	s_363, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
+	dst.ServiceManifestName = s_363
 
-	s_460, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_460
+	s_364, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_364
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
+	lst_365 := &innerFabricHealthEventList{}
 	{
-		lst := &innerFabricHealthEventList{}
 
 		var tmp []innerFabricHealthEvent
 
@@ -15629,13 +15569,13 @@ func (obj *FabricDeployedServicePackageHealth) toInnerStruct() *innerFabricDeplo
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_365.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_365.Items = &tmp[0]
 		}
 
-		dst.HealthEvents = lst
 	}
+	dst.HealthEvents = lst_365
 	return &dst
 }
 
@@ -15658,8 +15598,6 @@ func (obj *innerFabricDeployedServicePackageHealth) toGoStruct() *FabricDeployed
 	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
-		var lst []FabricHealthEvent
-
 		var innerlst []innerFabricHealthEvent
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.HealthEvents.Items), int(obj.HealthEvents.Count))
 
@@ -15668,10 +15606,9 @@ func (obj *innerFabricDeployedServicePackageHealth) toGoStruct() *FabricDeployed
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.HealthEvents = append(dst.HealthEvents, tmpitem)
 		}
 
-		dst.HealthEvents = lst
 	}
 	return &dst
 }
@@ -15685,8 +15622,8 @@ func (obj *FabricDeployedServicePackageHealthEx1) toInnerStruct() *innerFabricDe
 		return nil
 	}
 	dst := innerFabricDeployedServicePackageHealthEx1{}
+	lst_366 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -15698,13 +15635,13 @@ func (obj *FabricDeployedServicePackageHealthEx1) toInnerStruct() *innerFabricDe
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_366.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_366.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_366
 	return &dst
 }
 
@@ -15719,8 +15656,6 @@ func (obj *innerFabricDeployedServicePackageHealthEx1) toGoStruct() *FabricDeplo
 	}
 	dst := FabricDeployedServicePackageHealthEx1{}
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -15729,10 +15664,9 @@ func (obj *innerFabricDeployedServicePackageHealthEx1) toGoStruct() *FabricDeplo
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	return &dst
 }
@@ -15746,8 +15680,8 @@ func (obj *FabricDeployedServicePackageHealthEx2) toInnerStruct() *innerFabricDe
 		return nil
 	}
 	dst := innerFabricDeployedServicePackageHealthEx2{}
-	s_465, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	dst.ServicePackageActivationId = s_465
+	s_367, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
+	dst.ServicePackageActivationId = s_367
 
 	return &dst
 }
@@ -15778,14 +15712,14 @@ func (obj *FabricDeployedServicePackageHealthState) toInnerStruct() *innerFabric
 		return nil
 	}
 	dst := innerFabricDeployedServicePackageHealthState{}
-	s_466, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_466
+	s_368, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_368
 
-	s_467, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_467
+	s_369, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
+	dst.ServiceManifestName = s_369
 
-	s_468, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_468
+	s_370, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_370
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	return &dst
@@ -15820,8 +15754,8 @@ func (obj *FabricDeployedServicePackageHealthStateEx1) toInnerStruct() *innerFab
 		return nil
 	}
 	dst := innerFabricDeployedServicePackageHealthStateEx1{}
-	s_469, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	dst.ServicePackageActivationId = s_469
+	s_371, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
+	dst.ServicePackageActivationId = s_371
 
 	return &dst
 }
@@ -15848,8 +15782,6 @@ type innerFabricDeployedServicePackageHealthStateList struct {
 func (obj *innerFabricDeployedServicePackageHealthStateList) toGoStruct() []FabricDeployedServicePackageHealthState {
 	var dst []FabricDeployedServicePackageHealthState
 	{
-		var lst []FabricDeployedServicePackageHealthState
-
 		var innerlst []innerFabricDeployedServicePackageHealthState
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -15858,10 +15790,9 @@ func (obj *innerFabricDeployedServicePackageHealthStateList) toGoStruct() []Fabr
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -15879,15 +15810,15 @@ func (obj *FabricDeployedApplicationHealth) toInnerStruct() *innerFabricDeployed
 		return nil
 	}
 	dst := innerFabricDeployedApplicationHealth{}
-	s_471, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_471
+	s_372, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_372
 
-	s_472, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_472
+	s_373, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_373
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
+	lst_374 := &innerFabricHealthEventList{}
 	{
-		lst := &innerFabricHealthEventList{}
 
 		var tmp []innerFabricHealthEvent
 
@@ -15899,15 +15830,15 @@ func (obj *FabricDeployedApplicationHealth) toInnerStruct() *innerFabricDeployed
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_374.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_374.Items = &tmp[0]
 		}
 
-		dst.HealthEvents = lst
 	}
+	dst.HealthEvents = lst_374
+	lst_375 := &innerFabricDeployedServicePackageHealthStateList{}
 	{
-		lst := &innerFabricDeployedServicePackageHealthStateList{}
 
 		var tmp []innerFabricDeployedServicePackageHealthState
 
@@ -15919,13 +15850,13 @@ func (obj *FabricDeployedApplicationHealth) toInnerStruct() *innerFabricDeployed
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_375.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_375.Items = &tmp[0]
 		}
 
-		dst.DeployedServicePackageHealthStates = lst
 	}
+	dst.DeployedServicePackageHealthStates = lst_375
 	return &dst
 }
 
@@ -15947,8 +15878,6 @@ func (obj *innerFabricDeployedApplicationHealth) toGoStruct() *FabricDeployedApp
 	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
-		var lst []FabricHealthEvent
-
 		var innerlst []innerFabricHealthEvent
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.HealthEvents.Items), int(obj.HealthEvents.Count))
 
@@ -15957,14 +15886,11 @@ func (obj *innerFabricDeployedApplicationHealth) toGoStruct() *FabricDeployedApp
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.HealthEvents = append(dst.HealthEvents, tmpitem)
 		}
 
-		dst.HealthEvents = lst
 	}
 	{
-		var lst []FabricDeployedServicePackageHealthState
-
 		var innerlst []innerFabricDeployedServicePackageHealthState
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.DeployedServicePackageHealthStates.Items), int(obj.DeployedServicePackageHealthStates.Count))
 
@@ -15973,10 +15899,9 @@ func (obj *innerFabricDeployedApplicationHealth) toGoStruct() *FabricDeployedApp
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.DeployedServicePackageHealthStates = append(dst.DeployedServicePackageHealthStates, tmpitem)
 		}
 
-		dst.DeployedServicePackageHealthStates = lst
 	}
 	return &dst
 }
@@ -15990,8 +15915,8 @@ func (obj *FabricDeployedApplicationHealthEx1) toInnerStruct() *innerFabricDeplo
 		return nil
 	}
 	dst := innerFabricDeployedApplicationHealthEx1{}
+	lst_376 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -16003,13 +15928,13 @@ func (obj *FabricDeployedApplicationHealthEx1) toInnerStruct() *innerFabricDeplo
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_376.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_376.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_376
 	return &dst
 }
 
@@ -16024,8 +15949,6 @@ func (obj *innerFabricDeployedApplicationHealthEx1) toGoStruct() *FabricDeployed
 	}
 	dst := FabricDeployedApplicationHealthEx1{}
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -16034,10 +15957,9 @@ func (obj *innerFabricDeployedApplicationHealthEx1) toGoStruct() *FabricDeployed
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	return &dst
 }
@@ -16068,11 +15990,11 @@ func (obj *FabricDeployedApplicationHealthState) toInnerStruct() *innerFabricDep
 		return nil
 	}
 	dst := innerFabricDeployedApplicationHealthState{}
-	s_479, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_479
+	s_377, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_377
 
-	s_480, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_480
+	s_378, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_378
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	return &dst
@@ -16104,8 +16026,6 @@ type innerFabricDeployedApplicationHealthStateList struct {
 func (obj *innerFabricDeployedApplicationHealthStateList) toGoStruct() []FabricDeployedApplicationHealthState {
 	var dst []FabricDeployedApplicationHealthState
 	{
-		var lst []FabricDeployedApplicationHealthState
-
 		var innerlst []innerFabricDeployedApplicationHealthState
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -16114,10 +16034,9 @@ func (obj *innerFabricDeployedApplicationHealthStateList) toGoStruct() []FabricD
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -16134,12 +16053,12 @@ func (obj *FabricServiceHealth) toInnerStruct() *innerFabricServiceHealth {
 		return nil
 	}
 	dst := innerFabricServiceHealth{}
-	s_482, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_482
+	s_379, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_379
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
+	lst_380 := &innerFabricHealthEventList{}
 	{
-		lst := &innerFabricHealthEventList{}
 
 		var tmp []innerFabricHealthEvent
 
@@ -16151,15 +16070,15 @@ func (obj *FabricServiceHealth) toInnerStruct() *innerFabricServiceHealth {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_380.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_380.Items = &tmp[0]
 		}
 
-		dst.HealthEvents = lst
 	}
+	dst.HealthEvents = lst_380
+	lst_381 := &innerFabricPartitionHealthStateList{}
 	{
-		lst := &innerFabricPartitionHealthStateList{}
 
 		var tmp []innerFabricPartitionHealthState
 
@@ -16171,13 +16090,13 @@ func (obj *FabricServiceHealth) toInnerStruct() *innerFabricServiceHealth {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_381.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_381.Items = &tmp[0]
 		}
 
-		dst.PartitionHealthStates = lst
 	}
+	dst.PartitionHealthStates = lst_381
 	return &dst
 }
 
@@ -16197,8 +16116,6 @@ func (obj *innerFabricServiceHealth) toGoStruct() *FabricServiceHealth {
 	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
-		var lst []FabricHealthEvent
-
 		var innerlst []innerFabricHealthEvent
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.HealthEvents.Items), int(obj.HealthEvents.Count))
 
@@ -16207,14 +16124,11 @@ func (obj *innerFabricServiceHealth) toGoStruct() *FabricServiceHealth {
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.HealthEvents = append(dst.HealthEvents, tmpitem)
 		}
 
-		dst.HealthEvents = lst
 	}
 	{
-		var lst []FabricPartitionHealthState
-
 		var innerlst []innerFabricPartitionHealthState
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.PartitionHealthStates.Items), int(obj.PartitionHealthStates.Count))
 
@@ -16223,10 +16137,9 @@ func (obj *innerFabricServiceHealth) toGoStruct() *FabricServiceHealth {
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.PartitionHealthStates = append(dst.PartitionHealthStates, tmpitem)
 		}
 
-		dst.PartitionHealthStates = lst
 	}
 	return &dst
 }
@@ -16240,8 +16153,8 @@ func (obj *FabricServiceHealthEx1) toInnerStruct() *innerFabricServiceHealthEx1 
 		return nil
 	}
 	dst := innerFabricServiceHealthEx1{}
+	lst_382 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -16253,13 +16166,13 @@ func (obj *FabricServiceHealthEx1) toInnerStruct() *innerFabricServiceHealthEx1 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_382.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_382.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_382
 	return &dst
 }
 
@@ -16274,8 +16187,6 @@ func (obj *innerFabricServiceHealthEx1) toGoStruct() *FabricServiceHealthEx1 {
 	}
 	dst := FabricServiceHealthEx1{}
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -16284,10 +16195,9 @@ func (obj *innerFabricServiceHealthEx1) toGoStruct() *FabricServiceHealthEx1 {
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	return &dst
 }
@@ -16317,8 +16227,8 @@ func (obj *FabricServiceHealthState) toInnerStruct() *innerFabricServiceHealthSt
 		return nil
 	}
 	dst := innerFabricServiceHealthState{}
-	s_489, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_489
+	s_383, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_383
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	return &dst
@@ -16348,8 +16258,6 @@ type innerFabricServiceHealthStateList struct {
 func (obj *innerFabricServiceHealthStateList) toGoStruct() []FabricServiceHealthState {
 	var dst []FabricServiceHealthState
 	{
-		var lst []FabricServiceHealthState
-
 		var innerlst []innerFabricServiceHealthState
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -16358,10 +16266,9 @@ func (obj *innerFabricServiceHealthStateList) toGoStruct() []FabricServiceHealth
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -16379,12 +16286,12 @@ func (obj *FabricApplicationHealth) toInnerStruct() *innerFabricApplicationHealt
 		return nil
 	}
 	dst := innerFabricApplicationHealth{}
-	s_491, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_491
+	s_384, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_384
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
+	lst_385 := &innerFabricHealthEventList{}
 	{
-		lst := &innerFabricHealthEventList{}
 
 		var tmp []innerFabricHealthEvent
 
@@ -16396,15 +16303,15 @@ func (obj *FabricApplicationHealth) toInnerStruct() *innerFabricApplicationHealt
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_385.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_385.Items = &tmp[0]
 		}
 
-		dst.HealthEvents = lst
 	}
+	dst.HealthEvents = lst_385
+	lst_386 := &innerFabricDeployedApplicationHealthStateList{}
 	{
-		lst := &innerFabricDeployedApplicationHealthStateList{}
 
 		var tmp []innerFabricDeployedApplicationHealthState
 
@@ -16416,15 +16323,15 @@ func (obj *FabricApplicationHealth) toInnerStruct() *innerFabricApplicationHealt
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_386.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_386.Items = &tmp[0]
 		}
 
-		dst.DeployedApplicationHealthStates = lst
 	}
+	dst.DeployedApplicationHealthStates = lst_386
+	lst_387 := &innerFabricServiceHealthStateList{}
 	{
-		lst := &innerFabricServiceHealthStateList{}
 
 		var tmp []innerFabricServiceHealthState
 
@@ -16436,13 +16343,13 @@ func (obj *FabricApplicationHealth) toInnerStruct() *innerFabricApplicationHealt
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_387.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_387.Items = &tmp[0]
 		}
 
-		dst.ServiceHealthStates = lst
 	}
+	dst.ServiceHealthStates = lst_387
 	return &dst
 }
 
@@ -16463,8 +16370,6 @@ func (obj *innerFabricApplicationHealth) toGoStruct() *FabricApplicationHealth {
 	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
-		var lst []FabricHealthEvent
-
 		var innerlst []innerFabricHealthEvent
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.HealthEvents.Items), int(obj.HealthEvents.Count))
 
@@ -16473,14 +16378,11 @@ func (obj *innerFabricApplicationHealth) toGoStruct() *FabricApplicationHealth {
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.HealthEvents = append(dst.HealthEvents, tmpitem)
 		}
 
-		dst.HealthEvents = lst
 	}
 	{
-		var lst []FabricDeployedApplicationHealthState
-
 		var innerlst []innerFabricDeployedApplicationHealthState
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.DeployedApplicationHealthStates.Items), int(obj.DeployedApplicationHealthStates.Count))
 
@@ -16489,14 +16391,11 @@ func (obj *innerFabricApplicationHealth) toGoStruct() *FabricApplicationHealth {
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.DeployedApplicationHealthStates = append(dst.DeployedApplicationHealthStates, tmpitem)
 		}
 
-		dst.DeployedApplicationHealthStates = lst
 	}
 	{
-		var lst []FabricServiceHealthState
-
 		var innerlst []innerFabricServiceHealthState
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ServiceHealthStates.Items), int(obj.ServiceHealthStates.Count))
 
@@ -16505,10 +16404,9 @@ func (obj *innerFabricApplicationHealth) toGoStruct() *FabricApplicationHealth {
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.ServiceHealthStates = append(dst.ServiceHealthStates, tmpitem)
 		}
 
-		dst.ServiceHealthStates = lst
 	}
 	return &dst
 }
@@ -16522,8 +16420,8 @@ func (obj *FabricApplicationHealthEx1) toInnerStruct() *innerFabricApplicationHe
 		return nil
 	}
 	dst := innerFabricApplicationHealthEx1{}
+	lst_388 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -16535,13 +16433,13 @@ func (obj *FabricApplicationHealthEx1) toInnerStruct() *innerFabricApplicationHe
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_388.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_388.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_388
 	return &dst
 }
 
@@ -16556,8 +16454,6 @@ func (obj *innerFabricApplicationHealthEx1) toGoStruct() *FabricApplicationHealt
 	}
 	dst := FabricApplicationHealthEx1{}
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -16566,10 +16462,9 @@ func (obj *innerFabricApplicationHealthEx1) toGoStruct() *FabricApplicationHealt
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	return &dst
 }
@@ -16600,12 +16495,12 @@ func (obj *FabricNodeHealth) toInnerStruct() *innerFabricNodeHealth {
 		return nil
 	}
 	dst := innerFabricNodeHealth{}
-	s_500, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_500
+	s_389, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_389
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
+	lst_390 := &innerFabricHealthEventList{}
 	{
-		lst := &innerFabricHealthEventList{}
 
 		var tmp []innerFabricHealthEvent
 
@@ -16617,13 +16512,13 @@ func (obj *FabricNodeHealth) toInnerStruct() *innerFabricNodeHealth {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_390.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_390.Items = &tmp[0]
 		}
 
-		dst.HealthEvents = lst
 	}
+	dst.HealthEvents = lst_390
 	return &dst
 }
 
@@ -16642,8 +16537,6 @@ func (obj *innerFabricNodeHealth) toGoStruct() *FabricNodeHealth {
 	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
-		var lst []FabricHealthEvent
-
 		var innerlst []innerFabricHealthEvent
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.HealthEvents.Items), int(obj.HealthEvents.Count))
 
@@ -16652,10 +16545,9 @@ func (obj *innerFabricNodeHealth) toGoStruct() *FabricNodeHealth {
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.HealthEvents = append(dst.HealthEvents, tmpitem)
 		}
 
-		dst.HealthEvents = lst
 	}
 	return &dst
 }
@@ -16669,8 +16561,8 @@ func (obj *FabricNodeHealthEx1) toInnerStruct() *innerFabricNodeHealthEx1 {
 		return nil
 	}
 	dst := innerFabricNodeHealthEx1{}
+	lst_391 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -16682,13 +16574,13 @@ func (obj *FabricNodeHealthEx1) toInnerStruct() *innerFabricNodeHealthEx1 {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_391.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_391.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_391
 	return &dst
 }
 
@@ -16703,8 +16595,6 @@ func (obj *innerFabricNodeHealthEx1) toGoStruct() *FabricNodeHealthEx1 {
 	}
 	dst := FabricNodeHealthEx1{}
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -16713,10 +16603,9 @@ func (obj *innerFabricNodeHealthEx1) toGoStruct() *FabricNodeHealthEx1 {
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	return &dst
 }
@@ -16746,8 +16635,8 @@ func (obj *FabricNodeHealthState) toInnerStruct() *innerFabricNodeHealthState {
 		return nil
 	}
 	dst := innerFabricNodeHealthState{}
-	s_505, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_505
+	s_392, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_392
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	return &dst
@@ -16777,8 +16666,6 @@ type innerFabricNodeHealthStateList struct {
 func (obj *innerFabricNodeHealthStateList) toGoStruct() []FabricNodeHealthState {
 	var dst []FabricNodeHealthState
 	{
-		var lst []FabricNodeHealthState
-
 		var innerlst []innerFabricNodeHealthState
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -16787,10 +16674,9 @@ func (obj *innerFabricNodeHealthStateList) toGoStruct() []FabricNodeHealthState 
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -16805,8 +16691,8 @@ func (obj *FabricApplicationHealthState) toInnerStruct() *innerFabricApplication
 		return nil
 	}
 	dst := innerFabricApplicationHealthState{}
-	s_507, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_507
+	s_393, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_393
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	return &dst
@@ -16836,8 +16722,6 @@ type innerFabricApplicationHealthStateList struct {
 func (obj *innerFabricApplicationHealthStateList) toGoStruct() []FabricApplicationHealthState {
 	var dst []FabricApplicationHealthState
 	{
-		var lst []FabricApplicationHealthState
-
 		var innerlst []innerFabricApplicationHealthState
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -16846,10 +16730,9 @@ func (obj *innerFabricApplicationHealthStateList) toGoStruct() []FabricApplicati
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -16865,8 +16748,8 @@ func (obj *FabricClusterHealthEx1) toInnerStruct() *innerFabricClusterHealthEx1 
 		return nil
 	}
 	dst := innerFabricClusterHealthEx1{}
+	lst_394 := &innerFabricNodeHealthStateList{}
 	{
-		lst := &innerFabricNodeHealthStateList{}
 
 		var tmp []innerFabricNodeHealthState
 
@@ -16878,15 +16761,15 @@ func (obj *FabricClusterHealthEx1) toInnerStruct() *innerFabricClusterHealthEx1 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_394.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_394.Items = &tmp[0]
 		}
 
-		dst.NodeHealthStates = lst
 	}
+	dst.NodeHealthStates = lst_394
+	lst_395 := &innerFabricApplicationHealthStateList{}
 	{
-		lst := &innerFabricApplicationHealthStateList{}
 
 		var tmp []innerFabricApplicationHealthState
 
@@ -16898,15 +16781,15 @@ func (obj *FabricClusterHealthEx1) toInnerStruct() *innerFabricClusterHealthEx1 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_395.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_395.Items = &tmp[0]
 		}
 
-		dst.ApplicationHealthStates = lst
 	}
+	dst.ApplicationHealthStates = lst_395
+	lst_396 := &innerFabricHealthEventList{}
 	{
-		lst := &innerFabricHealthEventList{}
 
 		var tmp []innerFabricHealthEvent
 
@@ -16918,13 +16801,13 @@ func (obj *FabricClusterHealthEx1) toInnerStruct() *innerFabricClusterHealthEx1 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_396.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_396.Items = &tmp[0]
 		}
 
-		dst.HealthEvents = lst
 	}
+	dst.HealthEvents = lst_396
 	return &dst
 }
 
@@ -16941,8 +16824,6 @@ func (obj *innerFabricClusterHealthEx1) toGoStruct() *FabricClusterHealthEx1 {
 	}
 	dst := FabricClusterHealthEx1{}
 	{
-		var lst []FabricNodeHealthState
-
 		var innerlst []innerFabricNodeHealthState
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.NodeHealthStates.Items), int(obj.NodeHealthStates.Count))
 
@@ -16951,14 +16832,11 @@ func (obj *innerFabricClusterHealthEx1) toGoStruct() *FabricClusterHealthEx1 {
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.NodeHealthStates = append(dst.NodeHealthStates, tmpitem)
 		}
 
-		dst.NodeHealthStates = lst
 	}
 	{
-		var lst []FabricApplicationHealthState
-
 		var innerlst []innerFabricApplicationHealthState
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ApplicationHealthStates.Items), int(obj.ApplicationHealthStates.Count))
 
@@ -16967,14 +16845,11 @@ func (obj *innerFabricClusterHealthEx1) toGoStruct() *FabricClusterHealthEx1 {
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.ApplicationHealthStates = append(dst.ApplicationHealthStates, tmpitem)
 		}
 
-		dst.ApplicationHealthStates = lst
 	}
 	{
-		var lst []FabricHealthEvent
-
 		var innerlst []innerFabricHealthEvent
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.HealthEvents.Items), int(obj.HealthEvents.Count))
 
@@ -16983,10 +16858,9 @@ func (obj *innerFabricClusterHealthEx1) toGoStruct() *FabricClusterHealthEx1 {
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.HealthEvents = append(dst.HealthEvents, tmpitem)
 		}
 
-		dst.HealthEvents = lst
 	}
 	return &dst
 }
@@ -17000,8 +16874,8 @@ func (obj *FabricClusterHealthEx2) toInnerStruct() *innerFabricClusterHealthEx2 
 		return nil
 	}
 	dst := innerFabricClusterHealthEx2{}
+	lst_397 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -17013,13 +16887,13 @@ func (obj *FabricClusterHealthEx2) toInnerStruct() *innerFabricClusterHealthEx2 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_397.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_397.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_397
 	return &dst
 }
 
@@ -17034,8 +16908,6 @@ func (obj *innerFabricClusterHealthEx2) toGoStruct() *FabricClusterHealthEx2 {
 	}
 	dst := FabricClusterHealthEx2{}
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -17044,10 +16916,9 @@ func (obj *innerFabricClusterHealthEx2) toGoStruct() *FabricClusterHealthEx2 {
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	return &dst
 }
@@ -17079,8 +16950,8 @@ func (obj *FabricEventHealthEvaluation) toInnerStruct() *innerFabricEventHealthE
 		return nil
 	}
 	dst := innerFabricEventHealthEvaluation{}
-	s_517, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_517
+	s_398, _ := windows.UTF16PtrFromString(obj.Description)
+	dst.Description = s_398
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	dst.UnhealthyEvent = obj.UnhealthyEvent.toInnerStruct()
@@ -17121,12 +16992,12 @@ func (obj *FabricReplicasHealthEvaluation) toInnerStruct() *innerFabricReplicasH
 		return nil
 	}
 	dst := innerFabricReplicasHealthEvaluation{}
-	s_518, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_518
+	s_399, _ := windows.UTF16PtrFromString(obj.Description)
+	dst.Description = s_399
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
+	lst_400 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -17138,13 +17009,13 @@ func (obj *FabricReplicasHealthEvaluation) toInnerStruct() *innerFabricReplicasH
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_400.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_400.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_400
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyReplicasPerPartition = obj.MaxPercentUnhealthyReplicasPerPartition
 	return &dst
@@ -17167,8 +17038,6 @@ func (obj *innerFabricReplicasHealthEvaluation) toGoStruct() *FabricReplicasHeal
 	dst.Description = windows.UTF16PtrToString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -17177,10 +17046,9 @@ func (obj *innerFabricReplicasHealthEvaluation) toGoStruct() *FabricReplicasHeal
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyReplicasPerPartition = obj.MaxPercentUnhealthyReplicasPerPartition
@@ -17200,12 +17068,12 @@ func (obj *FabricPartitionsHealthEvaluation) toInnerStruct() *innerFabricPartiti
 		return nil
 	}
 	dst := innerFabricPartitionsHealthEvaluation{}
-	s_521, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_521
+	s_401, _ := windows.UTF16PtrFromString(obj.Description)
+	dst.Description = s_401
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
+	lst_402 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -17217,13 +17085,13 @@ func (obj *FabricPartitionsHealthEvaluation) toInnerStruct() *innerFabricPartiti
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_402.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_402.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_402
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyPartitionsPerService = obj.MaxPercentUnhealthyPartitionsPerService
 	return &dst
@@ -17246,8 +17114,6 @@ func (obj *innerFabricPartitionsHealthEvaluation) toGoStruct() *FabricPartitions
 	dst.Description = windows.UTF16PtrToString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -17256,10 +17122,9 @@ func (obj *innerFabricPartitionsHealthEvaluation) toGoStruct() *FabricPartitions
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyPartitionsPerService = obj.MaxPercentUnhealthyPartitionsPerService
@@ -17278,12 +17143,12 @@ func (obj *FabricDeployedServicePackagesHealthEvaluation) toInnerStruct() *inner
 		return nil
 	}
 	dst := innerFabricDeployedServicePackagesHealthEvaluation{}
-	s_524, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_524
+	s_403, _ := windows.UTF16PtrFromString(obj.Description)
+	dst.Description = s_403
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
+	lst_404 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -17295,13 +17160,13 @@ func (obj *FabricDeployedServicePackagesHealthEvaluation) toInnerStruct() *inner
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_404.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_404.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_404
 	dst.TotalCount = obj.TotalCount
 	return &dst
 }
@@ -17322,8 +17187,6 @@ func (obj *innerFabricDeployedServicePackagesHealthEvaluation) toGoStruct() *Fab
 	dst.Description = windows.UTF16PtrToString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -17332,10 +17195,9 @@ func (obj *innerFabricDeployedServicePackagesHealthEvaluation) toGoStruct() *Fab
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	dst.TotalCount = obj.TotalCount
 	return &dst
@@ -17354,12 +17216,12 @@ func (obj *FabricDeployedApplicationsHealthEvaluation) toInnerStruct() *innerFab
 		return nil
 	}
 	dst := innerFabricDeployedApplicationsHealthEvaluation{}
-	s_527, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_527
+	s_405, _ := windows.UTF16PtrFromString(obj.Description)
+	dst.Description = s_405
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
+	lst_406 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -17371,13 +17233,13 @@ func (obj *FabricDeployedApplicationsHealthEvaluation) toInnerStruct() *innerFab
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_406.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_406.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_406
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyDeployedApplications = obj.MaxPercentUnhealthyDeployedApplications
 	return &dst
@@ -17400,8 +17262,6 @@ func (obj *innerFabricDeployedApplicationsHealthEvaluation) toGoStruct() *Fabric
 	dst.Description = windows.UTF16PtrToString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -17410,10 +17270,9 @@ func (obj *innerFabricDeployedApplicationsHealthEvaluation) toGoStruct() *Fabric
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyDeployedApplications = obj.MaxPercentUnhealthyDeployedApplications
@@ -17434,15 +17293,15 @@ func (obj *FabricServicesHealthEvaluation) toInnerStruct() *innerFabricServicesH
 		return nil
 	}
 	dst := innerFabricServicesHealthEvaluation{}
-	s_530, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_530
+	s_407, _ := windows.UTF16PtrFromString(obj.Description)
+	dst.Description = s_407
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	s_531, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_531
+	s_408, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
+	dst.ServiceTypeName = s_408
 
+	lst_409 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -17454,13 +17313,13 @@ func (obj *FabricServicesHealthEvaluation) toInnerStruct() *innerFabricServicesH
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_409.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_409.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_409
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyServices = obj.MaxPercentUnhealthyServices
 	return &dst
@@ -17485,8 +17344,6 @@ func (obj *innerFabricServicesHealthEvaluation) toGoStruct() *FabricServicesHeal
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	dst.ServiceTypeName = windows.UTF16PtrToString(obj.ServiceTypeName)
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -17495,10 +17352,9 @@ func (obj *innerFabricServicesHealthEvaluation) toGoStruct() *FabricServicesHeal
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyServices = obj.MaxPercentUnhealthyServices
@@ -17518,12 +17374,12 @@ func (obj *FabricNodesHealthEvaluation) toInnerStruct() *innerFabricNodesHealthE
 		return nil
 	}
 	dst := innerFabricNodesHealthEvaluation{}
-	s_534, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_534
+	s_410, _ := windows.UTF16PtrFromString(obj.Description)
+	dst.Description = s_410
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
+	lst_411 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -17535,13 +17391,13 @@ func (obj *FabricNodesHealthEvaluation) toInnerStruct() *innerFabricNodesHealthE
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_411.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_411.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_411
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyNodes = obj.MaxPercentUnhealthyNodes
 	return &dst
@@ -17564,8 +17420,6 @@ func (obj *innerFabricNodesHealthEvaluation) toGoStruct() *FabricNodesHealthEval
 	dst.Description = windows.UTF16PtrToString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -17574,10 +17428,9 @@ func (obj *innerFabricNodesHealthEvaluation) toGoStruct() *FabricNodesHealthEval
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyNodes = obj.MaxPercentUnhealthyNodes
@@ -17597,12 +17450,12 @@ func (obj *FabricApplicationsHealthEvaluation) toInnerStruct() *innerFabricAppli
 		return nil
 	}
 	dst := innerFabricApplicationsHealthEvaluation{}
-	s_537, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_537
+	s_412, _ := windows.UTF16PtrFromString(obj.Description)
+	dst.Description = s_412
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
+	lst_413 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -17614,13 +17467,13 @@ func (obj *FabricApplicationsHealthEvaluation) toInnerStruct() *innerFabricAppli
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_413.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_413.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_413
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyApplications = obj.MaxPercentUnhealthyApplications
 	return &dst
@@ -17643,8 +17496,6 @@ func (obj *innerFabricApplicationsHealthEvaluation) toGoStruct() *FabricApplicat
 	dst.Description = windows.UTF16PtrToString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -17653,10 +17504,9 @@ func (obj *innerFabricApplicationsHealthEvaluation) toGoStruct() *FabricApplicat
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyApplications = obj.MaxPercentUnhealthyApplications
@@ -17677,15 +17527,15 @@ func (obj *FabricUpgradeDomainNodesHealthEvaluation) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := innerFabricUpgradeDomainNodesHealthEvaluation{}
-	s_540, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_540
+	s_414, _ := windows.UTF16PtrFromString(obj.Description)
+	dst.Description = s_414
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	s_541, _ := windows.UTF16PtrFromString(obj.UpgradeDomainName)
-	dst.UpgradeDomainName = s_541
+	s_415, _ := windows.UTF16PtrFromString(obj.UpgradeDomainName)
+	dst.UpgradeDomainName = s_415
 
+	lst_416 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -17697,13 +17547,13 @@ func (obj *FabricUpgradeDomainNodesHealthEvaluation) toInnerStruct() *innerFabri
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_416.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_416.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_416
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyNodes = obj.MaxPercentUnhealthyNodes
 	return &dst
@@ -17728,8 +17578,6 @@ func (obj *innerFabricUpgradeDomainNodesHealthEvaluation) toGoStruct() *FabricUp
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	dst.UpgradeDomainName = windows.UTF16PtrToString(obj.UpgradeDomainName)
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -17738,10 +17586,9 @@ func (obj *innerFabricUpgradeDomainNodesHealthEvaluation) toGoStruct() *FabricUp
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyNodes = obj.MaxPercentUnhealthyNodes
@@ -17762,15 +17609,15 @@ func (obj *FabricUpgradeDomainDeployedApplicationsHealthEvaluation) toInnerStruc
 		return nil
 	}
 	dst := innerFabricUpgradeDomainDeployedApplicationsHealthEvaluation{}
-	s_544, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_544
+	s_417, _ := windows.UTF16PtrFromString(obj.Description)
+	dst.Description = s_417
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	s_545, _ := windows.UTF16PtrFromString(obj.UpgradeDomainName)
-	dst.UpgradeDomainName = s_545
+	s_418, _ := windows.UTF16PtrFromString(obj.UpgradeDomainName)
+	dst.UpgradeDomainName = s_418
 
+	lst_419 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -17782,13 +17629,13 @@ func (obj *FabricUpgradeDomainDeployedApplicationsHealthEvaluation) toInnerStruc
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_419.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_419.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_419
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyDeployedApplications = obj.MaxPercentUnhealthyDeployedApplications
 	return &dst
@@ -17813,8 +17660,6 @@ func (obj *innerFabricUpgradeDomainDeployedApplicationsHealthEvaluation) toGoStr
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	dst.UpgradeDomainName = windows.UTF16PtrToString(obj.UpgradeDomainName)
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -17823,10 +17668,9 @@ func (obj *innerFabricUpgradeDomainDeployedApplicationsHealthEvaluation) toGoStr
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyDeployedApplications = obj.MaxPercentUnhealthyDeployedApplications
@@ -17844,12 +17688,12 @@ func (obj *FabricSystemApplicationHealthEvaluation) toInnerStruct() *innerFabric
 		return nil
 	}
 	dst := innerFabricSystemApplicationHealthEvaluation{}
-	s_548, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_548
+	s_420, _ := windows.UTF16PtrFromString(obj.Description)
+	dst.Description = s_420
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
+	lst_421 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -17861,13 +17705,13 @@ func (obj *FabricSystemApplicationHealthEvaluation) toInnerStruct() *innerFabric
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_421.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_421.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_421
 	return &dst
 }
 
@@ -17886,8 +17730,6 @@ func (obj *innerFabricSystemApplicationHealthEvaluation) toGoStruct() *FabricSys
 	dst.Description = windows.UTF16PtrToString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -17896,10 +17738,9 @@ func (obj *innerFabricSystemApplicationHealthEvaluation) toGoStruct() *FabricSys
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	return &dst
 }
@@ -17916,15 +17757,15 @@ func (obj *FabricNodeHealthEvaluation) toInnerStruct() *innerFabricNodeHealthEva
 		return nil
 	}
 	dst := innerFabricNodeHealthEvaluation{}
-	s_551, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_551
+	s_422, _ := windows.UTF16PtrFromString(obj.Description)
+	dst.Description = s_422
 
-	s_552, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_552
+	s_423, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_423
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
+	lst_424 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -17936,13 +17777,13 @@ func (obj *FabricNodeHealthEvaluation) toInnerStruct() *innerFabricNodeHealthEva
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_424.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_424.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_424
 	return &dst
 }
 
@@ -17963,8 +17804,6 @@ func (obj *innerFabricNodeHealthEvaluation) toGoStruct() *FabricNodeHealthEvalua
 	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -17973,10 +17812,9 @@ func (obj *innerFabricNodeHealthEvaluation) toGoStruct() *FabricNodeHealthEvalua
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	return &dst
 }
@@ -17994,14 +17832,14 @@ func (obj *FabricReplicaHealthEvaluation) toInnerStruct() *innerFabricReplicaHea
 		return nil
 	}
 	dst := innerFabricReplicaHealthEvaluation{}
-	s_555, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_555
+	s_425, _ := windows.UTF16PtrFromString(obj.Description)
+	dst.Description = s_425
 
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaOrInstanceId = obj.ReplicaOrInstanceId
 	dst.AggregatedHealthState = obj.AggregatedHealthState
+	lst_426 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -18013,13 +17851,13 @@ func (obj *FabricReplicaHealthEvaluation) toInnerStruct() *innerFabricReplicaHea
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_426.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_426.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_426
 	return &dst
 }
 
@@ -18042,8 +17880,6 @@ func (obj *innerFabricReplicaHealthEvaluation) toGoStruct() *FabricReplicaHealth
 	dst.ReplicaOrInstanceId = obj.ReplicaOrInstanceId
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -18052,10 +17888,9 @@ func (obj *innerFabricReplicaHealthEvaluation) toGoStruct() *FabricReplicaHealth
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	return &dst
 }
@@ -18072,13 +17907,13 @@ func (obj *FabricPartitionHealthEvaluation) toInnerStruct() *innerFabricPartitio
 		return nil
 	}
 	dst := innerFabricPartitionHealthEvaluation{}
-	s_558, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_558
+	s_427, _ := windows.UTF16PtrFromString(obj.Description)
+	dst.Description = s_427
 
 	dst.PartitionId = obj.PartitionId
 	dst.AggregatedHealthState = obj.AggregatedHealthState
+	lst_428 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -18090,13 +17925,13 @@ func (obj *FabricPartitionHealthEvaluation) toInnerStruct() *innerFabricPartitio
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_428.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_428.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_428
 	return &dst
 }
 
@@ -18117,8 +17952,6 @@ func (obj *innerFabricPartitionHealthEvaluation) toGoStruct() *FabricPartitionHe
 	dst.PartitionId = obj.PartitionId
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -18127,10 +17960,9 @@ func (obj *innerFabricPartitionHealthEvaluation) toGoStruct() *FabricPartitionHe
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	return &dst
 }
@@ -18147,15 +17979,15 @@ func (obj *FabricServiceHealthEvaluation) toInnerStruct() *innerFabricServiceHea
 		return nil
 	}
 	dst := innerFabricServiceHealthEvaluation{}
-	s_561, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_561
+	s_429, _ := windows.UTF16PtrFromString(obj.Description)
+	dst.Description = s_429
 
-	s_562, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_562
+	s_430, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_430
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
+	lst_431 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -18167,13 +17999,13 @@ func (obj *FabricServiceHealthEvaluation) toInnerStruct() *innerFabricServiceHea
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_431.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_431.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_431
 	return &dst
 }
 
@@ -18194,8 +18026,6 @@ func (obj *innerFabricServiceHealthEvaluation) toGoStruct() *FabricServiceHealth
 	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -18204,10 +18034,9 @@ func (obj *innerFabricServiceHealthEvaluation) toGoStruct() *FabricServiceHealth
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	return &dst
 }
@@ -18226,21 +18055,21 @@ func (obj *FabricDeployedServicePackageHealthEvaluation) toInnerStruct() *innerF
 		return nil
 	}
 	dst := innerFabricDeployedServicePackageHealthEvaluation{}
-	s_565, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_565
+	s_432, _ := windows.UTF16PtrFromString(obj.Description)
+	dst.Description = s_432
 
-	s_566, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_566
+	s_433, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_433
 
-	s_567, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_567
+	s_434, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
+	dst.ServiceManifestName = s_434
 
-	s_568, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_568
+	s_435, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_435
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
+	lst_436 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -18252,13 +18081,13 @@ func (obj *FabricDeployedServicePackageHealthEvaluation) toInnerStruct() *innerF
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_436.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_436.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_436
 	return &dst
 }
 
@@ -18283,8 +18112,6 @@ func (obj *innerFabricDeployedServicePackageHealthEvaluation) toGoStruct() *Fabr
 	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -18293,10 +18120,9 @@ func (obj *innerFabricDeployedServicePackageHealthEvaluation) toGoStruct() *Fabr
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	return &dst
 }
@@ -18310,8 +18136,8 @@ func (obj *FabricDeployedServicePackageHealthEvaluationEx1) toInnerStruct() *inn
 		return nil
 	}
 	dst := innerFabricDeployedServicePackageHealthEvaluationEx1{}
-	s_571, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	dst.ServicePackageActivationId = s_571
+	s_437, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
+	dst.ServicePackageActivationId = s_437
 
 	return &dst
 }
@@ -18343,18 +18169,18 @@ func (obj *FabricDeployedApplicationHealthEvaluation) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := innerFabricDeployedApplicationHealthEvaluation{}
-	s_572, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_572
+	s_438, _ := windows.UTF16PtrFromString(obj.Description)
+	dst.Description = s_438
 
-	s_573, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_573
+	s_439, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_439
 
-	s_574, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_574
+	s_440, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_440
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
+	lst_441 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -18366,13 +18192,13 @@ func (obj *FabricDeployedApplicationHealthEvaluation) toInnerStruct() *innerFabr
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_441.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_441.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_441
 	return &dst
 }
 
@@ -18395,8 +18221,6 @@ func (obj *innerFabricDeployedApplicationHealthEvaluation) toGoStruct() *FabricD
 	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -18405,10 +18229,9 @@ func (obj *innerFabricDeployedApplicationHealthEvaluation) toGoStruct() *FabricD
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	return &dst
 }
@@ -18425,15 +18248,15 @@ func (obj *FabricApplicationHealthEvaluation) toInnerStruct() *innerFabricApplic
 		return nil
 	}
 	dst := innerFabricApplicationHealthEvaluation{}
-	s_577, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_577
+	s_442, _ := windows.UTF16PtrFromString(obj.Description)
+	dst.Description = s_442
 
-	s_578, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_578
+	s_443, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_443
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
+	lst_444 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -18445,13 +18268,13 @@ func (obj *FabricApplicationHealthEvaluation) toInnerStruct() *innerFabricApplic
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_444.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_444.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_444
 	return &dst
 }
 
@@ -18472,8 +18295,6 @@ func (obj *innerFabricApplicationHealthEvaluation) toGoStruct() *FabricApplicati
 	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -18482,10 +18303,9 @@ func (obj *innerFabricApplicationHealthEvaluation) toGoStruct() *FabricApplicati
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	return &dst
 }
@@ -18587,20 +18407,20 @@ func (obj *FabricAadClAimsRetrievalMetadata) toInnerStruct() *innerFabricAadClAi
 		return nil
 	}
 	dst := innerFabricAadClAimsRetrievalMetadata{}
-	s_581, _ := windows.UTF16PtrFromString(obj.Authority)
-	dst.Authority = s_581
+	s_445, _ := windows.UTF16PtrFromString(obj.Authority)
+	dst.Authority = s_445
 
-	s_582, _ := windows.UTF16PtrFromString(obj.TenantId)
-	dst.TenantId = s_582
+	s_446, _ := windows.UTF16PtrFromString(obj.TenantId)
+	dst.TenantId = s_446
 
-	s_583, _ := windows.UTF16PtrFromString(obj.ClusterApplication)
-	dst.ClusterApplication = s_583
+	s_447, _ := windows.UTF16PtrFromString(obj.ClusterApplication)
+	dst.ClusterApplication = s_447
 
-	s_584, _ := windows.UTF16PtrFromString(obj.ClientApplication)
-	dst.ClientApplication = s_584
+	s_448, _ := windows.UTF16PtrFromString(obj.ClientApplication)
+	dst.ClientApplication = s_448
 
-	s_585, _ := windows.UTF16PtrFromString(obj.ClientRedirect)
-	dst.ClientRedirect = s_585
+	s_449, _ := windows.UTF16PtrFromString(obj.ClientRedirect)
+	dst.ClientRedirect = s_449
 
 	return &dst
 }
@@ -18636,8 +18456,8 @@ func (obj *FabricAadClAimsRetrievalMetadataEx1) toInnerStruct() *innerFabricAadC
 		return nil
 	}
 	dst := innerFabricAadClAimsRetrievalMetadataEx1{}
-	s_586, _ := windows.UTF16PtrFromString(obj.LoginEndpoint)
-	dst.LoginEndpoint = s_586
+	s_450, _ := windows.UTF16PtrFromString(obj.LoginEndpoint)
+	dst.LoginEndpoint = s_450
 
 	return &dst
 }
@@ -18668,54 +18488,54 @@ func (obj *FabricSecurityUserDescription) toInnerStruct() *innerFabricSecurityUs
 		return nil
 	}
 	dst := innerFabricSecurityUserDescription{}
-	s_587, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_587
+	s_451, _ := windows.UTF16PtrFromString(obj.Name)
+	dst.Name = s_451
 
-	s_588, _ := windows.UTF16PtrFromString(obj.Sid)
-	dst.Sid = s_588
+	s_452, _ := windows.UTF16PtrFromString(obj.Sid)
+	dst.Sid = s_452
 
+	lst_453 := &innerFabricStringList{}
 	{
-		lst := &innerFabricStringList{}
 
 		var tmp []*uint16
 
 		for _, item := range obj.ParentSystemGroups {
 			var tmpitem *uint16
 
-			s_590, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_590
+			s_454, _ := windows.UTF16PtrFromString(item)
+			tmpitem = s_454
 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_453.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_453.Items = &tmp[0]
 		}
 
-		dst.ParentSystemGroups = lst
 	}
+	dst.ParentSystemGroups = lst_453
+	lst_455 := &innerFabricStringList{}
 	{
-		lst := &innerFabricStringList{}
 
 		var tmp []*uint16
 
 		for _, item := range obj.ParentApplicationGroups {
 			var tmpitem *uint16
 
-			s_592, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_592
+			s_456, _ := windows.UTF16PtrFromString(item)
+			tmpitem = s_456
 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_455.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_455.Items = &tmp[0]
 		}
 
-		dst.ParentApplicationGroups = lst
 	}
+	dst.ParentApplicationGroups = lst_455
 	return &dst
 }
 
@@ -18735,8 +18555,6 @@ func (obj *innerFabricSecurityUserDescription) toGoStruct() *FabricSecurityUserD
 	dst.Name = windows.UTF16PtrToString(obj.Name)
 	dst.Sid = windows.UTF16PtrToString(obj.Sid)
 	{
-		var lst []string
-
 		var innerlst []*uint16
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ParentSystemGroups.Items), int(obj.ParentSystemGroups.Count))
 
@@ -18745,14 +18563,11 @@ func (obj *innerFabricSecurityUserDescription) toGoStruct() *FabricSecurityUserD
 
 			tmpitem = windows.UTF16PtrToString(item)
 
-			lst = append(lst, tmpitem)
+			dst.ParentSystemGroups = append(dst.ParentSystemGroups, tmpitem)
 		}
 
-		dst.ParentSystemGroups = lst
 	}
 	{
-		var lst []string
-
 		var innerlst []*uint16
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ParentApplicationGroups.Items), int(obj.ParentApplicationGroups.Count))
 
@@ -18761,10 +18576,9 @@ func (obj *innerFabricSecurityUserDescription) toGoStruct() *FabricSecurityUserD
 
 			tmpitem = windows.UTF16PtrToString(item)
 
-			lst = append(lst, tmpitem)
+			dst.ParentApplicationGroups = append(dst.ParentApplicationGroups, tmpitem)
 		}
 
-		dst.ParentApplicationGroups = lst
 	}
 	return &dst
 }
@@ -18777,8 +18591,6 @@ type innerFabricSecurityUserDescriptionList struct {
 func (obj *innerFabricSecurityUserDescriptionList) toGoStruct() []FabricSecurityUserDescription {
 	var dst []FabricSecurityUserDescription
 	{
-		var lst []FabricSecurityUserDescription
-
 		var innerlst []innerFabricSecurityUserDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -18787,10 +18599,9 @@ func (obj *innerFabricSecurityUserDescriptionList) toGoStruct() []FabricSecurity
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -18808,75 +18619,75 @@ func (obj *FabricSecurityGroupDescription) toInnerStruct() *innerFabricSecurityG
 		return nil
 	}
 	dst := innerFabricSecurityGroupDescription{}
-	s_596, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_596
+	s_457, _ := windows.UTF16PtrFromString(obj.Name)
+	dst.Name = s_457
 
-	s_597, _ := windows.UTF16PtrFromString(obj.Sid)
-	dst.Sid = s_597
+	s_458, _ := windows.UTF16PtrFromString(obj.Sid)
+	dst.Sid = s_458
 
+	lst_459 := &innerFabricStringList{}
 	{
-		lst := &innerFabricStringList{}
 
 		var tmp []*uint16
 
 		for _, item := range obj.DomainGroupMembers {
 			var tmpitem *uint16
 
-			s_599, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_599
+			s_460, _ := windows.UTF16PtrFromString(item)
+			tmpitem = s_460
 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_459.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_459.Items = &tmp[0]
 		}
 
-		dst.DomainGroupMembers = lst
 	}
+	dst.DomainGroupMembers = lst_459
+	lst_461 := &innerFabricStringList{}
 	{
-		lst := &innerFabricStringList{}
 
 		var tmp []*uint16
 
 		for _, item := range obj.SystemGroupMembers {
 			var tmpitem *uint16
 
-			s_601, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_601
+			s_462, _ := windows.UTF16PtrFromString(item)
+			tmpitem = s_462
 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_461.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_461.Items = &tmp[0]
 		}
 
-		dst.SystemGroupMembers = lst
 	}
+	dst.SystemGroupMembers = lst_461
+	lst_463 := &innerFabricStringList{}
 	{
-		lst := &innerFabricStringList{}
 
 		var tmp []*uint16
 
 		for _, item := range obj.DomainUserMembers {
 			var tmpitem *uint16
 
-			s_603, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_603
+			s_464, _ := windows.UTF16PtrFromString(item)
+			tmpitem = s_464
 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_463.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_463.Items = &tmp[0]
 		}
 
-		dst.DomainUserMembers = lst
 	}
+	dst.DomainUserMembers = lst_463
 	return &dst
 }
 
@@ -18897,8 +18708,6 @@ func (obj *innerFabricSecurityGroupDescription) toGoStruct() *FabricSecurityGrou
 	dst.Name = windows.UTF16PtrToString(obj.Name)
 	dst.Sid = windows.UTF16PtrToString(obj.Sid)
 	{
-		var lst []string
-
 		var innerlst []*uint16
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.DomainGroupMembers.Items), int(obj.DomainGroupMembers.Count))
 
@@ -18907,14 +18716,11 @@ func (obj *innerFabricSecurityGroupDescription) toGoStruct() *FabricSecurityGrou
 
 			tmpitem = windows.UTF16PtrToString(item)
 
-			lst = append(lst, tmpitem)
+			dst.DomainGroupMembers = append(dst.DomainGroupMembers, tmpitem)
 		}
 
-		dst.DomainGroupMembers = lst
 	}
 	{
-		var lst []string
-
 		var innerlst []*uint16
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.SystemGroupMembers.Items), int(obj.SystemGroupMembers.Count))
 
@@ -18923,14 +18729,11 @@ func (obj *innerFabricSecurityGroupDescription) toGoStruct() *FabricSecurityGrou
 
 			tmpitem = windows.UTF16PtrToString(item)
 
-			lst = append(lst, tmpitem)
+			dst.SystemGroupMembers = append(dst.SystemGroupMembers, tmpitem)
 		}
 
-		dst.SystemGroupMembers = lst
 	}
 	{
-		var lst []string
-
 		var innerlst []*uint16
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.DomainUserMembers.Items), int(obj.DomainUserMembers.Count))
 
@@ -18939,10 +18742,9 @@ func (obj *innerFabricSecurityGroupDescription) toGoStruct() *FabricSecurityGrou
 
 			tmpitem = windows.UTF16PtrToString(item)
 
-			lst = append(lst, tmpitem)
+			dst.DomainUserMembers = append(dst.DomainUserMembers, tmpitem)
 		}
 
-		dst.DomainUserMembers = lst
 	}
 	return &dst
 }
@@ -18955,8 +18757,6 @@ type innerFabricSecurityGroupDescriptionList struct {
 func (obj *innerFabricSecurityGroupDescriptionList) toGoStruct() []FabricSecurityGroupDescription {
 	var dst []FabricSecurityGroupDescription
 	{
-		var lst []FabricSecurityGroupDescription
-
 		var innerlst []innerFabricSecurityGroupDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -18965,10 +18765,9 @@ func (obj *innerFabricSecurityGroupDescriptionList) toGoStruct() []FabricSecurit
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -18983,8 +18782,8 @@ func (obj *FabricApplicationPrincipalsDescription) toInnerStruct() *innerFabricA
 		return nil
 	}
 	dst := innerFabricApplicationPrincipalsDescription{}
+	lst_465 := &innerFabricSecurityUserDescriptionList{}
 	{
-		lst := &innerFabricSecurityUserDescriptionList{}
 
 		var tmp []innerFabricSecurityUserDescription
 
@@ -18996,15 +18795,15 @@ func (obj *FabricApplicationPrincipalsDescription) toInnerStruct() *innerFabricA
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_465.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_465.Items = &tmp[0]
 		}
 
-		dst.Users = lst
 	}
+	dst.Users = lst_465
+	lst_466 := &innerFabricSecurityGroupDescriptionList{}
 	{
-		lst := &innerFabricSecurityGroupDescriptionList{}
 
 		var tmp []innerFabricSecurityGroupDescription
 
@@ -19016,13 +18815,13 @@ func (obj *FabricApplicationPrincipalsDescription) toInnerStruct() *innerFabricA
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_466.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_466.Items = &tmp[0]
 		}
 
-		dst.Groups = lst
 	}
+	dst.Groups = lst_466
 	return &dst
 }
 
@@ -19038,8 +18837,6 @@ func (obj *innerFabricApplicationPrincipalsDescription) toGoStruct() *FabricAppl
 	}
 	dst := FabricApplicationPrincipalsDescription{}
 	{
-		var lst []FabricSecurityUserDescription
-
 		var innerlst []innerFabricSecurityUserDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Users.Items), int(obj.Users.Count))
 
@@ -19048,14 +18845,11 @@ func (obj *innerFabricApplicationPrincipalsDescription) toGoStruct() *FabricAppl
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.Users = append(dst.Users, tmpitem)
 		}
 
-		dst.Users = lst
 	}
 	{
-		var lst []FabricSecurityGroupDescription
-
 		var innerlst []innerFabricSecurityGroupDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Groups.Items), int(obj.Groups.Count))
 
@@ -19064,10 +18858,9 @@ func (obj *innerFabricApplicationPrincipalsDescription) toGoStruct() *FabricAppl
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.Groups = append(dst.Groups, tmpitem)
 		}
 
-		dst.Groups = lst
 	}
 	return &dst
 }
@@ -19092,11 +18885,11 @@ func (obj *FabricApplicationUpgradeProgress) toInnerStruct() *innerFabricApplica
 	dst.UpgradeDescription = obj.UpgradeDescription.toInnerStruct()
 	dst.UpgradeState = obj.UpgradeState
 	dst.UpgradeMode = obj.UpgradeMode
-	s_612, _ := windows.UTF16PtrFromString(obj.NextUpgradeDomain)
-	dst.NextUpgradeDomain = s_612
+	s_467, _ := windows.UTF16PtrFromString(obj.NextUpgradeDomain)
+	dst.NextUpgradeDomain = s_467
 
+	lst_468 := &innerFabricUpgradeDomainStatusDescriptionList{}
 	{
-		lst := &innerFabricUpgradeDomainStatusDescriptionList{}
 
 		var tmp []innerFabricUpgradeDomainStatusDescription
 
@@ -19108,17 +18901,17 @@ func (obj *FabricApplicationUpgradeProgress) toInnerStruct() *innerFabricApplica
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_468.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_468.Items = &tmp[0]
 		}
 
-		dst.UpgradeDomains = lst
 	}
+	dst.UpgradeDomains = lst_468
 	dst.UpgradeDurationInSeconds = obj.UpgradeDurationInSeconds
 	dst.CurrentUpgradeDomainDurationInSeconds = obj.CurrentUpgradeDomainDurationInSeconds
+	lst_469 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -19130,13 +18923,13 @@ func (obj *FabricApplicationUpgradeProgress) toInnerStruct() *innerFabricApplica
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_469.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_469.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_469
 	dst.CurrentUpgradeDomainProgress = obj.CurrentUpgradeDomainProgress.toInnerStruct()
 	return &dst
 }
@@ -19164,8 +18957,6 @@ func (obj *innerFabricApplicationUpgradeProgress) toGoStruct() *FabricApplicatio
 	dst.UpgradeMode = obj.UpgradeMode
 	dst.NextUpgradeDomain = windows.UTF16PtrToString(obj.NextUpgradeDomain)
 	{
-		var lst []FabricUpgradeDomainStatusDescription
-
 		var innerlst []innerFabricUpgradeDomainStatusDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UpgradeDomains.Items), int(obj.UpgradeDomains.Count))
 
@@ -19174,16 +18965,13 @@ func (obj *innerFabricApplicationUpgradeProgress) toGoStruct() *FabricApplicatio
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UpgradeDomains = append(dst.UpgradeDomains, tmpitem)
 		}
 
-		dst.UpgradeDomains = lst
 	}
 	dst.UpgradeDurationInSeconds = obj.UpgradeDurationInSeconds
 	dst.CurrentUpgradeDomainDurationInSeconds = obj.CurrentUpgradeDomainDurationInSeconds
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -19192,10 +18980,9 @@ func (obj *innerFabricApplicationUpgradeProgress) toGoStruct() *FabricApplicatio
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	dst.CurrentUpgradeDomainProgress = obj.CurrentUpgradeDomainProgress.toGoStruct()
 	return &dst
@@ -19249,8 +19036,8 @@ func (obj *FabricApplicationUpgradeProgressEx2) toInnerStruct() *innerFabricAppl
 		return nil
 	}
 	dst := innerFabricApplicationUpgradeProgressEx2{}
-	s_617, _ := windows.UTF16PtrFromString(obj.UpgradeStatusDetails)
-	dst.UpgradeStatusDetails = s_617
+	s_470, _ := windows.UTF16PtrFromString(obj.UpgradeStatusDetails)
+	dst.UpgradeStatusDetails = s_470
 
 	return &dst
 }
@@ -19294,8 +19081,8 @@ func (obj *FabricProvisionApplicationTypeDescription) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := innerFabricProvisionApplicationTypeDescription{}
-	s_618, _ := windows.UTF16PtrFromString(obj.BuildPath)
-	dst.BuildPath = s_618
+	s_471, _ := windows.UTF16PtrFromString(obj.BuildPath)
+	dst.BuildPath = s_471
 
 	dst.Async = obj.Async
 	return &dst
@@ -19344,14 +19131,14 @@ func (obj *FabricExternalStoreProvisionApplicationTypeDescription) toInnerStruct
 		return nil
 	}
 	dst := innerFabricExternalStoreProvisionApplicationTypeDescription{}
-	s_619, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
-	dst.ApplicationTypeName = s_619
+	s_472, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
+	dst.ApplicationTypeName = s_472
 
-	s_620, _ := windows.UTF16PtrFromString(obj.ApplicationTypeVersion)
-	dst.ApplicationTypeVersion = s_620
+	s_473, _ := windows.UTF16PtrFromString(obj.ApplicationTypeVersion)
+	dst.ApplicationTypeVersion = s_473
 
-	s_621, _ := windows.UTF16PtrFromString(obj.ApplicationPackageDownloadUri)
-	dst.ApplicationPackageDownloadUri = s_621
+	s_474, _ := windows.UTF16PtrFromString(obj.ApplicationPackageDownloadUri)
+	dst.ApplicationPackageDownloadUri = s_474
 
 	dst.Async = obj.Async
 	return &dst
@@ -19388,11 +19175,11 @@ func (obj *FabricUnprovisionApplicationTypeDescription) toInnerStruct() *innerFa
 		return nil
 	}
 	dst := innerFabricUnprovisionApplicationTypeDescription{}
-	s_622, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
-	dst.ApplicationTypeName = s_622
+	s_475, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
+	dst.ApplicationTypeName = s_475
 
-	s_623, _ := windows.UTF16PtrFromString(obj.ApplicationTypeVersion)
-	dst.ApplicationTypeVersion = s_623
+	s_476, _ := windows.UTF16PtrFromString(obj.ApplicationTypeVersion)
+	dst.ApplicationTypeVersion = s_476
 
 	dst.Async = obj.Async
 	return &dst
@@ -19426,8 +19213,8 @@ func (obj *FabricDeleteApplicationDescription) toInnerStruct() *innerFabricDelet
 		return nil
 	}
 	dst := innerFabricDeleteApplicationDescription{}
-	s_624, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_624
+	s_477, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_477
 
 	dst.ForceDelete = obj.ForceDelete
 	return &dst
@@ -19469,11 +19256,11 @@ func (obj *FabricUpgradeProgress) toInnerStruct() *innerFabricUpgradeProgress {
 	dst.UpgradeDescription = obj.UpgradeDescription.toInnerStruct()
 	dst.UpgradeState = obj.UpgradeState
 	dst.UpgradeMode = obj.UpgradeMode
-	s_625, _ := windows.UTF16PtrFromString(obj.NextUpgradeDomain)
-	dst.NextUpgradeDomain = s_625
+	s_478, _ := windows.UTF16PtrFromString(obj.NextUpgradeDomain)
+	dst.NextUpgradeDomain = s_478
 
+	lst_479 := &innerFabricUpgradeDomainStatusDescriptionList{}
 	{
-		lst := &innerFabricUpgradeDomainStatusDescriptionList{}
 
 		var tmp []innerFabricUpgradeDomainStatusDescription
 
@@ -19485,17 +19272,17 @@ func (obj *FabricUpgradeProgress) toInnerStruct() *innerFabricUpgradeProgress {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_479.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_479.Items = &tmp[0]
 		}
 
-		dst.UpgradeDomains = lst
 	}
+	dst.UpgradeDomains = lst_479
 	dst.UpgradeDurationInSeconds = obj.UpgradeDurationInSeconds
 	dst.CurrentUpgradeDomainDurationInSeconds = obj.CurrentUpgradeDomainDurationInSeconds
+	lst_480 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -19507,13 +19294,13 @@ func (obj *FabricUpgradeProgress) toInnerStruct() *innerFabricUpgradeProgress {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_480.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_480.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_480
 	dst.CurrentUpgradeDomainProgress = obj.CurrentUpgradeDomainProgress.toInnerStruct()
 	return &dst
 }
@@ -19541,8 +19328,6 @@ func (obj *innerFabricUpgradeProgress) toGoStruct() *FabricUpgradeProgress {
 	dst.UpgradeMode = obj.UpgradeMode
 	dst.NextUpgradeDomain = windows.UTF16PtrToString(obj.NextUpgradeDomain)
 	{
-		var lst []FabricUpgradeDomainStatusDescription
-
 		var innerlst []innerFabricUpgradeDomainStatusDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UpgradeDomains.Items), int(obj.UpgradeDomains.Count))
 
@@ -19551,16 +19336,13 @@ func (obj *innerFabricUpgradeProgress) toGoStruct() *FabricUpgradeProgress {
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UpgradeDomains = append(dst.UpgradeDomains, tmpitem)
 		}
 
-		dst.UpgradeDomains = lst
 	}
 	dst.UpgradeDurationInSeconds = obj.UpgradeDurationInSeconds
 	dst.CurrentUpgradeDomainDurationInSeconds = obj.CurrentUpgradeDomainDurationInSeconds
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -19569,10 +19351,9 @@ func (obj *innerFabricUpgradeProgress) toGoStruct() *FabricUpgradeProgress {
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	dst.CurrentUpgradeDomainProgress = obj.CurrentUpgradeDomainProgress.toGoStruct()
 	return &dst
@@ -19627,8 +19408,8 @@ func (obj *FabricPackageSharingPolicy) toInnerStruct() *innerFabricPackageSharin
 		return nil
 	}
 	dst := innerFabricPackageSharingPolicy{}
-	s_630, _ := windows.UTF16PtrFromString(obj.PackageName)
-	dst.PackageName = s_630
+	s_481, _ := windows.UTF16PtrFromString(obj.PackageName)
+	dst.PackageName = s_481
 
 	dst.Scope = obj.Scope
 	return &dst
@@ -19658,8 +19439,6 @@ type innerFabricPackageSharingPolicyList struct {
 func (obj *innerFabricPackageSharingPolicyList) toGoStruct() []FabricPackageSharingPolicy {
 	var dst []FabricPackageSharingPolicy
 	{
-		var lst []FabricPackageSharingPolicy
-
 		var innerlst []innerFabricPackageSharingPolicy
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -19668,10 +19447,9 @@ func (obj *innerFabricPackageSharingPolicyList) toGoStruct() []FabricPackageShar
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -19818,8 +19596,8 @@ func (obj *FabricClusterHealthQueryDescription) toInnerStruct() *innerFabricClus
 		for k, v := range obj.ApplicationHealthPolicyMap {
 			kv := innerFabricApplicationHealthPolicyMapItem{}
 
-			s_633, _ := windows.UTF16PtrFromString(k)
-			kv.ApplicationName = s_633
+			s_483, _ := windows.UTF16PtrFromString(k)
+			kv.ApplicationName = s_483
 
 			kv.HealthPolicy = v.toInnerStruct()
 
@@ -19921,8 +19699,8 @@ func (obj *FabricNodeHealthQueryDescription) toInnerStruct() *innerFabricNodeHea
 		return nil
 	}
 	dst := innerFabricNodeHealthQueryDescription{}
-	s_635, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_635
+	s_485, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_485
 
 	dst.HealthPolicy = obj.HealthPolicy.toInnerStruct()
 	dst.EventsFilter = obj.EventsFilter.toInnerStruct()
@@ -19960,8 +19738,8 @@ func (obj *FabricApplicationHealthQueryDescription) toInnerStruct() *innerFabric
 		return nil
 	}
 	dst := innerFabricApplicationHealthQueryDescription{}
-	s_636, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_636
+	s_486, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_486
 
 	dst.HealthPolicy = obj.HealthPolicy.toInnerStruct()
 	dst.EventsFilter = obj.EventsFilter.toInnerStruct()
@@ -20034,8 +19812,8 @@ func (obj *FabricServiceHealthQueryDescription) toInnerStruct() *innerFabricServ
 		return nil
 	}
 	dst := innerFabricServiceHealthQueryDescription{}
-	s_637, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_637
+	s_487, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_487
 
 	dst.HealthPolicy = obj.HealthPolicy.toInnerStruct()
 	dst.EventsFilter = obj.EventsFilter.toInnerStruct()
@@ -20172,11 +19950,11 @@ func (obj *FabricDeployedApplicationHealthQueryDescription) toInnerStruct() *inn
 		return nil
 	}
 	dst := innerFabricDeployedApplicationHealthQueryDescription{}
-	s_638, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_638
+	s_488, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_488
 
-	s_639, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_639
+	s_489, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_489
 
 	dst.HealthPolicy = obj.HealthPolicy.toInnerStruct()
 	dst.EventsFilter = obj.EventsFilter.toInnerStruct()
@@ -20249,14 +20027,14 @@ func (obj *FabricDeployedServicePackageHealthQueryDescription) toInnerStruct() *
 		return nil
 	}
 	dst := innerFabricDeployedServicePackageHealthQueryDescription{}
-	s_640, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_640
+	s_490, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_490
 
-	s_641, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_641
+	s_491, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_491
 
-	s_642, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_642
+	s_492, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
+	dst.ServiceManifestName = s_492
 
 	dst.HealthPolicy = obj.HealthPolicy.toInnerStruct()
 	dst.EventsFilter = obj.EventsFilter.toInnerStruct()
@@ -20294,8 +20072,8 @@ func (obj *FabricDeployedServicePackageHealthQueryDescriptionEx1) toInnerStruct(
 		return nil
 	}
 	dst := innerFabricDeployedServicePackageHealthQueryDescriptionEx1{}
-	s_643, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	dst.ServicePackageActivationId = s_643
+	s_493, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
+	dst.ServicePackageActivationId = s_493
 
 	return &dst
 }
@@ -20354,8 +20132,8 @@ func (obj *FabricRepairNodeImpact) toInnerStruct() *innerFabricRepairNodeImpact 
 		return nil
 	}
 	dst := innerFabricRepairNodeImpact{}
-	s_644, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_644
+	s_494, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_494
 
 	dst.ImpactLevel = obj.ImpactLevel
 	return &dst
@@ -20385,8 +20163,6 @@ type innerFabricRepairNodeImpactList struct {
 func (obj *innerFabricRepairNodeImpactList) toGoStruct() []FabricRepairNodeImpact {
 	var dst []FabricRepairNodeImpact
 	{
-		var lst []FabricRepairNodeImpact
-
 		var innerlst []innerFabricRepairNodeImpact
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -20395,10 +20171,9 @@ func (obj *innerFabricRepairNodeImpactList) toGoStruct() []FabricRepairNodeImpac
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -20431,8 +20206,8 @@ func (obj *FabricRepairResultDescription) toInnerStruct() *innerFabricRepairResu
 	dst := innerFabricRepairResultDescription{}
 	dst.ResultStatus = obj.ResultStatus
 	dst.ResultCode = obj.ResultCode
-	s_646, _ := windows.UTF16PtrFromString(obj.ResultDetails)
-	dst.ResultDetails = s_646
+	s_495, _ := windows.UTF16PtrFromString(obj.ResultDetails)
+	dst.ResultDetails = s_495
 
 	return &dst
 }
@@ -20555,11 +20330,11 @@ func (obj *FabricRepairExecutorState) toInnerStruct() *innerFabricRepairExecutor
 		return nil
 	}
 	dst := innerFabricRepairExecutorState{}
-	s_647, _ := windows.UTF16PtrFromString(obj.Executor)
-	dst.Executor = s_647
+	s_496, _ := windows.UTF16PtrFromString(obj.Executor)
+	dst.Executor = s_496
 
-	s_648, _ := windows.UTF16PtrFromString(obj.ExecutorData)
-	dst.ExecutorData = s_648
+	s_497, _ := windows.UTF16PtrFromString(obj.ExecutorData)
+	dst.ExecutorData = s_497
 
 	return &dst
 }
@@ -20595,8 +20370,8 @@ func (obj *FabricRepairTaskHealthPolicyUpdateDescription) toInnerStruct() *inner
 	}
 	dst := innerFabricRepairTaskHealthPolicyUpdateDescription{}
 	dst.Scope = obj.Scope.toInnerStruct()
-	s_649, _ := windows.UTF16PtrFromString(obj.RepairTaskId)
-	dst.RepairTaskId = s_649
+	s_498, _ := windows.UTF16PtrFromString(obj.RepairTaskId)
+	dst.RepairTaskId = s_498
 
 	dst.Version = obj.Version
 	dst.Flags = obj.Flags
@@ -20650,17 +20425,17 @@ func (obj *FabricRepairTask) toInnerStruct() *innerFabricRepairTask {
 	}
 	dst := innerFabricRepairTask{}
 	dst.Scope = obj.Scope.toInnerStruct()
-	s_650, _ := windows.UTF16PtrFromString(obj.TaskId)
-	dst.TaskId = s_650
+	s_499, _ := windows.UTF16PtrFromString(obj.TaskId)
+	dst.TaskId = s_499
 
 	dst.Version = obj.Version
-	s_651, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_651
+	s_500, _ := windows.UTF16PtrFromString(obj.Description)
+	dst.Description = s_500
 
 	dst.State = obj.State
 	dst.Flags = obj.Flags
-	s_652, _ := windows.UTF16PtrFromString(obj.Action)
-	dst.Action = s_652
+	s_501, _ := windows.UTF16PtrFromString(obj.Action)
+	dst.Action = s_501
 
 	dst.Target = obj.Target.toInnerStruct()
 	dst.ExecutorState = obj.ExecutorState.toInnerStruct()
@@ -20732,8 +20507,6 @@ type innerFabricRepairTaskList struct {
 func (obj *innerFabricRepairTaskList) toGoStruct() []FabricRepairTask {
 	var dst []FabricRepairTask
 	{
-		var lst []FabricRepairTask
-
 		var innerlst []innerFabricRepairTask
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -20742,10 +20515,9 @@ func (obj *innerFabricRepairTaskList) toGoStruct() []FabricRepairTask {
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -20763,8 +20535,8 @@ func (obj *FabricRepairCancelDescription) toInnerStruct() *innerFabricRepairCanc
 	}
 	dst := innerFabricRepairCancelDescription{}
 	dst.Scope = obj.Scope.toInnerStruct()
-	s_654, _ := windows.UTF16PtrFromString(obj.RepairTaskId)
-	dst.RepairTaskId = s_654
+	s_502, _ := windows.UTF16PtrFromString(obj.RepairTaskId)
+	dst.RepairTaskId = s_502
 
 	dst.Version = obj.Version
 	dst.RequestAbort = obj.RequestAbort
@@ -20803,8 +20575,8 @@ func (obj *FabricRepairDeleteDescription) toInnerStruct() *innerFabricRepairDele
 	}
 	dst := innerFabricRepairDeleteDescription{}
 	dst.Scope = obj.Scope.toInnerStruct()
-	s_655, _ := windows.UTF16PtrFromString(obj.RepairTaskId)
-	dst.RepairTaskId = s_655
+	s_503, _ := windows.UTF16PtrFromString(obj.RepairTaskId)
+	dst.RepairTaskId = s_503
 
 	dst.Version = obj.Version
 	return &dst
@@ -20840,8 +20612,8 @@ func (obj *FabricRepairApproveDescription) toInnerStruct() *innerFabricRepairApp
 	}
 	dst := innerFabricRepairApproveDescription{}
 	dst.Scope = obj.Scope.toInnerStruct()
-	s_656, _ := windows.UTF16PtrFromString(obj.RepairTaskId)
-	dst.RepairTaskId = s_656
+	s_504, _ := windows.UTF16PtrFromString(obj.RepairTaskId)
+	dst.RepairTaskId = s_504
 
 	dst.Version = obj.Version
 	return &dst
@@ -20878,12 +20650,12 @@ func (obj *FabricRepairTaskQueryDescription) toInnerStruct() *innerFabricRepairT
 	}
 	dst := innerFabricRepairTaskQueryDescription{}
 	dst.Scope = obj.Scope.toInnerStruct()
-	s_657, _ := windows.UTF16PtrFromString(obj.TaskIdFilter)
-	dst.TaskIdFilter = s_657
+	s_505, _ := windows.UTF16PtrFromString(obj.TaskIdFilter)
+	dst.TaskIdFilter = s_505
 
 	dst.StateFilter = obj.StateFilter
-	s_658, _ := windows.UTF16PtrFromString(obj.ExecutorFilter)
-	dst.ExecutorFilter = s_658
+	s_506, _ := windows.UTF16PtrFromString(obj.ExecutorFilter)
+	dst.ExecutorFilter = s_506
 
 	return &dst
 }
@@ -20926,8 +20698,8 @@ func (obj *FabricStoreBackupInfo) toInnerStruct() *innerFabricStoreBackupInfo {
 		return nil
 	}
 	dst := innerFabricStoreBackupInfo{}
-	s_659, _ := windows.UTF16PtrFromString(obj.BackupFolder)
-	dst.BackupFolder = s_659
+	s_507, _ := windows.UTF16PtrFromString(obj.BackupFolder)
+	dst.BackupFolder = s_507
 
 	dst.BackupOption = obj.BackupOption
 	return &dst
@@ -20980,16 +20752,16 @@ func (obj *FabricDeltaNodesCheckHealthEvaluation) toInnerStruct() *innerFabricDe
 		return nil
 	}
 	dst := innerFabricDeltaNodesCheckHealthEvaluation{}
-	s_660, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_660
+	s_508, _ := windows.UTF16PtrFromString(obj.Description)
+	dst.Description = s_508
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	dst.BaselineErrorCount = obj.BaselineErrorCount
 	dst.BaselineTotalCount = obj.BaselineTotalCount
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentDeltaUnhealthyNodes = obj.MaxPercentDeltaUnhealthyNodes
+	lst_509 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -21001,13 +20773,13 @@ func (obj *FabricDeltaNodesCheckHealthEvaluation) toInnerStruct() *innerFabricDe
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_509.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_509.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_509
 	return &dst
 }
 
@@ -21034,8 +20806,6 @@ func (obj *innerFabricDeltaNodesCheckHealthEvaluation) toGoStruct() *FabricDelta
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentDeltaUnhealthyNodes = obj.MaxPercentDeltaUnhealthyNodes
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -21044,10 +20814,9 @@ func (obj *innerFabricDeltaNodesCheckHealthEvaluation) toGoStruct() *FabricDelta
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	return &dst
 }
@@ -21068,19 +20837,19 @@ func (obj *FabricUpgradeDomainDeltaNodesCheckHealthEvaluation) toInnerStruct() *
 		return nil
 	}
 	dst := innerFabricUpgradeDomainDeltaNodesCheckHealthEvaluation{}
-	s_663, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_663
+	s_510, _ := windows.UTF16PtrFromString(obj.Description)
+	dst.Description = s_510
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	s_664, _ := windows.UTF16PtrFromString(obj.UpgradeDomainName)
-	dst.UpgradeDomainName = s_664
+	s_511, _ := windows.UTF16PtrFromString(obj.UpgradeDomainName)
+	dst.UpgradeDomainName = s_511
 
 	dst.BaselineErrorCount = obj.BaselineErrorCount
 	dst.BaselineTotalCount = obj.BaselineTotalCount
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUpgradeDomainDeltaUnhealthyNodes = obj.MaxPercentUpgradeDomainDeltaUnhealthyNodes
+	lst_512 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -21092,13 +20861,13 @@ func (obj *FabricUpgradeDomainDeltaNodesCheckHealthEvaluation) toInnerStruct() *
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_512.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_512.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_512
 	return &dst
 }
 
@@ -21127,8 +20896,6 @@ func (obj *innerFabricUpgradeDomainDeltaNodesCheckHealthEvaluation) toGoStruct()
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUpgradeDomainDeltaUnhealthyNodes = obj.MaxPercentUpgradeDomainDeltaUnhealthyNodes
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -21137,10 +20904,9 @@ func (obj *innerFabricUpgradeDomainDeltaNodesCheckHealthEvaluation) toGoStruct()
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	return &dst
 }
@@ -21154,8 +20920,8 @@ func (obj *FabricPagingStatus) toInnerStruct() *innerFabricPagingStatus {
 		return nil
 	}
 	dst := innerFabricPagingStatus{}
-	s_667, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
-	dst.ContinuationToken = s_667
+	s_513, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
+	dst.ContinuationToken = s_513
 
 	return &dst
 }
@@ -21183,8 +20949,8 @@ func (obj *FabricNodeQueryDescriptionEx1) toInnerStruct() *innerFabricNodeQueryD
 		return nil
 	}
 	dst := innerFabricNodeQueryDescriptionEx1{}
-	s_668, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
-	dst.ContinuationToken = s_668
+	s_514, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
+	dst.ContinuationToken = s_514
 
 	return &dst
 }
@@ -21242,8 +21008,8 @@ func (obj *FabricServicePartitionQueryDescriptionEx1) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := innerFabricServicePartitionQueryDescriptionEx1{}
-	s_669, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
-	dst.ContinuationToken = s_669
+	s_515, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
+	dst.ContinuationToken = s_515
 
 	return &dst
 }
@@ -21271,8 +21037,8 @@ func (obj *FabricServiceReplicaQueryDescriptionEx2) toInnerStruct() *innerFabric
 		return nil
 	}
 	dst := innerFabricServiceReplicaQueryDescriptionEx2{}
-	s_670, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
-	dst.ContinuationToken = s_670
+	s_516, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
+	dst.ContinuationToken = s_516
 
 	return &dst
 }
@@ -21301,8 +21067,8 @@ func (obj *FabricApplicationTypeHealthPolicyMapItem) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := innerFabricApplicationTypeHealthPolicyMapItem{}
-	s_671, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
-	dst.ApplicationTypeName = s_671
+	s_517, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
+	dst.ApplicationTypeName = s_517
 
 	dst.MaxPercentUnhealthyApplications = obj.MaxPercentUnhealthyApplications
 	return &dst
@@ -21369,8 +21135,8 @@ func (obj *FabricClusterHealthPolicyEx1) toInnerStruct() *innerFabricClusterHeal
 		for k, v := range obj.ApplicationTypeHealthPolicyMap {
 			kv := innerFabricApplicationTypeHealthPolicyMapItem{}
 
-			s_674, _ := windows.UTF16PtrFromString(k)
-			kv.ApplicationTypeName = s_674
+			s_520, _ := windows.UTF16PtrFromString(k)
+			kv.ApplicationTypeName = s_520
 
 			kv.MaxPercentUnhealthyApplications = v
 
@@ -21433,15 +21199,15 @@ func (obj *FabricApplicationTypeApplicationsHealthEvaluation) toInnerStruct() *i
 		return nil
 	}
 	dst := innerFabricApplicationTypeApplicationsHealthEvaluation{}
-	s_676, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_676
+	s_522, _ := windows.UTF16PtrFromString(obj.Description)
+	dst.Description = s_522
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	s_677, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
-	dst.ApplicationTypeName = s_677
+	s_523, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
+	dst.ApplicationTypeName = s_523
 
+	lst_524 := &innerFabricHealthEvaluationList{}
 	{
-		lst := &innerFabricHealthEvaluationList{}
 
 		var tmp []innerFabricHealthEvaluation
 
@@ -21453,13 +21219,13 @@ func (obj *FabricApplicationTypeApplicationsHealthEvaluation) toInnerStruct() *i
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_524.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_524.Items = &tmp[0]
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
+	dst.UnhealthyEvaluations = lst_524
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyApplications = obj.MaxPercentUnhealthyApplications
 	return &dst
@@ -21484,8 +21250,6 @@ func (obj *innerFabricApplicationTypeApplicationsHealthEvaluation) toGoStruct() 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	dst.ApplicationTypeName = windows.UTF16PtrToString(obj.ApplicationTypeName)
 	{
-		var lst []FabricHealthEvaluation
-
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
 
@@ -21494,10 +21258,9 @@ func (obj *innerFabricApplicationTypeApplicationsHealthEvaluation) toGoStruct() 
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.UnhealthyEvaluations = append(dst.UnhealthyEvaluations, tmpitem)
 		}
 
-		dst.UnhealthyEvaluations = lst
 	}
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyApplications = obj.MaxPercentUnhealthyApplications
@@ -21515,8 +21278,8 @@ func (obj *FabricNodeHealthStateFilter) toInnerStruct() *innerFabricNodeHealthSt
 	}
 	dst := innerFabricNodeHealthStateFilter{}
 	dst.HealthStateFilter = obj.HealthStateFilter
-	s_680, _ := windows.UTF16PtrFromString(obj.NodeNameFilter)
-	dst.NodeNameFilter = s_680
+	s_525, _ := windows.UTF16PtrFromString(obj.NodeNameFilter)
+	dst.NodeNameFilter = s_525
 
 	return &dst
 }
@@ -21545,8 +21308,6 @@ type innerFabricNodeHealthStateFilterList struct {
 func (obj *innerFabricNodeHealthStateFilterList) toGoStruct() []FabricNodeHealthStateFilter {
 	var dst []FabricNodeHealthStateFilter
 	{
-		var lst []FabricNodeHealthStateFilter
-
 		var innerlst []innerFabricNodeHealthStateFilter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -21555,10 +21316,9 @@ func (obj *innerFabricNodeHealthStateFilterList) toGoStruct() []FabricNodeHealth
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -21574,8 +21334,8 @@ func (obj *FabricDeployedServicePackageHealthStateFilter) toInnerStruct() *inner
 	}
 	dst := innerFabricDeployedServicePackageHealthStateFilter{}
 	dst.HealthStateFilter = obj.HealthStateFilter
-	s_682, _ := windows.UTF16PtrFromString(obj.ServiceManifestNameFilter)
-	dst.ServiceManifestNameFilter = s_682
+	s_526, _ := windows.UTF16PtrFromString(obj.ServiceManifestNameFilter)
+	dst.ServiceManifestNameFilter = s_526
 
 	return &dst
 }
@@ -21605,8 +21365,8 @@ func (obj *FabricDeployedServicePackageHealthStateFilterEx1) toInnerStruct() *in
 		return nil
 	}
 	dst := innerFabricDeployedServicePackageHealthStateFilterEx1{}
-	s_683, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationIdFilter)
-	dst.ServicePackageActivationIdFilter = s_683
+	s_527, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationIdFilter)
+	dst.ServicePackageActivationIdFilter = s_527
 
 	return &dst
 }
@@ -21633,8 +21393,6 @@ type innerFabricDeployedServicePackageHealthStateFilterList struct {
 func (obj *innerFabricDeployedServicePackageHealthStateFilterList) toGoStruct() []FabricDeployedServicePackageHealthStateFilter {
 	var dst []FabricDeployedServicePackageHealthStateFilter
 	{
-		var lst []FabricDeployedServicePackageHealthStateFilter
-
 		var innerlst []innerFabricDeployedServicePackageHealthStateFilter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -21643,10 +21401,9 @@ func (obj *innerFabricDeployedServicePackageHealthStateFilterList) toGoStruct() 
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -21663,11 +21420,11 @@ func (obj *FabricDeployedApplicationHealthStateFilter) toInnerStruct() *innerFab
 	}
 	dst := innerFabricDeployedApplicationHealthStateFilter{}
 	dst.HealthStateFilter = obj.HealthStateFilter
-	s_685, _ := windows.UTF16PtrFromString(obj.NodeNameFilter)
-	dst.NodeNameFilter = s_685
+	s_528, _ := windows.UTF16PtrFromString(obj.NodeNameFilter)
+	dst.NodeNameFilter = s_528
 
+	lst_529 := &innerFabricDeployedServicePackageHealthStateFilterList{}
 	{
-		lst := &innerFabricDeployedServicePackageHealthStateFilterList{}
 
 		var tmp []innerFabricDeployedServicePackageHealthStateFilter
 
@@ -21679,13 +21436,13 @@ func (obj *FabricDeployedApplicationHealthStateFilter) toInnerStruct() *innerFab
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_529.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_529.Items = &tmp[0]
 		}
 
-		dst.DeployedServicePackageFilters = lst
 	}
+	dst.DeployedServicePackageFilters = lst_529
 	return &dst
 }
 
@@ -21704,8 +21461,6 @@ func (obj *innerFabricDeployedApplicationHealthStateFilter) toGoStruct() *Fabric
 	dst.HealthStateFilter = obj.HealthStateFilter
 	dst.NodeNameFilter = windows.UTF16PtrToString(obj.NodeNameFilter)
 	{
-		var lst []FabricDeployedServicePackageHealthStateFilter
-
 		var innerlst []innerFabricDeployedServicePackageHealthStateFilter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.DeployedServicePackageFilters.Items), int(obj.DeployedServicePackageFilters.Count))
 
@@ -21714,10 +21469,9 @@ func (obj *innerFabricDeployedApplicationHealthStateFilter) toGoStruct() *Fabric
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.DeployedServicePackageFilters = append(dst.DeployedServicePackageFilters, tmpitem)
 		}
 
-		dst.DeployedServicePackageFilters = lst
 	}
 	return &dst
 }
@@ -21730,8 +21484,6 @@ type innerFabricDeployedApplicationHealthStateFilterList struct {
 func (obj *innerFabricDeployedApplicationHealthStateFilterList) toGoStruct() []FabricDeployedApplicationHealthStateFilter {
 	var dst []FabricDeployedApplicationHealthStateFilter
 	{
-		var lst []FabricDeployedApplicationHealthStateFilter
-
 		var innerlst []innerFabricDeployedApplicationHealthStateFilter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -21740,10 +21492,9 @@ func (obj *innerFabricDeployedApplicationHealthStateFilterList) toGoStruct() []F
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -21772,8 +21523,6 @@ type innerFabricReplicaHealthStateFilterList struct {
 func (obj *innerFabricReplicaHealthStateFilterList) toGoStruct() []FabricReplicaHealthStateFilter {
 	var dst []FabricReplicaHealthStateFilter
 	{
-		var lst []FabricReplicaHealthStateFilter
-
 		var innerlst []innerFabricReplicaHealthStateFilter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -21782,10 +21531,9 @@ func (obj *innerFabricReplicaHealthStateFilterList) toGoStruct() []FabricReplica
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -21803,8 +21551,8 @@ func (obj *FabricPartitionHealthStateFilter) toInnerStruct() *innerFabricPartiti
 	dst := innerFabricPartitionHealthStateFilter{}
 	dst.HealthStateFilter = obj.HealthStateFilter
 	dst.PartitionIdFilter = obj.PartitionIdFilter
+	lst_530 := &innerFabricReplicaHealthStateFilterList{}
 	{
-		lst := &innerFabricReplicaHealthStateFilterList{}
 
 		var tmp []innerFabricReplicaHealthStateFilter
 
@@ -21816,13 +21564,13 @@ func (obj *FabricPartitionHealthStateFilter) toInnerStruct() *innerFabricPartiti
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_530.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_530.Items = &tmp[0]
 		}
 
-		dst.ReplicaFilters = lst
 	}
+	dst.ReplicaFilters = lst_530
 	return &dst
 }
 
@@ -21841,8 +21589,6 @@ func (obj *innerFabricPartitionHealthStateFilter) toGoStruct() *FabricPartitionH
 	dst.HealthStateFilter = obj.HealthStateFilter
 	dst.PartitionIdFilter = obj.PartitionIdFilter
 	{
-		var lst []FabricReplicaHealthStateFilter
-
 		var innerlst []innerFabricReplicaHealthStateFilter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ReplicaFilters.Items), int(obj.ReplicaFilters.Count))
 
@@ -21851,10 +21597,9 @@ func (obj *innerFabricPartitionHealthStateFilter) toGoStruct() *FabricPartitionH
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.ReplicaFilters = append(dst.ReplicaFilters, tmpitem)
 		}
 
-		dst.ReplicaFilters = lst
 	}
 	return &dst
 }
@@ -21867,8 +21612,6 @@ type innerFabricPartitionHealthStateFilterList struct {
 func (obj *innerFabricPartitionHealthStateFilterList) toGoStruct() []FabricPartitionHealthStateFilter {
 	var dst []FabricPartitionHealthStateFilter
 	{
-		var lst []FabricPartitionHealthStateFilter
-
 		var innerlst []innerFabricPartitionHealthStateFilter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -21877,10 +21620,9 @@ func (obj *innerFabricPartitionHealthStateFilterList) toGoStruct() []FabricParti
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -21897,11 +21639,11 @@ func (obj *FabricServiceHealthStateFilter) toInnerStruct() *innerFabricServiceHe
 	}
 	dst := innerFabricServiceHealthStateFilter{}
 	dst.HealthStateFilter = obj.HealthStateFilter
-	s_693, _ := windows.UTF16PtrFromString(obj.ServiceNameFilter)
-	dst.ServiceNameFilter = s_693
+	s_531, _ := windows.UTF16PtrFromString(obj.ServiceNameFilter)
+	dst.ServiceNameFilter = s_531
 
+	lst_532 := &innerFabricPartitionHealthStateFilterList{}
 	{
-		lst := &innerFabricPartitionHealthStateFilterList{}
 
 		var tmp []innerFabricPartitionHealthStateFilter
 
@@ -21913,13 +21655,13 @@ func (obj *FabricServiceHealthStateFilter) toInnerStruct() *innerFabricServiceHe
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_532.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_532.Items = &tmp[0]
 		}
 
-		dst.PartitionFilters = lst
 	}
+	dst.PartitionFilters = lst_532
 	return &dst
 }
 
@@ -21938,8 +21680,6 @@ func (obj *innerFabricServiceHealthStateFilter) toGoStruct() *FabricServiceHealt
 	dst.HealthStateFilter = obj.HealthStateFilter
 	dst.ServiceNameFilter = windows.UTF16PtrToString(obj.ServiceNameFilter)
 	{
-		var lst []FabricPartitionHealthStateFilter
-
 		var innerlst []innerFabricPartitionHealthStateFilter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.PartitionFilters.Items), int(obj.PartitionFilters.Count))
 
@@ -21948,10 +21688,9 @@ func (obj *innerFabricServiceHealthStateFilter) toGoStruct() *FabricServiceHealt
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.PartitionFilters = append(dst.PartitionFilters, tmpitem)
 		}
 
-		dst.PartitionFilters = lst
 	}
 	return &dst
 }
@@ -21964,8 +21703,6 @@ type innerFabricServiceHealthStateFilterList struct {
 func (obj *innerFabricServiceHealthStateFilterList) toGoStruct() []FabricServiceHealthStateFilter {
 	var dst []FabricServiceHealthStateFilter
 	{
-		var lst []FabricServiceHealthStateFilter
-
 		var innerlst []innerFabricServiceHealthStateFilter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -21974,10 +21711,9 @@ func (obj *innerFabricServiceHealthStateFilterList) toGoStruct() []FabricService
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -21995,11 +21731,11 @@ func (obj *FabricApplicationHealthStateFilter) toInnerStruct() *innerFabricAppli
 	}
 	dst := innerFabricApplicationHealthStateFilter{}
 	dst.HealthStateFilter = obj.HealthStateFilter
-	s_697, _ := windows.UTF16PtrFromString(obj.ApplicationNameFilter)
-	dst.ApplicationNameFilter = s_697
+	s_533, _ := windows.UTF16PtrFromString(obj.ApplicationNameFilter)
+	dst.ApplicationNameFilter = s_533
 
+	lst_534 := &innerFabricServiceHealthStateFilterList{}
 	{
-		lst := &innerFabricServiceHealthStateFilterList{}
 
 		var tmp []innerFabricServiceHealthStateFilter
 
@@ -22011,15 +21747,15 @@ func (obj *FabricApplicationHealthStateFilter) toInnerStruct() *innerFabricAppli
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_534.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_534.Items = &tmp[0]
 		}
 
-		dst.ServiceFilters = lst
 	}
+	dst.ServiceFilters = lst_534
+	lst_535 := &innerFabricDeployedApplicationHealthStateFilterList{}
 	{
-		lst := &innerFabricDeployedApplicationHealthStateFilterList{}
 
 		var tmp []innerFabricDeployedApplicationHealthStateFilter
 
@@ -22031,13 +21767,13 @@ func (obj *FabricApplicationHealthStateFilter) toInnerStruct() *innerFabricAppli
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_535.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_535.Items = &tmp[0]
 		}
 
-		dst.DeployedApplicationFilters = lst
 	}
+	dst.DeployedApplicationFilters = lst_535
 	return &dst
 }
 
@@ -22057,8 +21793,6 @@ func (obj *innerFabricApplicationHealthStateFilter) toGoStruct() *FabricApplicat
 	dst.HealthStateFilter = obj.HealthStateFilter
 	dst.ApplicationNameFilter = windows.UTF16PtrToString(obj.ApplicationNameFilter)
 	{
-		var lst []FabricServiceHealthStateFilter
-
 		var innerlst []innerFabricServiceHealthStateFilter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ServiceFilters.Items), int(obj.ServiceFilters.Count))
 
@@ -22067,14 +21801,11 @@ func (obj *innerFabricApplicationHealthStateFilter) toGoStruct() *FabricApplicat
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.ServiceFilters = append(dst.ServiceFilters, tmpitem)
 		}
 
-		dst.ServiceFilters = lst
 	}
 	{
-		var lst []FabricDeployedApplicationHealthStateFilter
-
 		var innerlst []innerFabricDeployedApplicationHealthStateFilter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.DeployedApplicationFilters.Items), int(obj.DeployedApplicationFilters.Count))
 
@@ -22083,10 +21814,9 @@ func (obj *innerFabricApplicationHealthStateFilter) toGoStruct() *FabricApplicat
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.DeployedApplicationFilters = append(dst.DeployedApplicationFilters, tmpitem)
 		}
 
-		dst.DeployedApplicationFilters = lst
 	}
 	return &dst
 }
@@ -22100,8 +21830,8 @@ func (obj *FabricApplicationHealthStateFilterEx1) toInnerStruct() *innerFabricAp
 		return nil
 	}
 	dst := innerFabricApplicationHealthStateFilterEx1{}
-	s_702, _ := windows.UTF16PtrFromString(obj.ApplicationTypeNameFilter)
-	dst.ApplicationTypeNameFilter = s_702
+	s_536, _ := windows.UTF16PtrFromString(obj.ApplicationTypeNameFilter)
+	dst.ApplicationTypeNameFilter = s_536
 
 	return &dst
 }
@@ -22128,8 +21858,6 @@ type innerFabricApplicationHealthStateFilterList struct {
 func (obj *innerFabricApplicationHealthStateFilterList) toGoStruct() []FabricApplicationHealthStateFilter {
 	var dst []FabricApplicationHealthStateFilter
 	{
-		var lst []FabricApplicationHealthStateFilter
-
 		var innerlst []innerFabricApplicationHealthStateFilter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -22138,10 +21866,9 @@ func (obj *innerFabricApplicationHealthStateFilterList) toGoStruct() []FabricApp
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -22167,8 +21894,8 @@ func (obj *FabricClusterHealthChunkQueryDescription) toInnerStruct() *innerFabri
 		for k, v := range obj.ApplicationHealthPolicyMap {
 			kv := innerFabricApplicationHealthPolicyMapItem{}
 
-			s_705, _ := windows.UTF16PtrFromString(k)
-			kv.ApplicationName = s_705
+			s_538, _ := windows.UTF16PtrFromString(k)
+			kv.ApplicationName = s_538
 
 			kv.HealthPolicy = v.toInnerStruct()
 
@@ -22182,8 +21909,8 @@ func (obj *FabricClusterHealthChunkQueryDescription) toInnerStruct() *innerFabri
 
 		dst.ApplicationHealthPolicyMap = mapobj
 	}
+	lst_539 := &innerFabricApplicationHealthStateFilterList{}
 	{
-		lst := &innerFabricApplicationHealthStateFilterList{}
 
 		var tmp []innerFabricApplicationHealthStateFilter
 
@@ -22195,15 +21922,15 @@ func (obj *FabricClusterHealthChunkQueryDescription) toInnerStruct() *innerFabri
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_539.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_539.Items = &tmp[0]
 		}
 
-		dst.ApplicationFilters = lst
 	}
+	dst.ApplicationFilters = lst_539
+	lst_540 := &innerFabricNodeHealthStateFilterList{}
 	{
-		lst := &innerFabricNodeHealthStateFilterList{}
 
 		var tmp []innerFabricNodeHealthStateFilter
 
@@ -22215,13 +21942,13 @@ func (obj *FabricClusterHealthChunkQueryDescription) toInnerStruct() *innerFabri
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_540.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_540.Items = &tmp[0]
 		}
 
-		dst.NodeFilters = lst
 	}
+	dst.NodeFilters = lst_540
 	return &dst
 }
 
@@ -22259,8 +21986,6 @@ func (obj *innerFabricClusterHealthChunkQueryDescription) toGoStruct() *FabricCl
 		dst.ApplicationHealthPolicyMap = mapvar
 	}
 	{
-		var lst []FabricApplicationHealthStateFilter
-
 		var innerlst []innerFabricApplicationHealthStateFilter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ApplicationFilters.Items), int(obj.ApplicationFilters.Count))
 
@@ -22269,14 +21994,11 @@ func (obj *innerFabricClusterHealthChunkQueryDescription) toGoStruct() *FabricCl
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.ApplicationFilters = append(dst.ApplicationFilters, tmpitem)
 		}
 
-		dst.ApplicationFilters = lst
 	}
 	{
-		var lst []FabricNodeHealthStateFilter
-
 		var innerlst []innerFabricNodeHealthStateFilter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.NodeFilters.Items), int(obj.NodeFilters.Count))
 
@@ -22285,10 +22007,9 @@ func (obj *innerFabricClusterHealthChunkQueryDescription) toGoStruct() *FabricCl
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.NodeFilters = append(dst.NodeFilters, tmpitem)
 		}
 
-		dst.NodeFilters = lst
 	}
 	return &dst
 }
@@ -22303,8 +22024,8 @@ func (obj *FabricNodeHealthStateChunk) toInnerStruct() *innerFabricNodeHealthSta
 		return nil
 	}
 	dst := innerFabricNodeHealthStateChunk{}
-	s_711, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_711
+	s_542, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_542
 
 	dst.HealthState = obj.HealthState
 	return &dst
@@ -22336,8 +22057,6 @@ type innerFabricNodeHealthStateChunkList struct {
 func (obj *innerFabricNodeHealthStateChunkList) toGoStruct() []FabricNodeHealthStateChunk {
 	var dst []FabricNodeHealthStateChunk
 	{
-		var lst []FabricNodeHealthStateChunk
-
 		var innerlst []innerFabricNodeHealthStateChunk
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -22346,10 +22065,9 @@ func (obj *innerFabricNodeHealthStateChunkList) toGoStruct() []FabricNodeHealthS
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -22380,8 +22098,6 @@ type innerFabricReplicaHealthStateChunkList struct {
 func (obj *innerFabricReplicaHealthStateChunkList) toGoStruct() []FabricReplicaHealthStateChunk {
 	var dst []FabricReplicaHealthStateChunk
 	{
-		var lst []FabricReplicaHealthStateChunk
-
 		var innerlst []innerFabricReplicaHealthStateChunk
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -22390,10 +22106,9 @@ func (obj *innerFabricReplicaHealthStateChunkList) toGoStruct() []FabricReplicaH
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -22411,8 +22126,8 @@ func (obj *FabricPartitionHealthStateChunk) toInnerStruct() *innerFabricPartitio
 	dst := innerFabricPartitionHealthStateChunk{}
 	dst.PartitionId = obj.PartitionId
 	dst.HealthState = obj.HealthState
+	lst_543 := &innerFabricReplicaHealthStateChunkList{}
 	{
-		lst := &innerFabricReplicaHealthStateChunkList{}
 
 		var tmp []innerFabricReplicaHealthStateChunk
 
@@ -22424,13 +22139,13 @@ func (obj *FabricPartitionHealthStateChunk) toInnerStruct() *innerFabricPartitio
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_543.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_543.Items = &tmp[0]
 		}
 
-		dst.ReplicaHealthStateChunks = lst
 	}
+	dst.ReplicaHealthStateChunks = lst_543
 	return &dst
 }
 
@@ -22449,8 +22164,6 @@ func (obj *innerFabricPartitionHealthStateChunk) toGoStruct() *FabricPartitionHe
 	dst.PartitionId = obj.PartitionId
 	dst.HealthState = obj.HealthState
 	{
-		var lst []FabricReplicaHealthStateChunk
-
 		var innerlst []innerFabricReplicaHealthStateChunk
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ReplicaHealthStateChunks.Items), int(obj.ReplicaHealthStateChunks.Count))
 
@@ -22459,10 +22172,9 @@ func (obj *innerFabricPartitionHealthStateChunk) toGoStruct() *FabricPartitionHe
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.ReplicaHealthStateChunks = append(dst.ReplicaHealthStateChunks, tmpitem)
 		}
 
-		dst.ReplicaHealthStateChunks = lst
 	}
 	return &dst
 }
@@ -22477,8 +22189,6 @@ type innerFabricPartitionHealthStateChunkList struct {
 func (obj *innerFabricPartitionHealthStateChunkList) toGoStruct() []FabricPartitionHealthStateChunk {
 	var dst []FabricPartitionHealthStateChunk
 	{
-		var lst []FabricPartitionHealthStateChunk
-
 		var innerlst []innerFabricPartitionHealthStateChunk
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -22487,10 +22197,9 @@ func (obj *innerFabricPartitionHealthStateChunkList) toGoStruct() []FabricPartit
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -22506,12 +22215,12 @@ func (obj *FabricServiceHealthStateChunk) toInnerStruct() *innerFabricServiceHea
 		return nil
 	}
 	dst := innerFabricServiceHealthStateChunk{}
-	s_717, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_717
+	s_544, _ := windows.UTF16PtrFromString(obj.ServiceName)
+	dst.ServiceName = s_544
 
 	dst.HealthState = obj.HealthState
+	lst_545 := &innerFabricPartitionHealthStateChunkList{}
 	{
-		lst := &innerFabricPartitionHealthStateChunkList{}
 
 		var tmp []innerFabricPartitionHealthStateChunk
 
@@ -22523,13 +22232,13 @@ func (obj *FabricServiceHealthStateChunk) toInnerStruct() *innerFabricServiceHea
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_545.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_545.Items = &tmp[0]
 		}
 
-		dst.PartitionHealthStateChunks = lst
 	}
+	dst.PartitionHealthStateChunks = lst_545
 	return &dst
 }
 
@@ -22548,8 +22257,6 @@ func (obj *innerFabricServiceHealthStateChunk) toGoStruct() *FabricServiceHealth
 	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
 	dst.HealthState = obj.HealthState
 	{
-		var lst []FabricPartitionHealthStateChunk
-
 		var innerlst []innerFabricPartitionHealthStateChunk
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.PartitionHealthStateChunks.Items), int(obj.PartitionHealthStateChunks.Count))
 
@@ -22558,10 +22265,9 @@ func (obj *innerFabricServiceHealthStateChunk) toGoStruct() *FabricServiceHealth
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.PartitionHealthStateChunks = append(dst.PartitionHealthStateChunks, tmpitem)
 		}
 
-		dst.PartitionHealthStateChunks = lst
 	}
 	return &dst
 }
@@ -22576,8 +22282,6 @@ type innerFabricServiceHealthStateChunkList struct {
 func (obj *innerFabricServiceHealthStateChunkList) toGoStruct() []FabricServiceHealthStateChunk {
 	var dst []FabricServiceHealthStateChunk
 	{
-		var lst []FabricServiceHealthStateChunk
-
 		var innerlst []innerFabricServiceHealthStateChunk
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -22586,10 +22290,9 @@ func (obj *innerFabricServiceHealthStateChunkList) toGoStruct() []FabricServiceH
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -22604,8 +22307,8 @@ func (obj *FabricDeployedServicePackageHealthStateChunk) toInnerStruct() *innerF
 		return nil
 	}
 	dst := innerFabricDeployedServicePackageHealthStateChunk{}
-	s_721, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_721
+	s_546, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
+	dst.ServiceManifestName = s_546
 
 	dst.HealthState = obj.HealthState
 	return &dst
@@ -22636,8 +22339,8 @@ func (obj *FabricDeployedServicePackageHealthStateChunkEx1) toInnerStruct() *inn
 		return nil
 	}
 	dst := innerFabricDeployedServicePackageHealthStateChunkEx1{}
-	s_722, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	dst.ServicePackageActivationId = s_722
+	s_547, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
+	dst.ServicePackageActivationId = s_547
 
 	return &dst
 }
@@ -22666,8 +22369,6 @@ type innerFabricDeployedServicePackageHealthStateChunkList struct {
 func (obj *innerFabricDeployedServicePackageHealthStateChunkList) toGoStruct() []FabricDeployedServicePackageHealthStateChunk {
 	var dst []FabricDeployedServicePackageHealthStateChunk
 	{
-		var lst []FabricDeployedServicePackageHealthStateChunk
-
 		var innerlst []innerFabricDeployedServicePackageHealthStateChunk
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -22676,10 +22377,9 @@ func (obj *innerFabricDeployedServicePackageHealthStateChunkList) toGoStruct() [
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -22695,12 +22395,12 @@ func (obj *FabricDeployedApplicationHealthStateChunk) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := innerFabricDeployedApplicationHealthStateChunk{}
-	s_724, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_724
+	s_548, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_548
 
 	dst.HealthState = obj.HealthState
+	lst_549 := &innerFabricDeployedServicePackageHealthStateChunkList{}
 	{
-		lst := &innerFabricDeployedServicePackageHealthStateChunkList{}
 
 		var tmp []innerFabricDeployedServicePackageHealthStateChunk
 
@@ -22712,13 +22412,13 @@ func (obj *FabricDeployedApplicationHealthStateChunk) toInnerStruct() *innerFabr
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_549.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_549.Items = &tmp[0]
 		}
 
-		dst.DeployedServicePackageHealthStateChunks = lst
 	}
+	dst.DeployedServicePackageHealthStateChunks = lst_549
 	return &dst
 }
 
@@ -22737,8 +22437,6 @@ func (obj *innerFabricDeployedApplicationHealthStateChunk) toGoStruct() *FabricD
 	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
 	dst.HealthState = obj.HealthState
 	{
-		var lst []FabricDeployedServicePackageHealthStateChunk
-
 		var innerlst []innerFabricDeployedServicePackageHealthStateChunk
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.DeployedServicePackageHealthStateChunks.Items), int(obj.DeployedServicePackageHealthStateChunks.Count))
 
@@ -22747,10 +22445,9 @@ func (obj *innerFabricDeployedApplicationHealthStateChunk) toGoStruct() *FabricD
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.DeployedServicePackageHealthStateChunks = append(dst.DeployedServicePackageHealthStateChunks, tmpitem)
 		}
 
-		dst.DeployedServicePackageHealthStateChunks = lst
 	}
 	return &dst
 }
@@ -22765,8 +22462,6 @@ type innerFabricDeployedApplicationHealthStateChunkList struct {
 func (obj *innerFabricDeployedApplicationHealthStateChunkList) toGoStruct() []FabricDeployedApplicationHealthStateChunk {
 	var dst []FabricDeployedApplicationHealthStateChunk
 	{
-		var lst []FabricDeployedApplicationHealthStateChunk
-
 		var innerlst []innerFabricDeployedApplicationHealthStateChunk
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -22775,10 +22470,9 @@ func (obj *innerFabricDeployedApplicationHealthStateChunkList) toGoStruct() []Fa
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -22795,12 +22489,12 @@ func (obj *FabricApplicationHealthStateChunk) toInnerStruct() *innerFabricApplic
 		return nil
 	}
 	dst := innerFabricApplicationHealthStateChunk{}
-	s_728, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_728
+	s_550, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_550
 
 	dst.HealthState = obj.HealthState
+	lst_551 := &innerFabricServiceHealthStateChunkList{}
 	{
-		lst := &innerFabricServiceHealthStateChunkList{}
 
 		var tmp []innerFabricServiceHealthStateChunk
 
@@ -22812,15 +22506,15 @@ func (obj *FabricApplicationHealthStateChunk) toInnerStruct() *innerFabricApplic
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_551.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_551.Items = &tmp[0]
 		}
 
-		dst.ServiceHealthStateChunks = lst
 	}
+	dst.ServiceHealthStateChunks = lst_551
+	lst_552 := &innerFabricDeployedApplicationHealthStateChunkList{}
 	{
-		lst := &innerFabricDeployedApplicationHealthStateChunkList{}
 
 		var tmp []innerFabricDeployedApplicationHealthStateChunk
 
@@ -22832,13 +22526,13 @@ func (obj *FabricApplicationHealthStateChunk) toInnerStruct() *innerFabricApplic
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_552.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_552.Items = &tmp[0]
 		}
 
-		dst.DeployedApplicationHealthStateChunks = lst
 	}
+	dst.DeployedApplicationHealthStateChunks = lst_552
 	return &dst
 }
 
@@ -22858,8 +22552,6 @@ func (obj *innerFabricApplicationHealthStateChunk) toGoStruct() *FabricApplicati
 	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
 	dst.HealthState = obj.HealthState
 	{
-		var lst []FabricServiceHealthStateChunk
-
 		var innerlst []innerFabricServiceHealthStateChunk
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ServiceHealthStateChunks.Items), int(obj.ServiceHealthStateChunks.Count))
 
@@ -22868,14 +22560,11 @@ func (obj *innerFabricApplicationHealthStateChunk) toGoStruct() *FabricApplicati
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.ServiceHealthStateChunks = append(dst.ServiceHealthStateChunks, tmpitem)
 		}
 
-		dst.ServiceHealthStateChunks = lst
 	}
 	{
-		var lst []FabricDeployedApplicationHealthStateChunk
-
 		var innerlst []innerFabricDeployedApplicationHealthStateChunk
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.DeployedApplicationHealthStateChunks.Items), int(obj.DeployedApplicationHealthStateChunks.Count))
 
@@ -22884,10 +22573,9 @@ func (obj *innerFabricApplicationHealthStateChunk) toGoStruct() *FabricApplicati
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.DeployedApplicationHealthStateChunks = append(dst.DeployedApplicationHealthStateChunks, tmpitem)
 		}
 
-		dst.DeployedApplicationHealthStateChunks = lst
 	}
 	return &dst
 }
@@ -22901,8 +22589,8 @@ func (obj *FabricApplicationHealthStateChunkEx1) toInnerStruct() *innerFabricApp
 		return nil
 	}
 	dst := innerFabricApplicationHealthStateChunkEx1{}
-	s_733, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
-	dst.ApplicationTypeName = s_733
+	s_553, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
+	dst.ApplicationTypeName = s_553
 
 	return &dst
 }
@@ -22931,8 +22619,6 @@ type innerFabricApplicationHealthStateChunkList struct {
 func (obj *innerFabricApplicationHealthStateChunkList) toGoStruct() []FabricApplicationHealthStateChunk {
 	var dst []FabricApplicationHealthStateChunk
 	{
-		var lst []FabricApplicationHealthStateChunk
-
 		var innerlst []innerFabricApplicationHealthStateChunk
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -22941,10 +22627,9 @@ func (obj *innerFabricApplicationHealthStateChunkList) toGoStruct() []FabricAppl
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -22961,8 +22646,8 @@ func (obj *FabricClusterHealthChunk) toInnerStruct() *innerFabricClusterHealthCh
 	}
 	dst := innerFabricClusterHealthChunk{}
 	dst.HealthState = obj.HealthState
+	lst_554 := &innerFabricNodeHealthStateChunkList{}
 	{
-		lst := &innerFabricNodeHealthStateChunkList{}
 
 		var tmp []innerFabricNodeHealthStateChunk
 
@@ -22974,15 +22659,15 @@ func (obj *FabricClusterHealthChunk) toInnerStruct() *innerFabricClusterHealthCh
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_554.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_554.Items = &tmp[0]
 		}
 
-		dst.NodeHealthStateChunks = lst
 	}
+	dst.NodeHealthStateChunks = lst_554
+	lst_555 := &innerFabricApplicationHealthStateChunkList{}
 	{
-		lst := &innerFabricApplicationHealthStateChunkList{}
 
 		var tmp []innerFabricApplicationHealthStateChunk
 
@@ -22994,13 +22679,13 @@ func (obj *FabricClusterHealthChunk) toInnerStruct() *innerFabricClusterHealthCh
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_555.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_555.Items = &tmp[0]
 		}
 
-		dst.ApplicationHealthStateChunks = lst
 	}
+	dst.ApplicationHealthStateChunks = lst_555
 	return &dst
 }
 
@@ -23018,8 +22703,6 @@ func (obj *innerFabricClusterHealthChunk) toGoStruct() *FabricClusterHealthChunk
 	dst := FabricClusterHealthChunk{}
 	dst.HealthState = obj.HealthState
 	{
-		var lst []FabricNodeHealthStateChunk
-
 		var innerlst []innerFabricNodeHealthStateChunk
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.NodeHealthStateChunks.Items), int(obj.NodeHealthStateChunks.Count))
 
@@ -23028,14 +22711,11 @@ func (obj *innerFabricClusterHealthChunk) toGoStruct() *FabricClusterHealthChunk
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.NodeHealthStateChunks = append(dst.NodeHealthStateChunks, tmpitem)
 		}
 
-		dst.NodeHealthStateChunks = lst
 	}
 	{
-		var lst []FabricApplicationHealthStateChunk
-
 		var innerlst []innerFabricApplicationHealthStateChunk
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ApplicationHealthStateChunks.Items), int(obj.ApplicationHealthStateChunks.Count))
 
@@ -23044,10 +22724,9 @@ func (obj *innerFabricClusterHealthChunk) toGoStruct() *FabricClusterHealthChunk
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.ApplicationHealthStateChunks = append(dst.ApplicationHealthStateChunks, tmpitem)
 		}
 
-		dst.ApplicationHealthStateChunks = lst
 	}
 	return &dst
 }
@@ -23069,8 +22748,8 @@ func (obj *FabricRollingUpgradePolicyDescriptionEx3) toInnerStruct() *innerFabri
 		for k, v := range obj.ApplicationHealthPolicyMap {
 			kv := innerFabricApplicationHealthPolicyMapItem{}
 
-			s_740, _ := windows.UTF16PtrFromString(k)
-			kv.ApplicationName = s_740
+			s_557, _ := windows.UTF16PtrFromString(k)
+			kv.ApplicationName = s_557
 
 			kv.HealthPolicy = v.toInnerStruct()
 
@@ -23129,11 +22808,11 @@ func (obj *FabricEventContextMapItem) toInnerStruct() *innerFabricEventContextMa
 		return nil
 	}
 	dst := innerFabricEventContextMapItem{}
-	s_742, _ := windows.UTF16PtrFromString(obj.Key)
-	dst.Key = s_742
+	s_559, _ := windows.UTF16PtrFromString(obj.Key)
+	dst.Key = s_559
 
-	s_743, _ := windows.UTF16PtrFromString(obj.Value)
-	dst.Value = s_743
+	s_560, _ := windows.UTF16PtrFromString(obj.Value)
+	dst.Value = s_560
 
 	return &dst
 }
@@ -23211,11 +22890,11 @@ func (obj *FabricChaosParameters) toInnerStruct() *innerFabricChaosParameters {
 		for k, v := range obj.Context {
 			kv := innerFabricEventContextMapItem{}
 
-			s_746, _ := windows.UTF16PtrFromString(k)
-			kv.Key = s_746
+			s_563, _ := windows.UTF16PtrFromString(k)
+			kv.Key = s_563
 
-			s_747, _ := windows.UTF16PtrFromString(v)
-			kv.Value = s_747
+			s_564, _ := windows.UTF16PtrFromString(v)
+			kv.Value = s_564
 
 			tmp = append(tmp, kv)
 		}
@@ -23299,48 +22978,48 @@ func (obj *FabricChaosTargetFilter) toInnerStruct() *innerFabricChaosTargetFilte
 		return nil
 	}
 	dst := innerFabricChaosTargetFilter{}
+	lst_566 := &innerFabricStringList{}
 	{
-		lst := &innerFabricStringList{}
 
 		var tmp []*uint16
 
 		for _, item := range obj.NodeTypeInclusionList {
 			var tmpitem *uint16
 
-			s_750, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_750
+			s_567, _ := windows.UTF16PtrFromString(item)
+			tmpitem = s_567
 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_566.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_566.Items = &tmp[0]
 		}
 
-		dst.NodeTypeInclusionList = lst
 	}
+	dst.NodeTypeInclusionList = lst_566
+	lst_568 := &innerFabricStringList{}
 	{
-		lst := &innerFabricStringList{}
 
 		var tmp []*uint16
 
 		for _, item := range obj.ApplicationInclusionList {
 			var tmpitem *uint16
 
-			s_752, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_752
+			s_569, _ := windows.UTF16PtrFromString(item)
+			tmpitem = s_569
 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_568.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_568.Items = &tmp[0]
 		}
 
-		dst.ApplicationInclusionList = lst
 	}
+	dst.ApplicationInclusionList = lst_568
 	return &dst
 }
 
@@ -23356,8 +23035,6 @@ func (obj *innerFabricChaosTargetFilter) toGoStruct() *FabricChaosTargetFilter {
 	}
 	dst := FabricChaosTargetFilter{}
 	{
-		var lst []string
-
 		var innerlst []*uint16
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.NodeTypeInclusionList.Items), int(obj.NodeTypeInclusionList.Count))
 
@@ -23366,14 +23043,11 @@ func (obj *innerFabricChaosTargetFilter) toGoStruct() *FabricChaosTargetFilter {
 
 			tmpitem = windows.UTF16PtrToString(item)
 
-			lst = append(lst, tmpitem)
+			dst.NodeTypeInclusionList = append(dst.NodeTypeInclusionList, tmpitem)
 		}
 
-		dst.NodeTypeInclusionList = lst
 	}
 	{
-		var lst []string
-
 		var innerlst []*uint16
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ApplicationInclusionList.Items), int(obj.ApplicationInclusionList.Count))
 
@@ -23382,10 +23056,9 @@ func (obj *innerFabricChaosTargetFilter) toGoStruct() *FabricChaosTargetFilter {
 
 			tmpitem = windows.UTF16PtrToString(item)
 
-			lst = append(lst, tmpitem)
+			dst.ApplicationInclusionList = append(dst.ApplicationInclusionList, tmpitem)
 		}
 
-		dst.ApplicationInclusionList = lst
 	}
 	return &dst
 }
@@ -23509,8 +23182,8 @@ func (obj *FabricGetChaosReportDescription) toInnerStruct() *innerFabricGetChaos
 	}
 	dst := innerFabricGetChaosReportDescription{}
 	dst.Filter = obj.Filter.toInnerStruct()
-	s_755, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
-	dst.ContinuationToken = s_755
+	s_570, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
+	dst.ContinuationToken = s_570
 
 	return &dst
 }
@@ -23588,27 +23261,27 @@ func (obj *FabricExecutingFaultsEvent) toInnerStruct() *innerFabricExecutingFaul
 	}
 	dst := innerFabricExecutingFaultsEvent{}
 	dst.TimeStampUtc = windows.NsecToFiletime(obj.TimeStampUtc.UnixNano())
+	lst_571 := &innerFabricStringList{}
 	{
-		lst := &innerFabricStringList{}
 
 		var tmp []*uint16
 
 		for _, item := range obj.Faults {
 			var tmpitem *uint16
 
-			s_757, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_757
+			s_572, _ := windows.UTF16PtrFromString(item)
+			tmpitem = s_572
 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_571.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_571.Items = &tmp[0]
 		}
 
-		dst.Faults = lst
 	}
+	dst.Faults = lst_571
 	return &dst
 }
 
@@ -23625,8 +23298,6 @@ func (obj *innerFabricExecutingFaultsEvent) toGoStruct() *FabricExecutingFaultsE
 	dst := FabricExecutingFaultsEvent{}
 	dst.TimeStampUtc = time.Unix(0, obj.TimeStampUtc.Nanoseconds())
 	{
-		var lst []string
-
 		var innerlst []*uint16
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Faults.Items), int(obj.Faults.Count))
 
@@ -23635,10 +23306,9 @@ func (obj *innerFabricExecutingFaultsEvent) toGoStruct() *FabricExecutingFaultsE
 
 			tmpitem = windows.UTF16PtrToString(item)
 
-			lst = append(lst, tmpitem)
+			dst.Faults = append(dst.Faults, tmpitem)
 		}
 
-		dst.Faults = lst
 	}
 	return &dst
 }
@@ -23654,8 +23324,8 @@ func (obj *FabricWaitingEvent) toInnerStruct() *innerFabricWaitingEvent {
 	}
 	dst := innerFabricWaitingEvent{}
 	dst.TimeStampUtc = windows.NsecToFiletime(obj.TimeStampUtc.UnixNano())
-	s_759, _ := windows.UTF16PtrFromString(obj.Reason)
-	dst.Reason = s_759
+	s_573, _ := windows.UTF16PtrFromString(obj.Reason)
+	dst.Reason = s_573
 
 	return &dst
 }
@@ -23687,8 +23357,8 @@ func (obj *FabricValidationFailedEvent) toInnerStruct() *innerFabricValidationFa
 	}
 	dst := innerFabricValidationFailedEvent{}
 	dst.TimeStampUtc = windows.NsecToFiletime(obj.TimeStampUtc.UnixNano())
-	s_760, _ := windows.UTF16PtrFromString(obj.Reason)
-	dst.Reason = s_760
+	s_574, _ := windows.UTF16PtrFromString(obj.Reason)
+	dst.Reason = s_574
 
 	return &dst
 }
@@ -23720,8 +23390,8 @@ func (obj *FabricTestErrorEvent) toInnerStruct() *innerFabricTestErrorEvent {
 	}
 	dst := innerFabricTestErrorEvent{}
 	dst.TimeStampUtc = windows.NsecToFiletime(obj.TimeStampUtc.UnixNano())
-	s_761, _ := windows.UTF16PtrFromString(obj.Reason)
-	dst.Reason = s_761
+	s_575, _ := windows.UTF16PtrFromString(obj.Reason)
+	dst.Reason = s_575
 
 	return &dst
 }
@@ -23753,8 +23423,8 @@ func (obj *FabricStoppedEvent) toInnerStruct() *innerFabricStoppedEvent {
 	}
 	dst := innerFabricStoppedEvent{}
 	dst.TimeStampUtc = windows.NsecToFiletime(obj.TimeStampUtc.UnixNano())
-	s_762, _ := windows.UTF16PtrFromString(obj.Reason)
-	dst.Reason = s_762
+	s_576, _ := windows.UTF16PtrFromString(obj.Reason)
+	dst.Reason = s_576
 
 	return &dst
 }
@@ -23783,8 +23453,6 @@ type innerFabricChaosEventList struct {
 func (obj *innerFabricChaosEventList) toGoStruct() []FabricChaosEvent {
 	var dst []FabricChaosEvent
 	{
-		var lst []FabricChaosEvent
-
 		var innerlst []innerFabricChaosEvent
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -23793,10 +23461,9 @@ func (obj *innerFabricChaosEventList) toGoStruct() []FabricChaosEvent {
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -23815,11 +23482,11 @@ func (obj *FabricChaosReport) toInnerStruct() *innerFabricChaosReport {
 	dst := innerFabricChaosReport{}
 	dst.ChaosParameters = obj.ChaosParameters.toInnerStruct()
 	dst.Status = obj.Status
-	s_764, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
-	dst.ContinuationToken = s_764
+	s_577, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
+	dst.ContinuationToken = s_577
 
+	lst_578 := &innerFabricChaosEventList{}
 	{
-		lst := &innerFabricChaosEventList{}
 
 		var tmp []innerFabricChaosEvent
 
@@ -23831,13 +23498,13 @@ func (obj *FabricChaosReport) toInnerStruct() *innerFabricChaosReport {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_578.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_578.Items = &tmp[0]
 		}
 
-		dst.History = lst
 	}
+	dst.History = lst_578
 	return &dst
 }
 
@@ -23858,8 +23525,6 @@ func (obj *innerFabricChaosReport) toGoStruct() *FabricChaosReport {
 	dst.Status = obj.Status
 	dst.ContinuationToken = windows.UTF16PtrToString(obj.ContinuationToken)
 	{
-		var lst []FabricChaosEvent
-
 		var innerlst []innerFabricChaosEvent
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.History.Items), int(obj.History.Count))
 
@@ -23868,10 +23533,9 @@ func (obj *innerFabricChaosReport) toGoStruct() *FabricChaosReport {
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.History = append(dst.History, tmpitem)
 		}
 
-		dst.History = lst
 	}
 	return &dst
 }
@@ -23886,11 +23550,11 @@ func (obj *FabricChaosEventsSegment) toInnerStruct() *innerFabricChaosEventsSegm
 		return nil
 	}
 	dst := innerFabricChaosEventsSegment{}
-	s_767, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
-	dst.ContinuationToken = s_767
+	s_579, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
+	dst.ContinuationToken = s_579
 
+	lst_580 := &innerFabricChaosEventList{}
 	{
-		lst := &innerFabricChaosEventList{}
 
 		var tmp []innerFabricChaosEvent
 
@@ -23902,13 +23566,13 @@ func (obj *FabricChaosEventsSegment) toInnerStruct() *innerFabricChaosEventsSegm
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_580.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_580.Items = &tmp[0]
 		}
 
-		dst.History = lst
 	}
+	dst.History = lst_580
 	return &dst
 }
 
@@ -23925,8 +23589,6 @@ func (obj *innerFabricChaosEventsSegment) toGoStruct() *FabricChaosEventsSegment
 	dst := FabricChaosEventsSegment{}
 	dst.ContinuationToken = windows.UTF16PtrToString(obj.ContinuationToken)
 	{
-		var lst []FabricChaosEvent
-
 		var innerlst []innerFabricChaosEvent
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.History.Items), int(obj.History.Count))
 
@@ -23935,10 +23597,9 @@ func (obj *innerFabricChaosEventsSegment) toGoStruct() *FabricChaosEventsSegment
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.History = append(dst.History, tmpitem)
 		}
 
-		dst.History = lst
 	}
 	return &dst
 }
@@ -24000,8 +23661,6 @@ type innerFabricChaosScheduleTimeRangeUtcList struct {
 func (obj *innerFabricChaosScheduleTimeRangeUtcList) toGoStruct() []FabricChaosScheduleTimeRangeUtc {
 	var dst []FabricChaosScheduleTimeRangeUtc
 	{
-		var lst []FabricChaosScheduleTimeRangeUtc
-
 		var innerlst []innerFabricChaosScheduleTimeRangeUtc
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -24010,10 +23669,9 @@ func (obj *innerFabricChaosScheduleTimeRangeUtcList) toGoStruct() []FabricChaosS
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -24050,12 +23708,12 @@ func (obj *FabricChaosScheduleJob) toInnerStruct() *innerFabricChaosScheduleJob 
 		return nil
 	}
 	dst := innerFabricChaosScheduleJob{}
-	s_771, _ := windows.UTF16PtrFromString(obj.ChaosParameters)
-	dst.ChaosParameters = s_771
+	s_581, _ := windows.UTF16PtrFromString(obj.ChaosParameters)
+	dst.ChaosParameters = s_581
 
 	dst.Days = obj.Days.toInnerStruct()
+	lst_582 := &innerFabricChaosScheduleTimeRangeUtcList{}
 	{
-		lst := &innerFabricChaosScheduleTimeRangeUtcList{}
 
 		var tmp []innerFabricChaosScheduleTimeRangeUtc
 
@@ -24067,13 +23725,13 @@ func (obj *FabricChaosScheduleJob) toInnerStruct() *innerFabricChaosScheduleJob 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_582.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_582.Items = &tmp[0]
 		}
 
-		dst.Times = lst
 	}
+	dst.Times = lst_582
 	return &dst
 }
 
@@ -24092,8 +23750,6 @@ func (obj *innerFabricChaosScheduleJob) toGoStruct() *FabricChaosScheduleJob {
 	dst.ChaosParameters = windows.UTF16PtrToString(obj.ChaosParameters)
 	dst.Days = obj.Days.toGoStruct()
 	{
-		var lst []FabricChaosScheduleTimeRangeUtc
-
 		var innerlst []innerFabricChaosScheduleTimeRangeUtc
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Times.Items), int(obj.Times.Count))
 
@@ -24102,10 +23758,9 @@ func (obj *innerFabricChaosScheduleJob) toGoStruct() *FabricChaosScheduleJob {
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.Times = append(dst.Times, tmpitem)
 		}
 
-		dst.Times = lst
 	}
 	return &dst
 }
@@ -24118,8 +23773,6 @@ type innerFabricChaosScheduleJobList struct {
 func (obj *innerFabricChaosScheduleJobList) toGoStruct() []FabricChaosScheduleJob {
 	var dst []FabricChaosScheduleJob
 	{
-		var lst []FabricChaosScheduleJob
-
 		var innerlst []innerFabricChaosScheduleJob
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -24128,10 +23781,9 @@ func (obj *innerFabricChaosScheduleJobList) toGoStruct() []FabricChaosScheduleJo
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -24146,8 +23798,8 @@ func (obj *FabricChaosScheduleChaosParametersMapItem) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := innerFabricChaosScheduleChaosParametersMapItem{}
-	s_775, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_775
+	s_583, _ := windows.UTF16PtrFromString(obj.Name)
+	dst.Name = s_583
 
 	dst.Parameters = obj.Parameters.toInnerStruct()
 	return &dst
@@ -24219,8 +23871,8 @@ func (obj *FabricChaosSchedule) toInnerStruct() *innerFabricChaosSchedule {
 		for k, v := range obj.ChaosParametersMap {
 			kv := innerFabricChaosScheduleChaosParametersMapItem{}
 
-			s_778, _ := windows.UTF16PtrFromString(k)
-			kv.Name = s_778
+			s_586, _ := windows.UTF16PtrFromString(k)
+			kv.Name = s_586
 
 			kv.Parameters = v.toInnerStruct()
 
@@ -24234,8 +23886,8 @@ func (obj *FabricChaosSchedule) toInnerStruct() *innerFabricChaosSchedule {
 
 		dst.ChaosParametersMap = mapobj
 	}
+	lst_587 := &innerFabricChaosScheduleJobList{}
 	{
-		lst := &innerFabricChaosScheduleJobList{}
 
 		var tmp []innerFabricChaosScheduleJob
 
@@ -24247,13 +23899,13 @@ func (obj *FabricChaosSchedule) toInnerStruct() *innerFabricChaosSchedule {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_587.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_587.Items = &tmp[0]
 		}
 
-		dst.Jobs = lst
 	}
+	dst.Jobs = lst_587
 	return &dst
 }
 
@@ -24292,8 +23944,6 @@ func (obj *innerFabricChaosSchedule) toGoStruct() *FabricChaosSchedule {
 		dst.ChaosParametersMap = mapvar
 	}
 	{
-		var lst []FabricChaosScheduleJob
-
 		var innerlst []innerFabricChaosScheduleJob
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Jobs.Items), int(obj.Jobs.Count))
 
@@ -24302,10 +23952,9 @@ func (obj *innerFabricChaosSchedule) toGoStruct() *FabricChaosSchedule {
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst.Jobs = append(dst.Jobs, tmpitem)
 		}
 
-		dst.Jobs = lst
 	}
 	return &dst
 }
@@ -24354,20 +24003,20 @@ func (obj *FabricSecret) toInnerStruct() *innerFabricSecret {
 		return nil
 	}
 	dst := innerFabricSecret{}
-	s_782, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_782
+	s_589, _ := windows.UTF16PtrFromString(obj.Name)
+	dst.Name = s_589
 
-	s_783, _ := windows.UTF16PtrFromString(obj.Version)
-	dst.Version = s_783
+	s_590, _ := windows.UTF16PtrFromString(obj.Version)
+	dst.Version = s_590
 
-	s_784, _ := windows.UTF16PtrFromString(obj.Value)
-	dst.Value = s_784
+	s_591, _ := windows.UTF16PtrFromString(obj.Value)
+	dst.Value = s_591
 
-	s_785, _ := windows.UTF16PtrFromString(obj.Kind)
-	dst.Kind = s_785
+	s_592, _ := windows.UTF16PtrFromString(obj.Kind)
+	dst.Kind = s_592
 
-	s_786, _ := windows.UTF16PtrFromString(obj.ContentType)
-	dst.ContentType = s_786
+	s_593, _ := windows.UTF16PtrFromString(obj.ContentType)
+	dst.ContentType = s_593
 
 	return &dst
 }
@@ -24401,8 +24050,6 @@ type innerFabricSecretList struct {
 func (obj *innerFabricSecretList) toGoStruct() []FabricSecret {
 	var dst []FabricSecret
 	{
-		var lst []FabricSecret
-
 		var innerlst []innerFabricSecret
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -24411,10 +24058,9 @@ func (obj *innerFabricSecretList) toGoStruct() []FabricSecret {
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -24429,11 +24075,11 @@ func (obj *FabricSecretReference) toInnerStruct() *innerFabricSecretReference {
 		return nil
 	}
 	dst := innerFabricSecretReference{}
-	s_788, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_788
+	s_594, _ := windows.UTF16PtrFromString(obj.Name)
+	dst.Name = s_594
 
-	s_789, _ := windows.UTF16PtrFromString(obj.Version)
-	dst.Version = s_789
+	s_595, _ := windows.UTF16PtrFromString(obj.Version)
+	dst.Version = s_595
 
 	return &dst
 }
@@ -24461,8 +24107,6 @@ type innerFabricSecretReferenceList struct {
 func (obj *innerFabricSecretReferenceList) toGoStruct() []FabricSecretReference {
 	var dst []FabricSecretReference
 	{
-		var lst []FabricSecretReference
-
 		var innerlst []innerFabricSecretReference
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -24471,10 +24115,9 @@ func (obj *innerFabricSecretReferenceList) toGoStruct() []FabricSecretReference 
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -24506,8 +24149,8 @@ func (obj *FabricCodePackageEventDescription) toInnerStruct() *innerFabricCodePa
 		return nil
 	}
 	dst := innerFabricCodePackageEventDescription{}
-	s_791, _ := windows.UTF16PtrFromString(obj.CodePackageName)
-	dst.CodePackageName = s_791
+	s_596, _ := windows.UTF16PtrFromString(obj.CodePackageName)
+	dst.CodePackageName = s_596
 
 	dst.IsSetupEntryPoint = obj.IsSetupEntryPoint
 	dst.IsContainerHost = obj.IsContainerHost
@@ -24522,11 +24165,11 @@ func (obj *FabricCodePackageEventDescription) toInnerStruct() *innerFabricCodePa
 		for k, v := range obj.Properties {
 			kv := innerFabricApplicationParameter{}
 
-			s_793, _ := windows.UTF16PtrFromString(k)
-			kv.Name = s_793
+			s_598, _ := windows.UTF16PtrFromString(k)
+			kv.Name = s_598
 
-			s_794, _ := windows.UTF16PtrFromString(v)
-			kv.Value = s_794
+			s_599, _ := windows.UTF16PtrFromString(v)
+			kv.Value = s_599
 
 			tmp = append(tmp, kv)
 		}
@@ -24609,8 +24252,8 @@ func (obj *FabricLocalNetworkConfigurationDescription) toInnerStruct() *innerFab
 		return nil
 	}
 	dst := innerFabricLocalNetworkConfigurationDescription{}
-	s_796, _ := windows.UTF16PtrFromString(obj.NetworkAddressPrefix)
-	dst.NetworkAddressPrefix = s_796
+	s_601, _ := windows.UTF16PtrFromString(obj.NetworkAddressPrefix)
+	dst.NetworkAddressPrefix = s_601
 
 	return &dst
 }
@@ -24653,8 +24296,8 @@ func (obj *FabricDeleteNetworkDescription) toInnerStruct() *innerFabricDeleteNet
 		return nil
 	}
 	dst := innerFabricDeleteNetworkDescription{}
-	s_797, _ := windows.UTF16PtrFromString(obj.NetworkName)
-	dst.NetworkName = s_797
+	s_602, _ := windows.UTF16PtrFromString(obj.NetworkName)
+	dst.NetworkName = s_602
 
 	return &dst
 }
@@ -24699,8 +24342,8 @@ func (obj *FabricNetworkQueryDescription) toInnerStruct() *innerFabricNetworkQue
 		return nil
 	}
 	dst := innerFabricNetworkQueryDescription{}
-	s_798, _ := windows.UTF16PtrFromString(obj.NetworkNameFilter)
-	dst.NetworkNameFilter = s_798
+	s_603, _ := windows.UTF16PtrFromString(obj.NetworkNameFilter)
+	dst.NetworkNameFilter = s_603
 
 	dst.NetworkStatusFilter = obj.NetworkStatusFilter
 	dst.PagingDescription = obj.PagingDescription.toInnerStruct()
@@ -24736,8 +24379,8 @@ func (obj *FabricLocalNetworkInformation) toInnerStruct() *innerFabricLocalNetwo
 		return nil
 	}
 	dst := innerFabricLocalNetworkInformation{}
-	s_799, _ := windows.UTF16PtrFromString(obj.NetworkName)
-	dst.NetworkName = s_799
+	s_604, _ := windows.UTF16PtrFromString(obj.NetworkName)
+	dst.NetworkName = s_604
 
 	dst.NetworkConfiguration = obj.NetworkConfiguration.toInnerStruct()
 	dst.NetworkStatus = obj.NetworkStatus
@@ -24770,8 +24413,6 @@ type innerFabricNetworkQueryResultList struct {
 func (obj *innerFabricNetworkQueryResultList) toGoStruct() []FabricNetworkInformation {
 	var dst []FabricNetworkInformation
 	{
-		var lst []FabricNetworkInformation
-
 		var innerlst []innerFabricNetworkInformation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -24780,10 +24421,9 @@ func (obj *innerFabricNetworkQueryResultList) toGoStruct() []FabricNetworkInform
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -24799,11 +24439,11 @@ func (obj *FabricNetworkApplicationQueryDescription) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := innerFabricNetworkApplicationQueryDescription{}
-	s_801, _ := windows.UTF16PtrFromString(obj.NetworkName)
-	dst.NetworkName = s_801
+	s_605, _ := windows.UTF16PtrFromString(obj.NetworkName)
+	dst.NetworkName = s_605
 
-	s_802, _ := windows.UTF16PtrFromString(obj.ApplicationNameFilter)
-	dst.ApplicationNameFilter = s_802
+	s_606, _ := windows.UTF16PtrFromString(obj.ApplicationNameFilter)
+	dst.ApplicationNameFilter = s_606
 
 	dst.PagingDescription = obj.PagingDescription.toInnerStruct()
 	return &dst
@@ -24836,8 +24476,8 @@ func (obj *FabricNetworkApplicationQueryResultItem) toInnerStruct() *innerFabric
 		return nil
 	}
 	dst := innerFabricNetworkApplicationQueryResultItem{}
-	s_803, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_803
+	s_607, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_607
 
 	return &dst
 }
@@ -24864,8 +24504,6 @@ type innerFabricNetworkApplicationQueryResultList struct {
 func (obj *innerFabricNetworkApplicationQueryResultList) toGoStruct() []FabricNetworkApplicationQueryResultItem {
 	var dst []FabricNetworkApplicationQueryResultItem
 	{
-		var lst []FabricNetworkApplicationQueryResultItem
-
 		var innerlst []innerFabricNetworkApplicationQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -24874,10 +24512,9 @@ func (obj *innerFabricNetworkApplicationQueryResultList) toGoStruct() []FabricNe
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -24893,11 +24530,11 @@ func (obj *FabricNetworkNodeQueryDescription) toInnerStruct() *innerFabricNetwor
 		return nil
 	}
 	dst := innerFabricNetworkNodeQueryDescription{}
-	s_805, _ := windows.UTF16PtrFromString(obj.NetworkName)
-	dst.NetworkName = s_805
+	s_608, _ := windows.UTF16PtrFromString(obj.NetworkName)
+	dst.NetworkName = s_608
 
-	s_806, _ := windows.UTF16PtrFromString(obj.NodeNameFilter)
-	dst.NodeNameFilter = s_806
+	s_609, _ := windows.UTF16PtrFromString(obj.NodeNameFilter)
+	dst.NodeNameFilter = s_609
 
 	dst.PagingDescription = obj.PagingDescription.toInnerStruct()
 	return &dst
@@ -24930,8 +24567,8 @@ func (obj *FabricNetworkNodeQueryResultItem) toInnerStruct() *innerFabricNetwork
 		return nil
 	}
 	dst := innerFabricNetworkNodeQueryResultItem{}
-	s_807, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_807
+	s_610, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_610
 
 	return &dst
 }
@@ -24958,8 +24595,6 @@ type innerFabricNetworkNodeQueryResultList struct {
 func (obj *innerFabricNetworkNodeQueryResultList) toGoStruct() []FabricNetworkNodeQueryResultItem {
 	var dst []FabricNetworkNodeQueryResultItem
 	{
-		var lst []FabricNetworkNodeQueryResultItem
-
 		var innerlst []innerFabricNetworkNodeQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -24968,10 +24603,9 @@ func (obj *innerFabricNetworkNodeQueryResultList) toGoStruct() []FabricNetworkNo
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -24986,8 +24620,8 @@ func (obj *FabricApplicationNetworkQueryDescription) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := innerFabricApplicationNetworkQueryDescription{}
-	s_809, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_809
+	s_611, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_611
 
 	dst.PagingDescription = obj.PagingDescription.toInnerStruct()
 	return &dst
@@ -25018,8 +24652,8 @@ func (obj *FabricApplicationNetworkQueryResultItem) toInnerStruct() *innerFabric
 		return nil
 	}
 	dst := innerFabricApplicationNetworkQueryResultItem{}
-	s_810, _ := windows.UTF16PtrFromString(obj.NetworkName)
-	dst.NetworkName = s_810
+	s_612, _ := windows.UTF16PtrFromString(obj.NetworkName)
+	dst.NetworkName = s_612
 
 	return &dst
 }
@@ -25046,8 +24680,6 @@ type innerFabricApplicationNetworkQueryResultList struct {
 func (obj *innerFabricApplicationNetworkQueryResultList) toGoStruct() []FabricApplicationNetworkQueryResultItem {
 	var dst []FabricApplicationNetworkQueryResultItem
 	{
-		var lst []FabricApplicationNetworkQueryResultItem
-
 		var innerlst []innerFabricApplicationNetworkQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -25056,10 +24688,9 @@ func (obj *innerFabricApplicationNetworkQueryResultList) toGoStruct() []FabricAp
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -25074,8 +24705,8 @@ func (obj *FabricDeployedNetworkQueryDescription) toInnerStruct() *innerFabricDe
 		return nil
 	}
 	dst := innerFabricDeployedNetworkQueryDescription{}
-	s_812, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_812
+	s_613, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_613
 
 	dst.PagingDescription = obj.PagingDescription.toInnerStruct()
 	return &dst
@@ -25106,8 +24737,8 @@ func (obj *FabricDeployedNetworkQueryResultItem) toInnerStruct() *innerFabricDep
 		return nil
 	}
 	dst := innerFabricDeployedNetworkQueryResultItem{}
-	s_813, _ := windows.UTF16PtrFromString(obj.NetworkName)
-	dst.NetworkName = s_813
+	s_614, _ := windows.UTF16PtrFromString(obj.NetworkName)
+	dst.NetworkName = s_614
 
 	return &dst
 }
@@ -25134,8 +24765,6 @@ type innerFabricDeployedNetworkQueryResultList struct {
 func (obj *innerFabricDeployedNetworkQueryResultList) toGoStruct() []FabricDeployedNetworkQueryResultItem {
 	var dst []FabricDeployedNetworkQueryResultItem
 	{
-		var lst []FabricDeployedNetworkQueryResultItem
-
 		var innerlst []innerFabricDeployedNetworkQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -25144,10 +24773,9 @@ func (obj *innerFabricDeployedNetworkQueryResultList) toGoStruct() []FabricDeplo
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }
@@ -25166,20 +24794,20 @@ func (obj *FabricDeployedNetworkCodePackageQueryDescription) toInnerStruct() *in
 		return nil
 	}
 	dst := innerFabricDeployedNetworkCodePackageQueryDescription{}
-	s_815, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_815
+	s_615, _ := windows.UTF16PtrFromString(obj.NodeName)
+	dst.NodeName = s_615
 
-	s_816, _ := windows.UTF16PtrFromString(obj.NetworkName)
-	dst.NetworkName = s_816
+	s_616, _ := windows.UTF16PtrFromString(obj.NetworkName)
+	dst.NetworkName = s_616
 
-	s_817, _ := windows.UTF16PtrFromString(obj.ApplicationNameFilter)
-	dst.ApplicationNameFilter = s_817
+	s_617, _ := windows.UTF16PtrFromString(obj.ApplicationNameFilter)
+	dst.ApplicationNameFilter = s_617
 
-	s_818, _ := windows.UTF16PtrFromString(obj.ServiceManifestNameFilter)
-	dst.ServiceManifestNameFilter = s_818
+	s_618, _ := windows.UTF16PtrFromString(obj.ServiceManifestNameFilter)
+	dst.ServiceManifestNameFilter = s_618
 
-	s_819, _ := windows.UTF16PtrFromString(obj.CodePackageNameFilter)
-	dst.CodePackageNameFilter = s_819
+	s_619, _ := windows.UTF16PtrFromString(obj.CodePackageNameFilter)
+	dst.CodePackageNameFilter = s_619
 
 	dst.PagingDescription = obj.PagingDescription.toInnerStruct()
 	return &dst
@@ -25225,29 +24853,29 @@ func (obj *FabricDeployedNetworkCodePackageQueryResultItem) toInnerStruct() *inn
 		return nil
 	}
 	dst := innerFabricDeployedNetworkCodePackageQueryResultItem{}
-	s_820, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_820
+	s_620, _ := windows.UTF16PtrFromString(obj.ApplicationName)
+	dst.ApplicationName = s_620
 
-	s_821, _ := windows.UTF16PtrFromString(obj.NetworkName)
-	dst.NetworkName = s_821
+	s_621, _ := windows.UTF16PtrFromString(obj.NetworkName)
+	dst.NetworkName = s_621
 
-	s_822, _ := windows.UTF16PtrFromString(obj.CodePackageName)
-	dst.CodePackageName = s_822
+	s_622, _ := windows.UTF16PtrFromString(obj.CodePackageName)
+	dst.CodePackageName = s_622
 
-	s_823, _ := windows.UTF16PtrFromString(obj.CodePackageVersion)
-	dst.CodePackageVersion = s_823
+	s_623, _ := windows.UTF16PtrFromString(obj.CodePackageVersion)
+	dst.CodePackageVersion = s_623
 
-	s_824, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_824
+	s_624, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
+	dst.ServiceManifestName = s_624
 
-	s_825, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	dst.ServicePackageActivationId = s_825
+	s_625, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
+	dst.ServicePackageActivationId = s_625
 
-	s_826, _ := windows.UTF16PtrFromString(obj.ContainerAddress)
-	dst.ContainerAddress = s_826
+	s_626, _ := windows.UTF16PtrFromString(obj.ContainerAddress)
+	dst.ContainerAddress = s_626
 
-	s_827, _ := windows.UTF16PtrFromString(obj.ContainerId)
-	dst.ContainerId = s_827
+	s_627, _ := windows.UTF16PtrFromString(obj.ContainerId)
+	dst.ContainerId = s_627
 
 	return &dst
 }
@@ -25288,8 +24916,6 @@ type innerFabricDeployedNetworkCodePackageQueryResultList struct {
 func (obj *innerFabricDeployedNetworkCodePackageQueryResultList) toGoStruct() []FabricDeployedNetworkCodePackageQueryResultItem {
 	var dst []FabricDeployedNetworkCodePackageQueryResultItem
 	{
-		var lst []FabricDeployedNetworkCodePackageQueryResultItem
-
 		var innerlst []innerFabricDeployedNetworkCodePackageQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Items), int(obj.Count))
 
@@ -25298,10 +24924,9 @@ func (obj *innerFabricDeployedNetworkCodePackageQueryResultList) toGoStruct() []
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			dst = append(dst, tmpitem)
 		}
 
-		dst = lst
 	}
 	return dst
 }

@@ -4,13 +4,32 @@ import (
 	"fmt"
 
 	"github.com/jd3nn1s/gomidl/ast"
+	"github.com/jd3nn1s/gomidl/scanner"
 )
+
+func extractSizeof(n *ast.StructNode) (fieldSize map[string]string, fieldIsSizeOf map[string]string) {
+	fieldSize = make(map[string]string)
+	fieldIsSizeOf = make(map[string]string)
+	for _, f := range n.Fields {
+		for _, a := range f.Attributes {
+			if a.Type == scanner.SIZE_IS {
+				fieldSize[f.Name] = a.Val
+				fieldIsSizeOf[a.Val] = f.Name
+				return
+			}
+		}
+	}
+
+	return
+}
 
 func (g *generator) generatePublicAndInnerStruct(n *ast.StructNode) {
 	publicTypeName := g.toGolangStructType(n.Name, false)
 	g.printfln("type %s struct {", publicTypeName)
 
 	simple := true
+
+	fieldSize, fieldIsSizeOf := extractSizeof(n)
 
 	for i := 0; i < len(n.Fields)-1; i++ {
 		cf := n.Fields[i]
@@ -21,16 +40,16 @@ func (g *generator) generatePublicAndInnerStruct(n *ast.StructNode) {
 			simple = false
 		}
 
-		ct := g.toGolangType(cf.Type, cf.Indirections, false)
-
 		// skip count
-		// if strings.HasPrefix(ct, "[]") {
-		if ct == "[]string" {
-			nf := n.Fields[i+1]
-			nt := g.toGolangType(nf.Type, nf.Indirections, false)
-			if nt == "uint32" || nt == "int32" {
-				continue
-			}
+		if _, ok := fieldIsSizeOf[cf.Name]; ok {
+			continue
+		}
+
+		var ct string
+		if _, ok := fieldSize[cf.Name]; ok {
+			ct = "[]" + g.toGolangType(cf.Type, cf.Indirections-1, false)
+		} else {
+			ct = g.toGolangType(cf.Type, cf.Indirections, false)
 		}
 
 		g.printfln("%s %s", cf.Name, ct)
@@ -85,6 +104,20 @@ func (g *generator) generatePublicAndInnerStruct(n *ast.StructNode) {
 
 		for i := 0; i < len(n.Fields)-1; i++ {
 			f := n.Fields[i]
+			sizeof := fieldIsSizeOf[f.Name]
+			if sizeof != "" {
+				// g.printfln("dst.%v = %v(len(obj.%v))", f.Name, g.toGolangType(f.Type, f.Indirections, false), sizeof)
+				continue
+			}
+
+			sizeis := fieldSize[f.Name]
+
+			if sizeis != "" {
+				// g.generatePointerToGolangSlice()
+				g.generateSliceToPointer(fmt.Sprintf("obj.%v", f.Name), fmt.Sprintf("dst.%v", sizeis), fmt.Sprintf("dst.%v", f.Name), f.Type)
+				continue
+			}
+
 			g.generateToInnerObject(fmt.Sprintf("obj.%v", f.Name), fmt.Sprintf("dst.%v", f.Name), f.Type, f.Indirections)
 		}
 
@@ -126,12 +159,24 @@ func (g *generator) generateInnerStruct(n *ast.StructNode) {
 		g.printfln("return dst")
 		g.printfln("}")
 	} else if !g.isInnerOnlyStruct(n.Name) {
+		fieldSize, fieldIsSizeOf := extractSizeof(n)
+
 		g.printfln("func (obj *%s) toGoStruct() *%v {", innerTypeName, publicTypeName)
 		g.printfln("if obj == nil { return nil}")
 		g.printfln("dst := %v{}", publicTypeName)
 
 		for i := 0; i < len(n.Fields)-1; i++ {
 			f := n.Fields[i]
+			if _, ok := fieldIsSizeOf[f.Name]; ok {
+				continue
+			}
+
+			sizeis := fieldSize[f.Name]
+			if sizeis != "" {
+				g.generatePointerToGolangSlice(fmt.Sprintf("dst.%v", f.Name), fmt.Sprintf("obj.%v", sizeis), fmt.Sprintf("obj.%v", f.Name), f.Type)
+				continue
+			}
+
 			g.generateToGolangObject(fmt.Sprintf("obj.%v", f.Name), fmt.Sprintf("dst.%v", f.Name), f.Type, f.Indirections)
 		}
 

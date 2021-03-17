@@ -8994,8 +8994,8 @@ func (v *comFabricApplicationManagementClient4) beginDeployServicePackageToNode(
 	p_2 = s_58
 
 	var p_3 *innerFabricPackageSharingPolicyList
+	lst_59 := &innerFabricPackageSharingPolicyList{}
 	{
-		lst := &innerFabricPackageSharingPolicyList{}
 
 		var tmp []innerFabricPackageSharingPolicy
 
@@ -9007,13 +9007,13 @@ func (v *comFabricApplicationManagementClient4) beginDeployServicePackageToNode(
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_59.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_59.Items = &tmp[0]
 		}
 
-		p_3 = lst
 	}
+	p_3 = lst_59
 	var p_4 *uint16
 	s_60, _ := windows.UTF16PtrFromString(nodeName)
 	p_4 = s_60
@@ -15409,8 +15409,6 @@ func (v *comFabricGetRepairTaskListResult) GetTasks() (rt []FabricRepairTask, er
 	tmp := (*innerFabricRepairTaskList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricRepairTask
-
 		var innerlst []innerFabricRepairTask
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -15419,10 +15417,9 @@ func (v *comFabricGetRepairTaskListResult) GetTasks() (rt []FabricRepairTask, er
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -16948,8 +16945,6 @@ func (v *comFabricGetNodeListResult) GetNodeList() (rt []FabricNodeQueryResultIt
 	tmp := (*innerFabricNodeQueryResultList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricNodeQueryResultItem
-
 		var innerlst []innerFabricNodeQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -16958,10 +16953,9 @@ func (v *comFabricGetNodeListResult) GetNodeList() (rt []FabricNodeQueryResultIt
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -16995,8 +16989,6 @@ func (v *comFabricGetApplicationTypeListResult) GetApplicationTypeList() (rt []F
 	tmp := (*innerFabricApplicationTypeQueryResultList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricApplicationTypeQueryResultItem
-
 		var innerlst []innerFabricApplicationTypeQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -17005,10 +16997,9 @@ func (v *comFabricGetApplicationTypeListResult) GetApplicationTypeList() (rt []F
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -17043,8 +17034,6 @@ func (v *comFabricGetApplicationTypePagedListResult) GetApplicationTypePagedList
 	tmp := (*innerFabricApplicationTypeQueryResultList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricApplicationTypeQueryResultItem
-
 		var innerlst []innerFabricApplicationTypeQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -17053,10 +17042,9 @@ func (v *comFabricGetApplicationTypePagedListResult) GetApplicationTypePagedList
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -17108,8 +17096,6 @@ func (v *comFabricGetApplicationListResult) GetApplicationList() (rt []FabricApp
 	tmp := (*innerFabricApplicationQueryResultList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricApplicationQueryResultItem
-
 		var innerlst []innerFabricApplicationQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -17118,10 +17104,9 @@ func (v *comFabricGetApplicationListResult) GetApplicationList() (rt []FabricApp
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -17155,8 +17140,6 @@ func (v *comFabricGetServiceTypeListResult) GetServiceTypeList() (rt []FabricSer
 	tmp := (*innerFabricServiceTypeQueryResultList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricServiceTypeQueryResultItem
-
 		var innerlst []innerFabricServiceTypeQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -17165,10 +17148,9 @@ func (v *comFabricGetServiceTypeListResult) GetServiceTypeList() (rt []FabricSer
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -17202,8 +17184,6 @@ func (v *comFabricGetServiceGroupMemberTypeListResult) GetServiceGroupMemberType
 	tmp := (*innerFabricServiceGroupMemberTypeQueryResultList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricServiceGroupMemberTypeQueryResultItem
-
 		var innerlst []innerFabricServiceGroupMemberTypeQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -17212,10 +17192,9 @@ func (v *comFabricGetServiceGroupMemberTypeListResult) GetServiceGroupMemberType
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -17249,8 +17228,6 @@ func (v *comFabricGetServiceListResult) GetServiceList() (rt []FabricServiceQuer
 	tmp := (*innerFabricServiceQueryResultList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricServiceQueryResultItem
-
 		var innerlst []innerFabricServiceQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -17259,10 +17236,9 @@ func (v *comFabricGetServiceListResult) GetServiceList() (rt []FabricServiceQuer
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -17296,8 +17272,6 @@ func (v *comFabricGetServiceGroupMemberListResult) GetServiceGroupMemberList() (
 	tmp := (*innerFabricServiceGroupMemberQueryResultList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricServiceGroupMemberQueryResultItem
-
 		var innerlst []innerFabricServiceGroupMemberQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -17306,10 +17280,9 @@ func (v *comFabricGetServiceGroupMemberListResult) GetServiceGroupMemberList() (
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -17343,8 +17316,6 @@ func (v *comFabricGetPartitionListResult) GetPartitionList() (rt []FabricService
 	tmp := (*innerFabricServicePartitionQueryResultList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricServicePartitionQueryResultItem
-
 		var innerlst []innerFabricServicePartitionQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -17353,10 +17324,9 @@ func (v *comFabricGetPartitionListResult) GetPartitionList() (rt []FabricService
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -17422,8 +17392,6 @@ func (v *comFabricGetReplicaListResult) GetReplicaList() (rt []FabricServiceRepl
 	tmp := (*innerFabricServiceReplicaQueryResultList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricServiceReplicaQueryResultItem
-
 		var innerlst []innerFabricServiceReplicaQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -17432,10 +17400,9 @@ func (v *comFabricGetReplicaListResult) GetReplicaList() (rt []FabricServiceRepl
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -17469,8 +17436,6 @@ func (v *comFabricGetDeployedApplicationListResult) GetDeployedApplicationList()
 	tmp := (*innerFabricDeployedApplicationQueryResultList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricDeployedApplicationQueryResultItem
-
 		var innerlst []innerFabricDeployedApplicationQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -17479,10 +17444,9 @@ func (v *comFabricGetDeployedApplicationListResult) GetDeployedApplicationList()
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -17517,8 +17481,6 @@ func (v *comFabricGetDeployedApplicationPagedListResult) GetDeployedApplicationP
 	tmp := (*innerFabricDeployedApplicationQueryResultList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricDeployedApplicationQueryResultItem
-
 		var innerlst []innerFabricDeployedApplicationQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -17527,10 +17489,9 @@ func (v *comFabricGetDeployedApplicationPagedListResult) GetDeployedApplicationP
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -17582,8 +17543,6 @@ func (v *comFabricGetDeployedServicePackageListResult) GetDeployedServicePackage
 	tmp := (*innerFabricDeployedServicePackageQueryResultList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricDeployedServicePackageQueryResultItem
-
 		var innerlst []innerFabricDeployedServicePackageQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -17592,10 +17551,9 @@ func (v *comFabricGetDeployedServicePackageListResult) GetDeployedServicePackage
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -17629,8 +17587,6 @@ func (v *comFabricGetDeployedServiceTypeListResult) GetDeployedServiceTypeList()
 	tmp := (*innerFabricDeployedServiceTypeQueryResultList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricDeployedServiceTypeQueryResultItem
-
 		var innerlst []innerFabricDeployedServiceTypeQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -17639,10 +17595,9 @@ func (v *comFabricGetDeployedServiceTypeListResult) GetDeployedServiceTypeList()
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -17676,8 +17631,6 @@ func (v *comFabricGetDeployedCodePackageListResult) GetDeployedCodePackageList()
 	tmp := (*innerFabricDeployedCodePackageQueryResultList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricDeployedCodePackageQueryResultItem
-
 		var innerlst []innerFabricDeployedCodePackageQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -17686,10 +17639,9 @@ func (v *comFabricGetDeployedCodePackageListResult) GetDeployedCodePackageList()
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -17723,8 +17675,6 @@ func (v *comFabricGetDeployedReplicaListResult) GetDeployedReplicaList() (rt []F
 	tmp := (*innerFabricDeployedServiceReplicaQueryResultList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricDeployedServiceReplicaQueryResultItem
-
 		var innerlst []innerFabricDeployedServiceReplicaQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -17733,10 +17683,9 @@ func (v *comFabricGetDeployedReplicaListResult) GetDeployedReplicaList() (rt []F
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -17802,8 +17751,6 @@ func (v *comFabricGetProvisionedCodeVersionListResult) GetProvisionedCodeVersion
 	tmp := (*innerFabricProvisionedCodeVersionQueryResultList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricProvisionedCodeVersionQueryResultItem
-
 		var innerlst []innerFabricProvisionedCodeVersionQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -17812,10 +17759,9 @@ func (v *comFabricGetProvisionedCodeVersionListResult) GetProvisionedCodeVersion
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -17881,8 +17827,6 @@ func (v *comFabricGetProvisionedConfigVersionListResult) GetProvisionedConfigVer
 	tmp := (*innerFabricProvisionedConfigVersionQueryResultList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricProvisionedConfigVersionQueryResultItem
-
 		var innerlst []innerFabricProvisionedConfigVersionQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -17891,10 +17835,9 @@ func (v *comFabricGetProvisionedConfigVersionListResult) GetProvisionedConfigVer
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -18472,8 +18415,6 @@ func (v *comFabricTestCommandStatusResult) GetResult() (rt []interface{}, err er
 	tmp := (*innerTestCommandQueryResultList)(unsafe.Pointer(hr))
 
 	{
-		var lst []interface{}
-
 		var innerlst []unsafe.Pointer
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -18482,10 +18423,9 @@ func (v *comFabricTestCommandStatusResult) GetResult() (rt []interface{}, err er
 
 			tmpitem = fromUnsafePointer(item)
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -18743,8 +18683,6 @@ func (v *comFabricSecretsResult) GetSecrets() (rt []FabricSecret, err error) {
 	tmp := (*innerFabricSecretList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricSecret
-
 		var innerlst []innerFabricSecret
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -18753,10 +18691,9 @@ func (v *comFabricSecretsResult) GetSecrets() (rt []FabricSecret, err error) {
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -18790,8 +18727,6 @@ func (v *comFabricSecretReferencesResult) GetSecretReferences() (rt []FabricSecr
 	tmp := (*innerFabricSecretReferenceList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricSecretReference
-
 		var innerlst []innerFabricSecretReference
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -18800,10 +18735,9 @@ func (v *comFabricSecretReferencesResult) GetSecretReferences() (rt []FabricSecr
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -18835,8 +18769,8 @@ func (v *comFabricSecretStoreClient) beginGetSecrets(
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricSecretReferenceList
+	lst_94 := &innerFabricSecretReferenceList{}
 	{
-		lst := &innerFabricSecretReferenceList{}
 
 		var tmp []innerFabricSecretReference
 
@@ -18848,13 +18782,13 @@ func (v *comFabricSecretStoreClient) beginGetSecrets(
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_94.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_94.Items = &tmp[0]
 		}
 
-		p_0 = lst
 	}
+	p_0 = lst_94
 	p_1 := 0
 	if includeValue {
 		p_1 = 1
@@ -18905,8 +18839,8 @@ func (v *comFabricSecretStoreClient) beginSetSecrets(
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricSecretList
+	lst_95 := &innerFabricSecretList{}
 	{
-		lst := &innerFabricSecretList{}
 
 		var tmp []innerFabricSecret
 
@@ -18918,13 +18852,13 @@ func (v *comFabricSecretStoreClient) beginSetSecrets(
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_95.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_95.Items = &tmp[0]
 		}
 
-		p_0 = lst
 	}
+	p_0 = lst_95
 	var p_3 *comIFabricAsyncOperationContext
 	defer func() {
 		context = p_3
@@ -18971,8 +18905,8 @@ func (v *comFabricSecretStoreClient) beginRemoveSecrets(
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricSecretReferenceList
+	lst_96 := &innerFabricSecretReferenceList{}
 	{
-		lst := &innerFabricSecretReferenceList{}
 
 		var tmp []innerFabricSecretReference
 
@@ -18984,13 +18918,13 @@ func (v *comFabricSecretStoreClient) beginRemoveSecrets(
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_96.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_96.Items = &tmp[0]
 		}
 
-		p_0 = lst
 	}
+	p_0 = lst_96
 	var p_3 *comIFabricAsyncOperationContext
 	defer func() {
 		context = p_3
@@ -19037,8 +18971,8 @@ func (v *comFabricSecretStoreClient) beginGetSecretVersions(
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricSecretReferenceList
+	lst_97 := &innerFabricSecretReferenceList{}
 	{
-		lst := &innerFabricSecretReferenceList{}
 
 		var tmp []innerFabricSecretReference
 
@@ -19050,13 +18984,13 @@ func (v *comFabricSecretStoreClient) beginGetSecretVersions(
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_97.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_97.Items = &tmp[0]
 		}
 
-		p_0 = lst
 	}
+	p_0 = lst_97
 	var p_3 *comIFabricAsyncOperationContext
 	defer func() {
 		context = p_3
@@ -19128,8 +19062,6 @@ func (v *comFabricGetNetworkListResult) GetNetworkList() (rt []FabricNetworkInfo
 	tmp := (*innerFabricNetworkQueryResultList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricNetworkInformation
-
 		var innerlst []innerFabricNetworkInformation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -19138,10 +19070,9 @@ func (v *comFabricGetNetworkListResult) GetNetworkList() (rt []FabricNetworkInfo
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -19194,8 +19125,6 @@ func (v *comFabricGetNetworkApplicationListResult) GetNetworkApplicationList() (
 	tmp := (*innerFabricNetworkApplicationQueryResultList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricNetworkApplicationQueryResultItem
-
 		var innerlst []innerFabricNetworkApplicationQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -19204,10 +19133,9 @@ func (v *comFabricGetNetworkApplicationListResult) GetNetworkApplicationList() (
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -19260,8 +19188,6 @@ func (v *comFabricGetNetworkNodeListResult) GetNetworkNodeList() (rt []FabricNet
 	tmp := (*innerFabricNetworkNodeQueryResultList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricNetworkNodeQueryResultItem
-
 		var innerlst []innerFabricNetworkNodeQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -19270,10 +19196,9 @@ func (v *comFabricGetNetworkNodeListResult) GetNetworkNodeList() (rt []FabricNet
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -19326,8 +19251,6 @@ func (v *comFabricGetApplicationNetworkListResult) GetApplicationNetworkList() (
 	tmp := (*innerFabricApplicationNetworkQueryResultList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricApplicationNetworkQueryResultItem
-
 		var innerlst []innerFabricApplicationNetworkQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -19336,10 +19259,9 @@ func (v *comFabricGetApplicationNetworkListResult) GetApplicationNetworkList() (
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -19392,8 +19314,6 @@ func (v *comFabricGetDeployedNetworkListResult) GetDeployedNetworkList() (rt []F
 	tmp := (*innerFabricDeployedNetworkQueryResultList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricDeployedNetworkQueryResultItem
-
 		var innerlst []innerFabricDeployedNetworkQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -19402,10 +19322,9 @@ func (v *comFabricGetDeployedNetworkListResult) GetDeployedNetworkList() (rt []F
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -19458,8 +19377,6 @@ func (v *comFabricGetDeployedNetworkCodePackageListResult) GetDeployedNetworkCod
 	tmp := (*innerFabricDeployedNetworkCodePackageQueryResultList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricDeployedNetworkCodePackageQueryResultItem
-
 		var innerlst []innerFabricDeployedNetworkCodePackageQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -19468,10 +19385,9 @@ func (v *comFabricGetDeployedNetworkCodePackageListResult) GetDeployedNetworkCod
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }

@@ -2665,8 +2665,6 @@ func (v *comFabricCodePackageActivationContext) GetServiceTypes() (rt []FabricSe
 	tmp := (*innerFabricServiceTypeDescriptionList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricServiceTypeDescription
-
 		var innerlst []innerFabricServiceTypeDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -2675,10 +2673,9 @@ func (v *comFabricCodePackageActivationContext) GetServiceTypes() (rt []FabricSe
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -2698,8 +2695,6 @@ func (v *comFabricCodePackageActivationContext) GetServiceGroupTypes() (rt []Fab
 	tmp := (*innerFabricServiceGroupTypeDescriptionList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricServiceGroupTypeDescription
-
 		var innerlst []innerFabricServiceGroupTypeDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -2708,10 +2703,9 @@ func (v *comFabricCodePackageActivationContext) GetServiceGroupTypes() (rt []Fab
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -2749,8 +2743,6 @@ func (v *comFabricCodePackageActivationContext) GetServiceEndpointResources() (r
 	tmp := (*innerFabricEndpointResourceDescriptionList)(unsafe.Pointer(hr))
 
 	{
-		var lst []FabricEndpointResourceDescription
-
 		var innerlst []innerFabricEndpointResourceDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
 
@@ -2759,10 +2751,9 @@ func (v *comFabricCodePackageActivationContext) GetServiceEndpointResources() (r
 
 			tmpitem = *item.toGoStruct()
 
-			lst = append(lst, tmpitem)
+			rt = append(rt, tmpitem)
 		}
 
-		rt = lst
 	}
 	return
 }
@@ -2770,8 +2761,8 @@ func (v *comFabricCodePackageActivationContext) GetServiceEndpointResource(
 	serviceEndpointResourceName string,
 ) (bufferedValue *FabricEndpointResourceDescription, err error) {
 	var p_0 *uint16
-	s_18, _ := windows.UTF16PtrFromString(serviceEndpointResourceName)
-	p_0 = s_18
+	s_15, _ := windows.UTF16PtrFromString(serviceEndpointResourceName)
+	p_0 = s_15
 
 	var p_1 *innerFabricEndpointResourceDescription
 	defer func() {
@@ -2848,8 +2839,8 @@ func (v *comFabricCodePackageActivationContext) GetCodePackage(
 	codePackageName string,
 ) (codePackage *comFabricCodePackage, err error) {
 	var p_0 *uint16
-	s_19, _ := windows.UTF16PtrFromString(codePackageName)
-	p_0 = s_19
+	s_16, _ := windows.UTF16PtrFromString(codePackageName)
+	p_0 = s_16
 
 	var p_1 *comFabricCodePackage
 	defer func() {
@@ -2872,8 +2863,8 @@ func (v *comFabricCodePackageActivationContext) GetConfigurationPackage(
 	configPackageName string,
 ) (configPackage *comFabricConfigurationPackage, err error) {
 	var p_0 *uint16
-	s_20, _ := windows.UTF16PtrFromString(configPackageName)
-	p_0 = s_20
+	s_17, _ := windows.UTF16PtrFromString(configPackageName)
+	p_0 = s_17
 
 	var p_1 *comFabricConfigurationPackage
 	defer func() {
@@ -2896,8 +2887,8 @@ func (v *comFabricCodePackageActivationContext) GetDataPackage(
 	dataPackageName string,
 ) (dataPackage *comFabricDataPackage, err error) {
 	var p_0 *uint16
-	s_21, _ := windows.UTF16PtrFromString(dataPackageName)
-	p_0 = s_21
+	s_18, _ := windows.UTF16PtrFromString(dataPackageName)
+	p_0 = s_18
 
 	var p_1 *comFabricDataPackage
 	defer func() {
@@ -3331,8 +3322,8 @@ func (v *comFabricCodePackageActivationContext6) GetDirectory(
 	logicalDirectoryName string,
 ) (directoryPath *comFabricStringResult, err error) {
 	var p_0 *uint16
-	s_22, _ := windows.UTF16PtrFromString(logicalDirectoryName)
-	p_0 = s_22
+	s_19, _ := windows.UTF16PtrFromString(logicalDirectoryName)
+	p_0 = s_19
 
 	var p_1 *comFabricStringResult
 	defer func() {
@@ -3530,8 +3521,8 @@ func (v *comFabricConfigurationPackage) GetSection(
 	sectionName string,
 ) (bufferedValue *FabricConfigurationSection, err error) {
 	var p_0 *uint16
-	s_23, _ := windows.UTF16PtrFromString(sectionName)
-	p_0 = s_23
+	s_20, _ := windows.UTF16PtrFromString(sectionName)
+	p_0 = s_20
 
 	var p_1 *innerFabricConfigurationSection
 	defer func() {
@@ -3555,12 +3546,12 @@ func (v *comFabricConfigurationPackage) GetValue(
 	parameterName string,
 ) (isEncrypted bool, bufferedValue string, err error) {
 	var p_0 *uint16
-	s_24, _ := windows.UTF16PtrFromString(sectionName)
-	p_0 = s_24
+	s_21, _ := windows.UTF16PtrFromString(sectionName)
+	p_0 = s_21
 
 	var p_1 *uint16
-	s_25, _ := windows.UTF16PtrFromString(parameterName)
-	p_1 = s_25
+	s_22, _ := windows.UTF16PtrFromString(parameterName)
+	p_1 = s_22
 
 	var p_2 bool
 	defer func() {
@@ -3590,8 +3581,8 @@ func (v *comFabricConfigurationPackage) DecryptValue(
 	encryptedValue string,
 ) (decryptedValue *comFabricStringResult, err error) {
 	var p_0 *uint16
-	s_26, _ := windows.UTF16PtrFromString(encryptedValue)
-	p_0 = s_26
+	s_23, _ := windows.UTF16PtrFromString(encryptedValue)
+	p_0 = s_23
 
 	var p_1 *comFabricStringResult
 	defer func() {
@@ -3629,18 +3620,16 @@ func (v *comFabricConfigurationPackage2) GetValues(
 	parameterPrefix string,
 ) (bufferedValue []FabricConfigurationParameter, err error) {
 	var p_0 *uint16
-	s_27, _ := windows.UTF16PtrFromString(sectionName)
-	p_0 = s_27
+	s_24, _ := windows.UTF16PtrFromString(sectionName)
+	p_0 = s_24
 
 	var p_1 *uint16
-	s_28, _ := windows.UTF16PtrFromString(parameterPrefix)
-	p_1 = s_28
+	s_25, _ := windows.UTF16PtrFromString(parameterPrefix)
+	p_1 = s_25
 
 	var p_2 *innerFabricConfigurationParameterList
 	defer func() {
 		{
-			var lst []FabricConfigurationParameter
-
 			var innerlst []innerFabricConfigurationParameter
 			sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(p_2.Items), int(p_2.Count))
 
@@ -3649,10 +3638,9 @@ func (v *comFabricConfigurationPackage2) GetValues(
 
 				tmpitem = *item.toGoStruct()
 
-				lst = append(lst, tmpitem)
+				bufferedValue = append(bufferedValue, tmpitem)
 			}
 
-			bufferedValue = lst
 		}
 	}()
 	hr, _, err1 := syscall.Syscall6(
@@ -4213,8 +4201,8 @@ func (v *comFabricKeyValueStoreReplica) Add(
 	value *byte,
 ) (err error) {
 	var p_1 *uint16
-	s_30, _ := windows.UTF16PtrFromString(key)
-	p_1 = s_30
+	s_26, _ := windows.UTF16PtrFromString(key)
+	p_1 = s_26
 
 	hr, _, err1 := syscall.Syscall6(
 		v.vtable().Add,
@@ -4238,8 +4226,8 @@ func (v *comFabricKeyValueStoreReplica) Remove(
 	checkSequenceNumber int64,
 ) (err error) {
 	var p_1 *uint16
-	s_31, _ := windows.UTF16PtrFromString(key)
-	p_1 = s_31
+	s_27, _ := windows.UTF16PtrFromString(key)
+	p_1 = s_27
 
 	hr, _, err1 := syscall.Syscall6(
 		v.vtable().Remove,
@@ -4265,8 +4253,8 @@ func (v *comFabricKeyValueStoreReplica) Update(
 	checkSequenceNumber int64,
 ) (err error) {
 	var p_1 *uint16
-	s_32, _ := windows.UTF16PtrFromString(key)
-	p_1 = s_32
+	s_28, _ := windows.UTF16PtrFromString(key)
+	p_1 = s_28
 
 	hr, _, err1 := syscall.Syscall6(
 		v.vtable().Update,
@@ -4289,8 +4277,8 @@ func (v *comFabricKeyValueStoreReplica) Get(
 	key string,
 ) (result *comFabricKeyValueStoreItemResult, err error) {
 	var p_1 *uint16
-	s_33, _ := windows.UTF16PtrFromString(key)
-	p_1 = s_33
+	s_29, _ := windows.UTF16PtrFromString(key)
+	p_1 = s_29
 
 	var p_2 *comFabricKeyValueStoreItemResult
 	defer func() {
@@ -4317,8 +4305,8 @@ func (v *comFabricKeyValueStoreReplica) GetMetadata(
 	key string,
 ) (result *comFabricKeyValueStoreItemMetadataResult, err error) {
 	var p_1 *uint16
-	s_34, _ := windows.UTF16PtrFromString(key)
-	p_1 = s_34
+	s_30, _ := windows.UTF16PtrFromString(key)
+	p_1 = s_30
 
 	var p_2 *comFabricKeyValueStoreItemMetadataResult
 	defer func() {
@@ -4345,8 +4333,8 @@ func (v *comFabricKeyValueStoreReplica) Contains(
 	key string,
 ) (result bool, err error) {
 	var p_1 *uint16
-	s_35, _ := windows.UTF16PtrFromString(key)
-	p_1 = s_35
+	s_31, _ := windows.UTF16PtrFromString(key)
+	p_1 = s_31
 
 	var p_2 bool
 	defer func() {
@@ -4393,8 +4381,8 @@ func (v *comFabricKeyValueStoreReplica) EnumerateByKey(
 	keyPrefix string,
 ) (result *comFabricKeyValueStoreItemEnumerator, err error) {
 	var p_1 *uint16
-	s_36, _ := windows.UTF16PtrFromString(keyPrefix)
-	p_1 = s_36
+	s_32, _ := windows.UTF16PtrFromString(keyPrefix)
+	p_1 = s_32
 
 	var p_2 *comFabricKeyValueStoreItemEnumerator
 	defer func() {
@@ -4441,8 +4429,8 @@ func (v *comFabricKeyValueStoreReplica) EnumerateMetadataByKey(
 	keyPrefix string,
 ) (result *comFabricKeyValueStoreItemMetadataEnumerator, err error) {
 	var p_1 *uint16
-	s_37, _ := windows.UTF16PtrFromString(keyPrefix)
-	p_1 = s_37
+	s_33, _ := windows.UTF16PtrFromString(keyPrefix)
+	p_1 = s_33
 
 	var p_2 *comFabricKeyValueStoreItemMetadataEnumerator
 	defer func() {
@@ -4484,8 +4472,8 @@ func (v *comFabricKeyValueStoreReplica2) Backup(
 	backupDirectory string,
 ) (err error) {
 	var p_0 *uint16
-	s_38, _ := windows.UTF16PtrFromString(backupDirectory)
-	p_0 = s_38
+	s_34, _ := windows.UTF16PtrFromString(backupDirectory)
+	p_0 = s_34
 
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().Backup,
@@ -4504,8 +4492,8 @@ func (v *comFabricKeyValueStoreReplica2) Restore(
 	backupDirectory string,
 ) (err error) {
 	var p_0 *uint16
-	s_39, _ := windows.UTF16PtrFromString(backupDirectory)
-	p_0 = s_39
+	s_35, _ := windows.UTF16PtrFromString(backupDirectory)
+	p_0 = s_35
 
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().Restore,
@@ -4564,8 +4552,8 @@ func (v *comFabricKeyValueStoreReplica3) beginBackup(
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_40, _ := windows.UTF16PtrFromString(backupDirectory)
-	p_0 = s_40
+	s_36, _ := windows.UTF16PtrFromString(backupDirectory)
+	p_0 = s_36
 
 	var p_4 *comIFabricAsyncOperationContext
 	defer func() {
@@ -4623,8 +4611,8 @@ func (v *comFabricKeyValueStoreReplica4) beginRestore(
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_41, _ := windows.UTF16PtrFromString(backupDirectory)
-	p_0 = s_41
+	s_37, _ := windows.UTF16PtrFromString(backupDirectory)
+	p_0 = s_37
 
 	var p_2 *comIFabricAsyncOperationContext
 	defer func() {
@@ -4689,8 +4677,8 @@ func (v *comFabricKeyValueStoreReplica5) TryAdd(
 	value *byte,
 ) (added bool, err error) {
 	var p_1 *uint16
-	s_42, _ := windows.UTF16PtrFromString(key)
-	p_1 = s_42
+	s_38, _ := windows.UTF16PtrFromString(key)
+	p_1 = s_38
 
 	var p_4 bool
 	defer func() {
@@ -4718,8 +4706,8 @@ func (v *comFabricKeyValueStoreReplica5) TryRemove(
 	checkSequenceNumber int64,
 ) (exists bool, err error) {
 	var p_1 *uint16
-	s_43, _ := windows.UTF16PtrFromString(key)
-	p_1 = s_43
+	s_39, _ := windows.UTF16PtrFromString(key)
+	p_1 = s_39
 
 	var p_3 bool
 	defer func() {
@@ -4749,8 +4737,8 @@ func (v *comFabricKeyValueStoreReplica5) TryUpdate(
 	checkSequenceNumber int64,
 ) (exists bool, err error) {
 	var p_1 *uint16
-	s_44, _ := windows.UTF16PtrFromString(key)
-	p_1 = s_44
+	s_40, _ := windows.UTF16PtrFromString(key)
+	p_1 = s_40
 
 	var p_5 bool
 	defer func() {
@@ -4780,8 +4768,8 @@ func (v *comFabricKeyValueStoreReplica5) TryGet(
 	key string,
 ) (result *comFabricKeyValueStoreItemResult, err error) {
 	var p_1 *uint16
-	s_45, _ := windows.UTF16PtrFromString(key)
-	p_1 = s_45
+	s_41, _ := windows.UTF16PtrFromString(key)
+	p_1 = s_41
 
 	var p_2 *comFabricKeyValueStoreItemResult
 	defer func() {
@@ -4808,8 +4796,8 @@ func (v *comFabricKeyValueStoreReplica5) TryGetMetadata(
 	key string,
 ) (result *comFabricKeyValueStoreItemMetadataResult, err error) {
 	var p_1 *uint16
-	s_46, _ := windows.UTF16PtrFromString(key)
-	p_1 = s_46
+	s_42, _ := windows.UTF16PtrFromString(key)
+	p_1 = s_42
 
 	var p_2 *comFabricKeyValueStoreItemMetadataResult
 	defer func() {
@@ -4837,8 +4825,8 @@ func (v *comFabricKeyValueStoreReplica5) EnumerateByKey2(
 	strictPrefix bool,
 ) (result *comFabricKeyValueStoreItemEnumerator, err error) {
 	var p_1 *uint16
-	s_47, _ := windows.UTF16PtrFromString(keyPrefix)
-	p_1 = s_47
+	s_43, _ := windows.UTF16PtrFromString(keyPrefix)
+	p_1 = s_43
 
 	p_2 := 0
 	if strictPrefix {
@@ -4870,8 +4858,8 @@ func (v *comFabricKeyValueStoreReplica5) EnumerateMetadataByKey2(
 	strictPrefix bool,
 ) (result *comFabricKeyValueStoreItemMetadataEnumerator, err error) {
 	var p_1 *uint16
-	s_48, _ := windows.UTF16PtrFromString(keyPrefix)
-	p_1 = s_48
+	s_44, _ := windows.UTF16PtrFromString(keyPrefix)
+	p_1 = s_44
 
 	p_2 := 0
 	if strictPrefix {
@@ -4917,8 +4905,8 @@ func (v *comFabricKeyValueStoreReplica6) beginRestore2(
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_49, _ := windows.UTF16PtrFromString(backupDirectory)
-	p_0 = s_49
+	s_45, _ := windows.UTF16PtrFromString(backupDirectory)
+	p_0 = s_45
 
 	var p_1 *innerFabricKeyValueStoreRestoreSettings
 	p_1 = settings.toInnerStruct()
@@ -4961,8 +4949,8 @@ func (v *comFabricKeyValueStoreEnumerator) EnumerateByKey(
 	keyPrefix string,
 ) (result *comFabricKeyValueStoreItemEnumerator, err error) {
 	var p_0 *uint16
-	s_50, _ := windows.UTF16PtrFromString(keyPrefix)
-	p_0 = s_50
+	s_46, _ := windows.UTF16PtrFromString(keyPrefix)
+	p_0 = s_46
 
 	var p_1 *comFabricKeyValueStoreItemEnumerator
 	defer func() {
@@ -4985,8 +4973,8 @@ func (v *comFabricKeyValueStoreEnumerator) EnumerateMetadataByKey(
 	keyPrefix string,
 ) (result *comFabricKeyValueStoreItemMetadataEnumerator, err error) {
 	var p_0 *uint16
-	s_51, _ := windows.UTF16PtrFromString(keyPrefix)
-	p_0 = s_51
+	s_47, _ := windows.UTF16PtrFromString(keyPrefix)
+	p_0 = s_47
 
 	var p_1 *comFabricKeyValueStoreItemMetadataEnumerator
 	defer func() {
@@ -5025,8 +5013,8 @@ func (v *comFabricKeyValueStoreEnumerator2) EnumerateByKey2(
 	strictPrefix bool,
 ) (result *comFabricKeyValueStoreItemEnumerator, err error) {
 	var p_0 *uint16
-	s_52, _ := windows.UTF16PtrFromString(keyPrefix)
-	p_0 = s_52
+	s_48, _ := windows.UTF16PtrFromString(keyPrefix)
+	p_0 = s_48
 
 	p_1 := 0
 	if strictPrefix {
@@ -5057,8 +5045,8 @@ func (v *comFabricKeyValueStoreEnumerator2) EnumerateMetadataByKey2(
 	strictPrefix bool,
 ) (result *comFabricKeyValueStoreItemMetadataEnumerator, err error) {
 	var p_0 *uint16
-	s_53, _ := windows.UTF16PtrFromString(keyPrefix)
-	p_0 = s_53
+	s_49, _ := windows.UTF16PtrFromString(keyPrefix)
+	p_0 = s_49
 
 	p_1 := 0
 	if strictPrefix {
@@ -5675,8 +5663,8 @@ func (v *comFabricNodeContextResult2) GetDirectory(
 	logicalDirectoryName string,
 ) (directoryPath *comFabricStringResult, err error) {
 	var p_0 *uint16
-	s_54, _ := windows.UTF16PtrFromString(logicalDirectoryName)
-	p_0 = s_54
+	s_50, _ := windows.UTF16PtrFromString(logicalDirectoryName)
+	p_0 = s_50
 
 	var p_1 *comFabricStringResult
 	defer func() {
@@ -5818,27 +5806,27 @@ func (v *comFabricCodePackageActivator) beginActivateCodePackage(
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricStringList
+	lst_51 := &innerFabricStringList{}
 	{
-		lst := &innerFabricStringList{}
 
 		var tmp []*uint16
 
 		for _, item := range codePackageNames {
 			var tmpitem *uint16
 
-			s_56, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_56
+			s_52, _ := windows.UTF16PtrFromString(item)
+			tmpitem = s_52
 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_51.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_51.Items = &tmp[0]
 		}
 
-		p_0 = lst
 	}
+	p_0 = lst_51
 	var p_1 *innerFabricStringMap
 	{
 		mapobj := &innerFabricStringMap{}
@@ -5848,11 +5836,11 @@ func (v *comFabricCodePackageActivator) beginActivateCodePackage(
 		for k, v := range environment {
 			kv := innerFabricApplicationParameter{}
 
-			s_58, _ := windows.UTF16PtrFromString(k)
-			kv.Name = s_58
+			s_54, _ := windows.UTF16PtrFromString(k)
+			kv.Name = s_54
 
-			s_59, _ := windows.UTF16PtrFromString(v)
-			kv.Value = s_59
+			s_55, _ := windows.UTF16PtrFromString(v)
+			kv.Value = s_55
 
 			tmp = append(tmp, kv)
 		}
@@ -5906,27 +5894,27 @@ func (v *comFabricCodePackageActivator) beginDeactivateCodePackage(
 	callback *comIFabricAsyncOperationCallback,
 ) (context *comIFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricStringList
+	lst_56 := &innerFabricStringList{}
 	{
-		lst := &innerFabricStringList{}
 
 		var tmp []*uint16
 
 		for _, item := range codePackageNames {
 			var tmpitem *uint16
 
-			s_61, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_61
+			s_57, _ := windows.UTF16PtrFromString(item)
+			tmpitem = s_57
 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_56.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_56.Items = &tmp[0]
 		}
 
-		p_0 = lst
 	}
+	p_0 = lst_56
 	var p_3 *comIFabricAsyncOperationContext
 	defer func() {
 		context = p_3
@@ -5967,27 +5955,27 @@ func (v *comFabricCodePackageActivator) AbortCodePackage(
 	codePackageNames []string,
 ) (err error) {
 	var p_0 *innerFabricStringList
+	lst_58 := &innerFabricStringList{}
 	{
-		lst := &innerFabricStringList{}
 
 		var tmp []*uint16
 
 		for _, item := range codePackageNames {
 			var tmpitem *uint16
 
-			s_63, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_63
+			s_59, _ := windows.UTF16PtrFromString(item)
+			tmpitem = s_59
 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.Count = uint32(len(tmp))
+		lst_58.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.Items = &tmp[0]
+			lst_58.Items = &tmp[0]
 		}
 
-		p_0 = lst
 	}
+	p_0 = lst_58
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().AbortCodePackage,
 		2,

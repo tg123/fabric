@@ -262,53 +262,49 @@ func (g *generator) generateToGolangObject(srcvar, dstvar, rawtype string, indir
 		}
 	}
 }
-
 func (g *generator) generateListObjectToGolangSlice(srcvar, dstvar, listType string) {
-	// g.importpkg("reflect")
-
-	golangTypeName := g.toGolangStructType(listType, false)
 	itemType := g.ctx.definedStruct[g.unwrapTypedef(listType)]
-	golangItemTypeName := g.toGolangType(itemType.Fields[1].Type, 0, false)
-	itemTypeName := g.toGolangType(itemType.Fields[1].Type, 0, true)
-	varuid := g.nextvarid()
+	countFieldName := itemType.Fields[0].Name
+	itemFieldName := itemType.Fields[1].Name
+	rawItemType := itemType.Fields[1].Type
+	g.generatePointerToGolangSlice(dstvar, srcvar+"."+countFieldName, srcvar+"."+itemFieldName, rawItemType)
+}
+
+func (g *generator) generatePointerToGolangSlice(dstSlice, countFieldName, itemFieldName, rawItemType string) {
+	golangItemTypeName := g.toGolangType(rawItemType, 0, false)
+	itemTypeName := g.toGolangType(rawItemType, 0, true)
+	// varuid := g.nextvarid()
 
 	data := struct {
 		GolangTypeName     string
 		GolangItemTypeName string
 		ItemTypeName       string
-		Srcvar             string
-		Dstvar             string
 		CountFieldName     string
 		ItemFieldName      string
 		VarUid             int
+		DstSlice           string
 	}{
-		GolangTypeName:     golangTypeName,
 		GolangItemTypeName: golangItemTypeName,
 		ItemTypeName:       itemTypeName,
-		Srcvar:             srcvar,
-		Dstvar:             dstvar,
-		CountFieldName:     itemType.Fields[0].Name,
-		ItemFieldName:      itemType.Fields[1].Name,
-		VarUid:             varuid,
+		CountFieldName:     countFieldName,
+		ItemFieldName:      itemFieldName,
+		DstSlice:           dstSlice,
 	}
 
 	g.templateln(`{
-		var lst {{.GolangTypeName}}
-
 		var innerlst []{{.ItemTypeName}}
-		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer({{.Srcvar}}.{{.ItemFieldName}}), int({{.Srcvar}}.{{.CountFieldName}}))
+		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer({{.ItemFieldName}}), int({{.CountFieldName}}))
 
 		for _, item := range innerlst {
 			var tmpitem {{.GolangItemTypeName}}
 	`, data)
 
-	g.generateToGolangObject("item", "tmpitem", itemType.Fields[1].Type, 0)
+	g.generateToGolangObject("item", "tmpitem", rawItemType, 0)
 
 	g.templateln(`
-			lst = append(lst, tmpitem)
+			{{.DstSlice}} = append({{.DstSlice}}, tmpitem)
 		}
 
-		{{.Dstvar}} = lst
 	}`, data)
 }
 
@@ -439,30 +435,36 @@ func (g *generator) generateToInnerObject(srcvar, dstvar, rawtype string, indire
 
 func (g *generator) generateSliceToInnerObject(srcvar, dstvar, listType string) {
 	innerTypeName := g.toGolangStructType(listType, true)
+
+	uid := g.nextvarid()
+	tmpvar := fmt.Sprintf("lst_%v", uid)
+	g.printfln("%v := &%v{}", tmpvar, innerTypeName)
+
 	itemType := g.ctx.definedStruct[g.unwrapTypedef(listType)]
-	itemTypeName := g.toGolangType(itemType.Fields[1].Type, 0, true)
-	varuid := g.nextvarid()
+	countFieldName := tmpvar + "." + itemType.Fields[0].Name
+	itemFieldName := tmpvar + "." + itemType.Fields[1].Name
+	rawItemType := itemType.Fields[1].Type
+
+	g.generateSliceToPointer(srcvar, countFieldName, itemFieldName, rawItemType)
+	g.printfln("%v = %v", dstvar, tmpvar)
+}
+
+func (g *generator) generateSliceToPointer(srcSlice, countFieldName, itemFieldName, rawItemType string) {
+	itemTypeName := g.toGolangType(rawItemType, 0, true)
 
 	data := struct {
-		InnerTypeName  string
 		ItemTypeName   string
 		Srcvar         string
-		Dstvar         string
 		CountFieldName string
 		ItemFieldName  string
-		VarUid         int
 	}{
-		InnerTypeName:  innerTypeName,
 		ItemTypeName:   itemTypeName,
-		Srcvar:         srcvar,
-		Dstvar:         dstvar,
-		CountFieldName: itemType.Fields[0].Name,
-		ItemFieldName:  itemType.Fields[1].Name,
-		VarUid:         varuid,
+		Srcvar:         srcSlice,
+		CountFieldName: countFieldName,
+		ItemFieldName:  itemFieldName,
 	}
 
 	g.templateln(`{
-		lst := &{{.InnerTypeName}}{}
 
 		var tmp []{{.ItemTypeName}}
 
@@ -470,18 +472,17 @@ func (g *generator) generateSliceToInnerObject(srcvar, dstvar, listType string) 
 			var tmpitem {{.ItemTypeName}}
 	`, data)
 
-	g.generateToInnerObject("item", "tmpitem", itemType.Fields[1].Type, 0)
+	g.generateToInnerObject("item", "tmpitem", rawItemType, 0)
 
 	g.templateln(`
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst.{{.CountFieldName}} = uint32(len(tmp))
+		{{.CountFieldName}} = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst.{{.ItemFieldName}} = &tmp[0]
+			{{.ItemFieldName}} = &tmp[0]
 		}
 
-		{{.Dstvar}} = lst
 	}`, data)
 }
 
