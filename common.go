@@ -46,7 +46,9 @@ func releaseComObject(com *ole.IUnknown) error {
 	// here we assume all our objects will ref == 0 eventually
 	// however
 	// now some com objects exposed and calling release is not guaranteed
-	com.Release()
+
+	// TODO temp disable release, seems something was released by accident
+	// com.Release()
 	return nil
 }
 

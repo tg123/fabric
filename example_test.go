@@ -13,12 +13,15 @@ func ExampleNewX509Client() {
 		panic(err)
 	}
 
-	client, err := NewX509Client("test.southcentralus.cloudapp.azure.com:19000", X509Credentials{
-		FindType:              FabricX509FindTypeFindbythumbprint,
-		FindValue:             "1111111111111111111111111111111111111111",
-		StoreName:             "MY",
-		StoreLocation:         FabricX509StoreLocationCurrentuser,
-		RemoteCertThumbprints: []string{"1111111111111111111111111111111111111111"},
+	client, err := NewClient(FabricClientOpt{
+		Address: []string{"test.southcentralus.cloudapp.azure.com:19000"},
+		Credentials: &X509Credentials{
+			FindType:              FabricX509FindTypeFindbythumbprint,
+			FindValue:             "1111111111111111111111111111111111111111",
+			StoreName:             "MY",
+			StoreLocation:         FabricX509StoreLocationCurrentuser,
+			RemoteCertThumbprints: []string{"1111111111111111111111111111111111111111"},
+		},
 	})
 
 	if err != nil {

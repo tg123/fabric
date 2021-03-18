@@ -83,10 +83,13 @@ func (g *generator) generatePublicAndInnerStruct(n *ast.StructNode) {
 		g.printfln("}")
 
 		g.printfln(`func (obj *%s) toGoStruct() *%v {
+			if obj == nil { return nil }
 			return &obj.%v
 		}`, innerTypeName, publicTypeName, publicTypeName)
 
 		g.printfln("func (obj *%s) toInnerStruct() *%v {", publicTypeName, innerTypeName)
+
+		g.printfln(`if obj == nil { return nil }`)
 
 		if hasReserved {
 			g.printfln("return &%v{*obj, nil}", innerTypeName)

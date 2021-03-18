@@ -1499,9 +1499,15 @@ type innerFabricNodeId struct {
 }
 
 func (obj *innerFabricNodeId) toGoStruct() *FabricNodeId {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricNodeId
 }
 func (obj *FabricNodeId) toInnerStruct() *innerFabricNodeId {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricNodeId{*obj, nil}
 }
 
@@ -1513,9 +1519,15 @@ type innerFabricOperationDataBuffer struct {
 }
 
 func (obj *innerFabricOperationDataBuffer) toGoStruct() *FabricOperationDataBuffer {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricOperationDataBuffer
 }
 func (obj *FabricOperationDataBuffer) toInnerStruct() *innerFabricOperationDataBuffer {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricOperationDataBuffer{*obj}
 }
 
@@ -1610,9 +1622,15 @@ type innerFabricStartPartitionDataLossDescription struct {
 }
 
 func (obj *innerFabricStartPartitionDataLossDescription) toGoStruct() *FabricStartPartitionDataLossDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStartPartitionDataLossDescription
 }
 func (obj *FabricStartPartitionDataLossDescription) toInnerStruct() *innerFabricStartPartitionDataLossDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStartPartitionDataLossDescription{*obj, nil}
 }
 
@@ -1659,9 +1677,15 @@ type innerFabricPartitionDataLossResult struct {
 }
 
 func (obj *innerFabricPartitionDataLossResult) toGoStruct() *FabricPartitionDataLossResult {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricPartitionDataLossResult
 }
 func (obj *FabricPartitionDataLossResult) toInnerStruct() *innerFabricPartitionDataLossResult {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricPartitionDataLossResult{*obj, nil}
 }
 
@@ -1675,9 +1699,15 @@ type innerFabricPartitionDataLossProgress struct {
 }
 
 func (obj *innerFabricPartitionDataLossProgress) toGoStruct() *FabricPartitionDataLossProgress {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricPartitionDataLossProgress
 }
 func (obj *FabricPartitionDataLossProgress) toInnerStruct() *innerFabricPartitionDataLossProgress {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricPartitionDataLossProgress{*obj, nil}
 }
 
@@ -1693,9 +1723,15 @@ type innerFabricStartPartitionQuorumLossDescription struct {
 }
 
 func (obj *innerFabricStartPartitionQuorumLossDescription) toGoStruct() *FabricStartPartitionQuorumLossDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStartPartitionQuorumLossDescription
 }
 func (obj *FabricStartPartitionQuorumLossDescription) toInnerStruct() *innerFabricStartPartitionQuorumLossDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStartPartitionQuorumLossDescription{*obj, nil}
 }
 
@@ -1709,9 +1745,15 @@ type innerFabricPartitionQuorumLossResult struct {
 }
 
 func (obj *innerFabricPartitionQuorumLossResult) toGoStruct() *FabricPartitionQuorumLossResult {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricPartitionQuorumLossResult
 }
 func (obj *FabricPartitionQuorumLossResult) toInnerStruct() *innerFabricPartitionQuorumLossResult {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricPartitionQuorumLossResult{*obj, nil}
 }
 
@@ -1725,9 +1767,15 @@ type innerFabricPartitionQuorumLossProgress struct {
 }
 
 func (obj *innerFabricPartitionQuorumLossProgress) toGoStruct() *FabricPartitionQuorumLossProgress {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricPartitionQuorumLossProgress
 }
 func (obj *FabricPartitionQuorumLossProgress) toInnerStruct() *innerFabricPartitionQuorumLossProgress {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricPartitionQuorumLossProgress{*obj, nil}
 }
 
@@ -1742,9 +1790,15 @@ type innerFabricStartPartitionRestartDescription struct {
 }
 
 func (obj *innerFabricStartPartitionRestartDescription) toGoStruct() *FabricStartPartitionRestartDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStartPartitionRestartDescription
 }
 func (obj *FabricStartPartitionRestartDescription) toInnerStruct() *innerFabricStartPartitionRestartDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStartPartitionRestartDescription{*obj, nil}
 }
 
@@ -1758,9 +1812,15 @@ type innerFabricOrchestrationUpgradeProgress struct {
 }
 
 func (obj *innerFabricOrchestrationUpgradeProgress) toGoStruct() *FabricOrchestrationUpgradeProgress {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricOrchestrationUpgradeProgress
 }
 func (obj *FabricOrchestrationUpgradeProgress) toInnerStruct() *innerFabricOrchestrationUpgradeProgress {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricOrchestrationUpgradeProgress{*obj, nil}
 }
 
@@ -1832,9 +1892,15 @@ type innerFabricPartitionRestartResult struct {
 }
 
 func (obj *innerFabricPartitionRestartResult) toGoStruct() *FabricPartitionRestartResult {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricPartitionRestartResult
 }
 func (obj *FabricPartitionRestartResult) toInnerStruct() *innerFabricPartitionRestartResult {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricPartitionRestartResult{*obj, nil}
 }
 
@@ -1848,9 +1914,15 @@ type innerFabricPartitionRestartProgress struct {
 }
 
 func (obj *innerFabricPartitionRestartProgress) toGoStruct() *FabricPartitionRestartProgress {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricPartitionRestartProgress
 }
 func (obj *FabricPartitionRestartProgress) toInnerStruct() *innerFabricPartitionRestartProgress {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricPartitionRestartProgress{*obj, nil}
 }
 
@@ -1864,9 +1936,15 @@ type innerFabricCancelTestCommandDescription struct {
 }
 
 func (obj *innerFabricCancelTestCommandDescription) toGoStruct() *FabricCancelTestCommandDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricCancelTestCommandDescription
 }
 func (obj *FabricCancelTestCommandDescription) toInnerStruct() *innerFabricCancelTestCommandDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricCancelTestCommandDescription{*obj, nil}
 }
 
@@ -1879,9 +1957,15 @@ type innerFabricOperationId struct {
 }
 
 func (obj *innerFabricOperationId) toGoStruct() *FabricOperationId {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricOperationId
 }
 func (obj *FabricOperationId) toInnerStruct() *innerFabricOperationId {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricOperationId{*obj, nil}
 }
 
@@ -1895,9 +1979,15 @@ type innerFabricTestCommandListDescription struct {
 }
 
 func (obj *innerFabricTestCommandListDescription) toGoStruct() *FabricTestCommandListDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricTestCommandListDescription
 }
 func (obj *FabricTestCommandListDescription) toInnerStruct() *innerFabricTestCommandListDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricTestCommandListDescription{*obj, nil}
 }
 
@@ -1912,9 +2002,15 @@ type innerTestCommandQueryResultItem struct {
 }
 
 func (obj *innerTestCommandQueryResultItem) toGoStruct() *TestCommandQueryResultItem {
+	if obj == nil {
+		return nil
+	}
 	return &obj.TestCommandQueryResultItem
 }
 func (obj *TestCommandQueryResultItem) toInnerStruct() *innerTestCommandQueryResultItem {
+	if obj == nil {
+		return nil
+	}
 	return &innerTestCommandQueryResultItem{*obj, nil}
 }
 
@@ -1983,9 +2079,15 @@ type innerFabricRestartNodeStatus struct {
 }
 
 func (obj *innerFabricRestartNodeStatus) toGoStruct() *FabricRestartNodeStatus {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricRestartNodeStatus
 }
 func (obj *FabricRestartNodeStatus) toInnerStruct() *innerFabricRestartNodeStatus {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricRestartNodeStatus{*obj, nil}
 }
 
@@ -1998,9 +2100,15 @@ type innerFabricStartNodeStatus struct {
 }
 
 func (obj *innerFabricStartNodeStatus) toGoStruct() *FabricStartNodeStatus {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStartNodeStatus
 }
 func (obj *FabricStartNodeStatus) toInnerStruct() *innerFabricStartNodeStatus {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStartNodeStatus{*obj, nil}
 }
 
@@ -2013,9 +2121,15 @@ type innerFabricStopNodeStatus struct {
 }
 
 func (obj *innerFabricStopNodeStatus) toGoStruct() *FabricStopNodeStatus {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStopNodeStatus
 }
 func (obj *FabricStopNodeStatus) toInnerStruct() *innerFabricStopNodeStatus {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStopNodeStatus{*obj, nil}
 }
 
@@ -2029,9 +2143,15 @@ type innerFabricNodeTransitionResult struct {
 }
 
 func (obj *innerFabricNodeTransitionResult) toGoStruct() *FabricNodeTransitionResult {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricNodeTransitionResult
 }
 func (obj *FabricNodeTransitionResult) toInnerStruct() *innerFabricNodeTransitionResult {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricNodeTransitionResult{*obj, nil}
 }
 
@@ -2045,9 +2165,15 @@ type innerFabricNodeTransitionProgress struct {
 }
 
 func (obj *innerFabricNodeTransitionProgress) toGoStruct() *FabricNodeTransitionProgress {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricNodeTransitionProgress
 }
 func (obj *FabricNodeTransitionProgress) toInnerStruct() *innerFabricNodeTransitionProgress {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricNodeTransitionProgress{*obj, nil}
 }
 
@@ -2116,9 +2242,15 @@ type innerFabricScalingTrigger struct {
 }
 
 func (obj *innerFabricScalingTrigger) toGoStruct() *FabricScalingTrigger {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricScalingTrigger
 }
 func (obj *FabricScalingTrigger) toInnerStruct() *innerFabricScalingTrigger {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricScalingTrigger{*obj}
 }
 
@@ -2131,9 +2263,15 @@ type innerFabricScalingMechanism struct {
 }
 
 func (obj *innerFabricScalingMechanism) toGoStruct() *FabricScalingMechanism {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricScalingMechanism
 }
 func (obj *FabricScalingMechanism) toInnerStruct() *innerFabricScalingMechanism {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricScalingMechanism{*obj}
 }
 
@@ -2147,9 +2285,15 @@ type innerFabricServiceScalingPolicy struct {
 }
 
 func (obj *innerFabricServiceScalingPolicy) toGoStruct() *FabricServiceScalingPolicy {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricServiceScalingPolicy
 }
 func (obj *FabricServiceScalingPolicy) toInnerStruct() *innerFabricServiceScalingPolicy {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricServiceScalingPolicy{*obj, nil}
 }
 
@@ -2244,9 +2388,15 @@ type innerFabricScalingTriggerAverageServiceLoadEx1 struct {
 }
 
 func (obj *innerFabricScalingTriggerAverageServiceLoadEx1) toGoStruct() *FabricScalingTriggerAverageServiceLoadEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricScalingTriggerAverageServiceLoadEx1
 }
 func (obj *FabricScalingTriggerAverageServiceLoadEx1) toInnerStruct() *innerFabricScalingTriggerAverageServiceLoadEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricScalingTriggerAverageServiceLoadEx1{*obj, nil}
 }
 
@@ -2261,9 +2411,15 @@ type innerFabricScalingMechanismPartitionInstanceCount struct {
 }
 
 func (obj *innerFabricScalingMechanismPartitionInstanceCount) toGoStruct() *FabricScalingMechanismPartitionInstanceCount {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricScalingMechanismPartitionInstanceCount
 }
 func (obj *FabricScalingMechanismPartitionInstanceCount) toInnerStruct() *innerFabricScalingMechanismPartitionInstanceCount {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricScalingMechanismPartitionInstanceCount{*obj, nil}
 }
 
@@ -2278,9 +2434,15 @@ type innerFabricScalingMechanismAddRemoveIncrementalNamedPartition struct {
 }
 
 func (obj *innerFabricScalingMechanismAddRemoveIncrementalNamedPartition) toGoStruct() *FabricScalingMechanismAddRemoveIncrementalNamedPartition {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricScalingMechanismAddRemoveIncrementalNamedPartition
 }
 func (obj *FabricScalingMechanismAddRemoveIncrementalNamedPartition) toInnerStruct() *innerFabricScalingMechanismAddRemoveIncrementalNamedPartition {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricScalingMechanismAddRemoveIncrementalNamedPartition{*obj, nil}
 }
 
@@ -2379,9 +2541,15 @@ type innerFabricPlacementPolicyRequiredDomainDistributionDescription struct {
 }
 
 func (obj *innerFabricPlacementPolicyRequiredDomainDistributionDescription) toGoStruct() *FabricPlacementPolicyRequiredDomainDistributionDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricPlacementPolicyRequiredDomainDistributionDescription
 }
 func (obj *FabricPlacementPolicyRequiredDomainDistributionDescription) toInnerStruct() *innerFabricPlacementPolicyRequiredDomainDistributionDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricPlacementPolicyRequiredDomainDistributionDescription{*obj, nil}
 }
 
@@ -2393,9 +2561,15 @@ type innerFabricPlacementPolicyNonpartiallyPlaceServiceDescription struct {
 }
 
 func (obj *innerFabricPlacementPolicyNonpartiallyPlaceServiceDescription) toGoStruct() *FabricPlacementPolicyNonpartiallyPlaceServiceDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricPlacementPolicyNonpartiallyPlaceServiceDescription
 }
 func (obj *FabricPlacementPolicyNonpartiallyPlaceServiceDescription) toInnerStruct() *innerFabricPlacementPolicyNonpartiallyPlaceServiceDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricPlacementPolicyNonpartiallyPlaceServiceDescription{*obj, nil}
 }
 
@@ -2408,9 +2582,15 @@ type innerFabricServicePlacementPolicyDescription struct {
 }
 
 func (obj *innerFabricServicePlacementPolicyDescription) toGoStruct() *FabricServicePlacementPolicyDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricServicePlacementPolicyDescription
 }
 func (obj *FabricServicePlacementPolicyDescription) toInnerStruct() *innerFabricServicePlacementPolicyDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricServicePlacementPolicyDescription{*obj}
 }
 
@@ -2446,9 +2626,15 @@ type innerFabricServicePartitionInformation struct {
 }
 
 func (obj *innerFabricServicePartitionInformation) toGoStruct() *FabricServicePartitionInformation {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricServicePartitionInformation
 }
 func (obj *FabricServicePartitionInformation) toInnerStruct() *innerFabricServicePartitionInformation {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricServicePartitionInformation{*obj}
 }
 
@@ -2461,9 +2647,15 @@ type innerFabricSingletonPartitionInformation struct {
 }
 
 func (obj *innerFabricSingletonPartitionInformation) toGoStruct() *FabricSingletonPartitionInformation {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricSingletonPartitionInformation
 }
 func (obj *FabricSingletonPartitionInformation) toInnerStruct() *innerFabricSingletonPartitionInformation {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricSingletonPartitionInformation{*obj, nil}
 }
 
@@ -2478,9 +2670,15 @@ type innerFabricInt64RangePartitionInformation struct {
 }
 
 func (obj *innerFabricInt64RangePartitionInformation) toGoStruct() *FabricInt64RangePartitionInformation {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricInt64RangePartitionInformation
 }
 func (obj *FabricInt64RangePartitionInformation) toInnerStruct() *innerFabricInt64RangePartitionInformation {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricInt64RangePartitionInformation{*obj, nil}
 }
 
@@ -2526,9 +2724,15 @@ type innerFabricCodePackageEntryPointDescription struct {
 }
 
 func (obj *innerFabricCodePackageEntryPointDescription) toGoStruct() *FabricCodePackageEntryPointDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricCodePackageEntryPointDescription
 }
 func (obj *FabricCodePackageEntryPointDescription) toInnerStruct() *innerFabricCodePackageEntryPointDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricCodePackageEntryPointDescription{*obj}
 }
 
@@ -2624,9 +2828,15 @@ type innerFabricExehostEntryPointDescriptionEx1 struct {
 }
 
 func (obj *innerFabricExehostEntryPointDescriptionEx1) toGoStruct() *FabricExehostEntryPointDescriptionEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricExehostEntryPointDescriptionEx1
 }
 func (obj *FabricExehostEntryPointDescriptionEx1) toInnerStruct() *innerFabricExehostEntryPointDescriptionEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricExehostEntryPointDescriptionEx1{*obj, nil}
 }
 
@@ -2639,9 +2849,15 @@ type innerFabricExehostEntryPointDescriptionEx2 struct {
 }
 
 func (obj *innerFabricExehostEntryPointDescriptionEx2) toGoStruct() *FabricExehostEntryPointDescriptionEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricExehostEntryPointDescriptionEx2
 }
 func (obj *FabricExehostEntryPointDescriptionEx2) toInnerStruct() *innerFabricExehostEntryPointDescriptionEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricExehostEntryPointDescriptionEx2{*obj, nil}
 }
 
@@ -2654,9 +2870,15 @@ type innerFabricDllhostHostedDllDescription struct {
 }
 
 func (obj *innerFabricDllhostHostedDllDescription) toGoStruct() *FabricDllhostHostedDllDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricDllhostHostedDllDescription
 }
 func (obj *FabricDllhostHostedDllDescription) toInnerStruct() *innerFabricDllhostHostedDllDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricDllhostHostedDllDescription{*obj}
 }
 
@@ -2994,9 +3216,15 @@ type innerFabricServiceTypeDescription struct {
 }
 
 func (obj *innerFabricServiceTypeDescription) toGoStruct() *FabricServiceTypeDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricServiceTypeDescription
 }
 func (obj *FabricServiceTypeDescription) toInnerStruct() *innerFabricServiceTypeDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricServiceTypeDescription{*obj}
 }
 
@@ -4077,9 +4305,15 @@ type innerFabricEpoch struct {
 }
 
 func (obj *innerFabricEpoch) toGoStruct() *FabricEpoch {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricEpoch
 }
 func (obj *FabricEpoch) toInnerStruct() *innerFabricEpoch {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricEpoch{*obj, nil}
 }
 
@@ -4094,9 +4328,15 @@ type innerFabricOperationMetadata struct {
 }
 
 func (obj *innerFabricOperationMetadata) toGoStruct() *FabricOperationMetadata {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricOperationMetadata
 }
 func (obj *FabricOperationMetadata) toInnerStruct() *innerFabricOperationMetadata {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricOperationMetadata{*obj, nil}
 }
 
@@ -4158,9 +4398,15 @@ type innerFabricReplicaInformationEx1 struct {
 }
 
 func (obj *innerFabricReplicaInformationEx1) toGoStruct() *FabricReplicaInformationEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricReplicaInformationEx1
 }
 func (obj *FabricReplicaInformationEx1) toInnerStruct() *innerFabricReplicaInformationEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricReplicaInformationEx1{*obj, nil}
 }
 
@@ -4174,9 +4420,15 @@ type innerFabricReplicaSetConfiguration struct {
 }
 
 func (obj *innerFabricReplicaSetConfiguration) toGoStruct() *FabricReplicaSetConfiguration {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricReplicaSetConfiguration
 }
 func (obj *FabricReplicaSetConfiguration) toInnerStruct() *innerFabricReplicaSetConfiguration {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricReplicaSetConfiguration{*obj, nil}
 }
 
@@ -4222,9 +4474,15 @@ type innerFabricSecurityCredentials struct {
 }
 
 func (obj *innerFabricSecurityCredentials) toGoStruct() *FabricSecurityCredentials {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricSecurityCredentials
 }
 func (obj *FabricSecurityCredentials) toInnerStruct() *innerFabricSecurityCredentials {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricSecurityCredentials{*obj}
 }
 
@@ -4304,9 +4562,15 @@ type innerFabricReplicatorSettingsEx1 struct {
 }
 
 func (obj *innerFabricReplicatorSettingsEx1) toGoStruct() *FabricReplicatorSettingsEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricReplicatorSettingsEx1
 }
 func (obj *FabricReplicatorSettingsEx1) toInnerStruct() *innerFabricReplicatorSettingsEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricReplicatorSettingsEx1{*obj, nil}
 }
 
@@ -4319,9 +4583,15 @@ type innerFabricReplicatorSettingsEx2 struct {
 }
 
 func (obj *innerFabricReplicatorSettingsEx2) toGoStruct() *FabricReplicatorSettingsEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricReplicatorSettingsEx2
 }
 func (obj *FabricReplicatorSettingsEx2) toInnerStruct() *innerFabricReplicatorSettingsEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricReplicatorSettingsEx2{*obj, nil}
 }
 
@@ -4340,9 +4610,15 @@ type innerFabricReplicatorSettingsEx3 struct {
 }
 
 func (obj *innerFabricReplicatorSettingsEx3) toGoStruct() *FabricReplicatorSettingsEx3 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricReplicatorSettingsEx3
 }
 func (obj *FabricReplicatorSettingsEx3) toInnerStruct() *innerFabricReplicatorSettingsEx3 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricReplicatorSettingsEx3{*obj, nil}
 }
 
@@ -4471,9 +4747,15 @@ type innerFabricNamedProperty struct {
 }
 
 func (obj *innerFabricNamedProperty) toGoStruct() *FabricNamedProperty {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricNamedProperty
 }
 func (obj *FabricNamedProperty) toInnerStruct() *innerFabricNamedProperty {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricNamedProperty{*obj, nil}
 }
 
@@ -4731,9 +5013,15 @@ type innerFabricPropertyBatchOperation struct {
 }
 
 func (obj *innerFabricPropertyBatchOperation) toGoStruct() *FabricPropertyBatchOperation {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricPropertyBatchOperation
 }
 func (obj *FabricPropertyBatchOperation) toInnerStruct() *innerFabricPropertyBatchOperation {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricPropertyBatchOperation{*obj}
 }
 
@@ -4746,9 +5034,15 @@ type innerFabricServiceDescription struct {
 }
 
 func (obj *innerFabricServiceDescription) toGoStruct() *FabricServiceDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricServiceDescription
 }
 func (obj *FabricServiceDescription) toInnerStruct() *innerFabricServiceDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricServiceDescription{*obj}
 }
 
@@ -4761,9 +5055,15 @@ type innerFabricNodeTransitionDescription struct {
 }
 
 func (obj *innerFabricNodeTransitionDescription) toGoStruct() *FabricNodeTransitionDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricNodeTransitionDescription
 }
 func (obj *FabricNodeTransitionDescription) toInnerStruct() *innerFabricNodeTransitionDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricNodeTransitionDescription{*obj}
 }
 
@@ -4854,9 +5154,15 @@ type innerFabricServiceUpdateDescription struct {
 }
 
 func (obj *innerFabricServiceUpdateDescription) toGoStruct() *FabricServiceUpdateDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricServiceUpdateDescription
 }
 func (obj *FabricServiceUpdateDescription) toInnerStruct() *innerFabricServiceUpdateDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricServiceUpdateDescription{*obj}
 }
 
@@ -5070,9 +5376,15 @@ type innerFabricUpgradeSafetyCheck struct {
 }
 
 func (obj *innerFabricUpgradeSafetyCheck) toGoStruct() *FabricUpgradeSafetyCheck {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricUpgradeSafetyCheck
 }
 func (obj *FabricUpgradeSafetyCheck) toInnerStruct() *innerFabricUpgradeSafetyCheck {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricUpgradeSafetyCheck{*obj}
 }
 
@@ -5085,9 +5397,15 @@ type innerFabricUpgradePartitionSafetyCheck struct {
 }
 
 func (obj *innerFabricUpgradePartitionSafetyCheck) toGoStruct() *FabricUpgradePartitionSafetyCheck {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricUpgradePartitionSafetyCheck
 }
 func (obj *FabricUpgradePartitionSafetyCheck) toInnerStruct() *innerFabricUpgradePartitionSafetyCheck {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricUpgradePartitionSafetyCheck{*obj, nil}
 }
 
@@ -5099,9 +5417,15 @@ type innerFabricUpgradeSeedNodeSafetyCheck struct {
 }
 
 func (obj *innerFabricUpgradeSeedNodeSafetyCheck) toGoStruct() *FabricUpgradeSeedNodeSafetyCheck {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricUpgradeSeedNodeSafetyCheck
 }
 func (obj *FabricUpgradeSeedNodeSafetyCheck) toInnerStruct() *innerFabricUpgradeSeedNodeSafetyCheck {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricUpgradeSeedNodeSafetyCheck{*obj, nil}
 }
 
@@ -5460,9 +5784,15 @@ type innerFabricStatelessServiceDescriptionEx2 struct {
 }
 
 func (obj *innerFabricStatelessServiceDescriptionEx2) toGoStruct() *FabricStatelessServiceDescriptionEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStatelessServiceDescriptionEx2
 }
 func (obj *FabricStatelessServiceDescriptionEx2) toInnerStruct() *innerFabricStatelessServiceDescriptionEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStatelessServiceDescriptionEx2{*obj, nil}
 }
 
@@ -5508,9 +5838,15 @@ type innerFabricStatelessServiceDescriptionEx4 struct {
 }
 
 func (obj *innerFabricStatelessServiceDescriptionEx4) toGoStruct() *FabricStatelessServiceDescriptionEx4 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStatelessServiceDescriptionEx4
 }
 func (obj *FabricStatelessServiceDescriptionEx4) toInnerStruct() *innerFabricStatelessServiceDescriptionEx4 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStatelessServiceDescriptionEx4{*obj, nil}
 }
 
@@ -5524,9 +5860,15 @@ type innerFabricStatelessServiceUpdateDescription struct {
 }
 
 func (obj *innerFabricStatelessServiceUpdateDescription) toGoStruct() *FabricStatelessServiceUpdateDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStatelessServiceUpdateDescription
 }
 func (obj *FabricStatelessServiceUpdateDescription) toInnerStruct() *innerFabricStatelessServiceUpdateDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStatelessServiceUpdateDescription{*obj, nil}
 }
 
@@ -5645,9 +5987,15 @@ type innerFabricStatelessServiceUpdateDescriptionEx2 struct {
 }
 
 func (obj *innerFabricStatelessServiceUpdateDescriptionEx2) toGoStruct() *FabricStatelessServiceUpdateDescriptionEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStatelessServiceUpdateDescriptionEx2
 }
 func (obj *FabricStatelessServiceUpdateDescriptionEx2) toInnerStruct() *innerFabricStatelessServiceUpdateDescriptionEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStatelessServiceUpdateDescriptionEx2{*obj, nil}
 }
 
@@ -5844,9 +6192,15 @@ type innerFabricStatefulServiceFailoverSettings struct {
 }
 
 func (obj *innerFabricStatefulServiceFailoverSettings) toGoStruct() *FabricStatefulServiceFailoverSettings {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStatefulServiceFailoverSettings
 }
 func (obj *FabricStatefulServiceFailoverSettings) toInnerStruct() *innerFabricStatefulServiceFailoverSettings {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStatefulServiceFailoverSettings{*obj, nil}
 }
 
@@ -5859,9 +6213,15 @@ type innerFabricStatefulServiceFailoverSettingsEx1 struct {
 }
 
 func (obj *innerFabricStatefulServiceFailoverSettingsEx1) toGoStruct() *FabricStatefulServiceFailoverSettingsEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStatefulServiceFailoverSettingsEx1
 }
 func (obj *FabricStatefulServiceFailoverSettingsEx1) toInnerStruct() *innerFabricStatefulServiceFailoverSettingsEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStatefulServiceFailoverSettingsEx1{*obj, nil}
 }
 
@@ -5937,9 +6297,15 @@ type innerFabricStatefulServiceDescriptionEx2 struct {
 }
 
 func (obj *innerFabricStatefulServiceDescriptionEx2) toGoStruct() *FabricStatefulServiceDescriptionEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStatefulServiceDescriptionEx2
 }
 func (obj *FabricStatefulServiceDescriptionEx2) toInnerStruct() *innerFabricStatefulServiceDescriptionEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStatefulServiceDescriptionEx2{*obj, nil}
 }
 
@@ -5985,9 +6351,15 @@ type innerFabricStatefulServiceDescriptionEx4 struct {
 }
 
 func (obj *innerFabricStatefulServiceDescriptionEx4) toGoStruct() *FabricStatefulServiceDescriptionEx4 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStatefulServiceDescriptionEx4
 }
 func (obj *FabricStatefulServiceDescriptionEx4) toInnerStruct() *innerFabricStatefulServiceDescriptionEx4 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStatefulServiceDescriptionEx4{*obj, nil}
 }
 
@@ -6003,9 +6375,15 @@ type innerFabricStatefulServiceUpdateDescription struct {
 }
 
 func (obj *innerFabricStatefulServiceUpdateDescription) toGoStruct() *FabricStatefulServiceUpdateDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStatefulServiceUpdateDescription
 }
 func (obj *FabricStatefulServiceUpdateDescription) toInnerStruct() *innerFabricStatefulServiceUpdateDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStatefulServiceUpdateDescription{*obj, nil}
 }
 
@@ -6018,9 +6396,15 @@ type innerFabricStatefulServiceUpdateDescriptionEx1 struct {
 }
 
 func (obj *innerFabricStatefulServiceUpdateDescriptionEx1) toGoStruct() *FabricStatefulServiceUpdateDescriptionEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStatefulServiceUpdateDescriptionEx1
 }
 func (obj *FabricStatefulServiceUpdateDescriptionEx1) toInnerStruct() *innerFabricStatefulServiceUpdateDescriptionEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStatefulServiceUpdateDescriptionEx1{*obj, nil}
 }
 
@@ -6033,9 +6417,15 @@ type innerFabricStatefulServiceUpdateDescriptionEx2 struct {
 }
 
 func (obj *innerFabricStatefulServiceUpdateDescriptionEx2) toGoStruct() *FabricStatefulServiceUpdateDescriptionEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStatefulServiceUpdateDescriptionEx2
 }
 func (obj *FabricStatefulServiceUpdateDescriptionEx2) toInnerStruct() *innerFabricStatefulServiceUpdateDescriptionEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStatefulServiceUpdateDescriptionEx2{*obj, nil}
 }
 
@@ -6154,9 +6544,15 @@ type innerFabricStatefulServiceUpdateDescriptionEx4 struct {
 }
 
 func (obj *innerFabricStatefulServiceUpdateDescriptionEx4) toGoStruct() *FabricStatefulServiceUpdateDescriptionEx4 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStatefulServiceUpdateDescriptionEx4
 }
 func (obj *FabricStatefulServiceUpdateDescriptionEx4) toInnerStruct() *innerFabricStatefulServiceUpdateDescriptionEx4 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStatefulServiceUpdateDescriptionEx4{*obj, nil}
 }
 
@@ -6243,9 +6639,15 @@ type innerFabricUniformInt64RangePartitionSchemeDescription struct {
 }
 
 func (obj *innerFabricUniformInt64RangePartitionSchemeDescription) toGoStruct() *FabricUniformInt64RangePartitionSchemeDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricUniformInt64RangePartitionSchemeDescription
 }
 func (obj *FabricUniformInt64RangePartitionSchemeDescription) toInnerStruct() *innerFabricUniformInt64RangePartitionSchemeDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricUniformInt64RangePartitionSchemeDescription{*obj, nil}
 }
 
@@ -6760,9 +7162,15 @@ type innerFabricApplicationDescriptionEx1 struct {
 }
 
 func (obj *innerFabricApplicationDescriptionEx1) toGoStruct() *FabricApplicationDescriptionEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricApplicationDescriptionEx1
 }
 func (obj *FabricApplicationDescriptionEx1) toInnerStruct() *innerFabricApplicationDescriptionEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricApplicationDescriptionEx1{*obj, nil}
 }
 
@@ -6857,9 +7265,15 @@ type innerFabricRollingUpgradePolicyDescription struct {
 }
 
 func (obj *innerFabricRollingUpgradePolicyDescription) toGoStruct() *FabricRollingUpgradePolicyDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricRollingUpgradePolicyDescription
 }
 func (obj *FabricRollingUpgradePolicyDescription) toInnerStruct() *innerFabricRollingUpgradePolicyDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricRollingUpgradePolicyDescription{*obj, nil}
 }
 
@@ -6876,9 +7290,15 @@ type innerFabricRollingUpgradeMonitoringPolicy struct {
 }
 
 func (obj *innerFabricRollingUpgradeMonitoringPolicy) toGoStruct() *FabricRollingUpgradeMonitoringPolicy {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricRollingUpgradeMonitoringPolicy
 }
 func (obj *FabricRollingUpgradeMonitoringPolicy) toInnerStruct() *innerFabricRollingUpgradeMonitoringPolicy {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricRollingUpgradeMonitoringPolicy{*obj, nil}
 }
 
@@ -6891,9 +7311,15 @@ type innerFabricRollingUpgradeMonitoringPolicyEx1 struct {
 }
 
 func (obj *innerFabricRollingUpgradeMonitoringPolicyEx1) toGoStruct() *FabricRollingUpgradeMonitoringPolicyEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricRollingUpgradeMonitoringPolicyEx1
 }
 func (obj *FabricRollingUpgradeMonitoringPolicyEx1) toInnerStruct() *innerFabricRollingUpgradeMonitoringPolicyEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricRollingUpgradeMonitoringPolicyEx1{*obj, nil}
 }
 
@@ -7243,9 +7669,15 @@ type innerFabricServiceGroupDescription struct {
 }
 
 func (obj *innerFabricServiceGroupDescription) toGoStruct() *FabricServiceGroupDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricServiceGroupDescription
 }
 func (obj *FabricServiceGroupDescription) toInnerStruct() *innerFabricServiceGroupDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricServiceGroupDescription{*obj, nil}
 }
 
@@ -7258,9 +7690,15 @@ type innerFabricServiceGroupUpdateDescription struct {
 }
 
 func (obj *innerFabricServiceGroupUpdateDescription) toGoStruct() *FabricServiceGroupUpdateDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricServiceGroupUpdateDescription
 }
 func (obj *FabricServiceGroupUpdateDescription) toInnerStruct() *innerFabricServiceGroupUpdateDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricServiceGroupUpdateDescription{*obj, nil}
 }
 
@@ -7342,9 +7780,15 @@ type innerFabricKeyValueStoreItem struct {
 }
 
 func (obj *innerFabricKeyValueStoreItem) toGoStruct() *FabricKeyValueStoreItem {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricKeyValueStoreItem
 }
 func (obj *FabricKeyValueStoreItem) toInnerStruct() *innerFabricKeyValueStoreItem {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricKeyValueStoreItem{*obj, nil}
 }
 
@@ -7357,9 +7801,15 @@ type innerFabricKeyValueStoreTransactionSettings struct {
 }
 
 func (obj *innerFabricKeyValueStoreTransactionSettings) toGoStruct() *FabricKeyValueStoreTransactionSettings {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricKeyValueStoreTransactionSettings
 }
 func (obj *FabricKeyValueStoreTransactionSettings) toInnerStruct() *innerFabricKeyValueStoreTransactionSettings {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricKeyValueStoreTransactionSettings{*obj, nil}
 }
 
@@ -7372,9 +7822,15 @@ type innerFabricKeyValueStoreRestoreSettings struct {
 }
 
 func (obj *innerFabricKeyValueStoreRestoreSettings) toGoStruct() *FabricKeyValueStoreRestoreSettings {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricKeyValueStoreRestoreSettings
 }
 func (obj *FabricKeyValueStoreRestoreSettings) toInnerStruct() *innerFabricKeyValueStoreRestoreSettings {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricKeyValueStoreRestoreSettings{*obj, nil}
 }
 
@@ -7387,9 +7843,15 @@ type innerFabricKeyValueStoreRestoreSettingsEx1 struct {
 }
 
 func (obj *innerFabricKeyValueStoreRestoreSettingsEx1) toGoStruct() *FabricKeyValueStoreRestoreSettingsEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricKeyValueStoreRestoreSettingsEx1
 }
 func (obj *FabricKeyValueStoreRestoreSettingsEx1) toInnerStruct() *innerFabricKeyValueStoreRestoreSettingsEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricKeyValueStoreRestoreSettingsEx1{*obj, nil}
 }
 
@@ -7403,9 +7865,15 @@ type innerFabricKeyValueStoreReplicaSettings struct {
 }
 
 func (obj *innerFabricKeyValueStoreReplicaSettings) toGoStruct() *FabricKeyValueStoreReplicaSettings {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricKeyValueStoreReplicaSettings
 }
 func (obj *FabricKeyValueStoreReplicaSettings) toInnerStruct() *innerFabricKeyValueStoreReplicaSettings {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricKeyValueStoreReplicaSettings{*obj, nil}
 }
 
@@ -7418,9 +7886,15 @@ type innerFabricKeyValueStoreReplicaSettingsEx1 struct {
 }
 
 func (obj *innerFabricKeyValueStoreReplicaSettingsEx1) toGoStruct() *FabricKeyValueStoreReplicaSettingsEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricKeyValueStoreReplicaSettingsEx1
 }
 func (obj *FabricKeyValueStoreReplicaSettingsEx1) toInnerStruct() *innerFabricKeyValueStoreReplicaSettingsEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricKeyValueStoreReplicaSettingsEx1{*obj, nil}
 }
 
@@ -7433,9 +7907,15 @@ type innerFabricKeyValueStoreReplicaSettingsEx2 struct {
 }
 
 func (obj *innerFabricKeyValueStoreReplicaSettingsEx2) toGoStruct() *FabricKeyValueStoreReplicaSettingsEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricKeyValueStoreReplicaSettingsEx2
 }
 func (obj *FabricKeyValueStoreReplicaSettingsEx2) toInnerStruct() *innerFabricKeyValueStoreReplicaSettingsEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricKeyValueStoreReplicaSettingsEx2{*obj, nil}
 }
 
@@ -7448,9 +7928,15 @@ type innerFabricKeyValueStoreReplicaSettingsEx3 struct {
 }
 
 func (obj *innerFabricKeyValueStoreReplicaSettingsEx3) toGoStruct() *FabricKeyValueStoreReplicaSettingsEx3 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricKeyValueStoreReplicaSettingsEx3
 }
 func (obj *FabricKeyValueStoreReplicaSettingsEx3) toInnerStruct() *innerFabricKeyValueStoreReplicaSettingsEx3 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricKeyValueStoreReplicaSettingsEx3{*obj, nil}
 }
 
@@ -7512,9 +7998,15 @@ type innerFabricEseLocalStoreSettingsEx1 struct {
 }
 
 func (obj *innerFabricEseLocalStoreSettingsEx1) toGoStruct() *FabricEseLocalStoreSettingsEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricEseLocalStoreSettingsEx1
 }
 func (obj *FabricEseLocalStoreSettingsEx1) toInnerStruct() *innerFabricEseLocalStoreSettingsEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricEseLocalStoreSettingsEx1{*obj, nil}
 }
 
@@ -7527,9 +8019,15 @@ type innerFabricEseLocalStoreSettingsEx2 struct {
 }
 
 func (obj *innerFabricEseLocalStoreSettingsEx2) toGoStruct() *FabricEseLocalStoreSettingsEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricEseLocalStoreSettingsEx2
 }
 func (obj *FabricEseLocalStoreSettingsEx2) toInnerStruct() *innerFabricEseLocalStoreSettingsEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricEseLocalStoreSettingsEx2{*obj, nil}
 }
 
@@ -7544,9 +8042,15 @@ type innerFabricEseLocalStoreSettingsEx3 struct {
 }
 
 func (obj *innerFabricEseLocalStoreSettingsEx3) toGoStruct() *FabricEseLocalStoreSettingsEx3 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricEseLocalStoreSettingsEx3
 }
 func (obj *FabricEseLocalStoreSettingsEx3) toInnerStruct() *innerFabricEseLocalStoreSettingsEx3 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricEseLocalStoreSettingsEx3{*obj, nil}
 }
 
@@ -7559,9 +8063,15 @@ type innerFabricEseLocalStoreSettingsEx4 struct {
 }
 
 func (obj *innerFabricEseLocalStoreSettingsEx4) toGoStruct() *FabricEseLocalStoreSettingsEx4 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricEseLocalStoreSettingsEx4
 }
 func (obj *FabricEseLocalStoreSettingsEx4) toInnerStruct() *innerFabricEseLocalStoreSettingsEx4 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricEseLocalStoreSettingsEx4{*obj, nil}
 }
 
@@ -7574,9 +8084,15 @@ type innerFabricEseLocalStoreSettingsEx5 struct {
 }
 
 func (obj *innerFabricEseLocalStoreSettingsEx5) toGoStruct() *FabricEseLocalStoreSettingsEx5 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricEseLocalStoreSettingsEx5
 }
 func (obj *FabricEseLocalStoreSettingsEx5) toInnerStruct() *innerFabricEseLocalStoreSettingsEx5 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricEseLocalStoreSettingsEx5{*obj, nil}
 }
 
@@ -7589,9 +8105,15 @@ type innerFabricEseLocalStoreSettingsEx6 struct {
 }
 
 func (obj *innerFabricEseLocalStoreSettingsEx6) toGoStruct() *FabricEseLocalStoreSettingsEx6 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricEseLocalStoreSettingsEx6
 }
 func (obj *FabricEseLocalStoreSettingsEx6) toInnerStruct() *innerFabricEseLocalStoreSettingsEx6 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricEseLocalStoreSettingsEx6{*obj, nil}
 }
 
@@ -7658,9 +8180,15 @@ type innerFabricClientSettings struct {
 }
 
 func (obj *innerFabricClientSettings) toGoStruct() *FabricClientSettings {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricClientSettings
 }
 func (obj *FabricClientSettings) toInnerStruct() *innerFabricClientSettings {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricClientSettings{*obj, nil}
 }
 
@@ -7711,9 +8239,15 @@ type innerFabricClientSettingsEx2 struct {
 }
 
 func (obj *innerFabricClientSettingsEx2) toGoStruct() *FabricClientSettingsEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricClientSettingsEx2
 }
 func (obj *FabricClientSettingsEx2) toInnerStruct() *innerFabricClientSettingsEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricClientSettingsEx2{*obj, nil}
 }
 
@@ -7726,9 +8260,15 @@ type innerFabricClientSettingsEx3 struct {
 }
 
 func (obj *innerFabricClientSettingsEx3) toGoStruct() *FabricClientSettingsEx3 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricClientSettingsEx3
 }
 func (obj *FabricClientSettingsEx3) toInnerStruct() *innerFabricClientSettingsEx3 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricClientSettingsEx3{*obj, nil}
 }
 
@@ -7741,9 +8281,15 @@ type innerFabricClientSettingsEx4 struct {
 }
 
 func (obj *innerFabricClientSettingsEx4) toGoStruct() *FabricClientSettingsEx4 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricClientSettingsEx4
 }
 func (obj *FabricClientSettingsEx4) toInnerStruct() *innerFabricClientSettingsEx4 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricClientSettingsEx4{*obj, nil}
 }
 
@@ -7928,9 +8474,15 @@ type innerFabricNodeQueryResultItemEx1 struct {
 }
 
 func (obj *innerFabricNodeQueryResultItemEx1) toGoStruct() *FabricNodeQueryResultItemEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricNodeQueryResultItemEx1
 }
 func (obj *FabricNodeQueryResultItemEx1) toInnerStruct() *innerFabricNodeQueryResultItemEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricNodeQueryResultItemEx1{*obj, nil}
 }
 
@@ -7943,9 +8495,15 @@ type innerFabricNodeQueryResultItemEx2 struct {
 }
 
 func (obj *innerFabricNodeQueryResultItemEx2) toGoStruct() *FabricNodeQueryResultItemEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricNodeQueryResultItemEx2
 }
 func (obj *FabricNodeQueryResultItemEx2) toInnerStruct() *innerFabricNodeQueryResultItemEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricNodeQueryResultItemEx2{*obj, nil}
 }
 
@@ -7992,9 +8550,15 @@ type innerFabricNodeDeactivationTask struct {
 }
 
 func (obj *innerFabricNodeDeactivationTask) toGoStruct() *FabricNodeDeactivationTask {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricNodeDeactivationTask
 }
 func (obj *FabricNodeDeactivationTask) toInnerStruct() *innerFabricNodeDeactivationTask {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricNodeDeactivationTask{*obj, nil}
 }
 
@@ -8096,9 +8660,15 @@ type innerFabricSafetyCheck struct {
 }
 
 func (obj *innerFabricSafetyCheck) toGoStruct() *FabricSafetyCheck {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricSafetyCheck
 }
 func (obj *FabricSafetyCheck) toInnerStruct() *innerFabricSafetyCheck {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricSafetyCheck{*obj}
 }
 
@@ -8111,9 +8681,15 @@ type innerFabricPartitionSafetyCheck struct {
 }
 
 func (obj *innerFabricPartitionSafetyCheck) toGoStruct() *FabricPartitionSafetyCheck {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricPartitionSafetyCheck
 }
 func (obj *FabricPartitionSafetyCheck) toInnerStruct() *innerFabricPartitionSafetyCheck {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricPartitionSafetyCheck{*obj, nil}
 }
 
@@ -8125,9 +8701,15 @@ type innerFabricSeedNodeSafetyCheck struct {
 }
 
 func (obj *innerFabricSeedNodeSafetyCheck) toGoStruct() *FabricSeedNodeSafetyCheck {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricSeedNodeSafetyCheck
 }
 func (obj *FabricSeedNodeSafetyCheck) toInnerStruct() *innerFabricSeedNodeSafetyCheck {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricSeedNodeSafetyCheck{*obj, nil}
 }
 
@@ -8221,9 +8803,15 @@ type innerFabricNodeQueryResultItemEx3 struct {
 }
 
 func (obj *innerFabricNodeQueryResultItemEx3) toGoStruct() *FabricNodeQueryResultItemEx3 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricNodeQueryResultItemEx3
 }
 func (obj *FabricNodeQueryResultItemEx3) toInnerStruct() *innerFabricNodeQueryResultItemEx3 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricNodeQueryResultItemEx3{*obj, nil}
 }
 
@@ -8236,9 +8824,15 @@ type innerFabricNodeQueryResultItemEx4 struct {
 }
 
 func (obj *innerFabricNodeQueryResultItemEx4) toGoStruct() *FabricNodeQueryResultItemEx4 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricNodeQueryResultItemEx4
 }
 func (obj *FabricNodeQueryResultItemEx4) toInnerStruct() *innerFabricNodeQueryResultItemEx4 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricNodeQueryResultItemEx4{*obj, nil}
 }
 
@@ -8251,9 +8845,15 @@ type innerFabricNodeQueryResultItemEx5 struct {
 }
 
 func (obj *innerFabricNodeQueryResultItemEx5) toGoStruct() *FabricNodeQueryResultItemEx5 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricNodeQueryResultItemEx5
 }
 func (obj *FabricNodeQueryResultItemEx5) toInnerStruct() *innerFabricNodeQueryResultItemEx5 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricNodeQueryResultItemEx5{*obj, nil}
 }
 
@@ -8421,9 +9021,15 @@ type innerPagedFabricApplicationTypeQueryDescriptionEx2 struct {
 }
 
 func (obj *innerPagedFabricApplicationTypeQueryDescriptionEx2) toGoStruct() *PagedFabricApplicationTypeQueryDescriptionEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.PagedFabricApplicationTypeQueryDescriptionEx2
 }
 func (obj *PagedFabricApplicationTypeQueryDescriptionEx2) toInnerStruct() *innerPagedFabricApplicationTypeQueryDescriptionEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerPagedFabricApplicationTypeQueryDescriptionEx2{*obj, nil}
 }
 
@@ -8539,9 +9145,15 @@ type innerFabricApplicationTypeQueryResultItemEx2 struct {
 }
 
 func (obj *innerFabricApplicationTypeQueryResultItemEx2) toGoStruct() *FabricApplicationTypeQueryResultItemEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricApplicationTypeQueryResultItemEx2
 }
 func (obj *FabricApplicationTypeQueryResultItemEx2) toInnerStruct() *innerFabricApplicationTypeQueryResultItemEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricApplicationTypeQueryResultItemEx2{*obj, nil}
 }
 
@@ -8721,9 +9333,15 @@ type innerFabricServiceTypeQueryResultItemEx2 struct {
 }
 
 func (obj *innerFabricServiceTypeQueryResultItemEx2) toGoStruct() *FabricServiceTypeQueryResultItemEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricServiceTypeQueryResultItemEx2
 }
 func (obj *FabricServiceTypeQueryResultItemEx2) toInnerStruct() *innerFabricServiceTypeQueryResultItemEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricServiceTypeQueryResultItemEx2{*obj, nil}
 }
 
@@ -8943,9 +9561,15 @@ type innerFabricApplicationQueryDescriptionEx3 struct {
 }
 
 func (obj *innerFabricApplicationQueryDescriptionEx3) toGoStruct() *FabricApplicationQueryDescriptionEx3 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricApplicationQueryDescriptionEx3
 }
 func (obj *FabricApplicationQueryDescriptionEx3) toInnerStruct() *innerFabricApplicationQueryDescriptionEx3 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricApplicationQueryDescriptionEx3{*obj, nil}
 }
 
@@ -8958,9 +9582,15 @@ type innerFabricApplicationQueryDescriptionEx4 struct {
 }
 
 func (obj *innerFabricApplicationQueryDescriptionEx4) toGoStruct() *FabricApplicationQueryDescriptionEx4 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricApplicationQueryDescriptionEx4
 }
 func (obj *FabricApplicationQueryDescriptionEx4) toInnerStruct() *innerFabricApplicationQueryDescriptionEx4 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricApplicationQueryDescriptionEx4{*obj, nil}
 }
 
@@ -9121,9 +9751,15 @@ type innerFabricApplicationQueryResultItemEx2 struct {
 }
 
 func (obj *innerFabricApplicationQueryResultItemEx2) toGoStruct() *FabricApplicationQueryResultItemEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricApplicationQueryResultItemEx2
 }
 func (obj *FabricApplicationQueryResultItemEx2) toInnerStruct() *innerFabricApplicationQueryResultItemEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricApplicationQueryResultItemEx2{*obj, nil}
 }
 
@@ -9252,9 +9888,15 @@ type innerFabricServiceQueryDescriptionEx3 struct {
 }
 
 func (obj *innerFabricServiceQueryDescriptionEx3) toGoStruct() *FabricServiceQueryDescriptionEx3 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricServiceQueryDescriptionEx3
 }
 func (obj *FabricServiceQueryDescriptionEx3) toInnerStruct() *innerFabricServiceQueryDescriptionEx3 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricServiceQueryDescriptionEx3{*obj, nil}
 }
 
@@ -9296,9 +9938,15 @@ type innerFabricServiceQueryResultItem struct {
 }
 
 func (obj *innerFabricServiceQueryResultItem) toGoStruct() *FabricServiceQueryResultItem {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricServiceQueryResultItem
 }
 func (obj *FabricServiceQueryResultItem) toInnerStruct() *innerFabricServiceQueryResultItem {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricServiceQueryResultItem{*obj}
 }
 
@@ -9379,9 +10027,15 @@ type innerFabricStatelessServiceQueryResultItemEx1 struct {
 }
 
 func (obj *innerFabricStatelessServiceQueryResultItemEx1) toGoStruct() *FabricStatelessServiceQueryResultItemEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStatelessServiceQueryResultItemEx1
 }
 func (obj *FabricStatelessServiceQueryResultItemEx1) toInnerStruct() *innerFabricStatelessServiceQueryResultItemEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStatelessServiceQueryResultItemEx1{*obj, nil}
 }
 
@@ -9394,9 +10048,15 @@ type innerFabricStatelessServiceQueryResultItemEx2 struct {
 }
 
 func (obj *innerFabricStatelessServiceQueryResultItemEx2) toGoStruct() *FabricStatelessServiceQueryResultItemEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStatelessServiceQueryResultItemEx2
 }
 func (obj *FabricStatelessServiceQueryResultItemEx2) toInnerStruct() *innerFabricStatelessServiceQueryResultItemEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStatelessServiceQueryResultItemEx2{*obj, nil}
 }
 
@@ -9458,9 +10118,15 @@ type innerFabricStatefulServiceQueryResultItemEx1 struct {
 }
 
 func (obj *innerFabricStatefulServiceQueryResultItemEx1) toGoStruct() *FabricStatefulServiceQueryResultItemEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStatefulServiceQueryResultItemEx1
 }
 func (obj *FabricStatefulServiceQueryResultItemEx1) toInnerStruct() *innerFabricStatefulServiceQueryResultItemEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStatefulServiceQueryResultItemEx1{*obj, nil}
 }
 
@@ -9473,9 +10139,15 @@ type innerFabricStatefulServiceQueryResultItemEx2 struct {
 }
 
 func (obj *innerFabricStatefulServiceQueryResultItemEx2) toGoStruct() *FabricStatefulServiceQueryResultItemEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStatefulServiceQueryResultItemEx2
 }
 func (obj *FabricStatefulServiceQueryResultItemEx2) toInnerStruct() *innerFabricStatefulServiceQueryResultItemEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStatefulServiceQueryResultItemEx2{*obj, nil}
 }
 
@@ -9668,9 +10340,15 @@ type innerFabricPartitionLoadInformationQueryDescription struct {
 }
 
 func (obj *innerFabricPartitionLoadInformationQueryDescription) toGoStruct() *FabricPartitionLoadInformationQueryDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricPartitionLoadInformationQueryDescription
 }
 func (obj *FabricPartitionLoadInformationQueryDescription) toInnerStruct() *innerFabricPartitionLoadInformationQueryDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricPartitionLoadInformationQueryDescription{*obj, nil}
 }
 
@@ -9684,9 +10362,15 @@ type innerFabricReplicaLoadInformationQueryDescription struct {
 }
 
 func (obj *innerFabricReplicaLoadInformationQueryDescription) toGoStruct() *FabricReplicaLoadInformationQueryDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricReplicaLoadInformationQueryDescription
 }
 func (obj *FabricReplicaLoadInformationQueryDescription) toInnerStruct() *innerFabricReplicaLoadInformationQueryDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricReplicaLoadInformationQueryDescription{*obj, nil}
 }
 
@@ -9827,9 +10511,15 @@ type innerFabricServicePartitionQueryResultItem struct {
 }
 
 func (obj *innerFabricServicePartitionQueryResultItem) toGoStruct() *FabricServicePartitionQueryResultItem {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricServicePartitionQueryResultItem
 }
 func (obj *FabricServicePartitionQueryResultItem) toInnerStruct() *innerFabricServicePartitionQueryResultItem {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricServicePartitionQueryResultItem{*obj}
 }
 
@@ -9868,9 +10558,15 @@ type innerFabricStatelessServicePartitionQueryResultItem struct {
 }
 
 func (obj *innerFabricStatelessServicePartitionQueryResultItem) toGoStruct() *FabricStatelessServicePartitionQueryResultItem {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStatelessServicePartitionQueryResultItem
 }
 func (obj *FabricStatelessServicePartitionQueryResultItem) toInnerStruct() *innerFabricStatelessServicePartitionQueryResultItem {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStatelessServicePartitionQueryResultItem{*obj, nil}
 }
 
@@ -9888,9 +10584,15 @@ type innerFabricStatefulServicePartitionQueryResultItem struct {
 }
 
 func (obj *innerFabricStatefulServicePartitionQueryResultItem) toGoStruct() *FabricStatefulServicePartitionQueryResultItem {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStatefulServicePartitionQueryResultItem
 }
 func (obj *FabricStatefulServicePartitionQueryResultItem) toInnerStruct() *innerFabricStatefulServicePartitionQueryResultItem {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStatefulServicePartitionQueryResultItem{*obj, nil}
 }
 
@@ -9903,9 +10605,15 @@ type innerFabricStatefulServicePartitionQueryResultItemEx1 struct {
 }
 
 func (obj *innerFabricStatefulServicePartitionQueryResultItemEx1) toGoStruct() *FabricStatefulServicePartitionQueryResultItemEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStatefulServicePartitionQueryResultItemEx1
 }
 func (obj *FabricStatefulServicePartitionQueryResultItemEx1) toInnerStruct() *innerFabricStatefulServicePartitionQueryResultItemEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStatefulServicePartitionQueryResultItemEx1{*obj, nil}
 }
 
@@ -9919,9 +10627,15 @@ type innerFabricServiceReplicaQueryDescription struct {
 }
 
 func (obj *innerFabricServiceReplicaQueryDescription) toGoStruct() *FabricServiceReplicaQueryDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricServiceReplicaQueryDescription
 }
 func (obj *FabricServiceReplicaQueryDescription) toInnerStruct() *innerFabricServiceReplicaQueryDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricServiceReplicaQueryDescription{*obj, nil}
 }
 
@@ -9934,9 +10648,15 @@ type innerFabricServiceReplicaQueryDescriptionEx1 struct {
 }
 
 func (obj *innerFabricServiceReplicaQueryDescriptionEx1) toGoStruct() *FabricServiceReplicaQueryDescriptionEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricServiceReplicaQueryDescriptionEx1
 }
 func (obj *FabricServiceReplicaQueryDescriptionEx1) toInnerStruct() *innerFabricServiceReplicaQueryDescriptionEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricServiceReplicaQueryDescriptionEx1{*obj, nil}
 }
 
@@ -9949,9 +10669,15 @@ type innerFabricServiceReplicaQueryResultItem struct {
 }
 
 func (obj *innerFabricServiceReplicaQueryResultItem) toGoStruct() *FabricServiceReplicaQueryResultItem {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricServiceReplicaQueryResultItem
 }
 func (obj *FabricServiceReplicaQueryResultItem) toInnerStruct() *innerFabricServiceReplicaQueryResultItem {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricServiceReplicaQueryResultItem{*obj}
 }
 
@@ -10251,9 +10977,15 @@ type innerFabricDeployedApplicationQueryResultItemEx2 struct {
 }
 
 func (obj *innerFabricDeployedApplicationQueryResultItemEx2) toGoStruct() *FabricDeployedApplicationQueryResultItemEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricDeployedApplicationQueryResultItemEx2
 }
 func (obj *FabricDeployedApplicationQueryResultItemEx2) toInnerStruct() *innerFabricDeployedApplicationQueryResultItemEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricDeployedApplicationQueryResultItemEx2{*obj, nil}
 }
 
@@ -10683,9 +11415,15 @@ type innerFabricCodePackageEntryPointEx1 struct {
 }
 
 func (obj *innerFabricCodePackageEntryPointEx1) toGoStruct() *FabricCodePackageEntryPointEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricCodePackageEntryPointEx1
 }
 func (obj *FabricCodePackageEntryPointEx1) toInnerStruct() *innerFabricCodePackageEntryPointEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricCodePackageEntryPointEx1{*obj, nil}
 }
 
@@ -10946,9 +11684,15 @@ type innerFabricDeployedServiceReplicaQueryResultItem struct {
 }
 
 func (obj *innerFabricDeployedServiceReplicaQueryResultItem) toGoStruct() *FabricDeployedServiceReplicaQueryResultItem {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricDeployedServiceReplicaQueryResultItem
 }
 func (obj *FabricDeployedServiceReplicaQueryResultItem) toInnerStruct() *innerFabricDeployedServiceReplicaQueryResultItem {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricDeployedServiceReplicaQueryResultItem{*obj}
 }
 
@@ -11112,9 +11856,15 @@ type innerFabricDeployedStatefulServiceReplicaQueryResultItemEx3 struct {
 }
 
 func (obj *innerFabricDeployedStatefulServiceReplicaQueryResultItemEx3) toGoStruct() *FabricDeployedStatefulServiceReplicaQueryResultItemEx3 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricDeployedStatefulServiceReplicaQueryResultItemEx3
 }
 func (obj *FabricDeployedStatefulServiceReplicaQueryResultItemEx3) toInnerStruct() *innerFabricDeployedStatefulServiceReplicaQueryResultItemEx3 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricDeployedStatefulServiceReplicaQueryResultItemEx3{*obj, nil}
 }
 
@@ -11250,9 +12000,15 @@ type innerFabricDeployedStatelessServiceInstanceQueryResultItemEx3 struct {
 }
 
 func (obj *innerFabricDeployedStatelessServiceInstanceQueryResultItemEx3) toGoStruct() *FabricDeployedStatelessServiceInstanceQueryResultItemEx3 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricDeployedStatelessServiceInstanceQueryResultItemEx3
 }
 func (obj *FabricDeployedStatelessServiceInstanceQueryResultItemEx3) toInnerStruct() *innerFabricDeployedStatelessServiceInstanceQueryResultItemEx3 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricDeployedStatelessServiceInstanceQueryResultItemEx3{*obj, nil}
 }
 
@@ -11302,9 +12058,15 @@ type innerFabricLoadMetricReportEx1 struct {
 }
 
 func (obj *innerFabricLoadMetricReportEx1) toGoStruct() *FabricLoadMetricReportEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricLoadMetricReportEx1
 }
 func (obj *FabricLoadMetricReportEx1) toInnerStruct() *innerFabricLoadMetricReportEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricLoadMetricReportEx1{*obj, nil}
 }
 
@@ -11400,9 +12162,15 @@ type innerFabricDeployedServiceReplicaDetailQueryResultItem struct {
 }
 
 func (obj *innerFabricDeployedServiceReplicaDetailQueryResultItem) toGoStruct() *FabricDeployedServiceReplicaDetailQueryResultItem {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricDeployedServiceReplicaDetailQueryResultItem
 }
 func (obj *FabricDeployedServiceReplicaDetailQueryResultItem) toInnerStruct() *innerFabricDeployedServiceReplicaDetailQueryResultItem {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricDeployedServiceReplicaDetailQueryResultItem{*obj}
 }
 
@@ -11495,9 +12263,15 @@ type innerFabricDeployedStatelessServiceInstanceDetailQueryResultItemEx1 struct 
 }
 
 func (obj *innerFabricDeployedStatelessServiceInstanceDetailQueryResultItemEx1) toGoStruct() *FabricDeployedStatelessServiceInstanceDetailQueryResultItemEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricDeployedStatelessServiceInstanceDetailQueryResultItemEx1
 }
 func (obj *FabricDeployedStatelessServiceInstanceDetailQueryResultItemEx1) toInnerStruct() *innerFabricDeployedStatelessServiceInstanceDetailQueryResultItemEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricDeployedStatelessServiceInstanceDetailQueryResultItemEx1{*obj, nil}
 }
 
@@ -11564,9 +12338,15 @@ type innerFabricRemoteReplicatorAcknowledgementDetail struct {
 }
 
 func (obj *innerFabricRemoteReplicatorAcknowledgementDetail) toGoStruct() *FabricRemoteReplicatorAcknowledgementDetail {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricRemoteReplicatorAcknowledgementDetail
 }
 func (obj *FabricRemoteReplicatorAcknowledgementDetail) toInnerStruct() *innerFabricRemoteReplicatorAcknowledgementDetail {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricRemoteReplicatorAcknowledgementDetail{*obj, nil}
 }
 
@@ -11580,9 +12360,15 @@ type innerFabricRemoteReplicatorAcknowledgementStatus struct {
 }
 
 func (obj *innerFabricRemoteReplicatorAcknowledgementStatus) toGoStruct() *FabricRemoteReplicatorAcknowledgementStatus {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricRemoteReplicatorAcknowledgementStatus
 }
 func (obj *FabricRemoteReplicatorAcknowledgementStatus) toInnerStruct() *innerFabricRemoteReplicatorAcknowledgementStatus {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricRemoteReplicatorAcknowledgementStatus{*obj, nil}
 }
 
@@ -11623,9 +12409,15 @@ type innerFabricReplicatorQueueStatus struct {
 }
 
 func (obj *innerFabricReplicatorQueueStatus) toGoStruct() *FabricReplicatorQueueStatus {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricReplicatorQueueStatus
 }
 func (obj *FabricReplicatorQueueStatus) toInnerStruct() *innerFabricReplicatorQueueStatus {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricReplicatorQueueStatus{*obj, nil}
 }
 
@@ -11747,9 +12539,15 @@ type innerFabricReplicatorStatusQueryResult struct {
 }
 
 func (obj *innerFabricReplicatorStatusQueryResult) toGoStruct() *FabricReplicatorStatusQueryResult {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricReplicatorStatusQueryResult
 }
 func (obj *FabricReplicatorStatusQueryResult) toInnerStruct() *innerFabricReplicatorStatusQueryResult {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricReplicatorStatusQueryResult{*obj}
 }
 
@@ -11889,9 +12687,15 @@ type innerFabricDeployedStatefulServiceReplicaDetailQueryResultItemEx1 struct {
 }
 
 func (obj *innerFabricDeployedStatefulServiceReplicaDetailQueryResultItemEx1) toGoStruct() *FabricDeployedStatefulServiceReplicaDetailQueryResultItemEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricDeployedStatefulServiceReplicaDetailQueryResultItemEx1
 }
 func (obj *FabricDeployedStatefulServiceReplicaDetailQueryResultItemEx1) toInnerStruct() *innerFabricDeployedStatefulServiceReplicaDetailQueryResultItemEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricDeployedStatefulServiceReplicaDetailQueryResultItemEx1{*obj, nil}
 }
 
@@ -11904,9 +12708,15 @@ type innerFabricDeployedStatefulServiceReplicaDetailQueryResultItemEx2 struct {
 }
 
 func (obj *innerFabricDeployedStatefulServiceReplicaDetailQueryResultItemEx2) toGoStruct() *FabricDeployedStatefulServiceReplicaDetailQueryResultItemEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricDeployedStatefulServiceReplicaDetailQueryResultItemEx2
 }
 func (obj *FabricDeployedStatefulServiceReplicaDetailQueryResultItemEx2) toInnerStruct() *innerFabricDeployedStatefulServiceReplicaDetailQueryResultItemEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricDeployedStatefulServiceReplicaDetailQueryResultItemEx2{*obj, nil}
 }
 
@@ -11921,9 +12731,15 @@ type innerFabricKeyValueStoreMigrationQueryResult struct {
 }
 
 func (obj *innerFabricKeyValueStoreMigrationQueryResult) toGoStruct() *FabricKeyValueStoreMigrationQueryResult {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricKeyValueStoreMigrationQueryResult
 }
 func (obj *FabricKeyValueStoreMigrationQueryResult) toInnerStruct() *innerFabricKeyValueStoreMigrationQueryResult {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricKeyValueStoreMigrationQueryResult{*obj, nil}
 }
 
@@ -11984,9 +12800,15 @@ type innerFabricKeyValueStoreStatusQueryResultEx1 struct {
 }
 
 func (obj *innerFabricKeyValueStoreStatusQueryResultEx1) toGoStruct() *FabricKeyValueStoreStatusQueryResultEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricKeyValueStoreStatusQueryResultEx1
 }
 func (obj *FabricKeyValueStoreStatusQueryResultEx1) toInnerStruct() *innerFabricKeyValueStoreStatusQueryResultEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricKeyValueStoreStatusQueryResultEx1{*obj, nil}
 }
 
@@ -12161,9 +12983,15 @@ type innerFabricServiceNameQueryDescription struct {
 }
 
 func (obj *innerFabricServiceNameQueryDescription) toGoStruct() *FabricServiceNameQueryDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricServiceNameQueryDescription
 }
 func (obj *FabricServiceNameQueryDescription) toInnerStruct() *innerFabricServiceNameQueryDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricServiceNameQueryDescription{*obj, nil}
 }
 
@@ -12384,9 +13212,15 @@ type innerFabricRestartNodeDescription2 struct {
 }
 
 func (obj *innerFabricRestartNodeDescription2) toGoStruct() *FabricRestartNodeDescription2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricRestartNodeDescription2
 }
 func (obj *FabricRestartNodeDescription2) toInnerStruct() *innerFabricRestartNodeDescription2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricRestartNodeDescription2{*obj}
 }
 
@@ -12399,9 +13233,15 @@ type innerFabricRestartNodeDescriptionEx1 struct {
 }
 
 func (obj *innerFabricRestartNodeDescriptionEx1) toGoStruct() *FabricRestartNodeDescriptionEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricRestartNodeDescriptionEx1
 }
 func (obj *FabricRestartNodeDescriptionEx1) toInnerStruct() *innerFabricRestartNodeDescriptionEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricRestartNodeDescriptionEx1{*obj, nil}
 }
 
@@ -12490,9 +13330,15 @@ type innerFabricStartNodeDescription2 struct {
 }
 
 func (obj *innerFabricStartNodeDescription2) toGoStruct() *FabricStartNodeDescription2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStartNodeDescription2
 }
 func (obj *FabricStartNodeDescription2) toInnerStruct() *innerFabricStartNodeDescription2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStartNodeDescription2{*obj}
 }
 
@@ -12548,9 +13394,15 @@ type innerFabricStopNodeDescription2 struct {
 }
 
 func (obj *innerFabricStopNodeDescription2) toGoStruct() *FabricStopNodeDescription2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStopNodeDescription2
 }
 func (obj *FabricStopNodeDescription2) toInnerStruct() *innerFabricStopNodeDescription2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStopNodeDescription2{*obj}
 }
 
@@ -12596,9 +13448,15 @@ type innerFabricRestartDeployedCodePackageDescription2 struct {
 }
 
 func (obj *innerFabricRestartDeployedCodePackageDescription2) toGoStruct() *FabricRestartDeployedCodePackageDescription2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricRestartDeployedCodePackageDescription2
 }
 func (obj *FabricRestartDeployedCodePackageDescription2) toInnerStruct() *innerFabricRestartDeployedCodePackageDescription2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricRestartDeployedCodePackageDescription2{*obj}
 }
 
@@ -12771,9 +13629,15 @@ type innerFabricMovePrimaryDescription2 struct {
 }
 
 func (obj *innerFabricMovePrimaryDescription2) toGoStruct() *FabricMovePrimaryDescription2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricMovePrimaryDescription2
 }
 func (obj *FabricMovePrimaryDescription2) toInnerStruct() *innerFabricMovePrimaryDescription2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricMovePrimaryDescription2{*obj}
 }
 
@@ -12868,9 +13732,15 @@ type innerFabricMoveSecondaryDescription2 struct {
 }
 
 func (obj *innerFabricMoveSecondaryDescription2) toGoStruct() *FabricMoveSecondaryDescription2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricMoveSecondaryDescription2
 }
 func (obj *FabricMoveSecondaryDescription2) toInnerStruct() *innerFabricMoveSecondaryDescription2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricMoveSecondaryDescription2{*obj}
 }
 
@@ -13051,9 +13921,15 @@ type innerFabricRemoveReplicaDescriptionEx1 struct {
 }
 
 func (obj *innerFabricRemoveReplicaDescriptionEx1) toGoStruct() *FabricRemoveReplicaDescriptionEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricRemoveReplicaDescriptionEx1
 }
 func (obj *FabricRemoveReplicaDescriptionEx1) toInnerStruct() *innerFabricRemoveReplicaDescriptionEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricRemoveReplicaDescriptionEx1{*obj, nil}
 }
 
@@ -13066,9 +13942,15 @@ type innerFabricHealthReportSendOptions struct {
 }
 
 func (obj *innerFabricHealthReportSendOptions) toGoStruct() *FabricHealthReportSendOptions {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricHealthReportSendOptions
 }
 func (obj *FabricHealthReportSendOptions) toInnerStruct() *innerFabricHealthReportSendOptions {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricHealthReportSendOptions{*obj, nil}
 }
 
@@ -13138,9 +14020,15 @@ type innerFabricHealthReport struct {
 }
 
 func (obj *innerFabricHealthReport) toGoStruct() *FabricHealthReport {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricHealthReport
 }
 func (obj *FabricHealthReport) toInnerStruct() *innerFabricHealthReport {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricHealthReport{*obj}
 }
 
@@ -13153,9 +14041,15 @@ type innerFabricClusterHealthReport struct {
 }
 
 func (obj *innerFabricClusterHealthReport) toGoStruct() *FabricClusterHealthReport {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricClusterHealthReport
 }
 func (obj *FabricClusterHealthReport) toInnerStruct() *innerFabricClusterHealthReport {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricClusterHealthReport{*obj, nil}
 }
 
@@ -13170,9 +14064,15 @@ type innerFabricStatelessServiceInstanceHealthReport struct {
 }
 
 func (obj *innerFabricStatelessServiceInstanceHealthReport) toGoStruct() *FabricStatelessServiceInstanceHealthReport {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStatelessServiceInstanceHealthReport
 }
 func (obj *FabricStatelessServiceInstanceHealthReport) toInnerStruct() *innerFabricStatelessServiceInstanceHealthReport {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStatelessServiceInstanceHealthReport{*obj, nil}
 }
 
@@ -13187,9 +14087,15 @@ type innerFabricStatefulServiceReplicaHealthReport struct {
 }
 
 func (obj *innerFabricStatefulServiceReplicaHealthReport) toGoStruct() *FabricStatefulServiceReplicaHealthReport {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStatefulServiceReplicaHealthReport
 }
 func (obj *FabricStatefulServiceReplicaHealthReport) toInnerStruct() *innerFabricStatefulServiceReplicaHealthReport {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStatefulServiceReplicaHealthReport{*obj, nil}
 }
 
@@ -13203,9 +14109,15 @@ type innerFabricPartitionHealthReport struct {
 }
 
 func (obj *innerFabricPartitionHealthReport) toGoStruct() *FabricPartitionHealthReport {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricPartitionHealthReport
 }
 func (obj *FabricPartitionHealthReport) toInnerStruct() *innerFabricPartitionHealthReport {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricPartitionHealthReport{*obj, nil}
 }
 
@@ -13432,9 +14344,15 @@ type innerFabricServiceTypeHealthPolicy struct {
 }
 
 func (obj *innerFabricServiceTypeHealthPolicy) toGoStruct() *FabricServiceTypeHealthPolicy {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricServiceTypeHealthPolicy
 }
 func (obj *FabricServiceTypeHealthPolicy) toInnerStruct() *innerFabricServiceTypeHealthPolicy {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricServiceTypeHealthPolicy{*obj, nil}
 }
 
@@ -13650,9 +14568,15 @@ type innerFabricClusterHealthPolicy struct {
 }
 
 func (obj *innerFabricClusterHealthPolicy) toGoStruct() *FabricClusterHealthPolicy {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricClusterHealthPolicy
 }
 func (obj *FabricClusterHealthPolicy) toInnerStruct() *innerFabricClusterHealthPolicy {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricClusterHealthPolicy{*obj, nil}
 }
 
@@ -13666,9 +14590,15 @@ type innerFabricClusterUpgradeHealthPolicy struct {
 }
 
 func (obj *innerFabricClusterUpgradeHealthPolicy) toGoStruct() *FabricClusterUpgradeHealthPolicy {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricClusterUpgradeHealthPolicy
 }
 func (obj *FabricClusterUpgradeHealthPolicy) toInnerStruct() *innerFabricClusterUpgradeHealthPolicy {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricClusterUpgradeHealthPolicy{*obj, nil}
 }
 
@@ -13738,9 +14668,15 @@ type innerFabricLoadMetricInformationEx1 struct {
 }
 
 func (obj *innerFabricLoadMetricInformationEx1) toGoStruct() *FabricLoadMetricInformationEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricLoadMetricInformationEx1
 }
 func (obj *FabricLoadMetricInformationEx1) toInnerStruct() *innerFabricLoadMetricInformationEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricLoadMetricInformationEx1{*obj, nil}
 }
 
@@ -13761,9 +14697,15 @@ type innerFabricLoadMetricInformationEx2 struct {
 }
 
 func (obj *innerFabricLoadMetricInformationEx2) toGoStruct() *FabricLoadMetricInformationEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricLoadMetricInformationEx2
 }
 func (obj *FabricLoadMetricInformationEx2) toInnerStruct() *innerFabricLoadMetricInformationEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricLoadMetricInformationEx2{*obj, nil}
 }
 
@@ -13780,9 +14722,15 @@ type innerFabricLoadMetricInformationEx3 struct {
 }
 
 func (obj *innerFabricLoadMetricInformationEx3) toGoStruct() *FabricLoadMetricInformationEx3 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricLoadMetricInformationEx3
 }
 func (obj *FabricLoadMetricInformationEx3) toInnerStruct() *innerFabricLoadMetricInformationEx3 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricLoadMetricInformationEx3{*obj, nil}
 }
 
@@ -14162,9 +15110,15 @@ type innerFabricNodeLoadMetricInformationEx1 struct {
 }
 
 func (obj *innerFabricNodeLoadMetricInformationEx1) toGoStruct() *FabricNodeLoadMetricInformationEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricNodeLoadMetricInformationEx1
 }
 func (obj *FabricNodeLoadMetricInformationEx1) toInnerStruct() *innerFabricNodeLoadMetricInformationEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricNodeLoadMetricInformationEx1{*obj, nil}
 }
 
@@ -14179,9 +15133,15 @@ type innerFabricNodeLoadMetricInformationEx2 struct {
 }
 
 func (obj *innerFabricNodeLoadMetricInformationEx2) toGoStruct() *FabricNodeLoadMetricInformationEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricNodeLoadMetricInformationEx2
 }
 func (obj *FabricNodeLoadMetricInformationEx2) toInnerStruct() *innerFabricNodeLoadMetricInformationEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricNodeLoadMetricInformationEx2{*obj, nil}
 }
 
@@ -14784,9 +15744,15 @@ type innerFabricHealthEvaluation struct {
 }
 
 func (obj *innerFabricHealthEvaluation) toGoStruct() *FabricHealthEvaluation {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricHealthEvaluation
 }
 func (obj *FabricHealthEvaluation) toInnerStruct() *innerFabricHealthEvaluation {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricHealthEvaluation{*obj}
 }
 
@@ -14824,9 +15790,15 @@ type innerFabricHealthStateCount struct {
 }
 
 func (obj *innerFabricHealthStateCount) toGoStruct() *FabricHealthStateCount {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricHealthStateCount
 }
 func (obj *FabricHealthStateCount) toInnerStruct() *innerFabricHealthStateCount {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricHealthStateCount{*obj, nil}
 }
 
@@ -14840,9 +15812,15 @@ type innerFabricEntityKindHealthStateCount struct {
 }
 
 func (obj *innerFabricEntityKindHealthStateCount) toGoStruct() *FabricEntityKindHealthStateCount {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricEntityKindHealthStateCount
 }
 func (obj *FabricEntityKindHealthStateCount) toInnerStruct() *innerFabricEntityKindHealthStateCount {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricEntityKindHealthStateCount{*obj, nil}
 }
 
@@ -14855,9 +15833,15 @@ type innerFabricHealthStatistics struct {
 }
 
 func (obj *innerFabricHealthStatistics) toGoStruct() *FabricHealthStatistics {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricHealthStatistics
 }
 func (obj *FabricHealthStatistics) toInnerStruct() *innerFabricHealthStatistics {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricHealthStatistics{*obj, nil}
 }
 
@@ -14870,9 +15854,15 @@ type innerFabricReplicaHealth struct {
 }
 
 func (obj *innerFabricReplicaHealth) toGoStruct() *FabricReplicaHealth {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricReplicaHealth
 }
 func (obj *FabricReplicaHealth) toInnerStruct() *innerFabricReplicaHealth {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricReplicaHealth{*obj}
 }
 
@@ -15141,9 +16131,15 @@ type innerFabricReplicaHealthState struct {
 }
 
 func (obj *innerFabricReplicaHealthState) toGoStruct() *FabricReplicaHealthState {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricReplicaHealthState
 }
 func (obj *FabricReplicaHealthState) toInnerStruct() *innerFabricReplicaHealthState {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricReplicaHealthState{*obj}
 }
 
@@ -15181,9 +16177,15 @@ type innerFabricStatelessServiceInstanceHealthState struct {
 }
 
 func (obj *innerFabricStatelessServiceInstanceHealthState) toGoStruct() *FabricStatelessServiceInstanceHealthState {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStatelessServiceInstanceHealthState
 }
 func (obj *FabricStatelessServiceInstanceHealthState) toInnerStruct() *innerFabricStatelessServiceInstanceHealthState {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStatelessServiceInstanceHealthState{*obj, nil}
 }
 
@@ -15256,9 +16258,15 @@ type innerFabricStatefulServiceReplicaHealthState struct {
 }
 
 func (obj *innerFabricStatefulServiceReplicaHealthState) toGoStruct() *FabricStatefulServiceReplicaHealthState {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStatefulServiceReplicaHealthState
 }
 func (obj *FabricStatefulServiceReplicaHealthState) toInnerStruct() *innerFabricStatefulServiceReplicaHealthState {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStatefulServiceReplicaHealthState{*obj, nil}
 }
 
@@ -15488,9 +16496,15 @@ type innerFabricPartitionHealthEx2 struct {
 }
 
 func (obj *innerFabricPartitionHealthEx2) toGoStruct() *FabricPartitionHealthEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricPartitionHealthEx2
 }
 func (obj *FabricPartitionHealthEx2) toInnerStruct() *innerFabricPartitionHealthEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricPartitionHealthEx2{*obj, nil}
 }
 
@@ -15504,9 +16518,15 @@ type innerFabricPartitionHealthState struct {
 }
 
 func (obj *innerFabricPartitionHealthState) toGoStruct() *FabricPartitionHealthState {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricPartitionHealthState
 }
 func (obj *FabricPartitionHealthState) toInnerStruct() *innerFabricPartitionHealthState {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricPartitionHealthState{*obj, nil}
 }
 
@@ -15973,9 +16993,15 @@ type innerFabricDeployedApplicationHealthEx2 struct {
 }
 
 func (obj *innerFabricDeployedApplicationHealthEx2) toGoStruct() *FabricDeployedApplicationHealthEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricDeployedApplicationHealthEx2
 }
 func (obj *FabricDeployedApplicationHealthEx2) toInnerStruct() *innerFabricDeployedApplicationHealthEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricDeployedApplicationHealthEx2{*obj, nil}
 }
 
@@ -16211,9 +17237,15 @@ type innerFabricServiceHealthEx2 struct {
 }
 
 func (obj *innerFabricServiceHealthEx2) toGoStruct() *FabricServiceHealthEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricServiceHealthEx2
 }
 func (obj *FabricServiceHealthEx2) toInnerStruct() *innerFabricServiceHealthEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricServiceHealthEx2{*obj, nil}
 }
 
@@ -16478,9 +17510,15 @@ type innerFabricApplicationHealthEx2 struct {
 }
 
 func (obj *innerFabricApplicationHealthEx2) toGoStruct() *FabricApplicationHealthEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricApplicationHealthEx2
 }
 func (obj *FabricApplicationHealthEx2) toInnerStruct() *innerFabricApplicationHealthEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricApplicationHealthEx2{*obj, nil}
 }
 
@@ -16619,9 +17657,15 @@ type innerFabricClusterHealth struct {
 }
 
 func (obj *innerFabricClusterHealth) toGoStruct() *FabricClusterHealth {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricClusterHealth
 }
 func (obj *FabricClusterHealth) toInnerStruct() *innerFabricClusterHealth {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricClusterHealth{*obj, nil}
 }
 
@@ -16932,9 +17976,15 @@ type innerFabricClusterHealthEx3 struct {
 }
 
 func (obj *innerFabricClusterHealthEx3) toGoStruct() *FabricClusterHealthEx3 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricClusterHealthEx3
 }
 func (obj *FabricClusterHealthEx3) toInnerStruct() *innerFabricClusterHealthEx3 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricClusterHealthEx3{*obj, nil}
 }
 
@@ -18388,9 +19438,15 @@ type innerFabricClaimsRetrievalMetadata struct {
 }
 
 func (obj *innerFabricClaimsRetrievalMetadata) toGoStruct() *FabricClaimsRetrievalMetadata {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricClaimsRetrievalMetadata
 }
 func (obj *FabricClaimsRetrievalMetadata) toInnerStruct() *innerFabricClaimsRetrievalMetadata {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricClaimsRetrievalMetadata{*obj}
 }
 
@@ -19065,9 +20121,15 @@ type innerFabricProvisionApplicationTypeDescriptionBase struct {
 }
 
 func (obj *innerFabricProvisionApplicationTypeDescriptionBase) toGoStruct() *FabricProvisionApplicationTypeDescriptionBase {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricProvisionApplicationTypeDescriptionBase
 }
 func (obj *FabricProvisionApplicationTypeDescriptionBase) toInnerStruct() *innerFabricProvisionApplicationTypeDescriptionBase {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricProvisionApplicationTypeDescriptionBase{*obj}
 }
 
@@ -19113,9 +20175,15 @@ type innerFabricProvisionApplicationTypeDescriptionEx1 struct {
 }
 
 func (obj *innerFabricProvisionApplicationTypeDescriptionEx1) toGoStruct() *FabricProvisionApplicationTypeDescriptionEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricProvisionApplicationTypeDescriptionEx1
 }
 func (obj *FabricProvisionApplicationTypeDescriptionEx1) toInnerStruct() *innerFabricProvisionApplicationTypeDescriptionEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricProvisionApplicationTypeDescriptionEx1{*obj, nil}
 }
 
@@ -19463,9 +20531,15 @@ type innerFabricHealthEventsFilter struct {
 }
 
 func (obj *innerFabricHealthEventsFilter) toGoStruct() *FabricHealthEventsFilter {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricHealthEventsFilter
 }
 func (obj *FabricHealthEventsFilter) toInnerStruct() *innerFabricHealthEventsFilter {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricHealthEventsFilter{*obj, nil}
 }
 
@@ -19478,9 +20552,15 @@ type innerFabricNodeHealthStatesFilter struct {
 }
 
 func (obj *innerFabricNodeHealthStatesFilter) toGoStruct() *FabricNodeHealthStatesFilter {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricNodeHealthStatesFilter
 }
 func (obj *FabricNodeHealthStatesFilter) toInnerStruct() *innerFabricNodeHealthStatesFilter {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricNodeHealthStatesFilter{*obj, nil}
 }
 
@@ -19493,9 +20573,15 @@ type innerFabricReplicaHealthStatesFilter struct {
 }
 
 func (obj *innerFabricReplicaHealthStatesFilter) toGoStruct() *FabricReplicaHealthStatesFilter {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricReplicaHealthStatesFilter
 }
 func (obj *FabricReplicaHealthStatesFilter) toInnerStruct() *innerFabricReplicaHealthStatesFilter {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricReplicaHealthStatesFilter{*obj, nil}
 }
 
@@ -19508,9 +20594,15 @@ type innerFabricPartitionHealthStatesFilter struct {
 }
 
 func (obj *innerFabricPartitionHealthStatesFilter) toGoStruct() *FabricPartitionHealthStatesFilter {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricPartitionHealthStatesFilter
 }
 func (obj *FabricPartitionHealthStatesFilter) toInnerStruct() *innerFabricPartitionHealthStatesFilter {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricPartitionHealthStatesFilter{*obj, nil}
 }
 
@@ -19523,9 +20615,15 @@ type innerFabricServiceHealthStatesFilter struct {
 }
 
 func (obj *innerFabricServiceHealthStatesFilter) toGoStruct() *FabricServiceHealthStatesFilter {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricServiceHealthStatesFilter
 }
 func (obj *FabricServiceHealthStatesFilter) toInnerStruct() *innerFabricServiceHealthStatesFilter {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricServiceHealthStatesFilter{*obj, nil}
 }
 
@@ -19538,9 +20636,15 @@ type innerFabricApplicationHealthStatesFilter struct {
 }
 
 func (obj *innerFabricApplicationHealthStatesFilter) toGoStruct() *FabricApplicationHealthStatesFilter {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricApplicationHealthStatesFilter
 }
 func (obj *FabricApplicationHealthStatesFilter) toInnerStruct() *innerFabricApplicationHealthStatesFilter {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricApplicationHealthStatesFilter{*obj, nil}
 }
 
@@ -19553,9 +20657,15 @@ type innerFabricDeployedApplicationHealthStatesFilter struct {
 }
 
 func (obj *innerFabricDeployedApplicationHealthStatesFilter) toGoStruct() *FabricDeployedApplicationHealthStatesFilter {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricDeployedApplicationHealthStatesFilter
 }
 func (obj *FabricDeployedApplicationHealthStatesFilter) toInnerStruct() *innerFabricDeployedApplicationHealthStatesFilter {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricDeployedApplicationHealthStatesFilter{*obj, nil}
 }
 
@@ -19568,9 +20678,15 @@ type innerFabricDeployedServicePackageHealthStatesFilter struct {
 }
 
 func (obj *innerFabricDeployedServicePackageHealthStatesFilter) toGoStruct() *FabricDeployedServicePackageHealthStatesFilter {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricDeployedServicePackageHealthStatesFilter
 }
 func (obj *FabricDeployedServicePackageHealthStatesFilter) toInnerStruct() *innerFabricDeployedServicePackageHealthStatesFilter {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricDeployedServicePackageHealthStatesFilter{*obj, nil}
 }
 
@@ -19667,9 +20783,15 @@ type innerFabricClusterHealthStatisticsFilter struct {
 }
 
 func (obj *innerFabricClusterHealthStatisticsFilter) toGoStruct() *FabricClusterHealthStatisticsFilter {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricClusterHealthStatisticsFilter
 }
 func (obj *FabricClusterHealthStatisticsFilter) toInnerStruct() *innerFabricClusterHealthStatisticsFilter {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricClusterHealthStatisticsFilter{*obj, nil}
 }
 
@@ -19682,9 +20804,15 @@ type innerFabricClusterHealthQueryDescriptionEx1 struct {
 }
 
 func (obj *innerFabricClusterHealthQueryDescriptionEx1) toGoStruct() *FabricClusterHealthQueryDescriptionEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricClusterHealthQueryDescriptionEx1
 }
 func (obj *FabricClusterHealthQueryDescriptionEx1) toInnerStruct() *innerFabricClusterHealthQueryDescriptionEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricClusterHealthQueryDescriptionEx1{*obj, nil}
 }
 
@@ -19779,9 +20907,15 @@ type innerFabricApplicationHealthStatisticsFilter struct {
 }
 
 func (obj *innerFabricApplicationHealthStatisticsFilter) toGoStruct() *FabricApplicationHealthStatisticsFilter {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricApplicationHealthStatisticsFilter
 }
 func (obj *FabricApplicationHealthStatisticsFilter) toInnerStruct() *innerFabricApplicationHealthStatisticsFilter {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricApplicationHealthStatisticsFilter{*obj, nil}
 }
 
@@ -19794,9 +20928,15 @@ type innerFabricApplicationHealthQueryDescriptionEx1 struct {
 }
 
 func (obj *innerFabricApplicationHealthQueryDescriptionEx1) toGoStruct() *FabricApplicationHealthQueryDescriptionEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricApplicationHealthQueryDescriptionEx1
 }
 func (obj *FabricApplicationHealthQueryDescriptionEx1) toInnerStruct() *innerFabricApplicationHealthQueryDescriptionEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricApplicationHealthQueryDescriptionEx1{*obj, nil}
 }
 
@@ -19850,9 +20990,15 @@ type innerFabricServiceHealthStatisticsFilter struct {
 }
 
 func (obj *innerFabricServiceHealthStatisticsFilter) toGoStruct() *FabricServiceHealthStatisticsFilter {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricServiceHealthStatisticsFilter
 }
 func (obj *FabricServiceHealthStatisticsFilter) toInnerStruct() *innerFabricServiceHealthStatisticsFilter {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricServiceHealthStatisticsFilter{*obj, nil}
 }
 
@@ -19865,9 +21011,15 @@ type innerFabricServiceHealthQueryDescriptionEx1 struct {
 }
 
 func (obj *innerFabricServiceHealthQueryDescriptionEx1) toGoStruct() *FabricServiceHealthQueryDescriptionEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricServiceHealthQueryDescriptionEx1
 }
 func (obj *FabricServiceHealthQueryDescriptionEx1) toInnerStruct() *innerFabricServiceHealthQueryDescriptionEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricServiceHealthQueryDescriptionEx1{*obj, nil}
 }
 
@@ -19883,9 +21035,15 @@ type innerFabricPartitionHealthQueryDescription struct {
 }
 
 func (obj *innerFabricPartitionHealthQueryDescription) toGoStruct() *FabricPartitionHealthQueryDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricPartitionHealthQueryDescription
 }
 func (obj *FabricPartitionHealthQueryDescription) toInnerStruct() *innerFabricPartitionHealthQueryDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricPartitionHealthQueryDescription{*obj, nil}
 }
 
@@ -19898,9 +21056,15 @@ type innerFabricPartitionHealthStatisticsFilter struct {
 }
 
 func (obj *innerFabricPartitionHealthStatisticsFilter) toGoStruct() *FabricPartitionHealthStatisticsFilter {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricPartitionHealthStatisticsFilter
 }
 func (obj *FabricPartitionHealthStatisticsFilter) toInnerStruct() *innerFabricPartitionHealthStatisticsFilter {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricPartitionHealthStatisticsFilter{*obj, nil}
 }
 
@@ -19913,9 +21077,15 @@ type innerFabricPartitionHealthQueryDescriptionEx1 struct {
 }
 
 func (obj *innerFabricPartitionHealthQueryDescriptionEx1) toGoStruct() *FabricPartitionHealthQueryDescriptionEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricPartitionHealthQueryDescriptionEx1
 }
 func (obj *FabricPartitionHealthQueryDescriptionEx1) toInnerStruct() *innerFabricPartitionHealthQueryDescriptionEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricPartitionHealthQueryDescriptionEx1{*obj, nil}
 }
 
@@ -19931,9 +21101,15 @@ type innerFabricReplicaHealthQueryDescription struct {
 }
 
 func (obj *innerFabricReplicaHealthQueryDescription) toGoStruct() *FabricReplicaHealthQueryDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricReplicaHealthQueryDescription
 }
 func (obj *FabricReplicaHealthQueryDescription) toInnerStruct() *innerFabricReplicaHealthQueryDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricReplicaHealthQueryDescription{*obj, nil}
 }
 
@@ -19993,9 +21169,15 @@ type innerFabricDeployedApplicationHealthStatisticsFilter struct {
 }
 
 func (obj *innerFabricDeployedApplicationHealthStatisticsFilter) toGoStruct() *FabricDeployedApplicationHealthStatisticsFilter {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricDeployedApplicationHealthStatisticsFilter
 }
 func (obj *FabricDeployedApplicationHealthStatisticsFilter) toInnerStruct() *innerFabricDeployedApplicationHealthStatisticsFilter {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricDeployedApplicationHealthStatisticsFilter{*obj, nil}
 }
 
@@ -20008,9 +21190,15 @@ type innerFabricDeployedApplicationHealthQueryDescriptionEx1 struct {
 }
 
 func (obj *innerFabricDeployedApplicationHealthQueryDescriptionEx1) toGoStruct() *FabricDeployedApplicationHealthQueryDescriptionEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricDeployedApplicationHealthQueryDescriptionEx1
 }
 func (obj *FabricDeployedApplicationHealthQueryDescriptionEx1) toInnerStruct() *innerFabricDeployedApplicationHealthQueryDescriptionEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricDeployedApplicationHealthQueryDescriptionEx1{*obj, nil}
 }
 
@@ -20101,9 +21289,15 @@ type innerFabricRepairScopeIdentifier struct {
 }
 
 func (obj *innerFabricRepairScopeIdentifier) toGoStruct() *FabricRepairScopeIdentifier {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricRepairScopeIdentifier
 }
 func (obj *FabricRepairScopeIdentifier) toInnerStruct() *innerFabricRepairScopeIdentifier {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricRepairScopeIdentifier{*obj}
 }
 
@@ -20116,9 +21310,15 @@ type innerFabricRepairTargetDescription struct {
 }
 
 func (obj *innerFabricRepairTargetDescription) toGoStruct() *FabricRepairTargetDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricRepairTargetDescription
 }
 func (obj *FabricRepairTargetDescription) toInnerStruct() *innerFabricRepairTargetDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricRepairTargetDescription{*obj}
 }
 
@@ -20187,9 +21387,15 @@ type innerFabricRepairImpactDescription struct {
 }
 
 func (obj *innerFabricRepairImpactDescription) toGoStruct() *FabricRepairImpactDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricRepairImpactDescription
 }
 func (obj *FabricRepairImpactDescription) toInnerStruct() *innerFabricRepairImpactDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricRepairImpactDescription{*obj}
 }
 
@@ -20493,9 +21699,15 @@ type innerFabricRepairTaskEx1 struct {
 }
 
 func (obj *innerFabricRepairTaskEx1) toGoStruct() *FabricRepairTaskEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricRepairTaskEx1
 }
 func (obj *FabricRepairTaskEx1) toInnerStruct() *innerFabricRepairTaskEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricRepairTaskEx1{*obj, nil}
 }
 
@@ -20731,9 +21943,15 @@ type innerFabricStoreBackupInfoEx1 struct {
 }
 
 func (obj *innerFabricStoreBackupInfoEx1) toGoStruct() *FabricStoreBackupInfoEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStoreBackupInfoEx1
 }
 func (obj *FabricStoreBackupInfoEx1) toInnerStruct() *innerFabricStoreBackupInfoEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStoreBackupInfoEx1{*obj, nil}
 }
 
@@ -20978,9 +22196,15 @@ type innerFabricNodeQueryDescriptionEx2 struct {
 }
 
 func (obj *innerFabricNodeQueryDescriptionEx2) toGoStruct() *FabricNodeQueryDescriptionEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricNodeQueryDescriptionEx2
 }
 func (obj *FabricNodeQueryDescriptionEx2) toInnerStruct() *innerFabricNodeQueryDescriptionEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricNodeQueryDescriptionEx2{*obj, nil}
 }
 
@@ -20993,9 +22217,15 @@ type innerFabricNodeQueryDescriptionEx3 struct {
 }
 
 func (obj *innerFabricNodeQueryDescriptionEx3) toGoStruct() *FabricNodeQueryDescriptionEx3 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricNodeQueryDescriptionEx3
 }
 func (obj *FabricNodeQueryDescriptionEx3) toInnerStruct() *innerFabricNodeQueryDescriptionEx3 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricNodeQueryDescriptionEx3{*obj, nil}
 }
 
@@ -21509,9 +22739,15 @@ type innerFabricReplicaHealthStateFilter struct {
 }
 
 func (obj *innerFabricReplicaHealthStateFilter) toGoStruct() *FabricReplicaHealthStateFilter {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricReplicaHealthStateFilter
 }
 func (obj *FabricReplicaHealthStateFilter) toInnerStruct() *innerFabricReplicaHealthStateFilter {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricReplicaHealthStateFilter{*obj, nil}
 }
 
@@ -22082,9 +23318,15 @@ type innerFabricReplicaHealthStateChunk struct {
 }
 
 func (obj *innerFabricReplicaHealthStateChunk) toGoStruct() *FabricReplicaHealthStateChunk {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricReplicaHealthStateChunk
 }
 func (obj *FabricReplicaHealthStateChunk) toInnerStruct() *innerFabricReplicaHealthStateChunk {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricReplicaHealthStateChunk{*obj, nil}
 }
 
@@ -22962,9 +24204,15 @@ type innerFabricChaosParametersEx1 struct {
 }
 
 func (obj *innerFabricChaosParametersEx1) toGoStruct() *FabricChaosParametersEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricChaosParametersEx1
 }
 func (obj *FabricChaosParametersEx1) toInnerStruct() *innerFabricChaosParametersEx1 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricChaosParametersEx1{*obj, nil}
 }
 
@@ -23072,9 +24320,15 @@ type innerFabricChaosParametersEx2 struct {
 }
 
 func (obj *innerFabricChaosParametersEx2) toGoStruct() *FabricChaosParametersEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricChaosParametersEx2
 }
 func (obj *FabricChaosParametersEx2) toInnerStruct() *innerFabricChaosParametersEx2 {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricChaosParametersEx2{*obj, nil}
 }
 
@@ -23087,9 +24341,15 @@ type innerFabricStartChaosDescription struct {
 }
 
 func (obj *innerFabricStartChaosDescription) toGoStruct() *FabricStartChaosDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricStartChaosDescription
 }
 func (obj *FabricStartChaosDescription) toInnerStruct() *innerFabricStartChaosDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricStartChaosDescription{*obj, nil}
 }
 
@@ -23134,9 +24394,15 @@ type innerFabricChaosEventsSegmentDescription struct {
 }
 
 func (obj *innerFabricChaosEventsSegmentDescription) toGoStruct() *FabricChaosEventsSegmentDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricChaosEventsSegmentDescription
 }
 func (obj *FabricChaosEventsSegmentDescription) toInnerStruct() *innerFabricChaosEventsSegmentDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricChaosEventsSegmentDescription{*obj, nil}
 }
 
@@ -23213,9 +24479,15 @@ type innerFabricChaosEvent struct {
 }
 
 func (obj *innerFabricChaosEvent) toGoStruct() *FabricChaosEvent {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricChaosEvent
 }
 func (obj *FabricChaosEvent) toInnerStruct() *innerFabricChaosEvent {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricChaosEvent{*obj}
 }
 
@@ -23615,9 +24887,15 @@ type innerFabricChaosDescription struct {
 }
 
 func (obj *innerFabricChaosDescription) toGoStruct() *FabricChaosDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricChaosDescription
 }
 func (obj *FabricChaosDescription) toInnerStruct() *innerFabricChaosDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricChaosDescription{*obj, nil}
 }
 
@@ -23631,9 +24909,15 @@ type innerFabricChaosScheduleTimeUtc struct {
 }
 
 func (obj *innerFabricChaosScheduleTimeUtc) toGoStruct() *FabricChaosScheduleTimeUtc {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricChaosScheduleTimeUtc
 }
 func (obj *FabricChaosScheduleTimeUtc) toInnerStruct() *innerFabricChaosScheduleTimeUtc {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricChaosScheduleTimeUtc{*obj, nil}
 }
 
@@ -23647,9 +24931,15 @@ type innerFabricChaosScheduleTimeRangeUtc struct {
 }
 
 func (obj *innerFabricChaosScheduleTimeRangeUtc) toGoStruct() *FabricChaosScheduleTimeRangeUtc {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricChaosScheduleTimeRangeUtc
 }
 func (obj *FabricChaosScheduleTimeRangeUtc) toInnerStruct() *innerFabricChaosScheduleTimeRangeUtc {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricChaosScheduleTimeRangeUtc{*obj, nil}
 }
 
@@ -23691,9 +24981,15 @@ type innerFabricChaosScheduleJobActiveDays struct {
 }
 
 func (obj *innerFabricChaosScheduleJobActiveDays) toGoStruct() *FabricChaosScheduleJobActiveDays {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricChaosScheduleJobActiveDays
 }
 func (obj *FabricChaosScheduleJobActiveDays) toInnerStruct() *innerFabricChaosScheduleJobActiveDays {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricChaosScheduleJobActiveDays{*obj, nil}
 }
 
@@ -23969,9 +25265,15 @@ type innerFabricChaosScheduleDescription struct {
 }
 
 func (obj *innerFabricChaosScheduleDescription) toGoStruct() *FabricChaosScheduleDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricChaosScheduleDescription
 }
 func (obj *FabricChaosScheduleDescription) toInnerStruct() *innerFabricChaosScheduleDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricChaosScheduleDescription{*obj, nil}
 }
 
@@ -23984,9 +25286,15 @@ type innerFabricChaosServiceScheduleDescription struct {
 }
 
 func (obj *innerFabricChaosServiceScheduleDescription) toGoStruct() *FabricChaosServiceScheduleDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricChaosServiceScheduleDescription
 }
 func (obj *FabricChaosServiceScheduleDescription) toInnerStruct() *innerFabricChaosServiceScheduleDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricChaosServiceScheduleDescription{*obj, nil}
 }
 
@@ -24237,9 +25545,15 @@ type innerFabricNetworkDescription struct {
 }
 
 func (obj *innerFabricNetworkDescription) toGoStruct() *FabricNetworkDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricNetworkDescription
 }
 func (obj *FabricNetworkDescription) toInnerStruct() *innerFabricNetworkDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricNetworkDescription{*obj}
 }
 
@@ -24281,9 +25595,15 @@ type innerFabricLocalNetworkDescription struct {
 }
 
 func (obj *innerFabricLocalNetworkDescription) toGoStruct() *FabricLocalNetworkDescription {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricLocalNetworkDescription
 }
 func (obj *FabricLocalNetworkDescription) toInnerStruct() *innerFabricLocalNetworkDescription {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricLocalNetworkDescription{*obj, nil}
 }
 
@@ -24325,9 +25645,15 @@ type innerFabricNetworkInformation struct {
 }
 
 func (obj *innerFabricNetworkInformation) toGoStruct() *FabricNetworkInformation {
+	if obj == nil {
+		return nil
+	}
 	return &obj.FabricNetworkInformation
 }
 func (obj *FabricNetworkInformation) toInnerStruct() *innerFabricNetworkInformation {
+	if obj == nil {
+		return nil
+	}
 	return &innerFabricNetworkInformation{*obj}
 }
 
