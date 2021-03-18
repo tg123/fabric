@@ -86,8 +86,6 @@ type goFabricServiceNotificationEventHandlerVtbl struct {
 	OnNotification uintptr
 }
 
-var fuck = map[unsafe.Pointer]bool{}
-
 func (h *goFabricServiceNotificationEventHandler) onNotification(this *ole.IUnknown, notification *comFabricServiceNotification) uintptr {
 	cb := h.client.OnNotification
 	if cb == nil {
