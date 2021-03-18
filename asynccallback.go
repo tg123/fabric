@@ -80,9 +80,12 @@ func newFabricAsyncOperationCallback(fn func(ctx *comIFabricAsyncOperationContex
 	return cb
 }
 
-func (v *comIFabricAsyncOperationCallback) invoke(this *ole.IUnknown, ctx *ole.IUnknown) uintptr {
+func (v *comIFabricAsyncOperationCallback) invoke(this *ole.IUnknown, ctx *comIFabricAsyncOperationContext) uintptr {
+	if ctx == nil {
+		return ole.E_POINTER
+	}
 	ctx.AddRef()
 	defer ctx.Release()
-	v.callback((*comIFabricAsyncOperationContext)(unsafe.Pointer(ctx)))
+	v.callback(ctx)
 	return ole.S_OK
 }

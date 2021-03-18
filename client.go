@@ -95,14 +95,15 @@ func (h *goFabricServiceNotificationEventHandler) onNotification(this *ole.IUnkn
 	}
 
 	if notification == nil {
-		return ole.S_OK
+		return ole.E_POINTER
 	}
 
-	n, err := notification.GetNotification()
+	notification.AddRef()
+	defer notification.Release()
 
-	// TODO handle err
+	n, err := notification.GetNotification()
 	if err != nil {
-		return ole.S_OK
+		return ole.E_FAIL
 	}
 
 	cb(*n)
@@ -147,12 +148,15 @@ func (h *goFabricConnectionEventHandler) onInfo(result *comFabricGatewayInformat
 	}
 
 	if result == nil {
-		return ole.S_OK
+		return ole.E_POINTER
 	}
+
+	result.AddRef()
+	defer result.Release()
 
 	info, err := result.GetGatewayInformation()
 	if err != nil {
-		return ole.S_OK
+		return ole.E_FAIL
 	}
 
 	cb(*info)
