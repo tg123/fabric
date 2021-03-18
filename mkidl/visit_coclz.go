@@ -93,7 +93,7 @@ func (g *generator) generateAsyncCall(hubFieldName string, asyncrt *ast.Interfac
 
 	g.printfln(`ch := make(chan error, 1)
 		defer close(ch)
-		callback := newFabricAsyncOperationCallback(func(sfctx *comIFabricAsyncOperationContext) {
+		callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 	`)
 
 	var rt []string

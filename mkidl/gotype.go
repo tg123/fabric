@@ -30,7 +30,6 @@ var basicTypeMap = map[string]string{
 
 	// TODO move to generated
 	"IFabricAsyncOperationCallback": "comIFabricAsyncOperationCallback",
-	"IFabricAsyncOperationContext":  "comIFabricAsyncOperationContext",
 }
 
 var basicTypeMapInner = map[string]string{

@@ -8,6 +8,79 @@ import (
 	"unsafe"
 )
 
+type comFabricAsyncOperationContext struct {
+	ole.IUnknown
+}
+
+type comFabricAsyncOperationContextVtbl struct {
+	ole.IUnknownVtbl
+	IsCompleted            uintptr
+	CompletedSynchronously uintptr
+	get_Callback           uintptr
+	Cancel                 uintptr
+}
+
+func (v *comFabricAsyncOperationContext) vtable() *comFabricAsyncOperationContextVtbl {
+	return (*comFabricAsyncOperationContextVtbl)(unsafe.Pointer(v.RawVTable))
+}
+
+func (v *comFabricAsyncOperationContext) IsCompleted() (rt bool, err error) {
+	hr, _, err1 := syscall.Syscall(
+		v.vtable().IsCompleted,
+		1,
+		uintptr(unsafe.Pointer(v)),
+		0,
+		0,
+	)
+	_ = err1
+	rt = hr != 0
+	return
+}
+func (v *comFabricAsyncOperationContext) CompletedSynchronously() (rt bool, err error) {
+	hr, _, err1 := syscall.Syscall(
+		v.vtable().CompletedSynchronously,
+		1,
+		uintptr(unsafe.Pointer(v)),
+		0,
+		0,
+	)
+	_ = err1
+	rt = hr != 0
+	return
+}
+func (v *comFabricAsyncOperationContext) GetCallback() (callback *comIFabricAsyncOperationCallback, err error) {
+	var p_0 *comIFabricAsyncOperationCallback
+	defer func() {
+		callback = p_0
+	}()
+	hr, _, err1 := syscall.Syscall(
+		v.vtable().get_Callback,
+		2,
+		uintptr(unsafe.Pointer(v)),
+		uintptr(unsafe.Pointer(&p_0)),
+		0,
+	)
+	if hr != 0 {
+		err = errno(hr, err1)
+		return
+	}
+	return
+}
+func (v *comFabricAsyncOperationContext) Cancel() (err error) {
+	hr, _, err1 := syscall.Syscall(
+		v.vtable().Cancel,
+		1,
+		uintptr(unsafe.Pointer(v)),
+		0,
+		0,
+	)
+	if hr != 0 {
+		err = errno(hr, err1)
+		return
+	}
+	return
+}
+
 type comFabricStringResult struct {
 	ole.IUnknown
 }

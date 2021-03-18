@@ -79,7 +79,7 @@ func errno(hr uintptr, syserr error) error {
 	return errors.Wrap(FabricErrorCode(hr), fabricGetLastError())
 }
 
-func waitch(ctx context.Context, ch <-chan error, sfctx *comIFabricAsyncOperationContext, timeout time.Duration) (err error) {
+func waitch(ctx context.Context, ch <-chan error, sfctx *comFabricAsyncOperationContext, timeout time.Duration) (err error) {
 	defer releaseComObject(&sfctx.IUnknown)
 	select {
 	case err = <-ch:
