@@ -47,8 +47,7 @@ func releaseComObject(com *ole.IUnknown) error {
 	// however
 	// now some com objects exposed and calling release is not guaranteed
 
-	// TODO temp disable release, seems something was released by accident
-	// com.Release()
+	com.Release()
 	return nil
 }
 
