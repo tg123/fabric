@@ -124,6 +124,7 @@ func (v *comFabricClientSettings) innerSetSecurityCredentials(
 
 	innerc := c.toInnerStruct()
 
+	// TODO combine Ex
 	ex1 := fabricX509CredentialsEx1{
 		IssuerThumbprints: cred.IssuerThumbprints,
 	}
