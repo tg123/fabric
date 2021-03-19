@@ -93,7 +93,7 @@ func (g *generator) generateAsyncCall(hubFieldName string, asyncrt *ast.Interfac
 
 	g.printfln(`ch := make(chan error, 1)
 		defer close(ch)
-		callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+		callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 	`)
 
 	var rt []string
@@ -199,6 +199,16 @@ next:
 	g.printfln("}")
 }
 
+func findIID(ifc *ast.InterfaceNode) string {
+	for _, attr := range ifc.Attributes {
+		if attr.Type == scanner.UUID {
+			return attr.Val
+		}
+	}
+
+	return ""
+}
+
 func (g *generator) generateCoClz(n *ast.CoClassNode) {
 	hubName := casee.ToCamelCase(n.Name)
 	clzName := n.Name
@@ -212,33 +222,27 @@ func (g *generator) generateCoClz(n *ast.CoClassNode) {
 	// init
 	g.printfln("func (v *%vComHub) init(createComObject comCreator) {", hubName)
 
-nextinit:
 	for _, ifc := range n.Interfaces {
 		ifc = g.ctx.definedInterface[ifc.Name]
 		hubFieldName := strings.TrimPrefix(ifc.Name, "I")
 
-		for _, attr := range ifc.Attributes {
-			if attr.Type == scanner.UUID {
-				g.printfln(`createComObject("{%v}", unsafe.Pointer(&v.%v))`, attr.Val, hubFieldName)
-				continue nextinit
-			}
+		iid := findIID(ifc)
+
+		if iid != "" {
+			g.printfln(`createComObject("{%v}", unsafe.Pointer(&v.%v))`, strings.ToUpper(iid), hubFieldName)
 		}
 	}
 	g.printfln("}")
 
 	g.printfln("func (v *%vComHub) Close() {", hubName)
-nextclose:
 	for _, ifc := range n.Interfaces {
 		ifc = g.ctx.definedInterface[ifc.Name]
 		hubFieldName := strings.TrimPrefix(ifc.Name, "I")
 
-		for _, attr := range ifc.Attributes {
-			if attr.Type == scanner.UUID {
-				g.printfln(`if v.%v != nil {`, hubFieldName)
-				g.printfln(`releaseComObject(&v.%v.IUnknown)`, hubFieldName)
-				g.printfln("}")
-				continue nextclose
-			}
+		if findIID(ifc) != "" {
+			g.printfln(`if v.%v != nil {`, hubFieldName)
+			g.printfln(`releaseComObject(&v.%v.IUnknown)`, hubFieldName)
+			g.printfln("}")
 		}
 	}
 	g.printfln("}")
@@ -249,7 +253,7 @@ nextclose:
 		hubFieldName := strings.TrimPrefix(ifc.Name, "I")
 
 		for i, m := range ifc.Methods {
-			if methodblacklist[fmt.Sprintf("%v.%v", ifc.Name, m.Name)] {
+			if methodBlackList[fmt.Sprintf("%v.%v", ifc.Name, m.Name)] {
 				continue
 			}
 

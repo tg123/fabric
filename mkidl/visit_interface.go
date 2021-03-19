@@ -11,7 +11,42 @@ import (
 	"github.com/pinzolo/casee"
 )
 
+var interfaceBlackList = map[string]bool{
+	// TODO goproxy to support inherit IFabricClientConnectionEventHandler
+	"IFabricClientConnectionEventHandler2": true,
+}
+
+type goproxyProperty struct {
+	Name string
+	Type string
+}
+
+var goproxyProperties = map[string][]goproxyProperty{
+	"IFabricServiceNotificationEventHandler": {
+		{
+			Name: "client",
+			Type: "*FabricClient",
+		},
+	},
+	"IFabricClientConnectionEventHandler": {
+		{
+			Name: "client",
+			Type: "*FabricClient",
+		},
+	},
+	"IFabricAsyncOperationCallback": {
+		{
+			Name: "callback",
+			Type: "func(ctx *comFabricAsyncOperationContext)",
+		},
+	},
+}
+
 func (g *generator) goInterfaceName(name string) string {
+
+	if _, ok := goproxyProperties[name]; ok {
+		return fmt.Sprintf("goProxy%v", strings.TrimPrefix(name, "I"))
+	}
 
 	if g.ctx.publicReturnedInterfaces[name] {
 		return fmt.Sprintf("Com%v", strings.TrimPrefix(name, "I"))
@@ -21,7 +56,7 @@ func (g *generator) goInterfaceName(name string) string {
 }
 
 // TODO support those method
-var methodblacklist = map[string]bool{
+var methodBlackList = map[string]bool{
 
 	// weird
 	"IFabricQueryClient6.EndGetNodeList2":        true,
@@ -129,7 +164,7 @@ func (g *generator) generateMethods(n *ast.InterfaceNode) {
 	for _, m := range n.Methods {
 
 		// TODO fix blacklist
-		if methodblacklist[fmt.Sprintf("%v.%v", n.Name, m.Name)] {
+		if methodBlackList[fmt.Sprintf("%v.%v", n.Name, m.Name)] {
 			continue
 		}
 
@@ -252,11 +287,7 @@ func (g *generator) generateMethods(n *ast.InterfaceNode) {
 
 }
 
-func (g *generator) visitInterface(n *ast.InterfaceNode) {
-	if _, ok := basicTypeMap[n.Name]; ok {
-		return
-	}
-
+func (g *generator) generateComStub(n *ast.InterfaceNode) {
 	interfaceName := g.goInterfaceName(n.Name)
 
 	// generate vtable
@@ -300,4 +331,57 @@ func (g *generator) visitInterface(n *ast.InterfaceNode) {
 	})
 
 	g.generateMethods(n)
+}
+
+func (g *generator) generateGoProxy(n *ast.InterfaceNode) {
+	g.importpkg("syscall")
+	interfaceName := g.goInterfaceName(n.Name)
+	g.templateln(`
+		type {{.Name}} struct {
+			vtbl       *{{.Name}}Vtbl
+			unknownref *goIUnknown
+			{{ range .Properties }} {{.Name}} {{.Type}}
+			{{ end }} 
+		}
+
+		type {{.Name}}Vtbl struct {
+			goIUnknownVtbl
+			{{ range .Methods }} {{.Name}} uintptr
+			{{ end }} 
+		}
+
+		func new{{ .Name | ToPascalCase }}( {{ range .Properties }} {{.Name}} {{.Type}} {{end}}) *{{.Name}} {
+			proxy := &{{.Name}}{}
+			proxy.vtbl = &{{.Name}}Vtbl{}
+			proxy.unknownref = attachIUnknown("{{"{"}}{{ .IID }}{{"}"}}", &proxy.vtbl.goIUnknownVtbl)
+			{{ range .Methods }} proxy.vtbl.{{.Name}} = syscall.NewCallback(proxy.{{.Name}})
+			{{ end }} 
+			{{ range .Properties }} proxy.{{.Name}} = {{.Name}}
+			{{ end }} 
+			proxy.init()
+			return proxy
+		}
+	`, struct {
+		Name       string
+		Methods    []*ast.MethodNode
+		Properties []goproxyProperty
+		IID        string
+	}{
+		Name:       interfaceName,
+		Methods:    n.Methods,
+		Properties: goproxyProperties[n.Name],
+		IID:        strings.ToUpper(findIID(n)),
+	})
+}
+
+func (g *generator) visitInterface(n *ast.InterfaceNode) {
+	if _, ok := interfaceBlackList[n.Name]; ok {
+		return
+	}
+
+	if _, ok := goproxyProperties[n.Name]; ok {
+		g.generateGoProxy(n)
+	} else {
+		g.generateComStub(n)
+	}
 }

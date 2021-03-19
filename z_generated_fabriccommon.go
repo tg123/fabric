@@ -8,6 +8,29 @@ import (
 	"unsafe"
 )
 
+type goProxyFabricAsyncOperationCallback struct {
+	vtbl       *goProxyFabricAsyncOperationCallbackVtbl
+	unknownref *goIUnknown
+	callback   func(ctx *comFabricAsyncOperationContext)
+}
+
+type goProxyFabricAsyncOperationCallbackVtbl struct {
+	goIUnknownVtbl
+	Invoke uintptr
+}
+
+func newGoProxyFabricAsyncOperationCallback(callback func(ctx *comFabricAsyncOperationContext)) *goProxyFabricAsyncOperationCallback {
+	proxy := &goProxyFabricAsyncOperationCallback{}
+	proxy.vtbl = &goProxyFabricAsyncOperationCallbackVtbl{}
+	proxy.unknownref = attachIUnknown("{86F08D7E-14DD-4575-8489-B1D5D679029C}", &proxy.vtbl.goIUnknownVtbl)
+	proxy.vtbl.Invoke = syscall.NewCallback(proxy.Invoke)
+
+	proxy.callback = callback
+
+	proxy.init()
+	return proxy
+}
+
 type comFabricAsyncOperationContext struct {
 	ole.IUnknown
 }
@@ -48,8 +71,8 @@ func (v *comFabricAsyncOperationContext) CompletedSynchronously() (rt bool, err 
 	rt = hr != 0
 	return
 }
-func (v *comFabricAsyncOperationContext) GetCallback() (callback *comIFabricAsyncOperationCallback, err error) {
-	var p_0 *comIFabricAsyncOperationCallback
+func (v *comFabricAsyncOperationContext) GetCallback() (callback *goProxyFabricAsyncOperationCallback, err error) {
+	var p_0 *goProxyFabricAsyncOperationCallback
 	defer func() {
 		callback = p_0
 	}()

@@ -13,7 +13,7 @@ type fabricRuntimeComHub struct {
 }
 
 func (v *fabricRuntimeComHub) init(createComObject comCreator) {
-	createComObject("{cc53af8e-74cd-11df-ac3e-0024811e3892}", unsafe.Pointer(&v.FabricRuntime))
+	createComObject("{CC53AF8E-74CD-11DF-AC3E-0024811E3892}", unsafe.Pointer(&v.FabricRuntime))
 }
 func (v *fabricRuntimeComHub) Close() {
 	if v.FabricRuntime != nil {
@@ -84,7 +84,7 @@ func (v *comFabricRuntime) beginRegisterStatelessServiceFactory(
 	serviceTypeName string,
 	factory *comFabricStatelessServiceFactory,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_1, _ := windows.UTF16PtrFromString(serviceTypeName)
@@ -135,7 +135,7 @@ func (v *comFabricRuntime) beginRegisterStatefulServiceFactory(
 	serviceTypeName string,
 	factory *comFabricStatefulServiceFactory,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_3, _ := windows.UTF16PtrFromString(serviceTypeName)
@@ -204,7 +204,7 @@ func (v *comFabricRuntime) beginRegisterServiceGroupFactory(
 	groupServiceType string,
 	factory *ComFabricServiceGroupFactory,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_5, _ := windows.UTF16PtrFromString(groupServiceType)
@@ -324,7 +324,7 @@ func (v *comFabricStatelessServiceInstance) vtable() *comFabricStatelessServiceI
 
 func (v *comFabricStatelessServiceInstance) beginOpen(
 	partition *comFabricStatelessServicePartition,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_2 *comFabricAsyncOperationContext
 	defer func() {
@@ -347,7 +347,7 @@ func (v *comFabricStatelessServiceInstance) beginOpen(
 	return
 }
 func (v *comFabricStatelessServiceInstance) beginClose(
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_1 *comFabricAsyncOperationContext
 	defer func() {
@@ -683,7 +683,7 @@ func (v *comFabricStatefulServiceReplica) vtable() *comFabricStatefulServiceRepl
 func (v *comFabricStatefulServiceReplica) beginOpen(
 	openMode FabricReplicaOpenMode,
 	partition *comFabricStatefulServicePartition,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
@@ -707,7 +707,7 @@ func (v *comFabricStatefulServiceReplica) beginOpen(
 }
 func (v *comFabricStatefulServiceReplica) beginChangeRole(
 	newRole FabricReplicaRole,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_2 *comFabricAsyncOperationContext
 	defer func() {
@@ -750,7 +750,7 @@ func (v *comFabricStatefulServiceReplica) endChangeRole(
 	return
 }
 func (v *comFabricStatefulServiceReplica) beginClose(
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_1 *comFabricAsyncOperationContext
 	defer func() {
@@ -1099,7 +1099,7 @@ func (v *comFabricStateReplicator) vtable() *comFabricStateReplicatorVtbl {
 
 func (v *comFabricStateReplicator) beginReplicate(
 	operationData *comFabricOperationData,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (sequenceNumber int64, context *comFabricAsyncOperationContext, err error) {
 	var p_2 int64
 	defer func() {
@@ -1254,7 +1254,7 @@ func (v *comFabricStateProvider) vtable() *comFabricStateProviderVtbl {
 func (v *comFabricStateProvider) beginUpdateEpoch(
 	epoch *FabricEpoch,
 	previousEpochLastSequenceNumber int64,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricEpoch
 	p_0 = epoch.toInnerStruct()
@@ -1313,7 +1313,7 @@ func (v *comFabricStateProvider) GetLastCommittedSequenceNumber() (sequenceNumbe
 	return
 }
 func (v *comFabricStateProvider) beginOnDataLoss(
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_1 *comFabricAsyncOperationContext
 	defer func() {
@@ -1516,7 +1516,7 @@ func (v *comFabricOperationStream) vtable() *comFabricOperationStreamVtbl {
 }
 
 func (v *comFabricOperationStream) beginGetOperation(
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_1 *comFabricAsyncOperationContext
 	defer func() {
@@ -1581,7 +1581,7 @@ func (v *comFabricOperationDataStream) vtable() *comFabricOperationDataStreamVtb
 }
 
 func (v *comFabricOperationDataStream) beginGetNext(
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_1 *comFabricAsyncOperationContext
 	defer func() {
@@ -1625,7 +1625,7 @@ func (v *comFabricReplicator) vtable() *comFabricReplicatorVtbl {
 }
 
 func (v *comFabricReplicator) beginOpen(
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_1 *comFabricAsyncOperationContext
 	defer func() {
@@ -1647,7 +1647,7 @@ func (v *comFabricReplicator) beginOpen(
 func (v *comFabricReplicator) beginChangeRole(
 	epoch *FabricEpoch,
 	role FabricReplicaRole,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricEpoch
 	p_0 = epoch.toInnerStruct()
@@ -1689,7 +1689,7 @@ func (v *comFabricReplicator) endChangeRole(
 }
 func (v *comFabricReplicator) beginUpdateEpoch(
 	epoch *FabricEpoch,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricEpoch
 	p_0 = epoch.toInnerStruct()
@@ -1730,7 +1730,7 @@ func (v *comFabricReplicator) endUpdateEpoch(
 	return
 }
 func (v *comFabricReplicator) beginClose(
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_1 *comFabricAsyncOperationContext
 	defer func() {
@@ -1842,7 +1842,7 @@ func (v *comFabricPrimaryReplicator) vtable() *comFabricPrimaryReplicatorVtbl {
 }
 
 func (v *comFabricPrimaryReplicator) beginOnDataLoss(
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_1 *comFabricAsyncOperationContext
 	defer func() {
@@ -1904,7 +1904,7 @@ func (v *comFabricPrimaryReplicator) UpdateCatchUpReplicaSetConfiguration(
 }
 func (v *comFabricPrimaryReplicator) beginWaitForCatchUpQuorum(
 	catchUpMode FabricReplicaSetQuorumMode,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_2 *comFabricAsyncOperationContext
 	defer func() {
@@ -1962,7 +1962,7 @@ func (v *comFabricPrimaryReplicator) UpdateCurrentReplicaSetConfiguration(
 }
 func (v *comFabricPrimaryReplicator) beginBuildReplica(
 	replica *FabricReplicaInformation,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricReplicaInformation
 	p_0 = replica.toInnerStruct()
@@ -2071,7 +2071,7 @@ func (v *comFabricAtomicGroupStateReplicator) CreateAtomicGroup() (AtomicGroupId
 func (v *comFabricAtomicGroupStateReplicator) beginReplicateAtomicGroupOperation(
 	atomicGroupId int64,
 	operationData *comFabricOperationData,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (operationSequenceNumber int64, context *comFabricAsyncOperationContext, err error) {
 	var p_3 int64
 	defer func() {
@@ -2119,7 +2119,7 @@ func (v *comFabricAtomicGroupStateReplicator) endReplicateAtomicGroupOperation(
 }
 func (v *comFabricAtomicGroupStateReplicator) beginReplicateAtomicGroupCommit(
 	atomicGroupId int64,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (commitSequenceNumber int64, context *comFabricAsyncOperationContext, err error) {
 	var p_2 int64
 	defer func() {
@@ -2167,7 +2167,7 @@ func (v *comFabricAtomicGroupStateReplicator) endReplicateAtomicGroupCommit(
 }
 func (v *comFabricAtomicGroupStateReplicator) beginReplicateAtomicGroupRollback(
 	atomicGroupId int64,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (rollbackSequenceNumber int64, context *comFabricAsyncOperationContext, err error) {
 	var p_2 int64
 	defer func() {
@@ -2235,7 +2235,7 @@ func (v *comFabricAtomicGroupStateProvider) vtable() *comFabricAtomicGroupStateP
 func (v *comFabricAtomicGroupStateProvider) beginAtomicGroupCommit(
 	atomicGroupId int64,
 	commitSequenceNumber int64,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
@@ -2276,7 +2276,7 @@ func (v *comFabricAtomicGroupStateProvider) endAtomicGroupCommit(
 func (v *comFabricAtomicGroupStateProvider) beginAtomicGroupRollback(
 	atomicGroupId int64,
 	rollbackequenceNumber int64,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
@@ -2316,7 +2316,7 @@ func (v *comFabricAtomicGroupStateProvider) endAtomicGroupRollback(
 }
 func (v *comFabricAtomicGroupStateProvider) beginUndoProgress(
 	fromCommitSequenceNumber int64,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_2 *comFabricAsyncOperationContext
 	defer func() {
@@ -4054,7 +4054,7 @@ func (v *comFabricTransaction) vtable() *comFabricTransactionVtbl {
 
 func (v *comFabricTransaction) beginCommit(
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_2 *comFabricAsyncOperationContext
 	defer func() {
@@ -4549,7 +4549,7 @@ func (v *comFabricKeyValueStoreReplica3) beginBackup(
 	backupDirectory string,
 	backupOption FabricStoreBackupOption,
 	postBackupHandler *comFabricStorePostBackupHandler,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_36, _ := windows.UTF16PtrFromString(backupDirectory)
@@ -4608,7 +4608,7 @@ func (v *comFabricKeyValueStoreReplica4) vtable() *comFabricKeyValueStoreReplica
 
 func (v *comFabricKeyValueStoreReplica4) beginRestore(
 	backupDirectory string,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_37, _ := windows.UTF16PtrFromString(backupDirectory)
@@ -4902,7 +4902,7 @@ func (v *comFabricKeyValueStoreReplica6) vtable() *comFabricKeyValueStoreReplica
 func (v *comFabricKeyValueStoreReplica6) beginRestore2(
 	backupDirectory string,
 	settings *FabricKeyValueStoreRestoreSettings,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_45, _ := windows.UTF16PtrFromString(backupDirectory)
@@ -5466,7 +5466,7 @@ func (v *comFabricStoreEventHandler2) vtable() *comFabricStoreEventHandler2Vtbl 
 }
 
 func (v *comFabricStoreEventHandler2) beginOnDataLoss(
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_1 *comFabricAsyncOperationContext
 	defer func() {
@@ -5522,7 +5522,7 @@ func (v *comFabricStorePostBackupHandler) vtable() *comFabricStorePostBackupHand
 
 func (v *comFabricStorePostBackupHandler) beginPostBackup(
 	info *FabricStoreBackupInfo,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricStoreBackupInfo
 	p_0 = info.toInnerStruct()
@@ -5803,7 +5803,7 @@ func (v *comFabricCodePackageActivator) beginActivateCodePackage(
 	codePackageNames []string,
 	environment map[string]string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricStringList
 	lst_51 := &innerFabricStringList{}
@@ -5891,7 +5891,7 @@ func (v *comFabricCodePackageActivator) endActivateCodePackage(
 func (v *comFabricCodePackageActivator) beginDeactivateCodePackage(
 	codePackageNames []string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricStringList
 	lst_56 := &innerFabricStringList{}

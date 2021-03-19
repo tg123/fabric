@@ -4,9 +4,11 @@ import (
 	"bytes"
 	"fmt"
 	"io"
+	"strings"
 	"text/template"
 
 	"github.com/jd3nn1s/gomidl/ast"
+	"github.com/pinzolo/casee"
 )
 
 type generator struct {
@@ -67,9 +69,12 @@ func (g *generator) printfln(format string, args ...interface{}) {
 
 func (g *generator) templateln(txt string, data interface{}) {
 	t := template.New("")
-	// t.Funcs(template.FuncMap{
-	// 	"": "",
-	// })
+	t.Funcs(template.FuncMap{
+		"ToCamelCase":  casee.ToCamelCase,
+		"ToPascalCase": casee.ToPascalCase,
+		"TrimPrefix":   strings.TrimPrefix,
+		"ToTitle":      strings.ToTitle,
+	})
 	t = template.Must(t.Parse(txt))
 	err := t.Execute(&g.buf, data)
 	if err != nil {

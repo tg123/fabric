@@ -66,58 +66,58 @@ type fabricClientComHub struct {
 }
 
 func (v *fabricClientComHub) init(createComObject comCreator) {
-	createComObject("{c6fb97f7-82f3-4e6c-a80a-021e8ffca425}", unsafe.Pointer(&v.FabricClientSettings2))
-	createComObject("{04991c28-3f9d-4a49-9322-a56d308965fd}", unsafe.Pointer(&v.FabricPropertyManagementClient2))
-	createComObject("{f7368189-fd1f-437c-888d-8c89cecc57a0}", unsafe.Pointer(&v.FabricServiceManagementClient))
-	createComObject("{9933ed08-5d0c-4aed-bab6-f676bf5be8aa}", unsafe.Pointer(&v.FabricServiceManagementClient2))
+	createComObject("{C6FB97F7-82F3-4E6C-A80A-021E8FFCA425}", unsafe.Pointer(&v.FabricClientSettings2))
+	createComObject("{04991C28-3F9D-4A49-9322-A56D308965FD}", unsafe.Pointer(&v.FabricPropertyManagementClient2))
+	createComObject("{F7368189-FD1F-437C-888D-8C89CECC57A0}", unsafe.Pointer(&v.FabricServiceManagementClient))
+	createComObject("{9933ED08-5D0C-4AED-BAB6-F676BF5BE8AA}", unsafe.Pointer(&v.FabricServiceManagementClient2))
 	createComObject("{98EC1156-C249-4F66-8D7C-9A5FA88E8E6D}", unsafe.Pointer(&v.FabricServiceManagementClient3))
-	createComObject("{8180db27-7d0b-43b0-82e0-4a8e022fc238}", unsafe.Pointer(&v.FabricServiceManagementClient4))
+	createComObject("{8180DB27-7D0B-43B0-82E0-4A8E022FC238}", unsafe.Pointer(&v.FabricServiceManagementClient4))
 	createComObject("{F9A70679-8CA3-4E27-9411-483E0C89B1FA}", unsafe.Pointer(&v.FabricServiceManagementClient5))
 	createComObject("{23E4EE1B-049A-48F5-8DD7-B601EACE47DE}", unsafe.Pointer(&v.FabricServiceManagementClient6))
-	createComObject("{2061227e-0281-4baf-9b19-b2dfb2e63bbe}", unsafe.Pointer(&v.FabricServiceGroupManagementClient))
-	createComObject("{4f0dc42d-8fec-4ea9-a96b-5be1fa1e1d64}", unsafe.Pointer(&v.FabricServiceGroupManagementClient2))
-	createComObject("{cbee0e12-b5a0-44dc-8c3c-c067958f82f6}", unsafe.Pointer(&v.FabricServiceGroupManagementClient3))
+	createComObject("{2061227E-0281-4BAF-9B19-B2DFB2E63BBE}", unsafe.Pointer(&v.FabricServiceGroupManagementClient))
+	createComObject("{4F0DC42D-8FEC-4EA9-A96B-5BE1FA1E1D64}", unsafe.Pointer(&v.FabricServiceGroupManagementClient2))
+	createComObject("{CBEE0E12-B5A0-44DC-8C3C-C067958F82F6}", unsafe.Pointer(&v.FabricServiceGroupManagementClient3))
 	createComObject("{3C73B32E-9A08-48CA-B3A3-993A2029E37A}", unsafe.Pointer(&v.FabricServiceGroupManagementClient4))
-	createComObject("{7c219ae9-e58d-431f-8b30-92a40281faac}", unsafe.Pointer(&v.FabricApplicationManagementClient))
-	createComObject("{f873516f-9bfe-47e5-93b9-3667aaf19324}", unsafe.Pointer(&v.FabricApplicationManagementClient2))
-	createComObject("{108c7735-97e1-4af8-8c2d-9080b1b29d33}", unsafe.Pointer(&v.FabricApplicationManagementClient3))
-	createComObject("{82c41b22-dbcb-4f7a-8d2f-f9bb94add446}", unsafe.Pointer(&v.FabricApplicationManagementClient4))
-	createComObject("{d7490e43-2217-4158-93e1-9ce4dd6f724a}", unsafe.Pointer(&v.FabricApplicationManagementClient5))
-	createComObject("{b01e63ee-1ea4-4181-95c7-983b32e16848}", unsafe.Pointer(&v.FabricApplicationManagementClient6))
+	createComObject("{7C219AE9-E58D-431F-8B30-92A40281FAAC}", unsafe.Pointer(&v.FabricApplicationManagementClient))
+	createComObject("{F873516F-9BFE-47E5-93B9-3667AAF19324}", unsafe.Pointer(&v.FabricApplicationManagementClient2))
+	createComObject("{108C7735-97E1-4AF8-8C2D-9080B1B29D33}", unsafe.Pointer(&v.FabricApplicationManagementClient3))
+	createComObject("{82C41B22-DBCB-4F7A-8D2F-F9BB94ADD446}", unsafe.Pointer(&v.FabricApplicationManagementClient4))
+	createComObject("{D7490E43-2217-4158-93E1-9CE4DD6F724A}", unsafe.Pointer(&v.FabricApplicationManagementClient5))
+	createComObject("{B01E63EE-1EA4-4181-95C7-983B32E16848}", unsafe.Pointer(&v.FabricApplicationManagementClient6))
 	createComObject("{26844276-25B1-4F8C-ADBE-B1B3A3083C17}", unsafe.Pointer(&v.FabricApplicationManagementClient7))
-	createComObject("{97b38e85-7329-47ff-a8d2-b7cbf1603689}", unsafe.Pointer(&v.FabricApplicationManagementClient8))
-	createComObject("{26617b63-1350-4d7f-830c-2200978d31bb}", unsafe.Pointer(&v.FabricApplicationManagementClient9))
-	createComObject("{67001225-d106-41ae-8bd4-5a0a119c5c01}", unsafe.Pointer(&v.FabricApplicationManagementClient10))
-	createComObject("{a3cf17e0-cf84-4ae0-b720-1785c0fb4ace}", unsafe.Pointer(&v.FabricClusterManagementClient))
-	createComObject("{f9493e16-6a49-4d79-8695-5a6826b504c5}", unsafe.Pointer(&v.FabricClusterManagementClient2))
-	createComObject("{c3001d74-92b6-44cb-ac2f-2ffc4a56287c}", unsafe.Pointer(&v.FabricClusterManagementClient3))
-	createComObject("{b6b12671-f283-4d71-a818-0260549bc83e}", unsafe.Pointer(&v.FabricClusterManagementClient4))
-	createComObject("{a6ddd816-a100-11e4-89d3-123b93f75cba}", unsafe.Pointer(&v.FabricClusterManagementClient5))
-	createComObject("{9e454ae8-4b8c-4136-884a-37b0b92cc855}", unsafe.Pointer(&v.FabricClusterManagementClient6))
+	createComObject("{97B38E85-7329-47FF-A8D2-B7CBF1603689}", unsafe.Pointer(&v.FabricApplicationManagementClient8))
+	createComObject("{26617B63-1350-4D7F-830C-2200978D31BB}", unsafe.Pointer(&v.FabricApplicationManagementClient9))
+	createComObject("{67001225-D106-41AE-8BD4-5A0A119C5C01}", unsafe.Pointer(&v.FabricApplicationManagementClient10))
+	createComObject("{A3CF17E0-CF84-4AE0-B720-1785C0FB4ACE}", unsafe.Pointer(&v.FabricClusterManagementClient))
+	createComObject("{F9493E16-6A49-4D79-8695-5A6826B504C5}", unsafe.Pointer(&v.FabricClusterManagementClient2))
+	createComObject("{C3001D74-92B6-44CB-AC2F-2FFC4A56287C}", unsafe.Pointer(&v.FabricClusterManagementClient3))
+	createComObject("{B6B12671-F283-4D71-A818-0260549BC83E}", unsafe.Pointer(&v.FabricClusterManagementClient4))
+	createComObject("{A6DDD816-A100-11E4-89D3-123B93F75CBA}", unsafe.Pointer(&v.FabricClusterManagementClient5))
+	createComObject("{9E454AE8-4B8C-4136-884A-37B0B92CC855}", unsafe.Pointer(&v.FabricClusterManagementClient6))
 	createComObject("{9B9105AC-D595-4F59-9C94-1FFDBF92A876}", unsafe.Pointer(&v.FabricClusterManagementClient7))
-	createComObject("{3d00d0be-7014-41da-9c5b-0a9ef46e2a43}", unsafe.Pointer(&v.FabricHealthClient))
-	createComObject("{66cbc014-d7b3-4f81-a498-e580feb9a1f5}", unsafe.Pointer(&v.FabricHealthClient2))
-	createComObject("{dd3e4497-3373-458d-ad22-c88ebd27493e}", unsafe.Pointer(&v.FabricHealthClient3))
-	createComObject("{9f0401af-4909-404f-8696-0a71bd753e98}", unsafe.Pointer(&v.FabricHealthClient4))
-	createComObject("{c629e422-90ba-4efd-8f64-cecf51bc3df0}", unsafe.Pointer(&v.FabricQueryClient))
+	createComObject("{3D00D0BE-7014-41DA-9C5B-0A9EF46E2A43}", unsafe.Pointer(&v.FabricHealthClient))
+	createComObject("{66CBC014-D7B3-4F81-A498-E580FEB9A1F5}", unsafe.Pointer(&v.FabricHealthClient2))
+	createComObject("{DD3E4497-3373-458D-AD22-C88EBD27493E}", unsafe.Pointer(&v.FabricHealthClient3))
+	createComObject("{9F0401AF-4909-404F-8696-0A71BD753E98}", unsafe.Pointer(&v.FabricHealthClient4))
+	createComObject("{C629E422-90BA-4EFD-8F64-CECF51BC3DF0}", unsafe.Pointer(&v.FabricQueryClient))
 	createComObject("{4E6D5D61-24C8-4240-A2E8-BCB1FC15D9AF}", unsafe.Pointer(&v.FabricQueryClient2))
 	createComObject("{16F563F3-4017-496E-B0E7-2650DE5774B3}", unsafe.Pointer(&v.FabricQueryClient3))
 	createComObject("{AB92081D-0D78-410B-9777-0846DBA24C10}", unsafe.Pointer(&v.FabricQueryClient4))
 	createComObject("{75C35E8C-87A2-4810-A401-B50DA858FE34}", unsafe.Pointer(&v.FabricQueryClient5))
-	createComObject("{173b2bb4-09c6-42fb-8754-caa8d43cf1b2}", unsafe.Pointer(&v.FabricQueryClient6))
-	createComObject("{538baa81-ba97-46da-95ac-e1cdd184cc74}", unsafe.Pointer(&v.FabricQueryClient7))
-	createComObject("{2c850629-6a83-4fc3-8468-c868b87e9a17}", unsafe.Pointer(&v.FabricQueryClient8))
-	createComObject("{76f0b4a5-4941-49d7-993c-ad7afc37c6af}", unsafe.Pointer(&v.FabricQueryClient9))
-	createComObject("{02139da8-7140-42ae-8403-79a551600e63}", unsafe.Pointer(&v.FabricQueryClient10))
-	createComObject("{a0cfbc71-184b-443b-b102-4b6d0a7cbc49}", unsafe.Pointer(&v.FabricInfrastructureServiceClient))
-	createComObject("{ee483ba5-9018-4c99-9804-be6185db88e6}", unsafe.Pointer(&v.FabricRepairManagementClient))
-	createComObject("{5067d775-3baa-48e4-8c72-bb5573cc3fb8}", unsafe.Pointer(&v.FabricRepairManagementClient2))
-	createComObject("{0df0f63a-4da0-44fe-81e8-f80cd28e9b28}", unsafe.Pointer(&v.FabricTestManagementClient))
-	createComObject("{1222b1ff-ae51-43b3-bbdf-439e7f61ca1a}", unsafe.Pointer(&v.FabricTestManagementClient2))
-	createComObject("{a4b94afd-0cb5-4010-8995-e58e9b6ca373}", unsafe.Pointer(&v.FabricTestManagementClient3))
-	createComObject("{769e1838-8726-4dcd-a3c0-211673a6967a}", unsafe.Pointer(&v.FabricFaultManagementClient))
-	createComObject("{fdb754c6-69c5-4bcf-bba5-cb70c84a4398}", unsafe.Pointer(&v.FabricNetworkManagementClient))
-	createComObject("{38c4c723-3815-49d8-bdf2-68bfb536b8c9}", unsafe.Pointer(&v.FabricSecretStoreClient))
+	createComObject("{173B2BB4-09C6-42FB-8754-CAA8D43CF1B2}", unsafe.Pointer(&v.FabricQueryClient6))
+	createComObject("{538BAA81-BA97-46DA-95AC-E1CDD184CC74}", unsafe.Pointer(&v.FabricQueryClient7))
+	createComObject("{2C850629-6A83-4FC3-8468-C868B87E9A17}", unsafe.Pointer(&v.FabricQueryClient8))
+	createComObject("{76F0B4A5-4941-49D7-993C-AD7AFC37C6AF}", unsafe.Pointer(&v.FabricQueryClient9))
+	createComObject("{02139DA8-7140-42AE-8403-79A551600E63}", unsafe.Pointer(&v.FabricQueryClient10))
+	createComObject("{A0CFBC71-184B-443B-B102-4B6D0A7CBC49}", unsafe.Pointer(&v.FabricInfrastructureServiceClient))
+	createComObject("{EE483BA5-9018-4C99-9804-BE6185DB88E6}", unsafe.Pointer(&v.FabricRepairManagementClient))
+	createComObject("{5067D775-3BAA-48E4-8C72-BB5573CC3FB8}", unsafe.Pointer(&v.FabricRepairManagementClient2))
+	createComObject("{0DF0F63A-4DA0-44FE-81E8-F80CD28E9B28}", unsafe.Pointer(&v.FabricTestManagementClient))
+	createComObject("{1222B1FF-AE51-43B3-BBDF-439E7F61CA1A}", unsafe.Pointer(&v.FabricTestManagementClient2))
+	createComObject("{A4B94AFD-0CB5-4010-8995-E58E9B6CA373}", unsafe.Pointer(&v.FabricTestManagementClient3))
+	createComObject("{769E1838-8726-4DCD-A3C0-211673A6967A}", unsafe.Pointer(&v.FabricFaultManagementClient))
+	createComObject("{FDB754C6-69C5-4BCF-BBA5-CB70C84A4398}", unsafe.Pointer(&v.FabricNetworkManagementClient))
+	createComObject("{38C4C723-3815-49D8-BDF2-68BFB536B8C9}", unsafe.Pointer(&v.FabricSecretStoreClient))
 }
 func (v *fabricClientComHub) Close() {
 	if v.FabricClientSettings2 != nil {
@@ -304,7 +304,7 @@ func (v *FabricClient) PutCustomPropertyOperation(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricPropertyManagementClient2.endPutCustomPropertyOperation(sfctx)
 
@@ -345,7 +345,7 @@ func (v *FabricClient) CreateService(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricServiceManagementClient.endCreateService(sfctx)
 
@@ -389,7 +389,7 @@ func (v *FabricClient) CreateServiceFromTemplate(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricServiceManagementClient.endCreateServiceFromTemplate(sfctx)
 
@@ -433,7 +433,7 @@ func (v *FabricClient) DeleteService(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricServiceManagementClient.endDeleteService(sfctx)
 
@@ -473,7 +473,7 @@ func (v *FabricClient) GetServiceDescription(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricServiceManagementClient.endGetServiceDescription(sfctx)
 
@@ -538,7 +538,7 @@ func (v *FabricClient) GetServiceManifest(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricServiceManagementClient2.endGetServiceManifest(sfctx)
 
@@ -583,7 +583,7 @@ func (v *FabricClient) UpdateService(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricServiceManagementClient2.endUpdateService(sfctx)
 
@@ -624,7 +624,7 @@ func (v *FabricClient) RemoveReplica(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricServiceManagementClient3.endRemoveReplica(sfctx)
 
@@ -664,7 +664,7 @@ func (v *FabricClient) RestartReplica(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricServiceManagementClient3.endRestartReplica(sfctx)
 
@@ -704,7 +704,7 @@ func (v *FabricClient) RegisterServiceNotificationFilter(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricServiceManagementClient4.endRegisterServiceNotificationFilter(sfctx)
 
@@ -745,7 +745,7 @@ func (v *FabricClient) UnregisterServiceNotificationFilter(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricServiceManagementClient4.endUnregisterServiceNotificationFilter(sfctx)
 
@@ -785,7 +785,7 @@ func (v *FabricClient) DeleteService2(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricServiceManagementClient5.endDeleteService2(sfctx)
 
@@ -825,7 +825,7 @@ func (v *FabricClient) CreateServiceFromTemplate2(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricServiceManagementClient6.endCreateServiceFromTemplate2(sfctx)
 
@@ -865,7 +865,7 @@ func (v *FabricClient) CreateServiceGroup(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricServiceGroupManagementClient.endCreateServiceGroup(sfctx)
 
@@ -905,7 +905,7 @@ func (v *FabricClient) DeleteServiceGroup(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricServiceGroupManagementClient.endDeleteServiceGroup(sfctx)
 
@@ -945,7 +945,7 @@ func (v *FabricClient) GetServiceGroupDescription(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricServiceGroupManagementClient.endGetServiceGroupDescription(sfctx)
 
@@ -988,7 +988,7 @@ func (v *FabricClient) UpdateServiceGroup(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricServiceGroupManagementClient2.endUpdateServiceGroup(sfctx)
 
@@ -1033,7 +1033,7 @@ func (v *FabricClient) CreateServiceGroupFromTemplate(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricServiceGroupManagementClient3.endCreateServiceGroupFromTemplate(sfctx)
 
@@ -1077,7 +1077,7 @@ func (v *FabricClient) CreateServiceGroupFromTemplate2(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricServiceGroupManagementClient4.endCreateServiceGroupFromTemplate2(sfctx)
 
@@ -1117,7 +1117,7 @@ func (v *FabricClient) ProvisionApplicationType(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricApplicationManagementClient.endProvisionApplicationType(sfctx)
 
@@ -1157,7 +1157,7 @@ func (v *FabricClient) CreateApplication(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricApplicationManagementClient.endCreateApplication(sfctx)
 
@@ -1197,7 +1197,7 @@ func (v *FabricClient) UpgradeApplication(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricApplicationManagementClient.endUpgradeApplication(sfctx)
 
@@ -1237,7 +1237,7 @@ func (v *FabricClient) GetApplicationUpgradeProgress(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricApplicationManagementClient.endGetApplicationUpgradeProgress(sfctx)
 
@@ -1284,7 +1284,7 @@ func (v *FabricClient) MoveNextApplicationUpgradeDomain(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricApplicationManagementClient.endMoveNextApplicationUpgradeDomain(sfctx)
 
@@ -1324,7 +1324,7 @@ func (v *FabricClient) DeleteApplication(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricApplicationManagementClient.endDeleteApplication(sfctx)
 
@@ -1365,7 +1365,7 @@ func (v *FabricClient) UnprovisionApplicationType(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricApplicationManagementClient.endUnprovisionApplicationType(sfctx)
 
@@ -1407,7 +1407,7 @@ func (v *FabricClient) GetApplicationManifest(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricApplicationManagementClient2.endGetApplicationManifest(sfctx)
 
@@ -1451,7 +1451,7 @@ func (v *FabricClient) MoveNextApplicationUpgradeDomain2(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricApplicationManagementClient2.endMoveNextApplicationUpgradeDomain2(sfctx)
 
@@ -1492,7 +1492,7 @@ func (v *FabricClient) UpdateApplicationUpgrade(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricApplicationManagementClient3.endUpdateApplicationUpgrade(sfctx)
 
@@ -1532,7 +1532,7 @@ func (v *FabricClient) RestartDeployedCodePackage(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricApplicationManagementClient3.endRestartDeployedCodePackage(sfctx)
 
@@ -1597,7 +1597,7 @@ func (v *FabricClient) DeployServicePackageToNode(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricApplicationManagementClient4.endDeployServicePackageToNode(sfctx)
 
@@ -1641,7 +1641,7 @@ func (v *FabricClient) RollbackApplicationUpgrade(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricApplicationManagementClient5.endRollbackApplicationUpgrade(sfctx)
 
@@ -1681,7 +1681,7 @@ func (v *FabricClient) UpdateApplication(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricApplicationManagementClient6.endUpdateApplication(sfctx)
 
@@ -1721,7 +1721,7 @@ func (v *FabricClient) DeleteApplication2(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricApplicationManagementClient7.endDeleteApplication2(sfctx)
 
@@ -1761,7 +1761,7 @@ func (v *FabricClient) ProvisionApplicationType2(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricApplicationManagementClient8.endProvisionApplicationType2(sfctx)
 
@@ -1801,7 +1801,7 @@ func (v *FabricClient) UnprovisionApplicationType2(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricApplicationManagementClient9.endUnprovisionApplicationType2(sfctx)
 
@@ -1841,7 +1841,7 @@ func (v *FabricClient) ProvisionApplicationType3(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricApplicationManagementClient10.endProvisionApplicationType3(sfctx)
 
@@ -1881,7 +1881,7 @@ func (v *FabricClient) NodeStateRemoved(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricClusterManagementClient.endNodeStateRemoved(sfctx)
 
@@ -1920,7 +1920,7 @@ func (v *FabricClient) RecoverPartitions(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricClusterManagementClient.endRecoverPartitions(sfctx)
 
@@ -1960,7 +1960,7 @@ func (v *FabricClient) DeactivateNode(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricClusterManagementClient2.endDeactivateNode(sfctx)
 
@@ -2001,7 +2001,7 @@ func (v *FabricClient) ActivateNode(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricClusterManagementClient2.endActivateNode(sfctx)
 
@@ -2042,7 +2042,7 @@ func (v *FabricClient) ProvisionFabric(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricClusterManagementClient2.endProvisionFabric(sfctx)
 
@@ -2083,7 +2083,7 @@ func (v *FabricClient) UpgradeFabric(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricClusterManagementClient2.endUpgradeFabric(sfctx)
 
@@ -2122,7 +2122,7 @@ func (v *FabricClient) GetFabricUpgradeProgress(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricClusterManagementClient2.endGetFabricUpgradeProgress(sfctx)
 
@@ -2168,7 +2168,7 @@ func (v *FabricClient) MoveNextFabricUpgradeDomain(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricClusterManagementClient2.endMoveNextFabricUpgradeDomain(sfctx)
 
@@ -2208,7 +2208,7 @@ func (v *FabricClient) MoveNextFabricUpgradeDomain2(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricClusterManagementClient2.endMoveNextFabricUpgradeDomain2(sfctx)
 
@@ -2249,7 +2249,7 @@ func (v *FabricClient) UnprovisionFabric(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricClusterManagementClient2.endUnprovisionFabric(sfctx)
 
@@ -2289,7 +2289,7 @@ func (v *FabricClient) GetClusterManifest(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricClusterManagementClient2.endGetClusterManifest(sfctx)
 
@@ -2330,7 +2330,7 @@ func (v *FabricClient) RecoverPartition(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricClusterManagementClient2.endRecoverPartition(sfctx)
 
@@ -2370,7 +2370,7 @@ func (v *FabricClient) RecoverServicePartitions(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricClusterManagementClient2.endRecoverServicePartitions(sfctx)
 
@@ -2409,7 +2409,7 @@ func (v *FabricClient) RecoverSystemPartitions(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricClusterManagementClient2.endRecoverSystemPartitions(sfctx)
 
@@ -2448,7 +2448,7 @@ func (v *FabricClient) UpdateFabricUpgrade(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricClusterManagementClient3.endUpdateFabricUpgrade(sfctx)
 
@@ -2488,7 +2488,7 @@ func (v *FabricClient) StopNode(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricClusterManagementClient3.endStopNode(sfctx)
 
@@ -2528,7 +2528,7 @@ func (v *FabricClient) RestartNode(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricClusterManagementClient3.endRestartNode(sfctx)
 
@@ -2568,7 +2568,7 @@ func (v *FabricClient) StartNode(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricClusterManagementClient3.endStartNode(sfctx)
 
@@ -2631,7 +2631,7 @@ func (v *FabricClient) RollbackFabricUpgrade(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricClusterManagementClient4.endRollbackFabricUpgrade(sfctx)
 
@@ -2670,7 +2670,7 @@ func (v *FabricClient) ResetPartitionLoad(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricClusterManagementClient5.endResetPartitionLoad(sfctx)
 
@@ -2710,7 +2710,7 @@ func (v *FabricClient) ToggleVerboseServicePlacementHealthReporting(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricClusterManagementClient6.endToggleVerboseServicePlacementHealthReporting(sfctx)
 
@@ -2750,7 +2750,7 @@ func (v *FabricClient) UpgradeConfiguration(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricClusterManagementClient7.endUpgradeConfiguration(sfctx)
 
@@ -2789,7 +2789,7 @@ func (v *FabricClient) GetClusterConfigurationUpgradeStatus(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricClusterManagementClient7.endGetClusterConfigurationUpgradeStatus(sfctx)
 
@@ -2829,7 +2829,7 @@ func (v *FabricClient) GetClusterConfiguration(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricClusterManagementClient7.endGetClusterConfiguration(sfctx)
 
@@ -2869,7 +2869,7 @@ func (v *FabricClient) GetUpgradesPendingApproval(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricClusterManagementClient7.endGetUpgradesPendingApproval(sfctx)
 
@@ -2907,7 +2907,7 @@ func (v *FabricClient) StartApprovedUpgrades(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricClusterManagementClient7.endStartApprovedUpgrades(sfctx)
 
@@ -2955,7 +2955,7 @@ func (v *FabricClient) GetClusterHealth(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricHealthClient.endGetClusterHealth(sfctx)
 
@@ -2998,7 +2998,7 @@ func (v *FabricClient) GetNodeHealth(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricHealthClient.endGetNodeHealth(sfctx)
 
@@ -3042,7 +3042,7 @@ func (v *FabricClient) GetApplicationHealth(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricHealthClient.endGetApplicationHealth(sfctx)
 
@@ -3086,7 +3086,7 @@ func (v *FabricClient) GetServiceHealth(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricHealthClient.endGetServiceHealth(sfctx)
 
@@ -3130,7 +3130,7 @@ func (v *FabricClient) GetPartitionHealth(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricHealthClient.endGetPartitionHealth(sfctx)
 
@@ -3175,7 +3175,7 @@ func (v *FabricClient) GetReplicaHealth(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricHealthClient.endGetReplicaHealth(sfctx)
 
@@ -3221,7 +3221,7 @@ func (v *FabricClient) GetDeployedApplicationHealth(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricHealthClient.endGetDeployedApplicationHealth(sfctx)
 
@@ -3268,7 +3268,7 @@ func (v *FabricClient) GetDeployedServicePackageHealth(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricHealthClient.endGetDeployedServicePackageHealth(sfctx)
 
@@ -3313,7 +3313,7 @@ func (v *FabricClient) GetClusterHealth2(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricHealthClient2.endGetClusterHealth2(sfctx)
 
@@ -3355,7 +3355,7 @@ func (v *FabricClient) GetNodeHealth2(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricHealthClient2.endGetNodeHealth2(sfctx)
 
@@ -3397,7 +3397,7 @@ func (v *FabricClient) GetApplicationHealth2(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricHealthClient2.endGetApplicationHealth2(sfctx)
 
@@ -3439,7 +3439,7 @@ func (v *FabricClient) GetServiceHealth2(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricHealthClient2.endGetServiceHealth2(sfctx)
 
@@ -3481,7 +3481,7 @@ func (v *FabricClient) GetPartitionHealth2(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricHealthClient2.endGetPartitionHealth2(sfctx)
 
@@ -3523,7 +3523,7 @@ func (v *FabricClient) GetReplicaHealth2(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricHealthClient2.endGetReplicaHealth2(sfctx)
 
@@ -3565,7 +3565,7 @@ func (v *FabricClient) GetDeployedApplicationHealth2(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricHealthClient2.endGetDeployedApplicationHealth2(sfctx)
 
@@ -3607,7 +3607,7 @@ func (v *FabricClient) GetDeployedServicePackageHealth2(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricHealthClient2.endGetDeployedServicePackageHealth2(sfctx)
 
@@ -3649,7 +3649,7 @@ func (v *FabricClient) GetClusterHealthChunk(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricHealthClient3.endGetClusterHealthChunk(sfctx)
 
@@ -3701,7 +3701,7 @@ func (v *FabricClient) GetNodeList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient.endGetNodeList(sfctx)
 
@@ -3743,7 +3743,7 @@ func (v *FabricClient) GetApplicationTypeList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient.endGetApplicationTypeList(sfctx)
 
@@ -3785,7 +3785,7 @@ func (v *FabricClient) GetServiceTypeList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient.endGetServiceTypeList(sfctx)
 
@@ -3827,7 +3827,7 @@ func (v *FabricClient) GetApplicationList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient.endGetApplicationList(sfctx)
 
@@ -3869,7 +3869,7 @@ func (v *FabricClient) GetServiceList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient.endGetServiceList(sfctx)
 
@@ -3911,7 +3911,7 @@ func (v *FabricClient) GetPartitionList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient.endGetPartitionList(sfctx)
 
@@ -3953,7 +3953,7 @@ func (v *FabricClient) GetReplicaList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient.endGetReplicaList(sfctx)
 
@@ -3995,7 +3995,7 @@ func (v *FabricClient) GetDeployedApplicationList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient.endGetDeployedApplicationList(sfctx)
 
@@ -4037,7 +4037,7 @@ func (v *FabricClient) GetDeployedServicePackageList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient.endGetDeployedServicePackageList(sfctx)
 
@@ -4079,7 +4079,7 @@ func (v *FabricClient) GetDeployedServiceTypeList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient.endGetDeployedServiceTypeList(sfctx)
 
@@ -4121,7 +4121,7 @@ func (v *FabricClient) GetDeployedCodePackageList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient.endGetDeployedCodePackageList(sfctx)
 
@@ -4163,7 +4163,7 @@ func (v *FabricClient) GetDeployedReplicaList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient.endGetDeployedReplicaList(sfctx)
 
@@ -4205,7 +4205,7 @@ func (v *FabricClient) GetDeployedReplicaDetail(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient2.endGetDeployedReplicaDetail(sfctx)
 
@@ -4246,7 +4246,7 @@ func (v *FabricClient) GetClusterLoadInformation(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient2.endGetClusterLoadInformation(sfctx)
 
@@ -4287,7 +4287,7 @@ func (v *FabricClient) GetPartitionLoadInformation(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient2.endGetPartitionLoadInformation(sfctx)
 
@@ -4329,7 +4329,7 @@ func (v *FabricClient) GetProvisionedFabricCodeVersionList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient2.endGetProvisionedFabricCodeVersionList(sfctx)
 
@@ -4371,7 +4371,7 @@ func (v *FabricClient) GetProvisionedFabricConfigVersionList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient2.endGetProvisionedFabricConfigVersionList(sfctx)
 
@@ -4413,7 +4413,7 @@ func (v *FabricClient) GetNodeLoadInformation(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient3.endGetNodeLoadInformation(sfctx)
 
@@ -4455,7 +4455,7 @@ func (v *FabricClient) GetReplicaLoadInformation(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient3.endGetReplicaLoadInformation(sfctx)
 
@@ -4497,7 +4497,7 @@ func (v *FabricClient) GetServiceGroupMemberList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient4.endGetServiceGroupMemberList(sfctx)
 
@@ -4539,7 +4539,7 @@ func (v *FabricClient) GetServiceGroupMemberTypeList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient4.endGetServiceGroupMemberTypeList(sfctx)
 
@@ -4581,7 +4581,7 @@ func (v *FabricClient) GetUnplacedReplicaInformation(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient5.endGetUnplacedReplicaInformation(sfctx)
 
@@ -4623,7 +4623,7 @@ func (v *FabricClient) GetApplicationLoadInformation(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient7.endGetApplicationLoadInformation(sfctx)
 
@@ -4665,7 +4665,7 @@ func (v *FabricClient) GetServiceName(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient8.endGetServiceName(sfctx)
 
@@ -4707,7 +4707,7 @@ func (v *FabricClient) GetApplicationName(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient8.endGetApplicationName(sfctx)
 
@@ -4749,7 +4749,7 @@ func (v *FabricClient) GetApplicationTypePagedList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient9.endGetApplicationTypePagedList(sfctx)
 
@@ -4796,7 +4796,7 @@ func (v *FabricClient) GetDeployedApplicationPagedList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricQueryClient10.endGetDeployedApplicationPagedList(sfctx)
 
@@ -4844,7 +4844,7 @@ func (v *FabricClient) InvokeInfrastructureCommand(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricInfrastructureServiceClient.endInvokeInfrastructureCommand(sfctx)
 
@@ -4888,7 +4888,7 @@ func (v *FabricClient) InvokeInfrastructureQuery(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricInfrastructureServiceClient.endInvokeInfrastructureQuery(sfctx)
 
@@ -4931,7 +4931,7 @@ func (v *FabricClient) CreateRepairTask(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricRepairManagementClient.endCreateRepairTask(sfctx)
 
@@ -4972,7 +4972,7 @@ func (v *FabricClient) CancelRepairTask(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricRepairManagementClient.endCancelRepairTask(sfctx)
 
@@ -5013,7 +5013,7 @@ func (v *FabricClient) ForceApproveRepairTask(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricRepairManagementClient.endForceApproveRepairTask(sfctx)
 
@@ -5054,7 +5054,7 @@ func (v *FabricClient) DeleteRepairTask(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricRepairManagementClient.endDeleteRepairTask(sfctx)
 
@@ -5094,7 +5094,7 @@ func (v *FabricClient) UpdateRepairExecutionState(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricRepairManagementClient.endUpdateRepairExecutionState(sfctx)
 
@@ -5135,7 +5135,7 @@ func (v *FabricClient) GetRepairTaskList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricRepairManagementClient.endGetRepairTaskList(sfctx)
 
@@ -5177,7 +5177,7 @@ func (v *FabricClient) UpdateRepairTaskHealthPolicy(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricRepairManagementClient2.endUpdateRepairTaskHealthPolicy(sfctx)
 
@@ -5218,7 +5218,7 @@ func (v *FabricClient) StartPartitionDataLoss(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricTestManagementClient.endStartPartitionDataLoss(sfctx)
 
@@ -5258,7 +5258,7 @@ func (v *FabricClient) GetPartitionDataLossProgress(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricTestManagementClient.endGetPartitionDataLossProgress(sfctx)
 
@@ -5300,7 +5300,7 @@ func (v *FabricClient) StartPartitionQuorumLoss(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricTestManagementClient.endStartPartitionQuorumLoss(sfctx)
 
@@ -5340,7 +5340,7 @@ func (v *FabricClient) GetPartitionQuorumLossProgress(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricTestManagementClient.endGetPartitionQuorumLossProgress(sfctx)
 
@@ -5382,7 +5382,7 @@ func (v *FabricClient) StartPartitionRestart(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricTestManagementClient.endStartPartitionRestart(sfctx)
 
@@ -5422,7 +5422,7 @@ func (v *FabricClient) GetPartitionRestartProgress(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricTestManagementClient.endGetPartitionRestartProgress(sfctx)
 
@@ -5464,7 +5464,7 @@ func (v *FabricClient) GetTestCommandStatusList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricTestManagementClient.endGetTestCommandStatusList(sfctx)
 
@@ -5506,7 +5506,7 @@ func (v *FabricClient) CancelTestCommand(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricTestManagementClient.endCancelTestCommand(sfctx)
 
@@ -5546,7 +5546,7 @@ func (v *FabricClient) StartChaos(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricTestManagementClient2.endStartChaos(sfctx)
 
@@ -5585,7 +5585,7 @@ func (v *FabricClient) StopChaos(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricTestManagementClient2.endStopChaos(sfctx)
 
@@ -5624,7 +5624,7 @@ func (v *FabricClient) GetChaosReport(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricTestManagementClient2.endGetChaosReport(sfctx)
 
@@ -5666,7 +5666,7 @@ func (v *FabricClient) StartNodeTransition(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricTestManagementClient3.endStartNodeTransition(sfctx)
 
@@ -5706,7 +5706,7 @@ func (v *FabricClient) GetNodeTransitionProgress(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricTestManagementClient3.endGetNodeTransitionProgress(sfctx)
 
@@ -5748,7 +5748,7 @@ func (v *FabricClient) MovePrimary(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricFaultManagementClient.endMovePrimary(sfctx)
 
@@ -5790,7 +5790,7 @@ func (v *FabricClient) MoveSecondary(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricFaultManagementClient.endMoveSecondary(sfctx)
 
@@ -5833,7 +5833,7 @@ func (v *FabricClient) CreateNetwork(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricNetworkManagementClient.endCreateNetwork(sfctx)
 
@@ -5874,7 +5874,7 @@ func (v *FabricClient) DeleteNetwork(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		err := v.hub.FabricNetworkManagementClient.endDeleteNetwork(sfctx)
 
@@ -5914,7 +5914,7 @@ func (v *FabricClient) GetNetworkList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricNetworkManagementClient.endGetNetworkList(sfctx)
 
@@ -5961,7 +5961,7 @@ func (v *FabricClient) GetNetworkApplicationList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricNetworkManagementClient.endGetNetworkApplicationList(sfctx)
 
@@ -6008,7 +6008,7 @@ func (v *FabricClient) GetNetworkNodeList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricNetworkManagementClient.endGetNetworkNodeList(sfctx)
 
@@ -6055,7 +6055,7 @@ func (v *FabricClient) GetApplicationNetworkList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricNetworkManagementClient.endGetApplicationNetworkList(sfctx)
 
@@ -6102,7 +6102,7 @@ func (v *FabricClient) GetDeployedNetworkList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricNetworkManagementClient.endGetDeployedNetworkList(sfctx)
 
@@ -6149,7 +6149,7 @@ func (v *FabricClient) GetDeployedNetworkCodePackageList(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricNetworkManagementClient.endGetDeployedNetworkCodePackageList(sfctx)
 
@@ -6197,7 +6197,7 @@ func (v *FabricClient) GetSecrets(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricSecretStoreClient.endGetSecrets(sfctx)
 
@@ -6240,7 +6240,7 @@ func (v *FabricClient) SetSecrets(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricSecretStoreClient.endSetSecrets(sfctx)
 
@@ -6282,7 +6282,7 @@ func (v *FabricClient) RemoveSecrets(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricSecretStoreClient.endRemoveSecrets(sfctx)
 
@@ -6324,7 +6324,7 @@ func (v *FabricClient) GetSecretVersions(
 	}
 	ch := make(chan error, 1)
 	defer close(ch)
-	callback := newFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
+	callback := newGoProxyFabricAsyncOperationCallback(func(sfctx *comFabricAsyncOperationContext) {
 
 		rt_1, err := v.hub.FabricSecretStoreClient.endGetSecretVersions(sfctx)
 
@@ -6500,7 +6500,7 @@ func (v *comFabricPropertyManagementClient) vtable() *comFabricPropertyManagemen
 func (v *comFabricPropertyManagementClient) beginCreateName(
 	name string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_1, _ := windows.UTF16PtrFromString(name)
@@ -6545,7 +6545,7 @@ func (v *comFabricPropertyManagementClient) endCreateName(
 func (v *comFabricPropertyManagementClient) beginDeleteName(
 	name string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_2, _ := windows.UTF16PtrFromString(name)
@@ -6590,7 +6590,7 @@ func (v *comFabricPropertyManagementClient) endDeleteName(
 func (v *comFabricPropertyManagementClient) beginNameExists(
 	name string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_3, _ := windows.UTF16PtrFromString(name)
@@ -6641,7 +6641,7 @@ func (v *comFabricPropertyManagementClient) beginEnumerateSubNames(
 	previousResult *comFabricNameEnumerationResult,
 	recursive bool,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_4, _ := windows.UTF16PtrFromString(name)
@@ -6680,7 +6680,7 @@ func (v *comFabricPropertyManagementClient) beginPutPropertyBinary(
 	dataLength uint32,
 	data *byte,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_5, _ := windows.UTF16PtrFromString(name)
@@ -6734,7 +6734,7 @@ func (v *comFabricPropertyManagementClient) beginPutPropertyInt64(
 	propertyName string,
 	data int64,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_7, _ := windows.UTF16PtrFromString(name)
@@ -6788,7 +6788,7 @@ func (v *comFabricPropertyManagementClient) beginPutPropertyDouble(
 	propertyName string,
 	data float64,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_9, _ := windows.UTF16PtrFromString(name)
@@ -6842,7 +6842,7 @@ func (v *comFabricPropertyManagementClient) beginPutPropertyWString(
 	propertyName string,
 	data string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_11, _ := windows.UTF16PtrFromString(name)
@@ -6900,7 +6900,7 @@ func (v *comFabricPropertyManagementClient) beginPutPropertyGuid(
 	propertyName string,
 	data *windows.GUID,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_14, _ := windows.UTF16PtrFromString(name)
@@ -6953,7 +6953,7 @@ func (v *comFabricPropertyManagementClient) beginDeleteProperty(
 	name string,
 	propertyName string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_16, _ := windows.UTF16PtrFromString(name)
@@ -7003,7 +7003,7 @@ func (v *comFabricPropertyManagementClient) beginGetPropertyMetadata(
 	name string,
 	propertyName string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_18, _ := windows.UTF16PtrFromString(name)
@@ -7057,7 +7057,7 @@ func (v *comFabricPropertyManagementClient) beginGetProperty(
 	name string,
 	propertyName string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_20, _ := windows.UTF16PtrFromString(name)
@@ -7092,7 +7092,7 @@ func (v *comFabricPropertyManagementClient) beginSubmitPropertyBatch(
 	operationCount uint32,
 	operations *FabricPropertyBatchOperation,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_22, _ := windows.UTF16PtrFromString(name)
@@ -7128,7 +7128,7 @@ func (v *comFabricPropertyManagementClient) beginEnumerateProperties(
 	includeValues bool,
 	previousResult *comFabricPropertyEnumerationResult,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_23, _ := windows.UTF16PtrFromString(name)
@@ -7180,7 +7180,7 @@ func (v *comFabricPropertyManagementClient2) beginPutCustomPropertyOperation(
 	name string,
 	propertyOperation *FabricPutCustomPropertyOperation,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_24, _ := windows.UTF16PtrFromString(name)
@@ -7252,7 +7252,7 @@ func (v *comFabricServiceManagementClient) vtable() *comFabricServiceManagementC
 func (v *comFabricServiceManagementClient) beginCreateService(
 	description *FabricServiceDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricServiceDescription
 	p_0 = description.toInnerStruct()
@@ -7299,7 +7299,7 @@ func (v *comFabricServiceManagementClient) beginCreateServiceFromTemplate(
 	InitializationDataSize uint32,
 	InitializationData *byte,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_25, _ := windows.UTF16PtrFromString(applicationName)
@@ -7355,7 +7355,7 @@ func (v *comFabricServiceManagementClient) endCreateServiceFromTemplate(
 func (v *comFabricServiceManagementClient) beginDeleteService(
 	name string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_28, _ := windows.UTF16PtrFromString(name)
@@ -7400,7 +7400,7 @@ func (v *comFabricServiceManagementClient) endDeleteService(
 func (v *comFabricServiceManagementClient) beginGetServiceDescription(
 	name string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_29, _ := windows.UTF16PtrFromString(name)
@@ -7498,7 +7498,7 @@ func (v *comFabricServiceManagementClient) beginResolveServicePartition(
 	partitionKey interface{},
 	previousResult *comFabricResolvedServicePartitionResult,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_31, _ := windows.UTF16PtrFromString(name)
@@ -7549,7 +7549,7 @@ func (v *comFabricServiceManagementClient2) beginGetServiceManifest(
 	applicationTypeVersion string,
 	serviceManifestName string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_32, _ := windows.UTF16PtrFromString(applicationTypeName)
@@ -7610,7 +7610,7 @@ func (v *comFabricServiceManagementClient2) beginUpdateService(
 	name string,
 	serviceUpdateDescription *FabricServiceUpdateDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_35, _ := windows.UTF16PtrFromString(name)
@@ -7674,7 +7674,7 @@ func (v *comFabricServiceManagementClient3) vtable() *comFabricServiceManagement
 func (v *comFabricServiceManagementClient3) beginRemoveReplica(
 	description *FabricRemoveReplicaDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricRemoveReplicaDescription
 	p_0 = description.toInnerStruct()
@@ -7717,7 +7717,7 @@ func (v *comFabricServiceManagementClient3) endRemoveReplica(
 func (v *comFabricServiceManagementClient3) beginRestartReplica(
 	description *FabricRestartReplicaDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricRestartReplicaDescription
 	p_0 = description.toInnerStruct()
@@ -7777,7 +7777,7 @@ func (v *comFabricServiceManagementClient4) vtable() *comFabricServiceManagement
 func (v *comFabricServiceManagementClient4) beginRegisterServiceNotificationFilter(
 	description *FabricServiceNotificationFilterDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricServiceNotificationFilterDescription
 	p_0 = description.toInnerStruct()
@@ -7824,7 +7824,7 @@ func (v *comFabricServiceManagementClient4) endRegisterServiceNotificationFilter
 func (v *comFabricServiceManagementClient4) beginUnregisterServiceNotificationFilter(
 	filterId int64,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
@@ -7880,7 +7880,7 @@ func (v *comFabricServiceManagementClient5) vtable() *comFabricServiceManagement
 func (v *comFabricServiceManagementClient5) beginDeleteService2(
 	deleteDescription *FabricDeleteServiceDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricDeleteServiceDescription
 	p_0 = deleteDescription.toInnerStruct()
@@ -7938,7 +7938,7 @@ func (v *comFabricServiceManagementClient6) vtable() *comFabricServiceManagement
 func (v *comFabricServiceManagementClient6) beginCreateServiceFromTemplate2(
 	serviceFromTemplateDescription *FabricServiceFromTemplateDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricServiceFromTemplateDescription
 	p_0 = serviceFromTemplateDescription.toInnerStruct()
@@ -8000,7 +8000,7 @@ func (v *comFabricServiceGroupManagementClient) vtable() *comFabricServiceGroupM
 func (v *comFabricServiceGroupManagementClient) beginCreateServiceGroup(
 	description *FabricServiceGroupDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricServiceGroupDescription
 	p_0 = description.toInnerStruct()
@@ -8043,7 +8043,7 @@ func (v *comFabricServiceGroupManagementClient) endCreateServiceGroup(
 func (v *comFabricServiceGroupManagementClient) beginDeleteServiceGroup(
 	name string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_36, _ := windows.UTF16PtrFromString(name)
@@ -8088,7 +8088,7 @@ func (v *comFabricServiceGroupManagementClient) endDeleteServiceGroup(
 func (v *comFabricServiceGroupManagementClient) beginGetServiceGroupDescription(
 	name string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_37, _ := windows.UTF16PtrFromString(name)
@@ -8153,7 +8153,7 @@ func (v *comFabricServiceGroupManagementClient2) beginUpdateServiceGroup(
 	name string,
 	serviceGroupUpdateDescription *FabricServiceGroupUpdateDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_38, _ := windows.UTF16PtrFromString(name)
@@ -8219,7 +8219,7 @@ func (v *comFabricServiceGroupManagementClient3) beginCreateServiceGroupFromTemp
 	InitializationDataSize uint32,
 	InitializationData *byte,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_39, _ := windows.UTF16PtrFromString(applicationName)
@@ -8290,7 +8290,7 @@ func (v *comFabricServiceGroupManagementClient4) vtable() *comFabricServiceGroup
 func (v *comFabricServiceGroupManagementClient4) beginCreateServiceGroupFromTemplate2(
 	serviceGroupFromTemplateDescription *FabricServiceGroupFromTemplateDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricServiceGroupFromTemplateDescription
 	p_0 = serviceGroupFromTemplateDescription.toInnerStruct()
@@ -8360,7 +8360,7 @@ func (v *comFabricApplicationManagementClient) vtable() *comFabricApplicationMan
 func (v *comFabricApplicationManagementClient) beginProvisionApplicationType(
 	applicationBuildPath string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_42, _ := windows.UTF16PtrFromString(applicationBuildPath)
@@ -8405,7 +8405,7 @@ func (v *comFabricApplicationManagementClient) endProvisionApplicationType(
 func (v *comFabricApplicationManagementClient) beginCreateApplication(
 	description *FabricApplicationDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricApplicationDescription
 	p_0 = description.toInnerStruct()
@@ -8448,7 +8448,7 @@ func (v *comFabricApplicationManagementClient) endCreateApplication(
 func (v *comFabricApplicationManagementClient) beginUpgradeApplication(
 	upgradeDescription *FabricApplicationUpgradeDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricApplicationUpgradeDescription
 	p_0 = upgradeDescription.toInnerStruct()
@@ -8491,7 +8491,7 @@ func (v *comFabricApplicationManagementClient) endUpgradeApplication(
 func (v *comFabricApplicationManagementClient) beginGetApplicationUpgradeProgress(
 	applicationName string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_43, _ := windows.UTF16PtrFromString(applicationName)
@@ -8540,7 +8540,7 @@ func (v *comFabricApplicationManagementClient) endGetApplicationUpgradeProgress(
 func (v *comFabricApplicationManagementClient) beginMoveNextApplicationUpgradeDomain(
 	progress *comFabricApplicationUpgradeProgressResult2,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
@@ -8581,7 +8581,7 @@ func (v *comFabricApplicationManagementClient) endMoveNextApplicationUpgradeDoma
 func (v *comFabricApplicationManagementClient) beginDeleteApplication(
 	applicationName string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_44, _ := windows.UTF16PtrFromString(applicationName)
@@ -8627,7 +8627,7 @@ func (v *comFabricApplicationManagementClient) beginUnprovisionApplicationType(
 	applicationTypeName string,
 	applicationTypeVersion string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_45, _ := windows.UTF16PtrFromString(applicationTypeName)
@@ -8694,7 +8694,7 @@ func (v *comFabricApplicationManagementClient2) beginGetApplicationManifest(
 	applicationTypeName string,
 	applicationTypeVersion string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_47, _ := windows.UTF16PtrFromString(applicationTypeName)
@@ -8748,7 +8748,7 @@ func (v *comFabricApplicationManagementClient2) beginMoveNextApplicationUpgradeD
 	applicationName string,
 	nextUpgradeDomain string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_49, _ := windows.UTF16PtrFromString(applicationName)
@@ -8816,7 +8816,7 @@ func (v *comFabricApplicationManagementClient3) vtable() *comFabricApplicationMa
 func (v *comFabricApplicationManagementClient3) beginUpdateApplicationUpgrade(
 	description *FabricApplicationUpgradeUpdateDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricApplicationUpgradeUpdateDescription
 	p_0 = description.toInnerStruct()
@@ -8859,7 +8859,7 @@ func (v *comFabricApplicationManagementClient3) endUpdateApplicationUpgrade(
 func (v *comFabricApplicationManagementClient3) beginRestartDeployedCodePackage(
 	restartCodePackageDescription *FabricRestartDeployedCodePackageDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricRestartDeployedCodePackageDescription
 	p_0 = restartCodePackageDescription.toInnerStruct()
@@ -8979,7 +8979,7 @@ func (v *comFabricApplicationManagementClient4) beginDeployServicePackageToNode(
 	sharingPolicy []FabricPackageSharingPolicy,
 	nodeName string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_56, _ := windows.UTF16PtrFromString(applicationTypeName)
@@ -9075,7 +9075,7 @@ func (v *comFabricApplicationManagementClient5) vtable() *comFabricApplicationMa
 func (v *comFabricApplicationManagementClient5) beginRollbackApplicationUpgrade(
 	applicationName string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_61, _ := windows.UTF16PtrFromString(applicationName)
@@ -9135,7 +9135,7 @@ func (v *comFabricApplicationManagementClient6) vtable() *comFabricApplicationMa
 func (v *comFabricApplicationManagementClient6) beginUpdateApplication(
 	applicationUpdateDescription *FabricApplicationUpdateDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricApplicationUpdateDescription
 	p_0 = applicationUpdateDescription.toInnerStruct()
@@ -9193,7 +9193,7 @@ func (v *comFabricApplicationManagementClient7) vtable() *comFabricApplicationMa
 func (v *comFabricApplicationManagementClient7) beginDeleteApplication2(
 	deleteDescription *FabricDeleteApplicationDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricDeleteApplicationDescription
 	p_0 = deleteDescription.toInnerStruct()
@@ -9251,7 +9251,7 @@ func (v *comFabricApplicationManagementClient8) vtable() *comFabricApplicationMa
 func (v *comFabricApplicationManagementClient8) beginProvisionApplicationType2(
 	description *FabricProvisionApplicationTypeDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricProvisionApplicationTypeDescription
 	p_0 = description.toInnerStruct()
@@ -9309,7 +9309,7 @@ func (v *comFabricApplicationManagementClient9) vtable() *comFabricApplicationMa
 func (v *comFabricApplicationManagementClient9) beginUnprovisionApplicationType2(
 	description *FabricUnprovisionApplicationTypeDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricUnprovisionApplicationTypeDescription
 	p_0 = description.toInnerStruct()
@@ -9367,7 +9367,7 @@ func (v *comFabricApplicationManagementClient10) vtable() *comFabricApplicationM
 func (v *comFabricApplicationManagementClient10) beginProvisionApplicationType3(
 	description *FabricProvisionApplicationTypeDescriptionBase,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricProvisionApplicationTypeDescriptionBase
 	p_0 = description.toInnerStruct()
@@ -9427,7 +9427,7 @@ func (v *comFabricClusterManagementClient) vtable() *comFabricClusterManagementC
 func (v *comFabricClusterManagementClient) beginNodeStateRemoved(
 	nodeName string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_62, _ := windows.UTF16PtrFromString(nodeName)
@@ -9471,7 +9471,7 @@ func (v *comFabricClusterManagementClient) endNodeStateRemoved(
 }
 func (v *comFabricClusterManagementClient) beginRecoverPartitions(
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_2 *comFabricAsyncOperationContext
 	defer func() {
@@ -9550,7 +9550,7 @@ func (v *comFabricClusterManagementClient2) beginDeactivateNode(
 	nodeName string,
 	intent FabricNodeDeactivationIntent,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_63, _ := windows.UTF16PtrFromString(nodeName)
@@ -9595,7 +9595,7 @@ func (v *comFabricClusterManagementClient2) endDeactivateNode(
 func (v *comFabricClusterManagementClient2) beginActivateNode(
 	nodeName string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_64, _ := windows.UTF16PtrFromString(nodeName)
@@ -9641,7 +9641,7 @@ func (v *comFabricClusterManagementClient2) beginProvisionFabric(
 	codeFilepath string,
 	clusterManifestFilepath string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_65, _ := windows.UTF16PtrFromString(codeFilepath)
@@ -9690,7 +9690,7 @@ func (v *comFabricClusterManagementClient2) endProvisionFabric(
 func (v *comFabricClusterManagementClient2) beginUpgradeFabric(
 	upgradeDescription *FabricUpgradeDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricUpgradeDescription
 	p_0 = upgradeDescription.toInnerStruct()
@@ -9732,7 +9732,7 @@ func (v *comFabricClusterManagementClient2) endUpgradeFabric(
 }
 func (v *comFabricClusterManagementClient2) beginGetFabricUpgradeProgress(
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_2 *comFabricAsyncOperationContext
 	defer func() {
@@ -9777,7 +9777,7 @@ func (v *comFabricClusterManagementClient2) endGetFabricUpgradeProgress(
 func (v *comFabricClusterManagementClient2) beginMoveNextFabricUpgradeDomain(
 	progress *comFabricUpgradeProgressResult2,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
@@ -9818,7 +9818,7 @@ func (v *comFabricClusterManagementClient2) endMoveNextFabricUpgradeDomain(
 func (v *comFabricClusterManagementClient2) beginMoveNextFabricUpgradeDomain2(
 	nextUpgradeDomain string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_67, _ := windows.UTF16PtrFromString(nextUpgradeDomain)
@@ -9864,7 +9864,7 @@ func (v *comFabricClusterManagementClient2) beginUnprovisionFabric(
 	codeVersion string,
 	configVersion string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_68, _ := windows.UTF16PtrFromString(codeVersion)
@@ -9912,7 +9912,7 @@ func (v *comFabricClusterManagementClient2) endUnprovisionFabric(
 }
 func (v *comFabricClusterManagementClient2) beginGetClusterManifest(
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_2 *comFabricAsyncOperationContext
 	defer func() {
@@ -9957,7 +9957,7 @@ func (v *comFabricClusterManagementClient2) endGetClusterManifest(
 func (v *comFabricClusterManagementClient2) beginRecoverPartition(
 	partitionId windows.GUID,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
@@ -9998,7 +9998,7 @@ func (v *comFabricClusterManagementClient2) endRecoverPartition(
 func (v *comFabricClusterManagementClient2) beginRecoverServicePartitions(
 	serviceName string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_70, _ := windows.UTF16PtrFromString(serviceName)
@@ -10042,7 +10042,7 @@ func (v *comFabricClusterManagementClient2) endRecoverServicePartitions(
 }
 func (v *comFabricClusterManagementClient2) beginRecoverSystemPartitions(
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_2 *comFabricAsyncOperationContext
 	defer func() {
@@ -10106,7 +10106,7 @@ func (v *comFabricClusterManagementClient3) vtable() *comFabricClusterManagement
 func (v *comFabricClusterManagementClient3) beginUpdateFabricUpgrade(
 	description *FabricUpgradeUpdateDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricUpgradeUpdateDescription
 	p_0 = description.toInnerStruct()
@@ -10149,7 +10149,7 @@ func (v *comFabricClusterManagementClient3) endUpdateFabricUpgrade(
 func (v *comFabricClusterManagementClient3) beginStopNode(
 	stopNodeDescription *FabricStopNodeDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricStopNodeDescription
 	p_0 = stopNodeDescription.toInnerStruct()
@@ -10192,7 +10192,7 @@ func (v *comFabricClusterManagementClient3) endStopNode(
 func (v *comFabricClusterManagementClient3) beginRestartNode(
 	restartNodeDescription *FabricRestartNodeDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricRestartNodeDescription
 	p_0 = restartNodeDescription.toInnerStruct()
@@ -10235,7 +10235,7 @@ func (v *comFabricClusterManagementClient3) endRestartNode(
 func (v *comFabricClusterManagementClient3) beginStartNode(
 	startNodeDescription *FabricStartNodeDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricStartNodeDescription
 	p_0 = startNodeDescription.toInnerStruct()
@@ -10368,7 +10368,7 @@ func (v *comFabricClusterManagementClient4) vtable() *comFabricClusterManagement
 
 func (v *comFabricClusterManagementClient4) beginRollbackFabricUpgrade(
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_2 *comFabricAsyncOperationContext
 	defer func() {
@@ -10424,7 +10424,7 @@ func (v *comFabricClusterManagementClient5) vtable() *comFabricClusterManagement
 func (v *comFabricClusterManagementClient5) beginResetPartitionLoad(
 	partitionId windows.GUID,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
@@ -10480,7 +10480,7 @@ func (v *comFabricClusterManagementClient6) vtable() *comFabricClusterManagement
 func (v *comFabricClusterManagementClient6) beginToggleVerboseServicePlacementHealthReporting(
 	enabled bool,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	p_0 := 0
 	if enabled {
@@ -10548,7 +10548,7 @@ func (v *comFabricClusterManagementClient7) vtable() *comFabricClusterManagement
 func (v *comFabricClusterManagementClient7) beginUpgradeConfiguration(
 	startUpgradeDescription *FabricStartUpgradeDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricStartUpgradeDescription
 	p_0 = startUpgradeDescription.toInnerStruct()
@@ -10590,7 +10590,7 @@ func (v *comFabricClusterManagementClient7) endUpgradeConfiguration(
 }
 func (v *comFabricClusterManagementClient7) beginGetClusterConfigurationUpgradeStatus(
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_2 *comFabricAsyncOperationContext
 	defer func() {
@@ -10634,7 +10634,7 @@ func (v *comFabricClusterManagementClient7) endGetClusterConfigurationUpgradeSta
 }
 func (v *comFabricClusterManagementClient7) beginGetClusterConfiguration(
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_2 *comFabricAsyncOperationContext
 	defer func() {
@@ -10678,7 +10678,7 @@ func (v *comFabricClusterManagementClient7) endGetClusterConfiguration(
 }
 func (v *comFabricClusterManagementClient7) beginGetUpgradesPendingApproval(
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_2 *comFabricAsyncOperationContext
 	defer func() {
@@ -10718,7 +10718,7 @@ func (v *comFabricClusterManagementClient7) endGetUpgradesPendingApproval(
 }
 func (v *comFabricClusterManagementClient7) beginStartApprovedUpgrades(
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_2 *comFabricAsyncOperationContext
 	defer func() {
@@ -10774,7 +10774,7 @@ func (v *comFabricClusterManagementClient8) vtable() *comFabricClusterManagement
 func (v *comFabricClusterManagementClient8) beginGetClusterManifest2(
 	queryDescription *FabricClusterManifestQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricClusterManifestQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -10837,7 +10837,7 @@ func (v *comFabricClusterManagementClient9) vtable() *comFabricClusterManagement
 
 func (v *comFabricClusterManagementClient9) beginGetUpgradeOrchestrationServiceState(
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_2 *comFabricAsyncOperationContext
 	defer func() {
@@ -10882,7 +10882,7 @@ func (v *comFabricClusterManagementClient9) endGetUpgradeOrchestrationServiceSta
 func (v *comFabricClusterManagementClient9) beginSetUpgradeOrchestrationServiceState(
 	state string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_79, _ := windows.UTF16PtrFromString(state)
@@ -10946,7 +10946,7 @@ func (v *comFabricClusterManagementClient10) vtable() *comFabricClusterManagemen
 func (v *comFabricClusterManagementClient10) beginGetClusterConfiguration2(
 	apiVersion string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_80, _ := windows.UTF16PtrFromString(apiVersion)
@@ -11043,7 +11043,7 @@ func (v *comFabricHealthClient) ReportHealth(
 func (v *comFabricHealthClient) beginGetClusterHealth(
 	healthPolicy *FabricClusterHealthPolicy,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricClusterHealthPolicy
 	p_0 = healthPolicy.toInnerStruct()
@@ -11091,7 +11091,7 @@ func (v *comFabricHealthClient) beginGetNodeHealth(
 	nodeName string,
 	healthPolicy *FabricClusterHealthPolicy,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_81, _ := windows.UTF16PtrFromString(nodeName)
@@ -11143,7 +11143,7 @@ func (v *comFabricHealthClient) beginGetApplicationHealth(
 	applicationName string,
 	healthPolicy *FabricApplicationHealthPolicy,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_82, _ := windows.UTF16PtrFromString(applicationName)
@@ -11195,7 +11195,7 @@ func (v *comFabricHealthClient) beginGetServiceHealth(
 	serviceName string,
 	healthPolicy *FabricApplicationHealthPolicy,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_83, _ := windows.UTF16PtrFromString(serviceName)
@@ -11247,7 +11247,7 @@ func (v *comFabricHealthClient) beginGetPartitionHealth(
 	partitionId windows.GUID,
 	healthPolicy *FabricApplicationHealthPolicy,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_1 *innerFabricApplicationHealthPolicy
 	p_1 = healthPolicy.toInnerStruct()
@@ -11296,7 +11296,7 @@ func (v *comFabricHealthClient) beginGetReplicaHealth(
 	replicaId int64,
 	healthPolicy *FabricApplicationHealthPolicy,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_2 *innerFabricApplicationHealthPolicy
 	p_2 = healthPolicy.toInnerStruct()
@@ -11348,7 +11348,7 @@ func (v *comFabricHealthClient) beginGetDeployedApplicationHealth(
 	nodeName string,
 	healthPolicy *FabricApplicationHealthPolicy,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_84, _ := windows.UTF16PtrFromString(applicationName)
@@ -11409,7 +11409,7 @@ func (v *comFabricHealthClient) beginGetDeployedServicePackageHealth(
 	nodeName string,
 	healthPolicy *FabricApplicationHealthPolicy,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_86, _ := windows.UTF16PtrFromString(applicationName)
@@ -11500,7 +11500,7 @@ func (v *comFabricHealthClient2) vtable() *comFabricHealthClient2Vtbl {
 func (v *comFabricHealthClient2) beginGetClusterHealth2(
 	queryDescription *FabricClusterHealthQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricClusterHealthQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -11547,7 +11547,7 @@ func (v *comFabricHealthClient2) endGetClusterHealth2(
 func (v *comFabricHealthClient2) beginGetNodeHealth2(
 	queryDescription *FabricNodeHealthQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricNodeHealthQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -11594,7 +11594,7 @@ func (v *comFabricHealthClient2) endGetNodeHealth2(
 func (v *comFabricHealthClient2) beginGetApplicationHealth2(
 	queryDescription *FabricApplicationHealthQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricApplicationHealthQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -11641,7 +11641,7 @@ func (v *comFabricHealthClient2) endGetApplicationHealth2(
 func (v *comFabricHealthClient2) beginGetServiceHealth2(
 	queryDescription *FabricServiceHealthQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricServiceHealthQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -11688,7 +11688,7 @@ func (v *comFabricHealthClient2) endGetServiceHealth2(
 func (v *comFabricHealthClient2) beginGetPartitionHealth2(
 	queryDescription *FabricPartitionHealthQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricPartitionHealthQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -11735,7 +11735,7 @@ func (v *comFabricHealthClient2) endGetPartitionHealth2(
 func (v *comFabricHealthClient2) beginGetReplicaHealth2(
 	queryDescription *FabricReplicaHealthQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricReplicaHealthQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -11782,7 +11782,7 @@ func (v *comFabricHealthClient2) endGetReplicaHealth2(
 func (v *comFabricHealthClient2) beginGetDeployedApplicationHealth2(
 	queryDescription *FabricDeployedApplicationHealthQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricDeployedApplicationHealthQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -11829,7 +11829,7 @@ func (v *comFabricHealthClient2) endGetDeployedApplicationHealth2(
 func (v *comFabricHealthClient2) beginGetDeployedServicePackageHealth2(
 	queryDescription *FabricDeployedServicePackageHealthQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricDeployedServicePackageHealthQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -11891,7 +11891,7 @@ func (v *comFabricHealthClient3) vtable() *comFabricHealthClient3Vtbl {
 func (v *comFabricHealthClient3) beginGetClusterHealthChunk(
 	queryDescription *FabricClusterHealthChunkQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricClusterHealthChunkQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -12010,7 +12010,7 @@ func (v *comFabricQueryClient) vtable() *comFabricQueryClientVtbl {
 func (v *comFabricQueryClient) beginGetNodeList(
 	queryDescription *FabricNodeQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricNodeQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -12057,7 +12057,7 @@ func (v *comFabricQueryClient) endGetNodeList(
 func (v *comFabricQueryClient) beginGetApplicationTypeList(
 	queryDescription *FabricApplicationTypeQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricApplicationTypeQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -12104,7 +12104,7 @@ func (v *comFabricQueryClient) endGetApplicationTypeList(
 func (v *comFabricQueryClient) beginGetServiceTypeList(
 	queryDescription *FabricServiceTypeQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricServiceTypeQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -12151,7 +12151,7 @@ func (v *comFabricQueryClient) endGetServiceTypeList(
 func (v *comFabricQueryClient) beginGetApplicationList(
 	queryDescription *FabricApplicationQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricApplicationQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -12198,7 +12198,7 @@ func (v *comFabricQueryClient) endGetApplicationList(
 func (v *comFabricQueryClient) beginGetServiceList(
 	queryDescription *FabricServiceQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricServiceQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -12245,7 +12245,7 @@ func (v *comFabricQueryClient) endGetServiceList(
 func (v *comFabricQueryClient) beginGetPartitionList(
 	queryDescription *FabricServicePartitionQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricServicePartitionQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -12292,7 +12292,7 @@ func (v *comFabricQueryClient) endGetPartitionList(
 func (v *comFabricQueryClient) beginGetReplicaList(
 	queryDescription *FabricServiceReplicaQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricServiceReplicaQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -12339,7 +12339,7 @@ func (v *comFabricQueryClient) endGetReplicaList(
 func (v *comFabricQueryClient) beginGetDeployedApplicationList(
 	queryDescription *FabricDeployedApplicationQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricDeployedApplicationQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -12386,7 +12386,7 @@ func (v *comFabricQueryClient) endGetDeployedApplicationList(
 func (v *comFabricQueryClient) beginGetDeployedServicePackageList(
 	queryDescription *FabricDeployedServicePackageQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricDeployedServicePackageQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -12433,7 +12433,7 @@ func (v *comFabricQueryClient) endGetDeployedServicePackageList(
 func (v *comFabricQueryClient) beginGetDeployedServiceTypeList(
 	queryDescription *FabricDeployedServiceTypeQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricDeployedServiceTypeQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -12480,7 +12480,7 @@ func (v *comFabricQueryClient) endGetDeployedServiceTypeList(
 func (v *comFabricQueryClient) beginGetDeployedCodePackageList(
 	queryDescription *FabricDeployedCodePackageQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricDeployedCodePackageQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -12527,7 +12527,7 @@ func (v *comFabricQueryClient) endGetDeployedCodePackageList(
 func (v *comFabricQueryClient) beginGetDeployedReplicaList(
 	queryDescription *FabricDeployedServiceReplicaQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricDeployedServiceReplicaQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -12597,7 +12597,7 @@ func (v *comFabricQueryClient2) vtable() *comFabricQueryClient2Vtbl {
 func (v *comFabricQueryClient2) beginGetDeployedReplicaDetail(
 	queryDescription *FabricDeployedServiceReplicaDetailQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricDeployedServiceReplicaDetailQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -12643,7 +12643,7 @@ func (v *comFabricQueryClient2) endGetDeployedReplicaDetail(
 }
 func (v *comFabricQueryClient2) beginGetClusterLoadInformation(
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_2 *comFabricAsyncOperationContext
 	defer func() {
@@ -12688,7 +12688,7 @@ func (v *comFabricQueryClient2) endGetClusterLoadInformation(
 func (v *comFabricQueryClient2) beginGetPartitionLoadInformation(
 	queryDescription *FabricPartitionLoadInformationQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricPartitionLoadInformationQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -12735,7 +12735,7 @@ func (v *comFabricQueryClient2) endGetPartitionLoadInformation(
 func (v *comFabricQueryClient2) beginGetProvisionedFabricCodeVersionList(
 	queryDescription *FabricProvisionedCodeVersionQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricProvisionedCodeVersionQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -12782,7 +12782,7 @@ func (v *comFabricQueryClient2) endGetProvisionedFabricCodeVersionList(
 func (v *comFabricQueryClient2) beginGetProvisionedFabricConfigVersionList(
 	queryDescription *FabricProvisionedConfigVersionQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricProvisionedConfigVersionQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -12846,7 +12846,7 @@ func (v *comFabricQueryClient3) vtable() *comFabricQueryClient3Vtbl {
 func (v *comFabricQueryClient3) beginGetNodeLoadInformation(
 	queryDescription *FabricNodeLoadInformationQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricNodeLoadInformationQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -12893,7 +12893,7 @@ func (v *comFabricQueryClient3) endGetNodeLoadInformation(
 func (v *comFabricQueryClient3) beginGetReplicaLoadInformation(
 	queryDescription *FabricReplicaLoadInformationQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricReplicaLoadInformationQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -12957,7 +12957,7 @@ func (v *comFabricQueryClient4) vtable() *comFabricQueryClient4Vtbl {
 func (v *comFabricQueryClient4) beginGetServiceGroupMemberList(
 	queryDescription *FabricServiceGroupMemberQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricServiceGroupMemberQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -13004,7 +13004,7 @@ func (v *comFabricQueryClient4) endGetServiceGroupMemberList(
 func (v *comFabricQueryClient4) beginGetServiceGroupMemberTypeList(
 	queryDescription *FabricServiceGroupMemberTypeQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricServiceGroupMemberTypeQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -13066,7 +13066,7 @@ func (v *comFabricQueryClient5) vtable() *comFabricQueryClient5Vtbl {
 func (v *comFabricQueryClient5) beginGetUnplacedReplicaInformation(
 	queryDescription *FabricUnplacedReplicaInformationQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricUnplacedReplicaInformationQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -13145,7 +13145,7 @@ func (v *comFabricQueryClient7) vtable() *comFabricQueryClient7Vtbl {
 func (v *comFabricQueryClient7) beginGetApplicationLoadInformation(
 	queryDescription *FabricApplicationLoadInformationQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricApplicationLoadInformationQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -13209,7 +13209,7 @@ func (v *comFabricQueryClient8) vtable() *comFabricQueryClient8Vtbl {
 func (v *comFabricQueryClient8) beginGetServiceName(
 	queryDescription *FabricServiceNameQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricServiceNameQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -13256,7 +13256,7 @@ func (v *comFabricQueryClient8) endGetServiceName(
 func (v *comFabricQueryClient8) beginGetApplicationName(
 	queryDescription *FabricApplicationNameQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricApplicationNameQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -13318,7 +13318,7 @@ func (v *comFabricQueryClient9) vtable() *comFabricQueryClient9Vtbl {
 func (v *comFabricQueryClient9) beginGetApplicationTypePagedList(
 	queryDescription *PagedFabricApplicationTypeQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerPagedFabricApplicationTypeQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -13380,7 +13380,7 @@ func (v *comFabricQueryClient10) vtable() *comFabricQueryClient10Vtbl {
 func (v *comFabricQueryClient10) beginGetDeployedApplicationPagedList(
 	queryDescription *FabricPagedDeployedApplicationQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricPagedDeployedApplicationQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -13445,7 +13445,7 @@ func (v *comFabricInfrastructureServiceClient) beginInvokeInfrastructureCommand(
 	serviceName string,
 	command string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_89, _ := windows.UTF16PtrFromString(serviceName)
@@ -13499,7 +13499,7 @@ func (v *comFabricInfrastructureServiceClient) beginInvokeInfrastructureQuery(
 	serviceName string,
 	command string,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_91, _ := windows.UTF16PtrFromString(serviceName)
@@ -13577,7 +13577,7 @@ func (v *comFabricRepairManagementClient) vtable() *comFabricRepairManagementCli
 func (v *comFabricRepairManagementClient) beginCreateRepairTask(
 	repairTask *FabricRepairTask,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricRepairTask
 	p_0 = repairTask.toInnerStruct()
@@ -13624,7 +13624,7 @@ func (v *comFabricRepairManagementClient) endCreateRepairTask(
 func (v *comFabricRepairManagementClient) beginCancelRepairTask(
 	requestDescription *FabricRepairCancelDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricRepairCancelDescription
 	p_0 = requestDescription.toInnerStruct()
@@ -13671,7 +13671,7 @@ func (v *comFabricRepairManagementClient) endCancelRepairTask(
 func (v *comFabricRepairManagementClient) beginForceApproveRepairTask(
 	requestDescription *FabricRepairApproveDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricRepairApproveDescription
 	p_0 = requestDescription.toInnerStruct()
@@ -13718,7 +13718,7 @@ func (v *comFabricRepairManagementClient) endForceApproveRepairTask(
 func (v *comFabricRepairManagementClient) beginDeleteRepairTask(
 	requestDescription *FabricRepairDeleteDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricRepairDeleteDescription
 	p_0 = requestDescription.toInnerStruct()
@@ -13761,7 +13761,7 @@ func (v *comFabricRepairManagementClient) endDeleteRepairTask(
 func (v *comFabricRepairManagementClient) beginUpdateRepairExecutionState(
 	repairTask *FabricRepairTask,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricRepairTask
 	p_0 = repairTask.toInnerStruct()
@@ -13808,7 +13808,7 @@ func (v *comFabricRepairManagementClient) endUpdateRepairExecutionState(
 func (v *comFabricRepairManagementClient) beginGetRepairTaskList(
 	queryDescription *FabricRepairTaskQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricRepairTaskQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -13870,7 +13870,7 @@ func (v *comFabricRepairManagementClient2) vtable() *comFabricRepairManagementCl
 func (v *comFabricRepairManagementClient2) beginUpdateRepairTaskHealthPolicy(
 	updateDescription *FabricRepairTaskHealthPolicyUpdateDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricRepairTaskHealthPolicyUpdateDescription
 	p_0 = updateDescription.toInnerStruct()
@@ -13942,7 +13942,7 @@ func (v *comFabricFaultManagementClient) vtable() *comFabricFaultManagementClien
 func (v *comFabricFaultManagementClient) beginRestartNode(
 	description *FabricRestartNodeDescription2,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricRestartNodeDescription2
 	p_0 = description.toInnerStruct()
@@ -13969,7 +13969,7 @@ func (v *comFabricFaultManagementClient) beginRestartNode(
 func (v *comFabricFaultManagementClient) beginStartNode(
 	description *FabricStartNodeDescription2,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricStartNodeDescription2
 	p_0 = description.toInnerStruct()
@@ -13996,7 +13996,7 @@ func (v *comFabricFaultManagementClient) beginStartNode(
 func (v *comFabricFaultManagementClient) beginStopNode(
 	description *FabricStopNodeDescription2,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricStopNodeDescription2
 	p_0 = description.toInnerStruct()
@@ -14023,7 +14023,7 @@ func (v *comFabricFaultManagementClient) beginStopNode(
 func (v *comFabricFaultManagementClient) beginRestartDeployedCodePackage(
 	description *FabricRestartDeployedCodePackageDescription2,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricRestartDeployedCodePackageDescription2
 	p_0 = description.toInnerStruct()
@@ -14050,7 +14050,7 @@ func (v *comFabricFaultManagementClient) beginRestartDeployedCodePackage(
 func (v *comFabricFaultManagementClient) beginMovePrimary(
 	description *FabricMovePrimaryDescription2,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricMovePrimaryDescription2
 	p_0 = description.toInnerStruct()
@@ -14097,7 +14097,7 @@ func (v *comFabricFaultManagementClient) endMovePrimary(
 func (v *comFabricFaultManagementClient) beginMoveSecondary(
 	description *FabricMoveSecondaryDescription2,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricMoveSecondaryDescription2
 	p_0 = description.toInnerStruct()
@@ -14173,7 +14173,7 @@ func (v *comFabricTestManagementClient) vtable() *comFabricTestManagementClientV
 func (v *comFabricTestManagementClient) beginStartPartitionDataLoss(
 	invokeDataLossDescription *FabricStartPartitionDataLossDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricStartPartitionDataLossDescription
 	p_0 = invokeDataLossDescription.toInnerStruct()
@@ -14216,7 +14216,7 @@ func (v *comFabricTestManagementClient) endStartPartitionDataLoss(
 func (v *comFabricTestManagementClient) beginGetPartitionDataLossProgress(
 	operationId windows.GUID,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
@@ -14261,7 +14261,7 @@ func (v *comFabricTestManagementClient) endGetPartitionDataLossProgress(
 func (v *comFabricTestManagementClient) beginStartPartitionQuorumLoss(
 	invokeQuorumLossDescription *FabricStartPartitionQuorumLossDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricStartPartitionQuorumLossDescription
 	p_0 = invokeQuorumLossDescription.toInnerStruct()
@@ -14304,7 +14304,7 @@ func (v *comFabricTestManagementClient) endStartPartitionQuorumLoss(
 func (v *comFabricTestManagementClient) beginGetPartitionQuorumLossProgress(
 	operationId windows.GUID,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
@@ -14349,7 +14349,7 @@ func (v *comFabricTestManagementClient) endGetPartitionQuorumLossProgress(
 func (v *comFabricTestManagementClient) beginStartPartitionRestart(
 	restartPartitionDescription *FabricStartPartitionRestartDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricStartPartitionRestartDescription
 	p_0 = restartPartitionDescription.toInnerStruct()
@@ -14392,7 +14392,7 @@ func (v *comFabricTestManagementClient) endStartPartitionRestart(
 func (v *comFabricTestManagementClient) beginGetPartitionRestartProgress(
 	operationId windows.GUID,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
@@ -14437,7 +14437,7 @@ func (v *comFabricTestManagementClient) endGetPartitionRestartProgress(
 func (v *comFabricTestManagementClient) beginGetTestCommandStatusList(
 	operationId *FabricTestCommandListDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricTestCommandListDescription
 	p_0 = operationId.toInnerStruct()
@@ -14484,7 +14484,7 @@ func (v *comFabricTestManagementClient) endGetTestCommandStatusList(
 func (v *comFabricTestManagementClient) beginCancelTestCommand(
 	invokeDataLossDescription *FabricCancelTestCommandDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricCancelTestCommandDescription
 	p_0 = invokeDataLossDescription.toInnerStruct()
@@ -14546,7 +14546,7 @@ func (v *comFabricTestManagementClient2) vtable() *comFabricTestManagementClient
 func (v *comFabricTestManagementClient2) beginStartChaos(
 	restartPartitionDescription *FabricStartChaosDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricStartChaosDescription
 	p_0 = restartPartitionDescription.toInnerStruct()
@@ -14588,7 +14588,7 @@ func (v *comFabricTestManagementClient2) endStartChaos(
 }
 func (v *comFabricTestManagementClient2) beginStopChaos(
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_2 *comFabricAsyncOperationContext
 	defer func() {
@@ -14629,7 +14629,7 @@ func (v *comFabricTestManagementClient2) endStopChaos(
 func (v *comFabricTestManagementClient2) beginGetChaosReport(
 	getChaosReportDescription *FabricGetChaosReportDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricGetChaosReportDescription
 	p_0 = getChaosReportDescription.toInnerStruct()
@@ -14693,7 +14693,7 @@ func (v *comFabricTestManagementClient3) vtable() *comFabricTestManagementClient
 func (v *comFabricTestManagementClient3) beginStartNodeTransition(
 	description *FabricNodeTransitionDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricNodeTransitionDescription
 	p_0 = description.toInnerStruct()
@@ -14736,7 +14736,7 @@ func (v *comFabricTestManagementClient3) endStartNodeTransition(
 func (v *comFabricTestManagementClient3) beginGetNodeTransitionProgress(
 	operationId windows.GUID,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
@@ -14801,7 +14801,7 @@ func (v *comFabricTestManagementClient4) vtable() *comFabricTestManagementClient
 
 func (v *comFabricTestManagementClient4) beginGetChaos(
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_2 *comFabricAsyncOperationContext
 	defer func() {
@@ -14845,7 +14845,7 @@ func (v *comFabricTestManagementClient4) endGetChaos(
 }
 func (v *comFabricTestManagementClient4) beginGetChaosSchedule(
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_2 *comFabricAsyncOperationContext
 	defer func() {
@@ -14890,7 +14890,7 @@ func (v *comFabricTestManagementClient4) endGetChaosSchedule(
 func (v *comFabricTestManagementClient4) beginSetChaosSchedule(
 	setChaosScheduleDescription *FabricChaosServiceScheduleDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricChaosServiceScheduleDescription
 	p_0 = setChaosScheduleDescription.toInnerStruct()
@@ -14933,7 +14933,7 @@ func (v *comFabricTestManagementClient4) endSetChaosSchedule(
 func (v *comFabricTestManagementClient4) beginGetChaosEvents(
 	chaosEventsDescription *FabricChaosEventsSegmentDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricChaosEventsSegmentDescription
 	p_0 = chaosEventsDescription.toInnerStruct()
@@ -15010,7 +15010,7 @@ func (v *comFabricNetworkManagementClient) beginCreateNetwork(
 	networkName string,
 	description *FabricNetworkDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
 	s_93, _ := windows.UTF16PtrFromString(networkName)
@@ -15057,7 +15057,7 @@ func (v *comFabricNetworkManagementClient) endCreateNetwork(
 func (v *comFabricNetworkManagementClient) beginDeleteNetwork(
 	deleteDescription *FabricDeleteNetworkDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricDeleteNetworkDescription
 	p_0 = deleteDescription.toInnerStruct()
@@ -15100,7 +15100,7 @@ func (v *comFabricNetworkManagementClient) endDeleteNetwork(
 func (v *comFabricNetworkManagementClient) beginGetNetworkList(
 	queryDescription *FabricNetworkQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricNetworkQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -15147,7 +15147,7 @@ func (v *comFabricNetworkManagementClient) endGetNetworkList(
 func (v *comFabricNetworkManagementClient) beginGetNetworkApplicationList(
 	queryDescription *FabricNetworkApplicationQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricNetworkApplicationQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -15194,7 +15194,7 @@ func (v *comFabricNetworkManagementClient) endGetNetworkApplicationList(
 func (v *comFabricNetworkManagementClient) beginGetNetworkNodeList(
 	queryDescription *FabricNetworkNodeQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricNetworkNodeQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -15241,7 +15241,7 @@ func (v *comFabricNetworkManagementClient) endGetNetworkNodeList(
 func (v *comFabricNetworkManagementClient) beginGetApplicationNetworkList(
 	queryDescription *FabricApplicationNetworkQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricApplicationNetworkQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -15288,7 +15288,7 @@ func (v *comFabricNetworkManagementClient) endGetApplicationNetworkList(
 func (v *comFabricNetworkManagementClient) beginGetDeployedNetworkList(
 	queryDescription *FabricDeployedNetworkQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricDeployedNetworkQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -15335,7 +15335,7 @@ func (v *comFabricNetworkManagementClient) endGetDeployedNetworkList(
 func (v *comFabricNetworkManagementClient) beginGetDeployedNetworkCodePackageList(
 	queryDescription *FabricDeployedNetworkCodePackageQueryDescription,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricDeployedNetworkCodePackageQueryDescription
 	p_0 = queryDescription.toInnerStruct()
@@ -16515,117 +16515,52 @@ func (v *comFabricServicePartitionResolutionChangeHandler) OnChange(
 	return
 }
 
-type comFabricServiceNotificationEventHandler struct {
-	ole.IUnknown
+type goProxyFabricServiceNotificationEventHandler struct {
+	vtbl       *goProxyFabricServiceNotificationEventHandlerVtbl
+	unknownref *goIUnknown
+	client     *FabricClient
 }
 
-type comFabricServiceNotificationEventHandlerVtbl struct {
-	ole.IUnknownVtbl
+type goProxyFabricServiceNotificationEventHandlerVtbl struct {
+	goIUnknownVtbl
 	OnNotification uintptr
 }
 
-func (v *comFabricServiceNotificationEventHandler) vtable() *comFabricServiceNotificationEventHandlerVtbl {
-	return (*comFabricServiceNotificationEventHandlerVtbl)(unsafe.Pointer(v.RawVTable))
+func newGoProxyFabricServiceNotificationEventHandler(client *FabricClient) *goProxyFabricServiceNotificationEventHandler {
+	proxy := &goProxyFabricServiceNotificationEventHandler{}
+	proxy.vtbl = &goProxyFabricServiceNotificationEventHandlerVtbl{}
+	proxy.unknownref = attachIUnknown("{A04B7E9A-DAAB-45D4-8DA3-95EF3AB5DBAC}", &proxy.vtbl.goIUnknownVtbl)
+	proxy.vtbl.OnNotification = syscall.NewCallback(proxy.OnNotification)
+
+	proxy.client = client
+
+	proxy.init()
+	return proxy
 }
 
-func (v *comFabricServiceNotificationEventHandler) OnNotification(
-	param_0 *comFabricServiceNotification,
-) (err error) {
-	hr, _, err1 := syscall.Syscall(
-		v.vtable().OnNotification,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(param_0)),
-		0,
-	)
-	if hr != 0 {
-		err = errno(hr, err1)
-		return
-	}
-	return
+type goProxyFabricClientConnectionEventHandler struct {
+	vtbl       *goProxyFabricClientConnectionEventHandlerVtbl
+	unknownref *goIUnknown
+	client     *FabricClient
 }
 
-type comFabricClientConnectionEventHandler struct {
-	ole.IUnknown
-}
-
-type comFabricClientConnectionEventHandlerVtbl struct {
-	ole.IUnknownVtbl
+type goProxyFabricClientConnectionEventHandlerVtbl struct {
+	goIUnknownVtbl
 	OnConnected    uintptr
 	OnDisconnected uintptr
 }
 
-func (v *comFabricClientConnectionEventHandler) vtable() *comFabricClientConnectionEventHandlerVtbl {
-	return (*comFabricClientConnectionEventHandlerVtbl)(unsafe.Pointer(v.RawVTable))
-}
+func newGoProxyFabricClientConnectionEventHandler(client *FabricClient) *goProxyFabricClientConnectionEventHandler {
+	proxy := &goProxyFabricClientConnectionEventHandler{}
+	proxy.vtbl = &goProxyFabricClientConnectionEventHandlerVtbl{}
+	proxy.unknownref = attachIUnknown("{2BD21F94-D962-4BB4-84B8-5A4B3E9D4D4D}", &proxy.vtbl.goIUnknownVtbl)
+	proxy.vtbl.OnConnected = syscall.NewCallback(proxy.OnConnected)
+	proxy.vtbl.OnDisconnected = syscall.NewCallback(proxy.OnDisconnected)
 
-func (v *comFabricClientConnectionEventHandler) OnConnected(
-	param_0 *comFabricGatewayInformationResult,
-) (err error) {
-	hr, _, err1 := syscall.Syscall(
-		v.vtable().OnConnected,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(param_0)),
-		0,
-	)
-	if hr != 0 {
-		err = errno(hr, err1)
-		return
-	}
-	return
-}
-func (v *comFabricClientConnectionEventHandler) OnDisconnected(
-	param_0 *comFabricGatewayInformationResult,
-) (err error) {
-	hr, _, err1 := syscall.Syscall(
-		v.vtable().OnDisconnected,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(param_0)),
-		0,
-	)
-	if hr != 0 {
-		err = errno(hr, err1)
-		return
-	}
-	return
-}
+	proxy.client = client
 
-type comFabricClientConnectionEventHandler2 struct {
-	comFabricClientConnectionEventHandler
-}
-
-type comFabricClientConnectionEventHandler2Vtbl struct {
-	comFabricClientConnectionEventHandlerVtbl
-	OnClaimsRetrieval uintptr
-}
-
-func (v *comFabricClientConnectionEventHandler2) vtable() *comFabricClientConnectionEventHandler2Vtbl {
-	return (*comFabricClientConnectionEventHandler2Vtbl)(unsafe.Pointer(v.RawVTable))
-}
-
-func (v *comFabricClientConnectionEventHandler2) OnClaimsRetrieval(
-	metadata *FabricClaimsRetrievalMetadata,
-) (token *comFabricStringResult, err error) {
-	var p_0 *innerFabricClaimsRetrievalMetadata
-	p_0 = metadata.toInnerStruct()
-	var p_1 *comFabricStringResult
-	defer func() {
-		token = p_1
-	}()
-	hr, _, err1 := syscall.Syscall(
-		v.vtable().OnClaimsRetrieval,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(&p_1)),
-	)
-	if hr != 0 {
-		err = errno(hr, err1)
-		return
-	}
-	return
+	proxy.init()
+	return proxy
 }
 
 type ComFabricClientSettingsResult struct {
@@ -18766,7 +18701,7 @@ func (v *comFabricSecretStoreClient) beginGetSecrets(
 	secretReferences []FabricSecretReference,
 	includeValue bool,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricSecretReferenceList
 	lst_94 := &innerFabricSecretReferenceList{}
@@ -18836,7 +18771,7 @@ func (v *comFabricSecretStoreClient) endGetSecrets(
 func (v *comFabricSecretStoreClient) beginSetSecrets(
 	secrets []FabricSecret,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricSecretList
 	lst_95 := &innerFabricSecretList{}
@@ -18902,7 +18837,7 @@ func (v *comFabricSecretStoreClient) endSetSecrets(
 func (v *comFabricSecretStoreClient) beginRemoveSecrets(
 	secretReferences []FabricSecretReference,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricSecretReferenceList
 	lst_96 := &innerFabricSecretReferenceList{}
@@ -18968,7 +18903,7 @@ func (v *comFabricSecretStoreClient) endRemoveSecrets(
 func (v *comFabricSecretStoreClient) beginGetSecretVersions(
 	secretReferences []FabricSecretReference,
 	timeoutMilliseconds uint32,
-	callback *comIFabricAsyncOperationCallback,
+	callback *goProxyFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricSecretReferenceList
 	lst_97 := &innerFabricSecretReferenceList{}

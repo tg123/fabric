@@ -27,9 +27,6 @@ var basicTypeMap = map[string]string{
 	"GUID":     "windows.GUID",
 	"FILETIME": "time.Time",
 	"void":     "interface{}",
-
-	// TODO move to generated
-	"IFabricAsyncOperationCallback": "comIFabricAsyncOperationCallback",
 }
 
 var basicTypeMapInner = map[string]string{

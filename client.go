@@ -3,7 +3,6 @@ package fabric
 import (
 	"fmt"
 	"sync"
-	"syscall"
 	"time"
 	"unsafe"
 
@@ -62,8 +61,8 @@ func createClient(client *FabricClient, connectionStrings []string, iid string, 
 	r, _, err := fabricCreateClient3Proc.Call(
 		uintptr(len(conn)),
 		uintptr(unsafe.Pointer(&conn[0])),
-		uintptr(unsafe.Pointer(newFabricServiceNotificationEventHandler(client))),
-		uintptr(unsafe.Pointer(newFabricConnectionEventHandler(client))),
+		uintptr(unsafe.Pointer(newGoProxyFabricServiceNotificationEventHandler(client))),
+		uintptr(unsafe.Pointer(newGoProxyFabricClientConnectionEventHandler(client))),
 		uintptr(unsafe.Pointer(clzid)),
 		uintptr(p),
 	)
@@ -75,18 +74,13 @@ func createClient(client *FabricClient, connectionStrings []string, iid string, 
 	return nil
 }
 
-type goFabricServiceNotificationEventHandler struct {
-	vtbl       *goFabricServiceNotificationEventHandlerVtbl
-	unknownref *goIUnknown
-	client     *FabricClient
+func (h *goProxyFabricServiceNotificationEventHandler) init() {
+	h.client.deferclose = append(h.client.deferclose, func() {
+		h.unknownref.release((*ole.IUnknown)(unsafe.Pointer(h)))
+	})
 }
 
-type goFabricServiceNotificationEventHandlerVtbl struct {
-	goIUnknownVtbl
-	OnNotification uintptr
-}
-
-func (h *goFabricServiceNotificationEventHandler) onNotification(this *ole.IUnknown, notification *comFabricServiceNotification) uintptr {
+func (h *goProxyFabricServiceNotificationEventHandler) OnNotification(this *ole.IUnknown, notification *comFabricServiceNotification) uintptr {
 	cb := h.client.OnNotification
 	if cb == nil {
 		return ole.S_OK
@@ -108,39 +102,21 @@ func (h *goFabricServiceNotificationEventHandler) onNotification(this *ole.IUnkn
 	return ole.S_OK
 }
 
-func newFabricServiceNotificationEventHandler(client *FabricClient) *goFabricServiceNotificationEventHandler {
-	handler := &goFabricServiceNotificationEventHandler{}
-	handler.vtbl = &goFabricServiceNotificationEventHandlerVtbl{}
-	handler.unknownref = attachIUnknown("{A04B7E9A-DAAB-45D4-8DA3-95EF3AB5DBAC}", &handler.vtbl.goIUnknownVtbl)
-	handler.vtbl.OnNotification = syscall.NewCallback(handler.onNotification)
-	handler.client = client
-	client.deferclose = append(client.deferclose, func() {
-		handler.unknownref.release((*ole.IUnknown)(unsafe.Pointer(handler)))
+func (h *goProxyFabricClientConnectionEventHandler) init() {
+	h.client.deferclose = append(h.client.deferclose, func() {
+		h.unknownref.release((*ole.IUnknown)(unsafe.Pointer(h)))
 	})
-	return handler
 }
 
-type goFabricConnectionEventHandler struct {
-	vtbl       *goFabricConnectionEventHandlerVtbl
-	unknownref *goIUnknown
-	client     *FabricClient
+func (h *goProxyFabricClientConnectionEventHandler) OnConnected(this *ole.IUnknown, result *comFabricGatewayInformationResult) uintptr {
+	return h.OnInfo(result, h.client.OnConnected)
 }
 
-type goFabricConnectionEventHandlerVtbl struct {
-	goIUnknownVtbl
-	OnConnected    uintptr
-	OnDisconnected uintptr
+func (h *goProxyFabricClientConnectionEventHandler) OnDisconnected(this *ole.IUnknown, result *comFabricGatewayInformationResult) uintptr {
+	return h.OnInfo(result, h.client.OnDisconnected)
 }
 
-func (h *goFabricConnectionEventHandler) onConnected(this *ole.IUnknown, result *comFabricGatewayInformationResult) uintptr {
-	return h.onInfo(result, h.client.OnConnected)
-}
-
-func (h *goFabricConnectionEventHandler) onDisconnected(this *ole.IUnknown, result *comFabricGatewayInformationResult) uintptr {
-	return h.onInfo(result, h.client.OnDisconnected)
-}
-
-func (h *goFabricConnectionEventHandler) onInfo(result *comFabricGatewayInformationResult, cb func(FabricGatewayInformation)) uintptr {
+func (h *goProxyFabricClientConnectionEventHandler) OnInfo(result *comFabricGatewayInformationResult, cb func(FabricGatewayInformation)) uintptr {
 	if cb == nil {
 		return ole.S_OK
 	}
@@ -159,19 +135,6 @@ func (h *goFabricConnectionEventHandler) onInfo(result *comFabricGatewayInformat
 
 	cb(*info)
 	return ole.S_OK
-}
-
-func newFabricConnectionEventHandler(client *FabricClient) *goFabricConnectionEventHandler {
-	handler := &goFabricConnectionEventHandler{}
-	handler.vtbl = &goFabricConnectionEventHandlerVtbl{}
-	handler.unknownref = attachIUnknown("{2BD21F94-D962-4BB4-84B8-5A4B3E9D4D4D}", &handler.vtbl.goIUnknownVtbl)
-	handler.vtbl.OnConnected = syscall.NewCallback(handler.onConnected)
-	handler.vtbl.OnDisconnected = syscall.NewCallback(handler.onDisconnected)
-	handler.client = client
-	client.deferclose = append(client.deferclose, func() {
-		handler.unknownref.release((*ole.IUnknown)(unsafe.Pointer(handler)))
-	})
-	return handler
 }
 
 type FabricClient struct {
