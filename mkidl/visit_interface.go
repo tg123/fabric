@@ -40,13 +40,11 @@ var goproxyProperties = map[string][]goproxyProperty{
 			Type: "func(ctx *comFabricAsyncOperationContext)",
 		},
 	},
+	"IFabricStatelessServiceFactory":  {},
+	"IFabricStatelessServiceInstance": {},
 }
 
 func (g *generator) goInterfaceName(name string) string {
-
-	if _, ok := goproxyProperties[name]; ok {
-		return fmt.Sprintf("goProxy%v", strings.TrimPrefix(name, "I"))
-	}
 
 	if g.ctx.publicReturnedInterfaces[name] {
 		return fmt.Sprintf("Com%v", strings.TrimPrefix(name, "I"))
@@ -75,21 +73,13 @@ var methodBlackList = map[string]bool{
 	"IFabricPropertyManagementClient.EndGetProperty":            true,
 	"IFabricPropertyManagementClient.EndEnumerateSubNames":      true,
 	"IFabricServiceManagementClient.EndResolveServicePartition": true,
+	"IFabricPropertyManagementClient.EndSubmitPropertyBatch":    true,
 	"IFabricNameEnumerationResult.GetNames":                     true,
 
 	// []
 	"IFabricApplicationUpgradeProgressResult.GetUpgradeDomains":        true,
 	"IFabricApplicationUpgradeProgressResult.GetChangedUpgradeDomains": true,
 	"IFabricStringListResult.GetStrings":                               true,
-
-	// generator bug skip
-	"IFabricPropertyManagementClient.EndSubmitPropertyBatch": true,
-
-	"IFabricStatelessServiceInstance.EndOpen": true,
-	"IFabricStatefulServiceReplica.EndOpen":   true,
-	"IFabricReplicator.EndOpen":               true,
-	"IFabricOperationStream.EndGetOperation":  true,
-	"IFabricOperationDataStream.EndGetNext":   true,
 
 	// TODO Name Duplicate
 	"IFabricFaultManagementClient.EndRestartDeployedCodePackage": true,
@@ -304,6 +294,7 @@ func (g *generator) generateComStub(n *ast.InterfaceNode) {
 	g.templateln(`
 		type {{.Name}} struct {
 			{{.Parent}}
+			{{if .HasGoProxy}} proxy {{.Name}}GoProxy {{end}}
 		}
 
 		type {{.InnerName}}Vtbl struct {
@@ -322,12 +313,14 @@ func (g *generator) generateComStub(n *ast.InterfaceNode) {
 		Parent      string
 		InnerParent string
 		Methods     []*ast.MethodNode
+		HasGoProxy  bool
 	}{
 		Name:        interfaceName,
 		InnerName:   casee.ToCamelCase(interfaceName),
 		Parent:      pn,
 		InnerParent: casee.ToCamelCase(pn),
 		Methods:     n.Methods,
+		HasGoProxy:  goproxyProperties[n.Name] != nil,
 	})
 
 	g.generateMethods(n)
@@ -337,41 +330,52 @@ func (g *generator) generateGoProxy(n *ast.InterfaceNode) {
 	g.importpkg("syscall")
 	interfaceName := g.goInterfaceName(n.Name)
 	g.templateln(`
-		type {{.Name}} struct {
-			vtbl       *{{.Name}}Vtbl
+		type {{.Name}}GoProxy struct {
 			unknownref *goIUnknown
 			{{ range .Properties }} {{.Name}} {{.Type}}
 			{{ end }} 
 		}
 
-		type {{.Name}}Vtbl struct {
-			goIUnknownVtbl
-			{{ range .Methods }} {{.Name}} uintptr
-			{{ end }} 
-		}
-
 		func new{{ .Name | ToPascalCase }}( {{ range .Properties }} {{.Name}} {{.Type}} {{end}}) *{{.Name}} {
-			proxy := &{{.Name}}{}
-			proxy.vtbl = &{{.Name}}Vtbl{}
-			proxy.unknownref = attachIUnknown("{{"{"}}{{ .IID }}{{"}"}}", &proxy.vtbl.goIUnknownVtbl)
-			{{ range .Methods }} proxy.vtbl.{{.Name}} = syscall.NewCallback(proxy.{{.Name}})
+			com := &{{.Name}}{}
+			*(**{{.InnerName}}Vtbl)(unsafe.Pointer(com)) = &{{.InnerName}}Vtbl{}
+			vtbl := com.vtable()
+			com.proxy.unknownref = attachIUnknown("{{"{"}}{{ .IID }}{{"}"}}", &vtbl.IUnknownVtbl)
+			{{ range .Methods }} vtbl.{{.Name}} = syscall.NewCallback(com.proxy.{{.Name}})
 			{{ end }} 
-			{{ range .Properties }} proxy.{{.Name}} = {{.Name}}
+			{{ range .Properties }} com.proxy.{{.Name}} = {{.Name}}
 			{{ end }} 
-			proxy.init()
-			return proxy
+			com.proxy.init()
+			return com
 		}
 	`, struct {
 		Name       string
+		InnerName  string
 		Methods    []*ast.MethodNode
 		Properties []goproxyProperty
 		IID        string
 	}{
 		Name:       interfaceName,
+		InnerName:  casee.ToCamelCase(interfaceName),
 		Methods:    n.Methods,
 		Properties: goproxyProperties[n.Name],
 		IID:        strings.ToUpper(findIID(n)),
 	})
+
+	g.printfln("/*")
+	for _, m := range n.Methods {
+		g.printfln("func (v *%sGoProxy) %s(", interfaceName, m.Name)
+		g.printfln("_ *ole.IUnknown,")
+		for i, p := range m.Params {
+			paramName := p.Name
+			if paramName == "" {
+				paramName = fmt.Sprintf("param_%v", i)
+			}
+			g.printfln("%v %v,", paramName, g.toGolangType(p.Type, p.Indirections, true))
+		}
+		g.printfln(") uintptr { return 0}")
+	}
+	g.printfln("*/")
 }
 
 func (g *generator) visitInterface(n *ast.InterfaceNode) {
@@ -381,7 +385,6 @@ func (g *generator) visitInterface(n *ast.InterfaceNode) {
 
 	if _, ok := goproxyProperties[n.Name]; ok {
 		g.generateGoProxy(n)
-	} else {
-		g.generateComStub(n)
 	}
+	g.generateComStub(n)
 }

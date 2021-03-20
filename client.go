@@ -61,8 +61,8 @@ func createClient(client *FabricClient, connectionStrings []string, iid string, 
 	r, _, err := fabricCreateClient3Proc.Call(
 		uintptr(len(conn)),
 		uintptr(unsafe.Pointer(&conn[0])),
-		uintptr(unsafe.Pointer(newGoProxyFabricServiceNotificationEventHandler(client))),
-		uintptr(unsafe.Pointer(newGoProxyFabricClientConnectionEventHandler(client))),
+		uintptr(unsafe.Pointer(newComFabricServiceNotificationEventHandler(client))),
+		uintptr(unsafe.Pointer(newComFabricClientConnectionEventHandler(client))),
 		uintptr(unsafe.Pointer(clzid)),
 		uintptr(p),
 	)
@@ -74,13 +74,13 @@ func createClient(client *FabricClient, connectionStrings []string, iid string, 
 	return nil
 }
 
-func (h *goProxyFabricServiceNotificationEventHandler) init() {
+func (h *comFabricServiceNotificationEventHandlerGoProxy) init() {
 	h.client.deferclose = append(h.client.deferclose, func() {
 		h.unknownref.release((*ole.IUnknown)(unsafe.Pointer(h)))
 	})
 }
 
-func (h *goProxyFabricServiceNotificationEventHandler) OnNotification(this *ole.IUnknown, notification *comFabricServiceNotification) uintptr {
+func (h *comFabricServiceNotificationEventHandlerGoProxy) OnNotification(this *ole.IUnknown, notification *comFabricServiceNotification) uintptr {
 	cb := h.client.OnNotification
 	if cb == nil {
 		return ole.S_OK
@@ -102,21 +102,21 @@ func (h *goProxyFabricServiceNotificationEventHandler) OnNotification(this *ole.
 	return ole.S_OK
 }
 
-func (h *goProxyFabricClientConnectionEventHandler) init() {
+func (h *comFabricClientConnectionEventHandlerGoProxy) init() {
 	h.client.deferclose = append(h.client.deferclose, func() {
 		h.unknownref.release((*ole.IUnknown)(unsafe.Pointer(h)))
 	})
 }
 
-func (h *goProxyFabricClientConnectionEventHandler) OnConnected(this *ole.IUnknown, result *comFabricGatewayInformationResult) uintptr {
+func (h *comFabricClientConnectionEventHandlerGoProxy) OnConnected(this *ole.IUnknown, result *comFabricGatewayInformationResult) uintptr {
 	return h.OnInfo(result, h.client.OnConnected)
 }
 
-func (h *goProxyFabricClientConnectionEventHandler) OnDisconnected(this *ole.IUnknown, result *comFabricGatewayInformationResult) uintptr {
+func (h *comFabricClientConnectionEventHandlerGoProxy) OnDisconnected(this *ole.IUnknown, result *comFabricGatewayInformationResult) uintptr {
 	return h.OnInfo(result, h.client.OnDisconnected)
 }
 
-func (h *goProxyFabricClientConnectionEventHandler) OnInfo(result *comFabricGatewayInformationResult, cb func(FabricGatewayInformation)) uintptr {
+func (h *comFabricClientConnectionEventHandlerGoProxy) OnInfo(result *comFabricGatewayInformationResult, cb func(FabricGatewayInformation)) uintptr {
 	if cb == nil {
 		return ole.S_OK
 	}

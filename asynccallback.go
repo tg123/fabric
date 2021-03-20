@@ -4,11 +4,11 @@ import (
 	ole "github.com/go-ole/go-ole"
 )
 
-func (cb *goProxyFabricAsyncOperationCallback) init() {
+func (cb *comFabricAsyncOperationCallbackGoProxy) init() {
 
 }
 
-func (cb *goProxyFabricAsyncOperationCallback) Invoke(this *ole.IUnknown, ctx *comFabricAsyncOperationContext) uintptr {
+func (cb *comFabricAsyncOperationCallbackGoProxy) Invoke(this *ole.IUnknown, ctx *comFabricAsyncOperationContext) uintptr {
 	if ctx == nil {
 		return ole.E_POINTER
 	}

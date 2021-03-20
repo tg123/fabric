@@ -8,27 +8,64 @@ import (
 	"unsafe"
 )
 
-type goProxyFabricAsyncOperationCallback struct {
-	vtbl       *goProxyFabricAsyncOperationCallbackVtbl
+type comFabricAsyncOperationCallbackGoProxy struct {
 	unknownref *goIUnknown
 	callback   func(ctx *comFabricAsyncOperationContext)
 }
 
-type goProxyFabricAsyncOperationCallbackVtbl struct {
-	goIUnknownVtbl
+func newComFabricAsyncOperationCallback(callback func(ctx *comFabricAsyncOperationContext)) *comFabricAsyncOperationCallback {
+	com := &comFabricAsyncOperationCallback{}
+	*(**comFabricAsyncOperationCallbackVtbl)(unsafe.Pointer(com)) = &comFabricAsyncOperationCallbackVtbl{}
+	vtbl := com.vtable()
+	com.proxy.unknownref = attachIUnknown("{86F08D7E-14DD-4575-8489-B1D5D679029C}", &vtbl.IUnknownVtbl)
+	vtbl.Invoke = syscall.NewCallback(com.proxy.Invoke)
+
+	com.proxy.callback = callback
+
+	com.proxy.init()
+	return com
+}
+
+/*
+func (v *comFabricAsyncOperationCallbackGoProxy) Invoke(
+_ *ole.IUnknown,
+context *comFabricAsyncOperationContext,
+) uintptr { return 0}
+*/
+
+type comFabricAsyncOperationCallback struct {
+	ole.IUnknown
+	proxy comFabricAsyncOperationCallbackGoProxy
+}
+
+type comFabricAsyncOperationCallbackVtbl struct {
+	ole.IUnknownVtbl
 	Invoke uintptr
 }
 
-func newGoProxyFabricAsyncOperationCallback(callback func(ctx *comFabricAsyncOperationContext)) *goProxyFabricAsyncOperationCallback {
-	proxy := &goProxyFabricAsyncOperationCallback{}
-	proxy.vtbl = &goProxyFabricAsyncOperationCallbackVtbl{}
-	proxy.unknownref = attachIUnknown("{86F08D7E-14DD-4575-8489-B1D5D679029C}", &proxy.vtbl.goIUnknownVtbl)
-	proxy.vtbl.Invoke = syscall.NewCallback(proxy.Invoke)
+func (v *comFabricAsyncOperationCallback) vtable() *comFabricAsyncOperationCallbackVtbl {
+	return (*comFabricAsyncOperationCallbackVtbl)(unsafe.Pointer(v.RawVTable))
+}
 
-	proxy.callback = callback
+func (v *comFabricAsyncOperationCallback) Invoke(
+	context *comFabricAsyncOperationContext,
+) (rt interface{}, err error) {
+	hr, _, err1 := syscall.Syscall(
+		v.vtable().Invoke,
+		2,
+		uintptr(unsafe.Pointer(v)),
+		uintptr(unsafe.Pointer(context)),
+		0,
+	)
+	if hr == 0 {
+		err = err1
+		return
+	}
 
-	proxy.init()
-	return proxy
+	tmp := (unsafe.Pointer)(unsafe.Pointer(hr))
+
+	rt = fromUnsafePointer(tmp)
+	return
 }
 
 type comFabricAsyncOperationContext struct {
@@ -71,8 +108,8 @@ func (v *comFabricAsyncOperationContext) CompletedSynchronously() (rt bool, err 
 	rt = hr != 0
 	return
 }
-func (v *comFabricAsyncOperationContext) GetCallback() (callback *goProxyFabricAsyncOperationCallback, err error) {
-	var p_0 *goProxyFabricAsyncOperationCallback
+func (v *comFabricAsyncOperationContext) GetCallback() (callback *comFabricAsyncOperationCallback, err error) {
+	var p_0 *comFabricAsyncOperationCallback
 	defer func() {
 		callback = p_0
 	}()

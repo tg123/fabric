@@ -19,13 +19,7 @@ type goIUnknown struct {
 	reflock sync.Mutex
 }
 
-type goIUnknownVtbl struct {
-	QueryInterface uintptr
-	AddRef         uintptr
-	Release        uintptr
-}
-
-func attachIUnknown(iid string, vtbl *goIUnknownVtbl) *goIUnknown {
+func attachIUnknown(iid string, vtbl *ole.IUnknownVtbl) *goIUnknown {
 	un := &goIUnknown{iid: iid}
 	vtbl.QueryInterface = syscall.NewCallback(un.queryInterface)
 	vtbl.AddRef = syscall.NewCallback(un.addRef)

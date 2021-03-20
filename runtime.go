@@ -72,3 +72,57 @@ type StatelessUserServiceInstance interface {
 	Close(ctx context.Context) error
 	Abort() error
 }
+
+func (f *comFabricStatelessServiceFactoryGoProxy) init() {
+
+}
+
+func (v *comFabricStatelessServiceFactoryGoProxy) CreateInstance(
+	_ *ole.IUnknown,
+	serviceTypeName *uint16,
+	serviceName *uint16,
+	initializationDataLength uint32,
+	initializationData *byte,
+	partitionId windows.GUID,
+	instanceId int64,
+	serviceInstance **comFabricStatelessServiceInstance,
+) uintptr {
+	return 0
+}
+
+func (v *comFabricStatelessServiceInstanceGoProxy) init() {
+}
+
+func (v *comFabricStatelessServiceInstanceGoProxy) BeginOpen(
+	_ *ole.IUnknown,
+	partition *comFabricStatelessServicePartition,
+	callback *comFabricAsyncOperationCallback,
+	context **comFabricAsyncOperationContext,
+) uintptr {
+	return 0
+}
+func (v *comFabricStatelessServiceInstanceGoProxy) EndOpen(
+	_ *ole.IUnknown,
+	context *comFabricAsyncOperationContext,
+	serviceAddress **comFabricStringResult,
+) uintptr {
+	return 0
+}
+func (v *comFabricStatelessServiceInstanceGoProxy) BeginClose(
+	_ *ole.IUnknown,
+	callback *comFabricAsyncOperationCallback,
+	context **comFabricAsyncOperationContext,
+) uintptr {
+	return 0
+}
+func (v *comFabricStatelessServiceInstanceGoProxy) EndClose(
+	_ *ole.IUnknown,
+	context *comFabricAsyncOperationContext,
+) uintptr {
+	return 0
+}
+func (v *comFabricStatelessServiceInstanceGoProxy) Abort(
+	_ *ole.IUnknown,
+) uintptr {
+	return 0
+}
