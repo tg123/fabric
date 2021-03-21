@@ -3,7 +3,9 @@ package fabric
 import (
 	"context"
 	"fmt"
+	"io"
 	"reflect"
+	"sync"
 	"time"
 	"unsafe"
 
@@ -134,4 +136,37 @@ func errorToHResult(err error) uintptr {
 	}
 
 	return ole.S_OK
+}
+
+type coclz struct {
+	hub            io.Closer
+	defaultTimeout time.Duration
+
+	closed    bool
+	closelock sync.Mutex
+
+	deferclose []func()
+}
+
+func (v *coclz) GetTimeout() time.Duration {
+	return v.defaultTimeout
+}
+
+func (v *coclz) SetDefaultTimeout(t time.Duration) {
+	v.defaultTimeout = t
+}
+
+func (v *coclz) Close() error {
+	v.closelock.Lock()
+	defer v.closelock.Unlock()
+	if v.closed {
+		return nil
+	}
+	v.closed = true
+
+	v.hub.Close()
+	for _, cf := range v.deferclose {
+		cf()
+	}
+	return nil
 }

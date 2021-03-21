@@ -195,11 +195,17 @@ func findIID(ifc *ast.InterfaceNode) string {
 }
 
 var hubHiddenList = map[string]bool{
-	"IFabricClientSettings2.GetSettings":              true,
-	"IFabricRuntime.RegisterStatelessServiceFactory":  true,
-	"IFabricRuntime.RegisterStatefulServiceFactory":   true,
-	"IFabricRuntime.CreateServiceGroupFactoryBuilder": true,
-	"IFabricRuntime.RegisterServiceGroupFactory":      true,
+	"IFabricClientSettings2.GetSettings":                                              true,
+	"IFabricRuntime.RegisterStatelessServiceFactory":                                  true,
+	"IFabricRuntime.RegisterStatefulServiceFactory":                                   true,
+	"IFabricRuntime.CreateServiceGroupFactoryBuilder":                                 true,
+	"IFabricRuntime.RegisterServiceGroupFactory":                                      true,
+	"IFabricCodePackageActivationContext.RegisterCodePackageChangeHandler":            true,
+	"IFabricCodePackageActivationContext.UnregisterCodePackageChangeHandler":          true,
+	"IFabricCodePackageActivationContext.RegisterConfigurationPackageChangeHandler":   true,
+	"IFabricCodePackageActivationContext.UnregisterConfigurationPackageChangeHandler": true,
+	"IFabricCodePackageActivationContext.RegisterDataPackageChangeHandler":            true,
+	"IFabricCodePackageActivationContext.UnregisterDataPackageChangeHandler":          true,
 }
 
 func (g *generator) generateCoClz(n *ast.CoClassNode) {
@@ -222,12 +228,13 @@ func (g *generator) generateCoClz(n *ast.CoClassNode) {
 		iid := findIID(ifc)
 
 		if iid != "" {
+			g.importpkg("unsafe")
 			g.printfln(`createComObject("{%v}", unsafe.Pointer(&v.%v))`, strings.ToUpper(iid), hubFieldName)
 		}
 	}
 	g.printfln("}")
 
-	g.printfln("func (v *%vComHub) Close() {", hubName)
+	g.printfln("func (v *%vComHub) Close() error {", hubName)
 	for _, ifc := range n.Interfaces {
 		ifc = g.ctx.definedInterface[ifc.Name]
 		hubFieldName := strings.TrimPrefix(ifc.Name, "I")
@@ -237,6 +244,7 @@ func (g *generator) generateCoClz(n *ast.CoClassNode) {
 			g.printfln(`releaseComObject(&v.%v.IUnknown)`, hubFieldName)
 			g.printfln("}")
 		}
+		g.printfln("return nil")
 	}
 	g.printfln("}")
 

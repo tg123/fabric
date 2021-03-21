@@ -1,0 +1,15 @@
+// add IFabricCodePackageActivationContext coclz to official idl
+
+library FabricRuntimeLib
+{
+
+    coclass FabricCodePackageActivationContext
+    {
+        interface IFabricCodePackageActivationContext;
+        interface IFabricCodePackageActivationContext2;
+        interface IFabricCodePackageActivationContext3;
+        interface IFabricCodePackageActivationContext4;
+        interface IFabricCodePackageActivationContext5;
+        interface IFabricCodePackageActivationContext6;
+    }
+}

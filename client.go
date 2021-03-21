@@ -2,7 +2,6 @@ package fabric
 
 import (
 	"fmt"
-	"sync"
 	"time"
 	"unsafe"
 
@@ -138,42 +137,12 @@ func (h *comFabricClientConnectionEventHandlerGoProxy) OnInfo(result *comFabricG
 }
 
 type FabricClient struct {
+	coclz
+	hub *fabricClientComHub
+
 	OnNotification func(notification FabricServiceNotification)
 	OnConnected    func(info FabricGatewayInformation)
 	OnDisconnected func(info FabricGatewayInformation)
-
-	hub            *fabricClientComHub
-	defaultTimeout time.Duration
-
-	closed    bool
-	closelock sync.Mutex
-
-	deferclose []func()
-}
-
-func (v *FabricClient) GetTimeout() time.Duration {
-	return v.defaultTimeout
-}
-
-func (v *FabricClient) SetDefaultTimeout(t time.Duration) {
-	v.defaultTimeout = t
-}
-
-func (v *FabricClient) Close() error {
-	// TODO calling func to a closing client is undefined
-	v.closelock.Lock()
-	defer v.closelock.Unlock()
-	if v.closed {
-		return nil
-	}
-	v.closed = true
-
-	v.hub.Close()
-
-	for _, cf := range v.deferclose {
-		cf()
-	}
-	return nil
 }
 
 const (
@@ -201,14 +170,11 @@ type FabricClientOpt struct {
 }
 
 func NewClient(opt FabricClientOpt) (*FabricClient, error) {
-	newComFabricStatelessServiceFactory(func(sc ServiceContext) (StatelessServiceInstance, error) {
-		return nil, nil
-	})
+
 	c := &FabricClient{
 		OnNotification: opt.OnNotification,
 		OnConnected:    opt.OnConnected,
 		OnDisconnected: opt.OnDisconnected,
-		defaultTimeout: 5 * time.Minute, // opt.DefaultTimeout,
 	}
 
 	var com *comFabricClientSettings
@@ -226,6 +192,8 @@ func NewClient(opt FabricClientOpt) (*FabricClient, error) {
 
 	hub := comHubFromComClientSetting(com)
 	c.hub = hub
+	c.coclz.hub = hub
+	c.coclz.defaultTimeout = 5 * time.Minute
 
 	return c, nil
 }
@@ -238,11 +206,14 @@ func NewLocalClient() (*FabricClient, error) {
 	}
 
 	// TODO support handlers
-	c := &FabricClient{
-		defaultTimeout: 5 * time.Minute,
-	}
 	hub := comHubFromComClientSetting(com)
-	c.hub = hub
+	c := &FabricClient{
+		coclz: coclz{
+			hub:            hub,
+			defaultTimeout: 5 * time.Minute,
+		},
+		hub: hub,
+	}
 
 	return c, nil
 }
