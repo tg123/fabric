@@ -2,6 +2,7 @@
 package fabric
 
 import (
+	"context"
 	"github.com/go-ole/go-ole"
 	"golang.org/x/sys/windows"
 	"syscall"
@@ -13,7 +14,9 @@ type comFabricAsyncOperationCallbackGoProxy struct {
 	callback   func(ctx *comFabricAsyncOperationContext)
 }
 
-func newComFabricAsyncOperationCallback(callback func(ctx *comFabricAsyncOperationContext)) *comFabricAsyncOperationCallback {
+func newComFabricAsyncOperationCallback(
+	callback func(ctx *comFabricAsyncOperationContext),
+) *comFabricAsyncOperationCallback {
 	com := &comFabricAsyncOperationCallback{}
 	*(**comFabricAsyncOperationCallbackVtbl)(unsafe.Pointer(com)) = &comFabricAsyncOperationCallbackVtbl{}
 	vtbl := com.vtable()
@@ -68,8 +71,60 @@ func (v *comFabricAsyncOperationCallback) Invoke(
 	return
 }
 
+type comFabricAsyncOperationContextGoProxy struct {
+	unknownref     *goIUnknown
+	nativeCallback *comFabricAsyncOperationCallback
+	result         interface{}
+	resultHResult  int64
+	goctx          context.Context
+	cancel         context.CancelFunc
+}
+
+func newComFabricAsyncOperationContext(
+	nativeCallback *comFabricAsyncOperationCallback,
+	result interface{},
+	resultHResult int64,
+	goctx context.Context,
+	cancel context.CancelFunc,
+) *comFabricAsyncOperationContext {
+	com := &comFabricAsyncOperationContext{}
+	*(**comFabricAsyncOperationContextVtbl)(unsafe.Pointer(com)) = &comFabricAsyncOperationContextVtbl{}
+	vtbl := com.vtable()
+	com.proxy.unknownref = attachIUnknown("{841720BF-C9E8-4E6F-9C3F-6B7F4AC73BCD}", &vtbl.IUnknownVtbl)
+	vtbl.IsCompleted = syscall.NewCallback(com.proxy.IsCompleted)
+	vtbl.CompletedSynchronously = syscall.NewCallback(com.proxy.CompletedSynchronously)
+	vtbl.get_Callback = syscall.NewCallback(com.proxy.GetCallback)
+	vtbl.Cancel = syscall.NewCallback(com.proxy.Cancel)
+
+	com.proxy.nativeCallback = nativeCallback
+	com.proxy.result = result
+	com.proxy.resultHResult = resultHResult
+	com.proxy.goctx = goctx
+	com.proxy.cancel = cancel
+
+	com.proxy.init()
+	return com
+}
+
+/*
+func (v *comFabricAsyncOperationContextGoProxy) IsCompleted(
+_ *ole.IUnknown,
+) uintptr { return 0}
+func (v *comFabricAsyncOperationContextGoProxy) CompletedSynchronously(
+_ *ole.IUnknown,
+) uintptr { return 0}
+func (v *comFabricAsyncOperationContextGoProxy) GetCallback(
+_ *ole.IUnknown,
+callback **comFabricAsyncOperationCallback,
+) uintptr { return 0}
+func (v *comFabricAsyncOperationContextGoProxy) Cancel(
+_ *ole.IUnknown,
+) uintptr { return 0}
+*/
+
 type comFabricAsyncOperationContext struct {
 	ole.IUnknown
+	proxy comFabricAsyncOperationContextGoProxy
 }
 
 type comFabricAsyncOperationContextVtbl struct {
@@ -141,8 +196,35 @@ func (v *comFabricAsyncOperationContext) Cancel() (err error) {
 	return
 }
 
+type comFabricStringResultGoProxy struct {
+	unknownref *goIUnknown
+	result     string
+}
+
+func newComFabricStringResult(
+	result string,
+) *comFabricStringResult {
+	com := &comFabricStringResult{}
+	*(**comFabricStringResultVtbl)(unsafe.Pointer(com)) = &comFabricStringResultVtbl{}
+	vtbl := com.vtable()
+	com.proxy.unknownref = attachIUnknown("{4AE69614-7D0F-4CD4-B836-23017000D132}", &vtbl.IUnknownVtbl)
+	vtbl.get_String = syscall.NewCallback(com.proxy.GetString)
+
+	com.proxy.result = result
+
+	com.proxy.init()
+	return com
+}
+
+/*
+func (v *comFabricStringResultGoProxy) GetString(
+_ *ole.IUnknown,
+) uintptr { return 0}
+*/
+
 type comFabricStringResult struct {
 	ole.IUnknown
+	proxy comFabricStringResultGoProxy
 }
 
 type comFabricStringResultVtbl struct {

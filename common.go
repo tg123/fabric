@@ -115,3 +115,11 @@ func sliceCast(dst, src unsafe.Pointer, len int) {
 	slice.Len = len
 	slice.Cap = len
 }
+
+func (v *comFabricStringResultGoProxy) init() {
+}
+
+func (v *comFabricStringResultGoProxy) GetString(_ *ole.IUnknown) uintptr {
+	s, _ := windows.UTF16PtrFromString(v.result)
+	return uintptr(unsafe.Pointer(s))
+}

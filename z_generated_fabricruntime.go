@@ -20,7 +20,7 @@ func (v *fabricRuntimeComHub) Close() {
 		releaseComObject(&v.FabricRuntime.IUnknown)
 	}
 }
-func (v *FabricRuntime) RegisterStatelessServiceFactory(
+func (v *FabricRuntime) registerStatelessServiceFactory(
 	serviceTypeName string,
 	factory *comFabricStatelessServiceFactory,
 ) (err error) {
@@ -30,7 +30,7 @@ func (v *FabricRuntime) RegisterStatelessServiceFactory(
 	}
 	return v.hub.FabricRuntime.RegisterStatelessServiceFactory(serviceTypeName, factory)
 }
-func (v *FabricRuntime) RegisterStatefulServiceFactory(
+func (v *FabricRuntime) registerStatefulServiceFactory(
 	serviceTypeName string,
 	factory *comFabricStatefulServiceFactory,
 ) (err error) {
@@ -40,16 +40,16 @@ func (v *FabricRuntime) RegisterStatefulServiceFactory(
 	}
 	return v.hub.FabricRuntime.RegisterStatefulServiceFactory(serviceTypeName, factory)
 }
-func (v *FabricRuntime) CreateServiceGroupFactoryBuilder() (builder *ComFabricServiceGroupFactoryBuilder, err error) {
+func (v *FabricRuntime) createServiceGroupFactoryBuilder() (builder *comFabricServiceGroupFactoryBuilder, err error) {
 	if v.hub.FabricRuntime == nil {
 		err = errComNotImpl
 		return
 	}
 	return v.hub.FabricRuntime.CreateServiceGroupFactoryBuilder()
 }
-func (v *FabricRuntime) RegisterServiceGroupFactory(
+func (v *FabricRuntime) registerServiceGroupFactory(
 	groupServiceType string,
-	factory *ComFabricServiceGroupFactory,
+	factory *comFabricServiceGroupFactory,
 ) (err error) {
 	if v.hub.FabricRuntime == nil {
 		err = errComNotImpl
@@ -182,8 +182,8 @@ func (v *comFabricRuntime) RegisterStatefulServiceFactory(
 	}
 	return
 }
-func (v *comFabricRuntime) CreateServiceGroupFactoryBuilder() (builder *ComFabricServiceGroupFactoryBuilder, err error) {
-	var p_0 *ComFabricServiceGroupFactoryBuilder
+func (v *comFabricRuntime) CreateServiceGroupFactoryBuilder() (builder *comFabricServiceGroupFactoryBuilder, err error) {
+	var p_0 *comFabricServiceGroupFactoryBuilder
 	defer func() {
 		builder = p_0
 	}()
@@ -202,7 +202,7 @@ func (v *comFabricRuntime) CreateServiceGroupFactoryBuilder() (builder *ComFabri
 }
 func (v *comFabricRuntime) beginRegisterServiceGroupFactory(
 	groupServiceType string,
-	factory *ComFabricServiceGroupFactory,
+	factory *comFabricServiceGroupFactory,
 	timeoutMilliseconds uint32,
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
@@ -232,7 +232,7 @@ func (v *comFabricRuntime) beginRegisterServiceGroupFactory(
 }
 func (v *comFabricRuntime) RegisterServiceGroupFactory(
 	groupServiceType string,
-	factory *ComFabricServiceGroupFactory,
+	factory *comFabricServiceGroupFactory,
 ) (err error) {
 	var p_0 *uint16
 	s_6, _ := windows.UTF16PtrFromString(groupServiceType)
@@ -336,9 +336,12 @@ func (v *comFabricStatelessServiceFactory) CreateInstance(
 
 type comFabricStatelessServiceInstanceGoProxy struct {
 	unknownref *goIUnknown
+	instance   StatelessServiceInstance
 }
 
-func newComFabricStatelessServiceInstance() *comFabricStatelessServiceInstance {
+func newComFabricStatelessServiceInstance(
+	instance StatelessServiceInstance,
+) *comFabricStatelessServiceInstance {
 	com := &comFabricStatelessServiceInstance{}
 	*(**comFabricStatelessServiceInstanceVtbl)(unsafe.Pointer(com)) = &comFabricStatelessServiceInstanceVtbl{}
 	vtbl := com.vtable()
@@ -348,6 +351,8 @@ func newComFabricStatelessServiceInstance() *comFabricStatelessServiceInstance {
 	vtbl.BeginClose = syscall.NewCallback(com.proxy.BeginClose)
 	vtbl.EndClose = syscall.NewCallback(com.proxy.EndClose)
 	vtbl.Abort = syscall.NewCallback(com.proxy.Abort)
+
+	com.proxy.instance = instance
 
 	com.proxy.init()
 	return com
@@ -2530,7 +2535,7 @@ func (v *comFabricAtomicGroupStateProvider) endUndoProgress(
 	return
 }
 
-type ComFabricServiceGroupFactory struct {
+type comFabricServiceGroupFactory struct {
 	ole.IUnknown
 }
 
@@ -2538,11 +2543,11 @@ type comFabricServiceGroupFactoryVtbl struct {
 	ole.IUnknownVtbl
 }
 
-func (v *ComFabricServiceGroupFactory) vtable() *comFabricServiceGroupFactoryVtbl {
+func (v *comFabricServiceGroupFactory) vtable() *comFabricServiceGroupFactoryVtbl {
 	return (*comFabricServiceGroupFactoryVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-type ComFabricServiceGroupFactoryBuilder struct {
+type comFabricServiceGroupFactoryBuilder struct {
 	ole.IUnknown
 }
 
@@ -2554,11 +2559,11 @@ type comFabricServiceGroupFactoryBuilderVtbl struct {
 	ToServiceGroupFactory      uintptr
 }
 
-func (v *ComFabricServiceGroupFactoryBuilder) vtable() *comFabricServiceGroupFactoryBuilderVtbl {
+func (v *comFabricServiceGroupFactoryBuilder) vtable() *comFabricServiceGroupFactoryBuilderVtbl {
 	return (*comFabricServiceGroupFactoryBuilderVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricServiceGroupFactoryBuilder) AddStatelessServiceFactory(
+func (v *comFabricServiceGroupFactoryBuilder) AddStatelessServiceFactory(
 	memberServiceType string,
 	factory *comFabricStatelessServiceFactory,
 ) (err error) {
@@ -2579,7 +2584,7 @@ func (v *ComFabricServiceGroupFactoryBuilder) AddStatelessServiceFactory(
 	}
 	return
 }
-func (v *ComFabricServiceGroupFactoryBuilder) AddStatefulServiceFactory(
+func (v *comFabricServiceGroupFactoryBuilder) AddStatefulServiceFactory(
 	memberServiceType string,
 	factory *comFabricStatefulServiceFactory,
 ) (err error) {
@@ -2600,7 +2605,7 @@ func (v *ComFabricServiceGroupFactoryBuilder) AddStatefulServiceFactory(
 	}
 	return
 }
-func (v *ComFabricServiceGroupFactoryBuilder) RemoveServiceFactory(
+func (v *comFabricServiceGroupFactoryBuilder) RemoveServiceFactory(
 	memberServiceType string,
 ) (err error) {
 	var p_0 *uint16
@@ -2620,8 +2625,8 @@ func (v *ComFabricServiceGroupFactoryBuilder) RemoveServiceFactory(
 	}
 	return
 }
-func (v *ComFabricServiceGroupFactoryBuilder) ToServiceGroupFactory() (factory *ComFabricServiceGroupFactory, err error) {
-	var p_0 *ComFabricServiceGroupFactory
+func (v *comFabricServiceGroupFactoryBuilder) ToServiceGroupFactory() (factory *comFabricServiceGroupFactory, err error) {
+	var p_0 *comFabricServiceGroupFactory
 	defer func() {
 		factory = p_0
 	}()

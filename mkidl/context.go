@@ -7,7 +7,6 @@ import (
 
 	"github.com/jd3nn1s/gomidl/ast"
 	"github.com/jd3nn1s/gomidl/parser"
-	"github.com/pinzolo/casee"
 )
 
 type defContext struct {
@@ -19,8 +18,6 @@ type defContext struct {
 	definedStruct        map[string]*ast.StructNode
 	definedInterface     map[string]*ast.InterfaceNode
 	definedTypedef       map[string]*ast.TypedefNode
-
-	publicReturnedInterfaces map[string]bool
 }
 
 func defineIdent(c *defContext, nodes []interface{}) {
@@ -45,9 +42,6 @@ func defineIdent(c *defContext, nodes []interface{}) {
 		case *ast.LibraryNode:
 			defineIdent(c, v.Nodes)
 		case *ast.CoClassNode:
-			for _, ifc := range v.Interfaces {
-				c.publicReturnedInterfaces[ifc.Name] = true
-			}
 		default:
 		}
 	}
@@ -61,8 +55,6 @@ func newDefContext(idls ...string) (*defContext, error) {
 		definedStruct:        make(map[string]*ast.StructNode),
 		definedInterface:     make(map[string]*ast.InterfaceNode),
 		definedTypedef:       make(map[string]*ast.TypedefNode),
-
-		publicReturnedInterfaces: make(map[string]bool),
 	}
 
 	for _, fn := range idls {
@@ -77,36 +69,6 @@ func newDefContext(idls ...string) (*defContext, error) {
 		rootnodes := parser.Parse(f)
 		defineIdent(c, rootnodes)
 		c.definedIdls[n] = rootnodes
-	}
-
-	var queue []string
-
-	for i := range c.publicReturnedInterfaces {
-		queue = append(queue, i)
-	}
-
-	// TODO this is not temp way: clear the map to hide all com clients
-	// since they are now moved to client com hub
-	c.publicReturnedInterfaces = make(map[string]bool)
-
-	for ; len(queue) > 0; queue = queue[1:] {
-		ifc := c.definedInterface[queue[0]]
-
-		if ifc == nil {
-			continue
-		}
-
-		for _, m := range ifc.Methods {
-			public := casee.IsPascalCase(goMethodName(m.Name))
-			if public {
-				for _, p := range m.Params {
-					if isOutParam(p) {
-						c.publicReturnedInterfaces[p.Type] = true
-						queue = append(queue, p.Type)
-					}
-				}
-			}
-		}
 	}
 
 	// temp hack for typedef

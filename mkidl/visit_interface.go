@@ -40,15 +40,48 @@ var goproxyProperties = map[string][]goproxyProperty{
 			Type: "func(ctx *comFabricAsyncOperationContext)",
 		},
 	},
-	"IFabricStatelessServiceFactory":  {},
-	"IFabricStatelessServiceInstance": {},
+	"IFabricAsyncOperationContext": {
+		{
+			Name: "nativeCallback",
+			Type: "*comFabricAsyncOperationCallback",
+		},
+		{
+			Name: "result",
+			Type: "interface{}",
+		},
+		{
+			Name: "resultHResult",
+			Type: "int64",
+		},
+		{
+			Name: "goctx",
+			Type: "context.Context",
+		},
+		{
+			Name: "cancel",
+			Type: "context.CancelFunc",
+		},
+	},
+	"IFabricStringResult": {
+		{
+			Name: "result",
+			Type: "string",
+		},
+	},
+	"IFabricStatelessServiceFactory": {},
+	"IFabricStatelessServiceInstance": {
+		{
+			Name: "instance",
+			Type: "StatelessServiceInstance",
+		},
+	},
 }
 
 func (g *generator) goInterfaceName(name string) string {
 
-	if g.ctx.publicReturnedInterfaces[name] {
-		return fmt.Sprintf("Com%v", strings.TrimPrefix(name, "I"))
-	}
+	// if g.ctx.publicInterfaces[name] {
+	// 	return fmt.Sprintf("Com%v", strings.TrimPrefix(name, "I"))
+	// }
 
 	return fmt.Sprintf("com%v", strings.TrimPrefix(name, "I"))
 }
@@ -93,7 +126,6 @@ func goMethodName(m string) string {
 		return casee.ToCamelCase(m)
 	}
 	return casee.ToPascalCase(m)
-
 }
 
 func isOutParam(p *ast.ParamNode) bool {
@@ -106,19 +138,19 @@ func isOutParam(p *ast.ParamNode) bool {
 	return false
 }
 
-func (g *generator) generateMethodSig(receiver string, m *ast.MethodNode, namedRt bool) ([]string, string) {
+func (g *generator) generateMethodSig(receiver string, m *ast.MethodNode, forceHidden bool) ([]string, string) {
 	methodName := goMethodName(m.Name)
-	g.printfln("func (v *%s) %s(", receiver, methodName)
 
+	if forceHidden {
+		g.printfln("func (v *%s) %s(", receiver, casee.ToCamelCase(methodName))
+	} else {
+		g.printfln("func (v *%s) %s(", receiver, methodName)
+	}
 	var rt []string
 	var paramNames []string
 
 	if m.ReturnType.Type != "HRESULT" {
-		if namedRt {
-			rt = append(rt, fmt.Sprintf("rt %v", g.toGolangType(m.ReturnType.Type, m.ReturnType.Indirections, false)))
-		} else {
-			rt = append(rt, fmt.Sprintf("%v", g.toGolangType(m.ReturnType.Type, m.ReturnType.Indirections, false)))
-		}
+		rt = append(rt, fmt.Sprintf("rt %v", g.toGolangType(m.ReturnType.Type, m.ReturnType.Indirections, false)))
 	}
 
 	for i, p := range m.Params {
@@ -128,21 +160,13 @@ func (g *generator) generateMethodSig(receiver string, m *ast.MethodNode, namedR
 		}
 
 		if isOutParam(p) {
-			if namedRt {
-				rt = append(rt, fmt.Sprintf("%v %v", paramName, g.toGolangType(p.Type, p.Indirections-1, false)))
-			} else {
-				rt = append(rt, fmt.Sprintf("%v", g.toGolangType(p.Type, p.Indirections-1, false)))
-			}
+			rt = append(rt, fmt.Sprintf("%v %v", paramName, g.toGolangType(p.Type, p.Indirections-1, false)))
 		} else {
 			g.printfln("%v %v,", paramName, g.toGolangType(p.Type, p.Indirections, false))
 			paramNames = append(paramNames, paramName)
 		}
 	}
-	if namedRt {
-		rt = append(rt, "err error")
-	} else {
-		rt = append(rt, "error")
-	}
+	rt = append(rt, "err error")
 	g.printfln(") (%v) {", strings.Join(rt, ","))
 
 	return paramNames, methodName
@@ -158,7 +182,7 @@ func (g *generator) generateMethods(n *ast.InterfaceNode) {
 			continue
 		}
 
-		g.generateMethodSig(interfaceName, m, true)
+		g.generateMethodSig(interfaceName, m, false)
 		syscallParams := make([]string, 0, len(m.Params))
 
 		// TODO dup code, but i did not find better way to make it more clear
@@ -294,7 +318,7 @@ func (g *generator) generateComStub(n *ast.InterfaceNode) {
 	g.templateln(`
 		type {{.Name}} struct {
 			{{.Parent}}
-			{{if .HasGoProxy}} proxy {{.Name}}GoProxy {{end}}
+			{{if .HasGoProxy}} proxy {{.Name | ToCamelCase }}GoProxy {{end}}
 		}
 
 		type {{.InnerName}}Vtbl struct {
@@ -329,19 +353,30 @@ func (g *generator) generateComStub(n *ast.InterfaceNode) {
 func (g *generator) generateGoProxy(n *ast.InterfaceNode) {
 	g.importpkg("syscall")
 	interfaceName := g.goInterfaceName(n.Name)
+	props := goproxyProperties[n.Name]
+
+	for _, p := range props {
+		p := strings.Split(p.Type, ".")
+		if len(p) == 2 {
+			g.importpkg(p[0])
+		}
+	}
+
 	g.templateln(`
-		type {{.Name}}GoProxy struct {
+		type {{.Name | ToCamelCase }}GoProxy struct {
 			unknownref *goIUnknown
 			{{ range .Properties }} {{.Name}} {{.Type}}
 			{{ end }} 
 		}
 
-		func new{{ .Name | ToPascalCase }}( {{ range .Properties }} {{.Name}} {{.Type}} {{end}}) *{{.Name}} {
+		func new{{ .Name | ToPascalCase }}( 
+			{{ range .Properties }} {{.Name}} {{.Type}},
+			{{end}}) *{{.Name}} {
 			com := &{{.Name}}{}
 			*(**{{.InnerName}}Vtbl)(unsafe.Pointer(com)) = &{{.InnerName}}Vtbl{}
 			vtbl := com.vtable()
 			com.proxy.unknownref = attachIUnknown("{{"{"}}{{ .IID }}{{"}"}}", &vtbl.IUnknownVtbl)
-			{{ range .Methods }} vtbl.{{.Name}} = syscall.NewCallback(com.proxy.{{.Name}})
+			{{ range .Methods }} vtbl.{{.Name}} = syscall.NewCallback(com.proxy.{{.Name | ToPascalCase }})
 			{{ end }} 
 			{{ range .Properties }} com.proxy.{{.Name}} = {{.Name}}
 			{{ end }} 
@@ -358,13 +393,13 @@ func (g *generator) generateGoProxy(n *ast.InterfaceNode) {
 		Name:       interfaceName,
 		InnerName:  casee.ToCamelCase(interfaceName),
 		Methods:    n.Methods,
-		Properties: goproxyProperties[n.Name],
+		Properties: props,
 		IID:        strings.ToUpper(findIID(n)),
 	})
 
 	g.printfln("/*")
 	for _, m := range n.Methods {
-		g.printfln("func (v *%sGoProxy) %s(", interfaceName, m.Name)
+		g.printfln("func (v *%sGoProxy) %s(", interfaceName, casee.ToPascalCase(m.Name))
 		g.printfln("_ *ole.IUnknown,")
 		for i, p := range m.Params {
 			paramName := p.Name

@@ -9,10 +9,9 @@ import (
 	"github.com/pinzolo/casee"
 )
 
-func (g *generator) generateAsyncCallSig(receiver string, begin, end *ast.MethodNode, namedRt bool) (*ast.InterfaceNode, []string, string) {
+func (g *generator) generateAsyncCallSig(receiver string, begin, end *ast.MethodNode) (*ast.InterfaceNode, []string, string) {
 	var paramNames []string
 	methodName := strings.TrimPrefix(begin.Name, "Begin")
-
 	g.printfln("func (v *%s) %s(", receiver, methodName)
 	g.importpkg("context")
 	g.printfln("ctx context.Context,")
@@ -51,33 +50,19 @@ func (g *generator) generateAsyncCallSig(receiver string, begin, end *ast.Method
 				asyncrt = g.ctx.definedInterface[g.unwrapTypedef(p.Type)]
 
 				if asyncrt == nil {
-					if namedRt {
-						rt = append(rt, fmt.Sprintf("result_%v %v", 0, g.toGolangType(p.Type, p.Indirections-1, false)))
-					} else {
-						rt = append(rt, fmt.Sprintf("%v", g.toGolangType(p.Type, p.Indirections-1, false)))
-					}
+					rt = append(rt, fmt.Sprintf("result_%v %v", 0, g.toGolangType(p.Type, p.Indirections-1, false)))
 					break
 				}
 
 				for i, m := range g.ctx.definedInterface[g.unwrapTypedef(p.Type)].Methods {
-					if namedRt {
-						rt = append(rt, fmt.Sprintf("result_%v %v", i, g.toGolangType(m.ReturnType.Type, m.ReturnType.Indirections, false)))
-
-					} else {
-						rt = append(rt, fmt.Sprintf("%v", g.toGolangType(m.ReturnType.Type, m.ReturnType.Indirections, false)))
-
-					}
+					rt = append(rt, fmt.Sprintf("result_%v %v", i, g.toGolangType(m.ReturnType.Type, m.ReturnType.Indirections, false)))
 				}
 
 			}
 		}
 	}
 
-	if namedRt {
-		rt = append(rt, "err error")
-	} else {
-		rt = append(rt, "error")
-	}
+	rt = append(rt, "err error")
 	g.printfln(") (%v) {", strings.Join(rt, ","))
 
 	return asyncrt, paramNames, methodName
@@ -209,6 +194,14 @@ func findIID(ifc *ast.InterfaceNode) string {
 	return ""
 }
 
+var hubHiddenList = map[string]bool{
+	"IFabricClientSettings2.GetSettings":              true,
+	"IFabricRuntime.RegisterStatelessServiceFactory":  true,
+	"IFabricRuntime.RegisterStatefulServiceFactory":   true,
+	"IFabricRuntime.CreateServiceGroupFactoryBuilder": true,
+	"IFabricRuntime.RegisterServiceGroupFactory":      true,
+}
+
 func (g *generator) generateCoClz(n *ast.CoClassNode) {
 	hubName := casee.ToCamelCase(n.Name)
 	clzName := n.Name
@@ -269,12 +262,15 @@ func (g *generator) generateCoClz(n *ast.CoClassNode) {
 				begin := ifc.Methods[i-1]
 				end := m
 				var asyncrt *ast.InterfaceNode
-				asyncrt, params, method = g.generateAsyncCallSig(clzName, begin, end, true)
+
+				// TODO unify hidden
+				asyncrt, params, method = g.generateAsyncCallSig(clzName, begin, end)
 
 				g.generateAsyncCall(hubFieldName, asyncrt, ifc, begin, end)
 
 			} else {
-				params, method = g.generateMethodSig(clzName, m, true)
+				params, method = g.generateMethodSig(clzName, m, hubHiddenList[fmt.Sprintf("%v.%v", ifc.Name, m.Name)])
+
 				g.printfln(`if v.hub.%v == nil {
 					err = errComNotImpl
 					return

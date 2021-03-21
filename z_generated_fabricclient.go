@@ -277,7 +277,7 @@ func (v *fabricClientComHub) Close() {
 		releaseComObject(&v.FabricSecretStoreClient.IUnknown)
 	}
 }
-func (v *FabricClient) GetSettings() (result *ComFabricClientSettingsResult, err error) {
+func (v *FabricClient) getSettings() (result *comFabricClientSettingsResult, err error) {
 	if v.hub.FabricClientSettings2 == nil {
 		err = errComNotImpl
 		return
@@ -6420,8 +6420,8 @@ func (v *comFabricClientSettings2) vtable() *comFabricClientSettings2Vtbl {
 	return (*comFabricClientSettings2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *comFabricClientSettings2) GetSettings() (result *ComFabricClientSettingsResult, err error) {
-	var p_0 *ComFabricClientSettingsResult
+func (v *comFabricClientSettings2) GetSettings() (result *comFabricClientSettingsResult, err error) {
+	var p_0 *comFabricClientSettingsResult
 	defer func() {
 		result = p_0
 	}()
@@ -16520,7 +16520,9 @@ type comFabricServiceNotificationEventHandlerGoProxy struct {
 	client     *FabricClient
 }
 
-func newComFabricServiceNotificationEventHandler(client *FabricClient) *comFabricServiceNotificationEventHandler {
+func newComFabricServiceNotificationEventHandler(
+	client *FabricClient,
+) *comFabricServiceNotificationEventHandler {
 	com := &comFabricServiceNotificationEventHandler{}
 	*(**comFabricServiceNotificationEventHandlerVtbl)(unsafe.Pointer(com)) = &comFabricServiceNotificationEventHandlerVtbl{}
 	vtbl := com.vtable()
@@ -16576,7 +16578,9 @@ type comFabricClientConnectionEventHandlerGoProxy struct {
 	client     *FabricClient
 }
 
-func newComFabricClientConnectionEventHandler(client *FabricClient) *comFabricClientConnectionEventHandler {
+func newComFabricClientConnectionEventHandler(
+	client *FabricClient,
+) *comFabricClientConnectionEventHandler {
 	com := &comFabricClientConnectionEventHandler{}
 	*(**comFabricClientConnectionEventHandlerVtbl)(unsafe.Pointer(com)) = &comFabricClientConnectionEventHandlerVtbl{}
 	vtbl := com.vtable()
@@ -16649,7 +16653,7 @@ func (v *comFabricClientConnectionEventHandler) OnDisconnected(
 	return
 }
 
-type ComFabricClientSettingsResult struct {
+type comFabricClientSettingsResult struct {
 	ole.IUnknown
 }
 
@@ -16658,11 +16662,11 @@ type comFabricClientSettingsResultVtbl struct {
 	get_Settings uintptr
 }
 
-func (v *ComFabricClientSettingsResult) vtable() *comFabricClientSettingsResultVtbl {
+func (v *comFabricClientSettingsResult) vtable() *comFabricClientSettingsResultVtbl {
 	return (*comFabricClientSettingsResultVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *ComFabricClientSettingsResult) GetSettings() (rt *FabricClientSettings, err error) {
+func (v *comFabricClientSettingsResult) GetSettings() (rt *FabricClientSettings, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_Settings,
 		1,

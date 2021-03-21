@@ -67,8 +67,8 @@ func NewFabricRuntime() (*FabricRuntime, error) {
 type ServiceContext struct {
 }
 
-type StatelessUserServiceInstance interface {
-	Run(ctx context.Context) error
+type StatelessServiceInstance interface {
+	Open(ctx context.Context) (string, error) // TODO support FabricStatelessServicePartition arg, should release com obj
 	Close(ctx context.Context) error
 	Abort() error
 }
@@ -97,8 +97,17 @@ func (v *comFabricStatelessServiceInstanceGoProxy) BeginOpen(
 	_ *ole.IUnknown,
 	partition *comFabricStatelessServicePartition,
 	callback *comFabricAsyncOperationCallback,
-	context **comFabricAsyncOperationContext,
+	asyncContext **comFabricAsyncOperationContext,
 ) uintptr {
+	goctx, cancel := context.WithCancel(context.Background())
+	ctx := newComFabricAsyncOperationContext(callback, nil, ole.S_OK, goctx, cancel)
+	go func() {
+		v.instance.Open(goctx)
+		cancel()
+		callback.Invoke(ctx)
+	}()
+
+	*asyncContext = ctx
 	return 0
 }
 func (v *comFabricStatelessServiceInstanceGoProxy) EndOpen(
@@ -106,6 +115,7 @@ func (v *comFabricStatelessServiceInstanceGoProxy) EndOpen(
 	context *comFabricAsyncOperationContext,
 	serviceAddress **comFabricStringResult,
 ) uintptr {
+
 	return 0
 }
 func (v *comFabricStatelessServiceInstanceGoProxy) BeginClose(
@@ -113,6 +123,7 @@ func (v *comFabricStatelessServiceInstanceGoProxy) BeginClose(
 	callback *comFabricAsyncOperationCallback,
 	context **comFabricAsyncOperationContext,
 ) uintptr {
+	callback.Invoke(nil)
 	return 0
 }
 func (v *comFabricStatelessServiceInstanceGoProxy) EndClose(
