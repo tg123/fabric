@@ -254,14 +254,19 @@ func (v *comFabricRuntime) RegisterServiceGroupFactory(
 
 type comFabricStatelessServiceFactoryGoProxy struct {
 	unknownref *goIUnknown
+	builder    func(ServiceContext) (StatelessServiceInstance, error)
 }
 
-func newComFabricStatelessServiceFactory() *comFabricStatelessServiceFactory {
+func newComFabricStatelessServiceFactory(
+	builder func(ServiceContext) (StatelessServiceInstance, error),
+) *comFabricStatelessServiceFactory {
 	com := &comFabricStatelessServiceFactory{}
 	*(**comFabricStatelessServiceFactoryVtbl)(unsafe.Pointer(com)) = &comFabricStatelessServiceFactoryVtbl{}
 	vtbl := com.vtable()
 	com.proxy.unknownref = attachIUnknown("{CC53AF8F-74CD-11DF-AC3E-0024811E3892}", &vtbl.IUnknownVtbl)
 	vtbl.CreateInstance = syscall.NewCallback(com.proxy.CreateInstance)
+
+	com.proxy.builder = builder
 
 	com.proxy.init()
 	return com

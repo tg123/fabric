@@ -123,3 +123,15 @@ func (v *comFabricStringResultGoProxy) GetString(_ *ole.IUnknown) uintptr {
 	s, _ := windows.UTF16PtrFromString(v.result)
 	return uintptr(unsafe.Pointer(s))
 }
+
+func errorToHResult(err error) uintptr {
+	if err != nil {
+		if err1, ok := err.(FabricErrorCode); ok {
+			return uintptr(err1)
+		}
+
+		return ole.E_FAIL
+	}
+
+	return ole.S_OK
+}

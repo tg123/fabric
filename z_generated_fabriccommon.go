@@ -75,7 +75,7 @@ type comFabricAsyncOperationContextGoProxy struct {
 	unknownref     *goIUnknown
 	nativeCallback *comFabricAsyncOperationCallback
 	result         interface{}
-	resultHResult  int64
+	resultHResult  uintptr
 	goctx          context.Context
 	cancel         context.CancelFunc
 }
@@ -83,7 +83,7 @@ type comFabricAsyncOperationContextGoProxy struct {
 func newComFabricAsyncOperationContext(
 	nativeCallback *comFabricAsyncOperationCallback,
 	result interface{},
-	resultHResult int64,
+	resultHResult uintptr,
 	goctx context.Context,
 	cancel context.CancelFunc,
 ) *comFabricAsyncOperationContext {

@@ -49,7 +49,7 @@ func NewFabricRuntime() (*FabricRuntime, error) {
 	var com *comFabricRuntime
 
 	clzid, _ := ole.IIDFromString("{cc53af8e-74cd-11df-ac3e-0024811e3892}")
-	r, _, err := fabricCreateLocalClientProc.Call(uintptr(unsafe.Pointer(clzid)), uintptr(unsafe.Pointer(&com)))
+	r, _, err := fabricFabricCreateRuntimeProc.Call(uintptr(unsafe.Pointer(clzid)), uintptr(unsafe.Pointer(&com)))
 
 	if r != 0 {
 		return nil, err
@@ -65,16 +65,30 @@ func NewFabricRuntime() (*FabricRuntime, error) {
 }
 
 type ServiceContext struct {
+	ServiceTypeName    string
+	ServiceName        string
+	InitializationData []byte
+	PartitionId        windows.GUID
+	InstanceId         int64
+}
+
+// TODO genrate interface from mkidl
+type FabricStatelessServicePartition interface {
+	GetPartitionInfo() (bufferedValue *FabricServicePartitionInformation, err error)
 }
 
 type StatelessServiceInstance interface {
-	Open(ctx context.Context) (string, error) // TODO support FabricStatelessServicePartition arg, should release com obj
+	Open(ctx context.Context, partition FabricStatelessServicePartition) (string, error)
 	Close(ctx context.Context) error
 	Abort() error
 }
 
-func (f *comFabricStatelessServiceFactoryGoProxy) init() {
+func (v *FabricRuntime) RegisterStatelessService(serviceTypeName string, builder func(ServiceContext) (StatelessServiceInstance, error)) error {
+	b := newComFabricStatelessServiceFactory(builder)
+	return v.registerStatelessServiceFactory(serviceTypeName, b)
+}
 
+func (f *comFabricStatelessServiceFactoryGoProxy) init() {
 }
 
 func (v *comFabricStatelessServiceFactoryGoProxy) CreateInstance(
@@ -83,11 +97,26 @@ func (v *comFabricStatelessServiceFactoryGoProxy) CreateInstance(
 	serviceName *uint16,
 	initializationDataLength uint32,
 	initializationData *byte,
-	partitionId windows.GUID,
+	partitionId *windows.GUID,
 	instanceId int64,
 	serviceInstance **comFabricStatelessServiceInstance,
 ) uintptr {
-	return 0
+	ctx := ServiceContext{
+		ServiceTypeName: windows.UTF16PtrToString(serviceTypeName),
+		ServiceName:     windows.UTF16PtrToString(serviceName),
+		PartitionId:     *partitionId,
+		InstanceId:      instanceId,
+	}
+	sliceCast(unsafe.Pointer(&ctx.InitializationData), unsafe.Pointer(initializationData), int(initializationDataLength))
+
+	inst, err := v.builder(ctx)
+
+	if err != nil {
+		return errorToHResult(err)
+	}
+
+	*serviceInstance = newComFabricStatelessServiceInstance(inst)
+	return ole.S_OK
 }
 
 func (v *comFabricStatelessServiceInstanceGoProxy) init() {
@@ -99,41 +128,54 @@ func (v *comFabricStatelessServiceInstanceGoProxy) BeginOpen(
 	callback *comFabricAsyncOperationCallback,
 	asyncContext **comFabricAsyncOperationContext,
 ) uintptr {
-	goctx, cancel := context.WithCancel(context.Background())
-	ctx := newComFabricAsyncOperationContext(callback, nil, ole.S_OK, goctx, cancel)
-	go func() {
-		v.instance.Open(goctx)
-		cancel()
-		callback.Invoke(ctx)
-	}()
-
-	*asyncContext = ctx
-	return 0
+	partition.AddRef()
+	return asyncRun(func(goctx context.Context) (interface{}, error) {
+		defer partition.Release()
+		return v.instance.Open(goctx, partition)
+	}, callback, asyncContext)
 }
+
 func (v *comFabricStatelessServiceInstanceGoProxy) EndOpen(
 	_ *ole.IUnknown,
 	context *comFabricAsyncOperationContext,
 	serviceAddress **comFabricStringResult,
 ) uintptr {
+	<-context.proxy.goctx.Done()
 
-	return 0
+	if context.proxy.resultHResult != ole.S_OK {
+		return context.proxy.resultHResult
+	}
+
+	result, ok := context.proxy.result.(string)
+
+	if !ok {
+		return ole.E_UNEXPECTED
+	}
+
+	*serviceAddress = newComFabricStringResult(result)
+	return ole.S_OK
 }
+
 func (v *comFabricStatelessServiceInstanceGoProxy) BeginClose(
 	_ *ole.IUnknown,
 	callback *comFabricAsyncOperationCallback,
-	context **comFabricAsyncOperationContext,
+	asyncContext **comFabricAsyncOperationContext,
 ) uintptr {
-	callback.Invoke(nil)
-	return 0
+	return asyncRun(func(goctx context.Context) (interface{}, error) {
+		return nil, v.instance.Close(goctx)
+	}, callback, asyncContext)
 }
+
 func (v *comFabricStatelessServiceInstanceGoProxy) EndClose(
 	_ *ole.IUnknown,
 	context *comFabricAsyncOperationContext,
 ) uintptr {
-	return 0
+	<-context.proxy.goctx.Done()
+	return context.proxy.resultHResult
 }
+
 func (v *comFabricStatelessServiceInstanceGoProxy) Abort(
 	_ *ole.IUnknown,
 ) uintptr {
-	return 0
+	return errorToHResult(v.instance.Abort())
 }

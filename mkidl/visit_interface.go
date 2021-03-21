@@ -51,7 +51,7 @@ var goproxyProperties = map[string][]goproxyProperty{
 		},
 		{
 			Name: "resultHResult",
-			Type: "int64",
+			Type: "uintptr",
 		},
 		{
 			Name: "goctx",
@@ -68,7 +68,12 @@ var goproxyProperties = map[string][]goproxyProperty{
 			Type: "string",
 		},
 	},
-	"IFabricStatelessServiceFactory": {},
+	"IFabricStatelessServiceFactory": {
+		{
+			Name: "builder",
+			Type: "func(ServiceContext) (StatelessServiceInstance, error)",
+		},
+	},
 	"IFabricStatelessServiceInstance": {
 		{
 			Name: "instance",

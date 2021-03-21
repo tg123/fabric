@@ -201,6 +201,9 @@ type FabricClientOpt struct {
 }
 
 func NewClient(opt FabricClientOpt) (*FabricClient, error) {
+	newComFabricStatelessServiceFactory(func(sc ServiceContext) (StatelessServiceInstance, error) {
+		return nil, nil
+	})
 	c := &FabricClient{
 		OnNotification: opt.OnNotification,
 		OnConnected:    opt.OnConnected,

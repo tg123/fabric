@@ -1,6 +1,7 @@
 package fabric
 
 import (
+	"context"
 	"unsafe"
 
 	ole "github.com/go-ole/go-ole"
@@ -41,6 +42,33 @@ func (a *comFabricAsyncOperationContextGoProxy) GetCallback(_ *ole.IUnknown, cal
 }
 
 func (a *comFabricAsyncOperationContextGoProxy) Cancel(_ *ole.IUnknown) uintptr {
+	a.resultHResult = ole.E_ABORT
+	a.result = nil
 	a.cancel()
+	return ole.S_OK
+}
+
+func asyncRun(
+	action func(goctx context.Context) (interface{}, error),
+	callback *comFabricAsyncOperationCallback,
+	asyncContext **comFabricAsyncOperationContext,
+) uintptr {
+	callback.AddRef()
+	goctx, cancel := context.WithCancel(context.Background())
+	ctx := newComFabricAsyncOperationContext(callback, nil, ole.S_OK, goctx, cancel)
+	go func() {
+		defer callback.Release()
+		go func() {
+			r, err := action(goctx)
+			ctx.proxy.result = r
+			ctx.proxy.resultHResult = errorToHResult(err)
+			cancel()
+		}()
+
+		<-goctx.Done()
+		callback.Invoke(ctx)
+	}()
+
+	*asyncContext = ctx
 	return ole.S_OK
 }
