@@ -244,8 +244,8 @@ func (g *generator) generateCoClz(n *ast.CoClassNode) {
 			g.printfln(`releaseComObject(&v.%v.IUnknown)`, hubFieldName)
 			g.printfln("}")
 		}
-		g.printfln("return nil")
 	}
+	g.printfln("return nil")
 	g.printfln("}")
 
 	// methods

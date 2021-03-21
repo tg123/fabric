@@ -123,207 +123,156 @@ func (v *fabricClientComHub) Close() error {
 	if v.FabricClientSettings2 != nil {
 		releaseComObject(&v.FabricClientSettings2.IUnknown)
 	}
-	return nil
 	if v.FabricPropertyManagementClient2 != nil {
 		releaseComObject(&v.FabricPropertyManagementClient2.IUnknown)
 	}
-	return nil
 	if v.FabricServiceManagementClient != nil {
 		releaseComObject(&v.FabricServiceManagementClient.IUnknown)
 	}
-	return nil
 	if v.FabricServiceManagementClient2 != nil {
 		releaseComObject(&v.FabricServiceManagementClient2.IUnknown)
 	}
-	return nil
 	if v.FabricServiceManagementClient3 != nil {
 		releaseComObject(&v.FabricServiceManagementClient3.IUnknown)
 	}
-	return nil
 	if v.FabricServiceManagementClient4 != nil {
 		releaseComObject(&v.FabricServiceManagementClient4.IUnknown)
 	}
-	return nil
 	if v.FabricServiceManagementClient5 != nil {
 		releaseComObject(&v.FabricServiceManagementClient5.IUnknown)
 	}
-	return nil
 	if v.FabricServiceManagementClient6 != nil {
 		releaseComObject(&v.FabricServiceManagementClient6.IUnknown)
 	}
-	return nil
 	if v.FabricServiceGroupManagementClient != nil {
 		releaseComObject(&v.FabricServiceGroupManagementClient.IUnknown)
 	}
-	return nil
 	if v.FabricServiceGroupManagementClient2 != nil {
 		releaseComObject(&v.FabricServiceGroupManagementClient2.IUnknown)
 	}
-	return nil
 	if v.FabricServiceGroupManagementClient3 != nil {
 		releaseComObject(&v.FabricServiceGroupManagementClient3.IUnknown)
 	}
-	return nil
 	if v.FabricServiceGroupManagementClient4 != nil {
 		releaseComObject(&v.FabricServiceGroupManagementClient4.IUnknown)
 	}
-	return nil
 	if v.FabricApplicationManagementClient != nil {
 		releaseComObject(&v.FabricApplicationManagementClient.IUnknown)
 	}
-	return nil
 	if v.FabricApplicationManagementClient2 != nil {
 		releaseComObject(&v.FabricApplicationManagementClient2.IUnknown)
 	}
-	return nil
 	if v.FabricApplicationManagementClient3 != nil {
 		releaseComObject(&v.FabricApplicationManagementClient3.IUnknown)
 	}
-	return nil
 	if v.FabricApplicationManagementClient4 != nil {
 		releaseComObject(&v.FabricApplicationManagementClient4.IUnknown)
 	}
-	return nil
 	if v.FabricApplicationManagementClient5 != nil {
 		releaseComObject(&v.FabricApplicationManagementClient5.IUnknown)
 	}
-	return nil
 	if v.FabricApplicationManagementClient6 != nil {
 		releaseComObject(&v.FabricApplicationManagementClient6.IUnknown)
 	}
-	return nil
 	if v.FabricApplicationManagementClient7 != nil {
 		releaseComObject(&v.FabricApplicationManagementClient7.IUnknown)
 	}
-	return nil
 	if v.FabricApplicationManagementClient8 != nil {
 		releaseComObject(&v.FabricApplicationManagementClient8.IUnknown)
 	}
-	return nil
 	if v.FabricApplicationManagementClient9 != nil {
 		releaseComObject(&v.FabricApplicationManagementClient9.IUnknown)
 	}
-	return nil
 	if v.FabricApplicationManagementClient10 != nil {
 		releaseComObject(&v.FabricApplicationManagementClient10.IUnknown)
 	}
-	return nil
 	if v.FabricClusterManagementClient != nil {
 		releaseComObject(&v.FabricClusterManagementClient.IUnknown)
 	}
-	return nil
 	if v.FabricClusterManagementClient2 != nil {
 		releaseComObject(&v.FabricClusterManagementClient2.IUnknown)
 	}
-	return nil
 	if v.FabricClusterManagementClient3 != nil {
 		releaseComObject(&v.FabricClusterManagementClient3.IUnknown)
 	}
-	return nil
 	if v.FabricClusterManagementClient4 != nil {
 		releaseComObject(&v.FabricClusterManagementClient4.IUnknown)
 	}
-	return nil
 	if v.FabricClusterManagementClient5 != nil {
 		releaseComObject(&v.FabricClusterManagementClient5.IUnknown)
 	}
-	return nil
 	if v.FabricClusterManagementClient6 != nil {
 		releaseComObject(&v.FabricClusterManagementClient6.IUnknown)
 	}
-	return nil
 	if v.FabricClusterManagementClient7 != nil {
 		releaseComObject(&v.FabricClusterManagementClient7.IUnknown)
 	}
-	return nil
 	if v.FabricHealthClient != nil {
 		releaseComObject(&v.FabricHealthClient.IUnknown)
 	}
-	return nil
 	if v.FabricHealthClient2 != nil {
 		releaseComObject(&v.FabricHealthClient2.IUnknown)
 	}
-	return nil
 	if v.FabricHealthClient3 != nil {
 		releaseComObject(&v.FabricHealthClient3.IUnknown)
 	}
-	return nil
 	if v.FabricHealthClient4 != nil {
 		releaseComObject(&v.FabricHealthClient4.IUnknown)
 	}
-	return nil
 	if v.FabricQueryClient != nil {
 		releaseComObject(&v.FabricQueryClient.IUnknown)
 	}
-	return nil
 	if v.FabricQueryClient2 != nil {
 		releaseComObject(&v.FabricQueryClient2.IUnknown)
 	}
-	return nil
 	if v.FabricQueryClient3 != nil {
 		releaseComObject(&v.FabricQueryClient3.IUnknown)
 	}
-	return nil
 	if v.FabricQueryClient4 != nil {
 		releaseComObject(&v.FabricQueryClient4.IUnknown)
 	}
-	return nil
 	if v.FabricQueryClient5 != nil {
 		releaseComObject(&v.FabricQueryClient5.IUnknown)
 	}
-	return nil
 	if v.FabricQueryClient6 != nil {
 		releaseComObject(&v.FabricQueryClient6.IUnknown)
 	}
-	return nil
 	if v.FabricQueryClient7 != nil {
 		releaseComObject(&v.FabricQueryClient7.IUnknown)
 	}
-	return nil
 	if v.FabricQueryClient8 != nil {
 		releaseComObject(&v.FabricQueryClient8.IUnknown)
 	}
-	return nil
 	if v.FabricQueryClient9 != nil {
 		releaseComObject(&v.FabricQueryClient9.IUnknown)
 	}
-	return nil
 	if v.FabricQueryClient10 != nil {
 		releaseComObject(&v.FabricQueryClient10.IUnknown)
 	}
-	return nil
 	if v.FabricInfrastructureServiceClient != nil {
 		releaseComObject(&v.FabricInfrastructureServiceClient.IUnknown)
 	}
-	return nil
 	if v.FabricRepairManagementClient != nil {
 		releaseComObject(&v.FabricRepairManagementClient.IUnknown)
 	}
-	return nil
 	if v.FabricRepairManagementClient2 != nil {
 		releaseComObject(&v.FabricRepairManagementClient2.IUnknown)
 	}
-	return nil
 	if v.FabricTestManagementClient != nil {
 		releaseComObject(&v.FabricTestManagementClient.IUnknown)
 	}
-	return nil
 	if v.FabricTestManagementClient2 != nil {
 		releaseComObject(&v.FabricTestManagementClient2.IUnknown)
 	}
-	return nil
 	if v.FabricTestManagementClient3 != nil {
 		releaseComObject(&v.FabricTestManagementClient3.IUnknown)
 	}
-	return nil
 	if v.FabricFaultManagementClient != nil {
 		releaseComObject(&v.FabricFaultManagementClient.IUnknown)
 	}
-	return nil
 	if v.FabricNetworkManagementClient != nil {
 		releaseComObject(&v.FabricNetworkManagementClient.IUnknown)
 	}
-	return nil
 	if v.FabricSecretStoreClient != nil {
 		releaseComObject(&v.FabricSecretStoreClient.IUnknown)
 	}

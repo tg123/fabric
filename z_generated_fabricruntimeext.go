@@ -26,23 +26,18 @@ func (v *fabricCodePackageActivationContextComHub) Close() error {
 	if v.FabricCodePackageActivationContext != nil {
 		releaseComObject(&v.FabricCodePackageActivationContext.IUnknown)
 	}
-	return nil
 	if v.FabricCodePackageActivationContext2 != nil {
 		releaseComObject(&v.FabricCodePackageActivationContext2.IUnknown)
 	}
-	return nil
 	if v.FabricCodePackageActivationContext3 != nil {
 		releaseComObject(&v.FabricCodePackageActivationContext3.IUnknown)
 	}
-	return nil
 	if v.FabricCodePackageActivationContext4 != nil {
 		releaseComObject(&v.FabricCodePackageActivationContext4.IUnknown)
 	}
-	return nil
 	if v.FabricCodePackageActivationContext5 != nil {
 		releaseComObject(&v.FabricCodePackageActivationContext5.IUnknown)
 	}
-	return nil
 	if v.FabricCodePackageActivationContext6 != nil {
 		releaseComObject(&v.FabricCodePackageActivationContext6.IUnknown)
 	}
