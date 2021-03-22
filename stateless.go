@@ -76,13 +76,14 @@ func (v *comFabricStatelessServiceInstanceGoProxy) EndOpen(
 	context *comFabricAsyncOperationContext,
 	serviceAddress **comFabricStringResult,
 ) uintptr {
+	r, hr := context.proxy.await()
 	<-context.proxy.goctx.Done()
 
-	if context.proxy.resultHResult != ole.S_OK {
-		return context.proxy.resultHResult
+	if hr != ole.S_OK {
+		return hr
 	}
 
-	result, ok := context.proxy.result.(string)
+	result, ok := r.(string)
 
 	if !ok {
 		return ole.E_UNEXPECTED
@@ -106,8 +107,8 @@ func (v *comFabricStatelessServiceInstanceGoProxy) EndClose(
 	_ *ole.IUnknown,
 	context *comFabricAsyncOperationContext,
 ) uintptr {
-	<-context.proxy.goctx.Done()
-	return context.proxy.resultHResult
+	_, hr := context.proxy.await()
+	return hr
 }
 
 func (v *comFabricStatelessServiceInstanceGoProxy) Abort(

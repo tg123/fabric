@@ -25,9 +25,29 @@ func (a *comFabricAsyncOperationContextGoProxy) init() {
 
 }
 
+func (a *comFabricAsyncOperationContextGoProxy) isCompleted() bool {
+	return a.goctx.Err() != nil
+}
+
+func (a *comFabricAsyncOperationContextGoProxy) completeWith(result interface{}, hr uintptr) {
+	a.lock.Lock()
+	defer a.lock.Unlock()
+	if a.isCompleted() {
+		return
+	}
+
+	a.result = result
+	a.resultHResult = hr
+	a.cancel()
+}
+
+func (a *comFabricAsyncOperationContextGoProxy) await() (result interface{}, hr uintptr) {
+	<-a.goctx.Done()
+	return a.result, a.resultHResult
+}
+
 func (a *comFabricAsyncOperationContextGoProxy) IsCompleted(_ *ole.IUnknown) uintptr {
-	done := a.goctx.Err() != nil
-	if done {
+	if a.isCompleted() {
 		return 1 // true
 	}
 	return 0 // false
@@ -42,9 +62,7 @@ func (a *comFabricAsyncOperationContextGoProxy) GetCallback(_ *ole.IUnknown, cal
 }
 
 func (a *comFabricAsyncOperationContextGoProxy) Cancel(_ *ole.IUnknown) uintptr {
-	a.resultHResult = ole.E_ABORT
-	a.result = nil
-	a.cancel()
+	a.completeWith(nil, ole.E_ABORT)
 	return ole.S_OK
 }
 
@@ -55,14 +73,12 @@ func asyncRun(
 ) uintptr {
 	callback.AddRef()
 	goctx, cancel := context.WithCancel(context.Background())
-	ctx := newComFabricAsyncOperationContext(callback, nil, ole.S_OK, goctx, cancel)
+	ctx := newComFabricAsyncOperationContext(callback, goctx, cancel)
 	go func() {
 		defer callback.Release()
 		go func() {
 			r, err := action(goctx)
-			ctx.proxy.result = r
-			ctx.proxy.resultHResult = errorToHResult(err)
-			cancel()
+			ctx.proxy.completeWith(r, errorToHResult(err))
 		}()
 
 		<-goctx.Done()

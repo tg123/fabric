@@ -17,8 +17,9 @@ var interfaceBlackList = map[string]bool{
 }
 
 type goproxyProperty struct {
-	Name string
-	Type string
+	Name   string
+	Type   string
+	NoCtor bool
 }
 
 var goproxyProperties = map[string][]goproxyProperty{
@@ -46,12 +47,19 @@ var goproxyProperties = map[string][]goproxyProperty{
 			Type: "*comFabricAsyncOperationCallback",
 		},
 		{
-			Name: "result",
-			Type: "interface{}",
+			Name:   "result",
+			Type:   "interface{}",
+			NoCtor: true,
 		},
 		{
-			Name: "resultHResult",
-			Type: "uintptr",
+			Name:   "resultHResult",
+			Type:   "uintptr",
+			NoCtor: true,
+		},
+		{
+			Name:   "lock",
+			Type:   "sync.Mutex",
+			NoCtor: true,
 		},
 		{
 			Name: "goctx",
@@ -375,7 +383,7 @@ func (g *generator) generateGoProxy(n *ast.InterfaceNode) {
 		}
 
 		func new{{ .Name | ToPascalCase }}( 
-			{{ range .Properties }} {{.Name}} {{.Type}},
+			{{ range .Properties }} {{if not .NoCtor }} {{.Name}} {{.Type}}, {{end}} 
 			{{end}}) *{{.Name}} {
 			com := &{{.Name}}{}
 			*(**{{.InnerName}}Vtbl)(unsafe.Pointer(com)) = &{{.InnerName}}Vtbl{}
@@ -383,7 +391,7 @@ func (g *generator) generateGoProxy(n *ast.InterfaceNode) {
 			com.proxy.unknownref = attachIUnknown("{{"{"}}{{ .IID }}{{"}"}}", &vtbl.IUnknownVtbl)
 			{{ range .Methods }} vtbl.{{.Name}} = syscall.NewCallback(com.proxy.{{.Name | ToPascalCase }})
 			{{ end }} 
-			{{ range .Properties }} com.proxy.{{.Name}} = {{.Name}}
+			{{ range .Properties }}  {{if not .NoCtor }} com.proxy.{{.Name}} = {{.Name}} {{ end }} 
 			{{ end }} 
 			com.proxy.init()
 			return com

@@ -5,6 +5,7 @@ import (
 	"context"
 	"github.com/go-ole/go-ole"
 	"golang.org/x/sys/windows"
+	"sync"
 	"syscall"
 	"unsafe"
 )
@@ -76,14 +77,14 @@ type comFabricAsyncOperationContextGoProxy struct {
 	nativeCallback *comFabricAsyncOperationCallback
 	result         interface{}
 	resultHResult  uintptr
+	lock           sync.Mutex
 	goctx          context.Context
 	cancel         context.CancelFunc
 }
 
 func newComFabricAsyncOperationContext(
 	nativeCallback *comFabricAsyncOperationCallback,
-	result interface{},
-	resultHResult uintptr,
+
 	goctx context.Context,
 	cancel context.CancelFunc,
 ) *comFabricAsyncOperationContext {
@@ -97,8 +98,7 @@ func newComFabricAsyncOperationContext(
 	vtbl.Cancel = syscall.NewCallback(com.proxy.Cancel)
 
 	com.proxy.nativeCallback = nativeCallback
-	com.proxy.result = result
-	com.proxy.resultHResult = resultHResult
+
 	com.proxy.goctx = goctx
 	com.proxy.cancel = cancel
 
