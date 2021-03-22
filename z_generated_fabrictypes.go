@@ -1512,7 +1512,7 @@ func (obj *FabricNodeId) toInnerStruct() *innerFabricNodeId {
 }
 
 type FabricOperationDataBuffer struct {
-	Buffer *byte
+	Buffer []byte
 }
 type innerFabricOperationDataBuffer struct {
 	FabricOperationDataBuffer
@@ -1542,14 +1542,14 @@ func (obj *FabricServiceLoadMetricDescription) toInnerStruct() *innerFabricServi
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceLoadMetricDescription{}
+	dst := &innerFabricServiceLoadMetricDescription{}
 	s_1, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_1
 
 	dst.Weight = obj.Weight
 	dst.PrimaryDefaultLoad = obj.PrimaryDefaultLoad
 	dst.SecondaryDefaultLoad = obj.SecondaryDefaultLoad
-	return &dst
+	return dst
 }
 
 type innerFabricServiceLoadMetricDescription struct {
@@ -1582,7 +1582,7 @@ func (obj *FabricPartitionSelector) toInnerStruct() *innerFabricPartitionSelecto
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricPartitionSelector{}
+	dst := &innerFabricPartitionSelector{}
 	s_2, _ := windows.UTF16PtrFromString(obj.ServiceName)
 	dst.ServiceName = s_2
 
@@ -1590,7 +1590,7 @@ func (obj *FabricPartitionSelector) toInnerStruct() *innerFabricPartitionSelecto
 	s_3, _ := windows.UTF16PtrFromString(obj.PartitionKey)
 	dst.PartitionKey = s_3
 
-	return &dst
+	return dst
 }
 
 type innerFabricPartitionSelector struct {
@@ -1643,12 +1643,12 @@ func (obj *FabricSelectedPartition) toInnerStruct() *innerFabricSelectedPartitio
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricSelectedPartition{}
+	dst := &innerFabricSelectedPartition{}
 	s_4, _ := windows.UTF16PtrFromString(obj.ServiceName)
 	dst.ServiceName = s_4
 
 	dst.PartitionId = obj.PartitionId
-	return &dst
+	return dst
 }
 
 type innerFabricSelectedPartition struct {
@@ -1813,7 +1813,7 @@ func (obj *FabricOrchestrationUpgradeProgress) toInnerStruct() *innerFabricOrche
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricOrchestrationUpgradeProgress{}
+	dst := &innerFabricOrchestrationUpgradeProgress{}
 	dst.UpgradeState = obj.UpgradeState
 	dst.ProgressStatus = obj.ProgressStatus
 	ex0 := dst
@@ -1827,7 +1827,7 @@ func (obj *FabricOrchestrationUpgradeProgress) toInnerStruct() *innerFabricOrche
 	ex2.Details = s_6
 
 	ex1.Reserved = unsafe.Pointer(ex2)
-	return &dst
+	return dst
 }
 
 type innerFabricOrchestrationUpgradeProgress struct {
@@ -2029,12 +2029,12 @@ func (obj *FabricNodeResult) toInnerStruct() *innerFabricNodeResult {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNodeResult{}
+	dst := &innerFabricNodeResult{}
 	s_7, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_7
 
 	dst.NodeInstance = obj.NodeInstance
-	return &dst
+	return dst
 }
 
 type innerFabricNodeResult struct {
@@ -2192,12 +2192,12 @@ func (obj *FabricServiceCorrelationDescription) toInnerStruct() *innerFabricServ
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceCorrelationDescription{}
+	dst := &innerFabricServiceCorrelationDescription{}
 	s_8, _ := windows.UTF16PtrFromString(obj.ServiceName)
 	dst.ServiceName = s_8
 
 	dst.Scheme = obj.Scheme
-	return &dst
+	return dst
 }
 
 type innerFabricServiceCorrelationDescription struct {
@@ -2220,42 +2220,60 @@ type FabricScalingTrigger struct {
 	ScalingTriggerKind        FabricScalingTriggerKind
 	ScalingTriggerDescription interface{}
 }
-type innerFabricScalingTrigger struct {
-	FabricScalingTrigger
-}
 
-func (obj *innerFabricScalingTrigger) toGoStruct() *FabricScalingTrigger {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricScalingTrigger
-}
 func (obj *FabricScalingTrigger) toInnerStruct() *innerFabricScalingTrigger {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricScalingTrigger{*obj}
+	dst := &innerFabricScalingTrigger{}
+	dst.ScalingTriggerKind = obj.ScalingTriggerKind
+	dst.ScalingTriggerDescription = toUnsafePointer(obj.ScalingTriggerDescription)
+	return dst
+}
+
+type innerFabricScalingTrigger struct {
+	ScalingTriggerKind        FabricScalingTriggerKind
+	ScalingTriggerDescription unsafe.Pointer
+}
+
+func (obj *innerFabricScalingTrigger) toGoStruct() (dst *FabricScalingTrigger) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricScalingTrigger{}
+	dst.ScalingTriggerKind = obj.ScalingTriggerKind
+	dst.ScalingTriggerDescription = fromUnsafePointer(obj.ScalingTriggerDescription)
+	return
 }
 
 type FabricScalingMechanism struct {
 	ScalingMechanismKind        FabricScalingMechanismKind
 	ScalingMechanismDescription interface{}
 }
-type innerFabricScalingMechanism struct {
-	FabricScalingMechanism
-}
 
-func (obj *innerFabricScalingMechanism) toGoStruct() *FabricScalingMechanism {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricScalingMechanism
-}
 func (obj *FabricScalingMechanism) toInnerStruct() *innerFabricScalingMechanism {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricScalingMechanism{*obj}
+	dst := &innerFabricScalingMechanism{}
+	dst.ScalingMechanismKind = obj.ScalingMechanismKind
+	dst.ScalingMechanismDescription = toUnsafePointer(obj.ScalingMechanismDescription)
+	return dst
+}
+
+type innerFabricScalingMechanism struct {
+	ScalingMechanismKind        FabricScalingMechanismKind
+	ScalingMechanismDescription unsafe.Pointer
+}
+
+func (obj *innerFabricScalingMechanism) toGoStruct() (dst *FabricScalingMechanism) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricScalingMechanism{}
+	dst.ScalingMechanismKind = obj.ScalingMechanismKind
+	dst.ScalingMechanismDescription = fromUnsafePointer(obj.ScalingMechanismDescription)
+	return
 }
 
 type FabricServiceScalingPolicy struct {
@@ -2291,14 +2309,14 @@ func (obj *FabricScalingTriggerAveragePartitionLoad) toInnerStruct() *innerFabri
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricScalingTriggerAveragePartitionLoad{}
+	dst := &innerFabricScalingTriggerAveragePartitionLoad{}
 	s_9, _ := windows.UTF16PtrFromString(obj.MetricName)
 	dst.MetricName = s_9
 
 	dst.LowerLoadThreshold = obj.LowerLoadThreshold
 	dst.UpperLoadThreshold = obj.UpperLoadThreshold
 	dst.ScaleIntervalInSeconds = obj.ScaleIntervalInSeconds
-	return &dst
+	return dst
 }
 
 type innerFabricScalingTriggerAveragePartitionLoad struct {
@@ -2333,7 +2351,7 @@ func (obj *FabricScalingTriggerAverageServiceLoad) toInnerStruct() *innerFabricS
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricScalingTriggerAverageServiceLoad{}
+	dst := &innerFabricScalingTriggerAverageServiceLoad{}
 	s_10, _ := windows.UTF16PtrFromString(obj.MetricName)
 	dst.MetricName = s_10
 
@@ -2344,7 +2362,7 @@ func (obj *FabricScalingTriggerAverageServiceLoad) toInnerStruct() *innerFabricS
 	ex1 := &innerFabricScalingTriggerAverageServiceLoadEx1{}
 	ex1.UseOnlyPrimaryLoad = obj.UseOnlyPrimaryLoad
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricScalingTriggerAverageServiceLoad struct {
@@ -2431,11 +2449,11 @@ func (obj *FabricPlacementPolicyInvalidDomainDescription) toInnerStruct() *inner
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricPlacementPolicyInvalidDomainDescription{}
+	dst := &innerFabricPlacementPolicyInvalidDomainDescription{}
 	s_11, _ := windows.UTF16PtrFromString(obj.InvalidFaultDomain)
 	dst.InvalidFaultDomain = s_11
 
-	return &dst
+	return dst
 }
 
 type innerFabricPlacementPolicyInvalidDomainDescription struct {
@@ -2460,11 +2478,11 @@ func (obj *FabricPlacementPolicyRequiredDomainDescription) toInnerStruct() *inne
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricPlacementPolicyRequiredDomainDescription{}
+	dst := &innerFabricPlacementPolicyRequiredDomainDescription{}
 	s_12, _ := windows.UTF16PtrFromString(obj.RequiredFaultDomain)
 	dst.RequiredFaultDomain = s_12
 
-	return &dst
+	return dst
 }
 
 type innerFabricPlacementPolicyRequiredDomainDescription struct {
@@ -2489,11 +2507,11 @@ func (obj *FabricPlacementPolicyPreferredPrimaryDomainDescription) toInnerStruct
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricPlacementPolicyPreferredPrimaryDomainDescription{}
+	dst := &innerFabricPlacementPolicyPreferredPrimaryDomainDescription{}
 	s_13, _ := windows.UTF16PtrFromString(obj.PreferredPrimaryFaultDomain)
 	dst.PreferredPrimaryFaultDomain = s_13
 
-	return &dst
+	return dst
 }
 
 type innerFabricPlacementPolicyPreferredPrimaryDomainDescription struct {
@@ -2554,21 +2572,30 @@ type FabricServicePlacementPolicyDescription struct {
 	Type  FabricPlacementPolicyType
 	Value interface{}
 }
-type innerFabricServicePlacementPolicyDescription struct {
-	FabricServicePlacementPolicyDescription
-}
 
-func (obj *innerFabricServicePlacementPolicyDescription) toGoStruct() *FabricServicePlacementPolicyDescription {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricServicePlacementPolicyDescription
-}
 func (obj *FabricServicePlacementPolicyDescription) toInnerStruct() *innerFabricServicePlacementPolicyDescription {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricServicePlacementPolicyDescription{*obj}
+	dst := &innerFabricServicePlacementPolicyDescription{}
+	dst.Type = obj.Type
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricServicePlacementPolicyDescription struct {
+	Type  FabricPlacementPolicyType
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricServicePlacementPolicyDescription) toGoStruct() (dst *FabricServicePlacementPolicyDescription) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricServicePlacementPolicyDescription{}
+	dst.Type = obj.Type
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type innerFabricServicePlacementPolicyList struct {
@@ -2598,21 +2625,30 @@ type FabricServicePartitionInformation struct {
 	Kind  FabricServicePartitionKind
 	Value interface{}
 }
-type innerFabricServicePartitionInformation struct {
-	FabricServicePartitionInformation
-}
 
-func (obj *innerFabricServicePartitionInformation) toGoStruct() *FabricServicePartitionInformation {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricServicePartitionInformation
-}
 func (obj *FabricServicePartitionInformation) toInnerStruct() *innerFabricServicePartitionInformation {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricServicePartitionInformation{*obj}
+	dst := &innerFabricServicePartitionInformation{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricServicePartitionInformation struct {
+	Kind  FabricServicePartitionKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricServicePartitionInformation) toGoStruct() (dst *FabricServicePartitionInformation) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricServicePartitionInformation{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricSingletonPartitionInformation struct {
@@ -2668,12 +2704,12 @@ func (obj *FabricNamedPartitionInformation) toInnerStruct() *innerFabricNamedPar
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNamedPartitionInformation{}
+	dst := &innerFabricNamedPartitionInformation{}
 	dst.Id = obj.Id
 	s_14, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_14
 
-	return &dst
+	return dst
 }
 
 type innerFabricNamedPartitionInformation struct {
@@ -2696,21 +2732,30 @@ type FabricCodePackageEntryPointDescription struct {
 	Kind  FabricCodePackageEntryPointKind
 	Value interface{}
 }
-type innerFabricCodePackageEntryPointDescription struct {
-	FabricCodePackageEntryPointDescription
-}
 
-func (obj *innerFabricCodePackageEntryPointDescription) toGoStruct() *FabricCodePackageEntryPointDescription {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricCodePackageEntryPointDescription
-}
 func (obj *FabricCodePackageEntryPointDescription) toInnerStruct() *innerFabricCodePackageEntryPointDescription {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricCodePackageEntryPointDescription{*obj}
+	dst := &innerFabricCodePackageEntryPointDescription{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricCodePackageEntryPointDescription struct {
+	Kind  FabricCodePackageEntryPointKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricCodePackageEntryPointDescription) toGoStruct() (dst *FabricCodePackageEntryPointDescription) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricCodePackageEntryPointDescription{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricContainerhostEntryPointDescription struct {
@@ -2723,7 +2768,7 @@ func (obj *FabricContainerhostEntryPointDescription) toInnerStruct() *innerFabri
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricContainerhostEntryPointDescription{}
+	dst := &innerFabricContainerhostEntryPointDescription{}
 	s_15, _ := windows.UTF16PtrFromString(obj.ImageName)
 	dst.ImageName = s_15
 
@@ -2733,7 +2778,7 @@ func (obj *FabricContainerhostEntryPointDescription) toInnerStruct() *innerFabri
 	s_17, _ := windows.UTF16PtrFromString(obj.EntryPoint)
 	dst.EntryPoint = s_17
 
-	return &dst
+	return dst
 }
 
 type innerFabricContainerhostEntryPointDescription struct {
@@ -2764,7 +2809,7 @@ func (obj *FabricExehostEntryPointDescription) toInnerStruct() *innerFabricExeho
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricExehostEntryPointDescription{}
+	dst := &innerFabricExehostEntryPointDescription{}
 	s_18, _ := windows.UTF16PtrFromString(obj.Program)
 	dst.Program = s_18
 
@@ -2772,7 +2817,7 @@ func (obj *FabricExehostEntryPointDescription) toInnerStruct() *innerFabricExeho
 	dst.Arguments = s_19
 
 	dst.WorkingFolder = obj.WorkingFolder
-	return &dst
+	return dst
 }
 
 type innerFabricExehostEntryPointDescription struct {
@@ -2842,21 +2887,30 @@ type FabricDllhostHostedDllDescription struct {
 	Kind  FabricDllhostHostedDllKind
 	Value interface{}
 }
-type innerFabricDllhostHostedDllDescription struct {
-	FabricDllhostHostedDllDescription
-}
 
-func (obj *innerFabricDllhostHostedDllDescription) toGoStruct() *FabricDllhostHostedDllDescription {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricDllhostHostedDllDescription
-}
 func (obj *FabricDllhostHostedDllDescription) toInnerStruct() *innerFabricDllhostHostedDllDescription {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricDllhostHostedDllDescription{*obj}
+	dst := &innerFabricDllhostHostedDllDescription{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricDllhostHostedDllDescription struct {
+	Kind  FabricDllhostHostedDllKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricDllhostHostedDllDescription) toGoStruct() (dst *FabricDllhostHostedDllDescription) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricDllhostHostedDllDescription{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricDllhostHostedUnmanagedDllDescription struct {
@@ -2867,11 +2921,11 @@ func (obj *FabricDllhostHostedUnmanagedDllDescription) toInnerStruct() *innerFab
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDllhostHostedUnmanagedDllDescription{}
+	dst := &innerFabricDllhostHostedUnmanagedDllDescription{}
 	s_20, _ := windows.UTF16PtrFromString(obj.DllName)
 	dst.DllName = s_20
 
-	return &dst
+	return dst
 }
 
 type innerFabricDllhostHostedUnmanagedDllDescription struct {
@@ -2896,11 +2950,11 @@ func (obj *FabricDllhostHostedManagedDllDescription) toInnerStruct() *innerFabri
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDllhostHostedManagedDllDescription{}
+	dst := &innerFabricDllhostHostedManagedDllDescription{}
 	s_21, _ := windows.UTF16PtrFromString(obj.AssemblyName)
 	dst.AssemblyName = s_21
 
-	return &dst
+	return dst
 }
 
 type innerFabricDllhostHostedManagedDllDescription struct {
@@ -2949,7 +3003,7 @@ func (obj *FabricDllhostEntryPointDescription) toInnerStruct() *innerFabricDllho
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDllhostEntryPointDescription{}
+	dst := &innerFabricDllhostEntryPointDescription{}
 	dst.IsolationPolicyType = obj.IsolationPolicyType
 	lst_22 := &innerFabricDllhostHostedDllDescriptionList{}
 	{
@@ -2971,7 +3025,7 @@ func (obj *FabricDllhostEntryPointDescription) toInnerStruct() *innerFabricDllho
 
 	}
 	dst.HostedDlls = lst_22
-	return &dst
+	return dst
 }
 
 type innerFabricDllhostEntryPointDescription struct {
@@ -3016,7 +3070,7 @@ func (obj *FabricCodePackageDescription) toInnerStruct() *innerFabricCodePackage
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricCodePackageDescription{}
+	dst := &innerFabricCodePackageDescription{}
 	s_23, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_23
 
@@ -3032,7 +3086,7 @@ func (obj *FabricCodePackageDescription) toInnerStruct() *innerFabricCodePackage
 	dst.IsShared = obj.IsShared
 	dst.SetupEntryPoint = obj.SetupEntryPoint.toInnerStruct()
 	dst.EntryPoint = obj.EntryPoint.toInnerStruct()
-	return &dst
+	return dst
 }
 
 type innerFabricCodePackageDescription struct {
@@ -3069,11 +3123,11 @@ func (obj *FabricRunasPolicyDescription) toInnerStruct() *innerFabricRunasPolicy
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricRunasPolicyDescription{}
+	dst := &innerFabricRunasPolicyDescription{}
 	s_27, _ := windows.UTF16PtrFromString(obj.UserName)
 	dst.UserName = s_27
 
-	return &dst
+	return dst
 }
 
 type innerFabricRunasPolicyDescription struct {
@@ -3101,7 +3155,7 @@ func (obj *FabricConfigurationPackageDescription) toInnerStruct() *innerFabricCo
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricConfigurationPackageDescription{}
+	dst := &innerFabricConfigurationPackageDescription{}
 	s_28, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_28
 
@@ -3114,7 +3168,7 @@ func (obj *FabricConfigurationPackageDescription) toInnerStruct() *innerFabricCo
 	s_31, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
 	dst.ServiceManifestVersion = s_31
 
-	return &dst
+	return dst
 }
 
 type innerFabricConfigurationPackageDescription struct {
@@ -3148,7 +3202,7 @@ func (obj *FabricDataPackageDescription) toInnerStruct() *innerFabricDataPackage
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDataPackageDescription{}
+	dst := &innerFabricDataPackageDescription{}
 	s_32, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_32
 
@@ -3161,7 +3215,7 @@ func (obj *FabricDataPackageDescription) toInnerStruct() *innerFabricDataPackage
 	s_35, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
 	dst.ServiceManifestVersion = s_35
 
-	return &dst
+	return dst
 }
 
 type innerFabricDataPackageDescription struct {
@@ -3188,21 +3242,30 @@ type FabricServiceTypeDescription struct {
 	Kind  FabricServiceKind
 	Value interface{}
 }
-type innerFabricServiceTypeDescription struct {
-	FabricServiceTypeDescription
-}
 
-func (obj *innerFabricServiceTypeDescription) toGoStruct() *FabricServiceTypeDescription {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricServiceTypeDescription
-}
 func (obj *FabricServiceTypeDescription) toInnerStruct() *innerFabricServiceTypeDescription {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricServiceTypeDescription{*obj}
+	dst := &innerFabricServiceTypeDescription{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricServiceTypeDescription struct {
+	Kind  FabricServiceKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricServiceTypeDescription) toGoStruct() (dst *FabricServiceTypeDescription) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricServiceTypeDescription{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type innerFabricServiceTypeDescriptionList struct {
@@ -3237,14 +3300,14 @@ func (obj *FabricServiceTypeDescriptionExtension) toInnerStruct() *innerFabricSe
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceTypeDescriptionExtension{}
+	dst := &innerFabricServiceTypeDescriptionExtension{}
 	s_36, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_36
 
 	s_37, _ := windows.UTF16PtrFromString(obj.Value)
 	dst.Value = s_37
 
-	return &dst
+	return dst
 }
 
 type innerFabricServiceTypeDescriptionExtension struct {
@@ -3299,7 +3362,7 @@ func (obj *FabricStatelessServiceTypeDescription) toInnerStruct() *innerFabricSt
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricStatelessServiceTypeDescription{}
+	dst := &innerFabricStatelessServiceTypeDescription{}
 	s_38, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
 	dst.ServiceTypeName = s_38
 
@@ -3370,7 +3433,7 @@ func (obj *FabricStatelessServiceTypeDescription) toInnerStruct() *innerFabricSt
 	}
 	ex1.PolicyList = lst_42
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricStatelessServiceTypeDescription struct {
@@ -3454,7 +3517,7 @@ func (obj *FabricStatefulServiceTypeDescription) toInnerStruct() *innerFabricSta
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricStatefulServiceTypeDescription{}
+	dst := &innerFabricStatefulServiceTypeDescription{}
 	s_43, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
 	dst.ServiceTypeName = s_43
 
@@ -3525,7 +3588,7 @@ func (obj *FabricStatefulServiceTypeDescription) toInnerStruct() *innerFabricSta
 	}
 	ex1.PolicyList = lst_47
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricStatefulServiceTypeDescription struct {
@@ -3605,7 +3668,7 @@ func (obj *FabricServiceGroupTypeMemberDescription) toInnerStruct() *innerFabric
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceGroupTypeMemberDescription{}
+	dst := &innerFabricServiceGroupTypeMemberDescription{}
 	s_48, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
 	dst.ServiceTypeName = s_48
 
@@ -3629,7 +3692,7 @@ func (obj *FabricServiceGroupTypeMemberDescription) toInnerStruct() *innerFabric
 
 	}
 	dst.LoadMetrics = lst_49
-	return &dst
+	return dst
 }
 
 type innerFabricServiceGroupTypeMemberDescription struct {
@@ -3693,7 +3756,7 @@ func (obj *FabricServiceGroupTypeDescription) toInnerStruct() *innerFabricServic
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceGroupTypeDescription{}
+	dst := &innerFabricServiceGroupTypeDescription{}
 	dst.Description = obj.Description.toInnerStruct()
 	lst_50 := &innerFabricServiceGroupTypeMemberDescriptionList{}
 	{
@@ -3716,7 +3779,7 @@ func (obj *FabricServiceGroupTypeDescription) toInnerStruct() *innerFabricServic
 	}
 	dst.Members = lst_50
 	dst.UseImplicitFactory = obj.UseImplicitFactory
-	return &dst
+	return dst
 }
 
 type innerFabricServiceGroupTypeDescription struct {
@@ -3788,7 +3851,7 @@ func (obj *FabricEndpointResourceDescription) toInnerStruct() *innerFabricEndpoi
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricEndpointResourceDescription{}
+	dst := &innerFabricEndpointResourceDescription{}
 	s_51, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_51
 
@@ -3819,7 +3882,7 @@ func (obj *FabricEndpointResourceDescription) toInnerStruct() *innerFabricEndpoi
 	ex2.IpAddressOrFqdn = s_58
 
 	ex1.Reserved = unsafe.Pointer(ex2)
-	return &dst
+	return dst
 }
 
 type innerFabricEndpointResourceDescription struct {
@@ -3971,7 +4034,7 @@ func (obj *FabricConfigurationParameter) toInnerStruct() *innerFabricConfigurati
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricConfigurationParameter{}
+	dst := &innerFabricConfigurationParameter{}
 	s_59, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_59
 
@@ -3986,7 +4049,7 @@ func (obj *FabricConfigurationParameter) toInnerStruct() *innerFabricConfigurati
 	ex1.Type = s_61
 
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricConfigurationParameter struct {
@@ -4051,7 +4114,7 @@ func (obj *FabricConfigurationSection) toInnerStruct() *innerFabricConfiguration
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricConfigurationSection{}
+	dst := &innerFabricConfigurationSection{}
 	s_62, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_62
 
@@ -4075,7 +4138,7 @@ func (obj *FabricConfigurationSection) toInnerStruct() *innerFabricConfiguration
 
 	}
 	dst.Parameters = lst_63
-	return &dst
+	return dst
 }
 
 type innerFabricConfigurationSection struct {
@@ -4137,7 +4200,7 @@ func (obj *FabricConfigurationSettings) toInnerStruct() *innerFabricConfiguratio
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricConfigurationSettings{}
+	dst := &innerFabricConfigurationSettings{}
 	lst_64 := &innerFabricConfigurationSectionList{}
 	{
 
@@ -4158,7 +4221,7 @@ func (obj *FabricConfigurationSettings) toInnerStruct() *innerFabricConfiguratio
 
 	}
 	dst.Sections = lst_64
-	return &dst
+	return dst
 }
 
 type innerFabricConfigurationSettings struct {
@@ -4269,7 +4332,7 @@ func (obj *FabricReplicaInformation) toInnerStruct() *innerFabricReplicaInformat
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricReplicaInformation{}
+	dst := &innerFabricReplicaInformation{}
 	dst.Id = obj.Id
 	dst.Role = obj.Role
 	dst.Status = obj.Status
@@ -4282,7 +4345,7 @@ func (obj *FabricReplicaInformation) toInnerStruct() *innerFabricReplicaInformat
 	ex1 := &innerFabricReplicaInformationEx1{}
 	ex1.MustCatchup = obj.MustCatchup
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricReplicaInformation struct {
@@ -4350,12 +4413,12 @@ func (obj *FabricLoadMetric) toInnerStruct() *innerFabricLoadMetric {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricLoadMetric{}
+	dst := &innerFabricLoadMetric{}
 	s_66, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_66
 
 	dst.Value = obj.Value
-	return &dst
+	return dst
 }
 
 type innerFabricLoadMetric struct {
@@ -4378,21 +4441,30 @@ type FabricSecurityCredentials struct {
 	Kind  FabricSecurityCredentialKind
 	Value interface{}
 }
-type innerFabricSecurityCredentials struct {
-	FabricSecurityCredentials
-}
 
-func (obj *innerFabricSecurityCredentials) toGoStruct() *FabricSecurityCredentials {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricSecurityCredentials
-}
 func (obj *FabricSecurityCredentials) toInnerStruct() *innerFabricSecurityCredentials {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricSecurityCredentials{*obj}
+	dst := &innerFabricSecurityCredentials{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricSecurityCredentials struct {
+	Kind  FabricSecurityCredentialKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricSecurityCredentials) toGoStruct() (dst *FabricSecurityCredentials) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricSecurityCredentials{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricReplicatorSettings struct {
@@ -4425,7 +4497,7 @@ func (obj *FabricReplicatorSettings) toInnerStruct() *innerFabricReplicatorSetti
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricReplicatorSettings{}
+	dst := &innerFabricReplicatorSettings{}
 	dst.Flags = obj.Flags
 	dst.RetryIntervalMilliseconds = obj.RetryIntervalMilliseconds
 	dst.BatchAcknowledgementIntervalMilliseconds = obj.BatchAcknowledgementIntervalMilliseconds
@@ -4464,7 +4536,7 @@ func (obj *FabricReplicatorSettings) toInnerStruct() *innerFabricReplicatorSetti
 	ex4.ReplicatorPublishAddress = s_69
 
 	ex3.Reserved = unsafe.Pointer(ex4)
-	return &dst
+	return dst
 }
 
 type innerFabricReplicatorSettings struct {
@@ -4568,7 +4640,7 @@ func (obj *FabricNamedPropertyMetadata) toInnerStruct() *innerFabricNamedPropert
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNamedPropertyMetadata{}
+	dst := &innerFabricNamedPropertyMetadata{}
 	s_70, _ := windows.UTF16PtrFromString(obj.PropertyName)
 	dst.PropertyName = s_70
 
@@ -4585,7 +4657,7 @@ func (obj *FabricNamedPropertyMetadata) toInnerStruct() *innerFabricNamedPropert
 	ex1.CustomTypeId = s_72
 
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricNamedPropertyMetadata struct {
@@ -4654,13 +4726,13 @@ func (obj *FabricPutPropertyOperation) toInnerStruct() *innerFabricPutPropertyOp
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricPutPropertyOperation{}
+	dst := &innerFabricPutPropertyOperation{}
 	s_73, _ := windows.UTF16PtrFromString(obj.PropertyName)
 	dst.PropertyName = s_73
 
 	dst.PropertyTypeId = obj.PropertyTypeId
 	dst.PropertyValue = toUnsafePointer(obj.PropertyValue)
-	return &dst
+	return dst
 }
 
 type innerFabricPutPropertyOperation struct {
@@ -4692,7 +4764,7 @@ func (obj *FabricPutCustomPropertyOperation) toInnerStruct() *innerFabricPutCust
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricPutCustomPropertyOperation{}
+	dst := &innerFabricPutCustomPropertyOperation{}
 	s_74, _ := windows.UTF16PtrFromString(obj.PropertyName)
 	dst.PropertyName = s_74
 
@@ -4701,7 +4773,7 @@ func (obj *FabricPutCustomPropertyOperation) toInnerStruct() *innerFabricPutCust
 	s_75, _ := windows.UTF16PtrFromString(obj.PropertyCustomTypeId)
 	dst.PropertyCustomTypeId = s_75
 
-	return &dst
+	return dst
 }
 
 type innerFabricPutCustomPropertyOperation struct {
@@ -4733,12 +4805,12 @@ func (obj *FabricGetPropertyOperation) toInnerStruct() *innerFabricGetPropertyOp
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricGetPropertyOperation{}
+	dst := &innerFabricGetPropertyOperation{}
 	s_76, _ := windows.UTF16PtrFromString(obj.PropertyName)
 	dst.PropertyName = s_76
 
 	dst.IncludeValue = obj.IncludeValue
-	return &dst
+	return dst
 }
 
 type innerFabricGetPropertyOperation struct {
@@ -4765,11 +4837,11 @@ func (obj *FabricDeletePropertyOperation) toInnerStruct() *innerFabricDeleteProp
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeletePropertyOperation{}
+	dst := &innerFabricDeletePropertyOperation{}
 	s_77, _ := windows.UTF16PtrFromString(obj.PropertyName)
 	dst.PropertyName = s_77
 
-	return &dst
+	return dst
 }
 
 type innerFabricDeletePropertyOperation struct {
@@ -4795,12 +4867,12 @@ func (obj *FabricCheckSequencePropertyOperation) toInnerStruct() *innerFabricChe
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricCheckSequencePropertyOperation{}
+	dst := &innerFabricCheckSequencePropertyOperation{}
 	s_78, _ := windows.UTF16PtrFromString(obj.PropertyName)
 	dst.PropertyName = s_78
 
 	dst.SequenceNumber = obj.SequenceNumber
-	return &dst
+	return dst
 }
 
 type innerFabricCheckSequencePropertyOperation struct {
@@ -4828,12 +4900,12 @@ func (obj *FabricCheckExistsPropertyOperation) toInnerStruct() *innerFabricCheck
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricCheckExistsPropertyOperation{}
+	dst := &innerFabricCheckExistsPropertyOperation{}
 	s_79, _ := windows.UTF16PtrFromString(obj.PropertyName)
 	dst.PropertyName = s_79
 
 	dst.ExistenceCheck = obj.ExistenceCheck
-	return &dst
+	return dst
 }
 
 type innerFabricCheckExistsPropertyOperation struct {
@@ -4862,13 +4934,13 @@ func (obj *FabricCheckValuePropertyOperation) toInnerStruct() *innerFabricCheckV
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricCheckValuePropertyOperation{}
+	dst := &innerFabricCheckValuePropertyOperation{}
 	s_80, _ := windows.UTF16PtrFromString(obj.PropertyName)
 	dst.PropertyName = s_80
 
 	dst.PropertyTypeId = obj.PropertyTypeId
 	dst.PropertyValue = toUnsafePointer(obj.PropertyValue)
-	return &dst
+	return dst
 }
 
 type innerFabricCheckValuePropertyOperation struct {
@@ -4893,63 +4965,90 @@ type FabricPropertyBatchOperation struct {
 	Kind  FabricPropertyBatchOperationKind
 	Value interface{}
 }
-type innerFabricPropertyBatchOperation struct {
-	FabricPropertyBatchOperation
-}
 
-func (obj *innerFabricPropertyBatchOperation) toGoStruct() *FabricPropertyBatchOperation {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricPropertyBatchOperation
-}
 func (obj *FabricPropertyBatchOperation) toInnerStruct() *innerFabricPropertyBatchOperation {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricPropertyBatchOperation{*obj}
+	dst := &innerFabricPropertyBatchOperation{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricPropertyBatchOperation struct {
+	Kind  FabricPropertyBatchOperationKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricPropertyBatchOperation) toGoStruct() (dst *FabricPropertyBatchOperation) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricPropertyBatchOperation{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricServiceDescription struct {
 	Kind  FabricServiceDescriptionKind
 	Value interface{}
 }
-type innerFabricServiceDescription struct {
-	FabricServiceDescription
-}
 
-func (obj *innerFabricServiceDescription) toGoStruct() *FabricServiceDescription {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricServiceDescription
-}
 func (obj *FabricServiceDescription) toInnerStruct() *innerFabricServiceDescription {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricServiceDescription{*obj}
+	dst := &innerFabricServiceDescription{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricServiceDescription struct {
+	Kind  FabricServiceDescriptionKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricServiceDescription) toGoStruct() (dst *FabricServiceDescription) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricServiceDescription{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricNodeTransitionDescription struct {
 	NodeTransitionType FabricNodeTransitionType
 	Value              interface{}
 }
-type innerFabricNodeTransitionDescription struct {
-	FabricNodeTransitionDescription
-}
 
-func (obj *innerFabricNodeTransitionDescription) toGoStruct() *FabricNodeTransitionDescription {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricNodeTransitionDescription
-}
 func (obj *FabricNodeTransitionDescription) toInnerStruct() *innerFabricNodeTransitionDescription {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricNodeTransitionDescription{*obj}
+	dst := &innerFabricNodeTransitionDescription{}
+	dst.NodeTransitionType = obj.NodeTransitionType
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricNodeTransitionDescription struct {
+	NodeTransitionType FabricNodeTransitionType
+	Value              unsafe.Pointer
+}
+
+func (obj *innerFabricNodeTransitionDescription) toGoStruct() (dst *FabricNodeTransitionDescription) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricNodeTransitionDescription{}
+	dst.NodeTransitionType = obj.NodeTransitionType
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricNodeStopDescription struct {
@@ -4963,14 +5062,14 @@ func (obj *FabricNodeStopDescription) toInnerStruct() *innerFabricNodeStopDescri
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNodeStopDescription{}
+	dst := &innerFabricNodeStopDescription{}
 	dst.OperationId = obj.OperationId
 	s_81, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_81
 
 	dst.NodeInstanceId = obj.NodeInstanceId
 	dst.StopDurationInSeconds = obj.StopDurationInSeconds
-	return &dst
+	return dst
 }
 
 type innerFabricNodeStopDescription struct {
@@ -5003,13 +5102,13 @@ func (obj *FabricNodeStartDescription) toInnerStruct() *innerFabricNodeStartDesc
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNodeStartDescription{}
+	dst := &innerFabricNodeStartDescription{}
 	dst.OperationId = obj.OperationId
 	s_82, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_82
 
 	dst.NodeInstanceId = obj.NodeInstanceId
-	return &dst
+	return dst
 }
 
 type innerFabricNodeStartDescription struct {
@@ -5034,21 +5133,30 @@ type FabricServiceUpdateDescription struct {
 	Kind  FabricServiceDescriptionKind
 	Value interface{}
 }
-type innerFabricServiceUpdateDescription struct {
-	FabricServiceUpdateDescription
-}
 
-func (obj *innerFabricServiceUpdateDescription) toGoStruct() *FabricServiceUpdateDescription {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricServiceUpdateDescription
-}
 func (obj *FabricServiceUpdateDescription) toInnerStruct() *innerFabricServiceUpdateDescription {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricServiceUpdateDescription{*obj}
+	dst := &innerFabricServiceUpdateDescription{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricServiceUpdateDescription struct {
+	Kind  FabricServiceDescriptionKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricServiceUpdateDescription) toGoStruct() (dst *FabricServiceUpdateDescription) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricServiceUpdateDescription{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricDeleteServiceDescription struct {
@@ -5060,12 +5168,12 @@ func (obj *FabricDeleteServiceDescription) toInnerStruct() *innerFabricDeleteSer
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeleteServiceDescription{}
+	dst := &innerFabricDeleteServiceDescription{}
 	s_83, _ := windows.UTF16PtrFromString(obj.ServiceName)
 	dst.ServiceName = s_83
 
 	dst.ForceDelete = obj.ForceDelete
-	return &dst
+	return dst
 }
 
 type innerFabricDeleteServiceDescription struct {
@@ -5098,7 +5206,7 @@ func (obj *FabricServiceFromTemplateDescription) toInnerStruct() *innerFabricSer
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceFromTemplateDescription{}
+	dst := &innerFabricServiceFromTemplateDescription{}
 	s_84, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_84
 
@@ -5114,7 +5222,7 @@ func (obj *FabricServiceFromTemplateDescription) toInnerStruct() *innerFabricSer
 	dst.ServicePackageActivationMode = obj.ServicePackageActivationMode
 	dst.InitializationDataSize = obj.InitializationDataSize
 	dst.InitializationData = obj.InitializationData
-	return &dst
+	return dst
 }
 
 type innerFabricServiceFromTemplateDescription struct {
@@ -5156,7 +5264,7 @@ func (obj *FabricServiceGroupFromTemplateDescription) toInnerStruct() *innerFabr
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceGroupFromTemplateDescription{}
+	dst := &innerFabricServiceGroupFromTemplateDescription{}
 	s_88, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_88
 
@@ -5169,7 +5277,7 @@ func (obj *FabricServiceGroupFromTemplateDescription) toInnerStruct() *innerFabr
 	dst.ServicePackageActivationMode = obj.ServicePackageActivationMode
 	dst.InitializationDataSize = obj.InitializationDataSize
 	dst.InitializationData = obj.InitializationData
-	return &dst
+	return dst
 }
 
 type innerFabricServiceGroupFromTemplateDescription struct {
@@ -5205,12 +5313,12 @@ func (obj *FabricUpgradeDomainStatusDescription) toInnerStruct() *innerFabricUpg
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricUpgradeDomainStatusDescription{}
+	dst := &innerFabricUpgradeDomainStatusDescription{}
 	s_91, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_91
 
 	dst.State = obj.State
-	return &dst
+	return dst
 }
 
 type innerFabricUpgradeDomainStatusDescription struct {
@@ -5256,21 +5364,30 @@ type FabricUpgradeSafetyCheck struct {
 	Kind  FabricUpgradeSafetyCheckKind
 	Value interface{}
 }
-type innerFabricUpgradeSafetyCheck struct {
-	FabricUpgradeSafetyCheck
-}
 
-func (obj *innerFabricUpgradeSafetyCheck) toGoStruct() *FabricUpgradeSafetyCheck {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricUpgradeSafetyCheck
-}
 func (obj *FabricUpgradeSafetyCheck) toInnerStruct() *innerFabricUpgradeSafetyCheck {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricUpgradeSafetyCheck{*obj}
+	dst := &innerFabricUpgradeSafetyCheck{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricUpgradeSafetyCheck struct {
+	Kind  FabricUpgradeSafetyCheckKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricUpgradeSafetyCheck) toGoStruct() (dst *FabricUpgradeSafetyCheck) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricUpgradeSafetyCheck{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricUpgradePartitionSafetyCheck struct {
@@ -5347,7 +5464,7 @@ func (obj *FabricNodeUpgradeProgress) toInnerStruct() *innerFabricNodeUpgradePro
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNodeUpgradeProgress{}
+	dst := &innerFabricNodeUpgradeProgress{}
 	s_92, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_92
 
@@ -5372,7 +5489,7 @@ func (obj *FabricNodeUpgradeProgress) toInnerStruct() *innerFabricNodeUpgradePro
 
 	}
 	dst.PendingSafetyChecks = lst_93
-	return &dst
+	return dst
 }
 
 type innerFabricNodeUpgradeProgress struct {
@@ -5437,7 +5554,7 @@ func (obj *FabricUpgradeDomainProgress) toInnerStruct() *innerFabricUpgradeDomai
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricUpgradeDomainProgress{}
+	dst := &innerFabricUpgradeDomainProgress{}
 	s_94, _ := windows.UTF16PtrFromString(obj.UpgradeDomainName)
 	dst.UpgradeDomainName = s_94
 
@@ -5461,7 +5578,7 @@ func (obj *FabricUpgradeDomainProgress) toInnerStruct() *innerFabricUpgradeDomai
 
 	}
 	dst.NodeProgressList = lst_95
-	return &dst
+	return dst
 }
 
 type innerFabricUpgradeDomainProgress struct {
@@ -5515,7 +5632,7 @@ func (obj *FabricStatelessServiceDescription) toInnerStruct() *innerFabricStatel
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricStatelessServiceDescription{}
+	dst := &innerFabricStatelessServiceDescription{}
 	s_96, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_96
 
@@ -5638,7 +5755,7 @@ func (obj *FabricStatelessServiceDescription) toInnerStruct() *innerFabricStatel
 
 	}
 	ex3.Reserved = unsafe.Pointer(ex4)
-	return &dst
+	return dst
 }
 
 type innerFabricStatelessServiceDescription struct {
@@ -5795,7 +5912,7 @@ func (obj *FabricStatelessServiceUpdateDescription) toInnerStruct() *innerFabric
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricStatelessServiceUpdateDescription{}
+	dst := &innerFabricStatelessServiceUpdateDescription{}
 	dst.Flags = obj.Flags
 	dst.InstanceCount = obj.InstanceCount
 	ex0 := dst
@@ -5885,7 +6002,7 @@ func (obj *FabricStatelessServiceUpdateDescription) toInnerStruct() *innerFabric
 
 	}
 	ex2.Reserved = unsafe.Pointer(ex3)
-	return &dst
+	return dst
 }
 
 type innerFabricStatelessServiceUpdateDescription struct {
@@ -6019,7 +6136,7 @@ func (obj *FabricStatefulServiceDescription) toInnerStruct() *innerFabricStatefu
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricStatefulServiceDescription{}
+	dst := &innerFabricStatefulServiceDescription{}
 	s_104, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_104
 
@@ -6145,7 +6262,7 @@ func (obj *FabricStatefulServiceDescription) toInnerStruct() *innerFabricStatefu
 
 	}
 	ex3.Reserved = unsafe.Pointer(ex4)
-	return &dst
+	return dst
 }
 
 type innerFabricStatefulServiceDescription struct {
@@ -6302,7 +6419,7 @@ func (obj *FabricStatefulServiceFailoverSettings) toInnerStruct() *innerFabricSt
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricStatefulServiceFailoverSettings{}
+	dst := &innerFabricStatefulServiceFailoverSettings{}
 	dst.Flags = obj.Flags
 	dst.ReplicaRestartWaitDurationSeconds = obj.ReplicaRestartWaitDurationSeconds
 	dst.QuorumLossWaitDurationSeconds = obj.QuorumLossWaitDurationSeconds
@@ -6310,7 +6427,7 @@ func (obj *FabricStatefulServiceFailoverSettings) toInnerStruct() *innerFabricSt
 	ex1 := &innerFabricStatefulServiceFailoverSettingsEx1{}
 	ex1.StandByReplicaKeepDurationSeconds = obj.StandByReplicaKeepDurationSeconds
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricStatefulServiceFailoverSettings struct {
@@ -6362,7 +6479,7 @@ func (obj *FabricStatefulServiceUpdateDescription) toInnerStruct() *innerFabricS
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricStatefulServiceUpdateDescription{}
+	dst := &innerFabricStatefulServiceUpdateDescription{}
 	dst.Flags = obj.Flags
 	dst.TargetReplicaSetSize = obj.TargetReplicaSetSize
 	dst.ReplicaRestartWaitDurationSeconds = obj.ReplicaRestartWaitDurationSeconds
@@ -6460,7 +6577,7 @@ func (obj *FabricStatefulServiceUpdateDescription) toInnerStruct() *innerFabricS
 
 	}
 	ex4.Reserved = unsafe.Pointer(ex5)
-	return &dst
+	return dst
 }
 
 type innerFabricStatefulServiceUpdateDescription struct {
@@ -6634,12 +6751,12 @@ func (obj *FabricResolvedServiceEndpoint) toInnerStruct() *innerFabricResolvedSe
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricResolvedServiceEndpoint{}
+	dst := &innerFabricResolvedServiceEndpoint{}
 	s_112, _ := windows.UTF16PtrFromString(obj.Address)
 	dst.Address = s_112
 
 	dst.Role = obj.Role
-	return &dst
+	return dst
 }
 
 type innerFabricResolvedServiceEndpoint struct {
@@ -6668,7 +6785,7 @@ func (obj *FabricResolvedServicePartition) toInnerStruct() *innerFabricResolvedS
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricResolvedServicePartition{}
+	dst := &innerFabricResolvedServicePartition{}
 	dst.Info = *obj.Info.toInnerStruct()
 	{
 
@@ -6691,7 +6808,7 @@ func (obj *FabricResolvedServicePartition) toInnerStruct() *innerFabricResolvedS
 	s_113, _ := windows.UTF16PtrFromString(obj.ServiceName)
 	dst.ServiceName = s_113
 
-	return &dst
+	return dst
 }
 
 type innerFabricResolvedServicePartition struct {
@@ -6736,7 +6853,7 @@ func (obj *FabricServiceNotification) toInnerStruct() *innerFabricServiceNotific
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceNotification{}
+	dst := &innerFabricServiceNotification{}
 	s_114, _ := windows.UTF16PtrFromString(obj.ServiceName)
 	dst.ServiceName = s_114
 
@@ -6760,7 +6877,7 @@ func (obj *FabricServiceNotification) toInnerStruct() *innerFabricServiceNotific
 
 	}
 	dst.PartitionInfo = obj.PartitionInfo.toInnerStruct()
-	return &dst
+	return dst
 }
 
 type innerFabricServiceNotification struct {
@@ -6805,12 +6922,12 @@ func (obj *FabricServiceNotificationFilterDescription) toInnerStruct() *innerFab
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceNotificationFilterDescription{}
+	dst := &innerFabricServiceNotificationFilterDescription{}
 	s_115, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_115
 
 	dst.Flags = obj.Flags
-	return &dst
+	return dst
 }
 
 type innerFabricServiceNotificationFilterDescription struct {
@@ -6838,14 +6955,14 @@ func (obj *FabricApplicationParameter) toInnerStruct() *innerFabricApplicationPa
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationParameter{}
+	dst := &innerFabricApplicationParameter{}
 	s_116, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_116
 
 	s_117, _ := windows.UTF16PtrFromString(obj.Value)
 	dst.Value = s_117
 
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationParameter struct {
@@ -6928,7 +7045,7 @@ func (obj *FabricApplicationDescription) toInnerStruct() *innerFabricApplication
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationDescription{}
+	dst := &innerFabricApplicationDescription{}
 	s_119, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_119
 
@@ -6962,7 +7079,7 @@ func (obj *FabricApplicationDescription) toInnerStruct() *innerFabricApplication
 	ex1 := &innerFabricApplicationDescriptionEx1{}
 	ex1.ApplicationCapacity = obj.ApplicationCapacity.toInnerStruct()
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationDescription struct {
@@ -7018,14 +7135,14 @@ func (obj *FabricApplicationMetricDescription) toInnerStruct() *innerFabricAppli
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationMetricDescription{}
+	dst := &innerFabricApplicationMetricDescription{}
 	s_123, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_123
 
 	dst.NodeReservationCapacity = obj.NodeReservationCapacity
 	dst.MaximumNodeCapacity = obj.MaximumNodeCapacity
 	dst.TotalApplicationCapacity = obj.TotalApplicationCapacity
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationMetricDescription struct {
@@ -7081,7 +7198,7 @@ func (obj *FabricApplicationCapacityDescription) toInnerStruct() *innerFabricApp
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationCapacityDescription{}
+	dst := &innerFabricApplicationCapacityDescription{}
 	dst.MaximumNodes = obj.MaximumNodes
 	dst.MinimumNodes = obj.MinimumNodes
 	lst_124 := &innerFabricApplicationMetricList{}
@@ -7104,7 +7221,7 @@ func (obj *FabricApplicationCapacityDescription) toInnerStruct() *innerFabricApp
 
 	}
 	dst.Metrics = lst_124
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationCapacityDescription struct {
@@ -7150,7 +7267,7 @@ func (obj *FabricApplicationUpdateDescription) toInnerStruct() *innerFabricAppli
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationUpdateDescription{}
+	dst := &innerFabricApplicationUpdateDescription{}
 	dst.Flags = obj.Flags
 	s_125, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_125
@@ -7178,7 +7295,7 @@ func (obj *FabricApplicationUpdateDescription) toInnerStruct() *innerFabricAppli
 
 	}
 	dst.Metrics = lst_126
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationUpdateDescription struct {
@@ -7232,7 +7349,7 @@ func (obj *FabricRollingUpgradePolicyDescription) toInnerStruct() *innerFabricRo
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricRollingUpgradePolicyDescription{}
+	dst := &innerFabricRollingUpgradePolicyDescription{}
 	dst.RollingUpgradeMode = obj.RollingUpgradeMode
 	dst.ForceRestart = obj.ForceRestart
 	dst.UpgradeReplicaSetCheckTimeoutInSeconds = obj.UpgradeReplicaSetCheckTimeoutInSeconds
@@ -7270,7 +7387,7 @@ func (obj *FabricRollingUpgradePolicyDescription) toInnerStruct() *innerFabricRo
 		ex3.ApplicationHealthPolicyMap = mapobj
 	}
 	ex2.Reserved = unsafe.Pointer(ex3)
-	return &dst
+	return dst
 }
 
 type innerFabricRollingUpgradePolicyDescription struct {
@@ -7354,7 +7471,7 @@ func (obj *FabricRollingUpgradeMonitoringPolicy) toInnerStruct() *innerFabricRol
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricRollingUpgradeMonitoringPolicy{}
+	dst := &innerFabricRollingUpgradeMonitoringPolicy{}
 	dst.FailureAction = obj.FailureAction
 	dst.HealthCheckWaitDurationInSeconds = obj.HealthCheckWaitDurationInSeconds
 	dst.HealthCheckRetryTimeoutInSeconds = obj.HealthCheckRetryTimeoutInSeconds
@@ -7364,7 +7481,7 @@ func (obj *FabricRollingUpgradeMonitoringPolicy) toInnerStruct() *innerFabricRol
 	ex1 := &innerFabricRollingUpgradeMonitoringPolicyEx1{}
 	ex1.HealthCheckStableDurationInSeconds = obj.HealthCheckStableDurationInSeconds
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricRollingUpgradeMonitoringPolicy struct {
@@ -7411,7 +7528,7 @@ func (obj *FabricApplicationUpgradeDescription) toInnerStruct() *innerFabricAppl
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationUpgradeDescription{}
+	dst := &innerFabricApplicationUpgradeDescription{}
 	s_130, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_130
 
@@ -7440,7 +7557,7 @@ func (obj *FabricApplicationUpgradeDescription) toInnerStruct() *innerFabricAppl
 	dst.ApplicationParameters = lst_132
 	dst.UpgradeKind = obj.UpgradeKind
 	dst.UpgradePolicyDescription = toUnsafePointer(obj.UpgradePolicyDescription)
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationUpgradeDescription struct {
@@ -7488,14 +7605,14 @@ func (obj *FabricApplicationUpgradeUpdateDescription) toInnerStruct() *innerFabr
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationUpgradeUpdateDescription{}
+	dst := &innerFabricApplicationUpgradeUpdateDescription{}
 	s_133, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_133
 
 	dst.UpgradeKind = obj.UpgradeKind
 	dst.UpdateFlags = obj.UpdateFlags
 	dst.UpgradePolicyDescription = toUnsafePointer(obj.UpgradePolicyDescription)
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationUpgradeUpdateDescription struct {
@@ -7529,7 +7646,7 @@ func (obj *FabricUpgradeDescription) toInnerStruct() *innerFabricUpgradeDescript
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricUpgradeDescription{}
+	dst := &innerFabricUpgradeDescription{}
 	s_134, _ := windows.UTF16PtrFromString(obj.CodeVersion)
 	dst.CodeVersion = s_134
 
@@ -7538,7 +7655,7 @@ func (obj *FabricUpgradeDescription) toInnerStruct() *innerFabricUpgradeDescript
 
 	dst.UpgradeKind = obj.UpgradeKind
 	dst.UpgradePolicyDescription = toUnsafePointer(obj.UpgradePolicyDescription)
-	return &dst
+	return dst
 }
 
 type innerFabricUpgradeDescription struct {
@@ -7571,11 +7688,11 @@ func (obj *FabricUpgradeUpdateDescription) toInnerStruct() *innerFabricUpgradeUp
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricUpgradeUpdateDescription{}
+	dst := &innerFabricUpgradeUpdateDescription{}
 	dst.UpgradeKind = obj.UpgradeKind
 	dst.UpdateFlags = obj.UpdateFlags
 	dst.UpgradePolicyDescription = toUnsafePointer(obj.UpgradePolicyDescription)
-	return &dst
+	return dst
 }
 
 type innerFabricUpgradeUpdateDescription struct {
@@ -7607,7 +7724,7 @@ func (obj *FabricServiceGroupMemberDescription) toInnerStruct() *innerFabricServ
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceGroupMemberDescription{}
+	dst := &innerFabricServiceGroupMemberDescription{}
 	s_136, _ := windows.UTF16PtrFromString(obj.ServiceType)
 	dst.ServiceType = s_136
 
@@ -7650,7 +7767,7 @@ func (obj *FabricServiceGroupMemberDescription) toInnerStruct() *innerFabricServ
 		}
 
 	}
-	return &dst
+	return dst
 }
 
 type innerFabricServiceGroupMemberDescription struct {
@@ -7754,7 +7871,7 @@ func (obj *FabricKeyValueStoreItemMetadata) toInnerStruct() *innerFabricKeyValue
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricKeyValueStoreItemMetadata{}
+	dst := &innerFabricKeyValueStoreItemMetadata{}
 	s_138, _ := windows.UTF16PtrFromString(obj.Key)
 	dst.Key = s_138
 
@@ -7765,7 +7882,7 @@ func (obj *FabricKeyValueStoreItemMetadata) toInnerStruct() *innerFabricKeyValue
 	ex1 := &innerFabricKeyValueStoreItemMetadataEx1{}
 	ex1.LastModifiedOnPrimaryUtc = windows.NsecToFiletime(obj.LastModifiedOnPrimaryUtc.UnixNano())
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricKeyValueStoreItemMetadata struct {
@@ -7850,13 +7967,13 @@ func (obj *FabricKeyValueStoreRestoreSettings) toInnerStruct() *innerFabricKeyVa
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricKeyValueStoreRestoreSettings{}
+	dst := &innerFabricKeyValueStoreRestoreSettings{}
 	dst.InlineReopen = obj.InlineReopen
 	ex0 := dst
 	ex1 := &innerFabricKeyValueStoreRestoreSettingsEx1{}
 	ex1.EnableLsnCheck = obj.EnableLsnCheck
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricKeyValueStoreRestoreSettings struct {
@@ -7895,7 +8012,7 @@ func (obj *FabricKeyValueStoreReplicaSettings) toInnerStruct() *innerFabricKeyVa
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricKeyValueStoreReplicaSettings{}
+	dst := &innerFabricKeyValueStoreReplicaSettings{}
 	dst.TransactionDrainTimeoutInSeconds = obj.TransactionDrainTimeoutInSeconds
 	dst.SecondaryNotificationMode = obj.SecondaryNotificationMode
 	ex0 := dst
@@ -7908,7 +8025,7 @@ func (obj *FabricKeyValueStoreReplicaSettings) toInnerStruct() *innerFabricKeyVa
 	ex3 := &innerFabricKeyValueStoreReplicaSettingsEx3{}
 	ex3.LogTruncationIntervalInMinutes = obj.LogTruncationIntervalInMinutes
 	ex2.Reserved = unsafe.Pointer(ex3)
-	return &dst
+	return dst
 }
 
 type innerFabricKeyValueStoreReplicaSettings struct {
@@ -7976,7 +8093,7 @@ func (obj *FabricEseLocalStoreSettings) toInnerStruct() *innerFabricEseLocalStor
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricEseLocalStoreSettings{}
+	dst := &innerFabricEseLocalStoreSettings{}
 	s_139, _ := windows.UTF16PtrFromString(obj.DbFolderPath)
 	dst.DbFolderPath = s_139
 
@@ -8006,7 +8123,7 @@ func (obj *FabricEseLocalStoreSettings) toInnerStruct() *innerFabricEseLocalStor
 	ex6 := &innerFabricEseLocalStoreSettingsEx6{}
 	ex6.EnableOverwriteOnUpdate = obj.EnableOverwriteOnUpdate
 	ex5.Reserved = unsafe.Pointer(ex6)
-	return &dst
+	return dst
 }
 
 type innerFabricEseLocalStoreSettings struct {
@@ -8104,7 +8221,7 @@ func (obj *FabricNodeContext) toInnerStruct() *innerFabricNodeContext {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNodeContext{}
+	dst := &innerFabricNodeContext{}
 	s_140, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_140
 
@@ -8116,7 +8233,7 @@ func (obj *FabricNodeContext) toInnerStruct() *innerFabricNodeContext {
 
 	dst.NodeInstanceId = obj.NodeInstanceId
 	dst.NodeId = *obj.NodeId.toInnerStruct()
-	return &dst
+	return dst
 }
 
 type innerFabricNodeContext struct {
@@ -8161,7 +8278,7 @@ func (obj *FabricClientSettings) toInnerStruct() *innerFabricClientSettings {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricClientSettings{}
+	dst := &innerFabricClientSettings{}
 	dst.PartitionLocationCacheLimit = obj.PartitionLocationCacheLimit
 	dst.ServiceChangePollIntervalInSeconds = obj.ServiceChangePollIntervalInSeconds
 	dst.ConnectionInitializationTimeoutInSeconds = obj.ConnectionInitializationTimeoutInSeconds
@@ -8186,7 +8303,7 @@ func (obj *FabricClientSettings) toInnerStruct() *innerFabricClientSettings {
 	ex4 := &innerFabricClientSettingsEx4{}
 	ex4.ConnectionIdleTimeoutInSeconds = obj.ConnectionIdleTimeoutInSeconds
 	ex3.Reserved = unsafe.Pointer(ex4)
-	return &dst
+	return dst
 }
 
 type innerFabricClientSettings struct {
@@ -8265,12 +8382,12 @@ func (obj *FabricQueryPagingDescription) toInnerStruct() *innerFabricQueryPaging
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricQueryPagingDescription{}
+	dst := &innerFabricQueryPagingDescription{}
 	s_144, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
 	dst.ContinuationToken = s_144
 
 	dst.MaxResults = obj.MaxResults
-	return &dst
+	return dst
 }
 
 type innerFabricQueryPagingDescription struct {
@@ -8297,11 +8414,11 @@ func (obj *FabricClusterManifestQueryDescription) toInnerStruct() *innerFabricCl
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricClusterManifestQueryDescription{}
+	dst := &innerFabricClusterManifestQueryDescription{}
 	s_145, _ := windows.UTF16PtrFromString(obj.ClusterManifestVersion)
 	dst.ClusterManifestVersion = s_145
 
-	return &dst
+	return dst
 }
 
 type innerFabricClusterManifestQueryDescription struct {
@@ -8329,7 +8446,7 @@ func (obj *FabricNodeQueryDescription) toInnerStruct() *innerFabricNodeQueryDesc
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNodeQueryDescription{}
+	dst := &innerFabricNodeQueryDescription{}
 	s_146, _ := windows.UTF16PtrFromString(obj.NodeNameFilter)
 	dst.NodeNameFilter = s_146
 
@@ -8345,7 +8462,7 @@ func (obj *FabricNodeQueryDescription) toInnerStruct() *innerFabricNodeQueryDesc
 	ex3 := &innerFabricNodeQueryDescriptionEx3{}
 	ex3.MaxResults = obj.MaxResults
 	ex2.Reserved = unsafe.Pointer(ex3)
-	return &dst
+	return dst
 }
 
 type innerFabricNodeQueryDescription struct {
@@ -8415,7 +8532,7 @@ func (obj *FabricNodeQueryResultItem) toInnerStruct() *innerFabricNodeQueryResul
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNodeQueryResultItem{}
+	dst := &innerFabricNodeQueryResultItem{}
 	s_148, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_148
 
@@ -8461,7 +8578,7 @@ func (obj *FabricNodeQueryResultItem) toInnerStruct() *innerFabricNodeQueryResul
 	ex6.NodeUpAt = windows.NsecToFiletime(obj.NodeUpAt.UnixNano())
 	ex6.NodeDownAt = windows.NsecToFiletime(obj.NodeDownAt.UnixNano())
 	ex5.Reserved = unsafe.Pointer(ex6)
-	return &dst
+	return dst
 }
 
 type innerFabricNodeQueryResultItem struct {
@@ -8564,12 +8681,12 @@ func (obj *FabricNodeDeactivationTaskId) toInnerStruct() *innerFabricNodeDeactiv
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNodeDeactivationTaskId{}
+	dst := &innerFabricNodeDeactivationTaskId{}
 	s_155, _ := windows.UTF16PtrFromString(obj.Id)
 	dst.Id = s_155
 
 	dst.Type = obj.Type
-	return &dst
+	return dst
 }
 
 type innerFabricNodeDeactivationTaskId struct {
@@ -8644,7 +8761,7 @@ func (obj *FabricNodeDeactivationQueryResultItem) toInnerStruct() *innerFabricNo
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNodeDeactivationQueryResultItem{}
+	dst := &innerFabricNodeDeactivationQueryResultItem{}
 	dst.EffectiveIntent = obj.EffectiveIntent
 	dst.Status = obj.Status
 	lst_156 := &innerFabricNodeDeactivationTaskList{}
@@ -8690,7 +8807,7 @@ func (obj *FabricNodeDeactivationQueryResultItem) toInnerStruct() *innerFabricNo
 	}
 	ex1.PendingSafetyChecks = lst_157
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricNodeDeactivationQueryResultItem struct {
@@ -8749,21 +8866,30 @@ type FabricSafetyCheck struct {
 	Kind  FabricSafetyCheckKind
 	Value interface{}
 }
-type innerFabricSafetyCheck struct {
-	FabricSafetyCheck
-}
 
-func (obj *innerFabricSafetyCheck) toGoStruct() *FabricSafetyCheck {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricSafetyCheck
-}
 func (obj *FabricSafetyCheck) toInnerStruct() *innerFabricSafetyCheck {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricSafetyCheck{*obj}
+	dst := &innerFabricSafetyCheck{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricSafetyCheck struct {
+	Kind  FabricSafetyCheckKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricSafetyCheck) toGoStruct() (dst *FabricSafetyCheck) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricSafetyCheck{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricPartitionSafetyCheck struct {
@@ -8861,11 +8987,11 @@ func (obj *FabricApplicationTypeQueryDescription) toInnerStruct() *innerFabricAp
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationTypeQueryDescription{}
+	dst := &innerFabricApplicationTypeQueryDescription{}
 	s_158, _ := windows.UTF16PtrFromString(obj.ApplicationTypeNameFilter)
 	dst.ApplicationTypeNameFilter = s_158
 
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationTypeQueryDescription struct {
@@ -8895,7 +9021,7 @@ func (obj *PagedFabricApplicationTypeQueryDescription) toInnerStruct() *innerPag
 	if obj == nil {
 		return nil
 	}
-	dst := innerPagedFabricApplicationTypeQueryDescription{}
+	dst := &innerPagedFabricApplicationTypeQueryDescription{}
 	s_159, _ := windows.UTF16PtrFromString(obj.ApplicationTypeNameFilter)
 	dst.ApplicationTypeNameFilter = s_159
 
@@ -8913,7 +9039,7 @@ func (obj *PagedFabricApplicationTypeQueryDescription) toInnerStruct() *innerPag
 	ex2 := &innerPagedFabricApplicationTypeQueryDescriptionEx2{}
 	ex2.ApplicationTypeDefinitionKindFilter = obj.ApplicationTypeDefinitionKindFilter
 	ex1.Reserved = unsafe.Pointer(ex2)
-	return &dst
+	return dst
 }
 
 type innerPagedFabricApplicationTypeQueryDescription struct {
@@ -8968,7 +9094,7 @@ func (obj *FabricApplicationTypeQueryResultItem) toInnerStruct() *innerFabricApp
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationTypeQueryResultItem{}
+	dst := &innerFabricApplicationTypeQueryResultItem{}
 	s_162, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
 	dst.ApplicationTypeName = s_162
 
@@ -9005,7 +9131,7 @@ func (obj *FabricApplicationTypeQueryResultItem) toInnerStruct() *innerFabricApp
 	ex2 := &innerFabricApplicationTypeQueryResultItemEx2{}
 	ex2.ApplicationTypeDefinitionKind = obj.ApplicationTypeDefinitionKind
 	ex1.Reserved = unsafe.Pointer(ex2)
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationTypeQueryResultItem struct {
@@ -9092,7 +9218,7 @@ func (obj *FabricServiceTypeQueryDescription) toInnerStruct() *innerFabricServic
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceTypeQueryDescription{}
+	dst := &innerFabricServiceTypeQueryDescription{}
 	s_166, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
 	dst.ApplicationTypeName = s_166
 
@@ -9102,7 +9228,7 @@ func (obj *FabricServiceTypeQueryDescription) toInnerStruct() *innerFabricServic
 	s_168, _ := windows.UTF16PtrFromString(obj.ServiceTypeNameFilter)
 	dst.ServiceTypeNameFilter = s_168
 
-	return &dst
+	return dst
 }
 
 type innerFabricServiceTypeQueryDescription struct {
@@ -9133,7 +9259,7 @@ func (obj *FabricServiceGroupMemberTypeQueryDescription) toInnerStruct() *innerF
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceGroupMemberTypeQueryDescription{}
+	dst := &innerFabricServiceGroupMemberTypeQueryDescription{}
 	s_169, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
 	dst.ApplicationTypeName = s_169
 
@@ -9143,7 +9269,7 @@ func (obj *FabricServiceGroupMemberTypeQueryDescription) toInnerStruct() *innerF
 	s_171, _ := windows.UTF16PtrFromString(obj.ServiceGroupTypeNameFilter)
 	dst.ServiceGroupTypeNameFilter = s_171
 
-	return &dst
+	return dst
 }
 
 type innerFabricServiceGroupMemberTypeQueryDescription struct {
@@ -9175,7 +9301,7 @@ func (obj *FabricServiceTypeQueryResultItem) toInnerStruct() *innerFabricService
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceTypeQueryResultItem{}
+	dst := &innerFabricServiceTypeQueryResultItem{}
 	dst.ServiceTypeDescription = obj.ServiceTypeDescription.toInnerStruct()
 	s_172, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
 	dst.ServiceManifestVersion = s_172
@@ -9189,7 +9315,7 @@ func (obj *FabricServiceTypeQueryResultItem) toInnerStruct() *innerFabricService
 	ex2 := &innerFabricServiceTypeQueryResultItemEx2{}
 	ex2.IsServiceGroup = obj.IsServiceGroup
 	ex1.Reserved = unsafe.Pointer(ex2)
-	return &dst
+	return dst
 }
 
 type innerFabricServiceTypeQueryResultItem struct {
@@ -9260,7 +9386,7 @@ func (obj *FabricServiceGroupMemberTypeQueryResultItem) toInnerStruct() *innerFa
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceGroupMemberTypeQueryResultItem{}
+	dst := &innerFabricServiceGroupMemberTypeQueryResultItem{}
 	lst_174 := &innerFabricServiceGroupTypeMemberDescriptionList{}
 	{
 
@@ -9287,7 +9413,7 @@ func (obj *FabricServiceGroupMemberTypeQueryResultItem) toInnerStruct() *innerFa
 	s_176, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
 	dst.ServiceManifestName = s_176
 
-	return &dst
+	return dst
 }
 
 type innerFabricServiceGroupMemberTypeQueryResultItem struct {
@@ -9356,7 +9482,7 @@ func (obj *FabricApplicationQueryDescription) toInnerStruct() *innerFabricApplic
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationQueryDescription{}
+	dst := &innerFabricApplicationQueryDescription{}
 	s_177, _ := windows.UTF16PtrFromString(obj.ApplicationNameFilter)
 	dst.ApplicationNameFilter = s_177
 
@@ -9378,7 +9504,7 @@ func (obj *FabricApplicationQueryDescription) toInnerStruct() *innerFabricApplic
 	ex4 := &innerFabricApplicationQueryDescriptionEx4{}
 	ex4.MaxResults = obj.MaxResults
 	ex3.Reserved = unsafe.Pointer(ex4)
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationQueryDescription struct {
@@ -9450,7 +9576,7 @@ func (obj *FabricApplicationQueryResultItem) toInnerStruct() *innerFabricApplica
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationQueryResultItem{}
+	dst := &innerFabricApplicationQueryResultItem{}
 	s_180, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_180
 
@@ -9511,7 +9637,7 @@ func (obj *FabricApplicationQueryResultItem) toInnerStruct() *innerFabricApplica
 	ex2 := &innerFabricApplicationQueryResultItemEx2{}
 	ex2.ApplicationDefinitionKind = obj.ApplicationDefinitionKind
 	ex1.Reserved = unsafe.Pointer(ex2)
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationQueryResultItem struct {
@@ -9618,7 +9744,7 @@ func (obj *FabricServiceQueryDescription) toInnerStruct() *innerFabricServiceQue
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceQueryDescription{}
+	dst := &innerFabricServiceQueryDescription{}
 	s_186, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_186
 
@@ -9639,7 +9765,7 @@ func (obj *FabricServiceQueryDescription) toInnerStruct() *innerFabricServiceQue
 	ex3 := &innerFabricServiceQueryDescriptionEx3{}
 	ex3.MaxResults = obj.MaxResults
 	ex2.Reserved = unsafe.Pointer(ex3)
-	return &dst
+	return dst
 }
 
 type innerFabricServiceQueryDescription struct {
@@ -9694,11 +9820,11 @@ func (obj *FabricSystemServiceQueryDescription) toInnerStruct() *innerFabricSyst
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricSystemServiceQueryDescription{}
+	dst := &innerFabricSystemServiceQueryDescription{}
 	s_190, _ := windows.UTF16PtrFromString(obj.SystemServiceNameFilter)
 	dst.SystemServiceNameFilter = s_190
 
-	return &dst
+	return dst
 }
 
 type innerFabricSystemServiceQueryDescription struct {
@@ -9719,21 +9845,30 @@ type FabricServiceQueryResultItem struct {
 	Kind  FabricServiceKind
 	Value interface{}
 }
-type innerFabricServiceQueryResultItem struct {
-	FabricServiceQueryResultItem
-}
 
-func (obj *innerFabricServiceQueryResultItem) toGoStruct() *FabricServiceQueryResultItem {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricServiceQueryResultItem
-}
 func (obj *FabricServiceQueryResultItem) toInnerStruct() *innerFabricServiceQueryResultItem {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricServiceQueryResultItem{*obj}
+	dst := &innerFabricServiceQueryResultItem{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricServiceQueryResultItem struct {
+	Kind  FabricServiceKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricServiceQueryResultItem) toGoStruct() (dst *FabricServiceQueryResultItem) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricServiceQueryResultItem{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type innerFabricServiceQueryResultList struct {
@@ -9772,7 +9907,7 @@ func (obj *FabricStatelessServiceQueryResultItem) toInnerStruct() *innerFabricSt
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricStatelessServiceQueryResultItem{}
+	dst := &innerFabricStatelessServiceQueryResultItem{}
 	s_191, _ := windows.UTF16PtrFromString(obj.ServiceName)
 	dst.ServiceName = s_191
 
@@ -9790,7 +9925,7 @@ func (obj *FabricStatelessServiceQueryResultItem) toInnerStruct() *innerFabricSt
 	ex2 := &innerFabricStatelessServiceQueryResultItemEx2{}
 	ex2.IsServiceGroup = obj.IsServiceGroup
 	ex1.Reserved = unsafe.Pointer(ex2)
-	return &dst
+	return dst
 }
 
 type innerFabricStatelessServiceQueryResultItem struct {
@@ -9846,7 +9981,7 @@ func (obj *FabricStatefulServiceQueryResultItem) toInnerStruct() *innerFabricSta
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricStatefulServiceQueryResultItem{}
+	dst := &innerFabricStatefulServiceQueryResultItem{}
 	s_194, _ := windows.UTF16PtrFromString(obj.ServiceName)
 	dst.ServiceName = s_194
 
@@ -9865,7 +10000,7 @@ func (obj *FabricStatefulServiceQueryResultItem) toInnerStruct() *innerFabricSta
 	ex2 := &innerFabricStatefulServiceQueryResultItemEx2{}
 	ex2.IsServiceGroup = obj.IsServiceGroup
 	ex1.Reserved = unsafe.Pointer(ex2)
-	return &dst
+	return dst
 }
 
 type innerFabricStatefulServiceQueryResultItem struct {
@@ -9918,14 +10053,14 @@ func (obj *FabricServiceGroupMemberQueryDescription) toInnerStruct() *innerFabri
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceGroupMemberQueryDescription{}
+	dst := &innerFabricServiceGroupMemberQueryDescription{}
 	s_197, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_197
 
 	s_198, _ := windows.UTF16PtrFromString(obj.ServiceNameFilter)
 	dst.ServiceNameFilter = s_198
 
-	return &dst
+	return dst
 }
 
 type innerFabricServiceGroupMemberQueryDescription struct {
@@ -9953,14 +10088,14 @@ func (obj *FabricServiceGroupMemberMemberQueryResultItem) toInnerStruct() *inner
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceGroupMemberMemberQueryResultItem{}
+	dst := &innerFabricServiceGroupMemberMemberQueryResultItem{}
 	s_199, _ := windows.UTF16PtrFromString(obj.ServiceType)
 	dst.ServiceType = s_199
 
 	s_200, _ := windows.UTF16PtrFromString(obj.ServiceName)
 	dst.ServiceName = s_200
 
-	return &dst
+	return dst
 }
 
 type innerFabricServiceGroupMemberMemberQueryResultItem struct {
@@ -10011,7 +10146,7 @@ func (obj *FabricServiceGroupMemberQueryResultItem) toInnerStruct() *innerFabric
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceGroupMemberQueryResultItem{}
+	dst := &innerFabricServiceGroupMemberQueryResultItem{}
 	s_201, _ := windows.UTF16PtrFromString(obj.ServiceName)
 	dst.ServiceName = s_201
 
@@ -10035,7 +10170,7 @@ func (obj *FabricServiceGroupMemberQueryResultItem) toInnerStruct() *innerFabric
 
 	}
 	dst.Members = lst_202
-	return &dst
+	return dst
 }
 
 type innerFabricServiceGroupMemberQueryResultItem struct {
@@ -10142,13 +10277,13 @@ func (obj *FabricUnplacedReplicaInformationQueryDescription) toInnerStruct() *in
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricUnplacedReplicaInformationQueryDescription{}
+	dst := &innerFabricUnplacedReplicaInformationQueryDescription{}
 	s_203, _ := windows.UTF16PtrFromString(obj.ServiceName)
 	dst.ServiceName = s_203
 
 	dst.PartitionId = obj.PartitionId
 	dst.OnlyQueryPrimaries = obj.OnlyQueryPrimaries
-	return &dst
+	return dst
 }
 
 type innerFabricUnplacedReplicaInformationQueryDescription struct {
@@ -10179,7 +10314,7 @@ func (obj *FabricServicePartitionQueryDescription) toInnerStruct() *innerFabricS
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServicePartitionQueryDescription{}
+	dst := &innerFabricServicePartitionQueryDescription{}
 	s_204, _ := windows.UTF16PtrFromString(obj.ServiceName)
 	dst.ServiceName = s_204
 
@@ -10190,7 +10325,7 @@ func (obj *FabricServicePartitionQueryDescription) toInnerStruct() *innerFabricS
 	ex1.ContinuationToken = s_205
 
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricServicePartitionQueryDescription struct {
@@ -10227,11 +10362,11 @@ func (obj *FabricNodeLoadInformationQueryDescription) toInnerStruct() *innerFabr
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNodeLoadInformationQueryDescription{}
+	dst := &innerFabricNodeLoadInformationQueryDescription{}
 	s_206, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_206
 
-	return &dst
+	return dst
 }
 
 type innerFabricNodeLoadInformationQueryDescription struct {
@@ -10256,11 +10391,11 @@ func (obj *FabricApplicationLoadInformationQueryDescription) toInnerStruct() *in
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationLoadInformationQueryDescription{}
+	dst := &innerFabricApplicationLoadInformationQueryDescription{}
 	s_207, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_207
 
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationLoadInformationQueryDescription struct {
@@ -10281,21 +10416,30 @@ type FabricServicePartitionQueryResultItem struct {
 	Kind  FabricServiceKind
 	Value interface{}
 }
-type innerFabricServicePartitionQueryResultItem struct {
-	FabricServicePartitionQueryResultItem
-}
 
-func (obj *innerFabricServicePartitionQueryResultItem) toGoStruct() *FabricServicePartitionQueryResultItem {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricServicePartitionQueryResultItem
-}
 func (obj *FabricServicePartitionQueryResultItem) toInnerStruct() *innerFabricServicePartitionQueryResultItem {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricServicePartitionQueryResultItem{*obj}
+	dst := &innerFabricServicePartitionQueryResultItem{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricServicePartitionQueryResultItem struct {
+	Kind  FabricServiceKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricServicePartitionQueryResultItem) toGoStruct() (dst *FabricServicePartitionQueryResultItem) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricServicePartitionQueryResultItem{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type innerFabricServicePartitionQueryResultList struct {
@@ -10359,7 +10503,7 @@ func (obj *FabricStatefulServicePartitionQueryResultItem) toInnerStruct() *inner
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricStatefulServicePartitionQueryResultItem{}
+	dst := &innerFabricStatefulServicePartitionQueryResultItem{}
 	dst.PartitionInformation = obj.PartitionInformation.toInnerStruct()
 	dst.TargetReplicaSetSize = obj.TargetReplicaSetSize
 	dst.MinReplicaSetSize = obj.MinReplicaSetSize
@@ -10370,7 +10514,7 @@ func (obj *FabricStatefulServicePartitionQueryResultItem) toInnerStruct() *inner
 	ex1 := &innerFabricStatefulServicePartitionQueryResultItemEx1{}
 	ex1.PrimaryEpoch = *obj.PrimaryEpoch.toInnerStruct()
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricStatefulServicePartitionQueryResultItem struct {
@@ -10418,7 +10562,7 @@ func (obj *FabricServiceReplicaQueryDescription) toInnerStruct() *innerFabricSer
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceReplicaQueryDescription{}
+	dst := &innerFabricServiceReplicaQueryDescription{}
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaIdOrInstanceIdFilter = obj.ReplicaIdOrInstanceIdFilter
 	ex0 := dst
@@ -10430,7 +10574,7 @@ func (obj *FabricServiceReplicaQueryDescription) toInnerStruct() *innerFabricSer
 	ex2.ContinuationToken = s_208
 
 	ex1.Reserved = unsafe.Pointer(ex2)
-	return &dst
+	return dst
 }
 
 type innerFabricServiceReplicaQueryDescription struct {
@@ -10472,21 +10616,30 @@ type FabricServiceReplicaQueryResultItem struct {
 	Kind  FabricServiceKind
 	Value interface{}
 }
-type innerFabricServiceReplicaQueryResultItem struct {
-	FabricServiceReplicaQueryResultItem
-}
 
-func (obj *innerFabricServiceReplicaQueryResultItem) toGoStruct() *FabricServiceReplicaQueryResultItem {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricServiceReplicaQueryResultItem
-}
 func (obj *FabricServiceReplicaQueryResultItem) toInnerStruct() *innerFabricServiceReplicaQueryResultItem {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricServiceReplicaQueryResultItem{*obj}
+	dst := &innerFabricServiceReplicaQueryResultItem{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricServiceReplicaQueryResultItem struct {
+	Kind  FabricServiceKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricServiceReplicaQueryResultItem) toGoStruct() (dst *FabricServiceReplicaQueryResultItem) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricServiceReplicaQueryResultItem{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type innerFabricServiceReplicaQueryResultList struct {
@@ -10526,7 +10679,7 @@ func (obj *FabricStatefulServiceReplicaQueryResultItem) toInnerStruct() *innerFa
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricStatefulServiceReplicaQueryResultItem{}
+	dst := &innerFabricStatefulServiceReplicaQueryResultItem{}
 	dst.ReplicaId = obj.ReplicaId
 	dst.ReplicaRole = obj.ReplicaRole
 	dst.ReplicaStatus = obj.ReplicaStatus
@@ -10538,7 +10691,7 @@ func (obj *FabricStatefulServiceReplicaQueryResultItem) toInnerStruct() *innerFa
 	dst.NodeName = s_210
 
 	dst.LastInBuildDurationInSeconds = obj.LastInBuildDurationInSeconds
-	return &dst
+	return dst
 }
 
 type innerFabricStatefulServiceReplicaQueryResultItem struct {
@@ -10580,7 +10733,7 @@ func (obj *FabricStatelessServiceInstanceQueryResultItem) toInnerStruct() *inner
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricStatelessServiceInstanceQueryResultItem{}
+	dst := &innerFabricStatelessServiceInstanceQueryResultItem{}
 	dst.InstanceId = obj.InstanceId
 	dst.ReplicaStatus = obj.ReplicaStatus
 	dst.AggregatedHealthState = obj.AggregatedHealthState
@@ -10591,7 +10744,7 @@ func (obj *FabricStatelessServiceInstanceQueryResultItem) toInnerStruct() *inner
 	dst.NodeName = s_212
 
 	dst.LastInBuildDurationInSeconds = obj.LastInBuildDurationInSeconds
-	return &dst
+	return dst
 }
 
 type innerFabricStatelessServiceInstanceQueryResultItem struct {
@@ -10627,14 +10780,14 @@ func (obj *FabricDeployedApplicationQueryDescription) toInnerStruct() *innerFabr
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedApplicationQueryDescription{}
+	dst := &innerFabricDeployedApplicationQueryDescription{}
 	s_213, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_213
 
 	s_214, _ := windows.UTF16PtrFromString(obj.ApplicationNameFilter)
 	dst.ApplicationNameFilter = s_214
 
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedApplicationQueryDescription struct {
@@ -10664,7 +10817,7 @@ func (obj *FabricPagedDeployedApplicationQueryDescription) toInnerStruct() *inne
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricPagedDeployedApplicationQueryDescription{}
+	dst := &innerFabricPagedDeployedApplicationQueryDescription{}
 	s_215, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_215
 
@@ -10673,7 +10826,7 @@ func (obj *FabricPagedDeployedApplicationQueryDescription) toInnerStruct() *inne
 
 	dst.IncludeHealthState = obj.IncludeHealthState
 	dst.PagingDescription = obj.PagingDescription.toInnerStruct()
-	return &dst
+	return dst
 }
 
 type innerFabricPagedDeployedApplicationQueryDescription struct {
@@ -10707,7 +10860,7 @@ func (obj *FabricDeployedApplicationQueryResultItem) toInnerStruct() *innerFabri
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedApplicationQueryResultItem{}
+	dst := &innerFabricDeployedApplicationQueryResultItem{}
 	s_217, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_217
 
@@ -10719,7 +10872,7 @@ func (obj *FabricDeployedApplicationQueryResultItem) toInnerStruct() *innerFabri
 	ex1 := &innerFabricDeployedApplicationQueryResultItemEx2{}
 	ex1.HealthState = obj.HealthState
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedApplicationQueryResultItem struct {
@@ -10760,7 +10913,7 @@ func (obj *FabricDeployedApplicationQueryResultItemEx) toInnerStruct() *innerFab
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedApplicationQueryResultItemEx{}
+	dst := &innerFabricDeployedApplicationQueryResultItemEx{}
 	s_219, _ := windows.UTF16PtrFromString(obj.WorkDirectory)
 	dst.WorkDirectory = s_219
 
@@ -10770,7 +10923,7 @@ func (obj *FabricDeployedApplicationQueryResultItemEx) toInnerStruct() *innerFab
 	s_221, _ := windows.UTF16PtrFromString(obj.TempDirectory)
 	dst.TempDirectory = s_221
 
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedApplicationQueryResultItemEx struct {
@@ -10824,7 +10977,7 @@ func (obj *FabricDeployedServicePackageQueryDescription) toInnerStruct() *innerF
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedServicePackageQueryDescription{}
+	dst := &innerFabricDeployedServicePackageQueryDescription{}
 	s_222, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_222
 
@@ -10834,7 +10987,7 @@ func (obj *FabricDeployedServicePackageQueryDescription) toInnerStruct() *innerF
 	s_224, _ := windows.UTF16PtrFromString(obj.ServiceManifestNameFilter)
 	dst.ServiceManifestNameFilter = s_224
 
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedServicePackageQueryDescription struct {
@@ -10866,7 +11019,7 @@ func (obj *FabricDeployedServicePackageQueryResultItem) toInnerStruct() *innerFa
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedServicePackageQueryResultItem{}
+	dst := &innerFabricDeployedServicePackageQueryResultItem{}
 	s_225, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
 	dst.ServiceManifestName = s_225
 
@@ -10880,7 +11033,7 @@ func (obj *FabricDeployedServicePackageQueryResultItem) toInnerStruct() *innerFa
 	ex1.ServicePackageActivationId = s_227
 
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedServicePackageQueryResultItem struct {
@@ -10945,7 +11098,7 @@ func (obj *FabricDeployedServiceTypeQueryDescription) toInnerStruct() *innerFabr
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedServiceTypeQueryDescription{}
+	dst := &innerFabricDeployedServiceTypeQueryDescription{}
 	s_228, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_228
 
@@ -10958,7 +11111,7 @@ func (obj *FabricDeployedServiceTypeQueryDescription) toInnerStruct() *innerFabr
 	s_231, _ := windows.UTF16PtrFromString(obj.ServiceTypeNameFilter)
 	dst.ServiceTypeNameFilter = s_231
 
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedServiceTypeQueryDescription struct {
@@ -10993,7 +11146,7 @@ func (obj *FabricDeployedServiceTypeQueryResultItem) toInnerStruct() *innerFabri
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedServiceTypeQueryResultItem{}
+	dst := &innerFabricDeployedServiceTypeQueryResultItem{}
 	s_232, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
 	dst.ServiceTypeName = s_232
 
@@ -11010,7 +11163,7 @@ func (obj *FabricDeployedServiceTypeQueryResultItem) toInnerStruct() *innerFabri
 	ex1.ServicePackageActivationId = s_235
 
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedServiceTypeQueryResultItem struct {
@@ -11084,7 +11237,7 @@ func (obj *FabricCodePackageEntryPointStatistics) toInnerStruct() *innerFabricCo
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricCodePackageEntryPointStatistics{}
+	dst := &innerFabricCodePackageEntryPointStatistics{}
 	dst.LastExitCode = obj.LastExitCode
 	dst.LastActivationUtc = windows.NsecToFiletime(obj.LastActivationUtc.UnixNano())
 	dst.LastExitUtc = windows.NsecToFiletime(obj.LastExitUtc.UnixNano())
@@ -11096,7 +11249,7 @@ func (obj *FabricCodePackageEntryPointStatistics) toInnerStruct() *innerFabricCo
 	dst.ExitCount = obj.ExitCount
 	dst.ExitFailureCount = obj.ExitFailureCount
 	dst.ContinuousExitFailureCount = obj.ContinuousExitFailureCount
-	return &dst
+	return dst
 }
 
 type innerFabricCodePackageEntryPointStatistics struct {
@@ -11147,7 +11300,7 @@ func (obj *FabricCodePackageEntryPoint) toInnerStruct() *innerFabricCodePackageE
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricCodePackageEntryPoint{}
+	dst := &innerFabricCodePackageEntryPoint{}
 	s_236, _ := windows.UTF16PtrFromString(obj.EntryPointLocation)
 	dst.EntryPointLocation = s_236
 
@@ -11162,7 +11315,7 @@ func (obj *FabricCodePackageEntryPoint) toInnerStruct() *innerFabricCodePackageE
 	ex1 := &innerFabricCodePackageEntryPointEx1{}
 	ex1.CodePackageInstanceId = obj.CodePackageInstanceId
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricCodePackageEntryPoint struct {
@@ -11210,7 +11363,7 @@ func (obj *FabricDeployedCodePackageQueryDescription) toInnerStruct() *innerFabr
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedCodePackageQueryDescription{}
+	dst := &innerFabricDeployedCodePackageQueryDescription{}
 	s_238, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_238
 
@@ -11223,7 +11376,7 @@ func (obj *FabricDeployedCodePackageQueryDescription) toInnerStruct() *innerFabr
 	s_241, _ := windows.UTF16PtrFromString(obj.CodePackageNameFilter)
 	dst.CodePackageNameFilter = s_241
 
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedCodePackageQueryDescription struct {
@@ -11263,7 +11416,7 @@ func (obj *FabricDeployedCodePackageQueryResultItem) toInnerStruct() *innerFabri
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedCodePackageQueryResultItem{}
+	dst := &innerFabricDeployedCodePackageQueryResultItem{}
 	s_242, _ := windows.UTF16PtrFromString(obj.CodePackageName)
 	dst.CodePackageName = s_242
 
@@ -11285,7 +11438,7 @@ func (obj *FabricDeployedCodePackageQueryResultItem) toInnerStruct() *innerFabri
 	ex1.HostType = obj.HostType
 	ex1.HostIsolationMode = obj.HostIsolationMode
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedCodePackageQueryResultItem struct {
@@ -11362,7 +11515,7 @@ func (obj *FabricDeployedServiceReplicaQueryDescription) toInnerStruct() *innerF
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedServiceReplicaQueryDescription{}
+	dst := &innerFabricDeployedServiceReplicaQueryDescription{}
 	s_246, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_246
 
@@ -11373,7 +11526,7 @@ func (obj *FabricDeployedServiceReplicaQueryDescription) toInnerStruct() *innerF
 	dst.ServiceManifestNameFilter = s_248
 
 	dst.PartitionIdFilter = obj.PartitionIdFilter
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedServiceReplicaQueryDescription struct {
@@ -11407,12 +11560,12 @@ func (obj *FabricReconfigurationInformationQueryResult) toInnerStruct() *innerFa
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricReconfigurationInformationQueryResult{}
+	dst := &innerFabricReconfigurationInformationQueryResult{}
 	dst.PreviousConfigurationRole = obj.PreviousConfigurationRole
 	dst.ReconfigurationPhase = obj.ReconfigurationPhase
 	dst.ReconfigurationType = obj.ReconfigurationType
 	dst.ReconfigurationStartTimeUtc = windows.NsecToFiletime(obj.ReconfigurationStartTimeUtc.UnixNano())
-	return &dst
+	return dst
 }
 
 type innerFabricReconfigurationInformationQueryResult struct {
@@ -11439,21 +11592,30 @@ type FabricDeployedServiceReplicaQueryResultItem struct {
 	Kind  FabricServiceKind
 	Value interface{}
 }
-type innerFabricDeployedServiceReplicaQueryResultItem struct {
-	FabricDeployedServiceReplicaQueryResultItem
-}
 
-func (obj *innerFabricDeployedServiceReplicaQueryResultItem) toGoStruct() *FabricDeployedServiceReplicaQueryResultItem {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricDeployedServiceReplicaQueryResultItem
-}
 func (obj *FabricDeployedServiceReplicaQueryResultItem) toInnerStruct() *innerFabricDeployedServiceReplicaQueryResultItem {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricDeployedServiceReplicaQueryResultItem{*obj}
+	dst := &innerFabricDeployedServiceReplicaQueryResultItem{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricDeployedServiceReplicaQueryResultItem struct {
+	Kind  FabricServiceKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricDeployedServiceReplicaQueryResultItem) toGoStruct() (dst *FabricDeployedServiceReplicaQueryResultItem) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricDeployedServiceReplicaQueryResultItem{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type innerFabricDeployedServiceReplicaQueryResultList struct {
@@ -11499,7 +11661,7 @@ func (obj *FabricDeployedStatefulServiceReplicaQueryResultItem) toInnerStruct() 
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedStatefulServiceReplicaQueryResultItem{}
+	dst := &innerFabricDeployedStatefulServiceReplicaQueryResultItem{}
 	s_249, _ := windows.UTF16PtrFromString(obj.ServiceName)
 	dst.ServiceName = s_249
 
@@ -11534,7 +11696,7 @@ func (obj *FabricDeployedStatefulServiceReplicaQueryResultItem) toInnerStruct() 
 	ex3.HostProcessId = obj.HostProcessId
 	ex3.ReconfigurationInformation = obj.ReconfigurationInformation.toInnerStruct()
 	ex2.Reserved = unsafe.Pointer(ex3)
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedStatefulServiceReplicaQueryResultItem struct {
@@ -11615,7 +11777,7 @@ func (obj *FabricDeployedStatelessServiceInstanceQueryResultItem) toInnerStruct(
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedStatelessServiceInstanceQueryResultItem{}
+	dst := &innerFabricDeployedStatelessServiceInstanceQueryResultItem{}
 	s_256, _ := windows.UTF16PtrFromString(obj.ServiceName)
 	dst.ServiceName = s_256
 
@@ -11648,7 +11810,7 @@ func (obj *FabricDeployedStatelessServiceInstanceQueryResultItem) toInnerStruct(
 	ex3 := &innerFabricDeployedStatelessServiceInstanceQueryResultItemEx3{}
 	ex3.HostProcessId = obj.HostProcessId
 	ex2.Reserved = unsafe.Pointer(ex3)
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedStatelessServiceInstanceQueryResultItem struct {
@@ -11718,7 +11880,7 @@ func (obj *FabricLoadMetricReport) toInnerStruct() *innerFabricLoadMetricReport 
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricLoadMetricReport{}
+	dst := &innerFabricLoadMetricReport{}
 	s_263, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_263
 
@@ -11728,7 +11890,7 @@ func (obj *FabricLoadMetricReport) toInnerStruct() *innerFabricLoadMetricReport 
 	ex1 := &innerFabricLoadMetricReportEx1{}
 	ex1.CurrentValue = obj.CurrentValue
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricLoadMetricReport struct {
@@ -11815,13 +11977,13 @@ func (obj *FabricDeployedServiceReplicaDetailQueryDescription) toInnerStruct() *
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedServiceReplicaDetailQueryDescription{}
+	dst := &innerFabricDeployedServiceReplicaDetailQueryDescription{}
 	s_264, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_264
 
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaId = obj.ReplicaId
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedServiceReplicaDetailQueryDescription struct {
@@ -11846,21 +12008,30 @@ type FabricDeployedServiceReplicaDetailQueryResultItem struct {
 	Kind  FabricServiceKind
 	Value interface{}
 }
-type innerFabricDeployedServiceReplicaDetailQueryResultItem struct {
-	FabricDeployedServiceReplicaDetailQueryResultItem
-}
 
-func (obj *innerFabricDeployedServiceReplicaDetailQueryResultItem) toGoStruct() *FabricDeployedServiceReplicaDetailQueryResultItem {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricDeployedServiceReplicaDetailQueryResultItem
-}
 func (obj *FabricDeployedServiceReplicaDetailQueryResultItem) toInnerStruct() *innerFabricDeployedServiceReplicaDetailQueryResultItem {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricDeployedServiceReplicaDetailQueryResultItem{*obj}
+	dst := &innerFabricDeployedServiceReplicaDetailQueryResultItem{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricDeployedServiceReplicaDetailQueryResultItem struct {
+	Kind  FabricServiceKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricDeployedServiceReplicaDetailQueryResultItem) toGoStruct() (dst *FabricDeployedServiceReplicaDetailQueryResultItem) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricDeployedServiceReplicaDetailQueryResultItem{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricDeployedStatelessServiceInstanceDetailQueryResultItem struct {
@@ -11877,7 +12048,7 @@ func (obj *FabricDeployedStatelessServiceInstanceDetailQueryResultItem) toInnerS
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedStatelessServiceInstanceDetailQueryResultItem{}
+	dst := &innerFabricDeployedStatelessServiceInstanceDetailQueryResultItem{}
 	s_265, _ := windows.UTF16PtrFromString(obj.ServiceName)
 	dst.ServiceName = s_265
 
@@ -11909,7 +12080,7 @@ func (obj *FabricDeployedStatelessServiceInstanceDetailQueryResultItem) toInnerS
 	ex1 := &innerFabricDeployedStatelessServiceInstanceDetailQueryResultItemEx1{}
 	ex1.DeployedServiceReplica = obj.DeployedServiceReplica.toInnerStruct()
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedStatelessServiceInstanceDetailQueryResultItem struct {
@@ -11972,7 +12143,7 @@ func (obj *FabricRemoteReplicatorStatus) toInnerStruct() *innerFabricRemoteRepli
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricRemoteReplicatorStatus{}
+	dst := &innerFabricRemoteReplicatorStatus{}
 	dst.ReplicaId = obj.ReplicaId
 	dst.LastAcknowledgementProcessedTimeUtc = windows.NsecToFiletime(obj.LastAcknowledgementProcessedTimeUtc.UnixNano())
 	dst.LastReceivedReplicationSequenceNumber = obj.LastReceivedReplicationSequenceNumber
@@ -11980,7 +12151,7 @@ func (obj *FabricRemoteReplicatorStatus) toInnerStruct() *innerFabricRemoteRepli
 	dst.IsInBuild = obj.IsInBuild
 	dst.LastReceivedCopySequenceNumber = obj.LastReceivedCopySequenceNumber
 	dst.LastAppliedCopySequenceNumber = obj.LastAppliedCopySequenceNumber
-	return &dst
+	return dst
 }
 
 type innerFabricRemoteReplicatorStatus struct {
@@ -12113,7 +12284,7 @@ func (obj *FabricPrimaryReplicatorStatusQueryResult) toInnerStruct() *innerFabri
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricPrimaryReplicatorStatusQueryResult{}
+	dst := &innerFabricPrimaryReplicatorStatusQueryResult{}
 	dst.ReplicationQueueStatus = obj.ReplicationQueueStatus.toInnerStruct()
 	lst_267 := &innerFabricRemoteReplicatorStatusList{}
 	{
@@ -12135,7 +12306,7 @@ func (obj *FabricPrimaryReplicatorStatusQueryResult) toInnerStruct() *innerFabri
 
 	}
 	dst.RemoteReplicators = lst_267
-	return &dst
+	return dst
 }
 
 type innerFabricPrimaryReplicatorStatusQueryResult struct {
@@ -12179,14 +12350,14 @@ func (obj *FabricSecondaryReplicatorStatusQueryResult) toInnerStruct() *innerFab
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricSecondaryReplicatorStatusQueryResult{}
+	dst := &innerFabricSecondaryReplicatorStatusQueryResult{}
 	dst.ReplicationQueueStatus = obj.ReplicationQueueStatus.toInnerStruct()
 	dst.LastReplicationOperationReceivedTimeUtc = windows.NsecToFiletime(obj.LastReplicationOperationReceivedTimeUtc.UnixNano())
 	dst.IsInBuild = obj.IsInBuild
 	dst.CopyQueueStatus = obj.CopyQueueStatus.toInnerStruct()
 	dst.LastCopyOperationReceivedTimeUtc = windows.NsecToFiletime(obj.LastCopyOperationReceivedTimeUtc.UnixNano())
 	dst.LastAcknowledgementSentTimeUtc = windows.NsecToFiletime(obj.LastAcknowledgementSentTimeUtc.UnixNano())
-	return &dst
+	return dst
 }
 
 type innerFabricSecondaryReplicatorStatusQueryResult struct {
@@ -12217,21 +12388,30 @@ type FabricReplicatorStatusQueryResult struct {
 	Role  FabricReplicaRole
 	Value interface{}
 }
-type innerFabricReplicatorStatusQueryResult struct {
-	FabricReplicatorStatusQueryResult
-}
 
-func (obj *innerFabricReplicatorStatusQueryResult) toGoStruct() *FabricReplicatorStatusQueryResult {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricReplicatorStatusQueryResult
-}
 func (obj *FabricReplicatorStatusQueryResult) toInnerStruct() *innerFabricReplicatorStatusQueryResult {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricReplicatorStatusQueryResult{*obj}
+	dst := &innerFabricReplicatorStatusQueryResult{}
+	dst.Role = obj.Role
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricReplicatorStatusQueryResult struct {
+	Role  FabricReplicaRole
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricReplicatorStatusQueryResult) toGoStruct() (dst *FabricReplicatorStatusQueryResult) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricReplicatorStatusQueryResult{}
+	dst.Role = obj.Role
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricReplicaStatusQueryResult struct {
@@ -12243,10 +12423,10 @@ func (obj *FabricReplicaStatusQueryResult) toInnerStruct() *innerFabricReplicaSt
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricReplicaStatusQueryResult{}
+	dst := &innerFabricReplicaStatusQueryResult{}
 	dst.Kind = obj.Kind
 	dst.Value = toUnsafePointer(obj.Value)
-	return &dst
+	return dst
 }
 
 type innerFabricReplicaStatusQueryResult struct {
@@ -12284,7 +12464,7 @@ func (obj *FabricDeployedStatefulServiceReplicaDetailQueryResultItem) toInnerStr
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedStatefulServiceReplicaDetailQueryResultItem{}
+	dst := &innerFabricDeployedStatefulServiceReplicaDetailQueryResultItem{}
 	s_268, _ := windows.UTF16PtrFromString(obj.ServiceName)
 	dst.ServiceName = s_268
 
@@ -12323,7 +12503,7 @@ func (obj *FabricDeployedStatefulServiceReplicaDetailQueryResultItem) toInnerStr
 	ex2 := &innerFabricDeployedStatefulServiceReplicaDetailQueryResultItemEx2{}
 	ex2.DeployedServiceReplica = obj.DeployedServiceReplica.toInnerStruct()
 	ex1.Reserved = unsafe.Pointer(ex2)
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedStatefulServiceReplicaDetailQueryResultItem struct {
@@ -12426,7 +12606,7 @@ func (obj *FabricKeyValueStoreStatusQueryResult) toInnerStruct() *innerFabricKey
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricKeyValueStoreStatusQueryResult{}
+	dst := &innerFabricKeyValueStoreStatusQueryResult{}
 	dst.DatabaseRowCountEstimate = obj.DatabaseRowCountEstimate
 	dst.DatabaseLogicalSizeEstimate = obj.DatabaseLogicalSizeEstimate
 	s_270, _ := windows.UTF16PtrFromString(obj.CopyNotificationCurrentKeyFilter)
@@ -12441,7 +12621,7 @@ func (obj *FabricKeyValueStoreStatusQueryResult) toInnerStruct() *innerFabricKey
 	ex1.ProviderKind = obj.ProviderKind
 	ex1.MigrationStatus = obj.MigrationStatus.toInnerStruct()
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricKeyValueStoreStatusQueryResult struct {
@@ -12486,11 +12666,11 @@ func (obj *FabricProvisionedCodeVersionQueryDescription) toInnerStruct() *innerF
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricProvisionedCodeVersionQueryDescription{}
+	dst := &innerFabricProvisionedCodeVersionQueryDescription{}
 	s_272, _ := windows.UTF16PtrFromString(obj.CodeVersionFilter)
 	dst.CodeVersionFilter = s_272
 
-	return &dst
+	return dst
 }
 
 type innerFabricProvisionedCodeVersionQueryDescription struct {
@@ -12515,11 +12695,11 @@ func (obj *FabricProvisionedCodeVersionQueryResultItem) toInnerStruct() *innerFa
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricProvisionedCodeVersionQueryResultItem{}
+	dst := &innerFabricProvisionedCodeVersionQueryResultItem{}
 	s_273, _ := windows.UTF16PtrFromString(obj.CodeVersion)
 	dst.CodeVersion = s_273
 
-	return &dst
+	return dst
 }
 
 type innerFabricProvisionedCodeVersionQueryResultItem struct {
@@ -12567,11 +12747,11 @@ func (obj *FabricProvisionedConfigVersionQueryDescription) toInnerStruct() *inne
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricProvisionedConfigVersionQueryDescription{}
+	dst := &innerFabricProvisionedConfigVersionQueryDescription{}
 	s_274, _ := windows.UTF16PtrFromString(obj.ConfigVersionFilter)
 	dst.ConfigVersionFilter = s_274
 
-	return &dst
+	return dst
 }
 
 type innerFabricProvisionedConfigVersionQueryDescription struct {
@@ -12596,11 +12776,11 @@ func (obj *FabricProvisionedConfigVersionQueryResultItem) toInnerStruct() *inner
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricProvisionedConfigVersionQueryResultItem{}
+	dst := &innerFabricProvisionedConfigVersionQueryResultItem{}
 	s_275, _ := windows.UTF16PtrFromString(obj.ConfigVersion)
 	dst.ConfigVersion = s_275
 
-	return &dst
+	return dst
 }
 
 type innerFabricProvisionedConfigVersionQueryResultItem struct {
@@ -12669,11 +12849,11 @@ func (obj *FabricServiceNameQueryResult) toInnerStruct() *innerFabricServiceName
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceNameQueryResult{}
+	dst := &innerFabricServiceNameQueryResult{}
 	s_276, _ := windows.UTF16PtrFromString(obj.ServiceName)
 	dst.ServiceName = s_276
 
-	return &dst
+	return dst
 }
 
 type innerFabricServiceNameQueryResult struct {
@@ -12698,11 +12878,11 @@ func (obj *FabricApplicationNameQueryDescription) toInnerStruct() *innerFabricAp
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationNameQueryDescription{}
+	dst := &innerFabricApplicationNameQueryDescription{}
 	s_277, _ := windows.UTF16PtrFromString(obj.ServiceName)
 	dst.ServiceName = s_277
 
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationNameQueryDescription struct {
@@ -12727,11 +12907,11 @@ func (obj *FabricApplicationNameQueryResult) toInnerStruct() *innerFabricApplica
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationNameQueryResult{}
+	dst := &innerFabricApplicationNameQueryResult{}
 	s_278, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_278
 
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationNameQueryResult struct {
@@ -12760,7 +12940,7 @@ func (obj *FabricRestartDeployedCodePackageDescription) toInnerStruct() *innerFa
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricRestartDeployedCodePackageDescription{}
+	dst := &innerFabricRestartDeployedCodePackageDescription{}
 	s_279, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_279
 
@@ -12774,7 +12954,7 @@ func (obj *FabricRestartDeployedCodePackageDescription) toInnerStruct() *innerFa
 	dst.CodePackageName = s_282
 
 	dst.CodePackageInstanceId = obj.CodePackageInstanceId
-	return &dst
+	return dst
 }
 
 type innerFabricRestartDeployedCodePackageDescription struct {
@@ -12809,7 +12989,7 @@ func (obj *FabricRestartNodeDescription) toInnerStruct() *innerFabricRestartNode
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricRestartNodeDescription{}
+	dst := &innerFabricRestartNodeDescription{}
 	s_283, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_283
 
@@ -12818,7 +12998,7 @@ func (obj *FabricRestartNodeDescription) toInnerStruct() *innerFabricRestartNode
 	ex1 := &innerFabricRestartNodeDescriptionEx1{}
 	ex1.CreateFabricDump = obj.CreateFabricDump
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricRestartNodeDescription struct {
@@ -12857,13 +13037,13 @@ func (obj *FabricRestartNodeDescriptionUsingNodeName) toInnerStruct() *innerFabr
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricRestartNodeDescriptionUsingNodeName{}
+	dst := &innerFabricRestartNodeDescriptionUsingNodeName{}
 	s_284, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_284
 
 	dst.NodeInstanceId = obj.NodeInstanceId
 	dst.ShouldCreateFabricDump = obj.ShouldCreateFabricDump
-	return &dst
+	return dst
 }
 
 type innerFabricRestartNodeDescriptionUsingNodeName struct {
@@ -12888,21 +13068,30 @@ type FabricRestartNodeDescription2 struct {
 	Kind  FabricRestartNodeDescriptionKind
 	Value interface{}
 }
-type innerFabricRestartNodeDescription2 struct {
-	FabricRestartNodeDescription2
-}
 
-func (obj *innerFabricRestartNodeDescription2) toGoStruct() *FabricRestartNodeDescription2 {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricRestartNodeDescription2
-}
 func (obj *FabricRestartNodeDescription2) toInnerStruct() *innerFabricRestartNodeDescription2 {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricRestartNodeDescription2{*obj}
+	dst := &innerFabricRestartNodeDescription2{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricRestartNodeDescription2 struct {
+	Kind  FabricRestartNodeDescriptionKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricRestartNodeDescription2) toGoStruct() (dst *FabricRestartNodeDescription2) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricRestartNodeDescription2{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricStopNodeDescription struct {
@@ -12914,12 +13103,12 @@ func (obj *FabricStopNodeDescription) toInnerStruct() *innerFabricStopNodeDescri
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricStopNodeDescription{}
+	dst := &innerFabricStopNodeDescription{}
 	s_285, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_285
 
 	dst.NodeInstanceId = obj.NodeInstanceId
-	return &dst
+	return dst
 }
 
 type innerFabricStopNodeDescription struct {
@@ -12949,7 +13138,7 @@ func (obj *FabricStartNodeDescription) toInnerStruct() *innerFabricStartNodeDesc
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricStartNodeDescription{}
+	dst := &innerFabricStartNodeDescription{}
 	s_286, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_286
 
@@ -12958,7 +13147,7 @@ func (obj *FabricStartNodeDescription) toInnerStruct() *innerFabricStartNodeDesc
 	dst.IPAddressOrFQDN = s_287
 
 	dst.ClusterConnectionPort = obj.ClusterConnectionPort
-	return &dst
+	return dst
 }
 
 type innerFabricStartNodeDescription struct {
@@ -12985,21 +13174,30 @@ type FabricStartNodeDescription2 struct {
 	Kind  FabricStartNodeDescriptionKind
 	Value interface{}
 }
-type innerFabricStartNodeDescription2 struct {
-	FabricStartNodeDescription2
-}
 
-func (obj *innerFabricStartNodeDescription2) toGoStruct() *FabricStartNodeDescription2 {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricStartNodeDescription2
-}
 func (obj *FabricStartNodeDescription2) toInnerStruct() *innerFabricStartNodeDescription2 {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricStartNodeDescription2{*obj}
+	dst := &innerFabricStartNodeDescription2{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricStartNodeDescription2 struct {
+	Kind  FabricStartNodeDescriptionKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricStartNodeDescription2) toGoStruct() (dst *FabricStartNodeDescription2) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricStartNodeDescription2{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricStartNodeDescriptionUsingNodeName struct {
@@ -13013,7 +13211,7 @@ func (obj *FabricStartNodeDescriptionUsingNodeName) toInnerStruct() *innerFabric
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricStartNodeDescriptionUsingNodeName{}
+	dst := &innerFabricStartNodeDescriptionUsingNodeName{}
 	s_288, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_288
 
@@ -13022,7 +13220,7 @@ func (obj *FabricStartNodeDescriptionUsingNodeName) toInnerStruct() *innerFabric
 	dst.IPAddressOrFQDN = s_289
 
 	dst.ClusterConnectionPort = obj.ClusterConnectionPort
-	return &dst
+	return dst
 }
 
 type innerFabricStartNodeDescriptionUsingNodeName struct {
@@ -13049,21 +13247,30 @@ type FabricStopNodeDescription2 struct {
 	Kind  FabricStopNodeDescriptionKind
 	Value interface{}
 }
-type innerFabricStopNodeDescription2 struct {
-	FabricStopNodeDescription2
-}
 
-func (obj *innerFabricStopNodeDescription2) toGoStruct() *FabricStopNodeDescription2 {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricStopNodeDescription2
-}
 func (obj *FabricStopNodeDescription2) toInnerStruct() *innerFabricStopNodeDescription2 {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricStopNodeDescription2{*obj}
+	dst := &innerFabricStopNodeDescription2{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricStopNodeDescription2 struct {
+	Kind  FabricStopNodeDescriptionKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricStopNodeDescription2) toGoStruct() (dst *FabricStopNodeDescription2) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricStopNodeDescription2{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricStopNodeDescriptionUsingNodeName struct {
@@ -13075,12 +13282,12 @@ func (obj *FabricStopNodeDescriptionUsingNodeName) toInnerStruct() *innerFabricS
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricStopNodeDescriptionUsingNodeName{}
+	dst := &innerFabricStopNodeDescriptionUsingNodeName{}
 	s_290, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_290
 
 	dst.NodeInstanceId = obj.NodeInstanceId
-	return &dst
+	return dst
 }
 
 type innerFabricStopNodeDescriptionUsingNodeName struct {
@@ -13103,21 +13310,30 @@ type FabricRestartDeployedCodePackageDescription2 struct {
 	Kind  FabricRestartDeployedCodePackageDescriptionKind
 	Value interface{}
 }
-type innerFabricRestartDeployedCodePackageDescription2 struct {
-	FabricRestartDeployedCodePackageDescription2
-}
 
-func (obj *innerFabricRestartDeployedCodePackageDescription2) toGoStruct() *FabricRestartDeployedCodePackageDescription2 {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricRestartDeployedCodePackageDescription2
-}
 func (obj *FabricRestartDeployedCodePackageDescription2) toInnerStruct() *innerFabricRestartDeployedCodePackageDescription2 {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricRestartDeployedCodePackageDescription2{*obj}
+	dst := &innerFabricRestartDeployedCodePackageDescription2{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricRestartDeployedCodePackageDescription2 struct {
+	Kind  FabricRestartDeployedCodePackageDescriptionKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricRestartDeployedCodePackageDescription2) toGoStruct() (dst *FabricRestartDeployedCodePackageDescription2) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricRestartDeployedCodePackageDescription2{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricRestartDeployedCodePackageDescriptionUsingNodeName struct {
@@ -13133,7 +13349,7 @@ func (obj *FabricRestartDeployedCodePackageDescriptionUsingNodeName) toInnerStru
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricRestartDeployedCodePackageDescriptionUsingNodeName{}
+	dst := &innerFabricRestartDeployedCodePackageDescriptionUsingNodeName{}
 	s_291, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_291
 
@@ -13153,7 +13369,7 @@ func (obj *FabricRestartDeployedCodePackageDescriptionUsingNodeName) toInnerStru
 	ex1.ServicePackageActivationId = s_295
 
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricRestartDeployedCodePackageDescriptionUsingNodeName struct {
@@ -13201,7 +13417,7 @@ func (obj *FabricDeployedCodePackageResult) toInnerStruct() *innerFabricDeployed
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedCodePackageResult{}
+	dst := &innerFabricDeployedCodePackageResult{}
 	s_296, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_296
 
@@ -13221,7 +13437,7 @@ func (obj *FabricDeployedCodePackageResult) toInnerStruct() *innerFabricDeployed
 	ex1.ServicePackageActivationId = s_300
 
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedCodePackageResult struct {
@@ -13260,21 +13476,30 @@ type FabricMovePrimaryDescription2 struct {
 	Kind  FabricMovePrimaryDescriptionKind
 	Value interface{}
 }
-type innerFabricMovePrimaryDescription2 struct {
-	FabricMovePrimaryDescription2
-}
 
-func (obj *innerFabricMovePrimaryDescription2) toGoStruct() *FabricMovePrimaryDescription2 {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricMovePrimaryDescription2
-}
 func (obj *FabricMovePrimaryDescription2) toInnerStruct() *innerFabricMovePrimaryDescription2 {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricMovePrimaryDescription2{*obj}
+	dst := &innerFabricMovePrimaryDescription2{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricMovePrimaryDescription2 struct {
+	Kind  FabricMovePrimaryDescriptionKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricMovePrimaryDescription2) toGoStruct() (dst *FabricMovePrimaryDescription2) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricMovePrimaryDescription2{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricMovePrimaryDescriptionUsingNodeName struct {
@@ -13288,7 +13513,7 @@ func (obj *FabricMovePrimaryDescriptionUsingNodeName) toInnerStruct() *innerFabr
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricMovePrimaryDescriptionUsingNodeName{}
+	dst := &innerFabricMovePrimaryDescriptionUsingNodeName{}
 	s_301, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_301
 
@@ -13297,7 +13522,7 @@ func (obj *FabricMovePrimaryDescriptionUsingNodeName) toInnerStruct() *innerFabr
 
 	dst.PartitionId = obj.PartitionId
 	dst.IgnoreConstraints = obj.IgnoreConstraints
-	return &dst
+	return dst
 }
 
 type innerFabricMovePrimaryDescriptionUsingNodeName struct {
@@ -13330,7 +13555,7 @@ func (obj *FabricMovePrimaryResult) toInnerStruct() *innerFabricMovePrimaryResul
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricMovePrimaryResult{}
+	dst := &innerFabricMovePrimaryResult{}
 	s_303, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_303
 
@@ -13338,7 +13563,7 @@ func (obj *FabricMovePrimaryResult) toInnerStruct() *innerFabricMovePrimaryResul
 	dst.ServiceName = s_304
 
 	dst.PartitionId = obj.PartitionId
-	return &dst
+	return dst
 }
 
 type innerFabricMovePrimaryResult struct {
@@ -13363,21 +13588,30 @@ type FabricMoveSecondaryDescription2 struct {
 	Kind  FabricMoveSecondaryDescriptionKind
 	Value interface{}
 }
-type innerFabricMoveSecondaryDescription2 struct {
-	FabricMoveSecondaryDescription2
-}
 
-func (obj *innerFabricMoveSecondaryDescription2) toGoStruct() *FabricMoveSecondaryDescription2 {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricMoveSecondaryDescription2
-}
 func (obj *FabricMoveSecondaryDescription2) toInnerStruct() *innerFabricMoveSecondaryDescription2 {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricMoveSecondaryDescription2{*obj}
+	dst := &innerFabricMoveSecondaryDescription2{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricMoveSecondaryDescription2 struct {
+	Kind  FabricMoveSecondaryDescriptionKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricMoveSecondaryDescription2) toGoStruct() (dst *FabricMoveSecondaryDescription2) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricMoveSecondaryDescription2{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricMoveSecondaryDescriptionUsingNodeName struct {
@@ -13392,7 +13626,7 @@ func (obj *FabricMoveSecondaryDescriptionUsingNodeName) toInnerStruct() *innerFa
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricMoveSecondaryDescriptionUsingNodeName{}
+	dst := &innerFabricMoveSecondaryDescriptionUsingNodeName{}
 	s_305, _ := windows.UTF16PtrFromString(obj.CurrentNodeName)
 	dst.CurrentNodeName = s_305
 
@@ -13404,7 +13638,7 @@ func (obj *FabricMoveSecondaryDescriptionUsingNodeName) toInnerStruct() *innerFa
 
 	dst.PartitionId = obj.PartitionId
 	dst.IgnoreConstraints = obj.IgnoreConstraints
-	return &dst
+	return dst
 }
 
 type innerFabricMoveSecondaryDescriptionUsingNodeName struct {
@@ -13440,7 +13674,7 @@ func (obj *FabricMoveSecondaryResult) toInnerStruct() *innerFabricMoveSecondaryR
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricMoveSecondaryResult{}
+	dst := &innerFabricMoveSecondaryResult{}
 	s_308, _ := windows.UTF16PtrFromString(obj.CurrentNodeName)
 	dst.CurrentNodeName = s_308
 
@@ -13451,7 +13685,7 @@ func (obj *FabricMoveSecondaryResult) toInnerStruct() *innerFabricMoveSecondaryR
 	dst.ServiceName = s_310
 
 	dst.PartitionId = obj.PartitionId
-	return &dst
+	return dst
 }
 
 type innerFabricMoveSecondaryResult struct {
@@ -13484,13 +13718,13 @@ func (obj *FabricRestartReplicaDescription) toInnerStruct() *innerFabricRestartR
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricRestartReplicaDescription{}
+	dst := &innerFabricRestartReplicaDescription{}
 	s_311, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_311
 
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaOrInstanceId = obj.ReplicaOrInstanceId
-	return &dst
+	return dst
 }
 
 type innerFabricRestartReplicaDescription struct {
@@ -13522,7 +13756,7 @@ func (obj *FabricRemoveReplicaDescription) toInnerStruct() *innerFabricRemoveRep
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricRemoveReplicaDescription{}
+	dst := &innerFabricRemoveReplicaDescription{}
 	s_312, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_312
 
@@ -13532,7 +13766,7 @@ func (obj *FabricRemoveReplicaDescription) toInnerStruct() *innerFabricRemoveRep
 	ex1 := &innerFabricRemoveReplicaDescriptionEx1{}
 	ex1.ForceRemove = obj.ForceRemove
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricRemoveReplicaDescription struct {
@@ -13598,7 +13832,7 @@ func (obj *FabricHealthInformation) toInnerStruct() *innerFabricHealthInformatio
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricHealthInformation{}
+	dst := &innerFabricHealthInformation{}
 	s_313, _ := windows.UTF16PtrFromString(obj.SourceId)
 	dst.SourceId = s_313
 
@@ -13612,7 +13846,7 @@ func (obj *FabricHealthInformation) toInnerStruct() *innerFabricHealthInformatio
 
 	dst.SequenceNumber = obj.SequenceNumber
 	dst.RemoveWhenExpired = obj.RemoveWhenExpired
-	return &dst
+	return dst
 }
 
 type innerFabricHealthInformation struct {
@@ -13645,21 +13879,30 @@ type FabricHealthReport struct {
 	Kind  FabricHealthReportKind
 	Value interface{}
 }
-type innerFabricHealthReport struct {
-	FabricHealthReport
-}
 
-func (obj *innerFabricHealthReport) toGoStruct() *FabricHealthReport {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricHealthReport
-}
 func (obj *FabricHealthReport) toInnerStruct() *innerFabricHealthReport {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricHealthReport{*obj}
+	dst := &innerFabricHealthReport{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricHealthReport struct {
+	Kind  FabricHealthReportKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricHealthReport) toGoStruct() (dst *FabricHealthReport) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricHealthReport{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricClusterHealthReport struct {
@@ -13760,12 +14003,12 @@ func (obj *FabricNodeHealthReport) toInnerStruct() *innerFabricNodeHealthReport 
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNodeHealthReport{}
+	dst := &innerFabricNodeHealthReport{}
 	s_316, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_316
 
 	dst.HealthInformation = obj.HealthInformation.toInnerStruct()
-	return &dst
+	return dst
 }
 
 type innerFabricNodeHealthReport struct {
@@ -13793,12 +14036,12 @@ func (obj *FabricApplicationHealthReport) toInnerStruct() *innerFabricApplicatio
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationHealthReport{}
+	dst := &innerFabricApplicationHealthReport{}
 	s_317, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_317
 
 	dst.HealthInformation = obj.HealthInformation.toInnerStruct()
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationHealthReport struct {
@@ -13826,12 +14069,12 @@ func (obj *FabricServiceHealthReport) toInnerStruct() *innerFabricServiceHealthR
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceHealthReport{}
+	dst := &innerFabricServiceHealthReport{}
 	s_318, _ := windows.UTF16PtrFromString(obj.ServiceName)
 	dst.ServiceName = s_318
 
 	dst.HealthInformation = obj.HealthInformation.toInnerStruct()
-	return &dst
+	return dst
 }
 
 type innerFabricServiceHealthReport struct {
@@ -13862,7 +14105,7 @@ func (obj *FabricDeployedServicePackageHealthReport) toInnerStruct() *innerFabri
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedServicePackageHealthReport{}
+	dst := &innerFabricDeployedServicePackageHealthReport{}
 	s_319, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_319
 
@@ -13879,7 +14122,7 @@ func (obj *FabricDeployedServicePackageHealthReport) toInnerStruct() *innerFabri
 	ex1.ServicePackageActivationId = s_322
 
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedServicePackageHealthReport struct {
@@ -13922,7 +14165,7 @@ func (obj *FabricDeployedApplicationHealthReport) toInnerStruct() *innerFabricDe
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedApplicationHealthReport{}
+	dst := &innerFabricDeployedApplicationHealthReport{}
 	s_323, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_323
 
@@ -13930,7 +14173,7 @@ func (obj *FabricDeployedApplicationHealthReport) toInnerStruct() *innerFabricDe
 	dst.NodeName = s_324
 
 	dst.HealthInformation = obj.HealthInformation.toInnerStruct()
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedApplicationHealthReport struct {
@@ -13983,12 +14226,12 @@ func (obj *FabricServiceTypeHealthPolicyMapItem) toInnerStruct() *innerFabricSer
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceTypeHealthPolicyMapItem{}
+	dst := &innerFabricServiceTypeHealthPolicyMapItem{}
 	s_325, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
 	dst.ServiceTypeName = s_325
 
 	dst.ServiceTypeHealthPolicy = obj.ServiceTypeHealthPolicy.toInnerStruct()
-	return &dst
+	return dst
 }
 
 type innerFabricServiceTypeHealthPolicyMapItem struct {
@@ -14046,7 +14289,7 @@ func (obj *FabricApplicationHealthPolicy) toInnerStruct() *innerFabricApplicatio
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationHealthPolicy{}
+	dst := &innerFabricApplicationHealthPolicy{}
 	dst.ConsiderWarningAsError = obj.ConsiderWarningAsError
 	dst.MaxPercentUnhealthyDeployedApplications = obj.MaxPercentUnhealthyDeployedApplications
 	dst.DefaultServiceTypeHealthPolicy = obj.DefaultServiceTypeHealthPolicy.toInnerStruct()
@@ -14073,7 +14316,7 @@ func (obj *FabricApplicationHealthPolicy) toInnerStruct() *innerFabricApplicatio
 
 		dst.ServiceTypeHealthPolicyMap = mapobj
 	}
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationHealthPolicy struct {
@@ -14123,12 +14366,12 @@ func (obj *FabricApplicationHealthPolicyMapItem) toInnerStruct() *innerFabricApp
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationHealthPolicyMapItem{}
+	dst := &innerFabricApplicationHealthPolicyMapItem{}
 	s_330, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_330
 
 	dst.HealthPolicy = obj.HealthPolicy.toInnerStruct()
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationHealthPolicyMapItem struct {
@@ -14186,7 +14429,7 @@ func (obj *FabricClusterHealthPolicy) toInnerStruct() *innerFabricClusterHealthP
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricClusterHealthPolicy{}
+	dst := &innerFabricClusterHealthPolicy{}
 	dst.ConsiderWarningAsError = obj.ConsiderWarningAsError
 	dst.MaxPercentUnhealthyNodes = obj.MaxPercentUnhealthyNodes
 	dst.MaxPercentUnhealthyApplications = obj.MaxPercentUnhealthyApplications
@@ -14216,7 +14459,7 @@ func (obj *FabricClusterHealthPolicy) toInnerStruct() *innerFabricClusterHealthP
 		ex1.ApplicationTypeHealthPolicyMap = mapobj
 	}
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricClusterHealthPolicy struct {
@@ -14318,7 +14561,7 @@ func (obj *FabricLoadMetricInformation) toInnerStruct() *innerFabricLoadMetricIn
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricLoadMetricInformation{}
+	dst := &innerFabricLoadMetricInformation{}
 	s_335, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_335
 
@@ -14354,7 +14597,7 @@ func (obj *FabricLoadMetricInformation) toInnerStruct() *innerFabricLoadMetricIn
 	ex3.MaximumNodeLoad = obj.MaximumNodeLoad
 	ex3.MinimumNodeLoad = obj.MinimumNodeLoad
 	ex2.Reserved = unsafe.Pointer(ex3)
-	return &dst
+	return dst
 }
 
 type innerFabricLoadMetricInformation struct {
@@ -14472,7 +14715,7 @@ func (obj *FabricClusterLoadInformation) toInnerStruct() *innerFabricClusterLoad
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricClusterLoadInformation{}
+	dst := &innerFabricClusterLoadInformation{}
 	dst.LastBalancingStartTimeUtc = windows.NsecToFiletime(obj.LastBalancingStartTimeUtc.UnixNano())
 	dst.LastBalancingEndTimeUtc = windows.NsecToFiletime(obj.LastBalancingEndTimeUtc.UnixNano())
 	lst_337 := &innerFabricLoadMetricInformationList{}
@@ -14495,7 +14738,7 @@ func (obj *FabricClusterLoadInformation) toInnerStruct() *innerFabricClusterLoad
 
 	}
 	dst.LoadMetricInformation = lst_337
-	return &dst
+	return dst
 }
 
 type innerFabricClusterLoadInformation struct {
@@ -14538,7 +14781,7 @@ func (obj *FabricPartitionLoadInformation) toInnerStruct() *innerFabricPartition
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricPartitionLoadInformation{}
+	dst := &innerFabricPartitionLoadInformation{}
 	dst.PartitionId = obj.PartitionId
 	lst_338 := &innerFabricLoadMetricReportList{}
 	{
@@ -14580,7 +14823,7 @@ func (obj *FabricPartitionLoadInformation) toInnerStruct() *innerFabricPartition
 
 	}
 	dst.SecondaryLoadMetricReports = lst_339
-	return &dst
+	return dst
 }
 
 type innerFabricPartitionLoadInformation struct {
@@ -14635,7 +14878,7 @@ func (obj *FabricReplicaLoadInformation) toInnerStruct() *innerFabricReplicaLoad
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricReplicaLoadInformation{}
+	dst := &innerFabricReplicaLoadInformation{}
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaOrInstanceId = obj.ReplicaOrInstanceId
 	lst_340 := &innerFabricLoadMetricReportList{}
@@ -14658,7 +14901,7 @@ func (obj *FabricReplicaLoadInformation) toInnerStruct() *innerFabricReplicaLoad
 
 	}
 	dst.LoadMetricReports = lst_340
-	return &dst
+	return dst
 }
 
 type innerFabricReplicaLoadInformation struct {
@@ -14701,7 +14944,7 @@ func (obj *FabricUnplacedReplicaInformation) toInnerStruct() *innerFabricUnplace
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricUnplacedReplicaInformation{}
+	dst := &innerFabricUnplacedReplicaInformation{}
 	s_341, _ := windows.UTF16PtrFromString(obj.ServiceName)
 	dst.ServiceName = s_341
 
@@ -14727,7 +14970,7 @@ func (obj *FabricUnplacedReplicaInformation) toInnerStruct() *innerFabricUnplace
 
 	}
 	dst.UnplacedReplicaReasons = lst_342
-	return &dst
+	return dst
 }
 
 type innerFabricUnplacedReplicaInformation struct {
@@ -14777,7 +15020,7 @@ func (obj *FabricNodeLoadMetricInformation) toInnerStruct() *innerFabricNodeLoad
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNodeLoadMetricInformation{}
+	dst := &innerFabricNodeLoadMetricInformation{}
 	s_344, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_344
 
@@ -14795,7 +15038,7 @@ func (obj *FabricNodeLoadMetricInformation) toInnerStruct() *innerFabricNodeLoad
 	ex2.NodeCapacityRemaining = obj.NodeCapacityRemaining
 	ex2.BufferedNodeCapacityRemaining = obj.BufferedNodeCapacityRemaining
 	ex1.Reserved = unsafe.Pointer(ex2)
-	return &dst
+	return dst
 }
 
 type innerFabricNodeLoadMetricInformation struct {
@@ -14877,7 +15120,7 @@ func (obj *FabricNodeLoadInformation) toInnerStruct() *innerFabricNodeLoadInform
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNodeLoadInformation{}
+	dst := &innerFabricNodeLoadInformation{}
 	s_345, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_345
 
@@ -14901,7 +15144,7 @@ func (obj *FabricNodeLoadInformation) toInnerStruct() *innerFabricNodeLoadInform
 
 	}
 	dst.NodeLoadMetricInformation = lst_346
-	return &dst
+	return dst
 }
 
 type innerFabricNodeLoadInformation struct {
@@ -14943,14 +15186,14 @@ func (obj *FabricApplicationLoadMetricInformation) toInnerStruct() *innerFabricA
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationLoadMetricInformation{}
+	dst := &innerFabricApplicationLoadMetricInformation{}
 	s_347, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_347
 
 	dst.ReservationCapacity = obj.ReservationCapacity
 	dst.ApplicationCapacity = obj.ApplicationCapacity
 	dst.ApplicationLoad = obj.ApplicationLoad
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationLoadMetricInformation struct {
@@ -15009,7 +15252,7 @@ func (obj *FabricApplicationLoadInformation) toInnerStruct() *innerFabricApplica
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationLoadInformation{}
+	dst := &innerFabricApplicationLoadInformation{}
 	s_348, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_348
 
@@ -15036,7 +15279,7 @@ func (obj *FabricApplicationLoadInformation) toInnerStruct() *innerFabricApplica
 
 	}
 	dst.ApplicationLoadMetricInformation = lst_349
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationLoadInformation struct {
@@ -15084,7 +15327,7 @@ func (obj *FabricGatewayInformation) toInnerStruct() *innerFabricGatewayInformat
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricGatewayInformation{}
+	dst := &innerFabricGatewayInformation{}
 	s_350, _ := windows.UTF16PtrFromString(obj.NodeAddress)
 	dst.NodeAddress = s_350
 
@@ -15093,7 +15336,7 @@ func (obj *FabricGatewayInformation) toInnerStruct() *innerFabricGatewayInformat
 	s_351, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_351
 
-	return &dst
+	return dst
 }
 
 type innerFabricGatewayInformation struct {
@@ -15126,13 +15369,13 @@ func (obj *FabricStartApprovedUpgradesDescription) toInnerStruct() *innerFabricS
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricStartApprovedUpgradesDescription{}
+	dst := &innerFabricStartApprovedUpgradesDescription{}
 	dst.OperationId = obj.OperationId
 	s_352, _ := windows.UTF16PtrFromString(obj.ClusterConfigPath)
 	dst.ClusterConfigPath = s_352
 
 	dst.RollbackOnFailure = obj.RollbackOnFailure
-	return &dst
+	return dst
 }
 
 type innerFabricStartApprovedUpgradesDescription struct {
@@ -15171,7 +15414,7 @@ func (obj *FabricStartUpgradeDescription) toInnerStruct() *innerFabricStartUpgra
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricStartUpgradeDescription{}
+	dst := &innerFabricStartUpgradeDescription{}
 	s_353, _ := windows.UTF16PtrFromString(obj.ClusterConfig)
 	dst.ClusterConfig = s_353
 
@@ -15210,7 +15453,7 @@ func (obj *FabricStartUpgradeDescription) toInnerStruct() *innerFabricStartUpgra
 		ex1.ApplicationHealthPolicyMap = mapobj
 	}
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricStartUpgradeDescription struct {
@@ -15285,7 +15528,7 @@ func (obj *FabricUpgradeOrchestrationServiceState) toInnerStruct() *innerFabricU
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricUpgradeOrchestrationServiceState{}
+	dst := &innerFabricUpgradeOrchestrationServiceState{}
 	s_357, _ := windows.UTF16PtrFromString(obj.CurrentCodeVersion)
 	dst.CurrentCodeVersion = s_357
 
@@ -15301,7 +15544,7 @@ func (obj *FabricUpgradeOrchestrationServiceState) toInnerStruct() *innerFabricU
 	s_361, _ := windows.UTF16PtrFromString(obj.PendingUpgradeType)
 	dst.PendingUpgradeType = s_361
 
-	return &dst
+	return dst
 }
 
 type innerFabricUpgradeOrchestrationServiceState struct {
@@ -15340,7 +15583,7 @@ func (obj *FabricHealthEvent) toInnerStruct() *innerFabricHealthEvent {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricHealthEvent{}
+	dst := &innerFabricHealthEvent{}
 	dst.HealthInformation = obj.HealthInformation.toInnerStruct()
 	dst.SourceUtcTimestamp = windows.NsecToFiletime(obj.SourceUtcTimestamp.UnixNano())
 	dst.LastModifiedUtcTimestamp = windows.NsecToFiletime(obj.LastModifiedUtcTimestamp.UnixNano())
@@ -15351,7 +15594,7 @@ func (obj *FabricHealthEvent) toInnerStruct() *innerFabricHealthEvent {
 	ex1.LastWarningTransitionAt = windows.NsecToFiletime(obj.LastWarningTransitionAt.UnixNano())
 	ex1.LastErrorTransitionAt = windows.NsecToFiletime(obj.LastErrorTransitionAt.UnixNano())
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricHealthEvent struct {
@@ -15415,21 +15658,30 @@ type FabricHealthEvaluation struct {
 	Kind  FabricHealthEvaluationKind
 	Value interface{}
 }
-type innerFabricHealthEvaluation struct {
-	FabricHealthEvaluation
-}
 
-func (obj *innerFabricHealthEvaluation) toGoStruct() *FabricHealthEvaluation {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricHealthEvaluation
-}
 func (obj *FabricHealthEvaluation) toInnerStruct() *innerFabricHealthEvaluation {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricHealthEvaluation{*obj}
+	dst := &innerFabricHealthEvaluation{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricHealthEvaluation struct {
+	Kind  FabricHealthEvaluationKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricHealthEvaluation) toGoStruct() (dst *FabricHealthEvaluation) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricHealthEvaluation{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type innerFabricHealthEvaluationList struct {
@@ -15525,21 +15777,30 @@ type FabricReplicaHealth struct {
 	Kind  FabricServiceKind
 	Value interface{}
 }
-type innerFabricReplicaHealth struct {
-	FabricReplicaHealth
-}
 
-func (obj *innerFabricReplicaHealth) toGoStruct() *FabricReplicaHealth {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricReplicaHealth
-}
 func (obj *FabricReplicaHealth) toInnerStruct() *innerFabricReplicaHealth {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricReplicaHealth{*obj}
+	dst := &innerFabricReplicaHealth{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricReplicaHealth struct {
+	Kind  FabricServiceKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricReplicaHealth) toGoStruct() (dst *FabricReplicaHealth) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricReplicaHealth{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricStatefulServiceReplicaHealth struct {
@@ -15554,7 +15815,7 @@ func (obj *FabricStatefulServiceReplicaHealth) toInnerStruct() *innerFabricState
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricStatefulServiceReplicaHealth{}
+	dst := &innerFabricStatefulServiceReplicaHealth{}
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaId = obj.ReplicaId
 	dst.AggregatedHealthState = obj.AggregatedHealthState
@@ -15601,7 +15862,7 @@ func (obj *FabricStatefulServiceReplicaHealth) toInnerStruct() *innerFabricState
 	}
 	ex1.UnhealthyEvaluations = lst_363
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricStatefulServiceReplicaHealth struct {
@@ -15670,7 +15931,7 @@ func (obj *FabricStatelessServiceInstanceHealth) toInnerStruct() *innerFabricSta
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricStatelessServiceInstanceHealth{}
+	dst := &innerFabricStatelessServiceInstanceHealth{}
 	dst.PartitionId = obj.PartitionId
 	dst.InstanceId = obj.InstanceId
 	dst.AggregatedHealthState = obj.AggregatedHealthState
@@ -15717,7 +15978,7 @@ func (obj *FabricStatelessServiceInstanceHealth) toInnerStruct() *innerFabricSta
 	}
 	ex1.UnhealthyEvaluations = lst_365
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricStatelessServiceInstanceHealth struct {
@@ -15778,21 +16039,30 @@ type FabricReplicaHealthState struct {
 	Kind  FabricServiceKind
 	Value interface{}
 }
-type innerFabricReplicaHealthState struct {
-	FabricReplicaHealthState
-}
 
-func (obj *innerFabricReplicaHealthState) toGoStruct() *FabricReplicaHealthState {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricReplicaHealthState
-}
 func (obj *FabricReplicaHealthState) toInnerStruct() *innerFabricReplicaHealthState {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricReplicaHealthState{*obj}
+	dst := &innerFabricReplicaHealthState{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricReplicaHealthState struct {
+	Kind  FabricServiceKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricReplicaHealthState) toGoStruct() (dst *FabricReplicaHealthState) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricReplicaHealthState{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type innerFabricReplicaHealthStateList struct {
@@ -15829,7 +16099,7 @@ func (obj *FabricStatelessServiceInstanceHealthState) toInnerStruct() *innerFabr
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricStatelessServiceInstanceHealthState{}
+	dst := &innerFabricStatelessServiceInstanceHealthState{}
 	dst.PartitionId = obj.PartitionId
 	dst.InstanceId = obj.InstanceId
 	dst.AggregatedHealthState = obj.AggregatedHealthState
@@ -15856,7 +16126,7 @@ func (obj *FabricStatelessServiceInstanceHealthState) toInnerStruct() *innerFabr
 	}
 	ex1.UnhealthyEvaluations = lst_366
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricStatelessServiceInstanceHealthState struct {
@@ -15910,7 +16180,7 @@ func (obj *FabricStatefulServiceReplicaHealthState) toInnerStruct() *innerFabric
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricStatefulServiceReplicaHealthState{}
+	dst := &innerFabricStatefulServiceReplicaHealthState{}
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaId = obj.ReplicaId
 	dst.AggregatedHealthState = obj.AggregatedHealthState
@@ -15937,7 +16207,7 @@ func (obj *FabricStatefulServiceReplicaHealthState) toInnerStruct() *innerFabric
 	}
 	ex1.UnhealthyEvaluations = lst_367
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricStatefulServiceReplicaHealthState struct {
@@ -15993,7 +16263,7 @@ func (obj *FabricPartitionHealth) toInnerStruct() *innerFabricPartitionHealth {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricPartitionHealth{}
+	dst := &innerFabricPartitionHealth{}
 	dst.PartitionId = obj.PartitionId
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	lst_368 := &innerFabricHealthEventList{}
@@ -16062,7 +16332,7 @@ func (obj *FabricPartitionHealth) toInnerStruct() *innerFabricPartitionHealth {
 	ex2 := &innerFabricPartitionHealthEx2{}
 	ex2.HealthStatistics = obj.HealthStatistics.toInnerStruct()
 	ex1.Reserved = unsafe.Pointer(ex2)
-	return &dst
+	return dst
 }
 
 type innerFabricPartitionHealth struct {
@@ -16199,7 +16469,7 @@ func (obj *FabricDeployedServicePackageHealth) toInnerStruct() *innerFabricDeplo
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedServicePackageHealth{}
+	dst := &innerFabricDeployedServicePackageHealth{}
 	s_371, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_371
 
@@ -16258,7 +16528,7 @@ func (obj *FabricDeployedServicePackageHealth) toInnerStruct() *innerFabricDeplo
 	ex2.ServicePackageActivationId = s_376
 
 	ex1.Reserved = unsafe.Pointer(ex2)
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedServicePackageHealth struct {
@@ -16338,7 +16608,7 @@ func (obj *FabricDeployedServicePackageHealthState) toInnerStruct() *innerFabric
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedServicePackageHealthState{}
+	dst := &innerFabricDeployedServicePackageHealthState{}
 	s_377, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_377
 
@@ -16355,7 +16625,7 @@ func (obj *FabricDeployedServicePackageHealthState) toInnerStruct() *innerFabric
 	ex1.ServicePackageActivationId = s_380
 
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedServicePackageHealthState struct {
@@ -16425,7 +16695,7 @@ func (obj *FabricDeployedApplicationHealth) toInnerStruct() *innerFabricDeployed
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedApplicationHealth{}
+	dst := &innerFabricDeployedApplicationHealth{}
 	s_381, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_381
 
@@ -16499,7 +16769,7 @@ func (obj *FabricDeployedApplicationHealth) toInnerStruct() *innerFabricDeployed
 	ex2 := &innerFabricDeployedApplicationHealthEx2{}
 	ex2.HealthStatistics = obj.HealthStatistics.toInnerStruct()
 	ex1.Reserved = unsafe.Pointer(ex2)
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedApplicationHealth struct {
@@ -16589,7 +16859,7 @@ func (obj *FabricDeployedApplicationHealthState) toInnerStruct() *innerFabricDep
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedApplicationHealthState{}
+	dst := &innerFabricDeployedApplicationHealthState{}
 	s_386, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_386
 
@@ -16597,7 +16867,7 @@ func (obj *FabricDeployedApplicationHealthState) toInnerStruct() *innerFabricDep
 	dst.NodeName = s_387
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedApplicationHealthState struct {
@@ -16654,7 +16924,7 @@ func (obj *FabricServiceHealth) toInnerStruct() *innerFabricServiceHealth {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceHealth{}
+	dst := &innerFabricServiceHealth{}
 	s_388, _ := windows.UTF16PtrFromString(obj.ServiceName)
 	dst.ServiceName = s_388
 
@@ -16725,7 +16995,7 @@ func (obj *FabricServiceHealth) toInnerStruct() *innerFabricServiceHealth {
 	ex2 := &innerFabricServiceHealthEx2{}
 	ex2.HealthStatistics = obj.HealthStatistics.toInnerStruct()
 	ex1.Reserved = unsafe.Pointer(ex2)
-	return &dst
+	return dst
 }
 
 type innerFabricServiceHealth struct {
@@ -16812,12 +17082,12 @@ func (obj *FabricServiceHealthState) toInnerStruct() *innerFabricServiceHealthSt
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceHealthState{}
+	dst := &innerFabricServiceHealthState{}
 	s_392, _ := windows.UTF16PtrFromString(obj.ServiceName)
 	dst.ServiceName = s_392
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	return &dst
+	return dst
 }
 
 type innerFabricServiceHealthState struct {
@@ -16873,7 +17143,7 @@ func (obj *FabricApplicationHealth) toInnerStruct() *innerFabricApplicationHealt
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationHealth{}
+	dst := &innerFabricApplicationHealth{}
 	s_393, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_393
 
@@ -16964,7 +17234,7 @@ func (obj *FabricApplicationHealth) toInnerStruct() *innerFabricApplicationHealt
 	ex2 := &innerFabricApplicationHealthEx2{}
 	ex2.HealthStatistics = obj.HealthStatistics.toInnerStruct()
 	ex1.Reserved = unsafe.Pointer(ex2)
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationHealth struct {
@@ -17067,7 +17337,7 @@ func (obj *FabricNodeHealth) toInnerStruct() *innerFabricNodeHealth {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNodeHealth{}
+	dst := &innerFabricNodeHealth{}
 	s_398, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_398
 
@@ -17115,7 +17385,7 @@ func (obj *FabricNodeHealth) toInnerStruct() *innerFabricNodeHealth {
 	}
 	ex1.UnhealthyEvaluations = lst_400
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricNodeHealth struct {
@@ -17183,7 +17453,7 @@ func (obj *FabricClusterHealth) toInnerStruct() *innerFabricClusterHealth {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricClusterHealth{}
+	dst := &innerFabricClusterHealth{}
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	ex0 := dst
 	ex1 := &innerFabricClusterHealthEx1{}
@@ -17273,7 +17543,7 @@ func (obj *FabricClusterHealth) toInnerStruct() *innerFabricClusterHealth {
 	ex3 := &innerFabricClusterHealthEx3{}
 	ex3.HealthStatistics = obj.HealthStatistics.toInnerStruct()
 	ex2.Reserved = unsafe.Pointer(ex3)
-	return &dst
+	return dst
 }
 
 type innerFabricClusterHealth struct {
@@ -17379,12 +17649,12 @@ func (obj *FabricNodeHealthState) toInnerStruct() *innerFabricNodeHealthState {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNodeHealthState{}
+	dst := &innerFabricNodeHealthState{}
 	s_405, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_405
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	return &dst
+	return dst
 }
 
 type innerFabricNodeHealthState struct {
@@ -17435,12 +17705,12 @@ func (obj *FabricApplicationHealthState) toInnerStruct() *innerFabricApplication
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationHealthState{}
+	dst := &innerFabricApplicationHealthState{}
 	s_406, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_406
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationHealthState struct {
@@ -17493,14 +17763,14 @@ func (obj *FabricEventHealthEvaluation) toInnerStruct() *innerFabricEventHealthE
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricEventHealthEvaluation{}
+	dst := &innerFabricEventHealthEvaluation{}
 	s_407, _ := windows.UTF16PtrFromString(obj.Description)
 	dst.Description = s_407
 
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	dst.UnhealthyEvent = obj.UnhealthyEvent.toInnerStruct()
 	dst.ConsiderWarningAsError = obj.ConsiderWarningAsError
-	return &dst
+	return dst
 }
 
 type innerFabricEventHealthEvaluation struct {
@@ -17535,7 +17805,7 @@ func (obj *FabricReplicasHealthEvaluation) toInnerStruct() *innerFabricReplicasH
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricReplicasHealthEvaluation{}
+	dst := &innerFabricReplicasHealthEvaluation{}
 	s_408, _ := windows.UTF16PtrFromString(obj.Description)
 	dst.Description = s_408
 
@@ -17562,7 +17832,7 @@ func (obj *FabricReplicasHealthEvaluation) toInnerStruct() *innerFabricReplicasH
 	dst.UnhealthyEvaluations = lst_409
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyReplicasPerPartition = obj.MaxPercentUnhealthyReplicasPerPartition
-	return &dst
+	return dst
 }
 
 type innerFabricReplicasHealthEvaluation struct {
@@ -17611,7 +17881,7 @@ func (obj *FabricPartitionsHealthEvaluation) toInnerStruct() *innerFabricPartiti
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricPartitionsHealthEvaluation{}
+	dst := &innerFabricPartitionsHealthEvaluation{}
 	s_410, _ := windows.UTF16PtrFromString(obj.Description)
 	dst.Description = s_410
 
@@ -17638,7 +17908,7 @@ func (obj *FabricPartitionsHealthEvaluation) toInnerStruct() *innerFabricPartiti
 	dst.UnhealthyEvaluations = lst_411
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyPartitionsPerService = obj.MaxPercentUnhealthyPartitionsPerService
-	return &dst
+	return dst
 }
 
 type innerFabricPartitionsHealthEvaluation struct {
@@ -17686,7 +17956,7 @@ func (obj *FabricDeployedServicePackagesHealthEvaluation) toInnerStruct() *inner
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedServicePackagesHealthEvaluation{}
+	dst := &innerFabricDeployedServicePackagesHealthEvaluation{}
 	s_412, _ := windows.UTF16PtrFromString(obj.Description)
 	dst.Description = s_412
 
@@ -17712,7 +17982,7 @@ func (obj *FabricDeployedServicePackagesHealthEvaluation) toInnerStruct() *inner
 	}
 	dst.UnhealthyEvaluations = lst_413
 	dst.TotalCount = obj.TotalCount
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedServicePackagesHealthEvaluation struct {
@@ -17759,7 +18029,7 @@ func (obj *FabricDeployedApplicationsHealthEvaluation) toInnerStruct() *innerFab
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedApplicationsHealthEvaluation{}
+	dst := &innerFabricDeployedApplicationsHealthEvaluation{}
 	s_414, _ := windows.UTF16PtrFromString(obj.Description)
 	dst.Description = s_414
 
@@ -17786,7 +18056,7 @@ func (obj *FabricDeployedApplicationsHealthEvaluation) toInnerStruct() *innerFab
 	dst.UnhealthyEvaluations = lst_415
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyDeployedApplications = obj.MaxPercentUnhealthyDeployedApplications
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedApplicationsHealthEvaluation struct {
@@ -17836,7 +18106,7 @@ func (obj *FabricServicesHealthEvaluation) toInnerStruct() *innerFabricServicesH
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServicesHealthEvaluation{}
+	dst := &innerFabricServicesHealthEvaluation{}
 	s_416, _ := windows.UTF16PtrFromString(obj.Description)
 	dst.Description = s_416
 
@@ -17866,7 +18136,7 @@ func (obj *FabricServicesHealthEvaluation) toInnerStruct() *innerFabricServicesH
 	dst.UnhealthyEvaluations = lst_418
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyServices = obj.MaxPercentUnhealthyServices
-	return &dst
+	return dst
 }
 
 type innerFabricServicesHealthEvaluation struct {
@@ -17917,7 +18187,7 @@ func (obj *FabricNodesHealthEvaluation) toInnerStruct() *innerFabricNodesHealthE
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNodesHealthEvaluation{}
+	dst := &innerFabricNodesHealthEvaluation{}
 	s_419, _ := windows.UTF16PtrFromString(obj.Description)
 	dst.Description = s_419
 
@@ -17944,7 +18214,7 @@ func (obj *FabricNodesHealthEvaluation) toInnerStruct() *innerFabricNodesHealthE
 	dst.UnhealthyEvaluations = lst_420
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyNodes = obj.MaxPercentUnhealthyNodes
-	return &dst
+	return dst
 }
 
 type innerFabricNodesHealthEvaluation struct {
@@ -17993,7 +18263,7 @@ func (obj *FabricApplicationsHealthEvaluation) toInnerStruct() *innerFabricAppli
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationsHealthEvaluation{}
+	dst := &innerFabricApplicationsHealthEvaluation{}
 	s_421, _ := windows.UTF16PtrFromString(obj.Description)
 	dst.Description = s_421
 
@@ -18020,7 +18290,7 @@ func (obj *FabricApplicationsHealthEvaluation) toInnerStruct() *innerFabricAppli
 	dst.UnhealthyEvaluations = lst_422
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyApplications = obj.MaxPercentUnhealthyApplications
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationsHealthEvaluation struct {
@@ -18070,7 +18340,7 @@ func (obj *FabricUpgradeDomainNodesHealthEvaluation) toInnerStruct() *innerFabri
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricUpgradeDomainNodesHealthEvaluation{}
+	dst := &innerFabricUpgradeDomainNodesHealthEvaluation{}
 	s_423, _ := windows.UTF16PtrFromString(obj.Description)
 	dst.Description = s_423
 
@@ -18100,7 +18370,7 @@ func (obj *FabricUpgradeDomainNodesHealthEvaluation) toInnerStruct() *innerFabri
 	dst.UnhealthyEvaluations = lst_425
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyNodes = obj.MaxPercentUnhealthyNodes
-	return &dst
+	return dst
 }
 
 type innerFabricUpgradeDomainNodesHealthEvaluation struct {
@@ -18152,7 +18422,7 @@ func (obj *FabricUpgradeDomainDeployedApplicationsHealthEvaluation) toInnerStruc
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricUpgradeDomainDeployedApplicationsHealthEvaluation{}
+	dst := &innerFabricUpgradeDomainDeployedApplicationsHealthEvaluation{}
 	s_426, _ := windows.UTF16PtrFromString(obj.Description)
 	dst.Description = s_426
 
@@ -18182,7 +18452,7 @@ func (obj *FabricUpgradeDomainDeployedApplicationsHealthEvaluation) toInnerStruc
 	dst.UnhealthyEvaluations = lst_428
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyDeployedApplications = obj.MaxPercentUnhealthyDeployedApplications
-	return &dst
+	return dst
 }
 
 type innerFabricUpgradeDomainDeployedApplicationsHealthEvaluation struct {
@@ -18231,7 +18501,7 @@ func (obj *FabricSystemApplicationHealthEvaluation) toInnerStruct() *innerFabric
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricSystemApplicationHealthEvaluation{}
+	dst := &innerFabricSystemApplicationHealthEvaluation{}
 	s_429, _ := windows.UTF16PtrFromString(obj.Description)
 	dst.Description = s_429
 
@@ -18256,7 +18526,7 @@ func (obj *FabricSystemApplicationHealthEvaluation) toInnerStruct() *innerFabric
 
 	}
 	dst.UnhealthyEvaluations = lst_430
-	return &dst
+	return dst
 }
 
 type innerFabricSystemApplicationHealthEvaluation struct {
@@ -18300,7 +18570,7 @@ func (obj *FabricNodeHealthEvaluation) toInnerStruct() *innerFabricNodeHealthEva
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNodeHealthEvaluation{}
+	dst := &innerFabricNodeHealthEvaluation{}
 	s_431, _ := windows.UTF16PtrFromString(obj.Description)
 	dst.Description = s_431
 
@@ -18328,7 +18598,7 @@ func (obj *FabricNodeHealthEvaluation) toInnerStruct() *innerFabricNodeHealthEva
 
 	}
 	dst.UnhealthyEvaluations = lst_433
-	return &dst
+	return dst
 }
 
 type innerFabricNodeHealthEvaluation struct {
@@ -18375,7 +18645,7 @@ func (obj *FabricReplicaHealthEvaluation) toInnerStruct() *innerFabricReplicaHea
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricReplicaHealthEvaluation{}
+	dst := &innerFabricReplicaHealthEvaluation{}
 	s_434, _ := windows.UTF16PtrFromString(obj.Description)
 	dst.Description = s_434
 
@@ -18402,7 +18672,7 @@ func (obj *FabricReplicaHealthEvaluation) toInnerStruct() *innerFabricReplicaHea
 
 	}
 	dst.UnhealthyEvaluations = lst_435
-	return &dst
+	return dst
 }
 
 type innerFabricReplicaHealthEvaluation struct {
@@ -18450,7 +18720,7 @@ func (obj *FabricPartitionHealthEvaluation) toInnerStruct() *innerFabricPartitio
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricPartitionHealthEvaluation{}
+	dst := &innerFabricPartitionHealthEvaluation{}
 	s_436, _ := windows.UTF16PtrFromString(obj.Description)
 	dst.Description = s_436
 
@@ -18476,7 +18746,7 @@ func (obj *FabricPartitionHealthEvaluation) toInnerStruct() *innerFabricPartitio
 
 	}
 	dst.UnhealthyEvaluations = lst_437
-	return &dst
+	return dst
 }
 
 type innerFabricPartitionHealthEvaluation struct {
@@ -18522,7 +18792,7 @@ func (obj *FabricServiceHealthEvaluation) toInnerStruct() *innerFabricServiceHea
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceHealthEvaluation{}
+	dst := &innerFabricServiceHealthEvaluation{}
 	s_438, _ := windows.UTF16PtrFromString(obj.Description)
 	dst.Description = s_438
 
@@ -18550,7 +18820,7 @@ func (obj *FabricServiceHealthEvaluation) toInnerStruct() *innerFabricServiceHea
 
 	}
 	dst.UnhealthyEvaluations = lst_440
-	return &dst
+	return dst
 }
 
 type innerFabricServiceHealthEvaluation struct {
@@ -18599,7 +18869,7 @@ func (obj *FabricDeployedServicePackageHealthEvaluation) toInnerStruct() *innerF
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedServicePackageHealthEvaluation{}
+	dst := &innerFabricDeployedServicePackageHealthEvaluation{}
 	s_441, _ := windows.UTF16PtrFromString(obj.Description)
 	dst.Description = s_441
 
@@ -18639,7 +18909,7 @@ func (obj *FabricDeployedServicePackageHealthEvaluation) toInnerStruct() *innerF
 	ex1.ServicePackageActivationId = s_446
 
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedServicePackageHealthEvaluation struct {
@@ -18700,7 +18970,7 @@ func (obj *FabricDeployedApplicationHealthEvaluation) toInnerStruct() *innerFabr
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedApplicationHealthEvaluation{}
+	dst := &innerFabricDeployedApplicationHealthEvaluation{}
 	s_447, _ := windows.UTF16PtrFromString(obj.Description)
 	dst.Description = s_447
 
@@ -18731,7 +19001,7 @@ func (obj *FabricDeployedApplicationHealthEvaluation) toInnerStruct() *innerFabr
 
 	}
 	dst.UnhealthyEvaluations = lst_450
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedApplicationHealthEvaluation struct {
@@ -18779,7 +19049,7 @@ func (obj *FabricApplicationHealthEvaluation) toInnerStruct() *innerFabricApplic
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationHealthEvaluation{}
+	dst := &innerFabricApplicationHealthEvaluation{}
 	s_451, _ := windows.UTF16PtrFromString(obj.Description)
 	dst.Description = s_451
 
@@ -18807,7 +19077,7 @@ func (obj *FabricApplicationHealthEvaluation) toInnerStruct() *innerFabricApplic
 
 	}
 	dst.UnhealthyEvaluations = lst_453
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationHealthEvaluation struct {
@@ -18860,7 +19130,7 @@ func (obj *FabricX509Credentials) toInnerStruct() *innerFabricX509Credentials {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricX509Credentials{}
+	dst := &innerFabricX509Credentials{}
 	{
 
 		var tmp []*uint16
@@ -18969,7 +19239,7 @@ func (obj *FabricX509Credentials) toInnerStruct() *innerFabricX509Credentials {
 
 	}
 	ex2.Reserved = unsafe.Pointer(ex3)
-	return &dst
+	return dst
 }
 
 type innerFabricX509Credentials struct {
@@ -19102,14 +19372,14 @@ func (obj *FabricX509Name) toInnerStruct() *innerFabricX509Name {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricX509Name{}
+	dst := &innerFabricX509Name{}
 	s_458, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_458
 
 	s_459, _ := windows.UTF16PtrFromString(obj.IssuerCertThumbprint)
 	dst.IssuerCertThumbprint = s_459
 
-	return &dst
+	return dst
 }
 
 type innerFabricX509Name struct {
@@ -19137,7 +19407,7 @@ func (obj *FabricX509IssuerName) toInnerStruct() *innerFabricX509IssuerName {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricX509IssuerName{}
+	dst := &innerFabricX509IssuerName{}
 	s_460, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_460
 
@@ -19160,7 +19430,7 @@ func (obj *FabricX509IssuerName) toInnerStruct() *innerFabricX509IssuerName {
 		}
 
 	}
-	return &dst
+	return dst
 }
 
 type innerFabricX509IssuerName struct {
@@ -19203,7 +19473,7 @@ func (obj *FabricX509Credentials2) toInnerStruct() *innerFabricX509Credentials2 
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricX509Credentials2{}
+	dst := &innerFabricX509Credentials2{}
 	s_462, _ := windows.UTF16PtrFromString(obj.CertLoadPath)
 	dst.CertLoadPath = s_462
 
@@ -19245,7 +19515,7 @@ func (obj *FabricX509Credentials2) toInnerStruct() *innerFabricX509Credentials2 
 
 	}
 	dst.ProtectionLevel = obj.ProtectionLevel
-	return &dst
+	return dst
 }
 
 type innerFabricX509Credentials2 struct {
@@ -19306,7 +19576,7 @@ func (obj *FabricClaimsCredentials) toInnerStruct() *innerFabricClaimsCredential
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricClaimsCredentials{}
+	dst := &innerFabricClaimsCredentials{}
 	{
 
 		var tmp []*uint16
@@ -19371,7 +19641,7 @@ func (obj *FabricClaimsCredentials) toInnerStruct() *innerFabricClaimsCredential
 
 	}
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricClaimsCredentials struct {
@@ -19453,7 +19723,7 @@ func (obj *FabricWindowsCredentials) toInnerStruct() *innerFabricWindowsCredenti
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricWindowsCredentials{}
+	dst := &innerFabricWindowsCredentials{}
 	s_468, _ := windows.UTF16PtrFromString(obj.RemoteSpn)
 	dst.RemoteSpn = s_468
 
@@ -19477,7 +19747,7 @@ func (obj *FabricWindowsCredentials) toInnerStruct() *innerFabricWindowsCredenti
 
 	}
 	dst.ProtectionLevel = obj.ProtectionLevel
-	return &dst
+	return dst
 }
 
 type innerFabricWindowsCredentials struct {
@@ -19515,21 +19785,30 @@ type FabricClaimsRetrievalMetadata struct {
 	Kind  FabricClaimsRetrievalMetadataKind
 	Value interface{}
 }
-type innerFabricClaimsRetrievalMetadata struct {
-	FabricClaimsRetrievalMetadata
-}
 
-func (obj *innerFabricClaimsRetrievalMetadata) toGoStruct() *FabricClaimsRetrievalMetadata {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricClaimsRetrievalMetadata
-}
 func (obj *FabricClaimsRetrievalMetadata) toInnerStruct() *innerFabricClaimsRetrievalMetadata {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricClaimsRetrievalMetadata{*obj}
+	dst := &innerFabricClaimsRetrievalMetadata{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricClaimsRetrievalMetadata struct {
+	Kind  FabricClaimsRetrievalMetadataKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricClaimsRetrievalMetadata) toGoStruct() (dst *FabricClaimsRetrievalMetadata) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricClaimsRetrievalMetadata{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricAadClAimsRetrievalMetadata struct {
@@ -19545,7 +19824,7 @@ func (obj *FabricAadClAimsRetrievalMetadata) toInnerStruct() *innerFabricAadClAi
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricAadClAimsRetrievalMetadata{}
+	dst := &innerFabricAadClAimsRetrievalMetadata{}
 	s_470, _ := windows.UTF16PtrFromString(obj.Authority)
 	dst.Authority = s_470
 
@@ -19567,7 +19846,7 @@ func (obj *FabricAadClAimsRetrievalMetadata) toInnerStruct() *innerFabricAadClAi
 	ex1.LoginEndpoint = s_475
 
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricAadClAimsRetrievalMetadata struct {
@@ -19613,7 +19892,7 @@ func (obj *FabricSecurityUserDescription) toInnerStruct() *innerFabricSecurityUs
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricSecurityUserDescription{}
+	dst := &innerFabricSecurityUserDescription{}
 	s_476, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_476
 
@@ -19662,7 +19941,7 @@ func (obj *FabricSecurityUserDescription) toInnerStruct() *innerFabricSecurityUs
 
 	}
 	dst.ParentApplicationGroups = lst_480
-	return &dst
+	return dst
 }
 
 type innerFabricSecurityUserDescription struct {
@@ -19744,7 +20023,7 @@ func (obj *FabricSecurityGroupDescription) toInnerStruct() *innerFabricSecurityG
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricSecurityGroupDescription{}
+	dst := &innerFabricSecurityGroupDescription{}
 	s_482, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_482
 
@@ -19814,7 +20093,7 @@ func (obj *FabricSecurityGroupDescription) toInnerStruct() *innerFabricSecurityG
 
 	}
 	dst.DomainUserMembers = lst_488
-	return &dst
+	return dst
 }
 
 type innerFabricSecurityGroupDescription struct {
@@ -19907,7 +20186,7 @@ func (obj *FabricApplicationPrincipalsDescription) toInnerStruct() *innerFabricA
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationPrincipalsDescription{}
+	dst := &innerFabricApplicationPrincipalsDescription{}
 	lst_490 := &innerFabricSecurityUserDescriptionList{}
 	{
 
@@ -19948,7 +20227,7 @@ func (obj *FabricApplicationPrincipalsDescription) toInnerStruct() *innerFabricA
 
 	}
 	dst.Groups = lst_491
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationPrincipalsDescription struct {
@@ -20012,7 +20291,7 @@ func (obj *FabricApplicationUpgradeProgress) toInnerStruct() *innerFabricApplica
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationUpgradeProgress{}
+	dst := &innerFabricApplicationUpgradeProgress{}
 	dst.UpgradeDescription = obj.UpgradeDescription.toInnerStruct()
 	dst.UpgradeState = obj.UpgradeState
 	dst.UpgradeMode = obj.UpgradeMode
@@ -20074,7 +20353,7 @@ func (obj *FabricApplicationUpgradeProgress) toInnerStruct() *innerFabricApplica
 	ex2.UpgradeStatusDetails = s_495
 
 	ex1.Reserved = unsafe.Pointer(ex2)
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationUpgradeProgress struct {
@@ -20160,21 +20439,30 @@ type FabricProvisionApplicationTypeDescriptionBase struct {
 	Kind  FabricProvisionApplicationTypeKind
 	Value interface{}
 }
-type innerFabricProvisionApplicationTypeDescriptionBase struct {
-	FabricProvisionApplicationTypeDescriptionBase
-}
 
-func (obj *innerFabricProvisionApplicationTypeDescriptionBase) toGoStruct() *FabricProvisionApplicationTypeDescriptionBase {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricProvisionApplicationTypeDescriptionBase
-}
 func (obj *FabricProvisionApplicationTypeDescriptionBase) toInnerStruct() *innerFabricProvisionApplicationTypeDescriptionBase {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricProvisionApplicationTypeDescriptionBase{*obj}
+	dst := &innerFabricProvisionApplicationTypeDescriptionBase{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricProvisionApplicationTypeDescriptionBase struct {
+	Kind  FabricProvisionApplicationTypeKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricProvisionApplicationTypeDescriptionBase) toGoStruct() (dst *FabricProvisionApplicationTypeDescriptionBase) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricProvisionApplicationTypeDescriptionBase{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricProvisionApplicationTypeDescription struct {
@@ -20187,7 +20475,7 @@ func (obj *FabricProvisionApplicationTypeDescription) toInnerStruct() *innerFabr
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricProvisionApplicationTypeDescription{}
+	dst := &innerFabricProvisionApplicationTypeDescription{}
 	s_496, _ := windows.UTF16PtrFromString(obj.BuildPath)
 	dst.BuildPath = s_496
 
@@ -20196,7 +20484,7 @@ func (obj *FabricProvisionApplicationTypeDescription) toInnerStruct() *innerFabr
 	ex1 := &innerFabricProvisionApplicationTypeDescriptionEx1{}
 	ex1.ApplicationPackageCleanupPolicy = obj.ApplicationPackageCleanupPolicy
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricProvisionApplicationTypeDescription struct {
@@ -20236,7 +20524,7 @@ func (obj *FabricExternalStoreProvisionApplicationTypeDescription) toInnerStruct
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricExternalStoreProvisionApplicationTypeDescription{}
+	dst := &innerFabricExternalStoreProvisionApplicationTypeDescription{}
 	s_497, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
 	dst.ApplicationTypeName = s_497
 
@@ -20247,7 +20535,7 @@ func (obj *FabricExternalStoreProvisionApplicationTypeDescription) toInnerStruct
 	dst.ApplicationPackageDownloadUri = s_499
 
 	dst.Async = obj.Async
-	return &dst
+	return dst
 }
 
 type innerFabricExternalStoreProvisionApplicationTypeDescription struct {
@@ -20280,7 +20568,7 @@ func (obj *FabricUnprovisionApplicationTypeDescription) toInnerStruct() *innerFa
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricUnprovisionApplicationTypeDescription{}
+	dst := &innerFabricUnprovisionApplicationTypeDescription{}
 	s_500, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
 	dst.ApplicationTypeName = s_500
 
@@ -20288,7 +20576,7 @@ func (obj *FabricUnprovisionApplicationTypeDescription) toInnerStruct() *innerFa
 	dst.ApplicationTypeVersion = s_501
 
 	dst.Async = obj.Async
-	return &dst
+	return dst
 }
 
 type innerFabricUnprovisionApplicationTypeDescription struct {
@@ -20318,12 +20606,12 @@ func (obj *FabricDeleteApplicationDescription) toInnerStruct() *innerFabricDelet
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeleteApplicationDescription{}
+	dst := &innerFabricDeleteApplicationDescription{}
 	s_502, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_502
 
 	dst.ForceDelete = obj.ForceDelete
-	return &dst
+	return dst
 }
 
 type innerFabricDeleteApplicationDescription struct {
@@ -20362,7 +20650,7 @@ func (obj *FabricUpgradeProgress) toInnerStruct() *innerFabricUpgradeProgress {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricUpgradeProgress{}
+	dst := &innerFabricUpgradeProgress{}
 	dst.UpgradeDescription = obj.UpgradeDescription.toInnerStruct()
 	dst.UpgradeState = obj.UpgradeState
 	dst.UpgradeMode = obj.UpgradeMode
@@ -20419,7 +20707,7 @@ func (obj *FabricUpgradeProgress) toInnerStruct() *innerFabricUpgradeProgress {
 	ex1.FailureReason = obj.FailureReason
 	ex1.UpgradeDomainProgressAtFailure = obj.UpgradeDomainProgressAtFailure.toInnerStruct()
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricUpgradeProgress struct {
@@ -20501,12 +20789,12 @@ func (obj *FabricPackageSharingPolicy) toInnerStruct() *innerFabricPackageSharin
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricPackageSharingPolicy{}
+	dst := &innerFabricPackageSharingPolicy{}
 	s_506, _ := windows.UTF16PtrFromString(obj.PackageName)
 	dst.PackageName = s_506
 
 	dst.Scope = obj.Scope
-	return &dst
+	return dst
 }
 
 type innerFabricPackageSharingPolicy struct {
@@ -20729,7 +21017,7 @@ func (obj *FabricClusterHealthQueryDescription) toInnerStruct() *innerFabricClus
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricClusterHealthQueryDescription{}
+	dst := &innerFabricClusterHealthQueryDescription{}
 	dst.HealthPolicy = obj.HealthPolicy.toInnerStruct()
 	{
 		mapobj := &innerFabricApplicationHealthPolicyMap{}
@@ -20761,7 +21049,7 @@ func (obj *FabricClusterHealthQueryDescription) toInnerStruct() *innerFabricClus
 	ex1 := &innerFabricClusterHealthQueryDescriptionEx1{}
 	ex1.HealthStatisticsFilter = obj.HealthStatisticsFilter.toInnerStruct()
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricClusterHealthQueryDescription struct {
@@ -20846,13 +21134,13 @@ func (obj *FabricNodeHealthQueryDescription) toInnerStruct() *innerFabricNodeHea
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNodeHealthQueryDescription{}
+	dst := &innerFabricNodeHealthQueryDescription{}
 	s_510, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_510
 
 	dst.HealthPolicy = obj.HealthPolicy.toInnerStruct()
 	dst.EventsFilter = obj.EventsFilter.toInnerStruct()
-	return &dst
+	return dst
 }
 
 type innerFabricNodeHealthQueryDescription struct {
@@ -20886,7 +21174,7 @@ func (obj *FabricApplicationHealthQueryDescription) toInnerStruct() *innerFabric
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationHealthQueryDescription{}
+	dst := &innerFabricApplicationHealthQueryDescription{}
 	s_511, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_511
 
@@ -20898,7 +21186,7 @@ func (obj *FabricApplicationHealthQueryDescription) toInnerStruct() *innerFabric
 	ex1 := &innerFabricApplicationHealthQueryDescriptionEx1{}
 	ex1.HealthStatisticsFilter = obj.HealthStatisticsFilter.toInnerStruct()
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationHealthQueryDescription struct {
@@ -20966,7 +21254,7 @@ func (obj *FabricServiceHealthQueryDescription) toInnerStruct() *innerFabricServ
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceHealthQueryDescription{}
+	dst := &innerFabricServiceHealthQueryDescription{}
 	s_512, _ := windows.UTF16PtrFromString(obj.ServiceName)
 	dst.ServiceName = s_512
 
@@ -20977,7 +21265,7 @@ func (obj *FabricServiceHealthQueryDescription) toInnerStruct() *innerFabricServ
 	ex1 := &innerFabricServiceHealthQueryDescriptionEx1{}
 	ex1.HealthStatisticsFilter = obj.HealthStatisticsFilter.toInnerStruct()
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricServiceHealthQueryDescription struct {
@@ -21043,7 +21331,7 @@ func (obj *FabricPartitionHealthQueryDescription) toInnerStruct() *innerFabricPa
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricPartitionHealthQueryDescription{}
+	dst := &innerFabricPartitionHealthQueryDescription{}
 	dst.PartitionId = obj.PartitionId
 	dst.HealthPolicy = obj.HealthPolicy.toInnerStruct()
 	dst.EventsFilter = obj.EventsFilter.toInnerStruct()
@@ -21052,7 +21340,7 @@ func (obj *FabricPartitionHealthQueryDescription) toInnerStruct() *innerFabricPa
 	ex1 := &innerFabricPartitionHealthQueryDescriptionEx1{}
 	ex1.HealthStatisticsFilter = obj.HealthStatisticsFilter.toInnerStruct()
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricPartitionHealthQueryDescription struct {
@@ -21143,7 +21431,7 @@ func (obj *FabricDeployedApplicationHealthQueryDescription) toInnerStruct() *inn
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedApplicationHealthQueryDescription{}
+	dst := &innerFabricDeployedApplicationHealthQueryDescription{}
 	s_513, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_513
 
@@ -21157,7 +21445,7 @@ func (obj *FabricDeployedApplicationHealthQueryDescription) toInnerStruct() *inn
 	ex1 := &innerFabricDeployedApplicationHealthQueryDescriptionEx1{}
 	ex1.HealthStatisticsFilter = obj.HealthStatisticsFilter.toInnerStruct()
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedApplicationHealthQueryDescription struct {
@@ -21226,7 +21514,7 @@ func (obj *FabricDeployedServicePackageHealthQueryDescription) toInnerStruct() *
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedServicePackageHealthQueryDescription{}
+	dst := &innerFabricDeployedServicePackageHealthQueryDescription{}
 	s_515, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_515
 
@@ -21244,7 +21532,7 @@ func (obj *FabricDeployedServicePackageHealthQueryDescription) toInnerStruct() *
 	ex1.ServicePackageActivationId = s_518
 
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedServicePackageHealthQueryDescription struct {
@@ -21283,42 +21571,60 @@ type FabricRepairScopeIdentifier struct {
 	Kind  FabricRepairScopeIdentifierKind
 	Value interface{}
 }
-type innerFabricRepairScopeIdentifier struct {
-	FabricRepairScopeIdentifier
-}
 
-func (obj *innerFabricRepairScopeIdentifier) toGoStruct() *FabricRepairScopeIdentifier {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricRepairScopeIdentifier
-}
 func (obj *FabricRepairScopeIdentifier) toInnerStruct() *innerFabricRepairScopeIdentifier {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricRepairScopeIdentifier{*obj}
+	dst := &innerFabricRepairScopeIdentifier{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricRepairScopeIdentifier struct {
+	Kind  FabricRepairScopeIdentifierKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricRepairScopeIdentifier) toGoStruct() (dst *FabricRepairScopeIdentifier) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricRepairScopeIdentifier{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricRepairTargetDescription struct {
 	Kind  FabricRepairTargetKind
 	Value interface{}
 }
-type innerFabricRepairTargetDescription struct {
-	FabricRepairTargetDescription
-}
 
-func (obj *innerFabricRepairTargetDescription) toGoStruct() *FabricRepairTargetDescription {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricRepairTargetDescription
-}
 func (obj *FabricRepairTargetDescription) toInnerStruct() *innerFabricRepairTargetDescription {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricRepairTargetDescription{*obj}
+	dst := &innerFabricRepairTargetDescription{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricRepairTargetDescription struct {
+	Kind  FabricRepairTargetKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricRepairTargetDescription) toGoStruct() (dst *FabricRepairTargetDescription) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricRepairTargetDescription{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricRepairNodeImpact struct {
@@ -21330,12 +21636,12 @@ func (obj *FabricRepairNodeImpact) toInnerStruct() *innerFabricRepairNodeImpact 
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricRepairNodeImpact{}
+	dst := &innerFabricRepairNodeImpact{}
 	s_519, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_519
 
 	dst.ImpactLevel = obj.ImpactLevel
-	return &dst
+	return dst
 }
 
 type innerFabricRepairNodeImpact struct {
@@ -21381,21 +21687,30 @@ type FabricRepairImpactDescription struct {
 	Kind  FabricRepairImpactKind
 	Value interface{}
 }
-type innerFabricRepairImpactDescription struct {
-	FabricRepairImpactDescription
-}
 
-func (obj *innerFabricRepairImpactDescription) toGoStruct() *FabricRepairImpactDescription {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricRepairImpactDescription
-}
 func (obj *FabricRepairImpactDescription) toInnerStruct() *innerFabricRepairImpactDescription {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricRepairImpactDescription{*obj}
+	dst := &innerFabricRepairImpactDescription{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricRepairImpactDescription struct {
+	Kind  FabricRepairImpactKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricRepairImpactDescription) toGoStruct() (dst *FabricRepairImpactDescription) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricRepairImpactDescription{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricRepairResultDescription struct {
@@ -21408,13 +21723,13 @@ func (obj *FabricRepairResultDescription) toInnerStruct() *innerFabricRepairResu
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricRepairResultDescription{}
+	dst := &innerFabricRepairResultDescription{}
 	dst.ResultStatus = obj.ResultStatus
 	dst.ResultCode = obj.ResultCode
 	s_520, _ := windows.UTF16PtrFromString(obj.ResultDetails)
 	dst.ResultDetails = s_520
 
-	return &dst
+	return dst
 }
 
 type innerFabricRepairResultDescription struct {
@@ -21453,7 +21768,7 @@ func (obj *FabricRepairTaskHistory) toInnerStruct() *innerFabricRepairTaskHistor
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricRepairTaskHistory{}
+	dst := &innerFabricRepairTaskHistory{}
 	dst.CreatedUtcTimestamp = windows.NsecToFiletime(obj.CreatedUtcTimestamp.UnixNano())
 	dst.ClaimedUtcTimestamp = windows.NsecToFiletime(obj.ClaimedUtcTimestamp.UnixNano())
 	dst.PreparingUtcTimestamp = windows.NsecToFiletime(obj.PreparingUtcTimestamp.UnixNano())
@@ -21468,7 +21783,7 @@ func (obj *FabricRepairTaskHistory) toInnerStruct() *innerFabricRepairTaskHistor
 	ex1.RestoringHealthCheckStartUtcTimestamp = windows.NsecToFiletime(obj.RestoringHealthCheckStartUtcTimestamp.UnixNano())
 	ex1.RestoringHealthCheckEndUtcTimestamp = windows.NsecToFiletime(obj.RestoringHealthCheckEndUtcTimestamp.UnixNano())
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricRepairTaskHistory struct {
@@ -21522,14 +21837,14 @@ func (obj *FabricRepairExecutorState) toInnerStruct() *innerFabricRepairExecutor
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricRepairExecutorState{}
+	dst := &innerFabricRepairExecutorState{}
 	s_521, _ := windows.UTF16PtrFromString(obj.Executor)
 	dst.Executor = s_521
 
 	s_522, _ := windows.UTF16PtrFromString(obj.ExecutorData)
 	dst.ExecutorData = s_522
 
-	return &dst
+	return dst
 }
 
 type innerFabricRepairExecutorState struct {
@@ -21561,7 +21876,7 @@ func (obj *FabricRepairTaskHealthPolicyUpdateDescription) toInnerStruct() *inner
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricRepairTaskHealthPolicyUpdateDescription{}
+	dst := &innerFabricRepairTaskHealthPolicyUpdateDescription{}
 	dst.Scope = obj.Scope.toInnerStruct()
 	s_523, _ := windows.UTF16PtrFromString(obj.RepairTaskId)
 	dst.RepairTaskId = s_523
@@ -21570,7 +21885,7 @@ func (obj *FabricRepairTaskHealthPolicyUpdateDescription) toInnerStruct() *inner
 	dst.Flags = obj.Flags
 	dst.PerformPreparingHealthCheck = obj.PerformPreparingHealthCheck
 	dst.PerformRestoringHealthCheck = obj.PerformRestoringHealthCheck
-	return &dst
+	return dst
 }
 
 type innerFabricRepairTaskHealthPolicyUpdateDescription struct {
@@ -21620,7 +21935,7 @@ func (obj *FabricRepairTask) toInnerStruct() *innerFabricRepairTask {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricRepairTask{}
+	dst := &innerFabricRepairTask{}
 	dst.Scope = obj.Scope.toInnerStruct()
 	s_524, _ := windows.UTF16PtrFromString(obj.TaskId)
 	dst.TaskId = s_524
@@ -21646,7 +21961,7 @@ func (obj *FabricRepairTask) toInnerStruct() *innerFabricRepairTask {
 	ex1.PreparingHealthCheckState = obj.PreparingHealthCheckState
 	ex1.RestoringHealthCheckState = obj.RestoringHealthCheckState
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricRepairTask struct {
@@ -21735,14 +22050,14 @@ func (obj *FabricRepairCancelDescription) toInnerStruct() *innerFabricRepairCanc
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricRepairCancelDescription{}
+	dst := &innerFabricRepairCancelDescription{}
 	dst.Scope = obj.Scope.toInnerStruct()
 	s_527, _ := windows.UTF16PtrFromString(obj.RepairTaskId)
 	dst.RepairTaskId = s_527
 
 	dst.Version = obj.Version
 	dst.RequestAbort = obj.RequestAbort
-	return &dst
+	return dst
 }
 
 type innerFabricRepairCancelDescription struct {
@@ -21775,13 +22090,13 @@ func (obj *FabricRepairDeleteDescription) toInnerStruct() *innerFabricRepairDele
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricRepairDeleteDescription{}
+	dst := &innerFabricRepairDeleteDescription{}
 	dst.Scope = obj.Scope.toInnerStruct()
 	s_528, _ := windows.UTF16PtrFromString(obj.RepairTaskId)
 	dst.RepairTaskId = s_528
 
 	dst.Version = obj.Version
-	return &dst
+	return dst
 }
 
 type innerFabricRepairDeleteDescription struct {
@@ -21812,13 +22127,13 @@ func (obj *FabricRepairApproveDescription) toInnerStruct() *innerFabricRepairApp
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricRepairApproveDescription{}
+	dst := &innerFabricRepairApproveDescription{}
 	dst.Scope = obj.Scope.toInnerStruct()
 	s_529, _ := windows.UTF16PtrFromString(obj.RepairTaskId)
 	dst.RepairTaskId = s_529
 
 	dst.Version = obj.Version
-	return &dst
+	return dst
 }
 
 type innerFabricRepairApproveDescription struct {
@@ -21850,7 +22165,7 @@ func (obj *FabricRepairTaskQueryDescription) toInnerStruct() *innerFabricRepairT
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricRepairTaskQueryDescription{}
+	dst := &innerFabricRepairTaskQueryDescription{}
 	dst.Scope = obj.Scope.toInnerStruct()
 	s_530, _ := windows.UTF16PtrFromString(obj.TaskIdFilter)
 	dst.TaskIdFilter = s_530
@@ -21859,7 +22174,7 @@ func (obj *FabricRepairTaskQueryDescription) toInnerStruct() *innerFabricRepairT
 	s_531, _ := windows.UTF16PtrFromString(obj.ExecutorFilter)
 	dst.ExecutorFilter = s_531
 
-	return &dst
+	return dst
 }
 
 type innerFabricRepairTaskQueryDescription struct {
@@ -21901,7 +22216,7 @@ func (obj *FabricStoreBackupInfo) toInnerStruct() *innerFabricStoreBackupInfo {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricStoreBackupInfo{}
+	dst := &innerFabricStoreBackupInfo{}
 	s_532, _ := windows.UTF16PtrFromString(obj.BackupFolder)
 	dst.BackupFolder = s_532
 
@@ -21911,7 +22226,7 @@ func (obj *FabricStoreBackupInfo) toInnerStruct() *innerFabricStoreBackupInfo {
 	ex1.BackupChainId = obj.BackupChainId
 	ex1.BackupIndex = obj.BackupIndex
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricStoreBackupInfo struct {
@@ -21956,7 +22271,7 @@ func (obj *FabricDeltaNodesCheckHealthEvaluation) toInnerStruct() *innerFabricDe
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeltaNodesCheckHealthEvaluation{}
+	dst := &innerFabricDeltaNodesCheckHealthEvaluation{}
 	s_533, _ := windows.UTF16PtrFromString(obj.Description)
 	dst.Description = s_533
 
@@ -21985,7 +22300,7 @@ func (obj *FabricDeltaNodesCheckHealthEvaluation) toInnerStruct() *innerFabricDe
 
 	}
 	dst.UnhealthyEvaluations = lst_534
-	return &dst
+	return dst
 }
 
 type innerFabricDeltaNodesCheckHealthEvaluation struct {
@@ -22041,7 +22356,7 @@ func (obj *FabricUpgradeDomainDeltaNodesCheckHealthEvaluation) toInnerStruct() *
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricUpgradeDomainDeltaNodesCheckHealthEvaluation{}
+	dst := &innerFabricUpgradeDomainDeltaNodesCheckHealthEvaluation{}
 	s_535, _ := windows.UTF16PtrFromString(obj.Description)
 	dst.Description = s_535
 
@@ -22073,7 +22388,7 @@ func (obj *FabricUpgradeDomainDeltaNodesCheckHealthEvaluation) toInnerStruct() *
 
 	}
 	dst.UnhealthyEvaluations = lst_537
-	return &dst
+	return dst
 }
 
 type innerFabricUpgradeDomainDeltaNodesCheckHealthEvaluation struct {
@@ -22124,11 +22439,11 @@ func (obj *FabricPagingStatus) toInnerStruct() *innerFabricPagingStatus {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricPagingStatus{}
+	dst := &innerFabricPagingStatus{}
 	s_538, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
 	dst.ContinuationToken = s_538
 
-	return &dst
+	return dst
 }
 
 type innerFabricPagingStatus struct {
@@ -22154,12 +22469,12 @@ func (obj *FabricApplicationTypeHealthPolicyMapItem) toInnerStruct() *innerFabri
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationTypeHealthPolicyMapItem{}
+	dst := &innerFabricApplicationTypeHealthPolicyMapItem{}
 	s_539, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
 	dst.ApplicationTypeName = s_539
 
 	dst.MaxPercentUnhealthyApplications = obj.MaxPercentUnhealthyApplications
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationTypeHealthPolicyMapItem struct {
@@ -22219,7 +22534,7 @@ func (obj *FabricApplicationTypeApplicationsHealthEvaluation) toInnerStruct() *i
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationTypeApplicationsHealthEvaluation{}
+	dst := &innerFabricApplicationTypeApplicationsHealthEvaluation{}
 	s_541, _ := windows.UTF16PtrFromString(obj.Description)
 	dst.Description = s_541
 
@@ -22249,7 +22564,7 @@ func (obj *FabricApplicationTypeApplicationsHealthEvaluation) toInnerStruct() *i
 	dst.UnhealthyEvaluations = lst_543
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyApplications = obj.MaxPercentUnhealthyApplications
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationTypeApplicationsHealthEvaluation struct {
@@ -22297,12 +22612,12 @@ func (obj *FabricNodeHealthStateFilter) toInnerStruct() *innerFabricNodeHealthSt
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNodeHealthStateFilter{}
+	dst := &innerFabricNodeHealthStateFilter{}
 	dst.HealthStateFilter = obj.HealthStateFilter
 	s_544, _ := windows.UTF16PtrFromString(obj.NodeNameFilter)
 	dst.NodeNameFilter = s_544
 
-	return &dst
+	return dst
 }
 
 type innerFabricNodeHealthStateFilter struct {
@@ -22354,7 +22669,7 @@ func (obj *FabricDeployedServicePackageHealthStateFilter) toInnerStruct() *inner
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedServicePackageHealthStateFilter{}
+	dst := &innerFabricDeployedServicePackageHealthStateFilter{}
 	dst.HealthStateFilter = obj.HealthStateFilter
 	s_545, _ := windows.UTF16PtrFromString(obj.ServiceManifestNameFilter)
 	dst.ServiceManifestNameFilter = s_545
@@ -22365,7 +22680,7 @@ func (obj *FabricDeployedServicePackageHealthStateFilter) toInnerStruct() *inner
 	ex1.ServicePackageActivationIdFilter = s_546
 
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedServicePackageHealthStateFilter struct {
@@ -22427,7 +22742,7 @@ func (obj *FabricDeployedApplicationHealthStateFilter) toInnerStruct() *innerFab
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedApplicationHealthStateFilter{}
+	dst := &innerFabricDeployedApplicationHealthStateFilter{}
 	dst.HealthStateFilter = obj.HealthStateFilter
 	s_547, _ := windows.UTF16PtrFromString(obj.NodeNameFilter)
 	dst.NodeNameFilter = s_547
@@ -22452,7 +22767,7 @@ func (obj *FabricDeployedApplicationHealthStateFilter) toInnerStruct() *innerFab
 
 	}
 	dst.DeployedServicePackageFilters = lst_548
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedApplicationHealthStateFilter struct {
@@ -22563,7 +22878,7 @@ func (obj *FabricPartitionHealthStateFilter) toInnerStruct() *innerFabricPartiti
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricPartitionHealthStateFilter{}
+	dst := &innerFabricPartitionHealthStateFilter{}
 	dst.HealthStateFilter = obj.HealthStateFilter
 	dst.PartitionIdFilter = obj.PartitionIdFilter
 	lst_549 := &innerFabricReplicaHealthStateFilterList{}
@@ -22586,7 +22901,7 @@ func (obj *FabricPartitionHealthStateFilter) toInnerStruct() *innerFabricPartiti
 
 	}
 	dst.ReplicaFilters = lst_549
-	return &dst
+	return dst
 }
 
 type innerFabricPartitionHealthStateFilter struct {
@@ -22652,7 +22967,7 @@ func (obj *FabricServiceHealthStateFilter) toInnerStruct() *innerFabricServiceHe
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceHealthStateFilter{}
+	dst := &innerFabricServiceHealthStateFilter{}
 	dst.HealthStateFilter = obj.HealthStateFilter
 	s_550, _ := windows.UTF16PtrFromString(obj.ServiceNameFilter)
 	dst.ServiceNameFilter = s_550
@@ -22677,7 +22992,7 @@ func (obj *FabricServiceHealthStateFilter) toInnerStruct() *innerFabricServiceHe
 
 	}
 	dst.PartitionFilters = lst_551
-	return &dst
+	return dst
 }
 
 type innerFabricServiceHealthStateFilter struct {
@@ -22745,7 +23060,7 @@ func (obj *FabricApplicationHealthStateFilter) toInnerStruct() *innerFabricAppli
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationHealthStateFilter{}
+	dst := &innerFabricApplicationHealthStateFilter{}
 	dst.HealthStateFilter = obj.HealthStateFilter
 	s_552, _ := windows.UTF16PtrFromString(obj.ApplicationNameFilter)
 	dst.ApplicationNameFilter = s_552
@@ -22796,7 +23111,7 @@ func (obj *FabricApplicationHealthStateFilter) toInnerStruct() *innerFabricAppli
 	ex1.ApplicationTypeNameFilter = s_555
 
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationHealthStateFilter struct {
@@ -22887,7 +23202,7 @@ func (obj *FabricClusterHealthChunkQueryDescription) toInnerStruct() *innerFabri
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricClusterHealthChunkQueryDescription{}
+	dst := &innerFabricClusterHealthChunkQueryDescription{}
 	dst.ClusterHealthPolicy = obj.ClusterHealthPolicy.toInnerStruct()
 	{
 		mapobj := &innerFabricApplicationHealthPolicyMap{}
@@ -22952,7 +23267,7 @@ func (obj *FabricClusterHealthChunkQueryDescription) toInnerStruct() *innerFabri
 
 	}
 	dst.NodeFilters = lst_559
-	return &dst
+	return dst
 }
 
 type innerFabricClusterHealthChunkQueryDescription struct {
@@ -23026,12 +23341,12 @@ func (obj *FabricNodeHealthStateChunk) toInnerStruct() *innerFabricNodeHealthSta
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNodeHealthStateChunk{}
+	dst := &innerFabricNodeHealthStateChunk{}
 	s_561, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_561
 
 	dst.HealthState = obj.HealthState
-	return &dst
+	return dst
 }
 
 type innerFabricNodeHealthStateChunk struct {
@@ -23132,7 +23447,7 @@ func (obj *FabricPartitionHealthStateChunk) toInnerStruct() *innerFabricPartitio
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricPartitionHealthStateChunk{}
+	dst := &innerFabricPartitionHealthStateChunk{}
 	dst.PartitionId = obj.PartitionId
 	dst.HealthState = obj.HealthState
 	lst_562 := &innerFabricReplicaHealthStateChunkList{}
@@ -23155,7 +23470,7 @@ func (obj *FabricPartitionHealthStateChunk) toInnerStruct() *innerFabricPartitio
 
 	}
 	dst.ReplicaHealthStateChunks = lst_562
-	return &dst
+	return dst
 }
 
 type innerFabricPartitionHealthStateChunk struct {
@@ -23223,7 +23538,7 @@ func (obj *FabricServiceHealthStateChunk) toInnerStruct() *innerFabricServiceHea
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricServiceHealthStateChunk{}
+	dst := &innerFabricServiceHealthStateChunk{}
 	s_563, _ := windows.UTF16PtrFromString(obj.ServiceName)
 	dst.ServiceName = s_563
 
@@ -23248,7 +23563,7 @@ func (obj *FabricServiceHealthStateChunk) toInnerStruct() *innerFabricServiceHea
 
 	}
 	dst.PartitionHealthStateChunks = lst_564
-	return &dst
+	return dst
 }
 
 type innerFabricServiceHealthStateChunk struct {
@@ -23316,7 +23631,7 @@ func (obj *FabricDeployedServicePackageHealthStateChunk) toInnerStruct() *innerF
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedServicePackageHealthStateChunk{}
+	dst := &innerFabricDeployedServicePackageHealthStateChunk{}
 	s_565, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
 	dst.ServiceManifestName = s_565
 
@@ -23327,7 +23642,7 @@ func (obj *FabricDeployedServicePackageHealthStateChunk) toInnerStruct() *innerF
 	ex1.ServicePackageActivationId = s_566
 
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedServicePackageHealthStateChunk struct {
@@ -23391,7 +23706,7 @@ func (obj *FabricDeployedApplicationHealthStateChunk) toInnerStruct() *innerFabr
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedApplicationHealthStateChunk{}
+	dst := &innerFabricDeployedApplicationHealthStateChunk{}
 	s_567, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_567
 
@@ -23416,7 +23731,7 @@ func (obj *FabricDeployedApplicationHealthStateChunk) toInnerStruct() *innerFabr
 
 	}
 	dst.DeployedServicePackageHealthStateChunks = lst_568
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedApplicationHealthStateChunk struct {
@@ -23486,7 +23801,7 @@ func (obj *FabricApplicationHealthStateChunk) toInnerStruct() *innerFabricApplic
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationHealthStateChunk{}
+	dst := &innerFabricApplicationHealthStateChunk{}
 	s_569, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_569
 
@@ -23537,7 +23852,7 @@ func (obj *FabricApplicationHealthStateChunk) toInnerStruct() *innerFabricApplic
 	ex1.ApplicationTypeName = s_572
 
 	ex0.Reserved = unsafe.Pointer(ex1)
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationHealthStateChunk struct {
@@ -23629,7 +23944,7 @@ func (obj *FabricClusterHealthChunk) toInnerStruct() *innerFabricClusterHealthCh
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricClusterHealthChunk{}
+	dst := &innerFabricClusterHealthChunk{}
 	dst.HealthState = obj.HealthState
 	lst_573 := &innerFabricNodeHealthStateChunkList{}
 	{
@@ -23671,7 +23986,7 @@ func (obj *FabricClusterHealthChunk) toInnerStruct() *innerFabricClusterHealthCh
 
 	}
 	dst.ApplicationHealthStateChunks = lst_574
-	return &dst
+	return dst
 }
 
 type innerFabricClusterHealthChunk struct {
@@ -23725,14 +24040,14 @@ func (obj *FabricEventContextMapItem) toInnerStruct() *innerFabricEventContextMa
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricEventContextMapItem{}
+	dst := &innerFabricEventContextMapItem{}
 	s_575, _ := windows.UTF16PtrFromString(obj.Key)
 	dst.Key = s_575
 
 	s_576, _ := windows.UTF16PtrFromString(obj.Value)
 	dst.Value = s_576
 
-	return &dst
+	return dst
 }
 
 type innerFabricEventContextMapItem struct {
@@ -23795,7 +24110,7 @@ func (obj *FabricChaosParameters) toInnerStruct() *innerFabricChaosParameters {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricChaosParameters{}
+	dst := &innerFabricChaosParameters{}
 	dst.MaxClusterStabilizationTimeoutInSeconds = obj.MaxClusterStabilizationTimeoutInSeconds
 	dst.MaxConcurrentFaults = obj.MaxConcurrentFaults
 	dst.EnableMoveReplicaFaults = obj.EnableMoveReplicaFaults
@@ -23833,7 +24148,7 @@ func (obj *FabricChaosParameters) toInnerStruct() *innerFabricChaosParameters {
 	ex2 := &innerFabricChaosParametersEx2{}
 	ex2.ChaosTargetFilter = obj.ChaosTargetFilter.toInnerStruct()
 	ex1.Reserved = unsafe.Pointer(ex2)
-	return &dst
+	return dst
 }
 
 type innerFabricChaosParameters struct {
@@ -23908,7 +24223,7 @@ func (obj *FabricChaosTargetFilter) toInnerStruct() *innerFabricChaosTargetFilte
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricChaosTargetFilter{}
+	dst := &innerFabricChaosTargetFilter{}
 	lst_582 := &innerFabricStringList{}
 	{
 
@@ -23951,7 +24266,7 @@ func (obj *FabricChaosTargetFilter) toInnerStruct() *innerFabricChaosTargetFilte
 
 	}
 	dst.ApplicationInclusionList = lst_584
-	return &dst
+	return dst
 }
 
 type innerFabricChaosTargetFilter struct {
@@ -24024,10 +24339,10 @@ func (obj *FabricChaosEventsSegmentFilter) toInnerStruct() *innerFabricChaosEven
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricChaosEventsSegmentFilter{}
+	dst := &innerFabricChaosEventsSegmentFilter{}
 	dst.StartTimeUtc = windows.NsecToFiletime(obj.StartTimeUtc.UnixNano())
 	dst.EndTimeUtc = windows.NsecToFiletime(obj.EndTimeUtc.UnixNano())
-	return &dst
+	return dst
 }
 
 type innerFabricChaosEventsSegmentFilter struct {
@@ -24077,10 +24392,10 @@ func (obj *FabricChaosReportFilter) toInnerStruct() *innerFabricChaosReportFilte
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricChaosReportFilter{}
+	dst := &innerFabricChaosReportFilter{}
 	dst.StartTimeUtc = windows.NsecToFiletime(obj.StartTimeUtc.UnixNano())
 	dst.EndTimeUtc = windows.NsecToFiletime(obj.EndTimeUtc.UnixNano())
-	return &dst
+	return dst
 }
 
 type innerFabricChaosReportFilter struct {
@@ -24108,12 +24423,12 @@ func (obj *FabricGetChaosReportDescription) toInnerStruct() *innerFabricGetChaos
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricGetChaosReportDescription{}
+	dst := &innerFabricGetChaosReportDescription{}
 	dst.Filter = obj.Filter.toInnerStruct()
 	s_586, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
 	dst.ContinuationToken = s_586
 
-	return &dst
+	return dst
 }
 
 type innerFabricGetChaosReportDescription struct {
@@ -24136,21 +24451,30 @@ type FabricChaosEvent struct {
 	Kind  FabricChaosEventKind
 	Value interface{}
 }
-type innerFabricChaosEvent struct {
-	FabricChaosEvent
-}
 
-func (obj *innerFabricChaosEvent) toGoStruct() *FabricChaosEvent {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricChaosEvent
-}
 func (obj *FabricChaosEvent) toInnerStruct() *innerFabricChaosEvent {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricChaosEvent{*obj}
+	dst := &innerFabricChaosEvent{}
+	dst.Kind = obj.Kind
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricChaosEvent struct {
+	Kind  FabricChaosEventKind
+	Value unsafe.Pointer
+}
+
+func (obj *innerFabricChaosEvent) toGoStruct() (dst *FabricChaosEvent) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricChaosEvent{}
+	dst.Kind = obj.Kind
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricStartedEvent struct {
@@ -24162,10 +24486,10 @@ func (obj *FabricStartedEvent) toInnerStruct() *innerFabricStartedEvent {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricStartedEvent{}
+	dst := &innerFabricStartedEvent{}
 	dst.TimeStampUtc = windows.NsecToFiletime(obj.TimeStampUtc.UnixNano())
 	dst.ChaosParameters = obj.ChaosParameters.toInnerStruct()
-	return &dst
+	return dst
 }
 
 type innerFabricStartedEvent struct {
@@ -24193,7 +24517,7 @@ func (obj *FabricExecutingFaultsEvent) toInnerStruct() *innerFabricExecutingFaul
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricExecutingFaultsEvent{}
+	dst := &innerFabricExecutingFaultsEvent{}
 	dst.TimeStampUtc = windows.NsecToFiletime(obj.TimeStampUtc.UnixNano())
 	lst_587 := &innerFabricStringList{}
 	{
@@ -24216,7 +24540,7 @@ func (obj *FabricExecutingFaultsEvent) toInnerStruct() *innerFabricExecutingFaul
 
 	}
 	dst.Faults = lst_587
-	return &dst
+	return dst
 }
 
 type innerFabricExecutingFaultsEvent struct {
@@ -24256,12 +24580,12 @@ func (obj *FabricWaitingEvent) toInnerStruct() *innerFabricWaitingEvent {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricWaitingEvent{}
+	dst := &innerFabricWaitingEvent{}
 	dst.TimeStampUtc = windows.NsecToFiletime(obj.TimeStampUtc.UnixNano())
 	s_589, _ := windows.UTF16PtrFromString(obj.Reason)
 	dst.Reason = s_589
 
-	return &dst
+	return dst
 }
 
 type innerFabricWaitingEvent struct {
@@ -24289,12 +24613,12 @@ func (obj *FabricValidationFailedEvent) toInnerStruct() *innerFabricValidationFa
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricValidationFailedEvent{}
+	dst := &innerFabricValidationFailedEvent{}
 	dst.TimeStampUtc = windows.NsecToFiletime(obj.TimeStampUtc.UnixNano())
 	s_590, _ := windows.UTF16PtrFromString(obj.Reason)
 	dst.Reason = s_590
 
-	return &dst
+	return dst
 }
 
 type innerFabricValidationFailedEvent struct {
@@ -24322,12 +24646,12 @@ func (obj *FabricTestErrorEvent) toInnerStruct() *innerFabricTestErrorEvent {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricTestErrorEvent{}
+	dst := &innerFabricTestErrorEvent{}
 	dst.TimeStampUtc = windows.NsecToFiletime(obj.TimeStampUtc.UnixNano())
 	s_591, _ := windows.UTF16PtrFromString(obj.Reason)
 	dst.Reason = s_591
 
-	return &dst
+	return dst
 }
 
 type innerFabricTestErrorEvent struct {
@@ -24355,12 +24679,12 @@ func (obj *FabricStoppedEvent) toInnerStruct() *innerFabricStoppedEvent {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricStoppedEvent{}
+	dst := &innerFabricStoppedEvent{}
 	dst.TimeStampUtc = windows.NsecToFiletime(obj.TimeStampUtc.UnixNano())
 	s_592, _ := windows.UTF16PtrFromString(obj.Reason)
 	dst.Reason = s_592
 
-	return &dst
+	return dst
 }
 
 type innerFabricStoppedEvent struct {
@@ -24413,7 +24737,7 @@ func (obj *FabricChaosReport) toInnerStruct() *innerFabricChaosReport {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricChaosReport{}
+	dst := &innerFabricChaosReport{}
 	dst.ChaosParameters = obj.ChaosParameters.toInnerStruct()
 	dst.Status = obj.Status
 	s_593, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
@@ -24439,7 +24763,7 @@ func (obj *FabricChaosReport) toInnerStruct() *innerFabricChaosReport {
 
 	}
 	dst.History = lst_594
-	return &dst
+	return dst
 }
 
 type innerFabricChaosReport struct {
@@ -24483,7 +24807,7 @@ func (obj *FabricChaosEventsSegment) toInnerStruct() *innerFabricChaosEventsSegm
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricChaosEventsSegment{}
+	dst := &innerFabricChaosEventsSegment{}
 	s_595, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
 	dst.ContinuationToken = s_595
 
@@ -24507,7 +24831,7 @@ func (obj *FabricChaosEventsSegment) toInnerStruct() *innerFabricChaosEventsSegm
 
 	}
 	dst.History = lst_596
-	return &dst
+	return dst
 }
 
 type innerFabricChaosEventsSegment struct {
@@ -24665,7 +24989,7 @@ func (obj *FabricChaosScheduleJob) toInnerStruct() *innerFabricChaosScheduleJob 
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricChaosScheduleJob{}
+	dst := &innerFabricChaosScheduleJob{}
 	s_597, _ := windows.UTF16PtrFromString(obj.ChaosParameters)
 	dst.ChaosParameters = s_597
 
@@ -24690,7 +25014,7 @@ func (obj *FabricChaosScheduleJob) toInnerStruct() *innerFabricChaosScheduleJob 
 
 	}
 	dst.Times = lst_598
-	return &dst
+	return dst
 }
 
 type innerFabricChaosScheduleJob struct {
@@ -24755,12 +25079,12 @@ func (obj *FabricChaosScheduleChaosParametersMapItem) toInnerStruct() *innerFabr
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricChaosScheduleChaosParametersMapItem{}
+	dst := &innerFabricChaosScheduleChaosParametersMapItem{}
 	s_599, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_599
 
 	dst.Parameters = obj.Parameters.toInnerStruct()
-	return &dst
+	return dst
 }
 
 type innerFabricChaosScheduleChaosParametersMapItem struct {
@@ -24818,7 +25142,7 @@ func (obj *FabricChaosSchedule) toInnerStruct() *innerFabricChaosSchedule {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricChaosSchedule{}
+	dst := &innerFabricChaosSchedule{}
 	dst.StartDate = windows.NsecToFiletime(obj.StartDate.UnixNano())
 	dst.ExpiryDate = windows.NsecToFiletime(obj.ExpiryDate.UnixNano())
 	{
@@ -24864,7 +25188,7 @@ func (obj *FabricChaosSchedule) toInnerStruct() *innerFabricChaosSchedule {
 
 	}
 	dst.Jobs = lst_603
-	return &dst
+	return dst
 }
 
 type innerFabricChaosSchedule struct {
@@ -24972,7 +25296,7 @@ func (obj *FabricSecret) toInnerStruct() *innerFabricSecret {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricSecret{}
+	dst := &innerFabricSecret{}
 	s_605, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_605
 
@@ -24988,7 +25312,7 @@ func (obj *FabricSecret) toInnerStruct() *innerFabricSecret {
 	s_609, _ := windows.UTF16PtrFromString(obj.ContentType)
 	dst.ContentType = s_609
 
-	return &dst
+	return dst
 }
 
 type innerFabricSecret struct {
@@ -25044,14 +25368,14 @@ func (obj *FabricSecretReference) toInnerStruct() *innerFabricSecretReference {
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricSecretReference{}
+	dst := &innerFabricSecretReference{}
 	s_610, _ := windows.UTF16PtrFromString(obj.Name)
 	dst.Name = s_610
 
 	s_611, _ := windows.UTF16PtrFromString(obj.Version)
 	dst.Version = s_611
 
-	return &dst
+	return dst
 }
 
 type innerFabricSecretReference struct {
@@ -25118,7 +25442,7 @@ func (obj *FabricCodePackageEventDescription) toInnerStruct() *innerFabricCodePa
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricCodePackageEventDescription{}
+	dst := &innerFabricCodePackageEventDescription{}
 	s_612, _ := windows.UTF16PtrFromString(obj.CodePackageName)
 	dst.CodePackageName = s_612
 
@@ -25151,7 +25475,7 @@ func (obj *FabricCodePackageEventDescription) toInnerStruct() *innerFabricCodePa
 
 		dst.Properties = mapobj
 	}
-	return &dst
+	return dst
 }
 
 type innerFabricCodePackageEventDescription struct {
@@ -25202,21 +25526,30 @@ type FabricNetworkDescription struct {
 	NetworkType FabricNetworkType
 	Value       interface{}
 }
-type innerFabricNetworkDescription struct {
-	FabricNetworkDescription
-}
 
-func (obj *innerFabricNetworkDescription) toGoStruct() *FabricNetworkDescription {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricNetworkDescription
-}
 func (obj *FabricNetworkDescription) toInnerStruct() *innerFabricNetworkDescription {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricNetworkDescription{*obj}
+	dst := &innerFabricNetworkDescription{}
+	dst.NetworkType = obj.NetworkType
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricNetworkDescription struct {
+	NetworkType FabricNetworkType
+	Value       unsafe.Pointer
+}
+
+func (obj *innerFabricNetworkDescription) toGoStruct() (dst *FabricNetworkDescription) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricNetworkDescription{}
+	dst.NetworkType = obj.NetworkType
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricLocalNetworkConfigurationDescription struct {
@@ -25227,11 +25560,11 @@ func (obj *FabricLocalNetworkConfigurationDescription) toInnerStruct() *innerFab
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricLocalNetworkConfigurationDescription{}
+	dst := &innerFabricLocalNetworkConfigurationDescription{}
 	s_617, _ := windows.UTF16PtrFromString(obj.NetworkAddressPrefix)
 	dst.NetworkAddressPrefix = s_617
 
-	return &dst
+	return dst
 }
 
 type innerFabricLocalNetworkConfigurationDescription struct {
@@ -25277,11 +25610,11 @@ func (obj *FabricDeleteNetworkDescription) toInnerStruct() *innerFabricDeleteNet
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeleteNetworkDescription{}
+	dst := &innerFabricDeleteNetworkDescription{}
 	s_618, _ := windows.UTF16PtrFromString(obj.NetworkName)
 	dst.NetworkName = s_618
 
-	return &dst
+	return dst
 }
 
 type innerFabricDeleteNetworkDescription struct {
@@ -25302,21 +25635,30 @@ type FabricNetworkInformation struct {
 	NetworkType FabricNetworkType
 	Value       interface{}
 }
-type innerFabricNetworkInformation struct {
-	FabricNetworkInformation
-}
 
-func (obj *innerFabricNetworkInformation) toGoStruct() *FabricNetworkInformation {
-	if obj == nil {
-		return nil
-	}
-	return &obj.FabricNetworkInformation
-}
 func (obj *FabricNetworkInformation) toInnerStruct() *innerFabricNetworkInformation {
 	if obj == nil {
 		return nil
 	}
-	return &innerFabricNetworkInformation{*obj}
+	dst := &innerFabricNetworkInformation{}
+	dst.NetworkType = obj.NetworkType
+	dst.Value = toUnsafePointer(obj.Value)
+	return dst
+}
+
+type innerFabricNetworkInformation struct {
+	NetworkType FabricNetworkType
+	Value       unsafe.Pointer
+}
+
+func (obj *innerFabricNetworkInformation) toGoStruct() (dst *FabricNetworkInformation) {
+	if obj == nil {
+		return
+	}
+	dst = &FabricNetworkInformation{}
+	dst.NetworkType = obj.NetworkType
+	dst.Value = fromUnsafePointer(obj.Value)
+	return
 }
 
 type FabricNetworkQueryDescription struct {
@@ -25329,13 +25671,13 @@ func (obj *FabricNetworkQueryDescription) toInnerStruct() *innerFabricNetworkQue
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNetworkQueryDescription{}
+	dst := &innerFabricNetworkQueryDescription{}
 	s_619, _ := windows.UTF16PtrFromString(obj.NetworkNameFilter)
 	dst.NetworkNameFilter = s_619
 
 	dst.NetworkStatusFilter = obj.NetworkStatusFilter
 	dst.PagingDescription = obj.PagingDescription.toInnerStruct()
-	return &dst
+	return dst
 }
 
 type innerFabricNetworkQueryDescription struct {
@@ -25366,13 +25708,13 @@ func (obj *FabricLocalNetworkInformation) toInnerStruct() *innerFabricLocalNetwo
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricLocalNetworkInformation{}
+	dst := &innerFabricLocalNetworkInformation{}
 	s_620, _ := windows.UTF16PtrFromString(obj.NetworkName)
 	dst.NetworkName = s_620
 
 	dst.NetworkConfiguration = obj.NetworkConfiguration.toInnerStruct()
 	dst.NetworkStatus = obj.NetworkStatus
-	return &dst
+	return dst
 }
 
 type innerFabricLocalNetworkInformation struct {
@@ -25426,7 +25768,7 @@ func (obj *FabricNetworkApplicationQueryDescription) toInnerStruct() *innerFabri
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNetworkApplicationQueryDescription{}
+	dst := &innerFabricNetworkApplicationQueryDescription{}
 	s_621, _ := windows.UTF16PtrFromString(obj.NetworkName)
 	dst.NetworkName = s_621
 
@@ -25434,7 +25776,7 @@ func (obj *FabricNetworkApplicationQueryDescription) toInnerStruct() *innerFabri
 	dst.ApplicationNameFilter = s_622
 
 	dst.PagingDescription = obj.PagingDescription.toInnerStruct()
-	return &dst
+	return dst
 }
 
 type innerFabricNetworkApplicationQueryDescription struct {
@@ -25463,11 +25805,11 @@ func (obj *FabricNetworkApplicationQueryResultItem) toInnerStruct() *innerFabric
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNetworkApplicationQueryResultItem{}
+	dst := &innerFabricNetworkApplicationQueryResultItem{}
 	s_623, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_623
 
-	return &dst
+	return dst
 }
 
 type innerFabricNetworkApplicationQueryResultItem struct {
@@ -25517,7 +25859,7 @@ func (obj *FabricNetworkNodeQueryDescription) toInnerStruct() *innerFabricNetwor
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNetworkNodeQueryDescription{}
+	dst := &innerFabricNetworkNodeQueryDescription{}
 	s_624, _ := windows.UTF16PtrFromString(obj.NetworkName)
 	dst.NetworkName = s_624
 
@@ -25525,7 +25867,7 @@ func (obj *FabricNetworkNodeQueryDescription) toInnerStruct() *innerFabricNetwor
 	dst.NodeNameFilter = s_625
 
 	dst.PagingDescription = obj.PagingDescription.toInnerStruct()
-	return &dst
+	return dst
 }
 
 type innerFabricNetworkNodeQueryDescription struct {
@@ -25554,11 +25896,11 @@ func (obj *FabricNetworkNodeQueryResultItem) toInnerStruct() *innerFabricNetwork
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricNetworkNodeQueryResultItem{}
+	dst := &innerFabricNetworkNodeQueryResultItem{}
 	s_626, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_626
 
-	return &dst
+	return dst
 }
 
 type innerFabricNetworkNodeQueryResultItem struct {
@@ -25607,12 +25949,12 @@ func (obj *FabricApplicationNetworkQueryDescription) toInnerStruct() *innerFabri
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationNetworkQueryDescription{}
+	dst := &innerFabricApplicationNetworkQueryDescription{}
 	s_627, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_627
 
 	dst.PagingDescription = obj.PagingDescription.toInnerStruct()
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationNetworkQueryDescription struct {
@@ -25639,11 +25981,11 @@ func (obj *FabricApplicationNetworkQueryResultItem) toInnerStruct() *innerFabric
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricApplicationNetworkQueryResultItem{}
+	dst := &innerFabricApplicationNetworkQueryResultItem{}
 	s_628, _ := windows.UTF16PtrFromString(obj.NetworkName)
 	dst.NetworkName = s_628
 
-	return &dst
+	return dst
 }
 
 type innerFabricApplicationNetworkQueryResultItem struct {
@@ -25692,12 +26034,12 @@ func (obj *FabricDeployedNetworkQueryDescription) toInnerStruct() *innerFabricDe
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedNetworkQueryDescription{}
+	dst := &innerFabricDeployedNetworkQueryDescription{}
 	s_629, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_629
 
 	dst.PagingDescription = obj.PagingDescription.toInnerStruct()
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedNetworkQueryDescription struct {
@@ -25724,11 +26066,11 @@ func (obj *FabricDeployedNetworkQueryResultItem) toInnerStruct() *innerFabricDep
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedNetworkQueryResultItem{}
+	dst := &innerFabricDeployedNetworkQueryResultItem{}
 	s_630, _ := windows.UTF16PtrFromString(obj.NetworkName)
 	dst.NetworkName = s_630
 
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedNetworkQueryResultItem struct {
@@ -25781,7 +26123,7 @@ func (obj *FabricDeployedNetworkCodePackageQueryDescription) toInnerStruct() *in
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedNetworkCodePackageQueryDescription{}
+	dst := &innerFabricDeployedNetworkCodePackageQueryDescription{}
 	s_631, _ := windows.UTF16PtrFromString(obj.NodeName)
 	dst.NodeName = s_631
 
@@ -25798,7 +26140,7 @@ func (obj *FabricDeployedNetworkCodePackageQueryDescription) toInnerStruct() *in
 	dst.CodePackageNameFilter = s_635
 
 	dst.PagingDescription = obj.PagingDescription.toInnerStruct()
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedNetworkCodePackageQueryDescription struct {
@@ -25840,7 +26182,7 @@ func (obj *FabricDeployedNetworkCodePackageQueryResultItem) toInnerStruct() *inn
 	if obj == nil {
 		return nil
 	}
-	dst := innerFabricDeployedNetworkCodePackageQueryResultItem{}
+	dst := &innerFabricDeployedNetworkCodePackageQueryResultItem{}
 	s_636, _ := windows.UTF16PtrFromString(obj.ApplicationName)
 	dst.ApplicationName = s_636
 
@@ -25865,7 +26207,7 @@ func (obj *FabricDeployedNetworkCodePackageQueryResultItem) toInnerStruct() *inn
 	s_643, _ := windows.UTF16PtrFromString(obj.ContainerId)
 	dst.ContainerId = s_643
 
-	return &dst
+	return dst
 }
 
 type innerFabricDeployedNetworkCodePackageQueryResultItem struct {

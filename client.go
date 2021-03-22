@@ -162,7 +162,7 @@ func comHubFromComClientSetting(com *comFabricClientSettings) *fabricClientComHu
 type FabricClientOpt struct {
 	Address     []string
 	Role        FabricClientRole
-	Credentials *X509Credentials
+	Credentials *FabricSecurityCredentials
 
 	OnNotification func(notification FabricServiceNotification)
 	OnConnected    func(info FabricGatewayInformation)
@@ -184,7 +184,7 @@ func NewClient(opt FabricClientOpt) (*FabricClient, error) {
 	}
 
 	if opt.Credentials != nil {
-		err = com.innerSetSecurityCredentials(opt.Credentials)
+		err = com.SetSecurityCredentials(opt.Credentials)
 		if err != nil {
 			return nil, err
 		}

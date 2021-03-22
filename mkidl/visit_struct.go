@@ -26,8 +26,11 @@ func (g *generator) generatePublicStructFields(n *ast.StructNode) (simple bool) 
 	simple = true
 	fieldSize, fieldIsSizeOf := extractSizeof(n)
 
-	for i := 0; i < len(n.Fields)-1; i++ {
+	for i := 0; i < len(n.Fields); i++ {
 		cf := n.Fields[i]
+		if isResversed(n, i) {
+			continue
+		}
 
 		if g.isInnerOnlyStruct(g.unwrapTypedef(cf.Type)) {
 			simple = false
@@ -48,15 +51,6 @@ func (g *generator) generatePublicStructFields(n *ast.StructNode) (simple bool) 
 		}
 
 		g.printfln("%s %s", cf.Name, ct)
-	}
-
-	{
-		if !isResversed(n, len(n.Fields)-1) {
-			f := n.Fields[len(n.Fields)-1]
-			ct := g.toGolangType(f.Type, f.Indirections, false)
-			g.printfln("%s %s", f.Name, ct)
-
-		}
 	}
 
 	return
@@ -136,7 +130,7 @@ func (g *generator) generatePublicAndInnerStruct(n *ast.StructNode) {
 
 		g.printfln("func (obj *%s) toInnerStruct() *%v {", publicTypeName, innerTypeName)
 		g.printfln("if obj == nil { return nil}")
-		g.printfln("dst := %v{}", innerTypeName)
+		g.printfln("dst := &%v{}", innerTypeName)
 		g.generateGolangToInner("obj", "dst", n)
 
 		if len(g.ctx.definedStructEx[n.Name]) > 0 {
@@ -151,7 +145,7 @@ func (g *generator) generatePublicAndInnerStruct(n *ast.StructNode) {
 			g.printfln("ex%v.Reserved = unsafe.Pointer(ex%v)", i, i+1)
 		}
 
-		g.printfln("return &dst")
+		g.printfln("return dst")
 		g.printfln("}")
 
 		g.generateInnerStructAndConverter(n)

@@ -15,12 +15,15 @@ func ExampleNewX509Client() {
 
 	client, err := NewClient(FabricClientOpt{
 		Address: []string{"test.southcentralus.cloudapp.azure.com:19000"},
-		Credentials: &X509Credentials{
-			FindType:              FabricX509FindTypeFindbythumbprint,
-			FindValue:             "1111111111111111111111111111111111111111",
-			StoreName:             "MY",
-			StoreLocation:         FabricX509StoreLocationCurrentuser,
-			RemoteCertThumbprints: []string{"1111111111111111111111111111111111111111"},
+		Credentials: &FabricSecurityCredentials{
+			Kind: FabricSecurityCredentialKindX509,
+			Value: FabricX509Credentials{
+				FindType:              FabricX509FindTypeFindbythumbprint,
+				FindValue:             "1111111111111111111111111111111111111111",
+				StoreName:             "MY",
+				StoreLocation:         FabricX509StoreLocationCurrentuser,
+				RemoteCertThumbprints: []string{"1111111111111111111111111111111111111111"},
+			},
 		},
 	})
 
