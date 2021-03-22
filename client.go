@@ -20,13 +20,19 @@ var (
 	fabricCreateClient3Proc      = fabricClientDll.NewProc("FabricCreateClient3")
 )
 
-func createLocalClient(iid string, p unsafe.Pointer) error {
+func createLocalClient(client *FabricClient, role FabricClientRole, iid string, p unsafe.Pointer) error {
 	clzid, err := ole.IIDFromString(iid)
 	if err != nil {
 		return err
 	}
 
-	r, _, err := fabricCreateLocalClientProc.Call(uintptr(unsafe.Pointer(clzid)), uintptr(p))
+	r, _, err := fabricCreateLocalClient4Proc.Call(
+		uintptr(unsafe.Pointer(newComFabricServiceNotificationEventHandler(client))),
+		uintptr(unsafe.Pointer(newComFabricClientConnectionEventHandler(client))),
+		uintptr(role),
+		uintptr(unsafe.Pointer(clzid)),
+		uintptr(p),
+	)
 
 	if r != 0 {
 		return err
@@ -160,10 +166,15 @@ func comHubFromComClientSetting(com *comFabricClientSettings) *fabricClientComHu
 
 // FabricClientOpt is the option to create a FabricClient
 type FabricClientOpt struct {
-	Address     []string
-	Role        FabricClientRole
-	Credentials *FabricSecurityCredentials
+	Address        []string
+	Credentials    *FabricSecurityCredentials
+	OnNotification func(notification FabricServiceNotification)
+	OnConnected    func(info FabricGatewayInformation)
+	OnDisconnected func(info FabricGatewayInformation)
+}
 
+type FabricLocalClientOpt struct {
+	Role           FabricClientRole
 	OnNotification func(notification FabricServiceNotification)
 	OnConnected    func(info FabricGatewayInformation)
 	OnDisconnected func(info FabricGatewayInformation)
@@ -198,22 +209,45 @@ func NewClient(opt FabricClientOpt) (*FabricClient, error) {
 	return c, nil
 }
 
+func NewInsecureClient(conn string) (*FabricClient, error) {
+	return NewClient(FabricClientOpt{
+		Address: []string{conn},
+	})
+}
+
+func NewX509Client(conn string, cred *FabricSecurityCredentials) (*FabricClient, error) {
+	return NewClient(FabricClientOpt{
+		Address: []string{conn},
+		Credentials: &FabricSecurityCredentials{
+			Kind:  FabricSecurityCredentialKindX509,
+			Value: cred,
+		},
+	})
+}
+
 func NewLocalClient() (*FabricClient, error) {
+	return NewLocalClientOpt(FabricLocalClientOpt{
+		Role: FabricClientRoleAdmin,
+	})
+}
+
+func NewLocalClientOpt(opt FabricLocalClientOpt) (*FabricClient, error) {
+	c := &FabricClient{
+		OnNotification: opt.OnNotification,
+		OnConnected:    opt.OnConnected,
+		OnDisconnected: opt.OnDisconnected,
+	}
+
 	var com *comFabricClientSettings
-	err := createLocalClient(comIFabricClientSettingsIID, unsafe.Pointer(&com))
+	err := createLocalClient(c, opt.Role, comIFabricClientSettingsIID, unsafe.Pointer(&com))
 	if err != nil {
 		return nil, err
 	}
 
-	// TODO support handlers
 	hub := comHubFromComClientSetting(com)
-	c := &FabricClient{
-		coclz: coclz{
-			hub:            hub,
-			defaultTimeout: 5 * time.Minute,
-		},
-		hub: hub,
-	}
+	c.hub = hub
+	c.coclz.hub = hub
+	c.coclz.defaultTimeout = 5 * time.Minute
 
 	return c, nil
 }
