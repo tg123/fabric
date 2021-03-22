@@ -15,7 +15,6 @@ func extractSizeof(n *ast.StructNode) (fieldSize map[string]string, fieldIsSizeO
 			if a.Type == scanner.SIZE_IS {
 				fieldSize[f.Name] = a.Val
 				fieldIsSizeOf[a.Val] = f.Name
-				return
 			}
 		}
 	}
@@ -23,12 +22,8 @@ func extractSizeof(n *ast.StructNode) (fieldSize map[string]string, fieldIsSizeO
 	return
 }
 
-func (g *generator) generatePublicAndInnerStruct(n *ast.StructNode) {
-	publicTypeName := g.toGolangStructType(n.Name, false)
-	g.printfln("type %s struct {", publicTypeName)
-
-	simple := true
-
+func (g *generator) generatePublicStructFields(n *ast.StructNode) (simple bool) {
+	simple = true
 	fieldSize, fieldIsSizeOf := extractSizeof(n)
 
 	for i := 0; i < len(n.Fields)-1; i++ {
@@ -55,19 +50,57 @@ func (g *generator) generatePublicAndInnerStruct(n *ast.StructNode) {
 		g.printfln("%s %s", cf.Name, ct)
 	}
 
-	hasReserved := false
 	{
-		f := n.Fields[len(n.Fields)-1]
-
-		if f.Name == "Reserved" && f.Type == "void" && f.Indirections == 1 {
-			hasReserved = true
-		} else {
-			// not Reserved
+		if !isResversed(n, len(n.Fields)-1) {
+			f := n.Fields[len(n.Fields)-1]
 			ct := g.toGolangType(f.Type, f.Indirections, false)
 			g.printfln("%s %s", f.Name, ct)
+
 		}
 	}
+
+	return
+}
+func (g *generator) generateGolangToInner(src, dst string, n *ast.StructNode) {
+	fieldSize, fieldIsSizeOf := extractSizeof(n)
+
+	for i := 0; i < len(n.Fields)-1; i++ {
+		f := n.Fields[i]
+		sizeof := fieldIsSizeOf[f.Name]
+		if sizeof != "" {
+			continue
+		}
+
+		sizeis := fieldSize[f.Name]
+
+		if sizeis != "" {
+			g.generateSliceToPointer(fmt.Sprintf("%v.%v", src, f.Name), fmt.Sprintf("%v.%v", dst, sizeis), fmt.Sprintf("%v.%v", dst, f.Name), f.Type, f.Indirections-1)
+			continue
+		}
+
+		g.generateToInnerObject(fmt.Sprintf("%v.%v", src, f.Name), fmt.Sprintf("%v.%v", dst, f.Name), f.Type, f.Indirections)
+	}
+
+	if !isResversed(n, len(n.Fields)-1) {
+		f := n.Fields[len(n.Fields)-1]
+		g.generateToInnerObject(fmt.Sprintf("%v.%v", src, f.Name), fmt.Sprintf("%v.%v", dst, f.Name), f.Type, f.Indirections)
+	}
+}
+
+func (g *generator) generatePublicAndInnerStruct(n *ast.StructNode) {
+	publicTypeName := g.toGolangStructType(n.Name, false)
+	g.printfln("type %s struct {", publicTypeName)
+
+	simple := g.generatePublicStructFields(n)
+
+	for _, c := range g.ctx.definedStructEx[n.Name] {
+		simple = false
+		g.generatePublicStructFields(g.ctx.definedStruct[c])
+	}
+
 	g.printfln("}")
+
+	hasReserved := isResversed(n, len(n.Fields)-1)
 
 	innerTypeName := g.toGolangStructType(n.Name, true)
 
@@ -104,50 +137,79 @@ func (g *generator) generatePublicAndInnerStruct(n *ast.StructNode) {
 		g.printfln("func (obj *%s) toInnerStruct() *%v {", publicTypeName, innerTypeName)
 		g.printfln("if obj == nil { return nil}")
 		g.printfln("dst := %v{}", innerTypeName)
+		g.generateGolangToInner("obj", "dst", n)
 
-		for i := 0; i < len(n.Fields)-1; i++ {
-			f := n.Fields[i]
-			sizeof := fieldIsSizeOf[f.Name]
-			if sizeof != "" {
-				// g.printfln("dst.%v = %v(len(obj.%v))", f.Name, g.toGolangType(f.Type, f.Indirections, false), sizeof)
-				continue
-			}
-
-			sizeis := fieldSize[f.Name]
-
-			if sizeis != "" {
-				// g.generatePointerToGolangSlice()
-				g.generateSliceToPointer(fmt.Sprintf("obj.%v", f.Name), fmt.Sprintf("dst.%v", sizeis), fmt.Sprintf("dst.%v", f.Name), f.Type)
-				continue
-			}
-
-			g.generateToInnerObject(fmt.Sprintf("obj.%v", f.Name), fmt.Sprintf("dst.%v", f.Name), f.Type, f.Indirections)
+		if len(g.ctx.definedStructEx[n.Name]) > 0 {
+			g.printfln("ex0 := dst")
 		}
 
-		if !hasReserved {
-			f := n.Fields[len(n.Fields)-1]
-			g.generateToInnerObject(fmt.Sprintf("obj.%v", f.Name), fmt.Sprintf("dst.%v", f.Name), f.Type, f.Indirections)
+		g.importpkg("unsafe")
+		for i, c := range g.ctx.definedStructEx[n.Name] {
+			g.printfln("ex%v := &%v{}", i+1, g.toGolangStructType(c, true))
+			g.generateGolangToInner("obj", fmt.Sprintf("ex%v", i+1), g.ctx.definedStruct[c])
+
+			g.printfln("ex%v.Reserved = unsafe.Pointer(ex%v)", i, i+1)
 		}
 
 		g.printfln("return &dst")
 		g.printfln("}")
 
-		g.generateInnerStruct(n)
+		g.generateInnerStructAndConverter(n)
 	}
 
 }
 
 func (g *generator) generateInnerStruct(n *ast.StructNode) {
-	publicTypeName := g.toGolangStructType(n.Name, false)
 	innerTypeName := g.toGolangStructType(n.Name, true)
 
 	g.printfln("type %s struct {", innerTypeName)
 	for _, f := range n.Fields {
 		t := g.toGolangType(f.Type, f.Indirections, true)
 		g.printfln("%s %s", f.Name, t)
-
 	}
 	g.printfln("}")
+}
+
+func isResversed(n *ast.StructNode, i int) bool {
+	if i != len(n.Fields)-1 {
+		return false
+	}
+	f := n.Fields[i]
+	return (f.Name == "Reserved" && f.Type == "void" && f.Indirections == 1)
+}
+
+func (g *generator) generateInnerToGo(src, dst string, n *ast.StructNode) {
+	fieldSize, fieldIsSizeOf := extractSizeof(n)
+	for i := 0; i < len(n.Fields)-1; i++ {
+		f := n.Fields[i]
+		if _, ok := fieldIsSizeOf[f.Name]; ok {
+			continue
+		}
+
+		sizeis := fieldSize[f.Name]
+		if sizeis != "" {
+			g.generatePointerToGolangSlice(fmt.Sprintf("%v.%v", dst, f.Name), fmt.Sprintf("%v.%v", src, sizeis), fmt.Sprintf("%v.%v", src, f.Name), f.Type, f.Indirections-1)
+			continue
+		}
+
+		g.generateToGolangObject(fmt.Sprintf("%v.%v", src, f.Name), fmt.Sprintf("%v.%v", dst, f.Name), f.Type, f.Indirections)
+	}
+
+	if !isResversed(n, len(n.Fields)-1) {
+		f := n.Fields[len(n.Fields)-1]
+		g.generateToGolangObject(fmt.Sprintf("%v.%v", src, f.Name), fmt.Sprintf("%v.%v", dst, f.Name), f.Type, f.Indirections)
+	}
+}
+
+func (g *generator) generateInnerStructAndConverter(n *ast.StructNode) {
+	publicTypeName := g.toGolangStructType(n.Name, false)
+	innerTypeName := g.toGolangStructType(n.Name, true)
+
+	g.generateInnerStruct(n)
+
+	for _, ex := range g.ctx.definedStructEx[n.Name] {
+		g.generateInnerStruct(g.ctx.definedStruct[ex])
+	}
 
 	if g.isListLike(n.Name) {
 		g.printfln("func (obj *%s) toGoStruct() %v {", innerTypeName, publicTypeName)
@@ -162,36 +224,22 @@ func (g *generator) generateInnerStruct(n *ast.StructNode) {
 		g.printfln("return dst")
 		g.printfln("}")
 	} else if !g.isInnerOnlyStruct(n.Name) {
-		fieldSize, fieldIsSizeOf := extractSizeof(n)
 
-		g.printfln("func (obj *%s) toGoStruct() *%v {", innerTypeName, publicTypeName)
-		g.printfln("if obj == nil { return nil}")
-		g.printfln("dst := %v{}", publicTypeName)
-
-		for i := 0; i < len(n.Fields)-1; i++ {
-			f := n.Fields[i]
-			if _, ok := fieldIsSizeOf[f.Name]; ok {
-				continue
-			}
-
-			sizeis := fieldSize[f.Name]
-			if sizeis != "" {
-				g.generatePointerToGolangSlice(fmt.Sprintf("dst.%v", f.Name), fmt.Sprintf("obj.%v", sizeis), fmt.Sprintf("obj.%v", f.Name), f.Type)
-				continue
-			}
-
-			g.generateToGolangObject(fmt.Sprintf("obj.%v", f.Name), fmt.Sprintf("dst.%v", f.Name), f.Type, f.Indirections)
+		g.printfln("func (obj *%s) toGoStruct() (dst *%v) {", innerTypeName, publicTypeName)
+		g.printfln("if obj == nil { return}")
+		g.printfln("dst = &%v{}", publicTypeName)
+		g.generateInnerToGo("obj", "dst", n)
+		if len(g.ctx.definedStructEx[n.Name]) > 0 {
+			g.printfln("ex0 := obj")
 		}
 
-		{
-			f := n.Fields[len(n.Fields)-1]
-			if !(f.Name == "Reserved" && f.Type == "void" && f.Indirections == 1) {
-				f := n.Fields[len(n.Fields)-1]
-				g.generateToGolangObject(fmt.Sprintf("obj.%v", f.Name), fmt.Sprintf("dst.%v", f.Name), f.Type, f.Indirections)
-			}
+		for i, c := range g.ctx.definedStructEx[n.Name] {
+			g.printfln("ex%v := (*%v)(ex%v.Reserved)", i+1, g.toGolangStructType(c, true), i)
+			g.printfln("if ex%v == nil { return }", i+1)
+			g.generateInnerToGo(fmt.Sprintf("ex%v", i+1), "dst", g.ctx.definedStruct[c])
 		}
 
-		g.printfln("return &dst")
+		g.printfln("return")
 		g.printfln("}")
 	}
 }
@@ -202,8 +250,12 @@ func (g *generator) visitStruct(n *ast.StructNode) {
 		return
 	}
 
+	if g.ctx.definedStructExParent[n.Name] != "" {
+		return
+	}
+
 	if g.isInnerOnlyStruct(n.Name) {
-		g.generateInnerStruct(n)
+		g.generateInnerStructAndConverter(n)
 	} else {
 		g.generatePublicAndInnerStruct(n)
 	}

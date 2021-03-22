@@ -48,16 +48,16 @@ var innerOnlyWhitelist = map[string]bool{
 	"FABRIC_NAMED_PARTITION_SCHEME_DESCRIPTION": true,
 	"FABRIC_NAMED_REPARTITION_DESCRIPTION":      true,
 
-	"FABRIC_X509_CREDENTIALS":       true,
-	"FABRIC_X509_CREDENTIALS_EX1":   true,
-	"FABRIC_X509_CREDENTIALS_EX2":   true,
-	"FABRIC_X509_ISSUER_NAME":       true,
-	"FABRIC_X509_NAME":              true,
-	"FABRIC_X509_CREDENTIALS2":      true,
-	"FABRIC_X509_CREDENTIALS_EX3":   true,
-	"FABRIC_CLAIMS_CREDENTIALS":     true,
-	"FABRIC_CLAIMS_CREDENTIALS_EX1": true,
-	"FABRIC_WINDOWS_CREDENTIALS":    true,
+	// "FABRIC_X509_CREDENTIALS":       true,
+	// "FABRIC_X509_CREDENTIALS_EX1":   true,
+	// "FABRIC_X509_CREDENTIALS_EX2":   true,
+	// "FABRIC_X509_ISSUER_NAME":       true,
+	// "FABRIC_X509_NAME":              true,
+	// "FABRIC_X509_CREDENTIALS2":      true,
+	// "FABRIC_X509_CREDENTIALS_EX3":   true,
+	// "FABRIC_CLAIMS_CREDENTIALS":     true,
+	// "FABRIC_CLAIMS_CREDENTIALS_EX1": true,
+	// "FABRIC_WINDOWS_CREDENTIALS":    true,
 }
 
 func (g *generator) isListLike(idltype string) bool {
@@ -87,7 +87,12 @@ func (g *generator) isInnerOnlyStruct(idltype string) bool {
 }
 
 func (g *generator) toGolangType(idltype string, indirections int, inner bool) string {
-	idltype = g.unwrapTypedef(idltype)
+	// TODO bug indirections not support by unwrapTypedef
+	// idltype = g.unwrapTypedef(idltype)
+	if t, ok := g.ctx.definedTypedef[idltype]; ok {
+		idltype = t.Type
+		indirections += t.Indirection
+	}
 
 	gotype := basicTypeMap[idltype]
 
@@ -263,12 +268,12 @@ func (g *generator) generateListObjectToGolangSlice(srcvar, dstvar, listType str
 	countFieldName := itemType.Fields[0].Name
 	itemFieldName := itemType.Fields[1].Name
 	rawItemType := itemType.Fields[1].Type
-	g.generatePointerToGolangSlice(dstvar, srcvar+"."+countFieldName, srcvar+"."+itemFieldName, rawItemType)
+	g.generatePointerToGolangSlice(dstvar, srcvar+"."+countFieldName, srcvar+"."+itemFieldName, rawItemType, 0)
 }
 
-func (g *generator) generatePointerToGolangSlice(dstSlice, countFieldName, itemFieldName, rawItemType string) {
-	golangItemTypeName := g.toGolangType(rawItemType, 0, false)
-	itemTypeName := g.toGolangType(rawItemType, 0, true)
+func (g *generator) generatePointerToGolangSlice(dstSlice, countFieldName, itemFieldName, rawItemType string, indirections int) {
+	golangItemTypeName := g.toGolangType(rawItemType, indirections, false)
+	itemTypeName := g.toGolangType(rawItemType, indirections, true)
 	// varuid := g.nextvarid()
 
 	data := struct {
@@ -422,7 +427,6 @@ func (g *generator) generateToInnerObject(srcvar, dstvar, rawtype string, indire
 			g.printfln("%v = s_%v\n", dstvar, i)
 		case "time.Time":
 			g.printfln("%v = windows.NsecToFiletime(%v.UnixNano())", dstvar, srcvar)
-
 		default:
 			panic(fmt.Sprintf("unsupported generateToInnerObject type %v, raw %v", t, rawtype))
 		}
@@ -441,12 +445,12 @@ func (g *generator) generateSliceToInnerObject(srcvar, dstvar, listType string) 
 	itemFieldName := tmpvar + "." + itemType.Fields[1].Name
 	rawItemType := itemType.Fields[1].Type
 
-	g.generateSliceToPointer(srcvar, countFieldName, itemFieldName, rawItemType)
+	g.generateSliceToPointer(srcvar, countFieldName, itemFieldName, rawItemType, 0)
 	g.printfln("%v = %v", dstvar, tmpvar)
 }
 
-func (g *generator) generateSliceToPointer(srcSlice, countFieldName, itemFieldName, rawItemType string) {
-	itemTypeName := g.toGolangType(rawItemType, 0, true)
+func (g *generator) generateSliceToPointer(srcSlice, countFieldName, itemFieldName, rawItemType string, indirections int) {
+	itemTypeName := g.toGolangType(rawItemType, indirections, true)
 
 	data := struct {
 		ItemTypeName   string

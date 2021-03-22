@@ -2665,7 +2665,7 @@ func (v *comFabricServiceGroupPartition) vtable() *comFabricServiceGroupPartitio
 
 func (v *comFabricServiceGroupPartition) ResolveMember(
 	name string,
-	riid windows.GUID,
+	riid *windows.GUID,
 ) (member interface{}, err error) {
 	var p_0 *uint16
 	s_14, _ := windows.UTF16PtrFromString(name)
@@ -2680,7 +2680,7 @@ func (v *comFabricServiceGroupPartition) ResolveMember(
 		4,
 		uintptr(unsafe.Pointer(v)),
 		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(&riid)),
+		uintptr(unsafe.Pointer(riid)),
 		uintptr(unsafe.Pointer(&p_2)),
 		0,
 		0,

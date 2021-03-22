@@ -3,6 +3,8 @@ package main
 import (
 	"os"
 	"path/filepath"
+	"sort"
+	"strconv"
 	"strings"
 
 	"github.com/jd3nn1s/gomidl/ast"
@@ -13,11 +15,13 @@ type defContext struct {
 	definedIdls map[string]interface{}
 
 	// for forward lookup
-	definedEnum          map[string]*ast.EnumNode
-	definedEnumValueType map[string]string
-	definedStruct        map[string]*ast.StructNode
-	definedInterface     map[string]*ast.InterfaceNode
-	definedTypedef       map[string]*ast.TypedefNode
+	definedEnum           map[string]*ast.EnumNode
+	definedEnumValueType  map[string]string
+	definedStruct         map[string]*ast.StructNode
+	definedStructEx       map[string][]string
+	definedStructExParent map[string]string
+	definedInterface      map[string]*ast.InterfaceNode
+	definedTypedef        map[string]*ast.TypedefNode
 }
 
 func defineIdent(c *defContext, nodes []interface{}) {
@@ -49,12 +53,14 @@ func defineIdent(c *defContext, nodes []interface{}) {
 
 func newDefContext(idls ...string) (*defContext, error) {
 	c := &defContext{
-		definedIdls:          make(map[string]interface{}),
-		definedEnum:          make(map[string]*ast.EnumNode),
-		definedEnumValueType: make(map[string]string),
-		definedStruct:        make(map[string]*ast.StructNode),
-		definedInterface:     make(map[string]*ast.InterfaceNode),
-		definedTypedef:       make(map[string]*ast.TypedefNode),
+		definedIdls:           make(map[string]interface{}),
+		definedEnum:           make(map[string]*ast.EnumNode),
+		definedEnumValueType:  make(map[string]string),
+		definedStruct:         make(map[string]*ast.StructNode),
+		definedStructEx:       make(map[string][]string),
+		definedStructExParent: make(map[string]string),
+		definedInterface:      make(map[string]*ast.InterfaceNode),
+		definedTypedef:        make(map[string]*ast.TypedefNode),
 	}
 
 	for _, fn := range idls {
@@ -93,6 +99,25 @@ func newDefContext(idls ...string) (*defContext, error) {
 		Name:        "REFIID",
 		Type:        "GUID",
 		Indirection: 1,
+	}
+
+	for s := range c.definedStruct {
+		p := strings.Split(s, "_EX")
+		if len(p) == 2 {
+			if _, err := strconv.Atoi(p[1]); err != nil {
+				continue
+			}
+			parent := p[0]
+			c.definedStructExParent[s] = parent
+			c.definedStructEx[parent] = append(c.definedStructEx[parent], s)
+		}
+	}
+
+	// what sort if doing an fucking interview
+	for _, ex := range c.definedStructEx {
+		sort.Slice(ex, func(i, j int) bool {
+			return strings.Compare(ex[i], ex[j]) < 0
+		})
 	}
 
 	return c, nil
