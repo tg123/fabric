@@ -2,7 +2,7 @@
 package fabric
 
 import (
-	"golang.org/x/sys/windows"
+	"github.com/google/uuid"
 	"time"
 	"unsafe"
 )
@@ -1543,9 +1543,7 @@ func (obj *FabricServiceLoadMetricDescription) toInnerStruct() *innerFabricServi
 		return nil
 	}
 	dst := &innerFabricServiceLoadMetricDescription{}
-	s_1, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_1
-
+	dst.Name = utf16PtrFromString(obj.Name)
 	dst.Weight = obj.Weight
 	dst.PrimaryDefaultLoad = obj.PrimaryDefaultLoad
 	dst.SecondaryDefaultLoad = obj.SecondaryDefaultLoad
@@ -1565,7 +1563,7 @@ func (obj *innerFabricServiceLoadMetricDescription) toGoStruct() (dst *FabricSer
 		return
 	}
 	dst = &FabricServiceLoadMetricDescription{}
-	dst.Name = windows.UTF16PtrToString(obj.Name)
+	dst.Name = utf16PtrToString(obj.Name)
 	dst.Weight = obj.Weight
 	dst.PrimaryDefaultLoad = obj.PrimaryDefaultLoad
 	dst.SecondaryDefaultLoad = obj.SecondaryDefaultLoad
@@ -1583,13 +1581,9 @@ func (obj *FabricPartitionSelector) toInnerStruct() *innerFabricPartitionSelecto
 		return nil
 	}
 	dst := &innerFabricPartitionSelector{}
-	s_2, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_2
-
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
 	dst.PartitionSelectorType = obj.PartitionSelectorType
-	s_3, _ := windows.UTF16PtrFromString(obj.PartitionKey)
-	dst.PartitionKey = s_3
-
+	dst.PartitionKey = utf16PtrFromString(obj.PartitionKey)
 	return dst
 }
 
@@ -1605,14 +1599,14 @@ func (obj *innerFabricPartitionSelector) toGoStruct() (dst *FabricPartitionSelec
 		return
 	}
 	dst = &FabricPartitionSelector{}
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	dst.PartitionSelectorType = obj.PartitionSelectorType
-	dst.PartitionKey = windows.UTF16PtrToString(obj.PartitionKey)
+	dst.PartitionKey = utf16PtrToString(obj.PartitionKey)
 	return
 }
 
 type FabricStartPartitionDataLossDescription struct {
-	OperationId       windows.GUID
+	OperationId       uuid.UUID
 	PartitionSelector *FabricPartitionSelector
 	DataLossMode      FabricDataLossMode
 }
@@ -1636,7 +1630,7 @@ func (obj *FabricStartPartitionDataLossDescription) toInnerStruct() *innerFabric
 
 type FabricSelectedPartition struct {
 	ServiceName string
-	PartitionId windows.GUID
+	PartitionId uuid.UUID
 }
 
 func (obj *FabricSelectedPartition) toInnerStruct() *innerFabricSelectedPartition {
@@ -1644,16 +1638,14 @@ func (obj *FabricSelectedPartition) toInnerStruct() *innerFabricSelectedPartitio
 		return nil
 	}
 	dst := &innerFabricSelectedPartition{}
-	s_4, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_4
-
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
 	dst.PartitionId = obj.PartitionId
 	return dst
 }
 
 type innerFabricSelectedPartition struct {
 	ServiceName *uint16
-	PartitionId windows.GUID
+	PartitionId uuid.UUID
 	Reserved    unsafe.Pointer
 }
 
@@ -1662,7 +1654,7 @@ func (obj *innerFabricSelectedPartition) toGoStruct() (dst *FabricSelectedPartit
 		return
 	}
 	dst = &FabricSelectedPartition{}
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	dst.PartitionId = obj.PartitionId
 	return
 }
@@ -1712,7 +1704,7 @@ func (obj *FabricPartitionDataLossProgress) toInnerStruct() *innerFabricPartitio
 }
 
 type FabricStartPartitionQuorumLossDescription struct {
-	OperationId                      windows.GUID
+	OperationId                      uuid.UUID
 	PartitionSelector                *FabricPartitionSelector
 	QuorumLossMode                   FabricQuorumLossMode
 	QuorumLossDurationInMilliSeconds int32
@@ -1780,7 +1772,7 @@ func (obj *FabricPartitionQuorumLossProgress) toInnerStruct() *innerFabricPartit
 }
 
 type FabricStartPartitionRestartDescription struct {
-	OperationId          windows.GUID
+	OperationId          uuid.UUID
 	PartitionSelector    *FabricPartitionSelector
 	RestartPartitionMode FabricRestartPartitionMode
 }
@@ -1818,14 +1810,10 @@ func (obj *FabricOrchestrationUpgradeProgress) toInnerStruct() *innerFabricOrche
 	dst.ProgressStatus = obj.ProgressStatus
 	ex0 := dst
 	ex1 := &innerFabricOrchestrationUpgradeProgressEx1{}
-	s_5, _ := windows.UTF16PtrFromString(obj.ConfigVersion)
-	ex1.ConfigVersion = s_5
-
+	ex1.ConfigVersion = utf16PtrFromString(obj.ConfigVersion)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	ex2 := &innerFabricOrchestrationUpgradeProgressEx2{}
-	s_6, _ := windows.UTF16PtrFromString(obj.Details)
-	ex2.Details = s_6
-
+	ex2.Details = utf16PtrFromString(obj.Details)
 	ex1.Reserved = unsafe.Pointer(ex2)
 	return dst
 }
@@ -1856,12 +1844,12 @@ func (obj *innerFabricOrchestrationUpgradeProgress) toGoStruct() (dst *FabricOrc
 	if ex1 == nil {
 		return
 	}
-	dst.ConfigVersion = windows.UTF16PtrToString(ex1.ConfigVersion)
+	dst.ConfigVersion = utf16PtrToString(ex1.ConfigVersion)
 	ex2 := (*innerFabricOrchestrationUpgradeProgressEx2)(ex1.Reserved)
 	if ex2 == nil {
 		return
 	}
-	dst.Details = windows.UTF16PtrToString(ex2.Details)
+	dst.Details = utf16PtrToString(ex2.Details)
 	return
 }
 
@@ -1910,7 +1898,7 @@ func (obj *FabricPartitionRestartProgress) toInnerStruct() *innerFabricPartition
 }
 
 type FabricCancelTestCommandDescription struct {
-	OperationId windows.GUID
+	OperationId uuid.UUID
 	Force       bool
 }
 type innerFabricCancelTestCommandDescription struct {
@@ -1932,7 +1920,7 @@ func (obj *FabricCancelTestCommandDescription) toInnerStruct() *innerFabricCance
 }
 
 type FabricOperationId struct {
-	PartitionId windows.GUID
+	PartitionId uuid.UUID
 }
 type innerFabricOperationId struct {
 	FabricOperationId
@@ -1975,7 +1963,7 @@ func (obj *FabricTestCommandListDescription) toInnerStruct() *innerFabricTestCom
 }
 
 type TestCommandQueryResultItem struct {
-	OperationId      windows.GUID
+	OperationId      uuid.UUID
 	TestCommandState FabricTestCommandProgressState
 	TestCommandType  FabricTestCommandType
 }
@@ -2030,9 +2018,7 @@ func (obj *FabricNodeResult) toInnerStruct() *innerFabricNodeResult {
 		return nil
 	}
 	dst := &innerFabricNodeResult{}
-	s_7, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_7
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.NodeInstance = obj.NodeInstance
 	return dst
 }
@@ -2048,7 +2034,7 @@ func (obj *innerFabricNodeResult) toGoStruct() (dst *FabricNodeResult) {
 		return
 	}
 	dst = &FabricNodeResult{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.NodeInstance = obj.NodeInstance
 	return
 }
@@ -2193,9 +2179,7 @@ func (obj *FabricServiceCorrelationDescription) toInnerStruct() *innerFabricServ
 		return nil
 	}
 	dst := &innerFabricServiceCorrelationDescription{}
-	s_8, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_8
-
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
 	dst.Scheme = obj.Scheme
 	return dst
 }
@@ -2211,7 +2195,7 @@ func (obj *innerFabricServiceCorrelationDescription) toGoStruct() (dst *FabricSe
 		return
 	}
 	dst = &FabricServiceCorrelationDescription{}
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	dst.Scheme = obj.Scheme
 	return
 }
@@ -2310,9 +2294,7 @@ func (obj *FabricScalingTriggerAveragePartitionLoad) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := &innerFabricScalingTriggerAveragePartitionLoad{}
-	s_9, _ := windows.UTF16PtrFromString(obj.MetricName)
-	dst.MetricName = s_9
-
+	dst.MetricName = utf16PtrFromString(obj.MetricName)
 	dst.LowerLoadThreshold = obj.LowerLoadThreshold
 	dst.UpperLoadThreshold = obj.UpperLoadThreshold
 	dst.ScaleIntervalInSeconds = obj.ScaleIntervalInSeconds
@@ -2332,7 +2314,7 @@ func (obj *innerFabricScalingTriggerAveragePartitionLoad) toGoStruct() (dst *Fab
 		return
 	}
 	dst = &FabricScalingTriggerAveragePartitionLoad{}
-	dst.MetricName = windows.UTF16PtrToString(obj.MetricName)
+	dst.MetricName = utf16PtrToString(obj.MetricName)
 	dst.LowerLoadThreshold = obj.LowerLoadThreshold
 	dst.UpperLoadThreshold = obj.UpperLoadThreshold
 	dst.ScaleIntervalInSeconds = obj.ScaleIntervalInSeconds
@@ -2352,9 +2334,7 @@ func (obj *FabricScalingTriggerAverageServiceLoad) toInnerStruct() *innerFabricS
 		return nil
 	}
 	dst := &innerFabricScalingTriggerAverageServiceLoad{}
-	s_10, _ := windows.UTF16PtrFromString(obj.MetricName)
-	dst.MetricName = s_10
-
+	dst.MetricName = utf16PtrFromString(obj.MetricName)
 	dst.LowerLoadThreshold = obj.LowerLoadThreshold
 	dst.UpperLoadThreshold = obj.UpperLoadThreshold
 	dst.ScaleIntervalInSeconds = obj.ScaleIntervalInSeconds
@@ -2382,7 +2362,7 @@ func (obj *innerFabricScalingTriggerAverageServiceLoad) toGoStruct() (dst *Fabri
 		return
 	}
 	dst = &FabricScalingTriggerAverageServiceLoad{}
-	dst.MetricName = windows.UTF16PtrToString(obj.MetricName)
+	dst.MetricName = utf16PtrToString(obj.MetricName)
 	dst.LowerLoadThreshold = obj.LowerLoadThreshold
 	dst.UpperLoadThreshold = obj.UpperLoadThreshold
 	dst.ScaleIntervalInSeconds = obj.ScaleIntervalInSeconds
@@ -2450,9 +2430,7 @@ func (obj *FabricPlacementPolicyInvalidDomainDescription) toInnerStruct() *inner
 		return nil
 	}
 	dst := &innerFabricPlacementPolicyInvalidDomainDescription{}
-	s_11, _ := windows.UTF16PtrFromString(obj.InvalidFaultDomain)
-	dst.InvalidFaultDomain = s_11
-
+	dst.InvalidFaultDomain = utf16PtrFromString(obj.InvalidFaultDomain)
 	return dst
 }
 
@@ -2466,7 +2444,7 @@ func (obj *innerFabricPlacementPolicyInvalidDomainDescription) toGoStruct() (dst
 		return
 	}
 	dst = &FabricPlacementPolicyInvalidDomainDescription{}
-	dst.InvalidFaultDomain = windows.UTF16PtrToString(obj.InvalidFaultDomain)
+	dst.InvalidFaultDomain = utf16PtrToString(obj.InvalidFaultDomain)
 	return
 }
 
@@ -2479,9 +2457,7 @@ func (obj *FabricPlacementPolicyRequiredDomainDescription) toInnerStruct() *inne
 		return nil
 	}
 	dst := &innerFabricPlacementPolicyRequiredDomainDescription{}
-	s_12, _ := windows.UTF16PtrFromString(obj.RequiredFaultDomain)
-	dst.RequiredFaultDomain = s_12
-
+	dst.RequiredFaultDomain = utf16PtrFromString(obj.RequiredFaultDomain)
 	return dst
 }
 
@@ -2495,7 +2471,7 @@ func (obj *innerFabricPlacementPolicyRequiredDomainDescription) toGoStruct() (ds
 		return
 	}
 	dst = &FabricPlacementPolicyRequiredDomainDescription{}
-	dst.RequiredFaultDomain = windows.UTF16PtrToString(obj.RequiredFaultDomain)
+	dst.RequiredFaultDomain = utf16PtrToString(obj.RequiredFaultDomain)
 	return
 }
 
@@ -2508,9 +2484,7 @@ func (obj *FabricPlacementPolicyPreferredPrimaryDomainDescription) toInnerStruct
 		return nil
 	}
 	dst := &innerFabricPlacementPolicyPreferredPrimaryDomainDescription{}
-	s_13, _ := windows.UTF16PtrFromString(obj.PreferredPrimaryFaultDomain)
-	dst.PreferredPrimaryFaultDomain = s_13
-
+	dst.PreferredPrimaryFaultDomain = utf16PtrFromString(obj.PreferredPrimaryFaultDomain)
 	return dst
 }
 
@@ -2524,7 +2498,7 @@ func (obj *innerFabricPlacementPolicyPreferredPrimaryDomainDescription) toGoStru
 		return
 	}
 	dst = &FabricPlacementPolicyPreferredPrimaryDomainDescription{}
-	dst.PreferredPrimaryFaultDomain = windows.UTF16PtrToString(obj.PreferredPrimaryFaultDomain)
+	dst.PreferredPrimaryFaultDomain = utf16PtrToString(obj.PreferredPrimaryFaultDomain)
 	return
 }
 
@@ -2652,7 +2626,7 @@ func (obj *innerFabricServicePartitionInformation) toGoStruct() (dst *FabricServ
 }
 
 type FabricSingletonPartitionInformation struct {
-	Id windows.GUID
+	Id uuid.UUID
 }
 type innerFabricSingletonPartitionInformation struct {
 	FabricSingletonPartitionInformation
@@ -2673,7 +2647,7 @@ func (obj *FabricSingletonPartitionInformation) toInnerStruct() *innerFabricSing
 }
 
 type FabricInt64RangePartitionInformation struct {
-	Id      windows.GUID
+	Id      uuid.UUID
 	LowKey  int64
 	HighKey int64
 }
@@ -2696,7 +2670,7 @@ func (obj *FabricInt64RangePartitionInformation) toInnerStruct() *innerFabricInt
 }
 
 type FabricNamedPartitionInformation struct {
-	Id   windows.GUID
+	Id   uuid.UUID
 	Name string
 }
 
@@ -2706,14 +2680,12 @@ func (obj *FabricNamedPartitionInformation) toInnerStruct() *innerFabricNamedPar
 	}
 	dst := &innerFabricNamedPartitionInformation{}
 	dst.Id = obj.Id
-	s_14, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_14
-
+	dst.Name = utf16PtrFromString(obj.Name)
 	return dst
 }
 
 type innerFabricNamedPartitionInformation struct {
-	Id       windows.GUID
+	Id       uuid.UUID
 	Name     *uint16
 	Reserved unsafe.Pointer
 }
@@ -2724,7 +2696,7 @@ func (obj *innerFabricNamedPartitionInformation) toGoStruct() (dst *FabricNamedP
 	}
 	dst = &FabricNamedPartitionInformation{}
 	dst.Id = obj.Id
-	dst.Name = windows.UTF16PtrToString(obj.Name)
+	dst.Name = utf16PtrToString(obj.Name)
 	return
 }
 
@@ -2769,15 +2741,9 @@ func (obj *FabricContainerhostEntryPointDescription) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := &innerFabricContainerhostEntryPointDescription{}
-	s_15, _ := windows.UTF16PtrFromString(obj.ImageName)
-	dst.ImageName = s_15
-
-	s_16, _ := windows.UTF16PtrFromString(obj.Commands)
-	dst.Commands = s_16
-
-	s_17, _ := windows.UTF16PtrFromString(obj.EntryPoint)
-	dst.EntryPoint = s_17
-
+	dst.ImageName = utf16PtrFromString(obj.ImageName)
+	dst.Commands = utf16PtrFromString(obj.Commands)
+	dst.EntryPoint = utf16PtrFromString(obj.EntryPoint)
 	return dst
 }
 
@@ -2793,9 +2759,9 @@ func (obj *innerFabricContainerhostEntryPointDescription) toGoStruct() (dst *Fab
 		return
 	}
 	dst = &FabricContainerhostEntryPointDescription{}
-	dst.ImageName = windows.UTF16PtrToString(obj.ImageName)
-	dst.Commands = windows.UTF16PtrToString(obj.Commands)
-	dst.EntryPoint = windows.UTF16PtrToString(obj.EntryPoint)
+	dst.ImageName = utf16PtrToString(obj.ImageName)
+	dst.Commands = utf16PtrToString(obj.Commands)
+	dst.EntryPoint = utf16PtrToString(obj.EntryPoint)
 	return
 }
 
@@ -2810,12 +2776,8 @@ func (obj *FabricExehostEntryPointDescription) toInnerStruct() *innerFabricExeho
 		return nil
 	}
 	dst := &innerFabricExehostEntryPointDescription{}
-	s_18, _ := windows.UTF16PtrFromString(obj.Program)
-	dst.Program = s_18
-
-	s_19, _ := windows.UTF16PtrFromString(obj.Arguments)
-	dst.Arguments = s_19
-
+	dst.Program = utf16PtrFromString(obj.Program)
+	dst.Arguments = utf16PtrFromString(obj.Arguments)
 	dst.WorkingFolder = obj.WorkingFolder
 	return dst
 }
@@ -2832,8 +2794,8 @@ func (obj *innerFabricExehostEntryPointDescription) toGoStruct() (dst *FabricExe
 		return
 	}
 	dst = &FabricExehostEntryPointDescription{}
-	dst.Program = windows.UTF16PtrToString(obj.Program)
-	dst.Arguments = windows.UTF16PtrToString(obj.Arguments)
+	dst.Program = utf16PtrToString(obj.Program)
+	dst.Arguments = utf16PtrToString(obj.Arguments)
 	dst.WorkingFolder = obj.WorkingFolder
 	return
 }
@@ -2922,9 +2884,7 @@ func (obj *FabricDllhostHostedUnmanagedDllDescription) toInnerStruct() *innerFab
 		return nil
 	}
 	dst := &innerFabricDllhostHostedUnmanagedDllDescription{}
-	s_20, _ := windows.UTF16PtrFromString(obj.DllName)
-	dst.DllName = s_20
-
+	dst.DllName = utf16PtrFromString(obj.DllName)
 	return dst
 }
 
@@ -2938,7 +2898,7 @@ func (obj *innerFabricDllhostHostedUnmanagedDllDescription) toGoStruct() (dst *F
 		return
 	}
 	dst = &FabricDllhostHostedUnmanagedDllDescription{}
-	dst.DllName = windows.UTF16PtrToString(obj.DllName)
+	dst.DllName = utf16PtrToString(obj.DllName)
 	return
 }
 
@@ -2951,9 +2911,7 @@ func (obj *FabricDllhostHostedManagedDllDescription) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := &innerFabricDllhostHostedManagedDllDescription{}
-	s_21, _ := windows.UTF16PtrFromString(obj.AssemblyName)
-	dst.AssemblyName = s_21
-
+	dst.AssemblyName = utf16PtrFromString(obj.AssemblyName)
 	return dst
 }
 
@@ -2967,7 +2925,7 @@ func (obj *innerFabricDllhostHostedManagedDllDescription) toGoStruct() (dst *Fab
 		return
 	}
 	dst = &FabricDllhostHostedManagedDllDescription{}
-	dst.AssemblyName = windows.UTF16PtrToString(obj.AssemblyName)
+	dst.AssemblyName = utf16PtrToString(obj.AssemblyName)
 	return
 }
 
@@ -3005,7 +2963,7 @@ func (obj *FabricDllhostEntryPointDescription) toInnerStruct() *innerFabricDllho
 	}
 	dst := &innerFabricDllhostEntryPointDescription{}
 	dst.IsolationPolicyType = obj.IsolationPolicyType
-	lst_22 := &innerFabricDllhostHostedDllDescriptionList{}
+	lst_1 := &innerFabricDllhostHostedDllDescriptionList{}
 	{
 
 		var tmp []innerFabricDllhostHostedDllDescription
@@ -3018,13 +2976,13 @@ func (obj *FabricDllhostEntryPointDescription) toInnerStruct() *innerFabricDllho
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_22.Count = uint32(len(tmp))
+		lst_1.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_22.Items = &tmp[0]
+			lst_1.Items = &tmp[0]
 		}
 
 	}
-	dst.HostedDlls = lst_22
+	dst.HostedDlls = lst_1
 	return dst
 }
 
@@ -3071,18 +3029,10 @@ func (obj *FabricCodePackageDescription) toInnerStruct() *innerFabricCodePackage
 		return nil
 	}
 	dst := &innerFabricCodePackageDescription{}
-	s_23, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_23
-
-	s_24, _ := windows.UTF16PtrFromString(obj.Version)
-	dst.Version = s_24
-
-	s_25, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_25
-
-	s_26, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
-	dst.ServiceManifestVersion = s_26
-
+	dst.Name = utf16PtrFromString(obj.Name)
+	dst.Version = utf16PtrFromString(obj.Version)
+	dst.ServiceManifestName = utf16PtrFromString(obj.ServiceManifestName)
+	dst.ServiceManifestVersion = utf16PtrFromString(obj.ServiceManifestVersion)
 	dst.IsShared = obj.IsShared
 	dst.SetupEntryPoint = obj.SetupEntryPoint.toInnerStruct()
 	dst.EntryPoint = obj.EntryPoint.toInnerStruct()
@@ -3105,10 +3055,10 @@ func (obj *innerFabricCodePackageDescription) toGoStruct() (dst *FabricCodePacka
 		return
 	}
 	dst = &FabricCodePackageDescription{}
-	dst.Name = windows.UTF16PtrToString(obj.Name)
-	dst.Version = windows.UTF16PtrToString(obj.Version)
-	dst.ServiceManifestName = windows.UTF16PtrToString(obj.ServiceManifestName)
-	dst.ServiceManifestVersion = windows.UTF16PtrToString(obj.ServiceManifestVersion)
+	dst.Name = utf16PtrToString(obj.Name)
+	dst.Version = utf16PtrToString(obj.Version)
+	dst.ServiceManifestName = utf16PtrToString(obj.ServiceManifestName)
+	dst.ServiceManifestVersion = utf16PtrToString(obj.ServiceManifestVersion)
 	dst.IsShared = obj.IsShared
 	dst.SetupEntryPoint = obj.SetupEntryPoint.toGoStruct()
 	dst.EntryPoint = obj.EntryPoint.toGoStruct()
@@ -3124,9 +3074,7 @@ func (obj *FabricRunasPolicyDescription) toInnerStruct() *innerFabricRunasPolicy
 		return nil
 	}
 	dst := &innerFabricRunasPolicyDescription{}
-	s_27, _ := windows.UTF16PtrFromString(obj.UserName)
-	dst.UserName = s_27
-
+	dst.UserName = utf16PtrFromString(obj.UserName)
 	return dst
 }
 
@@ -3140,7 +3088,7 @@ func (obj *innerFabricRunasPolicyDescription) toGoStruct() (dst *FabricRunasPoli
 		return
 	}
 	dst = &FabricRunasPolicyDescription{}
-	dst.UserName = windows.UTF16PtrToString(obj.UserName)
+	dst.UserName = utf16PtrToString(obj.UserName)
 	return
 }
 
@@ -3156,18 +3104,10 @@ func (obj *FabricConfigurationPackageDescription) toInnerStruct() *innerFabricCo
 		return nil
 	}
 	dst := &innerFabricConfigurationPackageDescription{}
-	s_28, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_28
-
-	s_29, _ := windows.UTF16PtrFromString(obj.Version)
-	dst.Version = s_29
-
-	s_30, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_30
-
-	s_31, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
-	dst.ServiceManifestVersion = s_31
-
+	dst.Name = utf16PtrFromString(obj.Name)
+	dst.Version = utf16PtrFromString(obj.Version)
+	dst.ServiceManifestName = utf16PtrFromString(obj.ServiceManifestName)
+	dst.ServiceManifestVersion = utf16PtrFromString(obj.ServiceManifestVersion)
 	return dst
 }
 
@@ -3184,10 +3124,10 @@ func (obj *innerFabricConfigurationPackageDescription) toGoStruct() (dst *Fabric
 		return
 	}
 	dst = &FabricConfigurationPackageDescription{}
-	dst.Name = windows.UTF16PtrToString(obj.Name)
-	dst.Version = windows.UTF16PtrToString(obj.Version)
-	dst.ServiceManifestName = windows.UTF16PtrToString(obj.ServiceManifestName)
-	dst.ServiceManifestVersion = windows.UTF16PtrToString(obj.ServiceManifestVersion)
+	dst.Name = utf16PtrToString(obj.Name)
+	dst.Version = utf16PtrToString(obj.Version)
+	dst.ServiceManifestName = utf16PtrToString(obj.ServiceManifestName)
+	dst.ServiceManifestVersion = utf16PtrToString(obj.ServiceManifestVersion)
 	return
 }
 
@@ -3203,18 +3143,10 @@ func (obj *FabricDataPackageDescription) toInnerStruct() *innerFabricDataPackage
 		return nil
 	}
 	dst := &innerFabricDataPackageDescription{}
-	s_32, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_32
-
-	s_33, _ := windows.UTF16PtrFromString(obj.Version)
-	dst.Version = s_33
-
-	s_34, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_34
-
-	s_35, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
-	dst.ServiceManifestVersion = s_35
-
+	dst.Name = utf16PtrFromString(obj.Name)
+	dst.Version = utf16PtrFromString(obj.Version)
+	dst.ServiceManifestName = utf16PtrFromString(obj.ServiceManifestName)
+	dst.ServiceManifestVersion = utf16PtrFromString(obj.ServiceManifestVersion)
 	return dst
 }
 
@@ -3231,10 +3163,10 @@ func (obj *innerFabricDataPackageDescription) toGoStruct() (dst *FabricDataPacka
 		return
 	}
 	dst = &FabricDataPackageDescription{}
-	dst.Name = windows.UTF16PtrToString(obj.Name)
-	dst.Version = windows.UTF16PtrToString(obj.Version)
-	dst.ServiceManifestName = windows.UTF16PtrToString(obj.ServiceManifestName)
-	dst.ServiceManifestVersion = windows.UTF16PtrToString(obj.ServiceManifestVersion)
+	dst.Name = utf16PtrToString(obj.Name)
+	dst.Version = utf16PtrToString(obj.Version)
+	dst.ServiceManifestName = utf16PtrToString(obj.ServiceManifestName)
+	dst.ServiceManifestVersion = utf16PtrToString(obj.ServiceManifestVersion)
 	return
 }
 
@@ -3301,12 +3233,8 @@ func (obj *FabricServiceTypeDescriptionExtension) toInnerStruct() *innerFabricSe
 		return nil
 	}
 	dst := &innerFabricServiceTypeDescriptionExtension{}
-	s_36, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_36
-
-	s_37, _ := windows.UTF16PtrFromString(obj.Value)
-	dst.Value = s_37
-
+	dst.Name = utf16PtrFromString(obj.Name)
+	dst.Value = utf16PtrFromString(obj.Value)
 	return dst
 }
 
@@ -3321,8 +3249,8 @@ func (obj *innerFabricServiceTypeDescriptionExtension) toGoStruct() (dst *Fabric
 		return
 	}
 	dst = &FabricServiceTypeDescriptionExtension{}
-	dst.Name = windows.UTF16PtrToString(obj.Name)
-	dst.Value = windows.UTF16PtrToString(obj.Value)
+	dst.Name = utf16PtrToString(obj.Name)
+	dst.Value = utf16PtrToString(obj.Value)
 	return
 }
 
@@ -3363,13 +3291,9 @@ func (obj *FabricStatelessServiceTypeDescription) toInnerStruct() *innerFabricSt
 		return nil
 	}
 	dst := &innerFabricStatelessServiceTypeDescription{}
-	s_38, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_38
-
-	s_39, _ := windows.UTF16PtrFromString(obj.PlacementConstraints)
-	dst.PlacementConstraints = s_39
-
-	lst_40 := &innerFabricServiceLoadMetricDescriptionList{}
+	dst.ServiceTypeName = utf16PtrFromString(obj.ServiceTypeName)
+	dst.PlacementConstraints = utf16PtrFromString(obj.PlacementConstraints)
+	lst_2 := &innerFabricServiceLoadMetricDescriptionList{}
 	{
 
 		var tmp []innerFabricServiceLoadMetricDescription
@@ -3382,14 +3306,14 @@ func (obj *FabricStatelessServiceTypeDescription) toInnerStruct() *innerFabricSt
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_40.Count = uint32(len(tmp))
+		lst_2.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_40.Items = &tmp[0]
+			lst_2.Items = &tmp[0]
 		}
 
 	}
-	dst.LoadMetrics = lst_40
-	lst_41 := &innerFabricServiceTypeDescriptionExtensionList{}
+	dst.LoadMetrics = lst_2
+	lst_3 := &innerFabricServiceTypeDescriptionExtensionList{}
 	{
 
 		var tmp []innerFabricServiceTypeDescriptionExtension
@@ -3402,17 +3326,17 @@ func (obj *FabricStatelessServiceTypeDescription) toInnerStruct() *innerFabricSt
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_41.Count = uint32(len(tmp))
+		lst_3.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_41.Items = &tmp[0]
+			lst_3.Items = &tmp[0]
 		}
 
 	}
-	dst.Extensions = lst_41
+	dst.Extensions = lst_3
 	dst.UseImplicitHost = obj.UseImplicitHost
 	ex0 := dst
 	ex1 := &innerFabricStatelessServiceTypeDescriptionEx1{}
-	lst_42 := &innerFabricServicePlacementPolicyList{}
+	lst_4 := &innerFabricServicePlacementPolicyList{}
 	{
 
 		var tmp []innerFabricServicePlacementPolicyDescription
@@ -3425,13 +3349,13 @@ func (obj *FabricStatelessServiceTypeDescription) toInnerStruct() *innerFabricSt
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_42.PolicyCount = uint32(len(tmp))
+		lst_4.PolicyCount = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_42.Policies = &tmp[0]
+			lst_4.Policies = &tmp[0]
 		}
 
 	}
-	ex1.PolicyList = lst_42
+	ex1.PolicyList = lst_4
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
@@ -3454,8 +3378,8 @@ func (obj *innerFabricStatelessServiceTypeDescription) toGoStruct() (dst *Fabric
 		return
 	}
 	dst = &FabricStatelessServiceTypeDescription{}
-	dst.ServiceTypeName = windows.UTF16PtrToString(obj.ServiceTypeName)
-	dst.PlacementConstraints = windows.UTF16PtrToString(obj.PlacementConstraints)
+	dst.ServiceTypeName = utf16PtrToString(obj.ServiceTypeName)
+	dst.PlacementConstraints = utf16PtrToString(obj.PlacementConstraints)
 	{
 		var innerlst []innerFabricServiceLoadMetricDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.LoadMetrics.Items), int(obj.LoadMetrics.Count))
@@ -3518,13 +3442,9 @@ func (obj *FabricStatefulServiceTypeDescription) toInnerStruct() *innerFabricSta
 		return nil
 	}
 	dst := &innerFabricStatefulServiceTypeDescription{}
-	s_43, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_43
-
-	s_44, _ := windows.UTF16PtrFromString(obj.PlacementConstraints)
-	dst.PlacementConstraints = s_44
-
-	lst_45 := &innerFabricServiceLoadMetricDescriptionList{}
+	dst.ServiceTypeName = utf16PtrFromString(obj.ServiceTypeName)
+	dst.PlacementConstraints = utf16PtrFromString(obj.PlacementConstraints)
+	lst_5 := &innerFabricServiceLoadMetricDescriptionList{}
 	{
 
 		var tmp []innerFabricServiceLoadMetricDescription
@@ -3537,14 +3457,14 @@ func (obj *FabricStatefulServiceTypeDescription) toInnerStruct() *innerFabricSta
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_45.Count = uint32(len(tmp))
+		lst_5.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_45.Items = &tmp[0]
+			lst_5.Items = &tmp[0]
 		}
 
 	}
-	dst.LoadMetrics = lst_45
-	lst_46 := &innerFabricServiceTypeDescriptionExtensionList{}
+	dst.LoadMetrics = lst_5
+	lst_6 := &innerFabricServiceTypeDescriptionExtensionList{}
 	{
 
 		var tmp []innerFabricServiceTypeDescriptionExtension
@@ -3557,17 +3477,17 @@ func (obj *FabricStatefulServiceTypeDescription) toInnerStruct() *innerFabricSta
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_46.Count = uint32(len(tmp))
+		lst_6.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_46.Items = &tmp[0]
+			lst_6.Items = &tmp[0]
 		}
 
 	}
-	dst.Extensions = lst_46
+	dst.Extensions = lst_6
 	dst.HasPersistedState = obj.HasPersistedState
 	ex0 := dst
 	ex1 := &innerFabricStatefulServiceTypeDescriptionEx1{}
-	lst_47 := &innerFabricServicePlacementPolicyList{}
+	lst_7 := &innerFabricServicePlacementPolicyList{}
 	{
 
 		var tmp []innerFabricServicePlacementPolicyDescription
@@ -3580,13 +3500,13 @@ func (obj *FabricStatefulServiceTypeDescription) toInnerStruct() *innerFabricSta
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_47.PolicyCount = uint32(len(tmp))
+		lst_7.PolicyCount = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_47.Policies = &tmp[0]
+			lst_7.Policies = &tmp[0]
 		}
 
 	}
-	ex1.PolicyList = lst_47
+	ex1.PolicyList = lst_7
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
@@ -3609,8 +3529,8 @@ func (obj *innerFabricStatefulServiceTypeDescription) toGoStruct() (dst *FabricS
 		return
 	}
 	dst = &FabricStatefulServiceTypeDescription{}
-	dst.ServiceTypeName = windows.UTF16PtrToString(obj.ServiceTypeName)
-	dst.PlacementConstraints = windows.UTF16PtrToString(obj.PlacementConstraints)
+	dst.ServiceTypeName = utf16PtrToString(obj.ServiceTypeName)
+	dst.PlacementConstraints = utf16PtrToString(obj.PlacementConstraints)
 	{
 		var innerlst []innerFabricServiceLoadMetricDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.LoadMetrics.Items), int(obj.LoadMetrics.Count))
@@ -3669,10 +3589,8 @@ func (obj *FabricServiceGroupTypeMemberDescription) toInnerStruct() *innerFabric
 		return nil
 	}
 	dst := &innerFabricServiceGroupTypeMemberDescription{}
-	s_48, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_48
-
-	lst_49 := &innerFabricServiceLoadMetricDescriptionList{}
+	dst.ServiceTypeName = utf16PtrFromString(obj.ServiceTypeName)
+	lst_8 := &innerFabricServiceLoadMetricDescriptionList{}
 	{
 
 		var tmp []innerFabricServiceLoadMetricDescription
@@ -3685,13 +3603,13 @@ func (obj *FabricServiceGroupTypeMemberDescription) toInnerStruct() *innerFabric
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_49.Count = uint32(len(tmp))
+		lst_8.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_49.Items = &tmp[0]
+			lst_8.Items = &tmp[0]
 		}
 
 	}
-	dst.LoadMetrics = lst_49
+	dst.LoadMetrics = lst_8
 	return dst
 }
 
@@ -3706,7 +3624,7 @@ func (obj *innerFabricServiceGroupTypeMemberDescription) toGoStruct() (dst *Fabr
 		return
 	}
 	dst = &FabricServiceGroupTypeMemberDescription{}
-	dst.ServiceTypeName = windows.UTF16PtrToString(obj.ServiceTypeName)
+	dst.ServiceTypeName = utf16PtrToString(obj.ServiceTypeName)
 	{
 		var innerlst []innerFabricServiceLoadMetricDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.LoadMetrics.Items), int(obj.LoadMetrics.Count))
@@ -3758,7 +3676,7 @@ func (obj *FabricServiceGroupTypeDescription) toInnerStruct() *innerFabricServic
 	}
 	dst := &innerFabricServiceGroupTypeDescription{}
 	dst.Description = obj.Description.toInnerStruct()
-	lst_50 := &innerFabricServiceGroupTypeMemberDescriptionList{}
+	lst_9 := &innerFabricServiceGroupTypeMemberDescriptionList{}
 	{
 
 		var tmp []innerFabricServiceGroupTypeMemberDescription
@@ -3771,13 +3689,13 @@ func (obj *FabricServiceGroupTypeDescription) toInnerStruct() *innerFabricServic
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_50.Count = uint32(len(tmp))
+		lst_9.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_50.Items = &tmp[0]
+			lst_9.Items = &tmp[0]
 		}
 
 	}
-	dst.Members = lst_50
+	dst.Members = lst_9
 	dst.UseImplicitFactory = obj.UseImplicitFactory
 	return dst
 }
@@ -3852,35 +3770,19 @@ func (obj *FabricEndpointResourceDescription) toInnerStruct() *innerFabricEndpoi
 		return nil
 	}
 	dst := &innerFabricEndpointResourceDescription{}
-	s_51, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_51
-
-	s_52, _ := windows.UTF16PtrFromString(obj.Protocol)
-	dst.Protocol = s_52
-
-	s_53, _ := windows.UTF16PtrFromString(obj.Type)
-	dst.Type = s_53
-
+	dst.Name = utf16PtrFromString(obj.Name)
+	dst.Protocol = utf16PtrFromString(obj.Protocol)
+	dst.Type = utf16PtrFromString(obj.Type)
 	dst.Port = obj.Port
-	s_54, _ := windows.UTF16PtrFromString(obj.CertificateName)
-	dst.CertificateName = s_54
-
+	dst.CertificateName = utf16PtrFromString(obj.CertificateName)
 	ex0 := dst
 	ex1 := &innerFabricEndpointResourceDescriptionEx1{}
-	s_55, _ := windows.UTF16PtrFromString(obj.UriScheme)
-	ex1.UriScheme = s_55
-
-	s_56, _ := windows.UTF16PtrFromString(obj.PathSuffix)
-	ex1.PathSuffix = s_56
-
+	ex1.UriScheme = utf16PtrFromString(obj.UriScheme)
+	ex1.PathSuffix = utf16PtrFromString(obj.PathSuffix)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	ex2 := &innerFabricEndpointResourceDescriptionEx2{}
-	s_57, _ := windows.UTF16PtrFromString(obj.CodePackageName)
-	ex2.CodePackageName = s_57
-
-	s_58, _ := windows.UTF16PtrFromString(obj.IpAddressOrFqdn)
-	ex2.IpAddressOrFqdn = s_58
-
+	ex2.CodePackageName = utf16PtrFromString(obj.CodePackageName)
+	ex2.IpAddressOrFqdn = utf16PtrFromString(obj.IpAddressOrFqdn)
 	ex1.Reserved = unsafe.Pointer(ex2)
 	return dst
 }
@@ -3909,24 +3811,24 @@ func (obj *innerFabricEndpointResourceDescription) toGoStruct() (dst *FabricEndp
 		return
 	}
 	dst = &FabricEndpointResourceDescription{}
-	dst.Name = windows.UTF16PtrToString(obj.Name)
-	dst.Protocol = windows.UTF16PtrToString(obj.Protocol)
-	dst.Type = windows.UTF16PtrToString(obj.Type)
+	dst.Name = utf16PtrToString(obj.Name)
+	dst.Protocol = utf16PtrToString(obj.Protocol)
+	dst.Type = utf16PtrToString(obj.Type)
 	dst.Port = obj.Port
-	dst.CertificateName = windows.UTF16PtrToString(obj.CertificateName)
+	dst.CertificateName = utf16PtrToString(obj.CertificateName)
 	ex0 := obj
 	ex1 := (*innerFabricEndpointResourceDescriptionEx1)(ex0.Reserved)
 	if ex1 == nil {
 		return
 	}
-	dst.UriScheme = windows.UTF16PtrToString(ex1.UriScheme)
-	dst.PathSuffix = windows.UTF16PtrToString(ex1.PathSuffix)
+	dst.UriScheme = utf16PtrToString(ex1.UriScheme)
+	dst.PathSuffix = utf16PtrToString(ex1.PathSuffix)
 	ex2 := (*innerFabricEndpointResourceDescriptionEx2)(ex1.Reserved)
 	if ex2 == nil {
 		return
 	}
-	dst.CodePackageName = windows.UTF16PtrToString(ex2.CodePackageName)
-	dst.IpAddressOrFqdn = windows.UTF16PtrToString(ex2.IpAddressOrFqdn)
+	dst.CodePackageName = utf16PtrToString(ex2.CodePackageName)
+	dst.IpAddressOrFqdn = utf16PtrToString(ex2.IpAddressOrFqdn)
 	return
 }
 
@@ -4035,19 +3937,13 @@ func (obj *FabricConfigurationParameter) toInnerStruct() *innerFabricConfigurati
 		return nil
 	}
 	dst := &innerFabricConfigurationParameter{}
-	s_59, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_59
-
-	s_60, _ := windows.UTF16PtrFromString(obj.Value)
-	dst.Value = s_60
-
+	dst.Name = utf16PtrFromString(obj.Name)
+	dst.Value = utf16PtrFromString(obj.Value)
 	dst.MustOverride = obj.MustOverride
 	dst.IsEncrypted = obj.IsEncrypted
 	ex0 := dst
 	ex1 := &innerFabricConfigurationParameterEx1{}
-	s_61, _ := windows.UTF16PtrFromString(obj.Type)
-	ex1.Type = s_61
-
+	ex1.Type = utf16PtrFromString(obj.Type)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
@@ -4069,8 +3965,8 @@ func (obj *innerFabricConfigurationParameter) toGoStruct() (dst *FabricConfigura
 		return
 	}
 	dst = &FabricConfigurationParameter{}
-	dst.Name = windows.UTF16PtrToString(obj.Name)
-	dst.Value = windows.UTF16PtrToString(obj.Value)
+	dst.Name = utf16PtrToString(obj.Name)
+	dst.Value = utf16PtrToString(obj.Value)
 	dst.MustOverride = obj.MustOverride
 	dst.IsEncrypted = obj.IsEncrypted
 	ex0 := obj
@@ -4078,7 +3974,7 @@ func (obj *innerFabricConfigurationParameter) toGoStruct() (dst *FabricConfigura
 	if ex1 == nil {
 		return
 	}
-	dst.Type = windows.UTF16PtrToString(ex1.Type)
+	dst.Type = utf16PtrToString(ex1.Type)
 	return
 }
 
@@ -4115,10 +4011,8 @@ func (obj *FabricConfigurationSection) toInnerStruct() *innerFabricConfiguration
 		return nil
 	}
 	dst := &innerFabricConfigurationSection{}
-	s_62, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_62
-
-	lst_63 := &innerFabricConfigurationParameterList{}
+	dst.Name = utf16PtrFromString(obj.Name)
+	lst_10 := &innerFabricConfigurationParameterList{}
 	{
 
 		var tmp []innerFabricConfigurationParameter
@@ -4131,13 +4025,13 @@ func (obj *FabricConfigurationSection) toInnerStruct() *innerFabricConfiguration
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_63.Count = uint32(len(tmp))
+		lst_10.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_63.Items = &tmp[0]
+			lst_10.Items = &tmp[0]
 		}
 
 	}
-	dst.Parameters = lst_63
+	dst.Parameters = lst_10
 	return dst
 }
 
@@ -4152,7 +4046,7 @@ func (obj *innerFabricConfigurationSection) toGoStruct() (dst *FabricConfigurati
 		return
 	}
 	dst = &FabricConfigurationSection{}
-	dst.Name = windows.UTF16PtrToString(obj.Name)
+	dst.Name = utf16PtrToString(obj.Name)
 	{
 		var innerlst []innerFabricConfigurationParameter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Parameters.Items), int(obj.Parameters.Count))
@@ -4201,7 +4095,7 @@ func (obj *FabricConfigurationSettings) toInnerStruct() *innerFabricConfiguratio
 		return nil
 	}
 	dst := &innerFabricConfigurationSettings{}
-	lst_64 := &innerFabricConfigurationSectionList{}
+	lst_11 := &innerFabricConfigurationSectionList{}
 	{
 
 		var tmp []innerFabricConfigurationSection
@@ -4214,13 +4108,13 @@ func (obj *FabricConfigurationSettings) toInnerStruct() *innerFabricConfiguratio
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_64.Count = uint32(len(tmp))
+		lst_11.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_64.Items = &tmp[0]
+			lst_11.Items = &tmp[0]
 		}
 
 	}
-	dst.Sections = lst_64
+	dst.Sections = lst_11
 	return dst
 }
 
@@ -4264,7 +4158,7 @@ func (obj *innerFabricStringList) toGoStruct() []string {
 		for _, item := range innerlst {
 			var tmpitem string
 
-			tmpitem = windows.UTF16PtrToString(item)
+			tmpitem = utf16PtrToString(item)
 
 			dst = append(dst, tmpitem)
 		}
@@ -4336,9 +4230,7 @@ func (obj *FabricReplicaInformation) toInnerStruct() *innerFabricReplicaInformat
 	dst.Id = obj.Id
 	dst.Role = obj.Role
 	dst.Status = obj.Status
-	s_65, _ := windows.UTF16PtrFromString(obj.ReplicatorAddress)
-	dst.ReplicatorAddress = s_65
-
+	dst.ReplicatorAddress = utf16PtrFromString(obj.ReplicatorAddress)
 	dst.CurrentProgress = obj.CurrentProgress
 	dst.CatchUpCapability = obj.CatchUpCapability
 	ex0 := dst
@@ -4370,7 +4262,7 @@ func (obj *innerFabricReplicaInformation) toGoStruct() (dst *FabricReplicaInform
 	dst.Id = obj.Id
 	dst.Role = obj.Role
 	dst.Status = obj.Status
-	dst.ReplicatorAddress = windows.UTF16PtrToString(obj.ReplicatorAddress)
+	dst.ReplicatorAddress = utf16PtrToString(obj.ReplicatorAddress)
 	dst.CurrentProgress = obj.CurrentProgress
 	dst.CatchUpCapability = obj.CatchUpCapability
 	ex0 := obj
@@ -4414,9 +4306,7 @@ func (obj *FabricLoadMetric) toInnerStruct() *innerFabricLoadMetric {
 		return nil
 	}
 	dst := &innerFabricLoadMetric{}
-	s_66, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_66
-
+	dst.Name = utf16PtrFromString(obj.Name)
 	dst.Value = obj.Value
 	return dst
 }
@@ -4432,7 +4322,7 @@ func (obj *innerFabricLoadMetric) toGoStruct() (dst *FabricLoadMetric) {
 		return
 	}
 	dst = &FabricLoadMetric{}
-	dst.Name = windows.UTF16PtrToString(obj.Name)
+	dst.Name = utf16PtrToString(obj.Name)
 	dst.Value = obj.Value
 	return
 }
@@ -4501,9 +4391,7 @@ func (obj *FabricReplicatorSettings) toInnerStruct() *innerFabricReplicatorSetti
 	dst.Flags = obj.Flags
 	dst.RetryIntervalMilliseconds = obj.RetryIntervalMilliseconds
 	dst.BatchAcknowledgementIntervalMilliseconds = obj.BatchAcknowledgementIntervalMilliseconds
-	s_67, _ := windows.UTF16PtrFromString(obj.ReplicatorAddress)
-	dst.ReplicatorAddress = s_67
-
+	dst.ReplicatorAddress = utf16PtrFromString(obj.ReplicatorAddress)
 	dst.RequireServiceAck = obj.RequireServiceAck
 	dst.InitialReplicationQueueSize = obj.InitialReplicationQueueSize
 	dst.MaxReplicationQueueSize = obj.MaxReplicationQueueSize
@@ -4529,12 +4417,8 @@ func (obj *FabricReplicatorSettings) toInnerStruct() *innerFabricReplicatorSetti
 	ex3.PrimaryWaitForPendingQuorumsTimeoutMilliseconds = obj.PrimaryWaitForPendingQuorumsTimeoutMilliseconds
 	ex2.Reserved = unsafe.Pointer(ex3)
 	ex4 := &innerFabricReplicatorSettingsEx4{}
-	s_68, _ := windows.UTF16PtrFromString(obj.ReplicatorListenAddress)
-	ex4.ReplicatorListenAddress = s_68
-
-	s_69, _ := windows.UTF16PtrFromString(obj.ReplicatorPublishAddress)
-	ex4.ReplicatorPublishAddress = s_69
-
+	ex4.ReplicatorListenAddress = utf16PtrFromString(obj.ReplicatorListenAddress)
+	ex4.ReplicatorPublishAddress = utf16PtrFromString(obj.ReplicatorPublishAddress)
 	ex3.Reserved = unsafe.Pointer(ex4)
 	return dst
 }
@@ -4586,7 +4470,7 @@ func (obj *innerFabricReplicatorSettings) toGoStruct() (dst *FabricReplicatorSet
 	dst.Flags = obj.Flags
 	dst.RetryIntervalMilliseconds = obj.RetryIntervalMilliseconds
 	dst.BatchAcknowledgementIntervalMilliseconds = obj.BatchAcknowledgementIntervalMilliseconds
-	dst.ReplicatorAddress = windows.UTF16PtrToString(obj.ReplicatorAddress)
+	dst.ReplicatorAddress = utf16PtrToString(obj.ReplicatorAddress)
 	dst.RequireServiceAck = obj.RequireServiceAck
 	dst.InitialReplicationQueueSize = obj.InitialReplicationQueueSize
 	dst.MaxReplicationQueueSize = obj.MaxReplicationQueueSize
@@ -4621,8 +4505,8 @@ func (obj *innerFabricReplicatorSettings) toGoStruct() (dst *FabricReplicatorSet
 	if ex4 == nil {
 		return
 	}
-	dst.ReplicatorListenAddress = windows.UTF16PtrToString(ex4.ReplicatorListenAddress)
-	dst.ReplicatorPublishAddress = windows.UTF16PtrToString(ex4.ReplicatorPublishAddress)
+	dst.ReplicatorListenAddress = utf16PtrToString(ex4.ReplicatorListenAddress)
+	dst.ReplicatorPublishAddress = utf16PtrToString(ex4.ReplicatorPublishAddress)
 	return
 }
 
@@ -4641,21 +4525,15 @@ func (obj *FabricNamedPropertyMetadata) toInnerStruct() *innerFabricNamedPropert
 		return nil
 	}
 	dst := &innerFabricNamedPropertyMetadata{}
-	s_70, _ := windows.UTF16PtrFromString(obj.PropertyName)
-	dst.PropertyName = s_70
-
+	dst.PropertyName = utf16PtrFromString(obj.PropertyName)
 	dst.TypeId = obj.TypeId
 	dst.ValueSize = obj.ValueSize
 	dst.SequenceNumber = obj.SequenceNumber
-	dst.LastModifiedUtc = windows.NsecToFiletime(obj.LastModifiedUtc.UnixNano())
-	s_71, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_71
-
+	dst.LastModifiedUtc = timeToFiletime(obj.LastModifiedUtc)
+	dst.Name = utf16PtrFromString(obj.Name)
 	ex0 := dst
 	ex1 := &innerFabricNamedPropertyMetadataEx1{}
-	s_72, _ := windows.UTF16PtrFromString(obj.CustomTypeId)
-	ex1.CustomTypeId = s_72
-
+	ex1.CustomTypeId = utf16PtrFromString(obj.CustomTypeId)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
@@ -4665,7 +4543,7 @@ type innerFabricNamedPropertyMetadata struct {
 	TypeId          FabricPropertyTypeId
 	ValueSize       int32
 	SequenceNumber  int64
-	LastModifiedUtc windows.Filetime
+	LastModifiedUtc filetime
 	Name            *uint16
 	Reserved        unsafe.Pointer
 }
@@ -4679,18 +4557,18 @@ func (obj *innerFabricNamedPropertyMetadata) toGoStruct() (dst *FabricNamedPrope
 		return
 	}
 	dst = &FabricNamedPropertyMetadata{}
-	dst.PropertyName = windows.UTF16PtrToString(obj.PropertyName)
+	dst.PropertyName = utf16PtrToString(obj.PropertyName)
 	dst.TypeId = obj.TypeId
 	dst.ValueSize = obj.ValueSize
 	dst.SequenceNumber = obj.SequenceNumber
-	dst.LastModifiedUtc = time.Unix(0, obj.LastModifiedUtc.Nanoseconds())
-	dst.Name = windows.UTF16PtrToString(obj.Name)
+	dst.LastModifiedUtc = obj.LastModifiedUtc.ToTime()
+	dst.Name = utf16PtrToString(obj.Name)
 	ex0 := obj
 	ex1 := (*innerFabricNamedPropertyMetadataEx1)(ex0.Reserved)
 	if ex1 == nil {
 		return
 	}
-	dst.CustomTypeId = windows.UTF16PtrToString(ex1.CustomTypeId)
+	dst.CustomTypeId = utf16PtrToString(ex1.CustomTypeId)
 	return
 }
 
@@ -4727,9 +4605,7 @@ func (obj *FabricPutPropertyOperation) toInnerStruct() *innerFabricPutPropertyOp
 		return nil
 	}
 	dst := &innerFabricPutPropertyOperation{}
-	s_73, _ := windows.UTF16PtrFromString(obj.PropertyName)
-	dst.PropertyName = s_73
-
+	dst.PropertyName = utf16PtrFromString(obj.PropertyName)
 	dst.PropertyTypeId = obj.PropertyTypeId
 	dst.PropertyValue = toUnsafePointer(obj.PropertyValue)
 	return dst
@@ -4747,7 +4623,7 @@ func (obj *innerFabricPutPropertyOperation) toGoStruct() (dst *FabricPutProperty
 		return
 	}
 	dst = &FabricPutPropertyOperation{}
-	dst.PropertyName = windows.UTF16PtrToString(obj.PropertyName)
+	dst.PropertyName = utf16PtrToString(obj.PropertyName)
 	dst.PropertyTypeId = obj.PropertyTypeId
 	dst.PropertyValue = fromUnsafePointer(obj.PropertyValue)
 	return
@@ -4765,14 +4641,10 @@ func (obj *FabricPutCustomPropertyOperation) toInnerStruct() *innerFabricPutCust
 		return nil
 	}
 	dst := &innerFabricPutCustomPropertyOperation{}
-	s_74, _ := windows.UTF16PtrFromString(obj.PropertyName)
-	dst.PropertyName = s_74
-
+	dst.PropertyName = utf16PtrFromString(obj.PropertyName)
 	dst.PropertyTypeId = obj.PropertyTypeId
 	dst.PropertyValue = toUnsafePointer(obj.PropertyValue)
-	s_75, _ := windows.UTF16PtrFromString(obj.PropertyCustomTypeId)
-	dst.PropertyCustomTypeId = s_75
-
+	dst.PropertyCustomTypeId = utf16PtrFromString(obj.PropertyCustomTypeId)
 	return dst
 }
 
@@ -4789,10 +4661,10 @@ func (obj *innerFabricPutCustomPropertyOperation) toGoStruct() (dst *FabricPutCu
 		return
 	}
 	dst = &FabricPutCustomPropertyOperation{}
-	dst.PropertyName = windows.UTF16PtrToString(obj.PropertyName)
+	dst.PropertyName = utf16PtrToString(obj.PropertyName)
 	dst.PropertyTypeId = obj.PropertyTypeId
 	dst.PropertyValue = fromUnsafePointer(obj.PropertyValue)
-	dst.PropertyCustomTypeId = windows.UTF16PtrToString(obj.PropertyCustomTypeId)
+	dst.PropertyCustomTypeId = utf16PtrToString(obj.PropertyCustomTypeId)
 	return
 }
 
@@ -4806,9 +4678,7 @@ func (obj *FabricGetPropertyOperation) toInnerStruct() *innerFabricGetPropertyOp
 		return nil
 	}
 	dst := &innerFabricGetPropertyOperation{}
-	s_76, _ := windows.UTF16PtrFromString(obj.PropertyName)
-	dst.PropertyName = s_76
-
+	dst.PropertyName = utf16PtrFromString(obj.PropertyName)
 	dst.IncludeValue = obj.IncludeValue
 	return dst
 }
@@ -4824,7 +4694,7 @@ func (obj *innerFabricGetPropertyOperation) toGoStruct() (dst *FabricGetProperty
 		return
 	}
 	dst = &FabricGetPropertyOperation{}
-	dst.PropertyName = windows.UTF16PtrToString(obj.PropertyName)
+	dst.PropertyName = utf16PtrToString(obj.PropertyName)
 	dst.IncludeValue = obj.IncludeValue
 	return
 }
@@ -4838,9 +4708,7 @@ func (obj *FabricDeletePropertyOperation) toInnerStruct() *innerFabricDeleteProp
 		return nil
 	}
 	dst := &innerFabricDeletePropertyOperation{}
-	s_77, _ := windows.UTF16PtrFromString(obj.PropertyName)
-	dst.PropertyName = s_77
-
+	dst.PropertyName = utf16PtrFromString(obj.PropertyName)
 	return dst
 }
 
@@ -4854,7 +4722,7 @@ func (obj *innerFabricDeletePropertyOperation) toGoStruct() (dst *FabricDeletePr
 		return
 	}
 	dst = &FabricDeletePropertyOperation{}
-	dst.PropertyName = windows.UTF16PtrToString(obj.PropertyName)
+	dst.PropertyName = utf16PtrToString(obj.PropertyName)
 	return
 }
 
@@ -4868,9 +4736,7 @@ func (obj *FabricCheckSequencePropertyOperation) toInnerStruct() *innerFabricChe
 		return nil
 	}
 	dst := &innerFabricCheckSequencePropertyOperation{}
-	s_78, _ := windows.UTF16PtrFromString(obj.PropertyName)
-	dst.PropertyName = s_78
-
+	dst.PropertyName = utf16PtrFromString(obj.PropertyName)
 	dst.SequenceNumber = obj.SequenceNumber
 	return dst
 }
@@ -4886,7 +4752,7 @@ func (obj *innerFabricCheckSequencePropertyOperation) toGoStruct() (dst *FabricC
 		return
 	}
 	dst = &FabricCheckSequencePropertyOperation{}
-	dst.PropertyName = windows.UTF16PtrToString(obj.PropertyName)
+	dst.PropertyName = utf16PtrToString(obj.PropertyName)
 	dst.SequenceNumber = obj.SequenceNumber
 	return
 }
@@ -4901,9 +4767,7 @@ func (obj *FabricCheckExistsPropertyOperation) toInnerStruct() *innerFabricCheck
 		return nil
 	}
 	dst := &innerFabricCheckExistsPropertyOperation{}
-	s_79, _ := windows.UTF16PtrFromString(obj.PropertyName)
-	dst.PropertyName = s_79
-
+	dst.PropertyName = utf16PtrFromString(obj.PropertyName)
 	dst.ExistenceCheck = obj.ExistenceCheck
 	return dst
 }
@@ -4919,7 +4783,7 @@ func (obj *innerFabricCheckExistsPropertyOperation) toGoStruct() (dst *FabricChe
 		return
 	}
 	dst = &FabricCheckExistsPropertyOperation{}
-	dst.PropertyName = windows.UTF16PtrToString(obj.PropertyName)
+	dst.PropertyName = utf16PtrToString(obj.PropertyName)
 	dst.ExistenceCheck = obj.ExistenceCheck
 	return
 }
@@ -4935,9 +4799,7 @@ func (obj *FabricCheckValuePropertyOperation) toInnerStruct() *innerFabricCheckV
 		return nil
 	}
 	dst := &innerFabricCheckValuePropertyOperation{}
-	s_80, _ := windows.UTF16PtrFromString(obj.PropertyName)
-	dst.PropertyName = s_80
-
+	dst.PropertyName = utf16PtrFromString(obj.PropertyName)
 	dst.PropertyTypeId = obj.PropertyTypeId
 	dst.PropertyValue = toUnsafePointer(obj.PropertyValue)
 	return dst
@@ -4955,7 +4817,7 @@ func (obj *innerFabricCheckValuePropertyOperation) toGoStruct() (dst *FabricChec
 		return
 	}
 	dst = &FabricCheckValuePropertyOperation{}
-	dst.PropertyName = windows.UTF16PtrToString(obj.PropertyName)
+	dst.PropertyName = utf16PtrToString(obj.PropertyName)
 	dst.PropertyTypeId = obj.PropertyTypeId
 	dst.PropertyValue = fromUnsafePointer(obj.PropertyValue)
 	return
@@ -5052,7 +4914,7 @@ func (obj *innerFabricNodeTransitionDescription) toGoStruct() (dst *FabricNodeTr
 }
 
 type FabricNodeStopDescription struct {
-	OperationId           windows.GUID
+	OperationId           uuid.UUID
 	NodeName              string
 	NodeInstanceId        uint64
 	StopDurationInSeconds uint32
@@ -5064,16 +4926,14 @@ func (obj *FabricNodeStopDescription) toInnerStruct() *innerFabricNodeStopDescri
 	}
 	dst := &innerFabricNodeStopDescription{}
 	dst.OperationId = obj.OperationId
-	s_81, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_81
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.NodeInstanceId = obj.NodeInstanceId
 	dst.StopDurationInSeconds = obj.StopDurationInSeconds
 	return dst
 }
 
 type innerFabricNodeStopDescription struct {
-	OperationId           windows.GUID
+	OperationId           uuid.UUID
 	NodeName              *uint16
 	NodeInstanceId        uint64
 	StopDurationInSeconds uint32
@@ -5086,14 +4946,14 @@ func (obj *innerFabricNodeStopDescription) toGoStruct() (dst *FabricNodeStopDesc
 	}
 	dst = &FabricNodeStopDescription{}
 	dst.OperationId = obj.OperationId
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.NodeInstanceId = obj.NodeInstanceId
 	dst.StopDurationInSeconds = obj.StopDurationInSeconds
 	return
 }
 
 type FabricNodeStartDescription struct {
-	OperationId    windows.GUID
+	OperationId    uuid.UUID
 	NodeName       string
 	NodeInstanceId uint64
 }
@@ -5104,15 +4964,13 @@ func (obj *FabricNodeStartDescription) toInnerStruct() *innerFabricNodeStartDesc
 	}
 	dst := &innerFabricNodeStartDescription{}
 	dst.OperationId = obj.OperationId
-	s_82, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_82
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.NodeInstanceId = obj.NodeInstanceId
 	return dst
 }
 
 type innerFabricNodeStartDescription struct {
-	OperationId    windows.GUID
+	OperationId    uuid.UUID
 	NodeName       *uint16
 	NodeInstanceId uint64
 	Reserved       unsafe.Pointer
@@ -5124,7 +4982,7 @@ func (obj *innerFabricNodeStartDescription) toGoStruct() (dst *FabricNodeStartDe
 	}
 	dst = &FabricNodeStartDescription{}
 	dst.OperationId = obj.OperationId
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.NodeInstanceId = obj.NodeInstanceId
 	return
 }
@@ -5169,9 +5027,7 @@ func (obj *FabricDeleteServiceDescription) toInnerStruct() *innerFabricDeleteSer
 		return nil
 	}
 	dst := &innerFabricDeleteServiceDescription{}
-	s_83, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_83
-
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
 	dst.ForceDelete = obj.ForceDelete
 	return dst
 }
@@ -5187,7 +5043,7 @@ func (obj *innerFabricDeleteServiceDescription) toGoStruct() (dst *FabricDeleteS
 		return
 	}
 	dst = &FabricDeleteServiceDescription{}
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	dst.ForceDelete = obj.ForceDelete
 	return
 }
@@ -5207,18 +5063,10 @@ func (obj *FabricServiceFromTemplateDescription) toInnerStruct() *innerFabricSer
 		return nil
 	}
 	dst := &innerFabricServiceFromTemplateDescription{}
-	s_84, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_84
-
-	s_85, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_85
-
-	s_86, _ := windows.UTF16PtrFromString(obj.ServiceDnsName)
-	dst.ServiceDnsName = s_86
-
-	s_87, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_87
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
+	dst.ServiceDnsName = utf16PtrFromString(obj.ServiceDnsName)
+	dst.ServiceTypeName = utf16PtrFromString(obj.ServiceTypeName)
 	dst.ServicePackageActivationMode = obj.ServicePackageActivationMode
 	dst.InitializationDataSize = obj.InitializationDataSize
 	dst.InitializationData = obj.InitializationData
@@ -5241,10 +5089,10 @@ func (obj *innerFabricServiceFromTemplateDescription) toGoStruct() (dst *FabricS
 		return
 	}
 	dst = &FabricServiceFromTemplateDescription{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
-	dst.ServiceDnsName = windows.UTF16PtrToString(obj.ServiceDnsName)
-	dst.ServiceTypeName = windows.UTF16PtrToString(obj.ServiceTypeName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
+	dst.ServiceDnsName = utf16PtrToString(obj.ServiceDnsName)
+	dst.ServiceTypeName = utf16PtrToString(obj.ServiceTypeName)
 	dst.ServicePackageActivationMode = obj.ServicePackageActivationMode
 	dst.InitializationDataSize = obj.InitializationDataSize
 	dst.InitializationData = obj.InitializationData
@@ -5265,15 +5113,9 @@ func (obj *FabricServiceGroupFromTemplateDescription) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := &innerFabricServiceGroupFromTemplateDescription{}
-	s_88, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_88
-
-	s_89, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_89
-
-	s_90, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_90
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
+	dst.ServiceTypeName = utf16PtrFromString(obj.ServiceTypeName)
 	dst.ServicePackageActivationMode = obj.ServicePackageActivationMode
 	dst.InitializationDataSize = obj.InitializationDataSize
 	dst.InitializationData = obj.InitializationData
@@ -5295,9 +5137,9 @@ func (obj *innerFabricServiceGroupFromTemplateDescription) toGoStruct() (dst *Fa
 		return
 	}
 	dst = &FabricServiceGroupFromTemplateDescription{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
-	dst.ServiceTypeName = windows.UTF16PtrToString(obj.ServiceTypeName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
+	dst.ServiceTypeName = utf16PtrToString(obj.ServiceTypeName)
 	dst.ServicePackageActivationMode = obj.ServicePackageActivationMode
 	dst.InitializationDataSize = obj.InitializationDataSize
 	dst.InitializationData = obj.InitializationData
@@ -5314,9 +5156,7 @@ func (obj *FabricUpgradeDomainStatusDescription) toInnerStruct() *innerFabricUpg
 		return nil
 	}
 	dst := &innerFabricUpgradeDomainStatusDescription{}
-	s_91, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_91
-
+	dst.Name = utf16PtrFromString(obj.Name)
 	dst.State = obj.State
 	return dst
 }
@@ -5332,7 +5172,7 @@ func (obj *innerFabricUpgradeDomainStatusDescription) toGoStruct() (dst *FabricU
 		return
 	}
 	dst = &FabricUpgradeDomainStatusDescription{}
-	dst.Name = windows.UTF16PtrToString(obj.Name)
+	dst.Name = utf16PtrToString(obj.Name)
 	dst.State = obj.State
 	return
 }
@@ -5391,7 +5231,7 @@ func (obj *innerFabricUpgradeSafetyCheck) toGoStruct() (dst *FabricUpgradeSafety
 }
 
 type FabricUpgradePartitionSafetyCheck struct {
-	PartitionId windows.GUID
+	PartitionId uuid.UUID
 }
 type innerFabricUpgradePartitionSafetyCheck struct {
 	FabricUpgradePartitionSafetyCheck
@@ -5465,11 +5305,9 @@ func (obj *FabricNodeUpgradeProgress) toInnerStruct() *innerFabricNodeUpgradePro
 		return nil
 	}
 	dst := &innerFabricNodeUpgradeProgress{}
-	s_92, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_92
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.UpgradePhase = obj.UpgradePhase
-	lst_93 := &innerFabricUpgradeSafetyCheckList{}
+	lst_12 := &innerFabricUpgradeSafetyCheckList{}
 	{
 
 		var tmp []innerFabricUpgradeSafetyCheck
@@ -5482,13 +5320,13 @@ func (obj *FabricNodeUpgradeProgress) toInnerStruct() *innerFabricNodeUpgradePro
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_93.Count = uint32(len(tmp))
+		lst_12.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_93.Items = &tmp[0]
+			lst_12.Items = &tmp[0]
 		}
 
 	}
-	dst.PendingSafetyChecks = lst_93
+	dst.PendingSafetyChecks = lst_12
 	return dst
 }
 
@@ -5504,7 +5342,7 @@ func (obj *innerFabricNodeUpgradeProgress) toGoStruct() (dst *FabricNodeUpgradeP
 		return
 	}
 	dst = &FabricNodeUpgradeProgress{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.UpgradePhase = obj.UpgradePhase
 	{
 		var innerlst []innerFabricUpgradeSafetyCheck
@@ -5555,10 +5393,8 @@ func (obj *FabricUpgradeDomainProgress) toInnerStruct() *innerFabricUpgradeDomai
 		return nil
 	}
 	dst := &innerFabricUpgradeDomainProgress{}
-	s_94, _ := windows.UTF16PtrFromString(obj.UpgradeDomainName)
-	dst.UpgradeDomainName = s_94
-
-	lst_95 := &innerFabricNodeUpgradeProgressList{}
+	dst.UpgradeDomainName = utf16PtrFromString(obj.UpgradeDomainName)
+	lst_13 := &innerFabricNodeUpgradeProgressList{}
 	{
 
 		var tmp []innerFabricNodeUpgradeProgress
@@ -5571,13 +5407,13 @@ func (obj *FabricUpgradeDomainProgress) toInnerStruct() *innerFabricUpgradeDomai
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_95.Count = uint32(len(tmp))
+		lst_13.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_95.Items = &tmp[0]
+			lst_13.Items = &tmp[0]
 		}
 
 	}
-	dst.NodeProgressList = lst_95
+	dst.NodeProgressList = lst_13
 	return dst
 }
 
@@ -5592,7 +5428,7 @@ func (obj *innerFabricUpgradeDomainProgress) toGoStruct() (dst *FabricUpgradeDom
 		return
 	}
 	dst = &FabricUpgradeDomainProgress{}
-	dst.UpgradeDomainName = windows.UTF16PtrToString(obj.UpgradeDomainName)
+	dst.UpgradeDomainName = utf16PtrToString(obj.UpgradeDomainName)
 	{
 		var innerlst []innerFabricNodeUpgradeProgress
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.NodeProgressList.Items), int(obj.NodeProgressList.Count))
@@ -5633,15 +5469,9 @@ func (obj *FabricStatelessServiceDescription) toInnerStruct() *innerFabricStatel
 		return nil
 	}
 	dst := &innerFabricStatelessServiceDescription{}
-	s_96, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_96
-
-	s_97, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_97
-
-	s_98, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_98
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
+	dst.ServiceTypeName = utf16PtrFromString(obj.ServiceTypeName)
 	{
 
 		var tmp []byte
@@ -5663,9 +5493,7 @@ func (obj *FabricStatelessServiceDescription) toInnerStruct() *innerFabricStatel
 	dst.PartitionScheme = obj.PartitionScheme
 	dst.PartitionSchemeDescription = toUnsafePointer(obj.PartitionSchemeDescription)
 	dst.InstanceCount = obj.InstanceCount
-	s_99, _ := windows.UTF16PtrFromString(obj.PlacementConstraints)
-	dst.PlacementConstraints = s_99
-
+	dst.PlacementConstraints = utf16PtrFromString(obj.PlacementConstraints)
 	{
 
 		var tmp []innerFabricServiceCorrelationDescription
@@ -5704,7 +5532,7 @@ func (obj *FabricStatelessServiceDescription) toInnerStruct() *innerFabricStatel
 	}
 	ex0 := dst
 	ex1 := &innerFabricStatelessServiceDescriptionEx1{}
-	lst_100 := &innerFabricServicePlacementPolicyList{}
+	lst_14 := &innerFabricServicePlacementPolicyList{}
 	{
 
 		var tmp []innerFabricServicePlacementPolicyDescription
@@ -5717,13 +5545,13 @@ func (obj *FabricStatelessServiceDescription) toInnerStruct() *innerFabricStatel
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_100.PolicyCount = uint32(len(tmp))
+		lst_14.PolicyCount = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_100.Policies = &tmp[0]
+			lst_14.Policies = &tmp[0]
 		}
 
 	}
-	ex1.PolicyList = lst_100
+	ex1.PolicyList = lst_14
 	ex0.Reserved = unsafe.Pointer(ex1)
 	ex2 := &innerFabricStatelessServiceDescriptionEx2{}
 	ex2.IsDefaultMoveCostSpecified = obj.IsDefaultMoveCostSpecified
@@ -5731,9 +5559,7 @@ func (obj *FabricStatelessServiceDescription) toInnerStruct() *innerFabricStatel
 	ex1.Reserved = unsafe.Pointer(ex2)
 	ex3 := &innerFabricStatelessServiceDescriptionEx3{}
 	ex3.ServicePackageActivationMode = obj.ServicePackageActivationMode
-	s_101, _ := windows.UTF16PtrFromString(obj.ServiceDnsName)
-	ex3.ServiceDnsName = s_101
-
+	ex3.ServiceDnsName = utf16PtrFromString(obj.ServiceDnsName)
 	ex2.Reserved = unsafe.Pointer(ex3)
 	ex4 := &innerFabricStatelessServiceDescriptionEx4{}
 	{
@@ -5799,9 +5625,9 @@ func (obj *innerFabricStatelessServiceDescription) toGoStruct() (dst *FabricStat
 		return
 	}
 	dst = &FabricStatelessServiceDescription{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
-	dst.ServiceTypeName = windows.UTF16PtrToString(obj.ServiceTypeName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
+	dst.ServiceTypeName = utf16PtrToString(obj.ServiceTypeName)
 	{
 		var innerlst []byte
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.InitializationData), int(obj.InitializationDataSize))
@@ -5818,7 +5644,7 @@ func (obj *innerFabricStatelessServiceDescription) toGoStruct() (dst *FabricStat
 	dst.PartitionScheme = obj.PartitionScheme
 	dst.PartitionSchemeDescription = fromUnsafePointer(obj.PartitionSchemeDescription)
 	dst.InstanceCount = obj.InstanceCount
-	dst.PlacementConstraints = windows.UTF16PtrToString(obj.PlacementConstraints)
+	dst.PlacementConstraints = utf16PtrToString(obj.PlacementConstraints)
 	{
 		var innerlst []innerFabricServiceCorrelationDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Correlations), int(obj.CorrelationCount))
@@ -5874,7 +5700,7 @@ func (obj *innerFabricStatelessServiceDescription) toGoStruct() (dst *FabricStat
 		return
 	}
 	dst.ServicePackageActivationMode = ex3.ServicePackageActivationMode
-	dst.ServiceDnsName = windows.UTF16PtrToString(ex3.ServiceDnsName)
+	dst.ServiceDnsName = utf16PtrToString(ex3.ServiceDnsName)
 	ex4 := (*innerFabricStatelessServiceDescriptionEx4)(ex3.Reserved)
 	if ex4 == nil {
 		return
@@ -5917,10 +5743,8 @@ func (obj *FabricStatelessServiceUpdateDescription) toInnerStruct() *innerFabric
 	dst.InstanceCount = obj.InstanceCount
 	ex0 := dst
 	ex1 := &innerFabricStatelessServiceUpdateDescriptionEx1{}
-	s_102, _ := windows.UTF16PtrFromString(obj.PlacementConstraints)
-	ex1.PlacementConstraints = s_102
-
-	lst_103 := &innerFabricServicePlacementPolicyList{}
+	ex1.PlacementConstraints = utf16PtrFromString(obj.PlacementConstraints)
+	lst_15 := &innerFabricServicePlacementPolicyList{}
 	{
 
 		var tmp []innerFabricServicePlacementPolicyDescription
@@ -5933,13 +5757,13 @@ func (obj *FabricStatelessServiceUpdateDescription) toInnerStruct() *innerFabric
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_103.PolicyCount = uint32(len(tmp))
+		lst_15.PolicyCount = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_103.Policies = &tmp[0]
+			lst_15.Policies = &tmp[0]
 		}
 
 	}
-	ex1.PolicyList = lst_103
+	ex1.PolicyList = lst_15
 	{
 
 		var tmp []innerFabricServiceCorrelationDescription
@@ -6043,7 +5867,7 @@ func (obj *innerFabricStatelessServiceUpdateDescription) toGoStruct() (dst *Fabr
 	if ex1 == nil {
 		return
 	}
-	dst.PlacementConstraints = windows.UTF16PtrToString(ex1.PlacementConstraints)
+	dst.PlacementConstraints = utf16PtrToString(ex1.PlacementConstraints)
 	{
 		var innerlst []innerFabricServicePlacementPolicyDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(ex1.PolicyList.Policies), int(ex1.PolicyList.PolicyCount))
@@ -6137,15 +5961,9 @@ func (obj *FabricStatefulServiceDescription) toInnerStruct() *innerFabricStatefu
 		return nil
 	}
 	dst := &innerFabricStatefulServiceDescription{}
-	s_104, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_104
-
-	s_105, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_105
-
-	s_106, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_106
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
+	dst.ServiceTypeName = utf16PtrFromString(obj.ServiceTypeName)
 	{
 
 		var tmp []byte
@@ -6168,9 +5986,7 @@ func (obj *FabricStatefulServiceDescription) toInnerStruct() *innerFabricStatefu
 	dst.PartitionSchemeDescription = toUnsafePointer(obj.PartitionSchemeDescription)
 	dst.TargetReplicaSetSize = obj.TargetReplicaSetSize
 	dst.MinReplicaSetSize = obj.MinReplicaSetSize
-	s_107, _ := windows.UTF16PtrFromString(obj.PlacementConstraints)
-	dst.PlacementConstraints = s_107
-
+	dst.PlacementConstraints = utf16PtrFromString(obj.PlacementConstraints)
 	{
 
 		var tmp []innerFabricServiceCorrelationDescription
@@ -6210,7 +6026,7 @@ func (obj *FabricStatefulServiceDescription) toInnerStruct() *innerFabricStatefu
 	dst.HasPersistedState = obj.HasPersistedState
 	ex0 := dst
 	ex1 := &innerFabricStatefulServiceDescriptionEx1{}
-	lst_108 := &innerFabricServicePlacementPolicyList{}
+	lst_16 := &innerFabricServicePlacementPolicyList{}
 	{
 
 		var tmp []innerFabricServicePlacementPolicyDescription
@@ -6223,13 +6039,13 @@ func (obj *FabricStatefulServiceDescription) toInnerStruct() *innerFabricStatefu
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_108.PolicyCount = uint32(len(tmp))
+		lst_16.PolicyCount = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_108.Policies = &tmp[0]
+			lst_16.Policies = &tmp[0]
 		}
 
 	}
-	ex1.PolicyList = lst_108
+	ex1.PolicyList = lst_16
 	ex1.FailoverSettings = obj.FailoverSettings.toInnerStruct()
 	ex0.Reserved = unsafe.Pointer(ex1)
 	ex2 := &innerFabricStatefulServiceDescriptionEx2{}
@@ -6238,9 +6054,7 @@ func (obj *FabricStatefulServiceDescription) toInnerStruct() *innerFabricStatefu
 	ex1.Reserved = unsafe.Pointer(ex2)
 	ex3 := &innerFabricStatefulServiceDescriptionEx3{}
 	ex3.ServicePackageActivationMode = obj.ServicePackageActivationMode
-	s_109, _ := windows.UTF16PtrFromString(obj.ServiceDnsName)
-	ex3.ServiceDnsName = s_109
-
+	ex3.ServiceDnsName = utf16PtrFromString(obj.ServiceDnsName)
 	ex2.Reserved = unsafe.Pointer(ex3)
 	ex4 := &innerFabricStatefulServiceDescriptionEx4{}
 	{
@@ -6309,9 +6123,9 @@ func (obj *innerFabricStatefulServiceDescription) toGoStruct() (dst *FabricState
 		return
 	}
 	dst = &FabricStatefulServiceDescription{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
-	dst.ServiceTypeName = windows.UTF16PtrToString(obj.ServiceTypeName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
+	dst.ServiceTypeName = utf16PtrToString(obj.ServiceTypeName)
 	{
 		var innerlst []byte
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.InitializationData), int(obj.InitializationDataSize))
@@ -6329,7 +6143,7 @@ func (obj *innerFabricStatefulServiceDescription) toGoStruct() (dst *FabricState
 	dst.PartitionSchemeDescription = fromUnsafePointer(obj.PartitionSchemeDescription)
 	dst.TargetReplicaSetSize = obj.TargetReplicaSetSize
 	dst.MinReplicaSetSize = obj.MinReplicaSetSize
-	dst.PlacementConstraints = windows.UTF16PtrToString(obj.PlacementConstraints)
+	dst.PlacementConstraints = utf16PtrToString(obj.PlacementConstraints)
 	{
 		var innerlst []innerFabricServiceCorrelationDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Correlations), int(obj.CorrelationCount))
@@ -6387,7 +6201,7 @@ func (obj *innerFabricStatefulServiceDescription) toGoStruct() (dst *FabricState
 		return
 	}
 	dst.ServicePackageActivationMode = ex3.ServicePackageActivationMode
-	dst.ServiceDnsName = windows.UTF16PtrToString(ex3.ServiceDnsName)
+	dst.ServiceDnsName = utf16PtrToString(ex3.ServiceDnsName)
 	ex4 := (*innerFabricStatefulServiceDescriptionEx4)(ex3.Reserved)
 	if ex4 == nil {
 		return
@@ -6492,10 +6306,8 @@ func (obj *FabricStatefulServiceUpdateDescription) toInnerStruct() *innerFabricS
 	ex2.MinReplicaSetSize = obj.MinReplicaSetSize
 	ex1.Reserved = unsafe.Pointer(ex2)
 	ex3 := &innerFabricStatefulServiceUpdateDescriptionEx3{}
-	s_110, _ := windows.UTF16PtrFromString(obj.PlacementConstraints)
-	ex3.PlacementConstraints = s_110
-
-	lst_111 := &innerFabricServicePlacementPolicyList{}
+	ex3.PlacementConstraints = utf16PtrFromString(obj.PlacementConstraints)
+	lst_17 := &innerFabricServicePlacementPolicyList{}
 	{
 
 		var tmp []innerFabricServicePlacementPolicyDescription
@@ -6508,13 +6320,13 @@ func (obj *FabricStatefulServiceUpdateDescription) toInnerStruct() *innerFabricS
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_111.PolicyCount = uint32(len(tmp))
+		lst_17.PolicyCount = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_111.Policies = &tmp[0]
+			lst_17.Policies = &tmp[0]
 		}
 
 	}
-	ex3.PolicyList = lst_111
+	ex3.PolicyList = lst_17
 	{
 
 		var tmp []innerFabricServiceCorrelationDescription
@@ -6640,7 +6452,7 @@ func (obj *innerFabricStatefulServiceUpdateDescription) toGoStruct() (dst *Fabri
 	if ex3 == nil {
 		return
 	}
-	dst.PlacementConstraints = windows.UTF16PtrToString(ex3.PlacementConstraints)
+	dst.PlacementConstraints = utf16PtrToString(ex3.PlacementConstraints)
 	{
 		var innerlst []innerFabricServicePlacementPolicyDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(ex3.PolicyList.Policies), int(ex3.PolicyList.PolicyCount))
@@ -6752,9 +6564,7 @@ func (obj *FabricResolvedServiceEndpoint) toInnerStruct() *innerFabricResolvedSe
 		return nil
 	}
 	dst := &innerFabricResolvedServiceEndpoint{}
-	s_112, _ := windows.UTF16PtrFromString(obj.Address)
-	dst.Address = s_112
-
+	dst.Address = utf16PtrFromString(obj.Address)
 	dst.Role = obj.Role
 	return dst
 }
@@ -6770,7 +6580,7 @@ func (obj *innerFabricResolvedServiceEndpoint) toGoStruct() (dst *FabricResolved
 		return
 	}
 	dst = &FabricResolvedServiceEndpoint{}
-	dst.Address = windows.UTF16PtrToString(obj.Address)
+	dst.Address = utf16PtrToString(obj.Address)
 	dst.Role = obj.Role
 	return
 }
@@ -6805,9 +6615,7 @@ func (obj *FabricResolvedServicePartition) toInnerStruct() *innerFabricResolvedS
 		}
 
 	}
-	s_113, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_113
-
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
 	return dst
 }
 
@@ -6838,13 +6646,13 @@ func (obj *innerFabricResolvedServicePartition) toGoStruct() (dst *FabricResolve
 		}
 
 	}
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	return
 }
 
 type FabricServiceNotification struct {
 	ServiceName   string
-	PartitionId   windows.GUID
+	PartitionId   uuid.UUID
 	Endpoints     []FabricResolvedServiceEndpoint
 	PartitionInfo *FabricServicePartitionInformation
 }
@@ -6854,9 +6662,7 @@ func (obj *FabricServiceNotification) toInnerStruct() *innerFabricServiceNotific
 		return nil
 	}
 	dst := &innerFabricServiceNotification{}
-	s_114, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_114
-
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
 	dst.PartitionId = obj.PartitionId
 	{
 
@@ -6882,7 +6688,7 @@ func (obj *FabricServiceNotification) toInnerStruct() *innerFabricServiceNotific
 
 type innerFabricServiceNotification struct {
 	ServiceName   *uint16
-	PartitionId   windows.GUID
+	PartitionId   uuid.UUID
 	EndpointCount uint32
 	Endpoints     *innerFabricResolvedServiceEndpoint
 	PartitionInfo *innerFabricServicePartitionInformation
@@ -6894,7 +6700,7 @@ func (obj *innerFabricServiceNotification) toGoStruct() (dst *FabricServiceNotif
 		return
 	}
 	dst = &FabricServiceNotification{}
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	dst.PartitionId = obj.PartitionId
 	{
 		var innerlst []innerFabricResolvedServiceEndpoint
@@ -6923,9 +6729,7 @@ func (obj *FabricServiceNotificationFilterDescription) toInnerStruct() *innerFab
 		return nil
 	}
 	dst := &innerFabricServiceNotificationFilterDescription{}
-	s_115, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_115
-
+	dst.Name = utf16PtrFromString(obj.Name)
 	dst.Flags = obj.Flags
 	return dst
 }
@@ -6941,7 +6745,7 @@ func (obj *innerFabricServiceNotificationFilterDescription) toGoStruct() (dst *F
 		return
 	}
 	dst = &FabricServiceNotificationFilterDescription{}
-	dst.Name = windows.UTF16PtrToString(obj.Name)
+	dst.Name = utf16PtrToString(obj.Name)
 	dst.Flags = obj.Flags
 	return
 }
@@ -6956,12 +6760,8 @@ func (obj *FabricApplicationParameter) toInnerStruct() *innerFabricApplicationPa
 		return nil
 	}
 	dst := &innerFabricApplicationParameter{}
-	s_116, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_116
-
-	s_117, _ := windows.UTF16PtrFromString(obj.Value)
-	dst.Value = s_117
-
+	dst.Name = utf16PtrFromString(obj.Name)
+	dst.Value = utf16PtrFromString(obj.Value)
 	return dst
 }
 
@@ -6976,8 +6776,8 @@ func (obj *innerFabricApplicationParameter) toGoStruct() (dst *FabricApplication
 		return
 	}
 	dst = &FabricApplicationParameter{}
-	dst.Name = windows.UTF16PtrToString(obj.Name)
-	dst.Value = windows.UTF16PtrToString(obj.Value)
+	dst.Name = utf16PtrToString(obj.Name)
+	dst.Value = utf16PtrToString(obj.Value)
 	return
 }
 
@@ -7022,8 +6822,8 @@ func (obj *innerFabricStringMap) toGoStruct() map[string]string {
 			var k string
 			var v string
 
-			k = windows.UTF16PtrToString(kv.Name)
-			v = windows.UTF16PtrToString(kv.Value)
+			k = utf16PtrToString(kv.Name)
+			v = utf16PtrToString(kv.Value)
 			mapvar[k] = v
 
 		}
@@ -7046,16 +6846,10 @@ func (obj *FabricApplicationDescription) toInnerStruct() *innerFabricApplication
 		return nil
 	}
 	dst := &innerFabricApplicationDescription{}
-	s_119, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_119
-
-	s_120, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
-	dst.ApplicationTypeName = s_120
-
-	s_121, _ := windows.UTF16PtrFromString(obj.ApplicationTypeVersion)
-	dst.ApplicationTypeVersion = s_121
-
-	lst_122 := &innerFabricApplicationParameterList{}
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.ApplicationTypeName = utf16PtrFromString(obj.ApplicationTypeName)
+	dst.ApplicationTypeVersion = utf16PtrFromString(obj.ApplicationTypeVersion)
+	lst_19 := &innerFabricApplicationParameterList{}
 	{
 
 		var tmp []innerFabricApplicationParameter
@@ -7068,13 +6862,13 @@ func (obj *FabricApplicationDescription) toInnerStruct() *innerFabricApplication
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_122.Count = uint32(len(tmp))
+		lst_19.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_122.Items = &tmp[0]
+			lst_19.Items = &tmp[0]
 		}
 
 	}
-	dst.ApplicationParameters = lst_122
+	dst.ApplicationParameters = lst_19
 	ex0 := dst
 	ex1 := &innerFabricApplicationDescriptionEx1{}
 	ex1.ApplicationCapacity = obj.ApplicationCapacity.toInnerStruct()
@@ -7099,9 +6893,9 @@ func (obj *innerFabricApplicationDescription) toGoStruct() (dst *FabricApplicati
 		return
 	}
 	dst = &FabricApplicationDescription{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.ApplicationTypeName = windows.UTF16PtrToString(obj.ApplicationTypeName)
-	dst.ApplicationTypeVersion = windows.UTF16PtrToString(obj.ApplicationTypeVersion)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.ApplicationTypeName = utf16PtrToString(obj.ApplicationTypeName)
+	dst.ApplicationTypeVersion = utf16PtrToString(obj.ApplicationTypeVersion)
 	{
 		var innerlst []innerFabricApplicationParameter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ApplicationParameters.Items), int(obj.ApplicationParameters.Count))
@@ -7136,9 +6930,7 @@ func (obj *FabricApplicationMetricDescription) toInnerStruct() *innerFabricAppli
 		return nil
 	}
 	dst := &innerFabricApplicationMetricDescription{}
-	s_123, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_123
-
+	dst.Name = utf16PtrFromString(obj.Name)
 	dst.NodeReservationCapacity = obj.NodeReservationCapacity
 	dst.MaximumNodeCapacity = obj.MaximumNodeCapacity
 	dst.TotalApplicationCapacity = obj.TotalApplicationCapacity
@@ -7158,7 +6950,7 @@ func (obj *innerFabricApplicationMetricDescription) toGoStruct() (dst *FabricApp
 		return
 	}
 	dst = &FabricApplicationMetricDescription{}
-	dst.Name = windows.UTF16PtrToString(obj.Name)
+	dst.Name = utf16PtrToString(obj.Name)
 	dst.NodeReservationCapacity = obj.NodeReservationCapacity
 	dst.MaximumNodeCapacity = obj.MaximumNodeCapacity
 	dst.TotalApplicationCapacity = obj.TotalApplicationCapacity
@@ -7201,7 +6993,7 @@ func (obj *FabricApplicationCapacityDescription) toInnerStruct() *innerFabricApp
 	dst := &innerFabricApplicationCapacityDescription{}
 	dst.MaximumNodes = obj.MaximumNodes
 	dst.MinimumNodes = obj.MinimumNodes
-	lst_124 := &innerFabricApplicationMetricList{}
+	lst_20 := &innerFabricApplicationMetricList{}
 	{
 
 		var tmp []innerFabricApplicationMetricDescription
@@ -7214,13 +7006,13 @@ func (obj *FabricApplicationCapacityDescription) toInnerStruct() *innerFabricApp
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_124.Count = uint32(len(tmp))
+		lst_20.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_124.Capacities = &tmp[0]
+			lst_20.Capacities = &tmp[0]
 		}
 
 	}
-	dst.Metrics = lst_124
+	dst.Metrics = lst_20
 	return dst
 }
 
@@ -7269,13 +7061,11 @@ func (obj *FabricApplicationUpdateDescription) toInnerStruct() *innerFabricAppli
 	}
 	dst := &innerFabricApplicationUpdateDescription{}
 	dst.Flags = obj.Flags
-	s_125, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_125
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
 	dst.RemoveApplicationCapacity = obj.RemoveApplicationCapacity
 	dst.MaximumNodes = obj.MaximumNodes
 	dst.MinimumNodes = obj.MinimumNodes
-	lst_126 := &innerFabricApplicationMetricList{}
+	lst_21 := &innerFabricApplicationMetricList{}
 	{
 
 		var tmp []innerFabricApplicationMetricDescription
@@ -7288,13 +7078,13 @@ func (obj *FabricApplicationUpdateDescription) toInnerStruct() *innerFabricAppli
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_126.Count = uint32(len(tmp))
+		lst_21.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_126.Capacities = &tmp[0]
+			lst_21.Capacities = &tmp[0]
 		}
 
 	}
-	dst.Metrics = lst_126
+	dst.Metrics = lst_21
 	return dst
 }
 
@@ -7314,7 +7104,7 @@ func (obj *innerFabricApplicationUpdateDescription) toGoStruct() (dst *FabricApp
 	}
 	dst = &FabricApplicationUpdateDescription{}
 	dst.Flags = obj.Flags
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
 	dst.RemoveApplicationCapacity = obj.RemoveApplicationCapacity
 	dst.MaximumNodes = obj.MaximumNodes
 	dst.MinimumNodes = obj.MinimumNodes
@@ -7371,9 +7161,7 @@ func (obj *FabricRollingUpgradePolicyDescription) toInnerStruct() *innerFabricRo
 		for k, v := range obj.ApplicationHealthPolicyMap {
 			kv := innerFabricApplicationHealthPolicyMapItem{}
 
-			s_128, _ := windows.UTF16PtrFromString(k)
-			kv.ApplicationName = s_128
-
+			kv.ApplicationName = utf16PtrFromString(k)
 			kv.HealthPolicy = v.toInnerStruct()
 
 			tmp = append(tmp, kv)
@@ -7447,7 +7235,7 @@ func (obj *innerFabricRollingUpgradePolicyDescription) toGoStruct() (dst *Fabric
 			var k string
 			var v *FabricApplicationHealthPolicy
 
-			k = windows.UTF16PtrToString(kv.ApplicationName)
+			k = utf16PtrToString(kv.ApplicationName)
 			v = kv.HealthPolicy.toGoStruct()
 			mapvar[k] = *v
 
@@ -7529,13 +7317,9 @@ func (obj *FabricApplicationUpgradeDescription) toInnerStruct() *innerFabricAppl
 		return nil
 	}
 	dst := &innerFabricApplicationUpgradeDescription{}
-	s_130, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_130
-
-	s_131, _ := windows.UTF16PtrFromString(obj.TargetApplicationTypeVersion)
-	dst.TargetApplicationTypeVersion = s_131
-
-	lst_132 := &innerFabricApplicationParameterList{}
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.TargetApplicationTypeVersion = utf16PtrFromString(obj.TargetApplicationTypeVersion)
+	lst_24 := &innerFabricApplicationParameterList{}
 	{
 
 		var tmp []innerFabricApplicationParameter
@@ -7548,13 +7332,13 @@ func (obj *FabricApplicationUpgradeDescription) toInnerStruct() *innerFabricAppl
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_132.Count = uint32(len(tmp))
+		lst_24.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_132.Items = &tmp[0]
+			lst_24.Items = &tmp[0]
 		}
 
 	}
-	dst.ApplicationParameters = lst_132
+	dst.ApplicationParameters = lst_24
 	dst.UpgradeKind = obj.UpgradeKind
 	dst.UpgradePolicyDescription = toUnsafePointer(obj.UpgradePolicyDescription)
 	return dst
@@ -7574,8 +7358,8 @@ func (obj *innerFabricApplicationUpgradeDescription) toGoStruct() (dst *FabricAp
 		return
 	}
 	dst = &FabricApplicationUpgradeDescription{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.TargetApplicationTypeVersion = windows.UTF16PtrToString(obj.TargetApplicationTypeVersion)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.TargetApplicationTypeVersion = utf16PtrToString(obj.TargetApplicationTypeVersion)
 	{
 		var innerlst []innerFabricApplicationParameter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ApplicationParameters.Items), int(obj.ApplicationParameters.Count))
@@ -7606,9 +7390,7 @@ func (obj *FabricApplicationUpgradeUpdateDescription) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := &innerFabricApplicationUpgradeUpdateDescription{}
-	s_133, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_133
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
 	dst.UpgradeKind = obj.UpgradeKind
 	dst.UpdateFlags = obj.UpdateFlags
 	dst.UpgradePolicyDescription = toUnsafePointer(obj.UpgradePolicyDescription)
@@ -7628,7 +7410,7 @@ func (obj *innerFabricApplicationUpgradeUpdateDescription) toGoStruct() (dst *Fa
 		return
 	}
 	dst = &FabricApplicationUpgradeUpdateDescription{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
 	dst.UpgradeKind = obj.UpgradeKind
 	dst.UpdateFlags = obj.UpdateFlags
 	dst.UpgradePolicyDescription = fromUnsafePointer(obj.UpgradePolicyDescription)
@@ -7647,12 +7429,8 @@ func (obj *FabricUpgradeDescription) toInnerStruct() *innerFabricUpgradeDescript
 		return nil
 	}
 	dst := &innerFabricUpgradeDescription{}
-	s_134, _ := windows.UTF16PtrFromString(obj.CodeVersion)
-	dst.CodeVersion = s_134
-
-	s_135, _ := windows.UTF16PtrFromString(obj.ConfigVersion)
-	dst.ConfigVersion = s_135
-
+	dst.CodeVersion = utf16PtrFromString(obj.CodeVersion)
+	dst.ConfigVersion = utf16PtrFromString(obj.ConfigVersion)
 	dst.UpgradeKind = obj.UpgradeKind
 	dst.UpgradePolicyDescription = toUnsafePointer(obj.UpgradePolicyDescription)
 	return dst
@@ -7671,8 +7449,8 @@ func (obj *innerFabricUpgradeDescription) toGoStruct() (dst *FabricUpgradeDescri
 		return
 	}
 	dst = &FabricUpgradeDescription{}
-	dst.CodeVersion = windows.UTF16PtrToString(obj.CodeVersion)
-	dst.ConfigVersion = windows.UTF16PtrToString(obj.ConfigVersion)
+	dst.CodeVersion = utf16PtrToString(obj.CodeVersion)
+	dst.ConfigVersion = utf16PtrToString(obj.ConfigVersion)
 	dst.UpgradeKind = obj.UpgradeKind
 	dst.UpgradePolicyDescription = fromUnsafePointer(obj.UpgradePolicyDescription)
 	return
@@ -7725,12 +7503,8 @@ func (obj *FabricServiceGroupMemberDescription) toInnerStruct() *innerFabricServ
 		return nil
 	}
 	dst := &innerFabricServiceGroupMemberDescription{}
-	s_136, _ := windows.UTF16PtrFromString(obj.ServiceType)
-	dst.ServiceType = s_136
-
-	s_137, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_137
-
+	dst.ServiceType = utf16PtrFromString(obj.ServiceType)
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
 	{
 
 		var tmp []byte
@@ -7785,8 +7559,8 @@ func (obj *innerFabricServiceGroupMemberDescription) toGoStruct() (dst *FabricSe
 		return
 	}
 	dst = &FabricServiceGroupMemberDescription{}
-	dst.ServiceType = windows.UTF16PtrToString(obj.ServiceType)
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.ServiceType = utf16PtrToString(obj.ServiceType)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	{
 		var innerlst []byte
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.InitializationData), int(obj.InitializationDataSize))
@@ -7872,15 +7646,13 @@ func (obj *FabricKeyValueStoreItemMetadata) toInnerStruct() *innerFabricKeyValue
 		return nil
 	}
 	dst := &innerFabricKeyValueStoreItemMetadata{}
-	s_138, _ := windows.UTF16PtrFromString(obj.Key)
-	dst.Key = s_138
-
+	dst.Key = utf16PtrFromString(obj.Key)
 	dst.ValueSizeInBytes = obj.ValueSizeInBytes
 	dst.SequenceNumber = obj.SequenceNumber
-	dst.LastModifiedUtc = windows.NsecToFiletime(obj.LastModifiedUtc.UnixNano())
+	dst.LastModifiedUtc = timeToFiletime(obj.LastModifiedUtc)
 	ex0 := dst
 	ex1 := &innerFabricKeyValueStoreItemMetadataEx1{}
-	ex1.LastModifiedOnPrimaryUtc = windows.NsecToFiletime(obj.LastModifiedOnPrimaryUtc.UnixNano())
+	ex1.LastModifiedOnPrimaryUtc = timeToFiletime(obj.LastModifiedOnPrimaryUtc)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
@@ -7889,11 +7661,11 @@ type innerFabricKeyValueStoreItemMetadata struct {
 	Key              *uint16
 	ValueSizeInBytes int32
 	SequenceNumber   int64
-	LastModifiedUtc  windows.Filetime
+	LastModifiedUtc  filetime
 	Reserved         unsafe.Pointer
 }
 type innerFabricKeyValueStoreItemMetadataEx1 struct {
-	LastModifiedOnPrimaryUtc windows.Filetime
+	LastModifiedOnPrimaryUtc filetime
 	Reserved                 unsafe.Pointer
 }
 
@@ -7902,16 +7674,16 @@ func (obj *innerFabricKeyValueStoreItemMetadata) toGoStruct() (dst *FabricKeyVal
 		return
 	}
 	dst = &FabricKeyValueStoreItemMetadata{}
-	dst.Key = windows.UTF16PtrToString(obj.Key)
+	dst.Key = utf16PtrToString(obj.Key)
 	dst.ValueSizeInBytes = obj.ValueSizeInBytes
 	dst.SequenceNumber = obj.SequenceNumber
-	dst.LastModifiedUtc = time.Unix(0, obj.LastModifiedUtc.Nanoseconds())
+	dst.LastModifiedUtc = obj.LastModifiedUtc.ToTime()
 	ex0 := obj
 	ex1 := (*innerFabricKeyValueStoreItemMetadataEx1)(ex0.Reserved)
 	if ex1 == nil {
 		return
 	}
-	dst.LastModifiedOnPrimaryUtc = time.Unix(0, ex1.LastModifiedOnPrimaryUtc.Nanoseconds())
+	dst.LastModifiedOnPrimaryUtc = ex1.LastModifiedOnPrimaryUtc.ToTime()
 	return
 }
 
@@ -8094,9 +7866,7 @@ func (obj *FabricEseLocalStoreSettings) toInnerStruct() *innerFabricEseLocalStor
 		return nil
 	}
 	dst := &innerFabricEseLocalStoreSettings{}
-	s_139, _ := windows.UTF16PtrFromString(obj.DbFolderPath)
-	dst.DbFolderPath = s_139
-
+	dst.DbFolderPath = utf16PtrFromString(obj.DbFolderPath)
 	dst.LogFileSizeInKB = obj.LogFileSizeInKB
 	dst.LogBufferSizeInKB = obj.LogBufferSizeInKB
 	dst.MaxCursors = obj.MaxCursors
@@ -8167,7 +7937,7 @@ func (obj *innerFabricEseLocalStoreSettings) toGoStruct() (dst *FabricEseLocalSt
 		return
 	}
 	dst = &FabricEseLocalStoreSettings{}
-	dst.DbFolderPath = windows.UTF16PtrToString(obj.DbFolderPath)
+	dst.DbFolderPath = utf16PtrToString(obj.DbFolderPath)
 	dst.LogFileSizeInKB = obj.LogFileSizeInKB
 	dst.LogBufferSizeInKB = obj.LogBufferSizeInKB
 	dst.MaxCursors = obj.MaxCursors
@@ -8222,15 +7992,9 @@ func (obj *FabricNodeContext) toInnerStruct() *innerFabricNodeContext {
 		return nil
 	}
 	dst := &innerFabricNodeContext{}
-	s_140, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_140
-
-	s_141, _ := windows.UTF16PtrFromString(obj.NodeType)
-	dst.NodeType = s_141
-
-	s_142, _ := windows.UTF16PtrFromString(obj.IPAddressOrFQDN)
-	dst.IPAddressOrFQDN = s_142
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
+	dst.NodeType = utf16PtrFromString(obj.NodeType)
+	dst.IPAddressOrFQDN = utf16PtrFromString(obj.IPAddressOrFQDN)
 	dst.NodeInstanceId = obj.NodeInstanceId
 	dst.NodeId = *obj.NodeId.toInnerStruct()
 	return dst
@@ -8250,9 +8014,9 @@ func (obj *innerFabricNodeContext) toGoStruct() (dst *FabricNodeContext) {
 		return
 	}
 	dst = &FabricNodeContext{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
-	dst.NodeType = windows.UTF16PtrToString(obj.NodeType)
-	dst.IPAddressOrFQDN = windows.UTF16PtrToString(obj.IPAddressOrFQDN)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
+	dst.NodeType = utf16PtrToString(obj.NodeType)
+	dst.IPAddressOrFQDN = utf16PtrToString(obj.IPAddressOrFQDN)
 	dst.NodeInstanceId = obj.NodeInstanceId
 	dst.NodeId = *obj.NodeId.toGoStruct()
 	return
@@ -8287,9 +8051,7 @@ func (obj *FabricClientSettings) toInnerStruct() *innerFabricClientSettings {
 	dst.HealthReportSendIntervalInSeconds = obj.HealthReportSendIntervalInSeconds
 	ex0 := dst
 	ex1 := &innerFabricClientSettingsEx1{}
-	s_143, _ := windows.UTF16PtrFromString(obj.ClientFriendlyName)
-	ex1.ClientFriendlyName = s_143
-
+	ex1.ClientFriendlyName = utf16PtrFromString(obj.ClientFriendlyName)
 	ex1.PartitionLocationCacheBucketCount = obj.PartitionLocationCacheBucketCount
 	ex1.HealthReportRetrySendIntervalInSeconds = obj.HealthReportRetrySendIntervalInSeconds
 	ex0.Reserved = unsafe.Pointer(ex1)
@@ -8351,7 +8113,7 @@ func (obj *innerFabricClientSettings) toGoStruct() (dst *FabricClientSettings) {
 	if ex1 == nil {
 		return
 	}
-	dst.ClientFriendlyName = windows.UTF16PtrToString(ex1.ClientFriendlyName)
+	dst.ClientFriendlyName = utf16PtrToString(ex1.ClientFriendlyName)
 	dst.PartitionLocationCacheBucketCount = ex1.PartitionLocationCacheBucketCount
 	dst.HealthReportRetrySendIntervalInSeconds = ex1.HealthReportRetrySendIntervalInSeconds
 	ex2 := (*innerFabricClientSettingsEx2)(ex1.Reserved)
@@ -8383,9 +8145,7 @@ func (obj *FabricQueryPagingDescription) toInnerStruct() *innerFabricQueryPaging
 		return nil
 	}
 	dst := &innerFabricQueryPagingDescription{}
-	s_144, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
-	dst.ContinuationToken = s_144
-
+	dst.ContinuationToken = utf16PtrFromString(obj.ContinuationToken)
 	dst.MaxResults = obj.MaxResults
 	return dst
 }
@@ -8401,7 +8161,7 @@ func (obj *innerFabricQueryPagingDescription) toGoStruct() (dst *FabricQueryPagi
 		return
 	}
 	dst = &FabricQueryPagingDescription{}
-	dst.ContinuationToken = windows.UTF16PtrToString(obj.ContinuationToken)
+	dst.ContinuationToken = utf16PtrToString(obj.ContinuationToken)
 	dst.MaxResults = obj.MaxResults
 	return
 }
@@ -8415,9 +8175,7 @@ func (obj *FabricClusterManifestQueryDescription) toInnerStruct() *innerFabricCl
 		return nil
 	}
 	dst := &innerFabricClusterManifestQueryDescription{}
-	s_145, _ := windows.UTF16PtrFromString(obj.ClusterManifestVersion)
-	dst.ClusterManifestVersion = s_145
-
+	dst.ClusterManifestVersion = utf16PtrFromString(obj.ClusterManifestVersion)
 	return dst
 }
 
@@ -8431,7 +8189,7 @@ func (obj *innerFabricClusterManifestQueryDescription) toGoStruct() (dst *Fabric
 		return
 	}
 	dst = &FabricClusterManifestQueryDescription{}
-	dst.ClusterManifestVersion = windows.UTF16PtrToString(obj.ClusterManifestVersion)
+	dst.ClusterManifestVersion = utf16PtrToString(obj.ClusterManifestVersion)
 	return
 }
 
@@ -8447,14 +8205,10 @@ func (obj *FabricNodeQueryDescription) toInnerStruct() *innerFabricNodeQueryDesc
 		return nil
 	}
 	dst := &innerFabricNodeQueryDescription{}
-	s_146, _ := windows.UTF16PtrFromString(obj.NodeNameFilter)
-	dst.NodeNameFilter = s_146
-
+	dst.NodeNameFilter = utf16PtrFromString(obj.NodeNameFilter)
 	ex0 := dst
 	ex1 := &innerFabricNodeQueryDescriptionEx1{}
-	s_147, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
-	ex1.ContinuationToken = s_147
-
+	ex1.ContinuationToken = utf16PtrFromString(obj.ContinuationToken)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	ex2 := &innerFabricNodeQueryDescriptionEx2{}
 	ex2.NodeStatusFilter = obj.NodeStatusFilter
@@ -8487,13 +8241,13 @@ func (obj *innerFabricNodeQueryDescription) toGoStruct() (dst *FabricNodeQueryDe
 		return
 	}
 	dst = &FabricNodeQueryDescription{}
-	dst.NodeNameFilter = windows.UTF16PtrToString(obj.NodeNameFilter)
+	dst.NodeNameFilter = utf16PtrToString(obj.NodeNameFilter)
 	ex0 := obj
 	ex1 := (*innerFabricNodeQueryDescriptionEx1)(ex0.Reserved)
 	if ex1 == nil {
 		return
 	}
-	dst.ContinuationToken = windows.UTF16PtrToString(ex1.ContinuationToken)
+	dst.ContinuationToken = utf16PtrToString(ex1.ContinuationToken)
 	ex2 := (*innerFabricNodeQueryDescriptionEx2)(ex1.Reserved)
 	if ex2 == nil {
 		return
@@ -8533,31 +8287,17 @@ func (obj *FabricNodeQueryResultItem) toInnerStruct() *innerFabricNodeQueryResul
 		return nil
 	}
 	dst := &innerFabricNodeQueryResultItem{}
-	s_148, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_148
-
-	s_149, _ := windows.UTF16PtrFromString(obj.IpAddressOrFQDN)
-	dst.IpAddressOrFQDN = s_149
-
-	s_150, _ := windows.UTF16PtrFromString(obj.NodeType)
-	dst.NodeType = s_150
-
-	s_151, _ := windows.UTF16PtrFromString(obj.CodeVersion)
-	dst.CodeVersion = s_151
-
-	s_152, _ := windows.UTF16PtrFromString(obj.ConfigVersion)
-	dst.ConfigVersion = s_152
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
+	dst.IpAddressOrFQDN = utf16PtrFromString(obj.IpAddressOrFQDN)
+	dst.NodeType = utf16PtrFromString(obj.NodeType)
+	dst.CodeVersion = utf16PtrFromString(obj.CodeVersion)
+	dst.ConfigVersion = utf16PtrFromString(obj.ConfigVersion)
 	dst.NodeStatus = obj.NodeStatus
 	dst.NodeUpTimeInSeconds = obj.NodeUpTimeInSeconds
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	dst.IsSeedNode = obj.IsSeedNode
-	s_153, _ := windows.UTF16PtrFromString(obj.UpgradeDomain)
-	dst.UpgradeDomain = s_153
-
-	s_154, _ := windows.UTF16PtrFromString(obj.FaultDomain)
-	dst.FaultDomain = s_154
-
+	dst.UpgradeDomain = utf16PtrFromString(obj.UpgradeDomain)
+	dst.FaultDomain = utf16PtrFromString(obj.FaultDomain)
 	ex0 := dst
 	ex1 := &innerFabricNodeQueryResultItemEx1{}
 	ex1.NodeId = *obj.NodeId.toInnerStruct()
@@ -8575,8 +8315,8 @@ func (obj *FabricNodeQueryResultItem) toInnerStruct() *innerFabricNodeQueryResul
 	ex5.NodeDownTimeInSeconds = obj.NodeDownTimeInSeconds
 	ex4.Reserved = unsafe.Pointer(ex5)
 	ex6 := &innerFabricNodeQueryResultItemEx6{}
-	ex6.NodeUpAt = windows.NsecToFiletime(obj.NodeUpAt.UnixNano())
-	ex6.NodeDownAt = windows.NsecToFiletime(obj.NodeDownAt.UnixNano())
+	ex6.NodeUpAt = timeToFiletime(obj.NodeUpAt)
+	ex6.NodeDownAt = timeToFiletime(obj.NodeDownAt)
 	ex5.Reserved = unsafe.Pointer(ex6)
 	return dst
 }
@@ -8616,8 +8356,8 @@ type innerFabricNodeQueryResultItemEx5 struct {
 	Reserved              unsafe.Pointer
 }
 type innerFabricNodeQueryResultItemEx6 struct {
-	NodeUpAt   windows.Filetime
-	NodeDownAt windows.Filetime
+	NodeUpAt   filetime
+	NodeDownAt filetime
 	Reserved   unsafe.Pointer
 }
 
@@ -8626,17 +8366,17 @@ func (obj *innerFabricNodeQueryResultItem) toGoStruct() (dst *FabricNodeQueryRes
 		return
 	}
 	dst = &FabricNodeQueryResultItem{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
-	dst.IpAddressOrFQDN = windows.UTF16PtrToString(obj.IpAddressOrFQDN)
-	dst.NodeType = windows.UTF16PtrToString(obj.NodeType)
-	dst.CodeVersion = windows.UTF16PtrToString(obj.CodeVersion)
-	dst.ConfigVersion = windows.UTF16PtrToString(obj.ConfigVersion)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
+	dst.IpAddressOrFQDN = utf16PtrToString(obj.IpAddressOrFQDN)
+	dst.NodeType = utf16PtrToString(obj.NodeType)
+	dst.CodeVersion = utf16PtrToString(obj.CodeVersion)
+	dst.ConfigVersion = utf16PtrToString(obj.ConfigVersion)
 	dst.NodeStatus = obj.NodeStatus
 	dst.NodeUpTimeInSeconds = obj.NodeUpTimeInSeconds
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	dst.IsSeedNode = obj.IsSeedNode
-	dst.UpgradeDomain = windows.UTF16PtrToString(obj.UpgradeDomain)
-	dst.FaultDomain = windows.UTF16PtrToString(obj.FaultDomain)
+	dst.UpgradeDomain = utf16PtrToString(obj.UpgradeDomain)
+	dst.FaultDomain = utf16PtrToString(obj.FaultDomain)
 	ex0 := obj
 	ex1 := (*innerFabricNodeQueryResultItemEx1)(ex0.Reserved)
 	if ex1 == nil {
@@ -8667,8 +8407,8 @@ func (obj *innerFabricNodeQueryResultItem) toGoStruct() (dst *FabricNodeQueryRes
 	if ex6 == nil {
 		return
 	}
-	dst.NodeUpAt = time.Unix(0, ex6.NodeUpAt.Nanoseconds())
-	dst.NodeDownAt = time.Unix(0, ex6.NodeDownAt.Nanoseconds())
+	dst.NodeUpAt = ex6.NodeUpAt.ToTime()
+	dst.NodeDownAt = ex6.NodeDownAt.ToTime()
 	return
 }
 
@@ -8682,9 +8422,7 @@ func (obj *FabricNodeDeactivationTaskId) toInnerStruct() *innerFabricNodeDeactiv
 		return nil
 	}
 	dst := &innerFabricNodeDeactivationTaskId{}
-	s_155, _ := windows.UTF16PtrFromString(obj.Id)
-	dst.Id = s_155
-
+	dst.Id = utf16PtrFromString(obj.Id)
 	dst.Type = obj.Type
 	return dst
 }
@@ -8700,7 +8438,7 @@ func (obj *innerFabricNodeDeactivationTaskId) toGoStruct() (dst *FabricNodeDeact
 		return
 	}
 	dst = &FabricNodeDeactivationTaskId{}
-	dst.Id = windows.UTF16PtrToString(obj.Id)
+	dst.Id = utf16PtrToString(obj.Id)
 	dst.Type = obj.Type
 	return
 }
@@ -8764,7 +8502,7 @@ func (obj *FabricNodeDeactivationQueryResultItem) toInnerStruct() *innerFabricNo
 	dst := &innerFabricNodeDeactivationQueryResultItem{}
 	dst.EffectiveIntent = obj.EffectiveIntent
 	dst.Status = obj.Status
-	lst_156 := &innerFabricNodeDeactivationTaskList{}
+	lst_25 := &innerFabricNodeDeactivationTaskList{}
 	{
 
 		var tmp []innerFabricNodeDeactivationTask
@@ -8777,16 +8515,16 @@ func (obj *FabricNodeDeactivationQueryResultItem) toInnerStruct() *innerFabricNo
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_156.Count = uint32(len(tmp))
+		lst_25.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_156.Items = &tmp[0]
+			lst_25.Items = &tmp[0]
 		}
 
 	}
-	dst.Tasks = lst_156
+	dst.Tasks = lst_25
 	ex0 := dst
 	ex1 := &innerFabricNodeDeactivationQueryResultItemEx1{}
-	lst_157 := &innerFabricSafetyCheckList{}
+	lst_26 := &innerFabricSafetyCheckList{}
 	{
 
 		var tmp []innerFabricSafetyCheck
@@ -8799,13 +8537,13 @@ func (obj *FabricNodeDeactivationQueryResultItem) toInnerStruct() *innerFabricNo
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_157.Count = uint32(len(tmp))
+		lst_26.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_157.Items = &tmp[0]
+			lst_26.Items = &tmp[0]
 		}
 
 	}
-	ex1.PendingSafetyChecks = lst_157
+	ex1.PendingSafetyChecks = lst_26
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
@@ -8893,7 +8631,7 @@ func (obj *innerFabricSafetyCheck) toGoStruct() (dst *FabricSafetyCheck) {
 }
 
 type FabricPartitionSafetyCheck struct {
-	PartitionId windows.GUID
+	PartitionId uuid.UUID
 }
 type innerFabricPartitionSafetyCheck struct {
 	FabricPartitionSafetyCheck
@@ -8988,9 +8726,7 @@ func (obj *FabricApplicationTypeQueryDescription) toInnerStruct() *innerFabricAp
 		return nil
 	}
 	dst := &innerFabricApplicationTypeQueryDescription{}
-	s_158, _ := windows.UTF16PtrFromString(obj.ApplicationTypeNameFilter)
-	dst.ApplicationTypeNameFilter = s_158
-
+	dst.ApplicationTypeNameFilter = utf16PtrFromString(obj.ApplicationTypeNameFilter)
 	return dst
 }
 
@@ -9004,7 +8740,7 @@ func (obj *innerFabricApplicationTypeQueryDescription) toGoStruct() (dst *Fabric
 		return
 	}
 	dst = &FabricApplicationTypeQueryDescription{}
-	dst.ApplicationTypeNameFilter = windows.UTF16PtrToString(obj.ApplicationTypeNameFilter)
+	dst.ApplicationTypeNameFilter = utf16PtrToString(obj.ApplicationTypeNameFilter)
 	return
 }
 
@@ -9022,19 +8758,13 @@ func (obj *PagedFabricApplicationTypeQueryDescription) toInnerStruct() *innerPag
 		return nil
 	}
 	dst := &innerPagedFabricApplicationTypeQueryDescription{}
-	s_159, _ := windows.UTF16PtrFromString(obj.ApplicationTypeNameFilter)
-	dst.ApplicationTypeNameFilter = s_159
-
+	dst.ApplicationTypeNameFilter = utf16PtrFromString(obj.ApplicationTypeNameFilter)
 	dst.MaxResults = obj.MaxResults
-	s_160, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
-	dst.ContinuationToken = s_160
-
+	dst.ContinuationToken = utf16PtrFromString(obj.ContinuationToken)
 	dst.ExcludeApplicationParameters = obj.ExcludeApplicationParameters
 	ex0 := dst
 	ex1 := &innerPagedFabricApplicationTypeQueryDescriptionEx1{}
-	s_161, _ := windows.UTF16PtrFromString(obj.ApplicationTypeVersionFilter)
-	ex1.ApplicationTypeVersionFilter = s_161
-
+	ex1.ApplicationTypeVersionFilter = utf16PtrFromString(obj.ApplicationTypeVersionFilter)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	ex2 := &innerPagedFabricApplicationTypeQueryDescriptionEx2{}
 	ex2.ApplicationTypeDefinitionKindFilter = obj.ApplicationTypeDefinitionKindFilter
@@ -9063,16 +8793,16 @@ func (obj *innerPagedFabricApplicationTypeQueryDescription) toGoStruct() (dst *P
 		return
 	}
 	dst = &PagedFabricApplicationTypeQueryDescription{}
-	dst.ApplicationTypeNameFilter = windows.UTF16PtrToString(obj.ApplicationTypeNameFilter)
+	dst.ApplicationTypeNameFilter = utf16PtrToString(obj.ApplicationTypeNameFilter)
 	dst.MaxResults = obj.MaxResults
-	dst.ContinuationToken = windows.UTF16PtrToString(obj.ContinuationToken)
+	dst.ContinuationToken = utf16PtrToString(obj.ContinuationToken)
 	dst.ExcludeApplicationParameters = obj.ExcludeApplicationParameters
 	ex0 := obj
 	ex1 := (*innerPagedFabricApplicationTypeQueryDescriptionEx1)(ex0.Reserved)
 	if ex1 == nil {
 		return
 	}
-	dst.ApplicationTypeVersionFilter = windows.UTF16PtrToString(ex1.ApplicationTypeVersionFilter)
+	dst.ApplicationTypeVersionFilter = utf16PtrToString(ex1.ApplicationTypeVersionFilter)
 	ex2 := (*innerPagedFabricApplicationTypeQueryDescriptionEx2)(ex1.Reserved)
 	if ex2 == nil {
 		return
@@ -9095,13 +8825,9 @@ func (obj *FabricApplicationTypeQueryResultItem) toInnerStruct() *innerFabricApp
 		return nil
 	}
 	dst := &innerFabricApplicationTypeQueryResultItem{}
-	s_162, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
-	dst.ApplicationTypeName = s_162
-
-	s_163, _ := windows.UTF16PtrFromString(obj.ApplicationTypeVersion)
-	dst.ApplicationTypeVersion = s_163
-
-	lst_164 := &innerFabricApplicationParameterList{}
+	dst.ApplicationTypeName = utf16PtrFromString(obj.ApplicationTypeName)
+	dst.ApplicationTypeVersion = utf16PtrFromString(obj.ApplicationTypeVersion)
+	lst_27 := &innerFabricApplicationParameterList{}
 	{
 
 		var tmp []innerFabricApplicationParameter
@@ -9114,19 +8840,17 @@ func (obj *FabricApplicationTypeQueryResultItem) toInnerStruct() *innerFabricApp
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_164.Count = uint32(len(tmp))
+		lst_27.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_164.Items = &tmp[0]
+			lst_27.Items = &tmp[0]
 		}
 
 	}
-	dst.DefaultParameters = lst_164
+	dst.DefaultParameters = lst_27
 	ex0 := dst
 	ex1 := &innerFabricApplicationTypeQueryResultItemEx1{}
 	ex1.Status = obj.Status
-	s_165, _ := windows.UTF16PtrFromString(obj.StatusDetails)
-	ex1.StatusDetails = s_165
-
+	ex1.StatusDetails = utf16PtrFromString(obj.StatusDetails)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	ex2 := &innerFabricApplicationTypeQueryResultItemEx2{}
 	ex2.ApplicationTypeDefinitionKind = obj.ApplicationTypeDefinitionKind
@@ -9155,8 +8879,8 @@ func (obj *innerFabricApplicationTypeQueryResultItem) toGoStruct() (dst *FabricA
 		return
 	}
 	dst = &FabricApplicationTypeQueryResultItem{}
-	dst.ApplicationTypeName = windows.UTF16PtrToString(obj.ApplicationTypeName)
-	dst.ApplicationTypeVersion = windows.UTF16PtrToString(obj.ApplicationTypeVersion)
+	dst.ApplicationTypeName = utf16PtrToString(obj.ApplicationTypeName)
+	dst.ApplicationTypeVersion = utf16PtrToString(obj.ApplicationTypeVersion)
 	{
 		var innerlst []innerFabricApplicationParameter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.DefaultParameters.Items), int(obj.DefaultParameters.Count))
@@ -9176,7 +8900,7 @@ func (obj *innerFabricApplicationTypeQueryResultItem) toGoStruct() (dst *FabricA
 		return
 	}
 	dst.Status = ex1.Status
-	dst.StatusDetails = windows.UTF16PtrToString(ex1.StatusDetails)
+	dst.StatusDetails = utf16PtrToString(ex1.StatusDetails)
 	ex2 := (*innerFabricApplicationTypeQueryResultItemEx2)(ex1.Reserved)
 	if ex2 == nil {
 		return
@@ -9219,15 +8943,9 @@ func (obj *FabricServiceTypeQueryDescription) toInnerStruct() *innerFabricServic
 		return nil
 	}
 	dst := &innerFabricServiceTypeQueryDescription{}
-	s_166, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
-	dst.ApplicationTypeName = s_166
-
-	s_167, _ := windows.UTF16PtrFromString(obj.ApplicationTypeVersion)
-	dst.ApplicationTypeVersion = s_167
-
-	s_168, _ := windows.UTF16PtrFromString(obj.ServiceTypeNameFilter)
-	dst.ServiceTypeNameFilter = s_168
-
+	dst.ApplicationTypeName = utf16PtrFromString(obj.ApplicationTypeName)
+	dst.ApplicationTypeVersion = utf16PtrFromString(obj.ApplicationTypeVersion)
+	dst.ServiceTypeNameFilter = utf16PtrFromString(obj.ServiceTypeNameFilter)
 	return dst
 }
 
@@ -9243,9 +8961,9 @@ func (obj *innerFabricServiceTypeQueryDescription) toGoStruct() (dst *FabricServ
 		return
 	}
 	dst = &FabricServiceTypeQueryDescription{}
-	dst.ApplicationTypeName = windows.UTF16PtrToString(obj.ApplicationTypeName)
-	dst.ApplicationTypeVersion = windows.UTF16PtrToString(obj.ApplicationTypeVersion)
-	dst.ServiceTypeNameFilter = windows.UTF16PtrToString(obj.ServiceTypeNameFilter)
+	dst.ApplicationTypeName = utf16PtrToString(obj.ApplicationTypeName)
+	dst.ApplicationTypeVersion = utf16PtrToString(obj.ApplicationTypeVersion)
+	dst.ServiceTypeNameFilter = utf16PtrToString(obj.ServiceTypeNameFilter)
 	return
 }
 
@@ -9260,15 +8978,9 @@ func (obj *FabricServiceGroupMemberTypeQueryDescription) toInnerStruct() *innerF
 		return nil
 	}
 	dst := &innerFabricServiceGroupMemberTypeQueryDescription{}
-	s_169, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
-	dst.ApplicationTypeName = s_169
-
-	s_170, _ := windows.UTF16PtrFromString(obj.ApplicationTypeVersion)
-	dst.ApplicationTypeVersion = s_170
-
-	s_171, _ := windows.UTF16PtrFromString(obj.ServiceGroupTypeNameFilter)
-	dst.ServiceGroupTypeNameFilter = s_171
-
+	dst.ApplicationTypeName = utf16PtrFromString(obj.ApplicationTypeName)
+	dst.ApplicationTypeVersion = utf16PtrFromString(obj.ApplicationTypeVersion)
+	dst.ServiceGroupTypeNameFilter = utf16PtrFromString(obj.ServiceGroupTypeNameFilter)
 	return dst
 }
 
@@ -9284,9 +8996,9 @@ func (obj *innerFabricServiceGroupMemberTypeQueryDescription) toGoStruct() (dst 
 		return
 	}
 	dst = &FabricServiceGroupMemberTypeQueryDescription{}
-	dst.ApplicationTypeName = windows.UTF16PtrToString(obj.ApplicationTypeName)
-	dst.ApplicationTypeVersion = windows.UTF16PtrToString(obj.ApplicationTypeVersion)
-	dst.ServiceGroupTypeNameFilter = windows.UTF16PtrToString(obj.ServiceGroupTypeNameFilter)
+	dst.ApplicationTypeName = utf16PtrToString(obj.ApplicationTypeName)
+	dst.ApplicationTypeVersion = utf16PtrToString(obj.ApplicationTypeVersion)
+	dst.ServiceGroupTypeNameFilter = utf16PtrToString(obj.ServiceGroupTypeNameFilter)
 	return
 }
 
@@ -9303,14 +9015,10 @@ func (obj *FabricServiceTypeQueryResultItem) toInnerStruct() *innerFabricService
 	}
 	dst := &innerFabricServiceTypeQueryResultItem{}
 	dst.ServiceTypeDescription = obj.ServiceTypeDescription.toInnerStruct()
-	s_172, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
-	dst.ServiceManifestVersion = s_172
-
+	dst.ServiceManifestVersion = utf16PtrFromString(obj.ServiceManifestVersion)
 	ex0 := dst
 	ex1 := &innerFabricServiceTypeQueryResultItemEx1{}
-	s_173, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	ex1.ServiceManifestName = s_173
-
+	ex1.ServiceManifestName = utf16PtrFromString(obj.ServiceManifestName)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	ex2 := &innerFabricServiceTypeQueryResultItemEx2{}
 	ex2.IsServiceGroup = obj.IsServiceGroup
@@ -9338,13 +9046,13 @@ func (obj *innerFabricServiceTypeQueryResultItem) toGoStruct() (dst *FabricServi
 	}
 	dst = &FabricServiceTypeQueryResultItem{}
 	dst.ServiceTypeDescription = obj.ServiceTypeDescription.toGoStruct()
-	dst.ServiceManifestVersion = windows.UTF16PtrToString(obj.ServiceManifestVersion)
+	dst.ServiceManifestVersion = utf16PtrToString(obj.ServiceManifestVersion)
 	ex0 := obj
 	ex1 := (*innerFabricServiceTypeQueryResultItemEx1)(ex0.Reserved)
 	if ex1 == nil {
 		return
 	}
-	dst.ServiceManifestName = windows.UTF16PtrToString(ex1.ServiceManifestName)
+	dst.ServiceManifestName = utf16PtrToString(ex1.ServiceManifestName)
 	ex2 := (*innerFabricServiceTypeQueryResultItemEx2)(ex1.Reserved)
 	if ex2 == nil {
 		return
@@ -9387,7 +9095,7 @@ func (obj *FabricServiceGroupMemberTypeQueryResultItem) toInnerStruct() *innerFa
 		return nil
 	}
 	dst := &innerFabricServiceGroupMemberTypeQueryResultItem{}
-	lst_174 := &innerFabricServiceGroupTypeMemberDescriptionList{}
+	lst_28 := &innerFabricServiceGroupTypeMemberDescriptionList{}
 	{
 
 		var tmp []innerFabricServiceGroupTypeMemberDescription
@@ -9400,19 +9108,15 @@ func (obj *FabricServiceGroupMemberTypeQueryResultItem) toInnerStruct() *innerFa
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_174.Count = uint32(len(tmp))
+		lst_28.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_174.Items = &tmp[0]
+			lst_28.Items = &tmp[0]
 		}
 
 	}
-	dst.ServiceGroupMemberTypeDescription = lst_174
-	s_175, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
-	dst.ServiceManifestVersion = s_175
-
-	s_176, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_176
-
+	dst.ServiceGroupMemberTypeDescription = lst_28
+	dst.ServiceManifestVersion = utf16PtrFromString(obj.ServiceManifestVersion)
+	dst.ServiceManifestName = utf16PtrFromString(obj.ServiceManifestName)
 	return dst
 }
 
@@ -9441,8 +9145,8 @@ func (obj *innerFabricServiceGroupMemberTypeQueryResultItem) toGoStruct() (dst *
 		}
 
 	}
-	dst.ServiceManifestVersion = windows.UTF16PtrToString(obj.ServiceManifestVersion)
-	dst.ServiceManifestName = windows.UTF16PtrToString(obj.ServiceManifestName)
+	dst.ServiceManifestVersion = utf16PtrToString(obj.ServiceManifestVersion)
+	dst.ServiceManifestName = utf16PtrToString(obj.ServiceManifestName)
 	return
 }
 
@@ -9483,19 +9187,13 @@ func (obj *FabricApplicationQueryDescription) toInnerStruct() *innerFabricApplic
 		return nil
 	}
 	dst := &innerFabricApplicationQueryDescription{}
-	s_177, _ := windows.UTF16PtrFromString(obj.ApplicationNameFilter)
-	dst.ApplicationNameFilter = s_177
-
+	dst.ApplicationNameFilter = utf16PtrFromString(obj.ApplicationNameFilter)
 	ex0 := dst
 	ex1 := &innerFabricApplicationQueryDescriptionEx1{}
-	s_178, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
-	ex1.ContinuationToken = s_178
-
+	ex1.ContinuationToken = utf16PtrFromString(obj.ContinuationToken)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	ex2 := &innerFabricApplicationQueryDescriptionEx2{}
-	s_179, _ := windows.UTF16PtrFromString(obj.ApplicationTypeNameFilter)
-	ex2.ApplicationTypeNameFilter = s_179
-
+	ex2.ApplicationTypeNameFilter = utf16PtrFromString(obj.ApplicationTypeNameFilter)
 	ex2.ExcludeApplicationParameters = obj.ExcludeApplicationParameters
 	ex1.Reserved = unsafe.Pointer(ex2)
 	ex3 := &innerFabricApplicationQueryDescriptionEx3{}
@@ -9534,18 +9232,18 @@ func (obj *innerFabricApplicationQueryDescription) toGoStruct() (dst *FabricAppl
 		return
 	}
 	dst = &FabricApplicationQueryDescription{}
-	dst.ApplicationNameFilter = windows.UTF16PtrToString(obj.ApplicationNameFilter)
+	dst.ApplicationNameFilter = utf16PtrToString(obj.ApplicationNameFilter)
 	ex0 := obj
 	ex1 := (*innerFabricApplicationQueryDescriptionEx1)(ex0.Reserved)
 	if ex1 == nil {
 		return
 	}
-	dst.ContinuationToken = windows.UTF16PtrToString(ex1.ContinuationToken)
+	dst.ContinuationToken = utf16PtrToString(ex1.ContinuationToken)
 	ex2 := (*innerFabricApplicationQueryDescriptionEx2)(ex1.Reserved)
 	if ex2 == nil {
 		return
 	}
-	dst.ApplicationTypeNameFilter = windows.UTF16PtrToString(ex2.ApplicationTypeNameFilter)
+	dst.ApplicationTypeNameFilter = utf16PtrToString(ex2.ApplicationTypeNameFilter)
 	dst.ExcludeApplicationParameters = ex2.ExcludeApplicationParameters
 	ex3 := (*innerFabricApplicationQueryDescriptionEx3)(ex2.Reserved)
 	if ex3 == nil {
@@ -9577,18 +9275,12 @@ func (obj *FabricApplicationQueryResultItem) toInnerStruct() *innerFabricApplica
 		return nil
 	}
 	dst := &innerFabricApplicationQueryResultItem{}
-	s_180, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_180
-
-	s_181, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
-	dst.ApplicationTypeName = s_181
-
-	s_182, _ := windows.UTF16PtrFromString(obj.ApplicationTypeVersion)
-	dst.ApplicationTypeVersion = s_182
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.ApplicationTypeName = utf16PtrFromString(obj.ApplicationTypeName)
+	dst.ApplicationTypeVersion = utf16PtrFromString(obj.ApplicationTypeVersion)
 	dst.Status = obj.Status
 	dst.HealthState = obj.HealthState
-	lst_183 := &innerFabricApplicationParameterList{}
+	lst_29 := &innerFabricApplicationParameterList{}
 	{
 
 		var tmp []innerFabricApplicationParameter
@@ -9601,19 +9293,17 @@ func (obj *FabricApplicationQueryResultItem) toInnerStruct() *innerFabricApplica
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_183.Count = uint32(len(tmp))
+		lst_29.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_183.Items = &tmp[0]
+			lst_29.Items = &tmp[0]
 		}
 
 	}
-	dst.ApplicationParameters = lst_183
+	dst.ApplicationParameters = lst_29
 	ex0 := dst
 	ex1 := &innerFabricApplicationQueryResultItemEx1{}
-	s_184, _ := windows.UTF16PtrFromString(obj.UpgradeTypeVersion)
-	ex1.UpgradeTypeVersion = s_184
-
-	lst_185 := &innerFabricApplicationParameterList{}
+	ex1.UpgradeTypeVersion = utf16PtrFromString(obj.UpgradeTypeVersion)
+	lst_30 := &innerFabricApplicationParameterList{}
 	{
 
 		var tmp []innerFabricApplicationParameter
@@ -9626,13 +9316,13 @@ func (obj *FabricApplicationQueryResultItem) toInnerStruct() *innerFabricApplica
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_185.Count = uint32(len(tmp))
+		lst_30.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_185.Items = &tmp[0]
+			lst_30.Items = &tmp[0]
 		}
 
 	}
-	ex1.UpgradeParameters = lst_185
+	ex1.UpgradeParameters = lst_30
 	ex0.Reserved = unsafe.Pointer(ex1)
 	ex2 := &innerFabricApplicationQueryResultItemEx2{}
 	ex2.ApplicationDefinitionKind = obj.ApplicationDefinitionKind
@@ -9664,9 +9354,9 @@ func (obj *innerFabricApplicationQueryResultItem) toGoStruct() (dst *FabricAppli
 		return
 	}
 	dst = &FabricApplicationQueryResultItem{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.ApplicationTypeName = windows.UTF16PtrToString(obj.ApplicationTypeName)
-	dst.ApplicationTypeVersion = windows.UTF16PtrToString(obj.ApplicationTypeVersion)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.ApplicationTypeName = utf16PtrToString(obj.ApplicationTypeName)
+	dst.ApplicationTypeVersion = utf16PtrToString(obj.ApplicationTypeVersion)
 	dst.Status = obj.Status
 	dst.HealthState = obj.HealthState
 	{
@@ -9687,7 +9377,7 @@ func (obj *innerFabricApplicationQueryResultItem) toGoStruct() (dst *FabricAppli
 	if ex1 == nil {
 		return
 	}
-	dst.UpgradeTypeVersion = windows.UTF16PtrToString(ex1.UpgradeTypeVersion)
+	dst.UpgradeTypeVersion = utf16PtrToString(ex1.UpgradeTypeVersion)
 	{
 		var innerlst []innerFabricApplicationParameter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(ex1.UpgradeParameters.Items), int(ex1.UpgradeParameters.Count))
@@ -9745,22 +9435,14 @@ func (obj *FabricServiceQueryDescription) toInnerStruct() *innerFabricServiceQue
 		return nil
 	}
 	dst := &innerFabricServiceQueryDescription{}
-	s_186, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_186
-
-	s_187, _ := windows.UTF16PtrFromString(obj.ServiceNameFilter)
-	dst.ServiceNameFilter = s_187
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.ServiceNameFilter = utf16PtrFromString(obj.ServiceNameFilter)
 	ex0 := dst
 	ex1 := &innerFabricServiceQueryDescriptionEx1{}
-	s_188, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
-	ex1.ContinuationToken = s_188
-
+	ex1.ContinuationToken = utf16PtrFromString(obj.ContinuationToken)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	ex2 := &innerFabricServiceQueryDescriptionEx2{}
-	s_189, _ := windows.UTF16PtrFromString(obj.ServiceTypeNameFilter)
-	ex2.ServiceTypeNameFilter = s_189
-
+	ex2.ServiceTypeNameFilter = utf16PtrFromString(obj.ServiceTypeNameFilter)
 	ex1.Reserved = unsafe.Pointer(ex2)
 	ex3 := &innerFabricServiceQueryDescriptionEx3{}
 	ex3.MaxResults = obj.MaxResults
@@ -9791,19 +9473,19 @@ func (obj *innerFabricServiceQueryDescription) toGoStruct() (dst *FabricServiceQ
 		return
 	}
 	dst = &FabricServiceQueryDescription{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.ServiceNameFilter = windows.UTF16PtrToString(obj.ServiceNameFilter)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.ServiceNameFilter = utf16PtrToString(obj.ServiceNameFilter)
 	ex0 := obj
 	ex1 := (*innerFabricServiceQueryDescriptionEx1)(ex0.Reserved)
 	if ex1 == nil {
 		return
 	}
-	dst.ContinuationToken = windows.UTF16PtrToString(ex1.ContinuationToken)
+	dst.ContinuationToken = utf16PtrToString(ex1.ContinuationToken)
 	ex2 := (*innerFabricServiceQueryDescriptionEx2)(ex1.Reserved)
 	if ex2 == nil {
 		return
 	}
-	dst.ServiceTypeNameFilter = windows.UTF16PtrToString(ex2.ServiceTypeNameFilter)
+	dst.ServiceTypeNameFilter = utf16PtrToString(ex2.ServiceTypeNameFilter)
 	ex3 := (*innerFabricServiceQueryDescriptionEx3)(ex2.Reserved)
 	if ex3 == nil {
 		return
@@ -9821,9 +9503,7 @@ func (obj *FabricSystemServiceQueryDescription) toInnerStruct() *innerFabricSyst
 		return nil
 	}
 	dst := &innerFabricSystemServiceQueryDescription{}
-	s_190, _ := windows.UTF16PtrFromString(obj.SystemServiceNameFilter)
-	dst.SystemServiceNameFilter = s_190
-
+	dst.SystemServiceNameFilter = utf16PtrFromString(obj.SystemServiceNameFilter)
 	return dst
 }
 
@@ -9837,7 +9517,7 @@ func (obj *innerFabricSystemServiceQueryDescription) toGoStruct() (dst *FabricSy
 		return
 	}
 	dst = &FabricSystemServiceQueryDescription{}
-	dst.SystemServiceNameFilter = windows.UTF16PtrToString(obj.SystemServiceNameFilter)
+	dst.SystemServiceNameFilter = utf16PtrToString(obj.SystemServiceNameFilter)
 	return
 }
 
@@ -9908,15 +9588,9 @@ func (obj *FabricStatelessServiceQueryResultItem) toInnerStruct() *innerFabricSt
 		return nil
 	}
 	dst := &innerFabricStatelessServiceQueryResultItem{}
-	s_191, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_191
-
-	s_192, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_192
-
-	s_193, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
-	dst.ServiceManifestVersion = s_193
-
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
+	dst.ServiceTypeName = utf16PtrFromString(obj.ServiceTypeName)
+	dst.ServiceManifestVersion = utf16PtrFromString(obj.ServiceManifestVersion)
 	dst.HealthState = obj.HealthState
 	ex0 := dst
 	ex1 := &innerFabricStatelessServiceQueryResultItemEx1{}
@@ -9949,9 +9623,9 @@ func (obj *innerFabricStatelessServiceQueryResultItem) toGoStruct() (dst *Fabric
 		return
 	}
 	dst = &FabricStatelessServiceQueryResultItem{}
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
-	dst.ServiceTypeName = windows.UTF16PtrToString(obj.ServiceTypeName)
-	dst.ServiceManifestVersion = windows.UTF16PtrToString(obj.ServiceManifestVersion)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
+	dst.ServiceTypeName = utf16PtrToString(obj.ServiceTypeName)
+	dst.ServiceManifestVersion = utf16PtrToString(obj.ServiceManifestVersion)
 	dst.HealthState = obj.HealthState
 	ex0 := obj
 	ex1 := (*innerFabricStatelessServiceQueryResultItemEx1)(ex0.Reserved)
@@ -9982,15 +9656,9 @@ func (obj *FabricStatefulServiceQueryResultItem) toInnerStruct() *innerFabricSta
 		return nil
 	}
 	dst := &innerFabricStatefulServiceQueryResultItem{}
-	s_194, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_194
-
-	s_195, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_195
-
-	s_196, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
-	dst.ServiceManifestVersion = s_196
-
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
+	dst.ServiceTypeName = utf16PtrFromString(obj.ServiceTypeName)
+	dst.ServiceManifestVersion = utf16PtrFromString(obj.ServiceManifestVersion)
 	dst.HasPersistedState = obj.HasPersistedState
 	dst.HealthState = obj.HealthState
 	ex0 := dst
@@ -10025,9 +9693,9 @@ func (obj *innerFabricStatefulServiceQueryResultItem) toGoStruct() (dst *FabricS
 		return
 	}
 	dst = &FabricStatefulServiceQueryResultItem{}
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
-	dst.ServiceTypeName = windows.UTF16PtrToString(obj.ServiceTypeName)
-	dst.ServiceManifestVersion = windows.UTF16PtrToString(obj.ServiceManifestVersion)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
+	dst.ServiceTypeName = utf16PtrToString(obj.ServiceTypeName)
+	dst.ServiceManifestVersion = utf16PtrToString(obj.ServiceManifestVersion)
 	dst.HasPersistedState = obj.HasPersistedState
 	dst.HealthState = obj.HealthState
 	ex0 := obj
@@ -10054,12 +9722,8 @@ func (obj *FabricServiceGroupMemberQueryDescription) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := &innerFabricServiceGroupMemberQueryDescription{}
-	s_197, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_197
-
-	s_198, _ := windows.UTF16PtrFromString(obj.ServiceNameFilter)
-	dst.ServiceNameFilter = s_198
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.ServiceNameFilter = utf16PtrFromString(obj.ServiceNameFilter)
 	return dst
 }
 
@@ -10074,8 +9738,8 @@ func (obj *innerFabricServiceGroupMemberQueryDescription) toGoStruct() (dst *Fab
 		return
 	}
 	dst = &FabricServiceGroupMemberQueryDescription{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.ServiceNameFilter = windows.UTF16PtrToString(obj.ServiceNameFilter)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.ServiceNameFilter = utf16PtrToString(obj.ServiceNameFilter)
 	return
 }
 
@@ -10089,12 +9753,8 @@ func (obj *FabricServiceGroupMemberMemberQueryResultItem) toInnerStruct() *inner
 		return nil
 	}
 	dst := &innerFabricServiceGroupMemberMemberQueryResultItem{}
-	s_199, _ := windows.UTF16PtrFromString(obj.ServiceType)
-	dst.ServiceType = s_199
-
-	s_200, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_200
-
+	dst.ServiceType = utf16PtrFromString(obj.ServiceType)
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
 	return dst
 }
 
@@ -10109,8 +9769,8 @@ func (obj *innerFabricServiceGroupMemberMemberQueryResultItem) toGoStruct() (dst
 		return
 	}
 	dst = &FabricServiceGroupMemberMemberQueryResultItem{}
-	dst.ServiceType = windows.UTF16PtrToString(obj.ServiceType)
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.ServiceType = utf16PtrToString(obj.ServiceType)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	return
 }
 
@@ -10147,10 +9807,8 @@ func (obj *FabricServiceGroupMemberQueryResultItem) toInnerStruct() *innerFabric
 		return nil
 	}
 	dst := &innerFabricServiceGroupMemberQueryResultItem{}
-	s_201, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_201
-
-	lst_202 := &innerFabricServiceGroupMemberMemberQueryResultList{}
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
+	lst_31 := &innerFabricServiceGroupMemberMemberQueryResultList{}
 	{
 
 		var tmp []innerFabricServiceGroupMemberMemberQueryResultItem
@@ -10163,13 +9821,13 @@ func (obj *FabricServiceGroupMemberQueryResultItem) toInnerStruct() *innerFabric
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_202.Count = uint32(len(tmp))
+		lst_31.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_202.Items = &tmp[0]
+			lst_31.Items = &tmp[0]
 		}
 
 	}
-	dst.Members = lst_202
+	dst.Members = lst_31
 	return dst
 }
 
@@ -10184,7 +9842,7 @@ func (obj *innerFabricServiceGroupMemberQueryResultItem) toGoStruct() (dst *Fabr
 		return
 	}
 	dst = &FabricServiceGroupMemberQueryResultItem{}
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	{
 		var innerlst []innerFabricServiceGroupMemberMemberQueryResultItem
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Members.Items), int(obj.Members.Count))
@@ -10225,7 +9883,7 @@ func (obj *innerFabricServiceGroupMemberQueryResultList) toGoStruct() []FabricSe
 }
 
 type FabricPartitionLoadInformationQueryDescription struct {
-	PartitionId windows.GUID
+	PartitionId uuid.UUID
 }
 type innerFabricPartitionLoadInformationQueryDescription struct {
 	FabricPartitionLoadInformationQueryDescription
@@ -10246,7 +9904,7 @@ func (obj *FabricPartitionLoadInformationQueryDescription) toInnerStruct() *inne
 }
 
 type FabricReplicaLoadInformationQueryDescription struct {
-	PartitionId         windows.GUID
+	PartitionId         uuid.UUID
 	ReplicaOrInstanceId int64
 }
 type innerFabricReplicaLoadInformationQueryDescription struct {
@@ -10269,7 +9927,7 @@ func (obj *FabricReplicaLoadInformationQueryDescription) toInnerStruct() *innerF
 
 type FabricUnplacedReplicaInformationQueryDescription struct {
 	ServiceName        string
-	PartitionId        windows.GUID
+	PartitionId        uuid.UUID
 	OnlyQueryPrimaries bool
 }
 
@@ -10278,9 +9936,7 @@ func (obj *FabricUnplacedReplicaInformationQueryDescription) toInnerStruct() *in
 		return nil
 	}
 	dst := &innerFabricUnplacedReplicaInformationQueryDescription{}
-	s_203, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_203
-
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
 	dst.PartitionId = obj.PartitionId
 	dst.OnlyQueryPrimaries = obj.OnlyQueryPrimaries
 	return dst
@@ -10288,7 +9944,7 @@ func (obj *FabricUnplacedReplicaInformationQueryDescription) toInnerStruct() *in
 
 type innerFabricUnplacedReplicaInformationQueryDescription struct {
 	ServiceName        *uint16
-	PartitionId        windows.GUID
+	PartitionId        uuid.UUID
 	OnlyQueryPrimaries bool
 	Reserved           unsafe.Pointer
 }
@@ -10298,7 +9954,7 @@ func (obj *innerFabricUnplacedReplicaInformationQueryDescription) toGoStruct() (
 		return
 	}
 	dst = &FabricUnplacedReplicaInformationQueryDescription{}
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	dst.PartitionId = obj.PartitionId
 	dst.OnlyQueryPrimaries = obj.OnlyQueryPrimaries
 	return
@@ -10306,7 +9962,7 @@ func (obj *innerFabricUnplacedReplicaInformationQueryDescription) toGoStruct() (
 
 type FabricServicePartitionQueryDescription struct {
 	ServiceName       string
-	PartitionIdFilter windows.GUID
+	PartitionIdFilter uuid.UUID
 	ContinuationToken string
 }
 
@@ -10315,22 +9971,18 @@ func (obj *FabricServicePartitionQueryDescription) toInnerStruct() *innerFabricS
 		return nil
 	}
 	dst := &innerFabricServicePartitionQueryDescription{}
-	s_204, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_204
-
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
 	dst.PartitionIdFilter = obj.PartitionIdFilter
 	ex0 := dst
 	ex1 := &innerFabricServicePartitionQueryDescriptionEx1{}
-	s_205, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
-	ex1.ContinuationToken = s_205
-
+	ex1.ContinuationToken = utf16PtrFromString(obj.ContinuationToken)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
 
 type innerFabricServicePartitionQueryDescription struct {
 	ServiceName       *uint16
-	PartitionIdFilter windows.GUID
+	PartitionIdFilter uuid.UUID
 	Reserved          unsafe.Pointer
 }
 type innerFabricServicePartitionQueryDescriptionEx1 struct {
@@ -10343,14 +9995,14 @@ func (obj *innerFabricServicePartitionQueryDescription) toGoStruct() (dst *Fabri
 		return
 	}
 	dst = &FabricServicePartitionQueryDescription{}
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	dst.PartitionIdFilter = obj.PartitionIdFilter
 	ex0 := obj
 	ex1 := (*innerFabricServicePartitionQueryDescriptionEx1)(ex0.Reserved)
 	if ex1 == nil {
 		return
 	}
-	dst.ContinuationToken = windows.UTF16PtrToString(ex1.ContinuationToken)
+	dst.ContinuationToken = utf16PtrToString(ex1.ContinuationToken)
 	return
 }
 
@@ -10363,9 +10015,7 @@ func (obj *FabricNodeLoadInformationQueryDescription) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := &innerFabricNodeLoadInformationQueryDescription{}
-	s_206, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_206
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	return dst
 }
 
@@ -10379,7 +10029,7 @@ func (obj *innerFabricNodeLoadInformationQueryDescription) toGoStruct() (dst *Fa
 		return
 	}
 	dst = &FabricNodeLoadInformationQueryDescription{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	return
 }
 
@@ -10392,9 +10042,7 @@ func (obj *FabricApplicationLoadInformationQueryDescription) toInnerStruct() *in
 		return nil
 	}
 	dst := &innerFabricApplicationLoadInformationQueryDescription{}
-	s_207, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_207
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
 	return dst
 }
 
@@ -10408,7 +10056,7 @@ func (obj *innerFabricApplicationLoadInformationQueryDescription) toGoStruct() (
 		return
 	}
 	dst = &FabricApplicationLoadInformationQueryDescription{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
 	return
 }
 
@@ -10552,7 +10200,7 @@ func (obj *innerFabricStatefulServicePartitionQueryResultItem) toGoStruct() (dst
 }
 
 type FabricServiceReplicaQueryDescription struct {
-	PartitionId                 windows.GUID
+	PartitionId                 uuid.UUID
 	ReplicaIdOrInstanceIdFilter int64
 	ReplicaStatusFilter         uint32
 	ContinuationToken           string
@@ -10570,15 +10218,13 @@ func (obj *FabricServiceReplicaQueryDescription) toInnerStruct() *innerFabricSer
 	ex1.ReplicaStatusFilter = obj.ReplicaStatusFilter
 	ex0.Reserved = unsafe.Pointer(ex1)
 	ex2 := &innerFabricServiceReplicaQueryDescriptionEx2{}
-	s_208, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
-	ex2.ContinuationToken = s_208
-
+	ex2.ContinuationToken = utf16PtrFromString(obj.ContinuationToken)
 	ex1.Reserved = unsafe.Pointer(ex2)
 	return dst
 }
 
 type innerFabricServiceReplicaQueryDescription struct {
-	PartitionId                 windows.GUID
+	PartitionId                 uuid.UUID
 	ReplicaIdOrInstanceIdFilter int64
 	Reserved                    unsafe.Pointer
 }
@@ -10608,7 +10254,7 @@ func (obj *innerFabricServiceReplicaQueryDescription) toGoStruct() (dst *FabricS
 	if ex2 == nil {
 		return
 	}
-	dst.ContinuationToken = windows.UTF16PtrToString(ex2.ContinuationToken)
+	dst.ContinuationToken = utf16PtrToString(ex2.ContinuationToken)
 	return
 }
 
@@ -10684,12 +10330,8 @@ func (obj *FabricStatefulServiceReplicaQueryResultItem) toInnerStruct() *innerFa
 	dst.ReplicaRole = obj.ReplicaRole
 	dst.ReplicaStatus = obj.ReplicaStatus
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	s_209, _ := windows.UTF16PtrFromString(obj.ReplicaAddress)
-	dst.ReplicaAddress = s_209
-
-	s_210, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_210
-
+	dst.ReplicaAddress = utf16PtrFromString(obj.ReplicaAddress)
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.LastInBuildDurationInSeconds = obj.LastInBuildDurationInSeconds
 	return dst
 }
@@ -10714,8 +10356,8 @@ func (obj *innerFabricStatefulServiceReplicaQueryResultItem) toGoStruct() (dst *
 	dst.ReplicaRole = obj.ReplicaRole
 	dst.ReplicaStatus = obj.ReplicaStatus
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	dst.ReplicaAddress = windows.UTF16PtrToString(obj.ReplicaAddress)
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.ReplicaAddress = utf16PtrToString(obj.ReplicaAddress)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.LastInBuildDurationInSeconds = obj.LastInBuildDurationInSeconds
 	return
 }
@@ -10737,12 +10379,8 @@ func (obj *FabricStatelessServiceInstanceQueryResultItem) toInnerStruct() *inner
 	dst.InstanceId = obj.InstanceId
 	dst.ReplicaStatus = obj.ReplicaStatus
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	s_211, _ := windows.UTF16PtrFromString(obj.ReplicaAddress)
-	dst.ReplicaAddress = s_211
-
-	s_212, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_212
-
+	dst.ReplicaAddress = utf16PtrFromString(obj.ReplicaAddress)
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.LastInBuildDurationInSeconds = obj.LastInBuildDurationInSeconds
 	return dst
 }
@@ -10765,8 +10403,8 @@ func (obj *innerFabricStatelessServiceInstanceQueryResultItem) toGoStruct() (dst
 	dst.InstanceId = obj.InstanceId
 	dst.ReplicaStatus = obj.ReplicaStatus
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	dst.ReplicaAddress = windows.UTF16PtrToString(obj.ReplicaAddress)
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.ReplicaAddress = utf16PtrToString(obj.ReplicaAddress)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.LastInBuildDurationInSeconds = obj.LastInBuildDurationInSeconds
 	return
 }
@@ -10781,12 +10419,8 @@ func (obj *FabricDeployedApplicationQueryDescription) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := &innerFabricDeployedApplicationQueryDescription{}
-	s_213, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_213
-
-	s_214, _ := windows.UTF16PtrFromString(obj.ApplicationNameFilter)
-	dst.ApplicationNameFilter = s_214
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
+	dst.ApplicationNameFilter = utf16PtrFromString(obj.ApplicationNameFilter)
 	return dst
 }
 
@@ -10801,8 +10435,8 @@ func (obj *innerFabricDeployedApplicationQueryDescription) toGoStruct() (dst *Fa
 		return
 	}
 	dst = &FabricDeployedApplicationQueryDescription{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
-	dst.ApplicationNameFilter = windows.UTF16PtrToString(obj.ApplicationNameFilter)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
+	dst.ApplicationNameFilter = utf16PtrToString(obj.ApplicationNameFilter)
 	return
 }
 
@@ -10818,12 +10452,8 @@ func (obj *FabricPagedDeployedApplicationQueryDescription) toInnerStruct() *inne
 		return nil
 	}
 	dst := &innerFabricPagedDeployedApplicationQueryDescription{}
-	s_215, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_215
-
-	s_216, _ := windows.UTF16PtrFromString(obj.ApplicationNameFilter)
-	dst.ApplicationNameFilter = s_216
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
+	dst.ApplicationNameFilter = utf16PtrFromString(obj.ApplicationNameFilter)
 	dst.IncludeHealthState = obj.IncludeHealthState
 	dst.PagingDescription = obj.PagingDescription.toInnerStruct()
 	return dst
@@ -10842,8 +10472,8 @@ func (obj *innerFabricPagedDeployedApplicationQueryDescription) toGoStruct() (ds
 		return
 	}
 	dst = &FabricPagedDeployedApplicationQueryDescription{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
-	dst.ApplicationNameFilter = windows.UTF16PtrToString(obj.ApplicationNameFilter)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
+	dst.ApplicationNameFilter = utf16PtrToString(obj.ApplicationNameFilter)
 	dst.IncludeHealthState = obj.IncludeHealthState
 	dst.PagingDescription = obj.PagingDescription.toGoStruct()
 	return
@@ -10861,12 +10491,8 @@ func (obj *FabricDeployedApplicationQueryResultItem) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := &innerFabricDeployedApplicationQueryResultItem{}
-	s_217, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_217
-
-	s_218, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
-	dst.ApplicationTypeName = s_218
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.ApplicationTypeName = utf16PtrFromString(obj.ApplicationTypeName)
 	dst.DeployedApplicationStatus = obj.DeployedApplicationStatus
 	ex0 := dst
 	ex1 := &innerFabricDeployedApplicationQueryResultItemEx2{}
@@ -10891,8 +10517,8 @@ func (obj *innerFabricDeployedApplicationQueryResultItem) toGoStruct() (dst *Fab
 		return
 	}
 	dst = &FabricDeployedApplicationQueryResultItem{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.ApplicationTypeName = windows.UTF16PtrToString(obj.ApplicationTypeName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.ApplicationTypeName = utf16PtrToString(obj.ApplicationTypeName)
 	dst.DeployedApplicationStatus = obj.DeployedApplicationStatus
 	ex0 := obj
 	ex1 := (*innerFabricDeployedApplicationQueryResultItemEx2)(ex0.Reserved)
@@ -10914,15 +10540,9 @@ func (obj *FabricDeployedApplicationQueryResultItemEx) toInnerStruct() *innerFab
 		return nil
 	}
 	dst := &innerFabricDeployedApplicationQueryResultItemEx{}
-	s_219, _ := windows.UTF16PtrFromString(obj.WorkDirectory)
-	dst.WorkDirectory = s_219
-
-	s_220, _ := windows.UTF16PtrFromString(obj.LogDirectory)
-	dst.LogDirectory = s_220
-
-	s_221, _ := windows.UTF16PtrFromString(obj.TempDirectory)
-	dst.TempDirectory = s_221
-
+	dst.WorkDirectory = utf16PtrFromString(obj.WorkDirectory)
+	dst.LogDirectory = utf16PtrFromString(obj.LogDirectory)
+	dst.TempDirectory = utf16PtrFromString(obj.TempDirectory)
 	return dst
 }
 
@@ -10938,9 +10558,9 @@ func (obj *innerFabricDeployedApplicationQueryResultItemEx) toGoStruct() (dst *F
 		return
 	}
 	dst = &FabricDeployedApplicationQueryResultItemEx{}
-	dst.WorkDirectory = windows.UTF16PtrToString(obj.WorkDirectory)
-	dst.LogDirectory = windows.UTF16PtrToString(obj.LogDirectory)
-	dst.TempDirectory = windows.UTF16PtrToString(obj.TempDirectory)
+	dst.WorkDirectory = utf16PtrToString(obj.WorkDirectory)
+	dst.LogDirectory = utf16PtrToString(obj.LogDirectory)
+	dst.TempDirectory = utf16PtrToString(obj.TempDirectory)
 	return
 }
 
@@ -10978,15 +10598,9 @@ func (obj *FabricDeployedServicePackageQueryDescription) toInnerStruct() *innerF
 		return nil
 	}
 	dst := &innerFabricDeployedServicePackageQueryDescription{}
-	s_222, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_222
-
-	s_223, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_223
-
-	s_224, _ := windows.UTF16PtrFromString(obj.ServiceManifestNameFilter)
-	dst.ServiceManifestNameFilter = s_224
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.ServiceManifestNameFilter = utf16PtrFromString(obj.ServiceManifestNameFilter)
 	return dst
 }
 
@@ -11002,9 +10616,9 @@ func (obj *innerFabricDeployedServicePackageQueryDescription) toGoStruct() (dst 
 		return
 	}
 	dst = &FabricDeployedServicePackageQueryDescription{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.ServiceManifestNameFilter = windows.UTF16PtrToString(obj.ServiceManifestNameFilter)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.ServiceManifestNameFilter = utf16PtrToString(obj.ServiceManifestNameFilter)
 	return
 }
 
@@ -11020,18 +10634,12 @@ func (obj *FabricDeployedServicePackageQueryResultItem) toInnerStruct() *innerFa
 		return nil
 	}
 	dst := &innerFabricDeployedServicePackageQueryResultItem{}
-	s_225, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_225
-
-	s_226, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
-	dst.ServiceManifestVersion = s_226
-
+	dst.ServiceManifestName = utf16PtrFromString(obj.ServiceManifestName)
+	dst.ServiceManifestVersion = utf16PtrFromString(obj.ServiceManifestVersion)
 	dst.DeployedServicePackageStatus = obj.DeployedServicePackageStatus
 	ex0 := dst
 	ex1 := &innerFabricDeployedServicePackageQueryResultItemEx1{}
-	s_227, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	ex1.ServicePackageActivationId = s_227
-
+	ex1.ServicePackageActivationId = utf16PtrFromString(obj.ServicePackageActivationId)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
@@ -11052,15 +10660,15 @@ func (obj *innerFabricDeployedServicePackageQueryResultItem) toGoStruct() (dst *
 		return
 	}
 	dst = &FabricDeployedServicePackageQueryResultItem{}
-	dst.ServiceManifestName = windows.UTF16PtrToString(obj.ServiceManifestName)
-	dst.ServiceManifestVersion = windows.UTF16PtrToString(obj.ServiceManifestVersion)
+	dst.ServiceManifestName = utf16PtrToString(obj.ServiceManifestName)
+	dst.ServiceManifestVersion = utf16PtrToString(obj.ServiceManifestVersion)
 	dst.DeployedServicePackageStatus = obj.DeployedServicePackageStatus
 	ex0 := obj
 	ex1 := (*innerFabricDeployedServicePackageQueryResultItemEx1)(ex0.Reserved)
 	if ex1 == nil {
 		return
 	}
-	dst.ServicePackageActivationId = windows.UTF16PtrToString(ex1.ServicePackageActivationId)
+	dst.ServicePackageActivationId = utf16PtrToString(ex1.ServicePackageActivationId)
 	return
 }
 
@@ -11099,18 +10707,10 @@ func (obj *FabricDeployedServiceTypeQueryDescription) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := &innerFabricDeployedServiceTypeQueryDescription{}
-	s_228, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_228
-
-	s_229, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_229
-
-	s_230, _ := windows.UTF16PtrFromString(obj.ServiceManifestNameFilter)
-	dst.ServiceManifestNameFilter = s_230
-
-	s_231, _ := windows.UTF16PtrFromString(obj.ServiceTypeNameFilter)
-	dst.ServiceTypeNameFilter = s_231
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.ServiceManifestNameFilter = utf16PtrFromString(obj.ServiceManifestNameFilter)
+	dst.ServiceTypeNameFilter = utf16PtrFromString(obj.ServiceTypeNameFilter)
 	return dst
 }
 
@@ -11127,10 +10727,10 @@ func (obj *innerFabricDeployedServiceTypeQueryDescription) toGoStruct() (dst *Fa
 		return
 	}
 	dst = &FabricDeployedServiceTypeQueryDescription{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.ServiceManifestNameFilter = windows.UTF16PtrToString(obj.ServiceManifestNameFilter)
-	dst.ServiceTypeNameFilter = windows.UTF16PtrToString(obj.ServiceTypeNameFilter)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.ServiceManifestNameFilter = utf16PtrToString(obj.ServiceManifestNameFilter)
+	dst.ServiceTypeNameFilter = utf16PtrToString(obj.ServiceTypeNameFilter)
 	return
 }
 
@@ -11147,21 +10747,13 @@ func (obj *FabricDeployedServiceTypeQueryResultItem) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := &innerFabricDeployedServiceTypeQueryResultItem{}
-	s_232, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_232
-
-	s_233, _ := windows.UTF16PtrFromString(obj.CodePackageName)
-	dst.CodePackageName = s_233
-
-	s_234, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_234
-
+	dst.ServiceTypeName = utf16PtrFromString(obj.ServiceTypeName)
+	dst.CodePackageName = utf16PtrFromString(obj.CodePackageName)
+	dst.ServiceManifestName = utf16PtrFromString(obj.ServiceManifestName)
 	dst.Status = obj.Status
 	ex0 := dst
 	ex1 := &innerFabricDeployedServiceTypeQueryResultItemEx1{}
-	s_235, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	ex1.ServicePackageActivationId = s_235
-
+	ex1.ServicePackageActivationId = utf16PtrFromString(obj.ServicePackageActivationId)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
@@ -11183,16 +10775,16 @@ func (obj *innerFabricDeployedServiceTypeQueryResultItem) toGoStruct() (dst *Fab
 		return
 	}
 	dst = &FabricDeployedServiceTypeQueryResultItem{}
-	dst.ServiceTypeName = windows.UTF16PtrToString(obj.ServiceTypeName)
-	dst.CodePackageName = windows.UTF16PtrToString(obj.CodePackageName)
-	dst.ServiceManifestName = windows.UTF16PtrToString(obj.ServiceManifestName)
+	dst.ServiceTypeName = utf16PtrToString(obj.ServiceTypeName)
+	dst.CodePackageName = utf16PtrToString(obj.CodePackageName)
+	dst.ServiceManifestName = utf16PtrToString(obj.ServiceManifestName)
 	dst.Status = obj.Status
 	ex0 := obj
 	ex1 := (*innerFabricDeployedServiceTypeQueryResultItemEx1)(ex0.Reserved)
 	if ex1 == nil {
 		return
 	}
-	dst.ServicePackageActivationId = windows.UTF16PtrToString(ex1.ServicePackageActivationId)
+	dst.ServicePackageActivationId = utf16PtrToString(ex1.ServicePackageActivationId)
 	return
 }
 
@@ -11239,10 +10831,10 @@ func (obj *FabricCodePackageEntryPointStatistics) toInnerStruct() *innerFabricCo
 	}
 	dst := &innerFabricCodePackageEntryPointStatistics{}
 	dst.LastExitCode = obj.LastExitCode
-	dst.LastActivationUtc = windows.NsecToFiletime(obj.LastActivationUtc.UnixNano())
-	dst.LastExitUtc = windows.NsecToFiletime(obj.LastExitUtc.UnixNano())
-	dst.LastSuccessfulActivationUtc = windows.NsecToFiletime(obj.LastSuccessfulActivationUtc.UnixNano())
-	dst.LastSuccessfulExitUtc = windows.NsecToFiletime(obj.LastSuccessfulExitUtc.UnixNano())
+	dst.LastActivationUtc = timeToFiletime(obj.LastActivationUtc)
+	dst.LastExitUtc = timeToFiletime(obj.LastExitUtc)
+	dst.LastSuccessfulActivationUtc = timeToFiletime(obj.LastSuccessfulActivationUtc)
+	dst.LastSuccessfulExitUtc = timeToFiletime(obj.LastSuccessfulExitUtc)
 	dst.ActivationCount = obj.ActivationCount
 	dst.ActivationFailureCount = obj.ActivationFailureCount
 	dst.ContinuousActivationFailureCount = obj.ContinuousActivationFailureCount
@@ -11254,10 +10846,10 @@ func (obj *FabricCodePackageEntryPointStatistics) toInnerStruct() *innerFabricCo
 
 type innerFabricCodePackageEntryPointStatistics struct {
 	LastExitCode                     uint32
-	LastActivationUtc                windows.Filetime
-	LastExitUtc                      windows.Filetime
-	LastSuccessfulActivationUtc      windows.Filetime
-	LastSuccessfulExitUtc            windows.Filetime
+	LastActivationUtc                filetime
+	LastExitUtc                      filetime
+	LastSuccessfulActivationUtc      filetime
+	LastSuccessfulExitUtc            filetime
 	ActivationCount                  uint32
 	ActivationFailureCount           uint32
 	ContinuousActivationFailureCount uint32
@@ -11273,10 +10865,10 @@ func (obj *innerFabricCodePackageEntryPointStatistics) toGoStruct() (dst *Fabric
 	}
 	dst = &FabricCodePackageEntryPointStatistics{}
 	dst.LastExitCode = obj.LastExitCode
-	dst.LastActivationUtc = time.Unix(0, obj.LastActivationUtc.Nanoseconds())
-	dst.LastExitUtc = time.Unix(0, obj.LastExitUtc.Nanoseconds())
-	dst.LastSuccessfulActivationUtc = time.Unix(0, obj.LastSuccessfulActivationUtc.Nanoseconds())
-	dst.LastSuccessfulExitUtc = time.Unix(0, obj.LastSuccessfulExitUtc.Nanoseconds())
+	dst.LastActivationUtc = obj.LastActivationUtc.ToTime()
+	dst.LastExitUtc = obj.LastExitUtc.ToTime()
+	dst.LastSuccessfulActivationUtc = obj.LastSuccessfulActivationUtc.ToTime()
+	dst.LastSuccessfulExitUtc = obj.LastSuccessfulExitUtc.ToTime()
 	dst.ActivationCount = obj.ActivationCount
 	dst.ActivationFailureCount = obj.ActivationFailureCount
 	dst.ContinuousActivationFailureCount = obj.ContinuousActivationFailureCount
@@ -11301,15 +10893,11 @@ func (obj *FabricCodePackageEntryPoint) toInnerStruct() *innerFabricCodePackageE
 		return nil
 	}
 	dst := &innerFabricCodePackageEntryPoint{}
-	s_236, _ := windows.UTF16PtrFromString(obj.EntryPointLocation)
-	dst.EntryPointLocation = s_236
-
+	dst.EntryPointLocation = utf16PtrFromString(obj.EntryPointLocation)
 	dst.ProcessId = obj.ProcessId
-	s_237, _ := windows.UTF16PtrFromString(obj.RunAsUserName)
-	dst.RunAsUserName = s_237
-
+	dst.RunAsUserName = utf16PtrFromString(obj.RunAsUserName)
 	dst.EntryPointStatus = obj.EntryPointStatus
-	dst.NextActivationUtc = windows.NsecToFiletime(obj.NextActivationUtc.UnixNano())
+	dst.NextActivationUtc = timeToFiletime(obj.NextActivationUtc)
 	dst.Statistics = obj.Statistics.toInnerStruct()
 	ex0 := dst
 	ex1 := &innerFabricCodePackageEntryPointEx1{}
@@ -11323,7 +10911,7 @@ type innerFabricCodePackageEntryPoint struct {
 	ProcessId          int64
 	RunAsUserName      *uint16
 	EntryPointStatus   FabricErrorntryPointStatus
-	NextActivationUtc  windows.Filetime
+	NextActivationUtc  filetime
 	Statistics         *innerFabricCodePackageEntryPointStatistics
 	Reserved           unsafe.Pointer
 }
@@ -11337,11 +10925,11 @@ func (obj *innerFabricCodePackageEntryPoint) toGoStruct() (dst *FabricCodePackag
 		return
 	}
 	dst = &FabricCodePackageEntryPoint{}
-	dst.EntryPointLocation = windows.UTF16PtrToString(obj.EntryPointLocation)
+	dst.EntryPointLocation = utf16PtrToString(obj.EntryPointLocation)
 	dst.ProcessId = obj.ProcessId
-	dst.RunAsUserName = windows.UTF16PtrToString(obj.RunAsUserName)
+	dst.RunAsUserName = utf16PtrToString(obj.RunAsUserName)
 	dst.EntryPointStatus = obj.EntryPointStatus
-	dst.NextActivationUtc = time.Unix(0, obj.NextActivationUtc.Nanoseconds())
+	dst.NextActivationUtc = obj.NextActivationUtc.ToTime()
 	dst.Statistics = obj.Statistics.toGoStruct()
 	ex0 := obj
 	ex1 := (*innerFabricCodePackageEntryPointEx1)(ex0.Reserved)
@@ -11364,18 +10952,10 @@ func (obj *FabricDeployedCodePackageQueryDescription) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := &innerFabricDeployedCodePackageQueryDescription{}
-	s_238, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_238
-
-	s_239, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_239
-
-	s_240, _ := windows.UTF16PtrFromString(obj.ServiceManifestNameFilter)
-	dst.ServiceManifestNameFilter = s_240
-
-	s_241, _ := windows.UTF16PtrFromString(obj.CodePackageNameFilter)
-	dst.CodePackageNameFilter = s_241
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.ServiceManifestNameFilter = utf16PtrFromString(obj.ServiceManifestNameFilter)
+	dst.CodePackageNameFilter = utf16PtrFromString(obj.CodePackageNameFilter)
 	return dst
 }
 
@@ -11392,10 +10972,10 @@ func (obj *innerFabricDeployedCodePackageQueryDescription) toGoStruct() (dst *Fa
 		return
 	}
 	dst = &FabricDeployedCodePackageQueryDescription{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.ServiceManifestNameFilter = windows.UTF16PtrToString(obj.ServiceManifestNameFilter)
-	dst.CodePackageNameFilter = windows.UTF16PtrToString(obj.CodePackageNameFilter)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.ServiceManifestNameFilter = utf16PtrToString(obj.ServiceManifestNameFilter)
+	dst.CodePackageNameFilter = utf16PtrToString(obj.CodePackageNameFilter)
 	return
 }
 
@@ -11417,24 +10997,16 @@ func (obj *FabricDeployedCodePackageQueryResultItem) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := &innerFabricDeployedCodePackageQueryResultItem{}
-	s_242, _ := windows.UTF16PtrFromString(obj.CodePackageName)
-	dst.CodePackageName = s_242
-
-	s_243, _ := windows.UTF16PtrFromString(obj.CodePackageVersion)
-	dst.CodePackageVersion = s_243
-
-	s_244, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_244
-
+	dst.CodePackageName = utf16PtrFromString(obj.CodePackageName)
+	dst.CodePackageVersion = utf16PtrFromString(obj.CodePackageVersion)
+	dst.ServiceManifestName = utf16PtrFromString(obj.ServiceManifestName)
 	dst.RunFrequencyInterval = obj.RunFrequencyInterval
 	dst.DeployedCodePackageStatus = obj.DeployedCodePackageStatus
 	dst.SetupEntryPoint = obj.SetupEntryPoint.toInnerStruct()
 	dst.EntryPoint = obj.EntryPoint.toInnerStruct()
 	ex0 := dst
 	ex1 := &innerFabricDeployedCodePackageQueryResultItemEx1{}
-	s_245, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	ex1.ServicePackageActivationId = s_245
-
+	ex1.ServicePackageActivationId = utf16PtrFromString(obj.ServicePackageActivationId)
 	ex1.HostType = obj.HostType
 	ex1.HostIsolationMode = obj.HostIsolationMode
 	ex0.Reserved = unsafe.Pointer(ex1)
@@ -11463,9 +11035,9 @@ func (obj *innerFabricDeployedCodePackageQueryResultItem) toGoStruct() (dst *Fab
 		return
 	}
 	dst = &FabricDeployedCodePackageQueryResultItem{}
-	dst.CodePackageName = windows.UTF16PtrToString(obj.CodePackageName)
-	dst.CodePackageVersion = windows.UTF16PtrToString(obj.CodePackageVersion)
-	dst.ServiceManifestName = windows.UTF16PtrToString(obj.ServiceManifestName)
+	dst.CodePackageName = utf16PtrToString(obj.CodePackageName)
+	dst.CodePackageVersion = utf16PtrToString(obj.CodePackageVersion)
+	dst.ServiceManifestName = utf16PtrToString(obj.ServiceManifestName)
 	dst.RunFrequencyInterval = obj.RunFrequencyInterval
 	dst.DeployedCodePackageStatus = obj.DeployedCodePackageStatus
 	dst.SetupEntryPoint = obj.SetupEntryPoint.toGoStruct()
@@ -11475,7 +11047,7 @@ func (obj *innerFabricDeployedCodePackageQueryResultItem) toGoStruct() (dst *Fab
 	if ex1 == nil {
 		return
 	}
-	dst.ServicePackageActivationId = windows.UTF16PtrToString(ex1.ServicePackageActivationId)
+	dst.ServicePackageActivationId = utf16PtrToString(ex1.ServicePackageActivationId)
 	dst.HostType = ex1.HostType
 	dst.HostIsolationMode = ex1.HostIsolationMode
 	return
@@ -11508,7 +11080,7 @@ type FabricDeployedServiceReplicaQueryDescription struct {
 	NodeName                  string
 	ApplicationName           string
 	ServiceManifestNameFilter string
-	PartitionIdFilter         windows.GUID
+	PartitionIdFilter         uuid.UUID
 }
 
 func (obj *FabricDeployedServiceReplicaQueryDescription) toInnerStruct() *innerFabricDeployedServiceReplicaQueryDescription {
@@ -11516,15 +11088,9 @@ func (obj *FabricDeployedServiceReplicaQueryDescription) toInnerStruct() *innerF
 		return nil
 	}
 	dst := &innerFabricDeployedServiceReplicaQueryDescription{}
-	s_246, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_246
-
-	s_247, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_247
-
-	s_248, _ := windows.UTF16PtrFromString(obj.ServiceManifestNameFilter)
-	dst.ServiceManifestNameFilter = s_248
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.ServiceManifestNameFilter = utf16PtrFromString(obj.ServiceManifestNameFilter)
 	dst.PartitionIdFilter = obj.PartitionIdFilter
 	return dst
 }
@@ -11533,7 +11099,7 @@ type innerFabricDeployedServiceReplicaQueryDescription struct {
 	NodeName                  *uint16
 	ApplicationName           *uint16
 	ServiceManifestNameFilter *uint16
-	PartitionIdFilter         windows.GUID
+	PartitionIdFilter         uuid.UUID
 	Reserved                  unsafe.Pointer
 }
 
@@ -11542,9 +11108,9 @@ func (obj *innerFabricDeployedServiceReplicaQueryDescription) toGoStruct() (dst 
 		return
 	}
 	dst = &FabricDeployedServiceReplicaQueryDescription{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.ServiceManifestNameFilter = windows.UTF16PtrToString(obj.ServiceManifestNameFilter)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.ServiceManifestNameFilter = utf16PtrToString(obj.ServiceManifestNameFilter)
 	dst.PartitionIdFilter = obj.PartitionIdFilter
 	return
 }
@@ -11564,7 +11130,7 @@ func (obj *FabricReconfigurationInformationQueryResult) toInnerStruct() *innerFa
 	dst.PreviousConfigurationRole = obj.PreviousConfigurationRole
 	dst.ReconfigurationPhase = obj.ReconfigurationPhase
 	dst.ReconfigurationType = obj.ReconfigurationType
-	dst.ReconfigurationStartTimeUtc = windows.NsecToFiletime(obj.ReconfigurationStartTimeUtc.UnixNano())
+	dst.ReconfigurationStartTimeUtc = timeToFiletime(obj.ReconfigurationStartTimeUtc)
 	return dst
 }
 
@@ -11572,7 +11138,7 @@ type innerFabricReconfigurationInformationQueryResult struct {
 	PreviousConfigurationRole   FabricReplicaRole
 	ReconfigurationPhase        FabricReconfigurationPhase
 	ReconfigurationType         FabricReconfigurationType
-	ReconfigurationStartTimeUtc windows.Filetime
+	ReconfigurationStartTimeUtc filetime
 	Reserved                    unsafe.Pointer
 }
 
@@ -11584,7 +11150,7 @@ func (obj *innerFabricReconfigurationInformationQueryResult) toGoStruct() (dst *
 	dst.PreviousConfigurationRole = obj.PreviousConfigurationRole
 	dst.ReconfigurationPhase = obj.ReconfigurationPhase
 	dst.ReconfigurationType = obj.ReconfigurationType
-	dst.ReconfigurationStartTimeUtc = time.Unix(0, obj.ReconfigurationStartTimeUtc.Nanoseconds())
+	dst.ReconfigurationStartTimeUtc = obj.ReconfigurationStartTimeUtc.ToTime()
 	return
 }
 
@@ -11646,7 +11212,7 @@ type FabricDeployedStatefulServiceReplicaQueryResultItem struct {
 	ServiceTypeName            string
 	ServiceManifestVersion     string
 	CodePackageName            string
-	PartitionId                windows.GUID
+	PartitionId                uuid.UUID
 	ReplicaId                  int64
 	ReplicaRole                FabricReplicaRole
 	ReplicaStatus              FabricQueryServiceReplicaStatus
@@ -11662,35 +11228,21 @@ func (obj *FabricDeployedStatefulServiceReplicaQueryResultItem) toInnerStruct() 
 		return nil
 	}
 	dst := &innerFabricDeployedStatefulServiceReplicaQueryResultItem{}
-	s_249, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_249
-
-	s_250, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_250
-
-	s_251, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
-	dst.ServiceManifestVersion = s_251
-
-	s_252, _ := windows.UTF16PtrFromString(obj.CodePackageName)
-	dst.CodePackageName = s_252
-
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
+	dst.ServiceTypeName = utf16PtrFromString(obj.ServiceTypeName)
+	dst.ServiceManifestVersion = utf16PtrFromString(obj.ServiceManifestVersion)
+	dst.CodePackageName = utf16PtrFromString(obj.CodePackageName)
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaId = obj.ReplicaId
 	dst.ReplicaRole = obj.ReplicaRole
 	dst.ReplicaStatus = obj.ReplicaStatus
-	s_253, _ := windows.UTF16PtrFromString(obj.Address)
-	dst.Address = s_253
-
+	dst.Address = utf16PtrFromString(obj.Address)
 	ex0 := dst
 	ex1 := &innerFabricDeployedStatefulServiceReplicaQueryResultItemEx1{}
-	s_254, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	ex1.ServiceManifestName = s_254
-
+	ex1.ServiceManifestName = utf16PtrFromString(obj.ServiceManifestName)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	ex2 := &innerFabricDeployedStatefulServiceReplicaQueryResultItemEx2{}
-	s_255, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	ex2.ServicePackageActivationId = s_255
-
+	ex2.ServicePackageActivationId = utf16PtrFromString(obj.ServicePackageActivationId)
 	ex1.Reserved = unsafe.Pointer(ex2)
 	ex3 := &innerFabricDeployedStatefulServiceReplicaQueryResultItemEx3{}
 	ex3.HostProcessId = obj.HostProcessId
@@ -11704,7 +11256,7 @@ type innerFabricDeployedStatefulServiceReplicaQueryResultItem struct {
 	ServiceTypeName        *uint16
 	ServiceManifestVersion *uint16
 	CodePackageName        *uint16
-	PartitionId            windows.GUID
+	PartitionId            uuid.UUID
 	ReplicaId              int64
 	ReplicaRole            FabricReplicaRole
 	ReplicaStatus          FabricQueryServiceReplicaStatus
@@ -11730,26 +11282,26 @@ func (obj *innerFabricDeployedStatefulServiceReplicaQueryResultItem) toGoStruct(
 		return
 	}
 	dst = &FabricDeployedStatefulServiceReplicaQueryResultItem{}
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
-	dst.ServiceTypeName = windows.UTF16PtrToString(obj.ServiceTypeName)
-	dst.ServiceManifestVersion = windows.UTF16PtrToString(obj.ServiceManifestVersion)
-	dst.CodePackageName = windows.UTF16PtrToString(obj.CodePackageName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
+	dst.ServiceTypeName = utf16PtrToString(obj.ServiceTypeName)
+	dst.ServiceManifestVersion = utf16PtrToString(obj.ServiceManifestVersion)
+	dst.CodePackageName = utf16PtrToString(obj.CodePackageName)
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaId = obj.ReplicaId
 	dst.ReplicaRole = obj.ReplicaRole
 	dst.ReplicaStatus = obj.ReplicaStatus
-	dst.Address = windows.UTF16PtrToString(obj.Address)
+	dst.Address = utf16PtrToString(obj.Address)
 	ex0 := obj
 	ex1 := (*innerFabricDeployedStatefulServiceReplicaQueryResultItemEx1)(ex0.Reserved)
 	if ex1 == nil {
 		return
 	}
-	dst.ServiceManifestName = windows.UTF16PtrToString(ex1.ServiceManifestName)
+	dst.ServiceManifestName = utf16PtrToString(ex1.ServiceManifestName)
 	ex2 := (*innerFabricDeployedStatefulServiceReplicaQueryResultItemEx2)(ex1.Reserved)
 	if ex2 == nil {
 		return
 	}
-	dst.ServicePackageActivationId = windows.UTF16PtrToString(ex2.ServicePackageActivationId)
+	dst.ServicePackageActivationId = utf16PtrToString(ex2.ServicePackageActivationId)
 	ex3 := (*innerFabricDeployedStatefulServiceReplicaQueryResultItemEx3)(ex2.Reserved)
 	if ex3 == nil {
 		return
@@ -11764,7 +11316,7 @@ type FabricDeployedStatelessServiceInstanceQueryResultItem struct {
 	ServiceTypeName            string
 	ServiceManifestVersion     string
 	CodePackageName            string
-	PartitionId                windows.GUID
+	PartitionId                uuid.UUID
 	InstanceId                 int64
 	ReplicaStatus              FabricQueryServiceReplicaStatus
 	Address                    string
@@ -11778,34 +11330,20 @@ func (obj *FabricDeployedStatelessServiceInstanceQueryResultItem) toInnerStruct(
 		return nil
 	}
 	dst := &innerFabricDeployedStatelessServiceInstanceQueryResultItem{}
-	s_256, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_256
-
-	s_257, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_257
-
-	s_258, _ := windows.UTF16PtrFromString(obj.ServiceManifestVersion)
-	dst.ServiceManifestVersion = s_258
-
-	s_259, _ := windows.UTF16PtrFromString(obj.CodePackageName)
-	dst.CodePackageName = s_259
-
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
+	dst.ServiceTypeName = utf16PtrFromString(obj.ServiceTypeName)
+	dst.ServiceManifestVersion = utf16PtrFromString(obj.ServiceManifestVersion)
+	dst.CodePackageName = utf16PtrFromString(obj.CodePackageName)
 	dst.PartitionId = obj.PartitionId
 	dst.InstanceId = obj.InstanceId
 	dst.ReplicaStatus = obj.ReplicaStatus
-	s_260, _ := windows.UTF16PtrFromString(obj.Address)
-	dst.Address = s_260
-
+	dst.Address = utf16PtrFromString(obj.Address)
 	ex0 := dst
 	ex1 := &innerFabricDeployedStatelessServiceInstanceQueryResultItemEx1{}
-	s_261, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	ex1.ServiceManifestName = s_261
-
+	ex1.ServiceManifestName = utf16PtrFromString(obj.ServiceManifestName)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	ex2 := &innerFabricDeployedStatelessServiceInstanceQueryResultItemEx2{}
-	s_262, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	ex2.ServicePackageActivationId = s_262
-
+	ex2.ServicePackageActivationId = utf16PtrFromString(obj.ServicePackageActivationId)
 	ex1.Reserved = unsafe.Pointer(ex2)
 	ex3 := &innerFabricDeployedStatelessServiceInstanceQueryResultItemEx3{}
 	ex3.HostProcessId = obj.HostProcessId
@@ -11818,7 +11356,7 @@ type innerFabricDeployedStatelessServiceInstanceQueryResultItem struct {
 	ServiceTypeName        *uint16
 	ServiceManifestVersion *uint16
 	CodePackageName        *uint16
-	PartitionId            windows.GUID
+	PartitionId            uuid.UUID
 	InstanceId             int64
 	ReplicaStatus          FabricQueryServiceReplicaStatus
 	Address                *uint16
@@ -11842,25 +11380,25 @@ func (obj *innerFabricDeployedStatelessServiceInstanceQueryResultItem) toGoStruc
 		return
 	}
 	dst = &FabricDeployedStatelessServiceInstanceQueryResultItem{}
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
-	dst.ServiceTypeName = windows.UTF16PtrToString(obj.ServiceTypeName)
-	dst.ServiceManifestVersion = windows.UTF16PtrToString(obj.ServiceManifestVersion)
-	dst.CodePackageName = windows.UTF16PtrToString(obj.CodePackageName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
+	dst.ServiceTypeName = utf16PtrToString(obj.ServiceTypeName)
+	dst.ServiceManifestVersion = utf16PtrToString(obj.ServiceManifestVersion)
+	dst.CodePackageName = utf16PtrToString(obj.CodePackageName)
 	dst.PartitionId = obj.PartitionId
 	dst.InstanceId = obj.InstanceId
 	dst.ReplicaStatus = obj.ReplicaStatus
-	dst.Address = windows.UTF16PtrToString(obj.Address)
+	dst.Address = utf16PtrToString(obj.Address)
 	ex0 := obj
 	ex1 := (*innerFabricDeployedStatelessServiceInstanceQueryResultItemEx1)(ex0.Reserved)
 	if ex1 == nil {
 		return
 	}
-	dst.ServiceManifestName = windows.UTF16PtrToString(ex1.ServiceManifestName)
+	dst.ServiceManifestName = utf16PtrToString(ex1.ServiceManifestName)
 	ex2 := (*innerFabricDeployedStatelessServiceInstanceQueryResultItemEx2)(ex1.Reserved)
 	if ex2 == nil {
 		return
 	}
-	dst.ServicePackageActivationId = windows.UTF16PtrToString(ex2.ServicePackageActivationId)
+	dst.ServicePackageActivationId = utf16PtrToString(ex2.ServicePackageActivationId)
 	ex3 := (*innerFabricDeployedStatelessServiceInstanceQueryResultItemEx3)(ex2.Reserved)
 	if ex3 == nil {
 		return
@@ -11881,11 +11419,9 @@ func (obj *FabricLoadMetricReport) toInnerStruct() *innerFabricLoadMetricReport 
 		return nil
 	}
 	dst := &innerFabricLoadMetricReport{}
-	s_263, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_263
-
+	dst.Name = utf16PtrFromString(obj.Name)
 	dst.Value = obj.Value
-	dst.LastReportedUtc = windows.NsecToFiletime(obj.LastReportedUtc.UnixNano())
+	dst.LastReportedUtc = timeToFiletime(obj.LastReportedUtc)
 	ex0 := dst
 	ex1 := &innerFabricLoadMetricReportEx1{}
 	ex1.CurrentValue = obj.CurrentValue
@@ -11896,7 +11432,7 @@ func (obj *FabricLoadMetricReport) toInnerStruct() *innerFabricLoadMetricReport 
 type innerFabricLoadMetricReport struct {
 	Name            *uint16
 	Value           uint32
-	LastReportedUtc windows.Filetime
+	LastReportedUtc filetime
 	Reserved        unsafe.Pointer
 }
 type innerFabricLoadMetricReportEx1 struct {
@@ -11909,9 +11445,9 @@ func (obj *innerFabricLoadMetricReport) toGoStruct() (dst *FabricLoadMetricRepor
 		return
 	}
 	dst = &FabricLoadMetricReport{}
-	dst.Name = windows.UTF16PtrToString(obj.Name)
+	dst.Name = utf16PtrToString(obj.Name)
 	dst.Value = obj.Value
-	dst.LastReportedUtc = time.Unix(0, obj.LastReportedUtc.Nanoseconds())
+	dst.LastReportedUtc = obj.LastReportedUtc.ToTime()
 	ex0 := obj
 	ex1 := (*innerFabricLoadMetricReportEx1)(ex0.Reserved)
 	if ex1 == nil {
@@ -11958,7 +11494,7 @@ func (obj *innerFabricUnplacedReplicaInformationList) toGoStruct() []string {
 		for _, item := range innerlst {
 			var tmpitem string
 
-			tmpitem = windows.UTF16PtrToString(item)
+			tmpitem = utf16PtrToString(item)
 
 			dst = append(dst, tmpitem)
 		}
@@ -11969,7 +11505,7 @@ func (obj *innerFabricUnplacedReplicaInformationList) toGoStruct() []string {
 
 type FabricDeployedServiceReplicaDetailQueryDescription struct {
 	NodeName    string
-	PartitionId windows.GUID
+	PartitionId uuid.UUID
 	ReplicaId   int64
 }
 
@@ -11978,9 +11514,7 @@ func (obj *FabricDeployedServiceReplicaDetailQueryDescription) toInnerStruct() *
 		return nil
 	}
 	dst := &innerFabricDeployedServiceReplicaDetailQueryDescription{}
-	s_264, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_264
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaId = obj.ReplicaId
 	return dst
@@ -11988,7 +11522,7 @@ func (obj *FabricDeployedServiceReplicaDetailQueryDescription) toInnerStruct() *
 
 type innerFabricDeployedServiceReplicaDetailQueryDescription struct {
 	NodeName    *uint16
-	PartitionId windows.GUID
+	PartitionId uuid.UUID
 	ReplicaId   int64
 	Reserved    unsafe.Pointer
 }
@@ -11998,7 +11532,7 @@ func (obj *innerFabricDeployedServiceReplicaDetailQueryDescription) toGoStruct()
 		return
 	}
 	dst = &FabricDeployedServiceReplicaDetailQueryDescription{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaId = obj.ReplicaId
 	return
@@ -12036,7 +11570,7 @@ func (obj *innerFabricDeployedServiceReplicaDetailQueryResultItem) toGoStruct() 
 
 type FabricDeployedStatelessServiceInstanceDetailQueryResultItem struct {
 	ServiceName                         string
-	PartitionId                         windows.GUID
+	PartitionId                         uuid.UUID
 	InstanceId                          int64
 	CurrentServiceOperation             FabricQueryServiceOperationName
 	CurrentServiceOperationStartTimeUtc time.Time
@@ -12049,14 +11583,12 @@ func (obj *FabricDeployedStatelessServiceInstanceDetailQueryResultItem) toInnerS
 		return nil
 	}
 	dst := &innerFabricDeployedStatelessServiceInstanceDetailQueryResultItem{}
-	s_265, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_265
-
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
 	dst.PartitionId = obj.PartitionId
 	dst.InstanceId = obj.InstanceId
 	dst.CurrentServiceOperation = obj.CurrentServiceOperation
-	dst.CurrentServiceOperationStartTimeUtc = windows.NsecToFiletime(obj.CurrentServiceOperationStartTimeUtc.UnixNano())
-	lst_266 := &innerFabricLoadMetricReportList{}
+	dst.CurrentServiceOperationStartTimeUtc = timeToFiletime(obj.CurrentServiceOperationStartTimeUtc)
+	lst_32 := &innerFabricLoadMetricReportList{}
 	{
 
 		var tmp []innerFabricLoadMetricReport
@@ -12069,13 +11601,13 @@ func (obj *FabricDeployedStatelessServiceInstanceDetailQueryResultItem) toInnerS
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_266.Count = uint32(len(tmp))
+		lst_32.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_266.Items = &tmp[0]
+			lst_32.Items = &tmp[0]
 		}
 
 	}
-	dst.ReportedLoad = lst_266
+	dst.ReportedLoad = lst_32
 	ex0 := dst
 	ex1 := &innerFabricDeployedStatelessServiceInstanceDetailQueryResultItemEx1{}
 	ex1.DeployedServiceReplica = obj.DeployedServiceReplica.toInnerStruct()
@@ -12085,10 +11617,10 @@ func (obj *FabricDeployedStatelessServiceInstanceDetailQueryResultItem) toInnerS
 
 type innerFabricDeployedStatelessServiceInstanceDetailQueryResultItem struct {
 	ServiceName                         *uint16
-	PartitionId                         windows.GUID
+	PartitionId                         uuid.UUID
 	InstanceId                          int64
 	CurrentServiceOperation             FabricQueryServiceOperationName
-	CurrentServiceOperationStartTimeUtc windows.Filetime
+	CurrentServiceOperationStartTimeUtc filetime
 	ReportedLoad                        *innerFabricLoadMetricReportList
 	Reserved                            unsafe.Pointer
 }
@@ -12102,11 +11634,11 @@ func (obj *innerFabricDeployedStatelessServiceInstanceDetailQueryResultItem) toG
 		return
 	}
 	dst = &FabricDeployedStatelessServiceInstanceDetailQueryResultItem{}
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	dst.PartitionId = obj.PartitionId
 	dst.InstanceId = obj.InstanceId
 	dst.CurrentServiceOperation = obj.CurrentServiceOperation
-	dst.CurrentServiceOperationStartTimeUtc = time.Unix(0, obj.CurrentServiceOperationStartTimeUtc.Nanoseconds())
+	dst.CurrentServiceOperationStartTimeUtc = obj.CurrentServiceOperationStartTimeUtc.ToTime()
 	{
 		var innerlst []innerFabricLoadMetricReport
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ReportedLoad.Items), int(obj.ReportedLoad.Count))
@@ -12145,7 +11677,7 @@ func (obj *FabricRemoteReplicatorStatus) toInnerStruct() *innerFabricRemoteRepli
 	}
 	dst := &innerFabricRemoteReplicatorStatus{}
 	dst.ReplicaId = obj.ReplicaId
-	dst.LastAcknowledgementProcessedTimeUtc = windows.NsecToFiletime(obj.LastAcknowledgementProcessedTimeUtc.UnixNano())
+	dst.LastAcknowledgementProcessedTimeUtc = timeToFiletime(obj.LastAcknowledgementProcessedTimeUtc)
 	dst.LastReceivedReplicationSequenceNumber = obj.LastReceivedReplicationSequenceNumber
 	dst.LastAppliedReplicationSequenceNumber = obj.LastAppliedReplicationSequenceNumber
 	dst.IsInBuild = obj.IsInBuild
@@ -12156,7 +11688,7 @@ func (obj *FabricRemoteReplicatorStatus) toInnerStruct() *innerFabricRemoteRepli
 
 type innerFabricRemoteReplicatorStatus struct {
 	ReplicaId                             int64
-	LastAcknowledgementProcessedTimeUtc   windows.Filetime
+	LastAcknowledgementProcessedTimeUtc   filetime
 	LastReceivedReplicationSequenceNumber int64
 	LastAppliedReplicationSequenceNumber  int64
 	IsInBuild                             bool
@@ -12171,7 +11703,7 @@ func (obj *innerFabricRemoteReplicatorStatus) toGoStruct() (dst *FabricRemoteRep
 	}
 	dst = &FabricRemoteReplicatorStatus{}
 	dst.ReplicaId = obj.ReplicaId
-	dst.LastAcknowledgementProcessedTimeUtc = time.Unix(0, obj.LastAcknowledgementProcessedTimeUtc.Nanoseconds())
+	dst.LastAcknowledgementProcessedTimeUtc = obj.LastAcknowledgementProcessedTimeUtc.ToTime()
 	dst.LastReceivedReplicationSequenceNumber = obj.LastReceivedReplicationSequenceNumber
 	dst.LastAppliedReplicationSequenceNumber = obj.LastAppliedReplicationSequenceNumber
 	dst.IsInBuild = obj.IsInBuild
@@ -12286,7 +11818,7 @@ func (obj *FabricPrimaryReplicatorStatusQueryResult) toInnerStruct() *innerFabri
 	}
 	dst := &innerFabricPrimaryReplicatorStatusQueryResult{}
 	dst.ReplicationQueueStatus = obj.ReplicationQueueStatus.toInnerStruct()
-	lst_267 := &innerFabricRemoteReplicatorStatusList{}
+	lst_33 := &innerFabricRemoteReplicatorStatusList{}
 	{
 
 		var tmp []innerFabricRemoteReplicatorStatus
@@ -12299,13 +11831,13 @@ func (obj *FabricPrimaryReplicatorStatusQueryResult) toInnerStruct() *innerFabri
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_267.Count = uint32(len(tmp))
+		lst_33.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_267.Items = &tmp[0]
+			lst_33.Items = &tmp[0]
 		}
 
 	}
-	dst.RemoteReplicators = lst_267
+	dst.RemoteReplicators = lst_33
 	return dst
 }
 
@@ -12352,21 +11884,21 @@ func (obj *FabricSecondaryReplicatorStatusQueryResult) toInnerStruct() *innerFab
 	}
 	dst := &innerFabricSecondaryReplicatorStatusQueryResult{}
 	dst.ReplicationQueueStatus = obj.ReplicationQueueStatus.toInnerStruct()
-	dst.LastReplicationOperationReceivedTimeUtc = windows.NsecToFiletime(obj.LastReplicationOperationReceivedTimeUtc.UnixNano())
+	dst.LastReplicationOperationReceivedTimeUtc = timeToFiletime(obj.LastReplicationOperationReceivedTimeUtc)
 	dst.IsInBuild = obj.IsInBuild
 	dst.CopyQueueStatus = obj.CopyQueueStatus.toInnerStruct()
-	dst.LastCopyOperationReceivedTimeUtc = windows.NsecToFiletime(obj.LastCopyOperationReceivedTimeUtc.UnixNano())
-	dst.LastAcknowledgementSentTimeUtc = windows.NsecToFiletime(obj.LastAcknowledgementSentTimeUtc.UnixNano())
+	dst.LastCopyOperationReceivedTimeUtc = timeToFiletime(obj.LastCopyOperationReceivedTimeUtc)
+	dst.LastAcknowledgementSentTimeUtc = timeToFiletime(obj.LastAcknowledgementSentTimeUtc)
 	return dst
 }
 
 type innerFabricSecondaryReplicatorStatusQueryResult struct {
 	ReplicationQueueStatus                  *innerFabricReplicatorQueueStatus
-	LastReplicationOperationReceivedTimeUtc windows.Filetime
+	LastReplicationOperationReceivedTimeUtc filetime
 	IsInBuild                               bool
 	CopyQueueStatus                         *innerFabricReplicatorQueueStatus
-	LastCopyOperationReceivedTimeUtc        windows.Filetime
-	LastAcknowledgementSentTimeUtc          windows.Filetime
+	LastCopyOperationReceivedTimeUtc        filetime
+	LastAcknowledgementSentTimeUtc          filetime
 	Reserved                                unsafe.Pointer
 }
 
@@ -12376,11 +11908,11 @@ func (obj *innerFabricSecondaryReplicatorStatusQueryResult) toGoStruct() (dst *F
 	}
 	dst = &FabricSecondaryReplicatorStatusQueryResult{}
 	dst.ReplicationQueueStatus = obj.ReplicationQueueStatus.toGoStruct()
-	dst.LastReplicationOperationReceivedTimeUtc = time.Unix(0, obj.LastReplicationOperationReceivedTimeUtc.Nanoseconds())
+	dst.LastReplicationOperationReceivedTimeUtc = obj.LastReplicationOperationReceivedTimeUtc.ToTime()
 	dst.IsInBuild = obj.IsInBuild
 	dst.CopyQueueStatus = obj.CopyQueueStatus.toGoStruct()
-	dst.LastCopyOperationReceivedTimeUtc = time.Unix(0, obj.LastCopyOperationReceivedTimeUtc.Nanoseconds())
-	dst.LastAcknowledgementSentTimeUtc = time.Unix(0, obj.LastAcknowledgementSentTimeUtc.Nanoseconds())
+	dst.LastCopyOperationReceivedTimeUtc = obj.LastCopyOperationReceivedTimeUtc.ToTime()
+	dst.LastAcknowledgementSentTimeUtc = obj.LastAcknowledgementSentTimeUtc.ToTime()
 	return
 }
 
@@ -12447,7 +11979,7 @@ func (obj *innerFabricReplicaStatusQueryResult) toGoStruct() (dst *FabricReplica
 
 type FabricDeployedStatefulServiceReplicaDetailQueryResultItem struct {
 	ServiceName                         string
-	PartitionId                         windows.GUID
+	PartitionId                         uuid.UUID
 	ReplicaId                           int64
 	CurrentServiceOperation             FabricQueryServiceOperationName
 	CurrentServiceOperationStartTimeUtc time.Time
@@ -12465,17 +11997,15 @@ func (obj *FabricDeployedStatefulServiceReplicaDetailQueryResultItem) toInnerStr
 		return nil
 	}
 	dst := &innerFabricDeployedStatefulServiceReplicaDetailQueryResultItem{}
-	s_268, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_268
-
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaId = obj.ReplicaId
 	dst.CurrentServiceOperation = obj.CurrentServiceOperation
-	dst.CurrentServiceOperationStartTimeUtc = windows.NsecToFiletime(obj.CurrentServiceOperationStartTimeUtc.UnixNano())
+	dst.CurrentServiceOperationStartTimeUtc = timeToFiletime(obj.CurrentServiceOperationStartTimeUtc)
 	dst.CurrentReplicatorOperation = obj.CurrentReplicatorOperation
 	dst.ReadStatus = obj.ReadStatus
 	dst.WriteStatus = obj.WriteStatus
-	lst_269 := &innerFabricLoadMetricReportList{}
+	lst_34 := &innerFabricLoadMetricReportList{}
 	{
 
 		var tmp []innerFabricLoadMetricReport
@@ -12488,13 +12018,13 @@ func (obj *FabricDeployedStatefulServiceReplicaDetailQueryResultItem) toInnerStr
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_269.Count = uint32(len(tmp))
+		lst_34.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_269.Items = &tmp[0]
+			lst_34.Items = &tmp[0]
 		}
 
 	}
-	dst.ReportedLoad = lst_269
+	dst.ReportedLoad = lst_34
 	dst.ReplicatorStatus = obj.ReplicatorStatus.toInnerStruct()
 	ex0 := dst
 	ex1 := &innerFabricDeployedStatefulServiceReplicaDetailQueryResultItemEx1{}
@@ -12508,10 +12038,10 @@ func (obj *FabricDeployedStatefulServiceReplicaDetailQueryResultItem) toInnerStr
 
 type innerFabricDeployedStatefulServiceReplicaDetailQueryResultItem struct {
 	ServiceName                         *uint16
-	PartitionId                         windows.GUID
+	PartitionId                         uuid.UUID
 	ReplicaId                           int64
 	CurrentServiceOperation             FabricQueryServiceOperationName
-	CurrentServiceOperationStartTimeUtc windows.Filetime
+	CurrentServiceOperationStartTimeUtc filetime
 	CurrentReplicatorOperation          FabricQueryReplicatorOperationName
 	ReadStatus                          FabricServicePartitionAccessStatus
 	WriteStatus                         FabricServicePartitionAccessStatus
@@ -12533,11 +12063,11 @@ func (obj *innerFabricDeployedStatefulServiceReplicaDetailQueryResultItem) toGoS
 		return
 	}
 	dst = &FabricDeployedStatefulServiceReplicaDetailQueryResultItem{}
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaId = obj.ReplicaId
 	dst.CurrentServiceOperation = obj.CurrentServiceOperation
-	dst.CurrentServiceOperationStartTimeUtc = time.Unix(0, obj.CurrentServiceOperationStartTimeUtc.Nanoseconds())
+	dst.CurrentServiceOperationStartTimeUtc = obj.CurrentServiceOperationStartTimeUtc.ToTime()
 	dst.CurrentReplicatorOperation = obj.CurrentReplicatorOperation
 	dst.ReadStatus = obj.ReadStatus
 	dst.WriteStatus = obj.WriteStatus
@@ -12609,13 +12139,9 @@ func (obj *FabricKeyValueStoreStatusQueryResult) toInnerStruct() *innerFabricKey
 	dst := &innerFabricKeyValueStoreStatusQueryResult{}
 	dst.DatabaseRowCountEstimate = obj.DatabaseRowCountEstimate
 	dst.DatabaseLogicalSizeEstimate = obj.DatabaseLogicalSizeEstimate
-	s_270, _ := windows.UTF16PtrFromString(obj.CopyNotificationCurrentKeyFilter)
-	dst.CopyNotificationCurrentKeyFilter = s_270
-
+	dst.CopyNotificationCurrentKeyFilter = utf16PtrFromString(obj.CopyNotificationCurrentKeyFilter)
 	dst.CopyNotificationCurrentProgress = obj.CopyNotificationCurrentProgress
-	s_271, _ := windows.UTF16PtrFromString(obj.StatusDetails)
-	dst.StatusDetails = s_271
-
+	dst.StatusDetails = utf16PtrFromString(obj.StatusDetails)
 	ex0 := dst
 	ex1 := &innerFabricKeyValueStoreStatusQueryResultEx1{}
 	ex1.ProviderKind = obj.ProviderKind
@@ -12645,9 +12171,9 @@ func (obj *innerFabricKeyValueStoreStatusQueryResult) toGoStruct() (dst *FabricK
 	dst = &FabricKeyValueStoreStatusQueryResult{}
 	dst.DatabaseRowCountEstimate = obj.DatabaseRowCountEstimate
 	dst.DatabaseLogicalSizeEstimate = obj.DatabaseLogicalSizeEstimate
-	dst.CopyNotificationCurrentKeyFilter = windows.UTF16PtrToString(obj.CopyNotificationCurrentKeyFilter)
+	dst.CopyNotificationCurrentKeyFilter = utf16PtrToString(obj.CopyNotificationCurrentKeyFilter)
 	dst.CopyNotificationCurrentProgress = obj.CopyNotificationCurrentProgress
-	dst.StatusDetails = windows.UTF16PtrToString(obj.StatusDetails)
+	dst.StatusDetails = utf16PtrToString(obj.StatusDetails)
 	ex0 := obj
 	ex1 := (*innerFabricKeyValueStoreStatusQueryResultEx1)(ex0.Reserved)
 	if ex1 == nil {
@@ -12667,9 +12193,7 @@ func (obj *FabricProvisionedCodeVersionQueryDescription) toInnerStruct() *innerF
 		return nil
 	}
 	dst := &innerFabricProvisionedCodeVersionQueryDescription{}
-	s_272, _ := windows.UTF16PtrFromString(obj.CodeVersionFilter)
-	dst.CodeVersionFilter = s_272
-
+	dst.CodeVersionFilter = utf16PtrFromString(obj.CodeVersionFilter)
 	return dst
 }
 
@@ -12683,7 +12207,7 @@ func (obj *innerFabricProvisionedCodeVersionQueryDescription) toGoStruct() (dst 
 		return
 	}
 	dst = &FabricProvisionedCodeVersionQueryDescription{}
-	dst.CodeVersionFilter = windows.UTF16PtrToString(obj.CodeVersionFilter)
+	dst.CodeVersionFilter = utf16PtrToString(obj.CodeVersionFilter)
 	return
 }
 
@@ -12696,9 +12220,7 @@ func (obj *FabricProvisionedCodeVersionQueryResultItem) toInnerStruct() *innerFa
 		return nil
 	}
 	dst := &innerFabricProvisionedCodeVersionQueryResultItem{}
-	s_273, _ := windows.UTF16PtrFromString(obj.CodeVersion)
-	dst.CodeVersion = s_273
-
+	dst.CodeVersion = utf16PtrFromString(obj.CodeVersion)
 	return dst
 }
 
@@ -12712,7 +12234,7 @@ func (obj *innerFabricProvisionedCodeVersionQueryResultItem) toGoStruct() (dst *
 		return
 	}
 	dst = &FabricProvisionedCodeVersionQueryResultItem{}
-	dst.CodeVersion = windows.UTF16PtrToString(obj.CodeVersion)
+	dst.CodeVersion = utf16PtrToString(obj.CodeVersion)
 	return
 }
 
@@ -12748,9 +12270,7 @@ func (obj *FabricProvisionedConfigVersionQueryDescription) toInnerStruct() *inne
 		return nil
 	}
 	dst := &innerFabricProvisionedConfigVersionQueryDescription{}
-	s_274, _ := windows.UTF16PtrFromString(obj.ConfigVersionFilter)
-	dst.ConfigVersionFilter = s_274
-
+	dst.ConfigVersionFilter = utf16PtrFromString(obj.ConfigVersionFilter)
 	return dst
 }
 
@@ -12764,7 +12284,7 @@ func (obj *innerFabricProvisionedConfigVersionQueryDescription) toGoStruct() (ds
 		return
 	}
 	dst = &FabricProvisionedConfigVersionQueryDescription{}
-	dst.ConfigVersionFilter = windows.UTF16PtrToString(obj.ConfigVersionFilter)
+	dst.ConfigVersionFilter = utf16PtrToString(obj.ConfigVersionFilter)
 	return
 }
 
@@ -12777,9 +12297,7 @@ func (obj *FabricProvisionedConfigVersionQueryResultItem) toInnerStruct() *inner
 		return nil
 	}
 	dst := &innerFabricProvisionedConfigVersionQueryResultItem{}
-	s_275, _ := windows.UTF16PtrFromString(obj.ConfigVersion)
-	dst.ConfigVersion = s_275
-
+	dst.ConfigVersion = utf16PtrFromString(obj.ConfigVersion)
 	return dst
 }
 
@@ -12793,7 +12311,7 @@ func (obj *innerFabricProvisionedConfigVersionQueryResultItem) toGoStruct() (dst
 		return
 	}
 	dst = &FabricProvisionedConfigVersionQueryResultItem{}
-	dst.ConfigVersion = windows.UTF16PtrToString(obj.ConfigVersion)
+	dst.ConfigVersion = utf16PtrToString(obj.ConfigVersion)
 	return
 }
 
@@ -12821,7 +12339,7 @@ func (obj *innerFabricProvisionedConfigVersionQueryResultList) toGoStruct() []Fa
 }
 
 type FabricServiceNameQueryDescription struct {
-	PartitionId windows.GUID
+	PartitionId uuid.UUID
 }
 type innerFabricServiceNameQueryDescription struct {
 	FabricServiceNameQueryDescription
@@ -12850,9 +12368,7 @@ func (obj *FabricServiceNameQueryResult) toInnerStruct() *innerFabricServiceName
 		return nil
 	}
 	dst := &innerFabricServiceNameQueryResult{}
-	s_276, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_276
-
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
 	return dst
 }
 
@@ -12866,7 +12382,7 @@ func (obj *innerFabricServiceNameQueryResult) toGoStruct() (dst *FabricServiceNa
 		return
 	}
 	dst = &FabricServiceNameQueryResult{}
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	return
 }
 
@@ -12879,9 +12395,7 @@ func (obj *FabricApplicationNameQueryDescription) toInnerStruct() *innerFabricAp
 		return nil
 	}
 	dst := &innerFabricApplicationNameQueryDescription{}
-	s_277, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_277
-
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
 	return dst
 }
 
@@ -12895,7 +12409,7 @@ func (obj *innerFabricApplicationNameQueryDescription) toGoStruct() (dst *Fabric
 		return
 	}
 	dst = &FabricApplicationNameQueryDescription{}
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	return
 }
 
@@ -12908,9 +12422,7 @@ func (obj *FabricApplicationNameQueryResult) toInnerStruct() *innerFabricApplica
 		return nil
 	}
 	dst := &innerFabricApplicationNameQueryResult{}
-	s_278, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_278
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
 	return dst
 }
 
@@ -12924,7 +12436,7 @@ func (obj *innerFabricApplicationNameQueryResult) toGoStruct() (dst *FabricAppli
 		return
 	}
 	dst = &FabricApplicationNameQueryResult{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
 	return
 }
 
@@ -12941,18 +12453,10 @@ func (obj *FabricRestartDeployedCodePackageDescription) toInnerStruct() *innerFa
 		return nil
 	}
 	dst := &innerFabricRestartDeployedCodePackageDescription{}
-	s_279, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_279
-
-	s_280, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_280
-
-	s_281, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_281
-
-	s_282, _ := windows.UTF16PtrFromString(obj.CodePackageName)
-	dst.CodePackageName = s_282
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.ServiceManifestName = utf16PtrFromString(obj.ServiceManifestName)
+	dst.CodePackageName = utf16PtrFromString(obj.CodePackageName)
 	dst.CodePackageInstanceId = obj.CodePackageInstanceId
 	return dst
 }
@@ -12971,10 +12475,10 @@ func (obj *innerFabricRestartDeployedCodePackageDescription) toGoStruct() (dst *
 		return
 	}
 	dst = &FabricRestartDeployedCodePackageDescription{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.ServiceManifestName = windows.UTF16PtrToString(obj.ServiceManifestName)
-	dst.CodePackageName = windows.UTF16PtrToString(obj.CodePackageName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.ServiceManifestName = utf16PtrToString(obj.ServiceManifestName)
+	dst.CodePackageName = utf16PtrToString(obj.CodePackageName)
 	dst.CodePackageInstanceId = obj.CodePackageInstanceId
 	return
 }
@@ -12990,9 +12494,7 @@ func (obj *FabricRestartNodeDescription) toInnerStruct() *innerFabricRestartNode
 		return nil
 	}
 	dst := &innerFabricRestartNodeDescription{}
-	s_283, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_283
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.NodeInstanceId = obj.NodeInstanceId
 	ex0 := dst
 	ex1 := &innerFabricRestartNodeDescriptionEx1{}
@@ -13016,7 +12518,7 @@ func (obj *innerFabricRestartNodeDescription) toGoStruct() (dst *FabricRestartNo
 		return
 	}
 	dst = &FabricRestartNodeDescription{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.NodeInstanceId = obj.NodeInstanceId
 	ex0 := obj
 	ex1 := (*innerFabricRestartNodeDescriptionEx1)(ex0.Reserved)
@@ -13038,9 +12540,7 @@ func (obj *FabricRestartNodeDescriptionUsingNodeName) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := &innerFabricRestartNodeDescriptionUsingNodeName{}
-	s_284, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_284
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.NodeInstanceId = obj.NodeInstanceId
 	dst.ShouldCreateFabricDump = obj.ShouldCreateFabricDump
 	return dst
@@ -13058,7 +12558,7 @@ func (obj *innerFabricRestartNodeDescriptionUsingNodeName) toGoStruct() (dst *Fa
 		return
 	}
 	dst = &FabricRestartNodeDescriptionUsingNodeName{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.NodeInstanceId = obj.NodeInstanceId
 	dst.ShouldCreateFabricDump = obj.ShouldCreateFabricDump
 	return
@@ -13104,9 +12604,7 @@ func (obj *FabricStopNodeDescription) toInnerStruct() *innerFabricStopNodeDescri
 		return nil
 	}
 	dst := &innerFabricStopNodeDescription{}
-	s_285, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_285
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.NodeInstanceId = obj.NodeInstanceId
 	return dst
 }
@@ -13122,7 +12620,7 @@ func (obj *innerFabricStopNodeDescription) toGoStruct() (dst *FabricStopNodeDesc
 		return
 	}
 	dst = &FabricStopNodeDescription{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.NodeInstanceId = obj.NodeInstanceId
 	return
 }
@@ -13139,13 +12637,9 @@ func (obj *FabricStartNodeDescription) toInnerStruct() *innerFabricStartNodeDesc
 		return nil
 	}
 	dst := &innerFabricStartNodeDescription{}
-	s_286, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_286
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.NodeInstanceId = obj.NodeInstanceId
-	s_287, _ := windows.UTF16PtrFromString(obj.IPAddressOrFQDN)
-	dst.IPAddressOrFQDN = s_287
-
+	dst.IPAddressOrFQDN = utf16PtrFromString(obj.IPAddressOrFQDN)
 	dst.ClusterConnectionPort = obj.ClusterConnectionPort
 	return dst
 }
@@ -13163,9 +12657,9 @@ func (obj *innerFabricStartNodeDescription) toGoStruct() (dst *FabricStartNodeDe
 		return
 	}
 	dst = &FabricStartNodeDescription{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.NodeInstanceId = obj.NodeInstanceId
-	dst.IPAddressOrFQDN = windows.UTF16PtrToString(obj.IPAddressOrFQDN)
+	dst.IPAddressOrFQDN = utf16PtrToString(obj.IPAddressOrFQDN)
 	dst.ClusterConnectionPort = obj.ClusterConnectionPort
 	return
 }
@@ -13212,13 +12706,9 @@ func (obj *FabricStartNodeDescriptionUsingNodeName) toInnerStruct() *innerFabric
 		return nil
 	}
 	dst := &innerFabricStartNodeDescriptionUsingNodeName{}
-	s_288, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_288
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.NodeInstanceId = obj.NodeInstanceId
-	s_289, _ := windows.UTF16PtrFromString(obj.IPAddressOrFQDN)
-	dst.IPAddressOrFQDN = s_289
-
+	dst.IPAddressOrFQDN = utf16PtrFromString(obj.IPAddressOrFQDN)
 	dst.ClusterConnectionPort = obj.ClusterConnectionPort
 	return dst
 }
@@ -13236,9 +12726,9 @@ func (obj *innerFabricStartNodeDescriptionUsingNodeName) toGoStruct() (dst *Fabr
 		return
 	}
 	dst = &FabricStartNodeDescriptionUsingNodeName{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.NodeInstanceId = obj.NodeInstanceId
-	dst.IPAddressOrFQDN = windows.UTF16PtrToString(obj.IPAddressOrFQDN)
+	dst.IPAddressOrFQDN = utf16PtrToString(obj.IPAddressOrFQDN)
 	dst.ClusterConnectionPort = obj.ClusterConnectionPort
 	return
 }
@@ -13283,9 +12773,7 @@ func (obj *FabricStopNodeDescriptionUsingNodeName) toInnerStruct() *innerFabricS
 		return nil
 	}
 	dst := &innerFabricStopNodeDescriptionUsingNodeName{}
-	s_290, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_290
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.NodeInstanceId = obj.NodeInstanceId
 	return dst
 }
@@ -13301,7 +12789,7 @@ func (obj *innerFabricStopNodeDescriptionUsingNodeName) toGoStruct() (dst *Fabri
 		return
 	}
 	dst = &FabricStopNodeDescriptionUsingNodeName{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.NodeInstanceId = obj.NodeInstanceId
 	return
 }
@@ -13350,24 +12838,14 @@ func (obj *FabricRestartDeployedCodePackageDescriptionUsingNodeName) toInnerStru
 		return nil
 	}
 	dst := &innerFabricRestartDeployedCodePackageDescriptionUsingNodeName{}
-	s_291, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_291
-
-	s_292, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_292
-
-	s_293, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_293
-
-	s_294, _ := windows.UTF16PtrFromString(obj.CodePackageName)
-	dst.CodePackageName = s_294
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.ServiceManifestName = utf16PtrFromString(obj.ServiceManifestName)
+	dst.CodePackageName = utf16PtrFromString(obj.CodePackageName)
 	dst.CodePackageInstanceId = obj.CodePackageInstanceId
 	ex0 := dst
 	ex1 := &innerFabricRestartDeployedCodePackageDescriptionUsingNodeNameEx1{}
-	s_295, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	ex1.ServicePackageActivationId = s_295
-
+	ex1.ServicePackageActivationId = utf16PtrFromString(obj.ServicePackageActivationId)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
@@ -13390,17 +12868,17 @@ func (obj *innerFabricRestartDeployedCodePackageDescriptionUsingNodeName) toGoSt
 		return
 	}
 	dst = &FabricRestartDeployedCodePackageDescriptionUsingNodeName{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.ServiceManifestName = windows.UTF16PtrToString(obj.ServiceManifestName)
-	dst.CodePackageName = windows.UTF16PtrToString(obj.CodePackageName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.ServiceManifestName = utf16PtrToString(obj.ServiceManifestName)
+	dst.CodePackageName = utf16PtrToString(obj.CodePackageName)
 	dst.CodePackageInstanceId = obj.CodePackageInstanceId
 	ex0 := obj
 	ex1 := (*innerFabricRestartDeployedCodePackageDescriptionUsingNodeNameEx1)(ex0.Reserved)
 	if ex1 == nil {
 		return
 	}
-	dst.ServicePackageActivationId = windows.UTF16PtrToString(ex1.ServicePackageActivationId)
+	dst.ServicePackageActivationId = utf16PtrToString(ex1.ServicePackageActivationId)
 	return
 }
 
@@ -13418,24 +12896,14 @@ func (obj *FabricDeployedCodePackageResult) toInnerStruct() *innerFabricDeployed
 		return nil
 	}
 	dst := &innerFabricDeployedCodePackageResult{}
-	s_296, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_296
-
-	s_297, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_297
-
-	s_298, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_298
-
-	s_299, _ := windows.UTF16PtrFromString(obj.CodePackageName)
-	dst.CodePackageName = s_299
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.ServiceManifestName = utf16PtrFromString(obj.ServiceManifestName)
+	dst.CodePackageName = utf16PtrFromString(obj.CodePackageName)
 	dst.CodePackageInstanceId = obj.CodePackageInstanceId
 	ex0 := dst
 	ex1 := &innerFabricDeployedCodePackageResultEx1{}
-	s_300, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	ex1.ServicePackageActivationId = s_300
-
+	ex1.ServicePackageActivationId = utf16PtrFromString(obj.ServicePackageActivationId)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
@@ -13458,17 +12926,17 @@ func (obj *innerFabricDeployedCodePackageResult) toGoStruct() (dst *FabricDeploy
 		return
 	}
 	dst = &FabricDeployedCodePackageResult{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.ServiceManifestName = windows.UTF16PtrToString(obj.ServiceManifestName)
-	dst.CodePackageName = windows.UTF16PtrToString(obj.CodePackageName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.ServiceManifestName = utf16PtrToString(obj.ServiceManifestName)
+	dst.CodePackageName = utf16PtrToString(obj.CodePackageName)
 	dst.CodePackageInstanceId = obj.CodePackageInstanceId
 	ex0 := obj
 	ex1 := (*innerFabricDeployedCodePackageResultEx1)(ex0.Reserved)
 	if ex1 == nil {
 		return
 	}
-	dst.ServicePackageActivationId = windows.UTF16PtrToString(ex1.ServicePackageActivationId)
+	dst.ServicePackageActivationId = utf16PtrToString(ex1.ServicePackageActivationId)
 	return
 }
 
@@ -13505,7 +12973,7 @@ func (obj *innerFabricMovePrimaryDescription2) toGoStruct() (dst *FabricMovePrim
 type FabricMovePrimaryDescriptionUsingNodeName struct {
 	NodeName          string
 	ServiceName       string
-	PartitionId       windows.GUID
+	PartitionId       uuid.UUID
 	IgnoreConstraints bool
 }
 
@@ -13514,12 +12982,8 @@ func (obj *FabricMovePrimaryDescriptionUsingNodeName) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := &innerFabricMovePrimaryDescriptionUsingNodeName{}
-	s_301, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_301
-
-	s_302, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_302
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
 	dst.PartitionId = obj.PartitionId
 	dst.IgnoreConstraints = obj.IgnoreConstraints
 	return dst
@@ -13528,7 +12992,7 @@ func (obj *FabricMovePrimaryDescriptionUsingNodeName) toInnerStruct() *innerFabr
 type innerFabricMovePrimaryDescriptionUsingNodeName struct {
 	NodeName          *uint16
 	ServiceName       *uint16
-	PartitionId       windows.GUID
+	PartitionId       uuid.UUID
 	IgnoreConstraints bool
 	Reserved          unsafe.Pointer
 }
@@ -13538,8 +13002,8 @@ func (obj *innerFabricMovePrimaryDescriptionUsingNodeName) toGoStruct() (dst *Fa
 		return
 	}
 	dst = &FabricMovePrimaryDescriptionUsingNodeName{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	dst.PartitionId = obj.PartitionId
 	dst.IgnoreConstraints = obj.IgnoreConstraints
 	return
@@ -13548,7 +13012,7 @@ func (obj *innerFabricMovePrimaryDescriptionUsingNodeName) toGoStruct() (dst *Fa
 type FabricMovePrimaryResult struct {
 	NodeName    string
 	ServiceName string
-	PartitionId windows.GUID
+	PartitionId uuid.UUID
 }
 
 func (obj *FabricMovePrimaryResult) toInnerStruct() *innerFabricMovePrimaryResult {
@@ -13556,12 +13020,8 @@ func (obj *FabricMovePrimaryResult) toInnerStruct() *innerFabricMovePrimaryResul
 		return nil
 	}
 	dst := &innerFabricMovePrimaryResult{}
-	s_303, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_303
-
-	s_304, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_304
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
 	dst.PartitionId = obj.PartitionId
 	return dst
 }
@@ -13569,7 +13029,7 @@ func (obj *FabricMovePrimaryResult) toInnerStruct() *innerFabricMovePrimaryResul
 type innerFabricMovePrimaryResult struct {
 	NodeName    *uint16
 	ServiceName *uint16
-	PartitionId windows.GUID
+	PartitionId uuid.UUID
 	Reserved    unsafe.Pointer
 }
 
@@ -13578,8 +13038,8 @@ func (obj *innerFabricMovePrimaryResult) toGoStruct() (dst *FabricMovePrimaryRes
 		return
 	}
 	dst = &FabricMovePrimaryResult{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	dst.PartitionId = obj.PartitionId
 	return
 }
@@ -13618,7 +13078,7 @@ type FabricMoveSecondaryDescriptionUsingNodeName struct {
 	CurrentNodeName   string
 	NewNodeName       string
 	ServiceName       string
-	PartitionId       windows.GUID
+	PartitionId       uuid.UUID
 	IgnoreConstraints bool
 }
 
@@ -13627,15 +13087,9 @@ func (obj *FabricMoveSecondaryDescriptionUsingNodeName) toInnerStruct() *innerFa
 		return nil
 	}
 	dst := &innerFabricMoveSecondaryDescriptionUsingNodeName{}
-	s_305, _ := windows.UTF16PtrFromString(obj.CurrentNodeName)
-	dst.CurrentNodeName = s_305
-
-	s_306, _ := windows.UTF16PtrFromString(obj.NewNodeName)
-	dst.NewNodeName = s_306
-
-	s_307, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_307
-
+	dst.CurrentNodeName = utf16PtrFromString(obj.CurrentNodeName)
+	dst.NewNodeName = utf16PtrFromString(obj.NewNodeName)
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
 	dst.PartitionId = obj.PartitionId
 	dst.IgnoreConstraints = obj.IgnoreConstraints
 	return dst
@@ -13645,7 +13099,7 @@ type innerFabricMoveSecondaryDescriptionUsingNodeName struct {
 	CurrentNodeName   *uint16
 	NewNodeName       *uint16
 	ServiceName       *uint16
-	PartitionId       windows.GUID
+	PartitionId       uuid.UUID
 	IgnoreConstraints bool
 	Reserved          unsafe.Pointer
 }
@@ -13655,9 +13109,9 @@ func (obj *innerFabricMoveSecondaryDescriptionUsingNodeName) toGoStruct() (dst *
 		return
 	}
 	dst = &FabricMoveSecondaryDescriptionUsingNodeName{}
-	dst.CurrentNodeName = windows.UTF16PtrToString(obj.CurrentNodeName)
-	dst.NewNodeName = windows.UTF16PtrToString(obj.NewNodeName)
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.CurrentNodeName = utf16PtrToString(obj.CurrentNodeName)
+	dst.NewNodeName = utf16PtrToString(obj.NewNodeName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	dst.PartitionId = obj.PartitionId
 	dst.IgnoreConstraints = obj.IgnoreConstraints
 	return
@@ -13667,7 +13121,7 @@ type FabricMoveSecondaryResult struct {
 	CurrentNodeName string
 	NewNodeName     string
 	ServiceName     string
-	PartitionId     windows.GUID
+	PartitionId     uuid.UUID
 }
 
 func (obj *FabricMoveSecondaryResult) toInnerStruct() *innerFabricMoveSecondaryResult {
@@ -13675,15 +13129,9 @@ func (obj *FabricMoveSecondaryResult) toInnerStruct() *innerFabricMoveSecondaryR
 		return nil
 	}
 	dst := &innerFabricMoveSecondaryResult{}
-	s_308, _ := windows.UTF16PtrFromString(obj.CurrentNodeName)
-	dst.CurrentNodeName = s_308
-
-	s_309, _ := windows.UTF16PtrFromString(obj.NewNodeName)
-	dst.NewNodeName = s_309
-
-	s_310, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_310
-
+	dst.CurrentNodeName = utf16PtrFromString(obj.CurrentNodeName)
+	dst.NewNodeName = utf16PtrFromString(obj.NewNodeName)
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
 	dst.PartitionId = obj.PartitionId
 	return dst
 }
@@ -13692,7 +13140,7 @@ type innerFabricMoveSecondaryResult struct {
 	CurrentNodeName *uint16
 	NewNodeName     *uint16
 	ServiceName     *uint16
-	PartitionId     windows.GUID
+	PartitionId     uuid.UUID
 	Reserved        unsafe.Pointer
 }
 
@@ -13701,16 +13149,16 @@ func (obj *innerFabricMoveSecondaryResult) toGoStruct() (dst *FabricMoveSecondar
 		return
 	}
 	dst = &FabricMoveSecondaryResult{}
-	dst.CurrentNodeName = windows.UTF16PtrToString(obj.CurrentNodeName)
-	dst.NewNodeName = windows.UTF16PtrToString(obj.NewNodeName)
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.CurrentNodeName = utf16PtrToString(obj.CurrentNodeName)
+	dst.NewNodeName = utf16PtrToString(obj.NewNodeName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	dst.PartitionId = obj.PartitionId
 	return
 }
 
 type FabricRestartReplicaDescription struct {
 	NodeName            string
-	PartitionId         windows.GUID
+	PartitionId         uuid.UUID
 	ReplicaOrInstanceId int64
 }
 
@@ -13719,9 +13167,7 @@ func (obj *FabricRestartReplicaDescription) toInnerStruct() *innerFabricRestartR
 		return nil
 	}
 	dst := &innerFabricRestartReplicaDescription{}
-	s_311, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_311
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaOrInstanceId = obj.ReplicaOrInstanceId
 	return dst
@@ -13729,7 +13175,7 @@ func (obj *FabricRestartReplicaDescription) toInnerStruct() *innerFabricRestartR
 
 type innerFabricRestartReplicaDescription struct {
 	NodeName            *uint16
-	PartitionId         windows.GUID
+	PartitionId         uuid.UUID
 	ReplicaOrInstanceId int64
 	Reserved            unsafe.Pointer
 }
@@ -13739,7 +13185,7 @@ func (obj *innerFabricRestartReplicaDescription) toGoStruct() (dst *FabricRestar
 		return
 	}
 	dst = &FabricRestartReplicaDescription{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaOrInstanceId = obj.ReplicaOrInstanceId
 	return
@@ -13747,7 +13193,7 @@ func (obj *innerFabricRestartReplicaDescription) toGoStruct() (dst *FabricRestar
 
 type FabricRemoveReplicaDescription struct {
 	NodeName            string
-	PartitionId         windows.GUID
+	PartitionId         uuid.UUID
 	ReplicaOrInstanceId int64
 	ForceRemove         bool
 }
@@ -13757,9 +13203,7 @@ func (obj *FabricRemoveReplicaDescription) toInnerStruct() *innerFabricRemoveRep
 		return nil
 	}
 	dst := &innerFabricRemoveReplicaDescription{}
-	s_312, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_312
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaOrInstanceId = obj.ReplicaOrInstanceId
 	ex0 := dst
@@ -13771,7 +13215,7 @@ func (obj *FabricRemoveReplicaDescription) toInnerStruct() *innerFabricRemoveRep
 
 type innerFabricRemoveReplicaDescription struct {
 	NodeName            *uint16
-	PartitionId         windows.GUID
+	PartitionId         uuid.UUID
 	ReplicaOrInstanceId int64
 	Reserved            unsafe.Pointer
 }
@@ -13785,7 +13229,7 @@ func (obj *innerFabricRemoveReplicaDescription) toGoStruct() (dst *FabricRemoveR
 		return
 	}
 	dst = &FabricRemoveReplicaDescription{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaOrInstanceId = obj.ReplicaOrInstanceId
 	ex0 := obj
@@ -13833,17 +13277,11 @@ func (obj *FabricHealthInformation) toInnerStruct() *innerFabricHealthInformatio
 		return nil
 	}
 	dst := &innerFabricHealthInformation{}
-	s_313, _ := windows.UTF16PtrFromString(obj.SourceId)
-	dst.SourceId = s_313
-
-	s_314, _ := windows.UTF16PtrFromString(obj.Property)
-	dst.Property = s_314
-
+	dst.SourceId = utf16PtrFromString(obj.SourceId)
+	dst.Property = utf16PtrFromString(obj.Property)
 	dst.TimeToLiveSeconds = obj.TimeToLiveSeconds
 	dst.State = obj.State
-	s_315, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_315
-
+	dst.Description = utf16PtrFromString(obj.Description)
 	dst.SequenceNumber = obj.SequenceNumber
 	dst.RemoveWhenExpired = obj.RemoveWhenExpired
 	return dst
@@ -13865,11 +13303,11 @@ func (obj *innerFabricHealthInformation) toGoStruct() (dst *FabricHealthInformat
 		return
 	}
 	dst = &FabricHealthInformation{}
-	dst.SourceId = windows.UTF16PtrToString(obj.SourceId)
-	dst.Property = windows.UTF16PtrToString(obj.Property)
+	dst.SourceId = utf16PtrToString(obj.SourceId)
+	dst.Property = utf16PtrToString(obj.Property)
 	dst.TimeToLiveSeconds = obj.TimeToLiveSeconds
 	dst.State = obj.State
-	dst.Description = windows.UTF16PtrToString(obj.Description)
+	dst.Description = utf16PtrToString(obj.Description)
 	dst.SequenceNumber = obj.SequenceNumber
 	dst.RemoveWhenExpired = obj.RemoveWhenExpired
 	return
@@ -13927,7 +13365,7 @@ func (obj *FabricClusterHealthReport) toInnerStruct() *innerFabricClusterHealthR
 }
 
 type FabricStatelessServiceInstanceHealthReport struct {
-	PartitionId       windows.GUID
+	PartitionId       uuid.UUID
 	InstanceId        int64
 	HealthInformation *FabricHealthInformation
 }
@@ -13950,7 +13388,7 @@ func (obj *FabricStatelessServiceInstanceHealthReport) toInnerStruct() *innerFab
 }
 
 type FabricStatefulServiceReplicaHealthReport struct {
-	PartitionId       windows.GUID
+	PartitionId       uuid.UUID
 	ReplicaId         int64
 	HealthInformation *FabricHealthInformation
 }
@@ -13973,7 +13411,7 @@ func (obj *FabricStatefulServiceReplicaHealthReport) toInnerStruct() *innerFabri
 }
 
 type FabricPartitionHealthReport struct {
-	PartitionId       windows.GUID
+	PartitionId       uuid.UUID
 	HealthInformation *FabricHealthInformation
 }
 type innerFabricPartitionHealthReport struct {
@@ -14004,9 +13442,7 @@ func (obj *FabricNodeHealthReport) toInnerStruct() *innerFabricNodeHealthReport 
 		return nil
 	}
 	dst := &innerFabricNodeHealthReport{}
-	s_316, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_316
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.HealthInformation = obj.HealthInformation.toInnerStruct()
 	return dst
 }
@@ -14022,7 +13458,7 @@ func (obj *innerFabricNodeHealthReport) toGoStruct() (dst *FabricNodeHealthRepor
 		return
 	}
 	dst = &FabricNodeHealthReport{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.HealthInformation = obj.HealthInformation.toGoStruct()
 	return
 }
@@ -14037,9 +13473,7 @@ func (obj *FabricApplicationHealthReport) toInnerStruct() *innerFabricApplicatio
 		return nil
 	}
 	dst := &innerFabricApplicationHealthReport{}
-	s_317, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_317
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
 	dst.HealthInformation = obj.HealthInformation.toInnerStruct()
 	return dst
 }
@@ -14055,7 +13489,7 @@ func (obj *innerFabricApplicationHealthReport) toGoStruct() (dst *FabricApplicat
 		return
 	}
 	dst = &FabricApplicationHealthReport{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
 	dst.HealthInformation = obj.HealthInformation.toGoStruct()
 	return
 }
@@ -14070,9 +13504,7 @@ func (obj *FabricServiceHealthReport) toInnerStruct() *innerFabricServiceHealthR
 		return nil
 	}
 	dst := &innerFabricServiceHealthReport{}
-	s_318, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_318
-
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
 	dst.HealthInformation = obj.HealthInformation.toInnerStruct()
 	return dst
 }
@@ -14088,7 +13520,7 @@ func (obj *innerFabricServiceHealthReport) toGoStruct() (dst *FabricServiceHealt
 		return
 	}
 	dst = &FabricServiceHealthReport{}
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	dst.HealthInformation = obj.HealthInformation.toGoStruct()
 	return
 }
@@ -14106,21 +13538,13 @@ func (obj *FabricDeployedServicePackageHealthReport) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := &innerFabricDeployedServicePackageHealthReport{}
-	s_319, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_319
-
-	s_320, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_320
-
-	s_321, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_321
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.ServiceManifestName = utf16PtrFromString(obj.ServiceManifestName)
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.HealthInformation = obj.HealthInformation.toInnerStruct()
 	ex0 := dst
 	ex1 := &innerFabricDeployedServicePackageHealthReportEx1{}
-	s_322, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	ex1.ServicePackageActivationId = s_322
-
+	ex1.ServicePackageActivationId = utf16PtrFromString(obj.ServicePackageActivationId)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
@@ -14142,16 +13566,16 @@ func (obj *innerFabricDeployedServicePackageHealthReport) toGoStruct() (dst *Fab
 		return
 	}
 	dst = &FabricDeployedServicePackageHealthReport{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.ServiceManifestName = windows.UTF16PtrToString(obj.ServiceManifestName)
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.ServiceManifestName = utf16PtrToString(obj.ServiceManifestName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.HealthInformation = obj.HealthInformation.toGoStruct()
 	ex0 := obj
 	ex1 := (*innerFabricDeployedServicePackageHealthReportEx1)(ex0.Reserved)
 	if ex1 == nil {
 		return
 	}
-	dst.ServicePackageActivationId = windows.UTF16PtrToString(ex1.ServicePackageActivationId)
+	dst.ServicePackageActivationId = utf16PtrToString(ex1.ServicePackageActivationId)
 	return
 }
 
@@ -14166,12 +13590,8 @@ func (obj *FabricDeployedApplicationHealthReport) toInnerStruct() *innerFabricDe
 		return nil
 	}
 	dst := &innerFabricDeployedApplicationHealthReport{}
-	s_323, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_323
-
-	s_324, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_324
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.HealthInformation = obj.HealthInformation.toInnerStruct()
 	return dst
 }
@@ -14188,8 +13608,8 @@ func (obj *innerFabricDeployedApplicationHealthReport) toGoStruct() (dst *Fabric
 		return
 	}
 	dst = &FabricDeployedApplicationHealthReport{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.HealthInformation = obj.HealthInformation.toGoStruct()
 	return
 }
@@ -14227,9 +13647,7 @@ func (obj *FabricServiceTypeHealthPolicyMapItem) toInnerStruct() *innerFabricSer
 		return nil
 	}
 	dst := &innerFabricServiceTypeHealthPolicyMapItem{}
-	s_325, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_325
-
+	dst.ServiceTypeName = utf16PtrFromString(obj.ServiceTypeName)
 	dst.ServiceTypeHealthPolicy = obj.ServiceTypeHealthPolicy.toInnerStruct()
 	return dst
 }
@@ -14244,7 +13662,7 @@ func (obj *innerFabricServiceTypeHealthPolicyMapItem) toGoStruct() (dst *FabricS
 		return
 	}
 	dst = &FabricServiceTypeHealthPolicyMapItem{}
-	dst.ServiceTypeName = windows.UTF16PtrToString(obj.ServiceTypeName)
+	dst.ServiceTypeName = utf16PtrToString(obj.ServiceTypeName)
 	dst.ServiceTypeHealthPolicy = obj.ServiceTypeHealthPolicy.toGoStruct()
 	return
 }
@@ -14267,7 +13685,7 @@ func (obj *innerFabricServiceTypeHealthPolicyMap) toGoStruct() map[string]Fabric
 			var k string
 			var v *FabricServiceTypeHealthPolicy
 
-			k = windows.UTF16PtrToString(kv.ServiceTypeName)
+			k = utf16PtrToString(kv.ServiceTypeName)
 			v = kv.ServiceTypeHealthPolicy.toGoStruct()
 			mapvar[k] = *v
 
@@ -14301,9 +13719,7 @@ func (obj *FabricApplicationHealthPolicy) toInnerStruct() *innerFabricApplicatio
 		for k, v := range obj.ServiceTypeHealthPolicyMap {
 			kv := innerFabricServiceTypeHealthPolicyMapItem{}
 
-			s_328, _ := windows.UTF16PtrFromString(k)
-			kv.ServiceTypeName = s_328
-
+			kv.ServiceTypeName = utf16PtrFromString(k)
 			kv.ServiceTypeHealthPolicy = v.toInnerStruct()
 
 			tmp = append(tmp, kv)
@@ -14346,7 +13762,7 @@ func (obj *innerFabricApplicationHealthPolicy) toGoStruct() (dst *FabricApplicat
 			var k string
 			var v *FabricServiceTypeHealthPolicy
 
-			k = windows.UTF16PtrToString(kv.ServiceTypeName)
+			k = utf16PtrToString(kv.ServiceTypeName)
 			v = kv.ServiceTypeHealthPolicy.toGoStruct()
 			mapvar[k] = *v
 
@@ -14367,9 +13783,7 @@ func (obj *FabricApplicationHealthPolicyMapItem) toInnerStruct() *innerFabricApp
 		return nil
 	}
 	dst := &innerFabricApplicationHealthPolicyMapItem{}
-	s_330, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_330
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
 	dst.HealthPolicy = obj.HealthPolicy.toInnerStruct()
 	return dst
 }
@@ -14384,7 +13798,7 @@ func (obj *innerFabricApplicationHealthPolicyMapItem) toGoStruct() (dst *FabricA
 		return
 	}
 	dst = &FabricApplicationHealthPolicyMapItem{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
 	dst.HealthPolicy = obj.HealthPolicy.toGoStruct()
 	return
 }
@@ -14407,7 +13821,7 @@ func (obj *innerFabricApplicationHealthPolicyMap) toGoStruct() map[string]Fabric
 			var k string
 			var v *FabricApplicationHealthPolicy
 
-			k = windows.UTF16PtrToString(kv.ApplicationName)
+			k = utf16PtrToString(kv.ApplicationName)
 			v = kv.HealthPolicy.toGoStruct()
 			mapvar[k] = *v
 
@@ -14443,9 +13857,7 @@ func (obj *FabricClusterHealthPolicy) toInnerStruct() *innerFabricClusterHealthP
 		for k, v := range obj.ApplicationTypeHealthPolicyMap {
 			kv := innerFabricApplicationTypeHealthPolicyMapItem{}
 
-			s_333, _ := windows.UTF16PtrFromString(k)
-			kv.ApplicationTypeName = s_333
-
+			kv.ApplicationTypeName = utf16PtrFromString(k)
 			kv.MaxPercentUnhealthyApplications = v
 
 			tmp = append(tmp, kv)
@@ -14497,7 +13909,7 @@ func (obj *innerFabricClusterHealthPolicy) toGoStruct() (dst *FabricClusterHealt
 			var k string
 			var v byte
 
-			k = windows.UTF16PtrToString(kv.ApplicationTypeName)
+			k = utf16PtrToString(kv.ApplicationTypeName)
 			v = kv.MaxPercentUnhealthyApplications
 			mapvar[k] = v
 
@@ -14562,17 +13974,13 @@ func (obj *FabricLoadMetricInformation) toInnerStruct() *innerFabricLoadMetricIn
 		return nil
 	}
 	dst := &innerFabricLoadMetricInformation{}
-	s_335, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_335
-
+	dst.Name = utf16PtrFromString(obj.Name)
 	dst.IsBalancedBefore = obj.IsBalancedBefore
 	dst.IsBalancedAfter = obj.IsBalancedAfter
 	dst.DeviationBefore = obj.DeviationBefore
 	dst.DeviationAfter = obj.DeviationAfter
 	dst.BalancingThreshold = obj.BalancingThreshold
-	s_336, _ := windows.UTF16PtrFromString(obj.Action)
-	dst.Action = s_336
-
+	dst.Action = utf16PtrFromString(obj.Action)
 	ex0 := dst
 	ex1 := &innerFabricLoadMetricInformationEx1{}
 	ex1.ActivityThreshold = obj.ActivityThreshold
@@ -14642,13 +14050,13 @@ func (obj *innerFabricLoadMetricInformation) toGoStruct() (dst *FabricLoadMetric
 		return
 	}
 	dst = &FabricLoadMetricInformation{}
-	dst.Name = windows.UTF16PtrToString(obj.Name)
+	dst.Name = utf16PtrToString(obj.Name)
 	dst.IsBalancedBefore = obj.IsBalancedBefore
 	dst.IsBalancedAfter = obj.IsBalancedAfter
 	dst.DeviationBefore = obj.DeviationBefore
 	dst.DeviationAfter = obj.DeviationAfter
 	dst.BalancingThreshold = obj.BalancingThreshold
-	dst.Action = windows.UTF16PtrToString(obj.Action)
+	dst.Action = utf16PtrToString(obj.Action)
 	ex0 := obj
 	ex1 := (*innerFabricLoadMetricInformationEx1)(ex0.Reserved)
 	if ex1 == nil {
@@ -14716,9 +14124,9 @@ func (obj *FabricClusterLoadInformation) toInnerStruct() *innerFabricClusterLoad
 		return nil
 	}
 	dst := &innerFabricClusterLoadInformation{}
-	dst.LastBalancingStartTimeUtc = windows.NsecToFiletime(obj.LastBalancingStartTimeUtc.UnixNano())
-	dst.LastBalancingEndTimeUtc = windows.NsecToFiletime(obj.LastBalancingEndTimeUtc.UnixNano())
-	lst_337 := &innerFabricLoadMetricInformationList{}
+	dst.LastBalancingStartTimeUtc = timeToFiletime(obj.LastBalancingStartTimeUtc)
+	dst.LastBalancingEndTimeUtc = timeToFiletime(obj.LastBalancingEndTimeUtc)
+	lst_41 := &innerFabricLoadMetricInformationList{}
 	{
 
 		var tmp []innerFabricLoadMetricInformation
@@ -14731,19 +14139,19 @@ func (obj *FabricClusterLoadInformation) toInnerStruct() *innerFabricClusterLoad
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_337.Count = uint32(len(tmp))
+		lst_41.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_337.Items = &tmp[0]
+			lst_41.Items = &tmp[0]
 		}
 
 	}
-	dst.LoadMetricInformation = lst_337
+	dst.LoadMetricInformation = lst_41
 	return dst
 }
 
 type innerFabricClusterLoadInformation struct {
-	LastBalancingStartTimeUtc windows.Filetime
-	LastBalancingEndTimeUtc   windows.Filetime
+	LastBalancingStartTimeUtc filetime
+	LastBalancingEndTimeUtc   filetime
 	LoadMetricInformation     *innerFabricLoadMetricInformationList
 	Reserved                  unsafe.Pointer
 }
@@ -14753,8 +14161,8 @@ func (obj *innerFabricClusterLoadInformation) toGoStruct() (dst *FabricClusterLo
 		return
 	}
 	dst = &FabricClusterLoadInformation{}
-	dst.LastBalancingStartTimeUtc = time.Unix(0, obj.LastBalancingStartTimeUtc.Nanoseconds())
-	dst.LastBalancingEndTimeUtc = time.Unix(0, obj.LastBalancingEndTimeUtc.Nanoseconds())
+	dst.LastBalancingStartTimeUtc = obj.LastBalancingStartTimeUtc.ToTime()
+	dst.LastBalancingEndTimeUtc = obj.LastBalancingEndTimeUtc.ToTime()
 	{
 		var innerlst []innerFabricLoadMetricInformation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.LoadMetricInformation.Items), int(obj.LoadMetricInformation.Count))
@@ -14772,7 +14180,7 @@ func (obj *innerFabricClusterLoadInformation) toGoStruct() (dst *FabricClusterLo
 }
 
 type FabricPartitionLoadInformation struct {
-	PartitionId                windows.GUID
+	PartitionId                uuid.UUID
 	PrimaryLoadMetricReports   []FabricLoadMetricReport
 	SecondaryLoadMetricReports []FabricLoadMetricReport
 }
@@ -14783,7 +14191,7 @@ func (obj *FabricPartitionLoadInformation) toInnerStruct() *innerFabricPartition
 	}
 	dst := &innerFabricPartitionLoadInformation{}
 	dst.PartitionId = obj.PartitionId
-	lst_338 := &innerFabricLoadMetricReportList{}
+	lst_42 := &innerFabricLoadMetricReportList{}
 	{
 
 		var tmp []innerFabricLoadMetricReport
@@ -14796,14 +14204,14 @@ func (obj *FabricPartitionLoadInformation) toInnerStruct() *innerFabricPartition
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_338.Count = uint32(len(tmp))
+		lst_42.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_338.Items = &tmp[0]
+			lst_42.Items = &tmp[0]
 		}
 
 	}
-	dst.PrimaryLoadMetricReports = lst_338
-	lst_339 := &innerFabricLoadMetricReportList{}
+	dst.PrimaryLoadMetricReports = lst_42
+	lst_43 := &innerFabricLoadMetricReportList{}
 	{
 
 		var tmp []innerFabricLoadMetricReport
@@ -14816,18 +14224,18 @@ func (obj *FabricPartitionLoadInformation) toInnerStruct() *innerFabricPartition
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_339.Count = uint32(len(tmp))
+		lst_43.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_339.Items = &tmp[0]
+			lst_43.Items = &tmp[0]
 		}
 
 	}
-	dst.SecondaryLoadMetricReports = lst_339
+	dst.SecondaryLoadMetricReports = lst_43
 	return dst
 }
 
 type innerFabricPartitionLoadInformation struct {
-	PartitionId                windows.GUID
+	PartitionId                uuid.UUID
 	PrimaryLoadMetricReports   *innerFabricLoadMetricReportList
 	SecondaryLoadMetricReports *innerFabricLoadMetricReportList
 	Reserved                   unsafe.Pointer
@@ -14869,7 +14277,7 @@ func (obj *innerFabricPartitionLoadInformation) toGoStruct() (dst *FabricPartiti
 }
 
 type FabricReplicaLoadInformation struct {
-	PartitionId         windows.GUID
+	PartitionId         uuid.UUID
 	ReplicaOrInstanceId int64
 	LoadMetricReports   []FabricLoadMetricReport
 }
@@ -14881,7 +14289,7 @@ func (obj *FabricReplicaLoadInformation) toInnerStruct() *innerFabricReplicaLoad
 	dst := &innerFabricReplicaLoadInformation{}
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaOrInstanceId = obj.ReplicaOrInstanceId
-	lst_340 := &innerFabricLoadMetricReportList{}
+	lst_44 := &innerFabricLoadMetricReportList{}
 	{
 
 		var tmp []innerFabricLoadMetricReport
@@ -14894,18 +14302,18 @@ func (obj *FabricReplicaLoadInformation) toInnerStruct() *innerFabricReplicaLoad
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_340.Count = uint32(len(tmp))
+		lst_44.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_340.Items = &tmp[0]
+			lst_44.Items = &tmp[0]
 		}
 
 	}
-	dst.LoadMetricReports = lst_340
+	dst.LoadMetricReports = lst_44
 	return dst
 }
 
 type innerFabricReplicaLoadInformation struct {
-	PartitionId         windows.GUID
+	PartitionId         uuid.UUID
 	ReplicaOrInstanceId int64
 	LoadMetricReports   *innerFabricLoadMetricReportList
 	Reserved            unsafe.Pointer
@@ -14936,7 +14344,7 @@ func (obj *innerFabricReplicaLoadInformation) toGoStruct() (dst *FabricReplicaLo
 
 type FabricUnplacedReplicaInformation struct {
 	ServiceName            string
-	PartitionId            windows.GUID
+	PartitionId            uuid.UUID
 	UnplacedReplicaReasons []string
 }
 
@@ -14945,11 +14353,9 @@ func (obj *FabricUnplacedReplicaInformation) toInnerStruct() *innerFabricUnplace
 		return nil
 	}
 	dst := &innerFabricUnplacedReplicaInformation{}
-	s_341, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_341
-
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
 	dst.PartitionId = obj.PartitionId
-	lst_342 := &innerFabricStringList{}
+	lst_45 := &innerFabricStringList{}
 	{
 
 		var tmp []*uint16
@@ -14957,25 +14363,24 @@ func (obj *FabricUnplacedReplicaInformation) toInnerStruct() *innerFabricUnplace
 		for _, item := range obj.UnplacedReplicaReasons {
 			var tmpitem *uint16
 
-			s_343, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_343
+			tmpitem = utf16PtrFromString(item)
 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_342.Count = uint32(len(tmp))
+		lst_45.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_342.Items = &tmp[0]
+			lst_45.Items = &tmp[0]
 		}
 
 	}
-	dst.UnplacedReplicaReasons = lst_342
+	dst.UnplacedReplicaReasons = lst_45
 	return dst
 }
 
 type innerFabricUnplacedReplicaInformation struct {
 	ServiceName            *uint16
-	PartitionId            windows.GUID
+	PartitionId            uuid.UUID
 	UnplacedReplicaReasons *innerFabricStringList
 	Reserved               unsafe.Pointer
 }
@@ -14985,7 +14390,7 @@ func (obj *innerFabricUnplacedReplicaInformation) toGoStruct() (dst *FabricUnpla
 		return
 	}
 	dst = &FabricUnplacedReplicaInformation{}
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	dst.PartitionId = obj.PartitionId
 	{
 		var innerlst []*uint16
@@ -14994,7 +14399,7 @@ func (obj *innerFabricUnplacedReplicaInformation) toGoStruct() (dst *FabricUnpla
 		for _, item := range innerlst {
 			var tmpitem string
 
-			tmpitem = windows.UTF16PtrToString(item)
+			tmpitem = utf16PtrToString(item)
 
 			dst.UnplacedReplicaReasons = append(dst.UnplacedReplicaReasons, tmpitem)
 		}
@@ -15021,9 +14426,7 @@ func (obj *FabricNodeLoadMetricInformation) toInnerStruct() *innerFabricNodeLoad
 		return nil
 	}
 	dst := &innerFabricNodeLoadMetricInformation{}
-	s_344, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_344
-
+	dst.Name = utf16PtrFromString(obj.Name)
 	dst.NodeCapacity = obj.NodeCapacity
 	dst.NodeLoad = obj.NodeLoad
 	dst.NodeRemainingCapacity = obj.NodeRemainingCapacity
@@ -15066,7 +14469,7 @@ func (obj *innerFabricNodeLoadMetricInformation) toGoStruct() (dst *FabricNodeLo
 		return
 	}
 	dst = &FabricNodeLoadMetricInformation{}
-	dst.Name = windows.UTF16PtrToString(obj.Name)
+	dst.Name = utf16PtrToString(obj.Name)
 	dst.NodeCapacity = obj.NodeCapacity
 	dst.NodeLoad = obj.NodeLoad
 	dst.NodeRemainingCapacity = obj.NodeRemainingCapacity
@@ -15121,10 +14524,8 @@ func (obj *FabricNodeLoadInformation) toInnerStruct() *innerFabricNodeLoadInform
 		return nil
 	}
 	dst := &innerFabricNodeLoadInformation{}
-	s_345, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_345
-
-	lst_346 := &innerFabricNodeLoadMetricInformationList{}
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
+	lst_46 := &innerFabricNodeLoadMetricInformationList{}
 	{
 
 		var tmp []innerFabricNodeLoadMetricInformation
@@ -15137,13 +14538,13 @@ func (obj *FabricNodeLoadInformation) toInnerStruct() *innerFabricNodeLoadInform
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_346.Count = uint32(len(tmp))
+		lst_46.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_346.Items = &tmp[0]
+			lst_46.Items = &tmp[0]
 		}
 
 	}
-	dst.NodeLoadMetricInformation = lst_346
+	dst.NodeLoadMetricInformation = lst_46
 	return dst
 }
 
@@ -15158,7 +14559,7 @@ func (obj *innerFabricNodeLoadInformation) toGoStruct() (dst *FabricNodeLoadInfo
 		return
 	}
 	dst = &FabricNodeLoadInformation{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	{
 		var innerlst []innerFabricNodeLoadMetricInformation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.NodeLoadMetricInformation.Items), int(obj.NodeLoadMetricInformation.Count))
@@ -15187,9 +14588,7 @@ func (obj *FabricApplicationLoadMetricInformation) toInnerStruct() *innerFabricA
 		return nil
 	}
 	dst := &innerFabricApplicationLoadMetricInformation{}
-	s_347, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_347
-
+	dst.Name = utf16PtrFromString(obj.Name)
 	dst.ReservationCapacity = obj.ReservationCapacity
 	dst.ApplicationCapacity = obj.ApplicationCapacity
 	dst.ApplicationLoad = obj.ApplicationLoad
@@ -15209,7 +14608,7 @@ func (obj *innerFabricApplicationLoadMetricInformation) toGoStruct() (dst *Fabri
 		return
 	}
 	dst = &FabricApplicationLoadMetricInformation{}
-	dst.Name = windows.UTF16PtrToString(obj.Name)
+	dst.Name = utf16PtrToString(obj.Name)
 	dst.ReservationCapacity = obj.ReservationCapacity
 	dst.ApplicationCapacity = obj.ApplicationCapacity
 	dst.ApplicationLoad = obj.ApplicationLoad
@@ -15253,13 +14652,11 @@ func (obj *FabricApplicationLoadInformation) toInnerStruct() *innerFabricApplica
 		return nil
 	}
 	dst := &innerFabricApplicationLoadInformation{}
-	s_348, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_348
-
+	dst.Name = utf16PtrFromString(obj.Name)
 	dst.MinimumNodes = obj.MinimumNodes
 	dst.MaximumNodes = obj.MaximumNodes
 	dst.NodeCount = obj.NodeCount
-	lst_349 := &innerFabricApplicationLoadMetricInformationList{}
+	lst_47 := &innerFabricApplicationLoadMetricInformationList{}
 	{
 
 		var tmp []innerFabricApplicationLoadMetricInformation
@@ -15272,13 +14669,13 @@ func (obj *FabricApplicationLoadInformation) toInnerStruct() *innerFabricApplica
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_349.Count = uint32(len(tmp))
+		lst_47.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_349.LoadMetrics = &tmp[0]
+			lst_47.LoadMetrics = &tmp[0]
 		}
 
 	}
-	dst.ApplicationLoadMetricInformation = lst_349
+	dst.ApplicationLoadMetricInformation = lst_47
 	return dst
 }
 
@@ -15296,7 +14693,7 @@ func (obj *innerFabricApplicationLoadInformation) toGoStruct() (dst *FabricAppli
 		return
 	}
 	dst = &FabricApplicationLoadInformation{}
-	dst.Name = windows.UTF16PtrToString(obj.Name)
+	dst.Name = utf16PtrToString(obj.Name)
 	dst.MinimumNodes = obj.MinimumNodes
 	dst.MaximumNodes = obj.MaximumNodes
 	dst.NodeCount = obj.NodeCount
@@ -15328,14 +14725,10 @@ func (obj *FabricGatewayInformation) toInnerStruct() *innerFabricGatewayInformat
 		return nil
 	}
 	dst := &innerFabricGatewayInformation{}
-	s_350, _ := windows.UTF16PtrFromString(obj.NodeAddress)
-	dst.NodeAddress = s_350
-
+	dst.NodeAddress = utf16PtrFromString(obj.NodeAddress)
 	dst.NodeId = *obj.NodeId.toInnerStruct()
 	dst.NodeInstanceId = obj.NodeInstanceId
-	s_351, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_351
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	return dst
 }
 
@@ -15352,15 +14745,15 @@ func (obj *innerFabricGatewayInformation) toGoStruct() (dst *FabricGatewayInform
 		return
 	}
 	dst = &FabricGatewayInformation{}
-	dst.NodeAddress = windows.UTF16PtrToString(obj.NodeAddress)
+	dst.NodeAddress = utf16PtrToString(obj.NodeAddress)
 	dst.NodeId = *obj.NodeId.toGoStruct()
 	dst.NodeInstanceId = obj.NodeInstanceId
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	return
 }
 
 type FabricStartApprovedUpgradesDescription struct {
-	OperationId       windows.GUID
+	OperationId       uuid.UUID
 	ClusterConfigPath string
 	RollbackOnFailure bool
 }
@@ -15371,15 +14764,13 @@ func (obj *FabricStartApprovedUpgradesDescription) toInnerStruct() *innerFabricS
 	}
 	dst := &innerFabricStartApprovedUpgradesDescription{}
 	dst.OperationId = obj.OperationId
-	s_352, _ := windows.UTF16PtrFromString(obj.ClusterConfigPath)
-	dst.ClusterConfigPath = s_352
-
+	dst.ClusterConfigPath = utf16PtrFromString(obj.ClusterConfigPath)
 	dst.RollbackOnFailure = obj.RollbackOnFailure
 	return dst
 }
 
 type innerFabricStartApprovedUpgradesDescription struct {
-	OperationId       windows.GUID
+	OperationId       uuid.UUID
 	ClusterConfigPath *uint16
 	RollbackOnFailure bool
 	Reserved          unsafe.Pointer
@@ -15391,7 +14782,7 @@ func (obj *innerFabricStartApprovedUpgradesDescription) toGoStruct() (dst *Fabri
 	}
 	dst = &FabricStartApprovedUpgradesDescription{}
 	dst.OperationId = obj.OperationId
-	dst.ClusterConfigPath = windows.UTF16PtrToString(obj.ClusterConfigPath)
+	dst.ClusterConfigPath = utf16PtrToString(obj.ClusterConfigPath)
 	dst.RollbackOnFailure = obj.RollbackOnFailure
 	return
 }
@@ -15415,9 +14806,7 @@ func (obj *FabricStartUpgradeDescription) toInnerStruct() *innerFabricStartUpgra
 		return nil
 	}
 	dst := &innerFabricStartUpgradeDescription{}
-	s_353, _ := windows.UTF16PtrFromString(obj.ClusterConfig)
-	dst.ClusterConfig = s_353
-
+	dst.ClusterConfig = utf16PtrFromString(obj.ClusterConfig)
 	dst.HealthCheckRetryTimeoutInSeconds = obj.HealthCheckRetryTimeoutInSeconds
 	dst.HealthCheckWaitDurationInSeconds = obj.HealthCheckWaitDurationInSeconds
 	dst.HealthCheckStableDurationInSeconds = obj.HealthCheckStableDurationInSeconds
@@ -15437,9 +14826,7 @@ func (obj *FabricStartUpgradeDescription) toInnerStruct() *innerFabricStartUpgra
 		for k, v := range obj.ApplicationHealthPolicyMap {
 			kv := innerFabricApplicationHealthPolicyMapItem{}
 
-			s_355, _ := windows.UTF16PtrFromString(k)
-			kv.ApplicationName = s_355
-
+			kv.ApplicationName = utf16PtrFromString(k)
 			kv.HealthPolicy = v.toInnerStruct()
 
 			tmp = append(tmp, kv)
@@ -15479,7 +14866,7 @@ func (obj *innerFabricStartUpgradeDescription) toGoStruct() (dst *FabricStartUpg
 		return
 	}
 	dst = &FabricStartUpgradeDescription{}
-	dst.ClusterConfig = windows.UTF16PtrToString(obj.ClusterConfig)
+	dst.ClusterConfig = utf16PtrToString(obj.ClusterConfig)
 	dst.HealthCheckRetryTimeoutInSeconds = obj.HealthCheckRetryTimeoutInSeconds
 	dst.HealthCheckWaitDurationInSeconds = obj.HealthCheckWaitDurationInSeconds
 	dst.HealthCheckStableDurationInSeconds = obj.HealthCheckStableDurationInSeconds
@@ -15505,7 +14892,7 @@ func (obj *innerFabricStartUpgradeDescription) toGoStruct() (dst *FabricStartUpg
 			var k string
 			var v *FabricApplicationHealthPolicy
 
-			k = windows.UTF16PtrToString(kv.ApplicationName)
+			k = utf16PtrToString(kv.ApplicationName)
 			v = kv.HealthPolicy.toGoStruct()
 			mapvar[k] = *v
 
@@ -15529,21 +14916,11 @@ func (obj *FabricUpgradeOrchestrationServiceState) toInnerStruct() *innerFabricU
 		return nil
 	}
 	dst := &innerFabricUpgradeOrchestrationServiceState{}
-	s_357, _ := windows.UTF16PtrFromString(obj.CurrentCodeVersion)
-	dst.CurrentCodeVersion = s_357
-
-	s_358, _ := windows.UTF16PtrFromString(obj.CurrentManifestVersion)
-	dst.CurrentManifestVersion = s_358
-
-	s_359, _ := windows.UTF16PtrFromString(obj.TargetCodeVersion)
-	dst.TargetCodeVersion = s_359
-
-	s_360, _ := windows.UTF16PtrFromString(obj.TargetManifestVersion)
-	dst.TargetManifestVersion = s_360
-
-	s_361, _ := windows.UTF16PtrFromString(obj.PendingUpgradeType)
-	dst.PendingUpgradeType = s_361
-
+	dst.CurrentCodeVersion = utf16PtrFromString(obj.CurrentCodeVersion)
+	dst.CurrentManifestVersion = utf16PtrFromString(obj.CurrentManifestVersion)
+	dst.TargetCodeVersion = utf16PtrFromString(obj.TargetCodeVersion)
+	dst.TargetManifestVersion = utf16PtrFromString(obj.TargetManifestVersion)
+	dst.PendingUpgradeType = utf16PtrFromString(obj.PendingUpgradeType)
 	return dst
 }
 
@@ -15561,11 +14938,11 @@ func (obj *innerFabricUpgradeOrchestrationServiceState) toGoStruct() (dst *Fabri
 		return
 	}
 	dst = &FabricUpgradeOrchestrationServiceState{}
-	dst.CurrentCodeVersion = windows.UTF16PtrToString(obj.CurrentCodeVersion)
-	dst.CurrentManifestVersion = windows.UTF16PtrToString(obj.CurrentManifestVersion)
-	dst.TargetCodeVersion = windows.UTF16PtrToString(obj.TargetCodeVersion)
-	dst.TargetManifestVersion = windows.UTF16PtrToString(obj.TargetManifestVersion)
-	dst.PendingUpgradeType = windows.UTF16PtrToString(obj.PendingUpgradeType)
+	dst.CurrentCodeVersion = utf16PtrToString(obj.CurrentCodeVersion)
+	dst.CurrentManifestVersion = utf16PtrToString(obj.CurrentManifestVersion)
+	dst.TargetCodeVersion = utf16PtrToString(obj.TargetCodeVersion)
+	dst.TargetManifestVersion = utf16PtrToString(obj.TargetManifestVersion)
+	dst.PendingUpgradeType = utf16PtrToString(obj.PendingUpgradeType)
 	return
 }
 
@@ -15585,29 +14962,29 @@ func (obj *FabricHealthEvent) toInnerStruct() *innerFabricHealthEvent {
 	}
 	dst := &innerFabricHealthEvent{}
 	dst.HealthInformation = obj.HealthInformation.toInnerStruct()
-	dst.SourceUtcTimestamp = windows.NsecToFiletime(obj.SourceUtcTimestamp.UnixNano())
-	dst.LastModifiedUtcTimestamp = windows.NsecToFiletime(obj.LastModifiedUtcTimestamp.UnixNano())
+	dst.SourceUtcTimestamp = timeToFiletime(obj.SourceUtcTimestamp)
+	dst.LastModifiedUtcTimestamp = timeToFiletime(obj.LastModifiedUtcTimestamp)
 	dst.IsExpired = obj.IsExpired
 	ex0 := dst
 	ex1 := &innerFabricHealthEventEx1{}
-	ex1.LastOkTransitionAt = windows.NsecToFiletime(obj.LastOkTransitionAt.UnixNano())
-	ex1.LastWarningTransitionAt = windows.NsecToFiletime(obj.LastWarningTransitionAt.UnixNano())
-	ex1.LastErrorTransitionAt = windows.NsecToFiletime(obj.LastErrorTransitionAt.UnixNano())
+	ex1.LastOkTransitionAt = timeToFiletime(obj.LastOkTransitionAt)
+	ex1.LastWarningTransitionAt = timeToFiletime(obj.LastWarningTransitionAt)
+	ex1.LastErrorTransitionAt = timeToFiletime(obj.LastErrorTransitionAt)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
 
 type innerFabricHealthEvent struct {
 	HealthInformation        *innerFabricHealthInformation
-	SourceUtcTimestamp       windows.Filetime
-	LastModifiedUtcTimestamp windows.Filetime
+	SourceUtcTimestamp       filetime
+	LastModifiedUtcTimestamp filetime
 	IsExpired                bool
 	Reserved                 unsafe.Pointer
 }
 type innerFabricHealthEventEx1 struct {
-	LastOkTransitionAt      windows.Filetime
-	LastWarningTransitionAt windows.Filetime
-	LastErrorTransitionAt   windows.Filetime
+	LastOkTransitionAt      filetime
+	LastWarningTransitionAt filetime
+	LastErrorTransitionAt   filetime
 	Reserved                unsafe.Pointer
 }
 
@@ -15617,17 +14994,17 @@ func (obj *innerFabricHealthEvent) toGoStruct() (dst *FabricHealthEvent) {
 	}
 	dst = &FabricHealthEvent{}
 	dst.HealthInformation = obj.HealthInformation.toGoStruct()
-	dst.SourceUtcTimestamp = time.Unix(0, obj.SourceUtcTimestamp.Nanoseconds())
-	dst.LastModifiedUtcTimestamp = time.Unix(0, obj.LastModifiedUtcTimestamp.Nanoseconds())
+	dst.SourceUtcTimestamp = obj.SourceUtcTimestamp.ToTime()
+	dst.LastModifiedUtcTimestamp = obj.LastModifiedUtcTimestamp.ToTime()
 	dst.IsExpired = obj.IsExpired
 	ex0 := obj
 	ex1 := (*innerFabricHealthEventEx1)(ex0.Reserved)
 	if ex1 == nil {
 		return
 	}
-	dst.LastOkTransitionAt = time.Unix(0, ex1.LastOkTransitionAt.Nanoseconds())
-	dst.LastWarningTransitionAt = time.Unix(0, ex1.LastWarningTransitionAt.Nanoseconds())
-	dst.LastErrorTransitionAt = time.Unix(0, ex1.LastErrorTransitionAt.Nanoseconds())
+	dst.LastOkTransitionAt = ex1.LastOkTransitionAt.ToTime()
+	dst.LastWarningTransitionAt = ex1.LastWarningTransitionAt.ToTime()
+	dst.LastErrorTransitionAt = ex1.LastErrorTransitionAt.ToTime()
 	return
 }
 
@@ -15804,7 +15181,7 @@ func (obj *innerFabricReplicaHealth) toGoStruct() (dst *FabricReplicaHealth) {
 }
 
 type FabricStatefulServiceReplicaHealth struct {
-	PartitionId           windows.GUID
+	PartitionId           uuid.UUID
 	ReplicaId             int64
 	AggregatedHealthState FabricHealthState
 	HealthEvents          []FabricHealthEvent
@@ -15819,7 +15196,7 @@ func (obj *FabricStatefulServiceReplicaHealth) toInnerStruct() *innerFabricState
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaId = obj.ReplicaId
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	lst_362 := &innerFabricHealthEventList{}
+	lst_50 := &innerFabricHealthEventList{}
 	{
 
 		var tmp []innerFabricHealthEvent
@@ -15832,16 +15209,16 @@ func (obj *FabricStatefulServiceReplicaHealth) toInnerStruct() *innerFabricState
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_362.Count = uint32(len(tmp))
+		lst_50.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_362.Items = &tmp[0]
+			lst_50.Items = &tmp[0]
 		}
 
 	}
-	dst.HealthEvents = lst_362
+	dst.HealthEvents = lst_50
 	ex0 := dst
 	ex1 := &innerFabricStatefulServiceReplicaHealthEx1{}
-	lst_363 := &innerFabricHealthEvaluationList{}
+	lst_51 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -15854,19 +15231,19 @@ func (obj *FabricStatefulServiceReplicaHealth) toInnerStruct() *innerFabricState
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_363.Count = uint32(len(tmp))
+		lst_51.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_363.Items = &tmp[0]
+			lst_51.Items = &tmp[0]
 		}
 
 	}
-	ex1.UnhealthyEvaluations = lst_363
+	ex1.UnhealthyEvaluations = lst_51
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
 
 type innerFabricStatefulServiceReplicaHealth struct {
-	PartitionId           windows.GUID
+	PartitionId           uuid.UUID
 	ReplicaId             int64
 	AggregatedHealthState FabricHealthState
 	HealthEvents          *innerFabricHealthEventList
@@ -15920,7 +15297,7 @@ func (obj *innerFabricStatefulServiceReplicaHealth) toGoStruct() (dst *FabricSta
 }
 
 type FabricStatelessServiceInstanceHealth struct {
-	PartitionId           windows.GUID
+	PartitionId           uuid.UUID
 	InstanceId            int64
 	AggregatedHealthState FabricHealthState
 	HealthEvents          []FabricHealthEvent
@@ -15935,7 +15312,7 @@ func (obj *FabricStatelessServiceInstanceHealth) toInnerStruct() *innerFabricSta
 	dst.PartitionId = obj.PartitionId
 	dst.InstanceId = obj.InstanceId
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	lst_364 := &innerFabricHealthEventList{}
+	lst_52 := &innerFabricHealthEventList{}
 	{
 
 		var tmp []innerFabricHealthEvent
@@ -15948,16 +15325,16 @@ func (obj *FabricStatelessServiceInstanceHealth) toInnerStruct() *innerFabricSta
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_364.Count = uint32(len(tmp))
+		lst_52.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_364.Items = &tmp[0]
+			lst_52.Items = &tmp[0]
 		}
 
 	}
-	dst.HealthEvents = lst_364
+	dst.HealthEvents = lst_52
 	ex0 := dst
 	ex1 := &innerFabricStatelessServiceInstanceHealthEx1{}
-	lst_365 := &innerFabricHealthEvaluationList{}
+	lst_53 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -15970,19 +15347,19 @@ func (obj *FabricStatelessServiceInstanceHealth) toInnerStruct() *innerFabricSta
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_365.Count = uint32(len(tmp))
+		lst_53.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_365.Items = &tmp[0]
+			lst_53.Items = &tmp[0]
 		}
 
 	}
-	ex1.UnhealthyEvaluations = lst_365
+	ex1.UnhealthyEvaluations = lst_53
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
 
 type innerFabricStatelessServiceInstanceHealth struct {
-	PartitionId           windows.GUID
+	PartitionId           uuid.UUID
 	InstanceId            int64
 	AggregatedHealthState FabricHealthState
 	HealthEvents          *innerFabricHealthEventList
@@ -16089,7 +15466,7 @@ func (obj *innerFabricReplicaHealthStateList) toGoStruct() []FabricReplicaHealth
 }
 
 type FabricStatelessServiceInstanceHealthState struct {
-	PartitionId           windows.GUID
+	PartitionId           uuid.UUID
 	InstanceId            int64
 	AggregatedHealthState FabricHealthState
 	UnhealthyEvaluations  []FabricHealthEvaluation
@@ -16105,7 +15482,7 @@ func (obj *FabricStatelessServiceInstanceHealthState) toInnerStruct() *innerFabr
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	ex0 := dst
 	ex1 := &innerFabricStatelessServiceInstanceHealthStateEx1{}
-	lst_366 := &innerFabricHealthEvaluationList{}
+	lst_54 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -16118,19 +15495,19 @@ func (obj *FabricStatelessServiceInstanceHealthState) toInnerStruct() *innerFabr
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_366.Count = uint32(len(tmp))
+		lst_54.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_366.Items = &tmp[0]
+			lst_54.Items = &tmp[0]
 		}
 
 	}
-	ex1.UnhealthyEvaluations = lst_366
+	ex1.UnhealthyEvaluations = lst_54
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
 
 type innerFabricStatelessServiceInstanceHealthState struct {
-	PartitionId           windows.GUID
+	PartitionId           uuid.UUID
 	InstanceId            int64
 	AggregatedHealthState FabricHealthState
 	Reserved              unsafe.Pointer
@@ -16170,7 +15547,7 @@ func (obj *innerFabricStatelessServiceInstanceHealthState) toGoStruct() (dst *Fa
 }
 
 type FabricStatefulServiceReplicaHealthState struct {
-	PartitionId           windows.GUID
+	PartitionId           uuid.UUID
 	ReplicaId             int64
 	AggregatedHealthState FabricHealthState
 	UnhealthyEvaluations  []FabricHealthEvaluation
@@ -16186,7 +15563,7 @@ func (obj *FabricStatefulServiceReplicaHealthState) toInnerStruct() *innerFabric
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	ex0 := dst
 	ex1 := &innerFabricStatefulServiceReplicaHealthStateEx1{}
-	lst_367 := &innerFabricHealthEvaluationList{}
+	lst_55 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -16199,19 +15576,19 @@ func (obj *FabricStatefulServiceReplicaHealthState) toInnerStruct() *innerFabric
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_367.Count = uint32(len(tmp))
+		lst_55.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_367.Items = &tmp[0]
+			lst_55.Items = &tmp[0]
 		}
 
 	}
-	ex1.UnhealthyEvaluations = lst_367
+	ex1.UnhealthyEvaluations = lst_55
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
 
 type innerFabricStatefulServiceReplicaHealthState struct {
-	PartitionId           windows.GUID
+	PartitionId           uuid.UUID
 	ReplicaId             int64
 	AggregatedHealthState FabricHealthState
 	Reserved              unsafe.Pointer
@@ -16251,7 +15628,7 @@ func (obj *innerFabricStatefulServiceReplicaHealthState) toGoStruct() (dst *Fabr
 }
 
 type FabricPartitionHealth struct {
-	PartitionId           windows.GUID
+	PartitionId           uuid.UUID
 	AggregatedHealthState FabricHealthState
 	HealthEvents          []FabricHealthEvent
 	ReplicaHealthStates   []FabricReplicaHealthState
@@ -16266,7 +15643,7 @@ func (obj *FabricPartitionHealth) toInnerStruct() *innerFabricPartitionHealth {
 	dst := &innerFabricPartitionHealth{}
 	dst.PartitionId = obj.PartitionId
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	lst_368 := &innerFabricHealthEventList{}
+	lst_56 := &innerFabricHealthEventList{}
 	{
 
 		var tmp []innerFabricHealthEvent
@@ -16279,14 +15656,14 @@ func (obj *FabricPartitionHealth) toInnerStruct() *innerFabricPartitionHealth {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_368.Count = uint32(len(tmp))
+		lst_56.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_368.Items = &tmp[0]
+			lst_56.Items = &tmp[0]
 		}
 
 	}
-	dst.HealthEvents = lst_368
-	lst_369 := &innerFabricReplicaHealthStateList{}
+	dst.HealthEvents = lst_56
+	lst_57 := &innerFabricReplicaHealthStateList{}
 	{
 
 		var tmp []innerFabricReplicaHealthState
@@ -16299,16 +15676,16 @@ func (obj *FabricPartitionHealth) toInnerStruct() *innerFabricPartitionHealth {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_369.Count = uint32(len(tmp))
+		lst_57.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_369.Items = &tmp[0]
+			lst_57.Items = &tmp[0]
 		}
 
 	}
-	dst.ReplicaHealthStates = lst_369
+	dst.ReplicaHealthStates = lst_57
 	ex0 := dst
 	ex1 := &innerFabricPartitionHealthEx1{}
-	lst_370 := &innerFabricHealthEvaluationList{}
+	lst_58 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -16321,13 +15698,13 @@ func (obj *FabricPartitionHealth) toInnerStruct() *innerFabricPartitionHealth {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_370.Count = uint32(len(tmp))
+		lst_58.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_370.Items = &tmp[0]
+			lst_58.Items = &tmp[0]
 		}
 
 	}
-	ex1.UnhealthyEvaluations = lst_370
+	ex1.UnhealthyEvaluations = lst_58
 	ex0.Reserved = unsafe.Pointer(ex1)
 	ex2 := &innerFabricPartitionHealthEx2{}
 	ex2.HealthStatistics = obj.HealthStatistics.toInnerStruct()
@@ -16336,7 +15713,7 @@ func (obj *FabricPartitionHealth) toInnerStruct() *innerFabricPartitionHealth {
 }
 
 type innerFabricPartitionHealth struct {
-	PartitionId           windows.GUID
+	PartitionId           uuid.UUID
 	AggregatedHealthState FabricHealthState
 	HealthEvents          *innerFabricHealthEventList
 	ReplicaHealthStates   *innerFabricReplicaHealthStateList
@@ -16411,7 +15788,7 @@ func (obj *innerFabricPartitionHealth) toGoStruct() (dst *FabricPartitionHealth)
 }
 
 type FabricPartitionHealthState struct {
-	PartitionId           windows.GUID
+	PartitionId           uuid.UUID
 	AggregatedHealthState FabricHealthState
 }
 type innerFabricPartitionHealthState struct {
@@ -16470,17 +15847,11 @@ func (obj *FabricDeployedServicePackageHealth) toInnerStruct() *innerFabricDeplo
 		return nil
 	}
 	dst := &innerFabricDeployedServicePackageHealth{}
-	s_371, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_371
-
-	s_372, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_372
-
-	s_373, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_373
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.ServiceManifestName = utf16PtrFromString(obj.ServiceManifestName)
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	lst_374 := &innerFabricHealthEventList{}
+	lst_59 := &innerFabricHealthEventList{}
 	{
 
 		var tmp []innerFabricHealthEvent
@@ -16493,16 +15864,16 @@ func (obj *FabricDeployedServicePackageHealth) toInnerStruct() *innerFabricDeplo
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_374.Count = uint32(len(tmp))
+		lst_59.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_374.Items = &tmp[0]
+			lst_59.Items = &tmp[0]
 		}
 
 	}
-	dst.HealthEvents = lst_374
+	dst.HealthEvents = lst_59
 	ex0 := dst
 	ex1 := &innerFabricDeployedServicePackageHealthEx1{}
-	lst_375 := &innerFabricHealthEvaluationList{}
+	lst_60 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -16515,18 +15886,16 @@ func (obj *FabricDeployedServicePackageHealth) toInnerStruct() *innerFabricDeplo
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_375.Count = uint32(len(tmp))
+		lst_60.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_375.Items = &tmp[0]
+			lst_60.Items = &tmp[0]
 		}
 
 	}
-	ex1.UnhealthyEvaluations = lst_375
+	ex1.UnhealthyEvaluations = lst_60
 	ex0.Reserved = unsafe.Pointer(ex1)
 	ex2 := &innerFabricDeployedServicePackageHealthEx2{}
-	s_376, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	ex2.ServicePackageActivationId = s_376
-
+	ex2.ServicePackageActivationId = utf16PtrFromString(obj.ServicePackageActivationId)
 	ex1.Reserved = unsafe.Pointer(ex2)
 	return dst
 }
@@ -16553,9 +15922,9 @@ func (obj *innerFabricDeployedServicePackageHealth) toGoStruct() (dst *FabricDep
 		return
 	}
 	dst = &FabricDeployedServicePackageHealth{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.ServiceManifestName = windows.UTF16PtrToString(obj.ServiceManifestName)
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.ServiceManifestName = utf16PtrToString(obj.ServiceManifestName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
 		var innerlst []innerFabricHealthEvent
@@ -16592,7 +15961,7 @@ func (obj *innerFabricDeployedServicePackageHealth) toGoStruct() (dst *FabricDep
 	if ex2 == nil {
 		return
 	}
-	dst.ServicePackageActivationId = windows.UTF16PtrToString(ex2.ServicePackageActivationId)
+	dst.ServicePackageActivationId = utf16PtrToString(ex2.ServicePackageActivationId)
 	return
 }
 
@@ -16609,21 +15978,13 @@ func (obj *FabricDeployedServicePackageHealthState) toInnerStruct() *innerFabric
 		return nil
 	}
 	dst := &innerFabricDeployedServicePackageHealthState{}
-	s_377, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_377
-
-	s_378, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_378
-
-	s_379, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_379
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.ServiceManifestName = utf16PtrFromString(obj.ServiceManifestName)
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	ex0 := dst
 	ex1 := &innerFabricDeployedServicePackageHealthStateEx1{}
-	s_380, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	ex1.ServicePackageActivationId = s_380
-
+	ex1.ServicePackageActivationId = utf16PtrFromString(obj.ServicePackageActivationId)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
@@ -16645,16 +16006,16 @@ func (obj *innerFabricDeployedServicePackageHealthState) toGoStruct() (dst *Fabr
 		return
 	}
 	dst = &FabricDeployedServicePackageHealthState{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.ServiceManifestName = windows.UTF16PtrToString(obj.ServiceManifestName)
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.ServiceManifestName = utf16PtrToString(obj.ServiceManifestName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	ex0 := obj
 	ex1 := (*innerFabricDeployedServicePackageHealthStateEx1)(ex0.Reserved)
 	if ex1 == nil {
 		return
 	}
-	dst.ServicePackageActivationId = windows.UTF16PtrToString(ex1.ServicePackageActivationId)
+	dst.ServicePackageActivationId = utf16PtrToString(ex1.ServicePackageActivationId)
 	return
 }
 
@@ -16696,14 +16057,10 @@ func (obj *FabricDeployedApplicationHealth) toInnerStruct() *innerFabricDeployed
 		return nil
 	}
 	dst := &innerFabricDeployedApplicationHealth{}
-	s_381, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_381
-
-	s_382, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_382
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	lst_383 := &innerFabricHealthEventList{}
+	lst_61 := &innerFabricHealthEventList{}
 	{
 
 		var tmp []innerFabricHealthEvent
@@ -16716,14 +16073,14 @@ func (obj *FabricDeployedApplicationHealth) toInnerStruct() *innerFabricDeployed
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_383.Count = uint32(len(tmp))
+		lst_61.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_383.Items = &tmp[0]
+			lst_61.Items = &tmp[0]
 		}
 
 	}
-	dst.HealthEvents = lst_383
-	lst_384 := &innerFabricDeployedServicePackageHealthStateList{}
+	dst.HealthEvents = lst_61
+	lst_62 := &innerFabricDeployedServicePackageHealthStateList{}
 	{
 
 		var tmp []innerFabricDeployedServicePackageHealthState
@@ -16736,16 +16093,16 @@ func (obj *FabricDeployedApplicationHealth) toInnerStruct() *innerFabricDeployed
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_384.Count = uint32(len(tmp))
+		lst_62.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_384.Items = &tmp[0]
+			lst_62.Items = &tmp[0]
 		}
 
 	}
-	dst.DeployedServicePackageHealthStates = lst_384
+	dst.DeployedServicePackageHealthStates = lst_62
 	ex0 := dst
 	ex1 := &innerFabricDeployedApplicationHealthEx1{}
-	lst_385 := &innerFabricHealthEvaluationList{}
+	lst_63 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -16758,13 +16115,13 @@ func (obj *FabricDeployedApplicationHealth) toInnerStruct() *innerFabricDeployed
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_385.Count = uint32(len(tmp))
+		lst_63.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_385.Items = &tmp[0]
+			lst_63.Items = &tmp[0]
 		}
 
 	}
-	ex1.UnhealthyEvaluations = lst_385
+	ex1.UnhealthyEvaluations = lst_63
 	ex0.Reserved = unsafe.Pointer(ex1)
 	ex2 := &innerFabricDeployedApplicationHealthEx2{}
 	ex2.HealthStatistics = obj.HealthStatistics.toInnerStruct()
@@ -16794,8 +16151,8 @@ func (obj *innerFabricDeployedApplicationHealth) toGoStruct() (dst *FabricDeploy
 		return
 	}
 	dst = &FabricDeployedApplicationHealth{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
 		var innerlst []innerFabricHealthEvent
@@ -16860,12 +16217,8 @@ func (obj *FabricDeployedApplicationHealthState) toInnerStruct() *innerFabricDep
 		return nil
 	}
 	dst := &innerFabricDeployedApplicationHealthState{}
-	s_386, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_386
-
-	s_387, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_387
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	return dst
 }
@@ -16882,8 +16235,8 @@ func (obj *innerFabricDeployedApplicationHealthState) toGoStruct() (dst *FabricD
 		return
 	}
 	dst = &FabricDeployedApplicationHealthState{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	return
 }
@@ -16925,11 +16278,9 @@ func (obj *FabricServiceHealth) toInnerStruct() *innerFabricServiceHealth {
 		return nil
 	}
 	dst := &innerFabricServiceHealth{}
-	s_388, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_388
-
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	lst_389 := &innerFabricHealthEventList{}
+	lst_64 := &innerFabricHealthEventList{}
 	{
 
 		var tmp []innerFabricHealthEvent
@@ -16942,14 +16293,14 @@ func (obj *FabricServiceHealth) toInnerStruct() *innerFabricServiceHealth {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_389.Count = uint32(len(tmp))
+		lst_64.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_389.Items = &tmp[0]
+			lst_64.Items = &tmp[0]
 		}
 
 	}
-	dst.HealthEvents = lst_389
-	lst_390 := &innerFabricPartitionHealthStateList{}
+	dst.HealthEvents = lst_64
+	lst_65 := &innerFabricPartitionHealthStateList{}
 	{
 
 		var tmp []innerFabricPartitionHealthState
@@ -16962,16 +16313,16 @@ func (obj *FabricServiceHealth) toInnerStruct() *innerFabricServiceHealth {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_390.Count = uint32(len(tmp))
+		lst_65.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_390.Items = &tmp[0]
+			lst_65.Items = &tmp[0]
 		}
 
 	}
-	dst.PartitionHealthStates = lst_390
+	dst.PartitionHealthStates = lst_65
 	ex0 := dst
 	ex1 := &innerFabricServiceHealthEx1{}
-	lst_391 := &innerFabricHealthEvaluationList{}
+	lst_66 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -16984,13 +16335,13 @@ func (obj *FabricServiceHealth) toInnerStruct() *innerFabricServiceHealth {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_391.Count = uint32(len(tmp))
+		lst_66.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_391.Items = &tmp[0]
+			lst_66.Items = &tmp[0]
 		}
 
 	}
-	ex1.UnhealthyEvaluations = lst_391
+	ex1.UnhealthyEvaluations = lst_66
 	ex0.Reserved = unsafe.Pointer(ex1)
 	ex2 := &innerFabricServiceHealthEx2{}
 	ex2.HealthStatistics = obj.HealthStatistics.toInnerStruct()
@@ -17019,7 +16370,7 @@ func (obj *innerFabricServiceHealth) toGoStruct() (dst *FabricServiceHealth) {
 		return
 	}
 	dst = &FabricServiceHealth{}
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
 		var innerlst []innerFabricHealthEvent
@@ -17083,9 +16434,7 @@ func (obj *FabricServiceHealthState) toInnerStruct() *innerFabricServiceHealthSt
 		return nil
 	}
 	dst := &innerFabricServiceHealthState{}
-	s_392, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_392
-
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	return dst
 }
@@ -17101,7 +16450,7 @@ func (obj *innerFabricServiceHealthState) toGoStruct() (dst *FabricServiceHealth
 		return
 	}
 	dst = &FabricServiceHealthState{}
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	return
 }
@@ -17144,11 +16493,9 @@ func (obj *FabricApplicationHealth) toInnerStruct() *innerFabricApplicationHealt
 		return nil
 	}
 	dst := &innerFabricApplicationHealth{}
-	s_393, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_393
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	lst_394 := &innerFabricHealthEventList{}
+	lst_67 := &innerFabricHealthEventList{}
 	{
 
 		var tmp []innerFabricHealthEvent
@@ -17161,14 +16508,14 @@ func (obj *FabricApplicationHealth) toInnerStruct() *innerFabricApplicationHealt
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_394.Count = uint32(len(tmp))
+		lst_67.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_394.Items = &tmp[0]
+			lst_67.Items = &tmp[0]
 		}
 
 	}
-	dst.HealthEvents = lst_394
-	lst_395 := &innerFabricDeployedApplicationHealthStateList{}
+	dst.HealthEvents = lst_67
+	lst_68 := &innerFabricDeployedApplicationHealthStateList{}
 	{
 
 		var tmp []innerFabricDeployedApplicationHealthState
@@ -17181,14 +16528,14 @@ func (obj *FabricApplicationHealth) toInnerStruct() *innerFabricApplicationHealt
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_395.Count = uint32(len(tmp))
+		lst_68.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_395.Items = &tmp[0]
+			lst_68.Items = &tmp[0]
 		}
 
 	}
-	dst.DeployedApplicationHealthStates = lst_395
-	lst_396 := &innerFabricServiceHealthStateList{}
+	dst.DeployedApplicationHealthStates = lst_68
+	lst_69 := &innerFabricServiceHealthStateList{}
 	{
 
 		var tmp []innerFabricServiceHealthState
@@ -17201,16 +16548,16 @@ func (obj *FabricApplicationHealth) toInnerStruct() *innerFabricApplicationHealt
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_396.Count = uint32(len(tmp))
+		lst_69.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_396.Items = &tmp[0]
+			lst_69.Items = &tmp[0]
 		}
 
 	}
-	dst.ServiceHealthStates = lst_396
+	dst.ServiceHealthStates = lst_69
 	ex0 := dst
 	ex1 := &innerFabricApplicationHealthEx1{}
-	lst_397 := &innerFabricHealthEvaluationList{}
+	lst_70 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -17223,13 +16570,13 @@ func (obj *FabricApplicationHealth) toInnerStruct() *innerFabricApplicationHealt
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_397.Count = uint32(len(tmp))
+		lst_70.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_397.Items = &tmp[0]
+			lst_70.Items = &tmp[0]
 		}
 
 	}
-	ex1.UnhealthyEvaluations = lst_397
+	ex1.UnhealthyEvaluations = lst_70
 	ex0.Reserved = unsafe.Pointer(ex1)
 	ex2 := &innerFabricApplicationHealthEx2{}
 	ex2.HealthStatistics = obj.HealthStatistics.toInnerStruct()
@@ -17259,7 +16606,7 @@ func (obj *innerFabricApplicationHealth) toGoStruct() (dst *FabricApplicationHea
 		return
 	}
 	dst = &FabricApplicationHealth{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
 		var innerlst []innerFabricHealthEvent
@@ -17338,11 +16685,9 @@ func (obj *FabricNodeHealth) toInnerStruct() *innerFabricNodeHealth {
 		return nil
 	}
 	dst := &innerFabricNodeHealth{}
-	s_398, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_398
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	lst_399 := &innerFabricHealthEventList{}
+	lst_71 := &innerFabricHealthEventList{}
 	{
 
 		var tmp []innerFabricHealthEvent
@@ -17355,16 +16700,16 @@ func (obj *FabricNodeHealth) toInnerStruct() *innerFabricNodeHealth {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_399.Count = uint32(len(tmp))
+		lst_71.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_399.Items = &tmp[0]
+			lst_71.Items = &tmp[0]
 		}
 
 	}
-	dst.HealthEvents = lst_399
+	dst.HealthEvents = lst_71
 	ex0 := dst
 	ex1 := &innerFabricNodeHealthEx1{}
-	lst_400 := &innerFabricHealthEvaluationList{}
+	lst_72 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -17377,13 +16722,13 @@ func (obj *FabricNodeHealth) toInnerStruct() *innerFabricNodeHealth {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_400.Count = uint32(len(tmp))
+		lst_72.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_400.Items = &tmp[0]
+			lst_72.Items = &tmp[0]
 		}
 
 	}
-	ex1.UnhealthyEvaluations = lst_400
+	ex1.UnhealthyEvaluations = lst_72
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
@@ -17404,7 +16749,7 @@ func (obj *innerFabricNodeHealth) toGoStruct() (dst *FabricNodeHealth) {
 		return
 	}
 	dst = &FabricNodeHealth{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
 		var innerlst []innerFabricHealthEvent
@@ -17457,7 +16802,7 @@ func (obj *FabricClusterHealth) toInnerStruct() *innerFabricClusterHealth {
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	ex0 := dst
 	ex1 := &innerFabricClusterHealthEx1{}
-	lst_401 := &innerFabricNodeHealthStateList{}
+	lst_73 := &innerFabricNodeHealthStateList{}
 	{
 
 		var tmp []innerFabricNodeHealthState
@@ -17470,14 +16815,14 @@ func (obj *FabricClusterHealth) toInnerStruct() *innerFabricClusterHealth {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_401.Count = uint32(len(tmp))
+		lst_73.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_401.Items = &tmp[0]
+			lst_73.Items = &tmp[0]
 		}
 
 	}
-	ex1.NodeHealthStates = lst_401
-	lst_402 := &innerFabricApplicationHealthStateList{}
+	ex1.NodeHealthStates = lst_73
+	lst_74 := &innerFabricApplicationHealthStateList{}
 	{
 
 		var tmp []innerFabricApplicationHealthState
@@ -17490,14 +16835,14 @@ func (obj *FabricClusterHealth) toInnerStruct() *innerFabricClusterHealth {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_402.Count = uint32(len(tmp))
+		lst_74.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_402.Items = &tmp[0]
+			lst_74.Items = &tmp[0]
 		}
 
 	}
-	ex1.ApplicationHealthStates = lst_402
-	lst_403 := &innerFabricHealthEventList{}
+	ex1.ApplicationHealthStates = lst_74
+	lst_75 := &innerFabricHealthEventList{}
 	{
 
 		var tmp []innerFabricHealthEvent
@@ -17510,16 +16855,16 @@ func (obj *FabricClusterHealth) toInnerStruct() *innerFabricClusterHealth {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_403.Count = uint32(len(tmp))
+		lst_75.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_403.Items = &tmp[0]
+			lst_75.Items = &tmp[0]
 		}
 
 	}
-	ex1.HealthEvents = lst_403
+	ex1.HealthEvents = lst_75
 	ex0.Reserved = unsafe.Pointer(ex1)
 	ex2 := &innerFabricClusterHealthEx2{}
-	lst_404 := &innerFabricHealthEvaluationList{}
+	lst_76 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -17532,13 +16877,13 @@ func (obj *FabricClusterHealth) toInnerStruct() *innerFabricClusterHealth {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_404.Count = uint32(len(tmp))
+		lst_76.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_404.Items = &tmp[0]
+			lst_76.Items = &tmp[0]
 		}
 
 	}
-	ex2.UnhealthyEvaluations = lst_404
+	ex2.UnhealthyEvaluations = lst_76
 	ex1.Reserved = unsafe.Pointer(ex2)
 	ex3 := &innerFabricClusterHealthEx3{}
 	ex3.HealthStatistics = obj.HealthStatistics.toInnerStruct()
@@ -17650,9 +16995,7 @@ func (obj *FabricNodeHealthState) toInnerStruct() *innerFabricNodeHealthState {
 		return nil
 	}
 	dst := &innerFabricNodeHealthState{}
-	s_405, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_405
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	return dst
 }
@@ -17668,7 +17011,7 @@ func (obj *innerFabricNodeHealthState) toGoStruct() (dst *FabricNodeHealthState)
 		return
 	}
 	dst = &FabricNodeHealthState{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	return
 }
@@ -17706,9 +17049,7 @@ func (obj *FabricApplicationHealthState) toInnerStruct() *innerFabricApplication
 		return nil
 	}
 	dst := &innerFabricApplicationHealthState{}
-	s_406, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_406
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	return dst
 }
@@ -17724,7 +17065,7 @@ func (obj *innerFabricApplicationHealthState) toGoStruct() (dst *FabricApplicati
 		return
 	}
 	dst = &FabricApplicationHealthState{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	return
 }
@@ -17764,9 +17105,7 @@ func (obj *FabricEventHealthEvaluation) toInnerStruct() *innerFabricEventHealthE
 		return nil
 	}
 	dst := &innerFabricEventHealthEvaluation{}
-	s_407, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_407
-
+	dst.Description = utf16PtrFromString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	dst.UnhealthyEvent = obj.UnhealthyEvent.toInnerStruct()
 	dst.ConsiderWarningAsError = obj.ConsiderWarningAsError
@@ -17786,7 +17125,7 @@ func (obj *innerFabricEventHealthEvaluation) toGoStruct() (dst *FabricEventHealt
 		return
 	}
 	dst = &FabricEventHealthEvaluation{}
-	dst.Description = windows.UTF16PtrToString(obj.Description)
+	dst.Description = utf16PtrToString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	dst.UnhealthyEvent = obj.UnhealthyEvent.toGoStruct()
 	dst.ConsiderWarningAsError = obj.ConsiderWarningAsError
@@ -17806,11 +17145,9 @@ func (obj *FabricReplicasHealthEvaluation) toInnerStruct() *innerFabricReplicasH
 		return nil
 	}
 	dst := &innerFabricReplicasHealthEvaluation{}
-	s_408, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_408
-
+	dst.Description = utf16PtrFromString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	lst_409 := &innerFabricHealthEvaluationList{}
+	lst_77 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -17823,13 +17160,13 @@ func (obj *FabricReplicasHealthEvaluation) toInnerStruct() *innerFabricReplicasH
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_409.Count = uint32(len(tmp))
+		lst_77.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_409.Items = &tmp[0]
+			lst_77.Items = &tmp[0]
 		}
 
 	}
-	dst.UnhealthyEvaluations = lst_409
+	dst.UnhealthyEvaluations = lst_77
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyReplicasPerPartition = obj.MaxPercentUnhealthyReplicasPerPartition
 	return dst
@@ -17849,7 +17186,7 @@ func (obj *innerFabricReplicasHealthEvaluation) toGoStruct() (dst *FabricReplica
 		return
 	}
 	dst = &FabricReplicasHealthEvaluation{}
-	dst.Description = windows.UTF16PtrToString(obj.Description)
+	dst.Description = utf16PtrToString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
 		var innerlst []innerFabricHealthEvaluation
@@ -17882,11 +17219,9 @@ func (obj *FabricPartitionsHealthEvaluation) toInnerStruct() *innerFabricPartiti
 		return nil
 	}
 	dst := &innerFabricPartitionsHealthEvaluation{}
-	s_410, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_410
-
+	dst.Description = utf16PtrFromString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	lst_411 := &innerFabricHealthEvaluationList{}
+	lst_78 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -17899,13 +17234,13 @@ func (obj *FabricPartitionsHealthEvaluation) toInnerStruct() *innerFabricPartiti
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_411.Count = uint32(len(tmp))
+		lst_78.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_411.Items = &tmp[0]
+			lst_78.Items = &tmp[0]
 		}
 
 	}
-	dst.UnhealthyEvaluations = lst_411
+	dst.UnhealthyEvaluations = lst_78
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyPartitionsPerService = obj.MaxPercentUnhealthyPartitionsPerService
 	return dst
@@ -17925,7 +17260,7 @@ func (obj *innerFabricPartitionsHealthEvaluation) toGoStruct() (dst *FabricParti
 		return
 	}
 	dst = &FabricPartitionsHealthEvaluation{}
-	dst.Description = windows.UTF16PtrToString(obj.Description)
+	dst.Description = utf16PtrToString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
 		var innerlst []innerFabricHealthEvaluation
@@ -17957,11 +17292,9 @@ func (obj *FabricDeployedServicePackagesHealthEvaluation) toInnerStruct() *inner
 		return nil
 	}
 	dst := &innerFabricDeployedServicePackagesHealthEvaluation{}
-	s_412, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_412
-
+	dst.Description = utf16PtrFromString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	lst_413 := &innerFabricHealthEvaluationList{}
+	lst_79 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -17974,13 +17307,13 @@ func (obj *FabricDeployedServicePackagesHealthEvaluation) toInnerStruct() *inner
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_413.Count = uint32(len(tmp))
+		lst_79.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_413.Items = &tmp[0]
+			lst_79.Items = &tmp[0]
 		}
 
 	}
-	dst.UnhealthyEvaluations = lst_413
+	dst.UnhealthyEvaluations = lst_79
 	dst.TotalCount = obj.TotalCount
 	return dst
 }
@@ -17998,7 +17331,7 @@ func (obj *innerFabricDeployedServicePackagesHealthEvaluation) toGoStruct() (dst
 		return
 	}
 	dst = &FabricDeployedServicePackagesHealthEvaluation{}
-	dst.Description = windows.UTF16PtrToString(obj.Description)
+	dst.Description = utf16PtrToString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
 		var innerlst []innerFabricHealthEvaluation
@@ -18030,11 +17363,9 @@ func (obj *FabricDeployedApplicationsHealthEvaluation) toInnerStruct() *innerFab
 		return nil
 	}
 	dst := &innerFabricDeployedApplicationsHealthEvaluation{}
-	s_414, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_414
-
+	dst.Description = utf16PtrFromString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	lst_415 := &innerFabricHealthEvaluationList{}
+	lst_80 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -18047,13 +17378,13 @@ func (obj *FabricDeployedApplicationsHealthEvaluation) toInnerStruct() *innerFab
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_415.Count = uint32(len(tmp))
+		lst_80.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_415.Items = &tmp[0]
+			lst_80.Items = &tmp[0]
 		}
 
 	}
-	dst.UnhealthyEvaluations = lst_415
+	dst.UnhealthyEvaluations = lst_80
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyDeployedApplications = obj.MaxPercentUnhealthyDeployedApplications
 	return dst
@@ -18073,7 +17404,7 @@ func (obj *innerFabricDeployedApplicationsHealthEvaluation) toGoStruct() (dst *F
 		return
 	}
 	dst = &FabricDeployedApplicationsHealthEvaluation{}
-	dst.Description = windows.UTF16PtrToString(obj.Description)
+	dst.Description = utf16PtrToString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
 		var innerlst []innerFabricHealthEvaluation
@@ -18107,14 +17438,10 @@ func (obj *FabricServicesHealthEvaluation) toInnerStruct() *innerFabricServicesH
 		return nil
 	}
 	dst := &innerFabricServicesHealthEvaluation{}
-	s_416, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_416
-
+	dst.Description = utf16PtrFromString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	s_417, _ := windows.UTF16PtrFromString(obj.ServiceTypeName)
-	dst.ServiceTypeName = s_417
-
-	lst_418 := &innerFabricHealthEvaluationList{}
+	dst.ServiceTypeName = utf16PtrFromString(obj.ServiceTypeName)
+	lst_81 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -18127,13 +17454,13 @@ func (obj *FabricServicesHealthEvaluation) toInnerStruct() *innerFabricServicesH
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_418.Count = uint32(len(tmp))
+		lst_81.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_418.Items = &tmp[0]
+			lst_81.Items = &tmp[0]
 		}
 
 	}
-	dst.UnhealthyEvaluations = lst_418
+	dst.UnhealthyEvaluations = lst_81
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyServices = obj.MaxPercentUnhealthyServices
 	return dst
@@ -18154,9 +17481,9 @@ func (obj *innerFabricServicesHealthEvaluation) toGoStruct() (dst *FabricService
 		return
 	}
 	dst = &FabricServicesHealthEvaluation{}
-	dst.Description = windows.UTF16PtrToString(obj.Description)
+	dst.Description = utf16PtrToString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	dst.ServiceTypeName = windows.UTF16PtrToString(obj.ServiceTypeName)
+	dst.ServiceTypeName = utf16PtrToString(obj.ServiceTypeName)
 	{
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
@@ -18188,11 +17515,9 @@ func (obj *FabricNodesHealthEvaluation) toInnerStruct() *innerFabricNodesHealthE
 		return nil
 	}
 	dst := &innerFabricNodesHealthEvaluation{}
-	s_419, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_419
-
+	dst.Description = utf16PtrFromString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	lst_420 := &innerFabricHealthEvaluationList{}
+	lst_82 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -18205,13 +17530,13 @@ func (obj *FabricNodesHealthEvaluation) toInnerStruct() *innerFabricNodesHealthE
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_420.Count = uint32(len(tmp))
+		lst_82.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_420.Items = &tmp[0]
+			lst_82.Items = &tmp[0]
 		}
 
 	}
-	dst.UnhealthyEvaluations = lst_420
+	dst.UnhealthyEvaluations = lst_82
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyNodes = obj.MaxPercentUnhealthyNodes
 	return dst
@@ -18231,7 +17556,7 @@ func (obj *innerFabricNodesHealthEvaluation) toGoStruct() (dst *FabricNodesHealt
 		return
 	}
 	dst = &FabricNodesHealthEvaluation{}
-	dst.Description = windows.UTF16PtrToString(obj.Description)
+	dst.Description = utf16PtrToString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
 		var innerlst []innerFabricHealthEvaluation
@@ -18264,11 +17589,9 @@ func (obj *FabricApplicationsHealthEvaluation) toInnerStruct() *innerFabricAppli
 		return nil
 	}
 	dst := &innerFabricApplicationsHealthEvaluation{}
-	s_421, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_421
-
+	dst.Description = utf16PtrFromString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	lst_422 := &innerFabricHealthEvaluationList{}
+	lst_83 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -18281,13 +17604,13 @@ func (obj *FabricApplicationsHealthEvaluation) toInnerStruct() *innerFabricAppli
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_422.Count = uint32(len(tmp))
+		lst_83.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_422.Items = &tmp[0]
+			lst_83.Items = &tmp[0]
 		}
 
 	}
-	dst.UnhealthyEvaluations = lst_422
+	dst.UnhealthyEvaluations = lst_83
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyApplications = obj.MaxPercentUnhealthyApplications
 	return dst
@@ -18307,7 +17630,7 @@ func (obj *innerFabricApplicationsHealthEvaluation) toGoStruct() (dst *FabricApp
 		return
 	}
 	dst = &FabricApplicationsHealthEvaluation{}
-	dst.Description = windows.UTF16PtrToString(obj.Description)
+	dst.Description = utf16PtrToString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
 		var innerlst []innerFabricHealthEvaluation
@@ -18341,14 +17664,10 @@ func (obj *FabricUpgradeDomainNodesHealthEvaluation) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := &innerFabricUpgradeDomainNodesHealthEvaluation{}
-	s_423, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_423
-
+	dst.Description = utf16PtrFromString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	s_424, _ := windows.UTF16PtrFromString(obj.UpgradeDomainName)
-	dst.UpgradeDomainName = s_424
-
-	lst_425 := &innerFabricHealthEvaluationList{}
+	dst.UpgradeDomainName = utf16PtrFromString(obj.UpgradeDomainName)
+	lst_84 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -18361,13 +17680,13 @@ func (obj *FabricUpgradeDomainNodesHealthEvaluation) toInnerStruct() *innerFabri
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_425.Count = uint32(len(tmp))
+		lst_84.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_425.Items = &tmp[0]
+			lst_84.Items = &tmp[0]
 		}
 
 	}
-	dst.UnhealthyEvaluations = lst_425
+	dst.UnhealthyEvaluations = lst_84
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyNodes = obj.MaxPercentUnhealthyNodes
 	return dst
@@ -18388,9 +17707,9 @@ func (obj *innerFabricUpgradeDomainNodesHealthEvaluation) toGoStruct() (dst *Fab
 		return
 	}
 	dst = &FabricUpgradeDomainNodesHealthEvaluation{}
-	dst.Description = windows.UTF16PtrToString(obj.Description)
+	dst.Description = utf16PtrToString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	dst.UpgradeDomainName = windows.UTF16PtrToString(obj.UpgradeDomainName)
+	dst.UpgradeDomainName = utf16PtrToString(obj.UpgradeDomainName)
 	{
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
@@ -18423,14 +17742,10 @@ func (obj *FabricUpgradeDomainDeployedApplicationsHealthEvaluation) toInnerStruc
 		return nil
 	}
 	dst := &innerFabricUpgradeDomainDeployedApplicationsHealthEvaluation{}
-	s_426, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_426
-
+	dst.Description = utf16PtrFromString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	s_427, _ := windows.UTF16PtrFromString(obj.UpgradeDomainName)
-	dst.UpgradeDomainName = s_427
-
-	lst_428 := &innerFabricHealthEvaluationList{}
+	dst.UpgradeDomainName = utf16PtrFromString(obj.UpgradeDomainName)
+	lst_85 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -18443,13 +17758,13 @@ func (obj *FabricUpgradeDomainDeployedApplicationsHealthEvaluation) toInnerStruc
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_428.Count = uint32(len(tmp))
+		lst_85.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_428.Items = &tmp[0]
+			lst_85.Items = &tmp[0]
 		}
 
 	}
-	dst.UnhealthyEvaluations = lst_428
+	dst.UnhealthyEvaluations = lst_85
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyDeployedApplications = obj.MaxPercentUnhealthyDeployedApplications
 	return dst
@@ -18470,9 +17785,9 @@ func (obj *innerFabricUpgradeDomainDeployedApplicationsHealthEvaluation) toGoStr
 		return
 	}
 	dst = &FabricUpgradeDomainDeployedApplicationsHealthEvaluation{}
-	dst.Description = windows.UTF16PtrToString(obj.Description)
+	dst.Description = utf16PtrToString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	dst.UpgradeDomainName = windows.UTF16PtrToString(obj.UpgradeDomainName)
+	dst.UpgradeDomainName = utf16PtrToString(obj.UpgradeDomainName)
 	{
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
@@ -18502,11 +17817,9 @@ func (obj *FabricSystemApplicationHealthEvaluation) toInnerStruct() *innerFabric
 		return nil
 	}
 	dst := &innerFabricSystemApplicationHealthEvaluation{}
-	s_429, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_429
-
+	dst.Description = utf16PtrFromString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	lst_430 := &innerFabricHealthEvaluationList{}
+	lst_86 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -18519,13 +17832,13 @@ func (obj *FabricSystemApplicationHealthEvaluation) toInnerStruct() *innerFabric
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_430.Count = uint32(len(tmp))
+		lst_86.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_430.Items = &tmp[0]
+			lst_86.Items = &tmp[0]
 		}
 
 	}
-	dst.UnhealthyEvaluations = lst_430
+	dst.UnhealthyEvaluations = lst_86
 	return dst
 }
 
@@ -18541,7 +17854,7 @@ func (obj *innerFabricSystemApplicationHealthEvaluation) toGoStruct() (dst *Fabr
 		return
 	}
 	dst = &FabricSystemApplicationHealthEvaluation{}
-	dst.Description = windows.UTF16PtrToString(obj.Description)
+	dst.Description = utf16PtrToString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
 		var innerlst []innerFabricHealthEvaluation
@@ -18571,14 +17884,10 @@ func (obj *FabricNodeHealthEvaluation) toInnerStruct() *innerFabricNodeHealthEva
 		return nil
 	}
 	dst := &innerFabricNodeHealthEvaluation{}
-	s_431, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_431
-
-	s_432, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_432
-
+	dst.Description = utf16PtrFromString(obj.Description)
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	lst_433 := &innerFabricHealthEvaluationList{}
+	lst_87 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -18591,13 +17900,13 @@ func (obj *FabricNodeHealthEvaluation) toInnerStruct() *innerFabricNodeHealthEva
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_433.Count = uint32(len(tmp))
+		lst_87.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_433.Items = &tmp[0]
+			lst_87.Items = &tmp[0]
 		}
 
 	}
-	dst.UnhealthyEvaluations = lst_433
+	dst.UnhealthyEvaluations = lst_87
 	return dst
 }
 
@@ -18614,8 +17923,8 @@ func (obj *innerFabricNodeHealthEvaluation) toGoStruct() (dst *FabricNodeHealthE
 		return
 	}
 	dst = &FabricNodeHealthEvaluation{}
-	dst.Description = windows.UTF16PtrToString(obj.Description)
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.Description = utf16PtrToString(obj.Description)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
 		var innerlst []innerFabricHealthEvaluation
@@ -18635,7 +17944,7 @@ func (obj *innerFabricNodeHealthEvaluation) toGoStruct() (dst *FabricNodeHealthE
 
 type FabricReplicaHealthEvaluation struct {
 	Description           string
-	PartitionId           windows.GUID
+	PartitionId           uuid.UUID
 	ReplicaOrInstanceId   int64
 	AggregatedHealthState FabricHealthState
 	UnhealthyEvaluations  []FabricHealthEvaluation
@@ -18646,13 +17955,11 @@ func (obj *FabricReplicaHealthEvaluation) toInnerStruct() *innerFabricReplicaHea
 		return nil
 	}
 	dst := &innerFabricReplicaHealthEvaluation{}
-	s_434, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_434
-
+	dst.Description = utf16PtrFromString(obj.Description)
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaOrInstanceId = obj.ReplicaOrInstanceId
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	lst_435 := &innerFabricHealthEvaluationList{}
+	lst_88 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -18665,19 +17972,19 @@ func (obj *FabricReplicaHealthEvaluation) toInnerStruct() *innerFabricReplicaHea
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_435.Count = uint32(len(tmp))
+		lst_88.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_435.Items = &tmp[0]
+			lst_88.Items = &tmp[0]
 		}
 
 	}
-	dst.UnhealthyEvaluations = lst_435
+	dst.UnhealthyEvaluations = lst_88
 	return dst
 }
 
 type innerFabricReplicaHealthEvaluation struct {
 	Description           *uint16
-	PartitionId           windows.GUID
+	PartitionId           uuid.UUID
 	ReplicaOrInstanceId   int64
 	AggregatedHealthState FabricHealthState
 	UnhealthyEvaluations  *innerFabricHealthEvaluationList
@@ -18689,7 +17996,7 @@ func (obj *innerFabricReplicaHealthEvaluation) toGoStruct() (dst *FabricReplicaH
 		return
 	}
 	dst = &FabricReplicaHealthEvaluation{}
-	dst.Description = windows.UTF16PtrToString(obj.Description)
+	dst.Description = utf16PtrToString(obj.Description)
 	dst.PartitionId = obj.PartitionId
 	dst.ReplicaOrInstanceId = obj.ReplicaOrInstanceId
 	dst.AggregatedHealthState = obj.AggregatedHealthState
@@ -18711,7 +18018,7 @@ func (obj *innerFabricReplicaHealthEvaluation) toGoStruct() (dst *FabricReplicaH
 
 type FabricPartitionHealthEvaluation struct {
 	Description           string
-	PartitionId           windows.GUID
+	PartitionId           uuid.UUID
 	AggregatedHealthState FabricHealthState
 	UnhealthyEvaluations  []FabricHealthEvaluation
 }
@@ -18721,12 +18028,10 @@ func (obj *FabricPartitionHealthEvaluation) toInnerStruct() *innerFabricPartitio
 		return nil
 	}
 	dst := &innerFabricPartitionHealthEvaluation{}
-	s_436, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_436
-
+	dst.Description = utf16PtrFromString(obj.Description)
 	dst.PartitionId = obj.PartitionId
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	lst_437 := &innerFabricHealthEvaluationList{}
+	lst_89 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -18739,19 +18044,19 @@ func (obj *FabricPartitionHealthEvaluation) toInnerStruct() *innerFabricPartitio
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_437.Count = uint32(len(tmp))
+		lst_89.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_437.Items = &tmp[0]
+			lst_89.Items = &tmp[0]
 		}
 
 	}
-	dst.UnhealthyEvaluations = lst_437
+	dst.UnhealthyEvaluations = lst_89
 	return dst
 }
 
 type innerFabricPartitionHealthEvaluation struct {
 	Description           *uint16
-	PartitionId           windows.GUID
+	PartitionId           uuid.UUID
 	AggregatedHealthState FabricHealthState
 	UnhealthyEvaluations  *innerFabricHealthEvaluationList
 	Reserved              unsafe.Pointer
@@ -18762,7 +18067,7 @@ func (obj *innerFabricPartitionHealthEvaluation) toGoStruct() (dst *FabricPartit
 		return
 	}
 	dst = &FabricPartitionHealthEvaluation{}
-	dst.Description = windows.UTF16PtrToString(obj.Description)
+	dst.Description = utf16PtrToString(obj.Description)
 	dst.PartitionId = obj.PartitionId
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
@@ -18793,14 +18098,10 @@ func (obj *FabricServiceHealthEvaluation) toInnerStruct() *innerFabricServiceHea
 		return nil
 	}
 	dst := &innerFabricServiceHealthEvaluation{}
-	s_438, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_438
-
-	s_439, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_439
-
+	dst.Description = utf16PtrFromString(obj.Description)
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	lst_440 := &innerFabricHealthEvaluationList{}
+	lst_90 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -18813,13 +18114,13 @@ func (obj *FabricServiceHealthEvaluation) toInnerStruct() *innerFabricServiceHea
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_440.Count = uint32(len(tmp))
+		lst_90.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_440.Items = &tmp[0]
+			lst_90.Items = &tmp[0]
 		}
 
 	}
-	dst.UnhealthyEvaluations = lst_440
+	dst.UnhealthyEvaluations = lst_90
 	return dst
 }
 
@@ -18836,8 +18137,8 @@ func (obj *innerFabricServiceHealthEvaluation) toGoStruct() (dst *FabricServiceH
 		return
 	}
 	dst = &FabricServiceHealthEvaluation{}
-	dst.Description = windows.UTF16PtrToString(obj.Description)
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.Description = utf16PtrToString(obj.Description)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
 		var innerlst []innerFabricHealthEvaluation
@@ -18870,20 +18171,12 @@ func (obj *FabricDeployedServicePackageHealthEvaluation) toInnerStruct() *innerF
 		return nil
 	}
 	dst := &innerFabricDeployedServicePackageHealthEvaluation{}
-	s_441, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_441
-
-	s_442, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_442
-
-	s_443, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_443
-
-	s_444, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_444
-
+	dst.Description = utf16PtrFromString(obj.Description)
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.ServiceManifestName = utf16PtrFromString(obj.ServiceManifestName)
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	lst_445 := &innerFabricHealthEvaluationList{}
+	lst_91 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -18896,18 +18189,16 @@ func (obj *FabricDeployedServicePackageHealthEvaluation) toInnerStruct() *innerF
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_445.Count = uint32(len(tmp))
+		lst_91.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_445.Items = &tmp[0]
+			lst_91.Items = &tmp[0]
 		}
 
 	}
-	dst.UnhealthyEvaluations = lst_445
+	dst.UnhealthyEvaluations = lst_91
 	ex0 := dst
 	ex1 := &innerFabricDeployedServicePackageHealthEvaluationEx1{}
-	s_446, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	ex1.ServicePackageActivationId = s_446
-
+	ex1.ServicePackageActivationId = utf16PtrFromString(obj.ServicePackageActivationId)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
@@ -18931,10 +18222,10 @@ func (obj *innerFabricDeployedServicePackageHealthEvaluation) toGoStruct() (dst 
 		return
 	}
 	dst = &FabricDeployedServicePackageHealthEvaluation{}
-	dst.Description = windows.UTF16PtrToString(obj.Description)
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.ServiceManifestName = windows.UTF16PtrToString(obj.ServiceManifestName)
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.Description = utf16PtrToString(obj.Description)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.ServiceManifestName = utf16PtrToString(obj.ServiceManifestName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
 		var innerlst []innerFabricHealthEvaluation
@@ -18954,7 +18245,7 @@ func (obj *innerFabricDeployedServicePackageHealthEvaluation) toGoStruct() (dst 
 	if ex1 == nil {
 		return
 	}
-	dst.ServicePackageActivationId = windows.UTF16PtrToString(ex1.ServicePackageActivationId)
+	dst.ServicePackageActivationId = utf16PtrToString(ex1.ServicePackageActivationId)
 	return
 }
 
@@ -18971,17 +18262,11 @@ func (obj *FabricDeployedApplicationHealthEvaluation) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := &innerFabricDeployedApplicationHealthEvaluation{}
-	s_447, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_447
-
-	s_448, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_448
-
-	s_449, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_449
-
+	dst.Description = utf16PtrFromString(obj.Description)
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	lst_450 := &innerFabricHealthEvaluationList{}
+	lst_92 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -18994,13 +18279,13 @@ func (obj *FabricDeployedApplicationHealthEvaluation) toInnerStruct() *innerFabr
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_450.Count = uint32(len(tmp))
+		lst_92.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_450.Items = &tmp[0]
+			lst_92.Items = &tmp[0]
 		}
 
 	}
-	dst.UnhealthyEvaluations = lst_450
+	dst.UnhealthyEvaluations = lst_92
 	return dst
 }
 
@@ -19018,9 +18303,9 @@ func (obj *innerFabricDeployedApplicationHealthEvaluation) toGoStruct() (dst *Fa
 		return
 	}
 	dst = &FabricDeployedApplicationHealthEvaluation{}
-	dst.Description = windows.UTF16PtrToString(obj.Description)
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.Description = utf16PtrToString(obj.Description)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
 		var innerlst []innerFabricHealthEvaluation
@@ -19050,14 +18335,10 @@ func (obj *FabricApplicationHealthEvaluation) toInnerStruct() *innerFabricApplic
 		return nil
 	}
 	dst := &innerFabricApplicationHealthEvaluation{}
-	s_451, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_451
-
-	s_452, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_452
-
+	dst.Description = utf16PtrFromString(obj.Description)
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	lst_453 := &innerFabricHealthEvaluationList{}
+	lst_93 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -19070,13 +18351,13 @@ func (obj *FabricApplicationHealthEvaluation) toInnerStruct() *innerFabricApplic
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_453.Count = uint32(len(tmp))
+		lst_93.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_453.Items = &tmp[0]
+			lst_93.Items = &tmp[0]
 		}
 
 	}
-	dst.UnhealthyEvaluations = lst_453
+	dst.UnhealthyEvaluations = lst_93
 	return dst
 }
 
@@ -19093,8 +18374,8 @@ func (obj *innerFabricApplicationHealthEvaluation) toGoStruct() (dst *FabricAppl
 		return
 	}
 	dst = &FabricApplicationHealthEvaluation{}
-	dst.Description = windows.UTF16PtrToString(obj.Description)
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
+	dst.Description = utf16PtrToString(obj.Description)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	{
 		var innerlst []innerFabricHealthEvaluation
@@ -19138,8 +18419,7 @@ func (obj *FabricX509Credentials) toInnerStruct() *innerFabricX509Credentials {
 		for _, item := range obj.AllowedCommonNames {
 			var tmpitem *uint16
 
-			s_454, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_454
+			tmpitem = utf16PtrFromString(item)
 
 			tmp = append(tmp, tmpitem)
 		}
@@ -19153,9 +18433,7 @@ func (obj *FabricX509Credentials) toInnerStruct() *innerFabricX509Credentials {
 	dst.FindType = obj.FindType
 	dst.FindValue = toUnsafePointer(obj.FindValue)
 	dst.StoreLocation = obj.StoreLocation
-	s_455, _ := windows.UTF16PtrFromString(obj.StoreName)
-	dst.StoreName = s_455
-
+	dst.StoreName = utf16PtrFromString(obj.StoreName)
 	dst.ProtectionLevel = obj.ProtectionLevel
 	ex0 := dst
 	ex1 := &innerFabricX509CredentialsEx1{}
@@ -19166,8 +18444,7 @@ func (obj *FabricX509Credentials) toInnerStruct() *innerFabricX509Credentials {
 		for _, item := range obj.IssuerThumbprints {
 			var tmpitem *uint16
 
-			s_456, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_456
+			tmpitem = utf16PtrFromString(item)
 
 			tmp = append(tmp, tmpitem)
 		}
@@ -19187,8 +18464,7 @@ func (obj *FabricX509Credentials) toInnerStruct() *innerFabricX509Credentials {
 		for _, item := range obj.RemoteCertThumbprints {
 			var tmpitem *uint16
 
-			s_457, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_457
+			tmpitem = utf16PtrFromString(item)
 
 			tmp = append(tmp, tmpitem)
 		}
@@ -19283,7 +18559,7 @@ func (obj *innerFabricX509Credentials) toGoStruct() (dst *FabricX509Credentials)
 		for _, item := range innerlst {
 			var tmpitem string
 
-			tmpitem = windows.UTF16PtrToString(item)
+			tmpitem = utf16PtrToString(item)
 
 			dst.AllowedCommonNames = append(dst.AllowedCommonNames, tmpitem)
 		}
@@ -19292,7 +18568,7 @@ func (obj *innerFabricX509Credentials) toGoStruct() (dst *FabricX509Credentials)
 	dst.FindType = obj.FindType
 	dst.FindValue = fromUnsafePointer(obj.FindValue)
 	dst.StoreLocation = obj.StoreLocation
-	dst.StoreName = windows.UTF16PtrToString(obj.StoreName)
+	dst.StoreName = utf16PtrToString(obj.StoreName)
 	dst.ProtectionLevel = obj.ProtectionLevel
 	ex0 := obj
 	ex1 := (*innerFabricX509CredentialsEx1)(ex0.Reserved)
@@ -19306,7 +18582,7 @@ func (obj *innerFabricX509Credentials) toGoStruct() (dst *FabricX509Credentials)
 		for _, item := range innerlst {
 			var tmpitem string
 
-			tmpitem = windows.UTF16PtrToString(item)
+			tmpitem = utf16PtrToString(item)
 
 			dst.IssuerThumbprints = append(dst.IssuerThumbprints, tmpitem)
 		}
@@ -19323,7 +18599,7 @@ func (obj *innerFabricX509Credentials) toGoStruct() (dst *FabricX509Credentials)
 		for _, item := range innerlst {
 			var tmpitem string
 
-			tmpitem = windows.UTF16PtrToString(item)
+			tmpitem = utf16PtrToString(item)
 
 			dst.RemoteCertThumbprints = append(dst.RemoteCertThumbprints, tmpitem)
 		}
@@ -19373,12 +18649,8 @@ func (obj *FabricX509Name) toInnerStruct() *innerFabricX509Name {
 		return nil
 	}
 	dst := &innerFabricX509Name{}
-	s_458, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_458
-
-	s_459, _ := windows.UTF16PtrFromString(obj.IssuerCertThumbprint)
-	dst.IssuerCertThumbprint = s_459
-
+	dst.Name = utf16PtrFromString(obj.Name)
+	dst.IssuerCertThumbprint = utf16PtrFromString(obj.IssuerCertThumbprint)
 	return dst
 }
 
@@ -19393,8 +18665,8 @@ func (obj *innerFabricX509Name) toGoStruct() (dst *FabricX509Name) {
 		return
 	}
 	dst = &FabricX509Name{}
-	dst.Name = windows.UTF16PtrToString(obj.Name)
-	dst.IssuerCertThumbprint = windows.UTF16PtrToString(obj.IssuerCertThumbprint)
+	dst.Name = utf16PtrToString(obj.Name)
+	dst.IssuerCertThumbprint = utf16PtrToString(obj.IssuerCertThumbprint)
 	return
 }
 
@@ -19408,9 +18680,7 @@ func (obj *FabricX509IssuerName) toInnerStruct() *innerFabricX509IssuerName {
 		return nil
 	}
 	dst := &innerFabricX509IssuerName{}
-	s_460, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_460
-
+	dst.Name = utf16PtrFromString(obj.Name)
 	{
 
 		var tmp []*uint16
@@ -19418,8 +18688,7 @@ func (obj *FabricX509IssuerName) toInnerStruct() *innerFabricX509IssuerName {
 		for _, item := range obj.IssuerStores {
 			var tmpitem *uint16
 
-			s_461, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_461
+			tmpitem = utf16PtrFromString(item)
 
 			tmp = append(tmp, tmpitem)
 		}
@@ -19445,7 +18714,7 @@ func (obj *innerFabricX509IssuerName) toGoStruct() (dst *FabricX509IssuerName) {
 		return
 	}
 	dst = &FabricX509IssuerName{}
-	dst.Name = windows.UTF16PtrToString(obj.Name)
+	dst.Name = utf16PtrToString(obj.Name)
 	{
 		var innerlst []*uint16
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.IssuerStores), int(obj.IssuerStoreCount))
@@ -19453,7 +18722,7 @@ func (obj *innerFabricX509IssuerName) toGoStruct() (dst *FabricX509IssuerName) {
 		for _, item := range innerlst {
 			var tmpitem string
 
-			tmpitem = windows.UTF16PtrToString(item)
+			tmpitem = utf16PtrToString(item)
 
 			dst.IssuerStores = append(dst.IssuerStores, tmpitem)
 		}
@@ -19474,9 +18743,7 @@ func (obj *FabricX509Credentials2) toInnerStruct() *innerFabricX509Credentials2 
 		return nil
 	}
 	dst := &innerFabricX509Credentials2{}
-	s_462, _ := windows.UTF16PtrFromString(obj.CertLoadPath)
-	dst.CertLoadPath = s_462
-
+	dst.CertLoadPath = utf16PtrFromString(obj.CertLoadPath)
 	{
 
 		var tmp []*uint16
@@ -19484,8 +18751,7 @@ func (obj *FabricX509Credentials2) toInnerStruct() *innerFabricX509Credentials2 
 		for _, item := range obj.RemoteCertThumbprints {
 			var tmpitem *uint16
 
-			s_463, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_463
+			tmpitem = utf16PtrFromString(item)
 
 			tmp = append(tmp, tmpitem)
 		}
@@ -19533,7 +18799,7 @@ func (obj *innerFabricX509Credentials2) toGoStruct() (dst *FabricX509Credentials
 		return
 	}
 	dst = &FabricX509Credentials2{}
-	dst.CertLoadPath = windows.UTF16PtrToString(obj.CertLoadPath)
+	dst.CertLoadPath = utf16PtrToString(obj.CertLoadPath)
 	{
 		var innerlst []*uint16
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.RemoteCertThumbprints), int(obj.RemoteCertThumbprintCount))
@@ -19541,7 +18807,7 @@ func (obj *innerFabricX509Credentials2) toGoStruct() (dst *FabricX509Credentials
 		for _, item := range innerlst {
 			var tmpitem string
 
-			tmpitem = windows.UTF16PtrToString(item)
+			tmpitem = utf16PtrToString(item)
 
 			dst.RemoteCertThumbprints = append(dst.RemoteCertThumbprints, tmpitem)
 		}
@@ -19584,8 +18850,7 @@ func (obj *FabricClaimsCredentials) toInnerStruct() *innerFabricClaimsCredential
 		for _, item := range obj.ServerCommonNames {
 			var tmpitem *uint16
 
-			s_464, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_464
+			tmpitem = utf16PtrFromString(item)
 
 			tmp = append(tmp, tmpitem)
 		}
@@ -19603,8 +18868,7 @@ func (obj *FabricClaimsCredentials) toInnerStruct() *innerFabricClaimsCredential
 		for _, item := range obj.IssuerThumbprints {
 			var tmpitem *uint16
 
-			s_465, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_465
+			tmpitem = utf16PtrFromString(item)
 
 			tmp = append(tmp, tmpitem)
 		}
@@ -19615,9 +18879,7 @@ func (obj *FabricClaimsCredentials) toInnerStruct() *innerFabricClaimsCredential
 		}
 
 	}
-	s_466, _ := windows.UTF16PtrFromString(obj.LocalClaims)
-	dst.LocalClaims = s_466
-
+	dst.LocalClaims = utf16PtrFromString(obj.LocalClaims)
 	dst.ProtectionLevel = obj.ProtectionLevel
 	ex0 := dst
 	ex1 := &innerFabricClaimsCredentialsEx1{}
@@ -19628,8 +18890,7 @@ func (obj *FabricClaimsCredentials) toInnerStruct() *innerFabricClaimsCredential
 		for _, item := range obj.ServerThumbprints {
 			var tmpitem *uint16
 
-			s_467, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_467
+			tmpitem = utf16PtrFromString(item)
 
 			tmp = append(tmp, tmpitem)
 		}
@@ -19671,7 +18932,7 @@ func (obj *innerFabricClaimsCredentials) toGoStruct() (dst *FabricClaimsCredenti
 		for _, item := range innerlst {
 			var tmpitem string
 
-			tmpitem = windows.UTF16PtrToString(item)
+			tmpitem = utf16PtrToString(item)
 
 			dst.ServerCommonNames = append(dst.ServerCommonNames, tmpitem)
 		}
@@ -19684,13 +18945,13 @@ func (obj *innerFabricClaimsCredentials) toGoStruct() (dst *FabricClaimsCredenti
 		for _, item := range innerlst {
 			var tmpitem string
 
-			tmpitem = windows.UTF16PtrToString(item)
+			tmpitem = utf16PtrToString(item)
 
 			dst.IssuerThumbprints = append(dst.IssuerThumbprints, tmpitem)
 		}
 
 	}
-	dst.LocalClaims = windows.UTF16PtrToString(obj.LocalClaims)
+	dst.LocalClaims = utf16PtrToString(obj.LocalClaims)
 	dst.ProtectionLevel = obj.ProtectionLevel
 	ex0 := obj
 	ex1 := (*innerFabricClaimsCredentialsEx1)(ex0.Reserved)
@@ -19704,7 +18965,7 @@ func (obj *innerFabricClaimsCredentials) toGoStruct() (dst *FabricClaimsCredenti
 		for _, item := range innerlst {
 			var tmpitem string
 
-			tmpitem = windows.UTF16PtrToString(item)
+			tmpitem = utf16PtrToString(item)
 
 			dst.ServerThumbprints = append(dst.ServerThumbprints, tmpitem)
 		}
@@ -19724,9 +18985,7 @@ func (obj *FabricWindowsCredentials) toInnerStruct() *innerFabricWindowsCredenti
 		return nil
 	}
 	dst := &innerFabricWindowsCredentials{}
-	s_468, _ := windows.UTF16PtrFromString(obj.RemoteSpn)
-	dst.RemoteSpn = s_468
-
+	dst.RemoteSpn = utf16PtrFromString(obj.RemoteSpn)
 	{
 
 		var tmp []*uint16
@@ -19734,8 +18993,7 @@ func (obj *FabricWindowsCredentials) toInnerStruct() *innerFabricWindowsCredenti
 		for _, item := range obj.RemoteIdentities {
 			var tmpitem *uint16
 
-			s_469, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_469
+			tmpitem = utf16PtrFromString(item)
 
 			tmp = append(tmp, tmpitem)
 		}
@@ -19763,7 +19021,7 @@ func (obj *innerFabricWindowsCredentials) toGoStruct() (dst *FabricWindowsCreden
 		return
 	}
 	dst = &FabricWindowsCredentials{}
-	dst.RemoteSpn = windows.UTF16PtrToString(obj.RemoteSpn)
+	dst.RemoteSpn = utf16PtrToString(obj.RemoteSpn)
 	{
 		var innerlst []*uint16
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.RemoteIdentities), int(obj.RemoteIdentityCount))
@@ -19771,7 +19029,7 @@ func (obj *innerFabricWindowsCredentials) toGoStruct() (dst *FabricWindowsCreden
 		for _, item := range innerlst {
 			var tmpitem string
 
-			tmpitem = windows.UTF16PtrToString(item)
+			tmpitem = utf16PtrToString(item)
 
 			dst.RemoteIdentities = append(dst.RemoteIdentities, tmpitem)
 		}
@@ -19825,26 +19083,14 @@ func (obj *FabricAadClAimsRetrievalMetadata) toInnerStruct() *innerFabricAadClAi
 		return nil
 	}
 	dst := &innerFabricAadClAimsRetrievalMetadata{}
-	s_470, _ := windows.UTF16PtrFromString(obj.Authority)
-	dst.Authority = s_470
-
-	s_471, _ := windows.UTF16PtrFromString(obj.TenantId)
-	dst.TenantId = s_471
-
-	s_472, _ := windows.UTF16PtrFromString(obj.ClusterApplication)
-	dst.ClusterApplication = s_472
-
-	s_473, _ := windows.UTF16PtrFromString(obj.ClientApplication)
-	dst.ClientApplication = s_473
-
-	s_474, _ := windows.UTF16PtrFromString(obj.ClientRedirect)
-	dst.ClientRedirect = s_474
-
+	dst.Authority = utf16PtrFromString(obj.Authority)
+	dst.TenantId = utf16PtrFromString(obj.TenantId)
+	dst.ClusterApplication = utf16PtrFromString(obj.ClusterApplication)
+	dst.ClientApplication = utf16PtrFromString(obj.ClientApplication)
+	dst.ClientRedirect = utf16PtrFromString(obj.ClientRedirect)
 	ex0 := dst
 	ex1 := &innerFabricAadClAimsRetrievalMetadataEx1{}
-	s_475, _ := windows.UTF16PtrFromString(obj.LoginEndpoint)
-	ex1.LoginEndpoint = s_475
-
+	ex1.LoginEndpoint = utf16PtrFromString(obj.LoginEndpoint)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
@@ -19867,17 +19113,17 @@ func (obj *innerFabricAadClAimsRetrievalMetadata) toGoStruct() (dst *FabricAadCl
 		return
 	}
 	dst = &FabricAadClAimsRetrievalMetadata{}
-	dst.Authority = windows.UTF16PtrToString(obj.Authority)
-	dst.TenantId = windows.UTF16PtrToString(obj.TenantId)
-	dst.ClusterApplication = windows.UTF16PtrToString(obj.ClusterApplication)
-	dst.ClientApplication = windows.UTF16PtrToString(obj.ClientApplication)
-	dst.ClientRedirect = windows.UTF16PtrToString(obj.ClientRedirect)
+	dst.Authority = utf16PtrToString(obj.Authority)
+	dst.TenantId = utf16PtrToString(obj.TenantId)
+	dst.ClusterApplication = utf16PtrToString(obj.ClusterApplication)
+	dst.ClientApplication = utf16PtrToString(obj.ClientApplication)
+	dst.ClientRedirect = utf16PtrToString(obj.ClientRedirect)
 	ex0 := obj
 	ex1 := (*innerFabricAadClAimsRetrievalMetadataEx1)(ex0.Reserved)
 	if ex1 == nil {
 		return
 	}
-	dst.LoginEndpoint = windows.UTF16PtrToString(ex1.LoginEndpoint)
+	dst.LoginEndpoint = utf16PtrToString(ex1.LoginEndpoint)
 	return
 }
 
@@ -19893,13 +19139,9 @@ func (obj *FabricSecurityUserDescription) toInnerStruct() *innerFabricSecurityUs
 		return nil
 	}
 	dst := &innerFabricSecurityUserDescription{}
-	s_476, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_476
-
-	s_477, _ := windows.UTF16PtrFromString(obj.Sid)
-	dst.Sid = s_477
-
-	lst_478 := &innerFabricStringList{}
+	dst.Name = utf16PtrFromString(obj.Name)
+	dst.Sid = utf16PtrFromString(obj.Sid)
+	lst_94 := &innerFabricStringList{}
 	{
 
 		var tmp []*uint16
@@ -19907,20 +19149,19 @@ func (obj *FabricSecurityUserDescription) toInnerStruct() *innerFabricSecurityUs
 		for _, item := range obj.ParentSystemGroups {
 			var tmpitem *uint16
 
-			s_479, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_479
+			tmpitem = utf16PtrFromString(item)
 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_478.Count = uint32(len(tmp))
+		lst_94.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_478.Items = &tmp[0]
+			lst_94.Items = &tmp[0]
 		}
 
 	}
-	dst.ParentSystemGroups = lst_478
-	lst_480 := &innerFabricStringList{}
+	dst.ParentSystemGroups = lst_94
+	lst_95 := &innerFabricStringList{}
 	{
 
 		var tmp []*uint16
@@ -19928,19 +19169,18 @@ func (obj *FabricSecurityUserDescription) toInnerStruct() *innerFabricSecurityUs
 		for _, item := range obj.ParentApplicationGroups {
 			var tmpitem *uint16
 
-			s_481, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_481
+			tmpitem = utf16PtrFromString(item)
 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_480.Count = uint32(len(tmp))
+		lst_95.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_480.Items = &tmp[0]
+			lst_95.Items = &tmp[0]
 		}
 
 	}
-	dst.ParentApplicationGroups = lst_480
+	dst.ParentApplicationGroups = lst_95
 	return dst
 }
 
@@ -19957,8 +19197,8 @@ func (obj *innerFabricSecurityUserDescription) toGoStruct() (dst *FabricSecurity
 		return
 	}
 	dst = &FabricSecurityUserDescription{}
-	dst.Name = windows.UTF16PtrToString(obj.Name)
-	dst.Sid = windows.UTF16PtrToString(obj.Sid)
+	dst.Name = utf16PtrToString(obj.Name)
+	dst.Sid = utf16PtrToString(obj.Sid)
 	{
 		var innerlst []*uint16
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ParentSystemGroups.Items), int(obj.ParentSystemGroups.Count))
@@ -19966,7 +19206,7 @@ func (obj *innerFabricSecurityUserDescription) toGoStruct() (dst *FabricSecurity
 		for _, item := range innerlst {
 			var tmpitem string
 
-			tmpitem = windows.UTF16PtrToString(item)
+			tmpitem = utf16PtrToString(item)
 
 			dst.ParentSystemGroups = append(dst.ParentSystemGroups, tmpitem)
 		}
@@ -19979,7 +19219,7 @@ func (obj *innerFabricSecurityUserDescription) toGoStruct() (dst *FabricSecurity
 		for _, item := range innerlst {
 			var tmpitem string
 
-			tmpitem = windows.UTF16PtrToString(item)
+			tmpitem = utf16PtrToString(item)
 
 			dst.ParentApplicationGroups = append(dst.ParentApplicationGroups, tmpitem)
 		}
@@ -20024,13 +19264,9 @@ func (obj *FabricSecurityGroupDescription) toInnerStruct() *innerFabricSecurityG
 		return nil
 	}
 	dst := &innerFabricSecurityGroupDescription{}
-	s_482, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_482
-
-	s_483, _ := windows.UTF16PtrFromString(obj.Sid)
-	dst.Sid = s_483
-
-	lst_484 := &innerFabricStringList{}
+	dst.Name = utf16PtrFromString(obj.Name)
+	dst.Sid = utf16PtrFromString(obj.Sid)
+	lst_96 := &innerFabricStringList{}
 	{
 
 		var tmp []*uint16
@@ -20038,20 +19274,19 @@ func (obj *FabricSecurityGroupDescription) toInnerStruct() *innerFabricSecurityG
 		for _, item := range obj.DomainGroupMembers {
 			var tmpitem *uint16
 
-			s_485, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_485
+			tmpitem = utf16PtrFromString(item)
 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_484.Count = uint32(len(tmp))
+		lst_96.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_484.Items = &tmp[0]
+			lst_96.Items = &tmp[0]
 		}
 
 	}
-	dst.DomainGroupMembers = lst_484
-	lst_486 := &innerFabricStringList{}
+	dst.DomainGroupMembers = lst_96
+	lst_97 := &innerFabricStringList{}
 	{
 
 		var tmp []*uint16
@@ -20059,20 +19294,19 @@ func (obj *FabricSecurityGroupDescription) toInnerStruct() *innerFabricSecurityG
 		for _, item := range obj.SystemGroupMembers {
 			var tmpitem *uint16
 
-			s_487, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_487
+			tmpitem = utf16PtrFromString(item)
 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_486.Count = uint32(len(tmp))
+		lst_97.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_486.Items = &tmp[0]
+			lst_97.Items = &tmp[0]
 		}
 
 	}
-	dst.SystemGroupMembers = lst_486
-	lst_488 := &innerFabricStringList{}
+	dst.SystemGroupMembers = lst_97
+	lst_98 := &innerFabricStringList{}
 	{
 
 		var tmp []*uint16
@@ -20080,19 +19314,18 @@ func (obj *FabricSecurityGroupDescription) toInnerStruct() *innerFabricSecurityG
 		for _, item := range obj.DomainUserMembers {
 			var tmpitem *uint16
 
-			s_489, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_489
+			tmpitem = utf16PtrFromString(item)
 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_488.Count = uint32(len(tmp))
+		lst_98.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_488.Items = &tmp[0]
+			lst_98.Items = &tmp[0]
 		}
 
 	}
-	dst.DomainUserMembers = lst_488
+	dst.DomainUserMembers = lst_98
 	return dst
 }
 
@@ -20110,8 +19343,8 @@ func (obj *innerFabricSecurityGroupDescription) toGoStruct() (dst *FabricSecurit
 		return
 	}
 	dst = &FabricSecurityGroupDescription{}
-	dst.Name = windows.UTF16PtrToString(obj.Name)
-	dst.Sid = windows.UTF16PtrToString(obj.Sid)
+	dst.Name = utf16PtrToString(obj.Name)
+	dst.Sid = utf16PtrToString(obj.Sid)
 	{
 		var innerlst []*uint16
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.DomainGroupMembers.Items), int(obj.DomainGroupMembers.Count))
@@ -20119,7 +19352,7 @@ func (obj *innerFabricSecurityGroupDescription) toGoStruct() (dst *FabricSecurit
 		for _, item := range innerlst {
 			var tmpitem string
 
-			tmpitem = windows.UTF16PtrToString(item)
+			tmpitem = utf16PtrToString(item)
 
 			dst.DomainGroupMembers = append(dst.DomainGroupMembers, tmpitem)
 		}
@@ -20132,7 +19365,7 @@ func (obj *innerFabricSecurityGroupDescription) toGoStruct() (dst *FabricSecurit
 		for _, item := range innerlst {
 			var tmpitem string
 
-			tmpitem = windows.UTF16PtrToString(item)
+			tmpitem = utf16PtrToString(item)
 
 			dst.SystemGroupMembers = append(dst.SystemGroupMembers, tmpitem)
 		}
@@ -20145,7 +19378,7 @@ func (obj *innerFabricSecurityGroupDescription) toGoStruct() (dst *FabricSecurit
 		for _, item := range innerlst {
 			var tmpitem string
 
-			tmpitem = windows.UTF16PtrToString(item)
+			tmpitem = utf16PtrToString(item)
 
 			dst.DomainUserMembers = append(dst.DomainUserMembers, tmpitem)
 		}
@@ -20187,7 +19420,7 @@ func (obj *FabricApplicationPrincipalsDescription) toInnerStruct() *innerFabricA
 		return nil
 	}
 	dst := &innerFabricApplicationPrincipalsDescription{}
-	lst_490 := &innerFabricSecurityUserDescriptionList{}
+	lst_99 := &innerFabricSecurityUserDescriptionList{}
 	{
 
 		var tmp []innerFabricSecurityUserDescription
@@ -20200,14 +19433,14 @@ func (obj *FabricApplicationPrincipalsDescription) toInnerStruct() *innerFabricA
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_490.Count = uint32(len(tmp))
+		lst_99.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_490.Items = &tmp[0]
+			lst_99.Items = &tmp[0]
 		}
 
 	}
-	dst.Users = lst_490
-	lst_491 := &innerFabricSecurityGroupDescriptionList{}
+	dst.Users = lst_99
+	lst_100 := &innerFabricSecurityGroupDescriptionList{}
 	{
 
 		var tmp []innerFabricSecurityGroupDescription
@@ -20220,13 +19453,13 @@ func (obj *FabricApplicationPrincipalsDescription) toInnerStruct() *innerFabricA
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_491.Count = uint32(len(tmp))
+		lst_100.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_491.Items = &tmp[0]
+			lst_100.Items = &tmp[0]
 		}
 
 	}
-	dst.Groups = lst_491
+	dst.Groups = lst_100
 	return dst
 }
 
@@ -20295,10 +19528,8 @@ func (obj *FabricApplicationUpgradeProgress) toInnerStruct() *innerFabricApplica
 	dst.UpgradeDescription = obj.UpgradeDescription.toInnerStruct()
 	dst.UpgradeState = obj.UpgradeState
 	dst.UpgradeMode = obj.UpgradeMode
-	s_492, _ := windows.UTF16PtrFromString(obj.NextUpgradeDomain)
-	dst.NextUpgradeDomain = s_492
-
-	lst_493 := &innerFabricUpgradeDomainStatusDescriptionList{}
+	dst.NextUpgradeDomain = utf16PtrFromString(obj.NextUpgradeDomain)
+	lst_101 := &innerFabricUpgradeDomainStatusDescriptionList{}
 	{
 
 		var tmp []innerFabricUpgradeDomainStatusDescription
@@ -20311,16 +19542,16 @@ func (obj *FabricApplicationUpgradeProgress) toInnerStruct() *innerFabricApplica
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_493.Count = uint32(len(tmp))
+		lst_101.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_493.Items = &tmp[0]
+			lst_101.Items = &tmp[0]
 		}
 
 	}
-	dst.UpgradeDomains = lst_493
+	dst.UpgradeDomains = lst_101
 	dst.UpgradeDurationInSeconds = obj.UpgradeDurationInSeconds
 	dst.CurrentUpgradeDomainDurationInSeconds = obj.CurrentUpgradeDomainDurationInSeconds
-	lst_494 := &innerFabricHealthEvaluationList{}
+	lst_102 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -20333,25 +19564,23 @@ func (obj *FabricApplicationUpgradeProgress) toInnerStruct() *innerFabricApplica
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_494.Count = uint32(len(tmp))
+		lst_102.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_494.Items = &tmp[0]
+			lst_102.Items = &tmp[0]
 		}
 
 	}
-	dst.UnhealthyEvaluations = lst_494
+	dst.UnhealthyEvaluations = lst_102
 	dst.CurrentUpgradeDomainProgress = obj.CurrentUpgradeDomainProgress.toInnerStruct()
 	ex0 := dst
 	ex1 := &innerFabricApplicationUpgradeProgressEx1{}
-	ex1.StartTimestampUtc = windows.NsecToFiletime(obj.StartTimestampUtc.UnixNano())
-	ex1.FailureTimestampUtc = windows.NsecToFiletime(obj.FailureTimestampUtc.UnixNano())
+	ex1.StartTimestampUtc = timeToFiletime(obj.StartTimestampUtc)
+	ex1.FailureTimestampUtc = timeToFiletime(obj.FailureTimestampUtc)
 	ex1.FailureReason = obj.FailureReason
 	ex1.UpgradeDomainProgressAtFailure = obj.UpgradeDomainProgressAtFailure.toInnerStruct()
 	ex0.Reserved = unsafe.Pointer(ex1)
 	ex2 := &innerFabricApplicationUpgradeProgressEx2{}
-	s_495, _ := windows.UTF16PtrFromString(obj.UpgradeStatusDetails)
-	ex2.UpgradeStatusDetails = s_495
-
+	ex2.UpgradeStatusDetails = utf16PtrFromString(obj.UpgradeStatusDetails)
 	ex1.Reserved = unsafe.Pointer(ex2)
 	return dst
 }
@@ -20369,8 +19598,8 @@ type innerFabricApplicationUpgradeProgress struct {
 	Reserved                              unsafe.Pointer
 }
 type innerFabricApplicationUpgradeProgressEx1 struct {
-	StartTimestampUtc              windows.Filetime
-	FailureTimestampUtc            windows.Filetime
+	StartTimestampUtc              filetime
+	FailureTimestampUtc            filetime
 	FailureReason                  FabricUpgradeFailureReason
 	UpgradeDomainProgressAtFailure *innerFabricUpgradeDomainProgress
 	Reserved                       unsafe.Pointer
@@ -20388,7 +19617,7 @@ func (obj *innerFabricApplicationUpgradeProgress) toGoStruct() (dst *FabricAppli
 	dst.UpgradeDescription = obj.UpgradeDescription.toGoStruct()
 	dst.UpgradeState = obj.UpgradeState
 	dst.UpgradeMode = obj.UpgradeMode
-	dst.NextUpgradeDomain = windows.UTF16PtrToString(obj.NextUpgradeDomain)
+	dst.NextUpgradeDomain = utf16PtrToString(obj.NextUpgradeDomain)
 	{
 		var innerlst []innerFabricUpgradeDomainStatusDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UpgradeDomains.Items), int(obj.UpgradeDomains.Count))
@@ -20423,15 +19652,15 @@ func (obj *innerFabricApplicationUpgradeProgress) toGoStruct() (dst *FabricAppli
 	if ex1 == nil {
 		return
 	}
-	dst.StartTimestampUtc = time.Unix(0, ex1.StartTimestampUtc.Nanoseconds())
-	dst.FailureTimestampUtc = time.Unix(0, ex1.FailureTimestampUtc.Nanoseconds())
+	dst.StartTimestampUtc = ex1.StartTimestampUtc.ToTime()
+	dst.FailureTimestampUtc = ex1.FailureTimestampUtc.ToTime()
 	dst.FailureReason = ex1.FailureReason
 	dst.UpgradeDomainProgressAtFailure = ex1.UpgradeDomainProgressAtFailure.toGoStruct()
 	ex2 := (*innerFabricApplicationUpgradeProgressEx2)(ex1.Reserved)
 	if ex2 == nil {
 		return
 	}
-	dst.UpgradeStatusDetails = windows.UTF16PtrToString(ex2.UpgradeStatusDetails)
+	dst.UpgradeStatusDetails = utf16PtrToString(ex2.UpgradeStatusDetails)
 	return
 }
 
@@ -20476,9 +19705,7 @@ func (obj *FabricProvisionApplicationTypeDescription) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := &innerFabricProvisionApplicationTypeDescription{}
-	s_496, _ := windows.UTF16PtrFromString(obj.BuildPath)
-	dst.BuildPath = s_496
-
+	dst.BuildPath = utf16PtrFromString(obj.BuildPath)
 	dst.Async = obj.Async
 	ex0 := dst
 	ex1 := &innerFabricProvisionApplicationTypeDescriptionEx1{}
@@ -20502,7 +19729,7 @@ func (obj *innerFabricProvisionApplicationTypeDescription) toGoStruct() (dst *Fa
 		return
 	}
 	dst = &FabricProvisionApplicationTypeDescription{}
-	dst.BuildPath = windows.UTF16PtrToString(obj.BuildPath)
+	dst.BuildPath = utf16PtrToString(obj.BuildPath)
 	dst.Async = obj.Async
 	ex0 := obj
 	ex1 := (*innerFabricProvisionApplicationTypeDescriptionEx1)(ex0.Reserved)
@@ -20525,15 +19752,9 @@ func (obj *FabricExternalStoreProvisionApplicationTypeDescription) toInnerStruct
 		return nil
 	}
 	dst := &innerFabricExternalStoreProvisionApplicationTypeDescription{}
-	s_497, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
-	dst.ApplicationTypeName = s_497
-
-	s_498, _ := windows.UTF16PtrFromString(obj.ApplicationTypeVersion)
-	dst.ApplicationTypeVersion = s_498
-
-	s_499, _ := windows.UTF16PtrFromString(obj.ApplicationPackageDownloadUri)
-	dst.ApplicationPackageDownloadUri = s_499
-
+	dst.ApplicationTypeName = utf16PtrFromString(obj.ApplicationTypeName)
+	dst.ApplicationTypeVersion = utf16PtrFromString(obj.ApplicationTypeVersion)
+	dst.ApplicationPackageDownloadUri = utf16PtrFromString(obj.ApplicationPackageDownloadUri)
 	dst.Async = obj.Async
 	return dst
 }
@@ -20551,9 +19772,9 @@ func (obj *innerFabricExternalStoreProvisionApplicationTypeDescription) toGoStru
 		return
 	}
 	dst = &FabricExternalStoreProvisionApplicationTypeDescription{}
-	dst.ApplicationTypeName = windows.UTF16PtrToString(obj.ApplicationTypeName)
-	dst.ApplicationTypeVersion = windows.UTF16PtrToString(obj.ApplicationTypeVersion)
-	dst.ApplicationPackageDownloadUri = windows.UTF16PtrToString(obj.ApplicationPackageDownloadUri)
+	dst.ApplicationTypeName = utf16PtrToString(obj.ApplicationTypeName)
+	dst.ApplicationTypeVersion = utf16PtrToString(obj.ApplicationTypeVersion)
+	dst.ApplicationPackageDownloadUri = utf16PtrToString(obj.ApplicationPackageDownloadUri)
 	dst.Async = obj.Async
 	return
 }
@@ -20569,12 +19790,8 @@ func (obj *FabricUnprovisionApplicationTypeDescription) toInnerStruct() *innerFa
 		return nil
 	}
 	dst := &innerFabricUnprovisionApplicationTypeDescription{}
-	s_500, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
-	dst.ApplicationTypeName = s_500
-
-	s_501, _ := windows.UTF16PtrFromString(obj.ApplicationTypeVersion)
-	dst.ApplicationTypeVersion = s_501
-
+	dst.ApplicationTypeName = utf16PtrFromString(obj.ApplicationTypeName)
+	dst.ApplicationTypeVersion = utf16PtrFromString(obj.ApplicationTypeVersion)
 	dst.Async = obj.Async
 	return dst
 }
@@ -20591,8 +19808,8 @@ func (obj *innerFabricUnprovisionApplicationTypeDescription) toGoStruct() (dst *
 		return
 	}
 	dst = &FabricUnprovisionApplicationTypeDescription{}
-	dst.ApplicationTypeName = windows.UTF16PtrToString(obj.ApplicationTypeName)
-	dst.ApplicationTypeVersion = windows.UTF16PtrToString(obj.ApplicationTypeVersion)
+	dst.ApplicationTypeName = utf16PtrToString(obj.ApplicationTypeName)
+	dst.ApplicationTypeVersion = utf16PtrToString(obj.ApplicationTypeVersion)
 	dst.Async = obj.Async
 	return
 }
@@ -20607,9 +19824,7 @@ func (obj *FabricDeleteApplicationDescription) toInnerStruct() *innerFabricDelet
 		return nil
 	}
 	dst := &innerFabricDeleteApplicationDescription{}
-	s_502, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_502
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
 	dst.ForceDelete = obj.ForceDelete
 	return dst
 }
@@ -20625,7 +19840,7 @@ func (obj *innerFabricDeleteApplicationDescription) toGoStruct() (dst *FabricDel
 		return
 	}
 	dst = &FabricDeleteApplicationDescription{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
 	dst.ForceDelete = obj.ForceDelete
 	return
 }
@@ -20654,10 +19869,8 @@ func (obj *FabricUpgradeProgress) toInnerStruct() *innerFabricUpgradeProgress {
 	dst.UpgradeDescription = obj.UpgradeDescription.toInnerStruct()
 	dst.UpgradeState = obj.UpgradeState
 	dst.UpgradeMode = obj.UpgradeMode
-	s_503, _ := windows.UTF16PtrFromString(obj.NextUpgradeDomain)
-	dst.NextUpgradeDomain = s_503
-
-	lst_504 := &innerFabricUpgradeDomainStatusDescriptionList{}
+	dst.NextUpgradeDomain = utf16PtrFromString(obj.NextUpgradeDomain)
+	lst_103 := &innerFabricUpgradeDomainStatusDescriptionList{}
 	{
 
 		var tmp []innerFabricUpgradeDomainStatusDescription
@@ -20670,16 +19883,16 @@ func (obj *FabricUpgradeProgress) toInnerStruct() *innerFabricUpgradeProgress {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_504.Count = uint32(len(tmp))
+		lst_103.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_504.Items = &tmp[0]
+			lst_103.Items = &tmp[0]
 		}
 
 	}
-	dst.UpgradeDomains = lst_504
+	dst.UpgradeDomains = lst_103
 	dst.UpgradeDurationInSeconds = obj.UpgradeDurationInSeconds
 	dst.CurrentUpgradeDomainDurationInSeconds = obj.CurrentUpgradeDomainDurationInSeconds
-	lst_505 := &innerFabricHealthEvaluationList{}
+	lst_104 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -20692,18 +19905,18 @@ func (obj *FabricUpgradeProgress) toInnerStruct() *innerFabricUpgradeProgress {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_505.Count = uint32(len(tmp))
+		lst_104.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_505.Items = &tmp[0]
+			lst_104.Items = &tmp[0]
 		}
 
 	}
-	dst.UnhealthyEvaluations = lst_505
+	dst.UnhealthyEvaluations = lst_104
 	dst.CurrentUpgradeDomainProgress = obj.CurrentUpgradeDomainProgress.toInnerStruct()
 	ex0 := dst
 	ex1 := &innerFabricUpgradeProgressEx1{}
-	ex1.StartTimestampUtc = windows.NsecToFiletime(obj.StartTimestampUtc.UnixNano())
-	ex1.FailureTimestampUtc = windows.NsecToFiletime(obj.FailureTimestampUtc.UnixNano())
+	ex1.StartTimestampUtc = timeToFiletime(obj.StartTimestampUtc)
+	ex1.FailureTimestampUtc = timeToFiletime(obj.FailureTimestampUtc)
 	ex1.FailureReason = obj.FailureReason
 	ex1.UpgradeDomainProgressAtFailure = obj.UpgradeDomainProgressAtFailure.toInnerStruct()
 	ex0.Reserved = unsafe.Pointer(ex1)
@@ -20723,8 +19936,8 @@ type innerFabricUpgradeProgress struct {
 	Reserved                              unsafe.Pointer
 }
 type innerFabricUpgradeProgressEx1 struct {
-	StartTimestampUtc              windows.Filetime
-	FailureTimestampUtc            windows.Filetime
+	StartTimestampUtc              filetime
+	FailureTimestampUtc            filetime
 	FailureReason                  FabricUpgradeFailureReason
 	UpgradeDomainProgressAtFailure *innerFabricUpgradeDomainProgress
 	Reserved                       unsafe.Pointer
@@ -20738,7 +19951,7 @@ func (obj *innerFabricUpgradeProgress) toGoStruct() (dst *FabricUpgradeProgress)
 	dst.UpgradeDescription = obj.UpgradeDescription.toGoStruct()
 	dst.UpgradeState = obj.UpgradeState
 	dst.UpgradeMode = obj.UpgradeMode
-	dst.NextUpgradeDomain = windows.UTF16PtrToString(obj.NextUpgradeDomain)
+	dst.NextUpgradeDomain = utf16PtrToString(obj.NextUpgradeDomain)
 	{
 		var innerlst []innerFabricUpgradeDomainStatusDescription
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UpgradeDomains.Items), int(obj.UpgradeDomains.Count))
@@ -20773,8 +19986,8 @@ func (obj *innerFabricUpgradeProgress) toGoStruct() (dst *FabricUpgradeProgress)
 	if ex1 == nil {
 		return
 	}
-	dst.StartTimestampUtc = time.Unix(0, ex1.StartTimestampUtc.Nanoseconds())
-	dst.FailureTimestampUtc = time.Unix(0, ex1.FailureTimestampUtc.Nanoseconds())
+	dst.StartTimestampUtc = ex1.StartTimestampUtc.ToTime()
+	dst.FailureTimestampUtc = ex1.FailureTimestampUtc.ToTime()
 	dst.FailureReason = ex1.FailureReason
 	dst.UpgradeDomainProgressAtFailure = ex1.UpgradeDomainProgressAtFailure.toGoStruct()
 	return
@@ -20790,9 +20003,7 @@ func (obj *FabricPackageSharingPolicy) toInnerStruct() *innerFabricPackageSharin
 		return nil
 	}
 	dst := &innerFabricPackageSharingPolicy{}
-	s_506, _ := windows.UTF16PtrFromString(obj.PackageName)
-	dst.PackageName = s_506
-
+	dst.PackageName = utf16PtrFromString(obj.PackageName)
 	dst.Scope = obj.Scope
 	return dst
 }
@@ -20808,7 +20019,7 @@ func (obj *innerFabricPackageSharingPolicy) toGoStruct() (dst *FabricPackageShar
 		return
 	}
 	dst = &FabricPackageSharingPolicy{}
-	dst.PackageName = windows.UTF16PtrToString(obj.PackageName)
+	dst.PackageName = utf16PtrToString(obj.PackageName)
 	dst.Scope = obj.Scope
 	return
 }
@@ -21027,9 +20238,7 @@ func (obj *FabricClusterHealthQueryDescription) toInnerStruct() *innerFabricClus
 		for k, v := range obj.ApplicationHealthPolicyMap {
 			kv := innerFabricApplicationHealthPolicyMapItem{}
 
-			s_508, _ := windows.UTF16PtrFromString(k)
-			kv.ApplicationName = s_508
-
+			kv.ApplicationName = utf16PtrFromString(k)
 			kv.HealthPolicy = v.toInnerStruct()
 
 			tmp = append(tmp, kv)
@@ -21082,7 +20291,7 @@ func (obj *innerFabricClusterHealthQueryDescription) toGoStruct() (dst *FabricCl
 			var k string
 			var v *FabricApplicationHealthPolicy
 
-			k = windows.UTF16PtrToString(kv.ApplicationName)
+			k = utf16PtrToString(kv.ApplicationName)
 			v = kv.HealthPolicy.toGoStruct()
 			mapvar[k] = *v
 
@@ -21135,9 +20344,7 @@ func (obj *FabricNodeHealthQueryDescription) toInnerStruct() *innerFabricNodeHea
 		return nil
 	}
 	dst := &innerFabricNodeHealthQueryDescription{}
-	s_510, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_510
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.HealthPolicy = obj.HealthPolicy.toInnerStruct()
 	dst.EventsFilter = obj.EventsFilter.toInnerStruct()
 	return dst
@@ -21155,7 +20362,7 @@ func (obj *innerFabricNodeHealthQueryDescription) toGoStruct() (dst *FabricNodeH
 		return
 	}
 	dst = &FabricNodeHealthQueryDescription{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.HealthPolicy = obj.HealthPolicy.toGoStruct()
 	dst.EventsFilter = obj.EventsFilter.toGoStruct()
 	return
@@ -21175,9 +20382,7 @@ func (obj *FabricApplicationHealthQueryDescription) toInnerStruct() *innerFabric
 		return nil
 	}
 	dst := &innerFabricApplicationHealthQueryDescription{}
-	s_511, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_511
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
 	dst.HealthPolicy = obj.HealthPolicy.toInnerStruct()
 	dst.EventsFilter = obj.EventsFilter.toInnerStruct()
 	dst.ServicesFilter = obj.ServicesFilter.toInnerStruct()
@@ -21207,7 +20412,7 @@ func (obj *innerFabricApplicationHealthQueryDescription) toGoStruct() (dst *Fabr
 		return
 	}
 	dst = &FabricApplicationHealthQueryDescription{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
 	dst.HealthPolicy = obj.HealthPolicy.toGoStruct()
 	dst.EventsFilter = obj.EventsFilter.toGoStruct()
 	dst.ServicesFilter = obj.ServicesFilter.toGoStruct()
@@ -21255,9 +20460,7 @@ func (obj *FabricServiceHealthQueryDescription) toInnerStruct() *innerFabricServ
 		return nil
 	}
 	dst := &innerFabricServiceHealthQueryDescription{}
-	s_512, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_512
-
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
 	dst.HealthPolicy = obj.HealthPolicy.toInnerStruct()
 	dst.EventsFilter = obj.EventsFilter.toInnerStruct()
 	dst.PartitionsFilter = obj.PartitionsFilter.toInnerStruct()
@@ -21285,7 +20488,7 @@ func (obj *innerFabricServiceHealthQueryDescription) toGoStruct() (dst *FabricSe
 		return
 	}
 	dst = &FabricServiceHealthQueryDescription{}
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	dst.HealthPolicy = obj.HealthPolicy.toGoStruct()
 	dst.EventsFilter = obj.EventsFilter.toGoStruct()
 	dst.PartitionsFilter = obj.PartitionsFilter.toGoStruct()
@@ -21320,7 +20523,7 @@ func (obj *FabricServiceHealthStatisticsFilter) toInnerStruct() *innerFabricServ
 }
 
 type FabricPartitionHealthQueryDescription struct {
-	PartitionId            windows.GUID
+	PartitionId            uuid.UUID
 	HealthPolicy           *FabricApplicationHealthPolicy
 	EventsFilter           *FabricHealthEventsFilter
 	ReplicasFilter         *FabricReplicaHealthStatesFilter
@@ -21344,7 +20547,7 @@ func (obj *FabricPartitionHealthQueryDescription) toInnerStruct() *innerFabricPa
 }
 
 type innerFabricPartitionHealthQueryDescription struct {
-	PartitionId    windows.GUID
+	PartitionId    uuid.UUID
 	HealthPolicy   *innerFabricApplicationHealthPolicy
 	EventsFilter   *innerFabricHealthEventsFilter
 	ReplicasFilter *innerFabricReplicaHealthStatesFilter
@@ -21395,7 +20598,7 @@ func (obj *FabricPartitionHealthStatisticsFilter) toInnerStruct() *innerFabricPa
 }
 
 type FabricReplicaHealthQueryDescription struct {
-	PartitionId         windows.GUID
+	PartitionId         uuid.UUID
 	ReplicaOrInstanceId int64
 	HealthPolicy        *FabricApplicationHealthPolicy
 	EventsFilter        *FabricHealthEventsFilter
@@ -21432,12 +20635,8 @@ func (obj *FabricDeployedApplicationHealthQueryDescription) toInnerStruct() *inn
 		return nil
 	}
 	dst := &innerFabricDeployedApplicationHealthQueryDescription{}
-	s_513, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_513
-
-	s_514, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_514
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.HealthPolicy = obj.HealthPolicy.toInnerStruct()
 	dst.EventsFilter = obj.EventsFilter.toInnerStruct()
 	dst.DeployedServicePackagesFilter = obj.DeployedServicePackagesFilter.toInnerStruct()
@@ -21466,8 +20665,8 @@ func (obj *innerFabricDeployedApplicationHealthQueryDescription) toGoStruct() (d
 		return
 	}
 	dst = &FabricDeployedApplicationHealthQueryDescription{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.HealthPolicy = obj.HealthPolicy.toGoStruct()
 	dst.EventsFilter = obj.EventsFilter.toGoStruct()
 	dst.DeployedServicePackagesFilter = obj.DeployedServicePackagesFilter.toGoStruct()
@@ -21515,22 +20714,14 @@ func (obj *FabricDeployedServicePackageHealthQueryDescription) toInnerStruct() *
 		return nil
 	}
 	dst := &innerFabricDeployedServicePackageHealthQueryDescription{}
-	s_515, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_515
-
-	s_516, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_516
-
-	s_517, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_517
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
+	dst.ServiceManifestName = utf16PtrFromString(obj.ServiceManifestName)
 	dst.HealthPolicy = obj.HealthPolicy.toInnerStruct()
 	dst.EventsFilter = obj.EventsFilter.toInnerStruct()
 	ex0 := dst
 	ex1 := &innerFabricDeployedServicePackageHealthQueryDescriptionEx1{}
-	s_518, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	ex1.ServicePackageActivationId = s_518
-
+	ex1.ServicePackageActivationId = utf16PtrFromString(obj.ServicePackageActivationId)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
@@ -21553,9 +20744,9 @@ func (obj *innerFabricDeployedServicePackageHealthQueryDescription) toGoStruct()
 		return
 	}
 	dst = &FabricDeployedServicePackageHealthQueryDescription{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
-	dst.ServiceManifestName = windows.UTF16PtrToString(obj.ServiceManifestName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
+	dst.ServiceManifestName = utf16PtrToString(obj.ServiceManifestName)
 	dst.HealthPolicy = obj.HealthPolicy.toGoStruct()
 	dst.EventsFilter = obj.EventsFilter.toGoStruct()
 	ex0 := obj
@@ -21563,7 +20754,7 @@ func (obj *innerFabricDeployedServicePackageHealthQueryDescription) toGoStruct()
 	if ex1 == nil {
 		return
 	}
-	dst.ServicePackageActivationId = windows.UTF16PtrToString(ex1.ServicePackageActivationId)
+	dst.ServicePackageActivationId = utf16PtrToString(ex1.ServicePackageActivationId)
 	return
 }
 
@@ -21637,9 +20828,7 @@ func (obj *FabricRepairNodeImpact) toInnerStruct() *innerFabricRepairNodeImpact 
 		return nil
 	}
 	dst := &innerFabricRepairNodeImpact{}
-	s_519, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_519
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.ImpactLevel = obj.ImpactLevel
 	return dst
 }
@@ -21655,7 +20844,7 @@ func (obj *innerFabricRepairNodeImpact) toGoStruct() (dst *FabricRepairNodeImpac
 		return
 	}
 	dst = &FabricRepairNodeImpact{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.ImpactLevel = obj.ImpactLevel
 	return
 }
@@ -21726,9 +20915,7 @@ func (obj *FabricRepairResultDescription) toInnerStruct() *innerFabricRepairResu
 	dst := &innerFabricRepairResultDescription{}
 	dst.ResultStatus = obj.ResultStatus
 	dst.ResultCode = obj.ResultCode
-	s_520, _ := windows.UTF16PtrFromString(obj.ResultDetails)
-	dst.ResultDetails = s_520
-
+	dst.ResultDetails = utf16PtrFromString(obj.ResultDetails)
 	return dst
 }
 
@@ -21746,7 +20933,7 @@ func (obj *innerFabricRepairResultDescription) toGoStruct() (dst *FabricRepairRe
 	dst = &FabricRepairResultDescription{}
 	dst.ResultStatus = obj.ResultStatus
 	dst.ResultCode = obj.ResultCode
-	dst.ResultDetails = windows.UTF16PtrToString(obj.ResultDetails)
+	dst.ResultDetails = utf16PtrToString(obj.ResultDetails)
 	return
 }
 
@@ -21769,38 +20956,38 @@ func (obj *FabricRepairTaskHistory) toInnerStruct() *innerFabricRepairTaskHistor
 		return nil
 	}
 	dst := &innerFabricRepairTaskHistory{}
-	dst.CreatedUtcTimestamp = windows.NsecToFiletime(obj.CreatedUtcTimestamp.UnixNano())
-	dst.ClaimedUtcTimestamp = windows.NsecToFiletime(obj.ClaimedUtcTimestamp.UnixNano())
-	dst.PreparingUtcTimestamp = windows.NsecToFiletime(obj.PreparingUtcTimestamp.UnixNano())
-	dst.ApprovedUtcTimestamp = windows.NsecToFiletime(obj.ApprovedUtcTimestamp.UnixNano())
-	dst.ExecutingUtcTimestamp = windows.NsecToFiletime(obj.ExecutingUtcTimestamp.UnixNano())
-	dst.RestoringUtcTimestamp = windows.NsecToFiletime(obj.RestoringUtcTimestamp.UnixNano())
-	dst.CompletedUtcTimestamp = windows.NsecToFiletime(obj.CompletedUtcTimestamp.UnixNano())
+	dst.CreatedUtcTimestamp = timeToFiletime(obj.CreatedUtcTimestamp)
+	dst.ClaimedUtcTimestamp = timeToFiletime(obj.ClaimedUtcTimestamp)
+	dst.PreparingUtcTimestamp = timeToFiletime(obj.PreparingUtcTimestamp)
+	dst.ApprovedUtcTimestamp = timeToFiletime(obj.ApprovedUtcTimestamp)
+	dst.ExecutingUtcTimestamp = timeToFiletime(obj.ExecutingUtcTimestamp)
+	dst.RestoringUtcTimestamp = timeToFiletime(obj.RestoringUtcTimestamp)
+	dst.CompletedUtcTimestamp = timeToFiletime(obj.CompletedUtcTimestamp)
 	ex0 := dst
 	ex1 := &innerFabricRepairTaskHistoryEx1{}
-	ex1.PreparingHealthCheckStartUtcTimestamp = windows.NsecToFiletime(obj.PreparingHealthCheckStartUtcTimestamp.UnixNano())
-	ex1.PreparingHealthCheckEndUtcTimestamp = windows.NsecToFiletime(obj.PreparingHealthCheckEndUtcTimestamp.UnixNano())
-	ex1.RestoringHealthCheckStartUtcTimestamp = windows.NsecToFiletime(obj.RestoringHealthCheckStartUtcTimestamp.UnixNano())
-	ex1.RestoringHealthCheckEndUtcTimestamp = windows.NsecToFiletime(obj.RestoringHealthCheckEndUtcTimestamp.UnixNano())
+	ex1.PreparingHealthCheckStartUtcTimestamp = timeToFiletime(obj.PreparingHealthCheckStartUtcTimestamp)
+	ex1.PreparingHealthCheckEndUtcTimestamp = timeToFiletime(obj.PreparingHealthCheckEndUtcTimestamp)
+	ex1.RestoringHealthCheckStartUtcTimestamp = timeToFiletime(obj.RestoringHealthCheckStartUtcTimestamp)
+	ex1.RestoringHealthCheckEndUtcTimestamp = timeToFiletime(obj.RestoringHealthCheckEndUtcTimestamp)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
 
 type innerFabricRepairTaskHistory struct {
-	CreatedUtcTimestamp   windows.Filetime
-	ClaimedUtcTimestamp   windows.Filetime
-	PreparingUtcTimestamp windows.Filetime
-	ApprovedUtcTimestamp  windows.Filetime
-	ExecutingUtcTimestamp windows.Filetime
-	RestoringUtcTimestamp windows.Filetime
-	CompletedUtcTimestamp windows.Filetime
+	CreatedUtcTimestamp   filetime
+	ClaimedUtcTimestamp   filetime
+	PreparingUtcTimestamp filetime
+	ApprovedUtcTimestamp  filetime
+	ExecutingUtcTimestamp filetime
+	RestoringUtcTimestamp filetime
+	CompletedUtcTimestamp filetime
 	Reserved              unsafe.Pointer
 }
 type innerFabricRepairTaskHistoryEx1 struct {
-	PreparingHealthCheckStartUtcTimestamp windows.Filetime
-	PreparingHealthCheckEndUtcTimestamp   windows.Filetime
-	RestoringHealthCheckStartUtcTimestamp windows.Filetime
-	RestoringHealthCheckEndUtcTimestamp   windows.Filetime
+	PreparingHealthCheckStartUtcTimestamp filetime
+	PreparingHealthCheckEndUtcTimestamp   filetime
+	RestoringHealthCheckStartUtcTimestamp filetime
+	RestoringHealthCheckEndUtcTimestamp   filetime
 	Reserved                              unsafe.Pointer
 }
 
@@ -21809,22 +20996,22 @@ func (obj *innerFabricRepairTaskHistory) toGoStruct() (dst *FabricRepairTaskHist
 		return
 	}
 	dst = &FabricRepairTaskHistory{}
-	dst.CreatedUtcTimestamp = time.Unix(0, obj.CreatedUtcTimestamp.Nanoseconds())
-	dst.ClaimedUtcTimestamp = time.Unix(0, obj.ClaimedUtcTimestamp.Nanoseconds())
-	dst.PreparingUtcTimestamp = time.Unix(0, obj.PreparingUtcTimestamp.Nanoseconds())
-	dst.ApprovedUtcTimestamp = time.Unix(0, obj.ApprovedUtcTimestamp.Nanoseconds())
-	dst.ExecutingUtcTimestamp = time.Unix(0, obj.ExecutingUtcTimestamp.Nanoseconds())
-	dst.RestoringUtcTimestamp = time.Unix(0, obj.RestoringUtcTimestamp.Nanoseconds())
-	dst.CompletedUtcTimestamp = time.Unix(0, obj.CompletedUtcTimestamp.Nanoseconds())
+	dst.CreatedUtcTimestamp = obj.CreatedUtcTimestamp.ToTime()
+	dst.ClaimedUtcTimestamp = obj.ClaimedUtcTimestamp.ToTime()
+	dst.PreparingUtcTimestamp = obj.PreparingUtcTimestamp.ToTime()
+	dst.ApprovedUtcTimestamp = obj.ApprovedUtcTimestamp.ToTime()
+	dst.ExecutingUtcTimestamp = obj.ExecutingUtcTimestamp.ToTime()
+	dst.RestoringUtcTimestamp = obj.RestoringUtcTimestamp.ToTime()
+	dst.CompletedUtcTimestamp = obj.CompletedUtcTimestamp.ToTime()
 	ex0 := obj
 	ex1 := (*innerFabricRepairTaskHistoryEx1)(ex0.Reserved)
 	if ex1 == nil {
 		return
 	}
-	dst.PreparingHealthCheckStartUtcTimestamp = time.Unix(0, ex1.PreparingHealthCheckStartUtcTimestamp.Nanoseconds())
-	dst.PreparingHealthCheckEndUtcTimestamp = time.Unix(0, ex1.PreparingHealthCheckEndUtcTimestamp.Nanoseconds())
-	dst.RestoringHealthCheckStartUtcTimestamp = time.Unix(0, ex1.RestoringHealthCheckStartUtcTimestamp.Nanoseconds())
-	dst.RestoringHealthCheckEndUtcTimestamp = time.Unix(0, ex1.RestoringHealthCheckEndUtcTimestamp.Nanoseconds())
+	dst.PreparingHealthCheckStartUtcTimestamp = ex1.PreparingHealthCheckStartUtcTimestamp.ToTime()
+	dst.PreparingHealthCheckEndUtcTimestamp = ex1.PreparingHealthCheckEndUtcTimestamp.ToTime()
+	dst.RestoringHealthCheckStartUtcTimestamp = ex1.RestoringHealthCheckStartUtcTimestamp.ToTime()
+	dst.RestoringHealthCheckEndUtcTimestamp = ex1.RestoringHealthCheckEndUtcTimestamp.ToTime()
 	return
 }
 
@@ -21838,12 +21025,8 @@ func (obj *FabricRepairExecutorState) toInnerStruct() *innerFabricRepairExecutor
 		return nil
 	}
 	dst := &innerFabricRepairExecutorState{}
-	s_521, _ := windows.UTF16PtrFromString(obj.Executor)
-	dst.Executor = s_521
-
-	s_522, _ := windows.UTF16PtrFromString(obj.ExecutorData)
-	dst.ExecutorData = s_522
-
+	dst.Executor = utf16PtrFromString(obj.Executor)
+	dst.ExecutorData = utf16PtrFromString(obj.ExecutorData)
 	return dst
 }
 
@@ -21858,8 +21041,8 @@ func (obj *innerFabricRepairExecutorState) toGoStruct() (dst *FabricRepairExecut
 		return
 	}
 	dst = &FabricRepairExecutorState{}
-	dst.Executor = windows.UTF16PtrToString(obj.Executor)
-	dst.ExecutorData = windows.UTF16PtrToString(obj.ExecutorData)
+	dst.Executor = utf16PtrToString(obj.Executor)
+	dst.ExecutorData = utf16PtrToString(obj.ExecutorData)
 	return
 }
 
@@ -21878,9 +21061,7 @@ func (obj *FabricRepairTaskHealthPolicyUpdateDescription) toInnerStruct() *inner
 	}
 	dst := &innerFabricRepairTaskHealthPolicyUpdateDescription{}
 	dst.Scope = obj.Scope.toInnerStruct()
-	s_523, _ := windows.UTF16PtrFromString(obj.RepairTaskId)
-	dst.RepairTaskId = s_523
-
+	dst.RepairTaskId = utf16PtrFromString(obj.RepairTaskId)
 	dst.Version = obj.Version
 	dst.Flags = obj.Flags
 	dst.PerformPreparingHealthCheck = obj.PerformPreparingHealthCheck
@@ -21904,7 +21085,7 @@ func (obj *innerFabricRepairTaskHealthPolicyUpdateDescription) toGoStruct() (dst
 	}
 	dst = &FabricRepairTaskHealthPolicyUpdateDescription{}
 	dst.Scope = obj.Scope.toGoStruct()
-	dst.RepairTaskId = windows.UTF16PtrToString(obj.RepairTaskId)
+	dst.RepairTaskId = utf16PtrToString(obj.RepairTaskId)
 	dst.Version = obj.Version
 	dst.Flags = obj.Flags
 	dst.PerformPreparingHealthCheck = obj.PerformPreparingHealthCheck
@@ -21937,18 +21118,12 @@ func (obj *FabricRepairTask) toInnerStruct() *innerFabricRepairTask {
 	}
 	dst := &innerFabricRepairTask{}
 	dst.Scope = obj.Scope.toInnerStruct()
-	s_524, _ := windows.UTF16PtrFromString(obj.TaskId)
-	dst.TaskId = s_524
-
+	dst.TaskId = utf16PtrFromString(obj.TaskId)
 	dst.Version = obj.Version
-	s_525, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_525
-
+	dst.Description = utf16PtrFromString(obj.Description)
 	dst.State = obj.State
 	dst.Flags = obj.Flags
-	s_526, _ := windows.UTF16PtrFromString(obj.Action)
-	dst.Action = s_526
-
+	dst.Action = utf16PtrFromString(obj.Action)
 	dst.Target = obj.Target.toInnerStruct()
 	dst.ExecutorState = obj.ExecutorState.toInnerStruct()
 	dst.Impact = obj.Impact.toInnerStruct()
@@ -21993,12 +21168,12 @@ func (obj *innerFabricRepairTask) toGoStruct() (dst *FabricRepairTask) {
 	}
 	dst = &FabricRepairTask{}
 	dst.Scope = obj.Scope.toGoStruct()
-	dst.TaskId = windows.UTF16PtrToString(obj.TaskId)
+	dst.TaskId = utf16PtrToString(obj.TaskId)
 	dst.Version = obj.Version
-	dst.Description = windows.UTF16PtrToString(obj.Description)
+	dst.Description = utf16PtrToString(obj.Description)
 	dst.State = obj.State
 	dst.Flags = obj.Flags
-	dst.Action = windows.UTF16PtrToString(obj.Action)
+	dst.Action = utf16PtrToString(obj.Action)
 	dst.Target = obj.Target.toGoStruct()
 	dst.ExecutorState = obj.ExecutorState.toGoStruct()
 	dst.Impact = obj.Impact.toGoStruct()
@@ -22052,9 +21227,7 @@ func (obj *FabricRepairCancelDescription) toInnerStruct() *innerFabricRepairCanc
 	}
 	dst := &innerFabricRepairCancelDescription{}
 	dst.Scope = obj.Scope.toInnerStruct()
-	s_527, _ := windows.UTF16PtrFromString(obj.RepairTaskId)
-	dst.RepairTaskId = s_527
-
+	dst.RepairTaskId = utf16PtrFromString(obj.RepairTaskId)
 	dst.Version = obj.Version
 	dst.RequestAbort = obj.RequestAbort
 	return dst
@@ -22074,7 +21247,7 @@ func (obj *innerFabricRepairCancelDescription) toGoStruct() (dst *FabricRepairCa
 	}
 	dst = &FabricRepairCancelDescription{}
 	dst.Scope = obj.Scope.toGoStruct()
-	dst.RepairTaskId = windows.UTF16PtrToString(obj.RepairTaskId)
+	dst.RepairTaskId = utf16PtrToString(obj.RepairTaskId)
 	dst.Version = obj.Version
 	dst.RequestAbort = obj.RequestAbort
 	return
@@ -22092,9 +21265,7 @@ func (obj *FabricRepairDeleteDescription) toInnerStruct() *innerFabricRepairDele
 	}
 	dst := &innerFabricRepairDeleteDescription{}
 	dst.Scope = obj.Scope.toInnerStruct()
-	s_528, _ := windows.UTF16PtrFromString(obj.RepairTaskId)
-	dst.RepairTaskId = s_528
-
+	dst.RepairTaskId = utf16PtrFromString(obj.RepairTaskId)
 	dst.Version = obj.Version
 	return dst
 }
@@ -22112,7 +21283,7 @@ func (obj *innerFabricRepairDeleteDescription) toGoStruct() (dst *FabricRepairDe
 	}
 	dst = &FabricRepairDeleteDescription{}
 	dst.Scope = obj.Scope.toGoStruct()
-	dst.RepairTaskId = windows.UTF16PtrToString(obj.RepairTaskId)
+	dst.RepairTaskId = utf16PtrToString(obj.RepairTaskId)
 	dst.Version = obj.Version
 	return
 }
@@ -22129,9 +21300,7 @@ func (obj *FabricRepairApproveDescription) toInnerStruct() *innerFabricRepairApp
 	}
 	dst := &innerFabricRepairApproveDescription{}
 	dst.Scope = obj.Scope.toInnerStruct()
-	s_529, _ := windows.UTF16PtrFromString(obj.RepairTaskId)
-	dst.RepairTaskId = s_529
-
+	dst.RepairTaskId = utf16PtrFromString(obj.RepairTaskId)
 	dst.Version = obj.Version
 	return dst
 }
@@ -22149,7 +21318,7 @@ func (obj *innerFabricRepairApproveDescription) toGoStruct() (dst *FabricRepairA
 	}
 	dst = &FabricRepairApproveDescription{}
 	dst.Scope = obj.Scope.toGoStruct()
-	dst.RepairTaskId = windows.UTF16PtrToString(obj.RepairTaskId)
+	dst.RepairTaskId = utf16PtrToString(obj.RepairTaskId)
 	dst.Version = obj.Version
 	return
 }
@@ -22167,13 +21336,9 @@ func (obj *FabricRepairTaskQueryDescription) toInnerStruct() *innerFabricRepairT
 	}
 	dst := &innerFabricRepairTaskQueryDescription{}
 	dst.Scope = obj.Scope.toInnerStruct()
-	s_530, _ := windows.UTF16PtrFromString(obj.TaskIdFilter)
-	dst.TaskIdFilter = s_530
-
+	dst.TaskIdFilter = utf16PtrFromString(obj.TaskIdFilter)
 	dst.StateFilter = obj.StateFilter
-	s_531, _ := windows.UTF16PtrFromString(obj.ExecutorFilter)
-	dst.ExecutorFilter = s_531
-
+	dst.ExecutorFilter = utf16PtrFromString(obj.ExecutorFilter)
 	return dst
 }
 
@@ -22191,9 +21356,9 @@ func (obj *innerFabricRepairTaskQueryDescription) toGoStruct() (dst *FabricRepai
 	}
 	dst = &FabricRepairTaskQueryDescription{}
 	dst.Scope = obj.Scope.toGoStruct()
-	dst.TaskIdFilter = windows.UTF16PtrToString(obj.TaskIdFilter)
+	dst.TaskIdFilter = utf16PtrToString(obj.TaskIdFilter)
 	dst.StateFilter = obj.StateFilter
-	dst.ExecutorFilter = windows.UTF16PtrToString(obj.ExecutorFilter)
+	dst.ExecutorFilter = utf16PtrToString(obj.ExecutorFilter)
 	return
 }
 
@@ -22208,7 +21373,7 @@ const (
 type FabricStoreBackupInfo struct {
 	BackupFolder  string
 	BackupOption  FabricStoreBackupOption
-	BackupChainId windows.GUID
+	BackupChainId uuid.UUID
 	BackupIndex   uint32
 }
 
@@ -22217,9 +21382,7 @@ func (obj *FabricStoreBackupInfo) toInnerStruct() *innerFabricStoreBackupInfo {
 		return nil
 	}
 	dst := &innerFabricStoreBackupInfo{}
-	s_532, _ := windows.UTF16PtrFromString(obj.BackupFolder)
-	dst.BackupFolder = s_532
-
+	dst.BackupFolder = utf16PtrFromString(obj.BackupFolder)
 	dst.BackupOption = obj.BackupOption
 	ex0 := dst
 	ex1 := &innerFabricStoreBackupInfoEx1{}
@@ -22235,7 +21398,7 @@ type innerFabricStoreBackupInfo struct {
 	Reserved     unsafe.Pointer
 }
 type innerFabricStoreBackupInfoEx1 struct {
-	BackupChainId windows.GUID
+	BackupChainId uuid.UUID
 	BackupIndex   uint32
 	Reserved      unsafe.Pointer
 }
@@ -22245,7 +21408,7 @@ func (obj *innerFabricStoreBackupInfo) toGoStruct() (dst *FabricStoreBackupInfo)
 		return
 	}
 	dst = &FabricStoreBackupInfo{}
-	dst.BackupFolder = windows.UTF16PtrToString(obj.BackupFolder)
+	dst.BackupFolder = utf16PtrToString(obj.BackupFolder)
 	dst.BackupOption = obj.BackupOption
 	ex0 := obj
 	ex1 := (*innerFabricStoreBackupInfoEx1)(ex0.Reserved)
@@ -22272,15 +21435,13 @@ func (obj *FabricDeltaNodesCheckHealthEvaluation) toInnerStruct() *innerFabricDe
 		return nil
 	}
 	dst := &innerFabricDeltaNodesCheckHealthEvaluation{}
-	s_533, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_533
-
+	dst.Description = utf16PtrFromString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	dst.BaselineErrorCount = obj.BaselineErrorCount
 	dst.BaselineTotalCount = obj.BaselineTotalCount
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentDeltaUnhealthyNodes = obj.MaxPercentDeltaUnhealthyNodes
-	lst_534 := &innerFabricHealthEvaluationList{}
+	lst_107 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -22293,13 +21454,13 @@ func (obj *FabricDeltaNodesCheckHealthEvaluation) toInnerStruct() *innerFabricDe
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_534.Count = uint32(len(tmp))
+		lst_107.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_534.Items = &tmp[0]
+			lst_107.Items = &tmp[0]
 		}
 
 	}
-	dst.UnhealthyEvaluations = lst_534
+	dst.UnhealthyEvaluations = lst_107
 	return dst
 }
 
@@ -22319,7 +21480,7 @@ func (obj *innerFabricDeltaNodesCheckHealthEvaluation) toGoStruct() (dst *Fabric
 		return
 	}
 	dst = &FabricDeltaNodesCheckHealthEvaluation{}
-	dst.Description = windows.UTF16PtrToString(obj.Description)
+	dst.Description = utf16PtrToString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
 	dst.BaselineErrorCount = obj.BaselineErrorCount
 	dst.BaselineTotalCount = obj.BaselineTotalCount
@@ -22357,18 +21518,14 @@ func (obj *FabricUpgradeDomainDeltaNodesCheckHealthEvaluation) toInnerStruct() *
 		return nil
 	}
 	dst := &innerFabricUpgradeDomainDeltaNodesCheckHealthEvaluation{}
-	s_535, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_535
-
+	dst.Description = utf16PtrFromString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	s_536, _ := windows.UTF16PtrFromString(obj.UpgradeDomainName)
-	dst.UpgradeDomainName = s_536
-
+	dst.UpgradeDomainName = utf16PtrFromString(obj.UpgradeDomainName)
 	dst.BaselineErrorCount = obj.BaselineErrorCount
 	dst.BaselineTotalCount = obj.BaselineTotalCount
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUpgradeDomainDeltaUnhealthyNodes = obj.MaxPercentUpgradeDomainDeltaUnhealthyNodes
-	lst_537 := &innerFabricHealthEvaluationList{}
+	lst_108 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -22381,13 +21538,13 @@ func (obj *FabricUpgradeDomainDeltaNodesCheckHealthEvaluation) toInnerStruct() *
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_537.Count = uint32(len(tmp))
+		lst_108.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_537.Items = &tmp[0]
+			lst_108.Items = &tmp[0]
 		}
 
 	}
-	dst.UnhealthyEvaluations = lst_537
+	dst.UnhealthyEvaluations = lst_108
 	return dst
 }
 
@@ -22408,9 +21565,9 @@ func (obj *innerFabricUpgradeDomainDeltaNodesCheckHealthEvaluation) toGoStruct()
 		return
 	}
 	dst = &FabricUpgradeDomainDeltaNodesCheckHealthEvaluation{}
-	dst.Description = windows.UTF16PtrToString(obj.Description)
+	dst.Description = utf16PtrToString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	dst.UpgradeDomainName = windows.UTF16PtrToString(obj.UpgradeDomainName)
+	dst.UpgradeDomainName = utf16PtrToString(obj.UpgradeDomainName)
 	dst.BaselineErrorCount = obj.BaselineErrorCount
 	dst.BaselineTotalCount = obj.BaselineTotalCount
 	dst.TotalCount = obj.TotalCount
@@ -22440,9 +21597,7 @@ func (obj *FabricPagingStatus) toInnerStruct() *innerFabricPagingStatus {
 		return nil
 	}
 	dst := &innerFabricPagingStatus{}
-	s_538, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
-	dst.ContinuationToken = s_538
-
+	dst.ContinuationToken = utf16PtrFromString(obj.ContinuationToken)
 	return dst
 }
 
@@ -22456,7 +21611,7 @@ func (obj *innerFabricPagingStatus) toGoStruct() (dst *FabricPagingStatus) {
 		return
 	}
 	dst = &FabricPagingStatus{}
-	dst.ContinuationToken = windows.UTF16PtrToString(obj.ContinuationToken)
+	dst.ContinuationToken = utf16PtrToString(obj.ContinuationToken)
 	return
 }
 
@@ -22470,9 +21625,7 @@ func (obj *FabricApplicationTypeHealthPolicyMapItem) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := &innerFabricApplicationTypeHealthPolicyMapItem{}
-	s_539, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
-	dst.ApplicationTypeName = s_539
-
+	dst.ApplicationTypeName = utf16PtrFromString(obj.ApplicationTypeName)
 	dst.MaxPercentUnhealthyApplications = obj.MaxPercentUnhealthyApplications
 	return dst
 }
@@ -22487,7 +21640,7 @@ func (obj *innerFabricApplicationTypeHealthPolicyMapItem) toGoStruct() (dst *Fab
 		return
 	}
 	dst = &FabricApplicationTypeHealthPolicyMapItem{}
-	dst.ApplicationTypeName = windows.UTF16PtrToString(obj.ApplicationTypeName)
+	dst.ApplicationTypeName = utf16PtrToString(obj.ApplicationTypeName)
 	dst.MaxPercentUnhealthyApplications = obj.MaxPercentUnhealthyApplications
 	return
 }
@@ -22510,7 +21663,7 @@ func (obj *innerFabricApplicationTypeHealthPolicyMap) toGoStruct() map[string]by
 			var k string
 			var v byte
 
-			k = windows.UTF16PtrToString(kv.ApplicationTypeName)
+			k = utf16PtrToString(kv.ApplicationTypeName)
 			v = kv.MaxPercentUnhealthyApplications
 			mapvar[k] = v
 
@@ -22535,14 +21688,10 @@ func (obj *FabricApplicationTypeApplicationsHealthEvaluation) toInnerStruct() *i
 		return nil
 	}
 	dst := &innerFabricApplicationTypeApplicationsHealthEvaluation{}
-	s_541, _ := windows.UTF16PtrFromString(obj.Description)
-	dst.Description = s_541
-
+	dst.Description = utf16PtrFromString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	s_542, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
-	dst.ApplicationTypeName = s_542
-
-	lst_543 := &innerFabricHealthEvaluationList{}
+	dst.ApplicationTypeName = utf16PtrFromString(obj.ApplicationTypeName)
+	lst_110 := &innerFabricHealthEvaluationList{}
 	{
 
 		var tmp []innerFabricHealthEvaluation
@@ -22555,13 +21704,13 @@ func (obj *FabricApplicationTypeApplicationsHealthEvaluation) toInnerStruct() *i
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_543.Count = uint32(len(tmp))
+		lst_110.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_543.Items = &tmp[0]
+			lst_110.Items = &tmp[0]
 		}
 
 	}
-	dst.UnhealthyEvaluations = lst_543
+	dst.UnhealthyEvaluations = lst_110
 	dst.TotalCount = obj.TotalCount
 	dst.MaxPercentUnhealthyApplications = obj.MaxPercentUnhealthyApplications
 	return dst
@@ -22582,9 +21731,9 @@ func (obj *innerFabricApplicationTypeApplicationsHealthEvaluation) toGoStruct() 
 		return
 	}
 	dst = &FabricApplicationTypeApplicationsHealthEvaluation{}
-	dst.Description = windows.UTF16PtrToString(obj.Description)
+	dst.Description = utf16PtrToString(obj.Description)
 	dst.AggregatedHealthState = obj.AggregatedHealthState
-	dst.ApplicationTypeName = windows.UTF16PtrToString(obj.ApplicationTypeName)
+	dst.ApplicationTypeName = utf16PtrToString(obj.ApplicationTypeName)
 	{
 		var innerlst []innerFabricHealthEvaluation
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.UnhealthyEvaluations.Items), int(obj.UnhealthyEvaluations.Count))
@@ -22614,9 +21763,7 @@ func (obj *FabricNodeHealthStateFilter) toInnerStruct() *innerFabricNodeHealthSt
 	}
 	dst := &innerFabricNodeHealthStateFilter{}
 	dst.HealthStateFilter = obj.HealthStateFilter
-	s_544, _ := windows.UTF16PtrFromString(obj.NodeNameFilter)
-	dst.NodeNameFilter = s_544
-
+	dst.NodeNameFilter = utf16PtrFromString(obj.NodeNameFilter)
 	return dst
 }
 
@@ -22632,7 +21779,7 @@ func (obj *innerFabricNodeHealthStateFilter) toGoStruct() (dst *FabricNodeHealth
 	}
 	dst = &FabricNodeHealthStateFilter{}
 	dst.HealthStateFilter = obj.HealthStateFilter
-	dst.NodeNameFilter = windows.UTF16PtrToString(obj.NodeNameFilter)
+	dst.NodeNameFilter = utf16PtrToString(obj.NodeNameFilter)
 	return
 }
 
@@ -22671,14 +21818,10 @@ func (obj *FabricDeployedServicePackageHealthStateFilter) toInnerStruct() *inner
 	}
 	dst := &innerFabricDeployedServicePackageHealthStateFilter{}
 	dst.HealthStateFilter = obj.HealthStateFilter
-	s_545, _ := windows.UTF16PtrFromString(obj.ServiceManifestNameFilter)
-	dst.ServiceManifestNameFilter = s_545
-
+	dst.ServiceManifestNameFilter = utf16PtrFromString(obj.ServiceManifestNameFilter)
 	ex0 := dst
 	ex1 := &innerFabricDeployedServicePackageHealthStateFilterEx1{}
-	s_546, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationIdFilter)
-	ex1.ServicePackageActivationIdFilter = s_546
-
+	ex1.ServicePackageActivationIdFilter = utf16PtrFromString(obj.ServicePackageActivationIdFilter)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
@@ -22699,13 +21842,13 @@ func (obj *innerFabricDeployedServicePackageHealthStateFilter) toGoStruct() (dst
 	}
 	dst = &FabricDeployedServicePackageHealthStateFilter{}
 	dst.HealthStateFilter = obj.HealthStateFilter
-	dst.ServiceManifestNameFilter = windows.UTF16PtrToString(obj.ServiceManifestNameFilter)
+	dst.ServiceManifestNameFilter = utf16PtrToString(obj.ServiceManifestNameFilter)
 	ex0 := obj
 	ex1 := (*innerFabricDeployedServicePackageHealthStateFilterEx1)(ex0.Reserved)
 	if ex1 == nil {
 		return
 	}
-	dst.ServicePackageActivationIdFilter = windows.UTF16PtrToString(ex1.ServicePackageActivationIdFilter)
+	dst.ServicePackageActivationIdFilter = utf16PtrToString(ex1.ServicePackageActivationIdFilter)
 	return
 }
 
@@ -22744,10 +21887,8 @@ func (obj *FabricDeployedApplicationHealthStateFilter) toInnerStruct() *innerFab
 	}
 	dst := &innerFabricDeployedApplicationHealthStateFilter{}
 	dst.HealthStateFilter = obj.HealthStateFilter
-	s_547, _ := windows.UTF16PtrFromString(obj.NodeNameFilter)
-	dst.NodeNameFilter = s_547
-
-	lst_548 := &innerFabricDeployedServicePackageHealthStateFilterList{}
+	dst.NodeNameFilter = utf16PtrFromString(obj.NodeNameFilter)
+	lst_111 := &innerFabricDeployedServicePackageHealthStateFilterList{}
 	{
 
 		var tmp []innerFabricDeployedServicePackageHealthStateFilter
@@ -22760,13 +21901,13 @@ func (obj *FabricDeployedApplicationHealthStateFilter) toInnerStruct() *innerFab
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_548.Count = uint32(len(tmp))
+		lst_111.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_548.Items = &tmp[0]
+			lst_111.Items = &tmp[0]
 		}
 
 	}
-	dst.DeployedServicePackageFilters = lst_548
+	dst.DeployedServicePackageFilters = lst_111
 	return dst
 }
 
@@ -22783,7 +21924,7 @@ func (obj *innerFabricDeployedApplicationHealthStateFilter) toGoStruct() (dst *F
 	}
 	dst = &FabricDeployedApplicationHealthStateFilter{}
 	dst.HealthStateFilter = obj.HealthStateFilter
-	dst.NodeNameFilter = windows.UTF16PtrToString(obj.NodeNameFilter)
+	dst.NodeNameFilter = utf16PtrToString(obj.NodeNameFilter)
 	{
 		var innerlst []innerFabricDeployedServicePackageHealthStateFilter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.DeployedServicePackageFilters.Items), int(obj.DeployedServicePackageFilters.Count))
@@ -22870,7 +22011,7 @@ func (obj *innerFabricReplicaHealthStateFilterList) toGoStruct() []FabricReplica
 
 type FabricPartitionHealthStateFilter struct {
 	HealthStateFilter uint32
-	PartitionIdFilter windows.GUID
+	PartitionIdFilter uuid.UUID
 	ReplicaFilters    []FabricReplicaHealthStateFilter
 }
 
@@ -22881,7 +22022,7 @@ func (obj *FabricPartitionHealthStateFilter) toInnerStruct() *innerFabricPartiti
 	dst := &innerFabricPartitionHealthStateFilter{}
 	dst.HealthStateFilter = obj.HealthStateFilter
 	dst.PartitionIdFilter = obj.PartitionIdFilter
-	lst_549 := &innerFabricReplicaHealthStateFilterList{}
+	lst_112 := &innerFabricReplicaHealthStateFilterList{}
 	{
 
 		var tmp []innerFabricReplicaHealthStateFilter
@@ -22894,19 +22035,19 @@ func (obj *FabricPartitionHealthStateFilter) toInnerStruct() *innerFabricPartiti
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_549.Count = uint32(len(tmp))
+		lst_112.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_549.Items = &tmp[0]
+			lst_112.Items = &tmp[0]
 		}
 
 	}
-	dst.ReplicaFilters = lst_549
+	dst.ReplicaFilters = lst_112
 	return dst
 }
 
 type innerFabricPartitionHealthStateFilter struct {
 	HealthStateFilter uint32
-	PartitionIdFilter windows.GUID
+	PartitionIdFilter uuid.UUID
 	ReplicaFilters    *innerFabricReplicaHealthStateFilterList
 	Reserved          unsafe.Pointer
 }
@@ -22969,10 +22110,8 @@ func (obj *FabricServiceHealthStateFilter) toInnerStruct() *innerFabricServiceHe
 	}
 	dst := &innerFabricServiceHealthStateFilter{}
 	dst.HealthStateFilter = obj.HealthStateFilter
-	s_550, _ := windows.UTF16PtrFromString(obj.ServiceNameFilter)
-	dst.ServiceNameFilter = s_550
-
-	lst_551 := &innerFabricPartitionHealthStateFilterList{}
+	dst.ServiceNameFilter = utf16PtrFromString(obj.ServiceNameFilter)
+	lst_113 := &innerFabricPartitionHealthStateFilterList{}
 	{
 
 		var tmp []innerFabricPartitionHealthStateFilter
@@ -22985,13 +22124,13 @@ func (obj *FabricServiceHealthStateFilter) toInnerStruct() *innerFabricServiceHe
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_551.Count = uint32(len(tmp))
+		lst_113.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_551.Items = &tmp[0]
+			lst_113.Items = &tmp[0]
 		}
 
 	}
-	dst.PartitionFilters = lst_551
+	dst.PartitionFilters = lst_113
 	return dst
 }
 
@@ -23008,7 +22147,7 @@ func (obj *innerFabricServiceHealthStateFilter) toGoStruct() (dst *FabricService
 	}
 	dst = &FabricServiceHealthStateFilter{}
 	dst.HealthStateFilter = obj.HealthStateFilter
-	dst.ServiceNameFilter = windows.UTF16PtrToString(obj.ServiceNameFilter)
+	dst.ServiceNameFilter = utf16PtrToString(obj.ServiceNameFilter)
 	{
 		var innerlst []innerFabricPartitionHealthStateFilter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.PartitionFilters.Items), int(obj.PartitionFilters.Count))
@@ -23062,10 +22201,8 @@ func (obj *FabricApplicationHealthStateFilter) toInnerStruct() *innerFabricAppli
 	}
 	dst := &innerFabricApplicationHealthStateFilter{}
 	dst.HealthStateFilter = obj.HealthStateFilter
-	s_552, _ := windows.UTF16PtrFromString(obj.ApplicationNameFilter)
-	dst.ApplicationNameFilter = s_552
-
-	lst_553 := &innerFabricServiceHealthStateFilterList{}
+	dst.ApplicationNameFilter = utf16PtrFromString(obj.ApplicationNameFilter)
+	lst_114 := &innerFabricServiceHealthStateFilterList{}
 	{
 
 		var tmp []innerFabricServiceHealthStateFilter
@@ -23078,14 +22215,14 @@ func (obj *FabricApplicationHealthStateFilter) toInnerStruct() *innerFabricAppli
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_553.Count = uint32(len(tmp))
+		lst_114.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_553.Items = &tmp[0]
+			lst_114.Items = &tmp[0]
 		}
 
 	}
-	dst.ServiceFilters = lst_553
-	lst_554 := &innerFabricDeployedApplicationHealthStateFilterList{}
+	dst.ServiceFilters = lst_114
+	lst_115 := &innerFabricDeployedApplicationHealthStateFilterList{}
 	{
 
 		var tmp []innerFabricDeployedApplicationHealthStateFilter
@@ -23098,18 +22235,16 @@ func (obj *FabricApplicationHealthStateFilter) toInnerStruct() *innerFabricAppli
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_554.Count = uint32(len(tmp))
+		lst_115.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_554.Items = &tmp[0]
+			lst_115.Items = &tmp[0]
 		}
 
 	}
-	dst.DeployedApplicationFilters = lst_554
+	dst.DeployedApplicationFilters = lst_115
 	ex0 := dst
 	ex1 := &innerFabricApplicationHealthStateFilterEx1{}
-	s_555, _ := windows.UTF16PtrFromString(obj.ApplicationTypeNameFilter)
-	ex1.ApplicationTypeNameFilter = s_555
-
+	ex1.ApplicationTypeNameFilter = utf16PtrFromString(obj.ApplicationTypeNameFilter)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
@@ -23132,7 +22267,7 @@ func (obj *innerFabricApplicationHealthStateFilter) toGoStruct() (dst *FabricApp
 	}
 	dst = &FabricApplicationHealthStateFilter{}
 	dst.HealthStateFilter = obj.HealthStateFilter
-	dst.ApplicationNameFilter = windows.UTF16PtrToString(obj.ApplicationNameFilter)
+	dst.ApplicationNameFilter = utf16PtrToString(obj.ApplicationNameFilter)
 	{
 		var innerlst []innerFabricServiceHealthStateFilter
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.ServiceFilters.Items), int(obj.ServiceFilters.Count))
@@ -23164,7 +22299,7 @@ func (obj *innerFabricApplicationHealthStateFilter) toGoStruct() (dst *FabricApp
 	if ex1 == nil {
 		return
 	}
-	dst.ApplicationTypeNameFilter = windows.UTF16PtrToString(ex1.ApplicationTypeNameFilter)
+	dst.ApplicationTypeNameFilter = utf16PtrToString(ex1.ApplicationTypeNameFilter)
 	return
 }
 
@@ -23212,9 +22347,7 @@ func (obj *FabricClusterHealthChunkQueryDescription) toInnerStruct() *innerFabri
 		for k, v := range obj.ApplicationHealthPolicyMap {
 			kv := innerFabricApplicationHealthPolicyMapItem{}
 
-			s_557, _ := windows.UTF16PtrFromString(k)
-			kv.ApplicationName = s_557
-
+			kv.ApplicationName = utf16PtrFromString(k)
 			kv.HealthPolicy = v.toInnerStruct()
 
 			tmp = append(tmp, kv)
@@ -23227,7 +22360,7 @@ func (obj *FabricClusterHealthChunkQueryDescription) toInnerStruct() *innerFabri
 
 		dst.ApplicationHealthPolicyMap = mapobj
 	}
-	lst_558 := &innerFabricApplicationHealthStateFilterList{}
+	lst_117 := &innerFabricApplicationHealthStateFilterList{}
 	{
 
 		var tmp []innerFabricApplicationHealthStateFilter
@@ -23240,14 +22373,14 @@ func (obj *FabricClusterHealthChunkQueryDescription) toInnerStruct() *innerFabri
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_558.Count = uint32(len(tmp))
+		lst_117.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_558.Items = &tmp[0]
+			lst_117.Items = &tmp[0]
 		}
 
 	}
-	dst.ApplicationFilters = lst_558
-	lst_559 := &innerFabricNodeHealthStateFilterList{}
+	dst.ApplicationFilters = lst_117
+	lst_118 := &innerFabricNodeHealthStateFilterList{}
 	{
 
 		var tmp []innerFabricNodeHealthStateFilter
@@ -23260,13 +22393,13 @@ func (obj *FabricClusterHealthChunkQueryDescription) toInnerStruct() *innerFabri
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_559.Count = uint32(len(tmp))
+		lst_118.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_559.Items = &tmp[0]
+			lst_118.Items = &tmp[0]
 		}
 
 	}
-	dst.NodeFilters = lst_559
+	dst.NodeFilters = lst_118
 	return dst
 }
 
@@ -23295,7 +22428,7 @@ func (obj *innerFabricClusterHealthChunkQueryDescription) toGoStruct() (dst *Fab
 			var k string
 			var v *FabricApplicationHealthPolicy
 
-			k = windows.UTF16PtrToString(kv.ApplicationName)
+			k = utf16PtrToString(kv.ApplicationName)
 			v = kv.HealthPolicy.toGoStruct()
 			mapvar[k] = *v
 
@@ -23342,9 +22475,7 @@ func (obj *FabricNodeHealthStateChunk) toInnerStruct() *innerFabricNodeHealthSta
 		return nil
 	}
 	dst := &innerFabricNodeHealthStateChunk{}
-	s_561, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_561
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.HealthState = obj.HealthState
 	return dst
 }
@@ -23360,7 +22491,7 @@ func (obj *innerFabricNodeHealthStateChunk) toGoStruct() (dst *FabricNodeHealthS
 		return
 	}
 	dst = &FabricNodeHealthStateChunk{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.HealthState = obj.HealthState
 	return
 }
@@ -23438,7 +22569,7 @@ func (obj *innerFabricReplicaHealthStateChunkList) toGoStruct() []FabricReplicaH
 }
 
 type FabricPartitionHealthStateChunk struct {
-	PartitionId              windows.GUID
+	PartitionId              uuid.UUID
 	HealthState              FabricHealthState
 	ReplicaHealthStateChunks []FabricReplicaHealthStateChunk
 }
@@ -23450,7 +22581,7 @@ func (obj *FabricPartitionHealthStateChunk) toInnerStruct() *innerFabricPartitio
 	dst := &innerFabricPartitionHealthStateChunk{}
 	dst.PartitionId = obj.PartitionId
 	dst.HealthState = obj.HealthState
-	lst_562 := &innerFabricReplicaHealthStateChunkList{}
+	lst_120 := &innerFabricReplicaHealthStateChunkList{}
 	{
 
 		var tmp []innerFabricReplicaHealthStateChunk
@@ -23463,18 +22594,18 @@ func (obj *FabricPartitionHealthStateChunk) toInnerStruct() *innerFabricPartitio
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_562.Count = uint32(len(tmp))
+		lst_120.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_562.Items = &tmp[0]
+			lst_120.Items = &tmp[0]
 		}
 
 	}
-	dst.ReplicaHealthStateChunks = lst_562
+	dst.ReplicaHealthStateChunks = lst_120
 	return dst
 }
 
 type innerFabricPartitionHealthStateChunk struct {
-	PartitionId              windows.GUID
+	PartitionId              uuid.UUID
 	HealthState              FabricHealthState
 	ReplicaHealthStateChunks *innerFabricReplicaHealthStateChunkList
 	Reserved                 unsafe.Pointer
@@ -23539,11 +22670,9 @@ func (obj *FabricServiceHealthStateChunk) toInnerStruct() *innerFabricServiceHea
 		return nil
 	}
 	dst := &innerFabricServiceHealthStateChunk{}
-	s_563, _ := windows.UTF16PtrFromString(obj.ServiceName)
-	dst.ServiceName = s_563
-
+	dst.ServiceName = utf16PtrFromString(obj.ServiceName)
 	dst.HealthState = obj.HealthState
-	lst_564 := &innerFabricPartitionHealthStateChunkList{}
+	lst_121 := &innerFabricPartitionHealthStateChunkList{}
 	{
 
 		var tmp []innerFabricPartitionHealthStateChunk
@@ -23556,13 +22685,13 @@ func (obj *FabricServiceHealthStateChunk) toInnerStruct() *innerFabricServiceHea
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_564.Count = uint32(len(tmp))
+		lst_121.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_564.Items = &tmp[0]
+			lst_121.Items = &tmp[0]
 		}
 
 	}
-	dst.PartitionHealthStateChunks = lst_564
+	dst.PartitionHealthStateChunks = lst_121
 	return dst
 }
 
@@ -23578,7 +22707,7 @@ func (obj *innerFabricServiceHealthStateChunk) toGoStruct() (dst *FabricServiceH
 		return
 	}
 	dst = &FabricServiceHealthStateChunk{}
-	dst.ServiceName = windows.UTF16PtrToString(obj.ServiceName)
+	dst.ServiceName = utf16PtrToString(obj.ServiceName)
 	dst.HealthState = obj.HealthState
 	{
 		var innerlst []innerFabricPartitionHealthStateChunk
@@ -23632,15 +22761,11 @@ func (obj *FabricDeployedServicePackageHealthStateChunk) toInnerStruct() *innerF
 		return nil
 	}
 	dst := &innerFabricDeployedServicePackageHealthStateChunk{}
-	s_565, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_565
-
+	dst.ServiceManifestName = utf16PtrFromString(obj.ServiceManifestName)
 	dst.HealthState = obj.HealthState
 	ex0 := dst
 	ex1 := &innerFabricDeployedServicePackageHealthStateChunkEx1{}
-	s_566, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	ex1.ServicePackageActivationId = s_566
-
+	ex1.ServicePackageActivationId = utf16PtrFromString(obj.ServicePackageActivationId)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
@@ -23660,14 +22785,14 @@ func (obj *innerFabricDeployedServicePackageHealthStateChunk) toGoStruct() (dst 
 		return
 	}
 	dst = &FabricDeployedServicePackageHealthStateChunk{}
-	dst.ServiceManifestName = windows.UTF16PtrToString(obj.ServiceManifestName)
+	dst.ServiceManifestName = utf16PtrToString(obj.ServiceManifestName)
 	dst.HealthState = obj.HealthState
 	ex0 := obj
 	ex1 := (*innerFabricDeployedServicePackageHealthStateChunkEx1)(ex0.Reserved)
 	if ex1 == nil {
 		return
 	}
-	dst.ServicePackageActivationId = windows.UTF16PtrToString(ex1.ServicePackageActivationId)
+	dst.ServicePackageActivationId = utf16PtrToString(ex1.ServicePackageActivationId)
 	return
 }
 
@@ -23707,11 +22832,9 @@ func (obj *FabricDeployedApplicationHealthStateChunk) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := &innerFabricDeployedApplicationHealthStateChunk{}
-	s_567, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_567
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.HealthState = obj.HealthState
-	lst_568 := &innerFabricDeployedServicePackageHealthStateChunkList{}
+	lst_122 := &innerFabricDeployedServicePackageHealthStateChunkList{}
 	{
 
 		var tmp []innerFabricDeployedServicePackageHealthStateChunk
@@ -23724,13 +22847,13 @@ func (obj *FabricDeployedApplicationHealthStateChunk) toInnerStruct() *innerFabr
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_568.Count = uint32(len(tmp))
+		lst_122.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_568.Items = &tmp[0]
+			lst_122.Items = &tmp[0]
 		}
 
 	}
-	dst.DeployedServicePackageHealthStateChunks = lst_568
+	dst.DeployedServicePackageHealthStateChunks = lst_122
 	return dst
 }
 
@@ -23746,7 +22869,7 @@ func (obj *innerFabricDeployedApplicationHealthStateChunk) toGoStruct() (dst *Fa
 		return
 	}
 	dst = &FabricDeployedApplicationHealthStateChunk{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.HealthState = obj.HealthState
 	{
 		var innerlst []innerFabricDeployedServicePackageHealthStateChunk
@@ -23802,11 +22925,9 @@ func (obj *FabricApplicationHealthStateChunk) toInnerStruct() *innerFabricApplic
 		return nil
 	}
 	dst := &innerFabricApplicationHealthStateChunk{}
-	s_569, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_569
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
 	dst.HealthState = obj.HealthState
-	lst_570 := &innerFabricServiceHealthStateChunkList{}
+	lst_123 := &innerFabricServiceHealthStateChunkList{}
 	{
 
 		var tmp []innerFabricServiceHealthStateChunk
@@ -23819,14 +22940,14 @@ func (obj *FabricApplicationHealthStateChunk) toInnerStruct() *innerFabricApplic
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_570.Count = uint32(len(tmp))
+		lst_123.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_570.Items = &tmp[0]
+			lst_123.Items = &tmp[0]
 		}
 
 	}
-	dst.ServiceHealthStateChunks = lst_570
-	lst_571 := &innerFabricDeployedApplicationHealthStateChunkList{}
+	dst.ServiceHealthStateChunks = lst_123
+	lst_124 := &innerFabricDeployedApplicationHealthStateChunkList{}
 	{
 
 		var tmp []innerFabricDeployedApplicationHealthStateChunk
@@ -23839,18 +22960,16 @@ func (obj *FabricApplicationHealthStateChunk) toInnerStruct() *innerFabricApplic
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_571.Count = uint32(len(tmp))
+		lst_124.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_571.Items = &tmp[0]
+			lst_124.Items = &tmp[0]
 		}
 
 	}
-	dst.DeployedApplicationHealthStateChunks = lst_571
+	dst.DeployedApplicationHealthStateChunks = lst_124
 	ex0 := dst
 	ex1 := &innerFabricApplicationHealthStateChunkEx1{}
-	s_572, _ := windows.UTF16PtrFromString(obj.ApplicationTypeName)
-	ex1.ApplicationTypeName = s_572
-
+	ex1.ApplicationTypeName = utf16PtrFromString(obj.ApplicationTypeName)
 	ex0.Reserved = unsafe.Pointer(ex1)
 	return dst
 }
@@ -23872,7 +22991,7 @@ func (obj *innerFabricApplicationHealthStateChunk) toGoStruct() (dst *FabricAppl
 		return
 	}
 	dst = &FabricApplicationHealthStateChunk{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
 	dst.HealthState = obj.HealthState
 	{
 		var innerlst []innerFabricServiceHealthStateChunk
@@ -23905,7 +23024,7 @@ func (obj *innerFabricApplicationHealthStateChunk) toGoStruct() (dst *FabricAppl
 	if ex1 == nil {
 		return
 	}
-	dst.ApplicationTypeName = windows.UTF16PtrToString(ex1.ApplicationTypeName)
+	dst.ApplicationTypeName = utf16PtrToString(ex1.ApplicationTypeName)
 	return
 }
 
@@ -23946,7 +23065,7 @@ func (obj *FabricClusterHealthChunk) toInnerStruct() *innerFabricClusterHealthCh
 	}
 	dst := &innerFabricClusterHealthChunk{}
 	dst.HealthState = obj.HealthState
-	lst_573 := &innerFabricNodeHealthStateChunkList{}
+	lst_125 := &innerFabricNodeHealthStateChunkList{}
 	{
 
 		var tmp []innerFabricNodeHealthStateChunk
@@ -23959,14 +23078,14 @@ func (obj *FabricClusterHealthChunk) toInnerStruct() *innerFabricClusterHealthCh
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_573.Count = uint32(len(tmp))
+		lst_125.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_573.Items = &tmp[0]
+			lst_125.Items = &tmp[0]
 		}
 
 	}
-	dst.NodeHealthStateChunks = lst_573
-	lst_574 := &innerFabricApplicationHealthStateChunkList{}
+	dst.NodeHealthStateChunks = lst_125
+	lst_126 := &innerFabricApplicationHealthStateChunkList{}
 	{
 
 		var tmp []innerFabricApplicationHealthStateChunk
@@ -23979,13 +23098,13 @@ func (obj *FabricClusterHealthChunk) toInnerStruct() *innerFabricClusterHealthCh
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_574.Count = uint32(len(tmp))
+		lst_126.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_574.Items = &tmp[0]
+			lst_126.Items = &tmp[0]
 		}
 
 	}
-	dst.ApplicationHealthStateChunks = lst_574
+	dst.ApplicationHealthStateChunks = lst_126
 	return dst
 }
 
@@ -24041,12 +23160,8 @@ func (obj *FabricEventContextMapItem) toInnerStruct() *innerFabricEventContextMa
 		return nil
 	}
 	dst := &innerFabricEventContextMapItem{}
-	s_575, _ := windows.UTF16PtrFromString(obj.Key)
-	dst.Key = s_575
-
-	s_576, _ := windows.UTF16PtrFromString(obj.Value)
-	dst.Value = s_576
-
+	dst.Key = utf16PtrFromString(obj.Key)
+	dst.Value = utf16PtrFromString(obj.Value)
 	return dst
 }
 
@@ -24060,8 +23175,8 @@ func (obj *innerFabricEventContextMapItem) toGoStruct() (dst *FabricEventContext
 		return
 	}
 	dst = &FabricEventContextMapItem{}
-	dst.Key = windows.UTF16PtrToString(obj.Key)
-	dst.Value = windows.UTF16PtrToString(obj.Value)
+	dst.Key = utf16PtrToString(obj.Key)
+	dst.Value = utf16PtrToString(obj.Value)
 	return
 }
 
@@ -24083,8 +23198,8 @@ func (obj *innerFabricEventContextMap) toGoStruct() map[string]string {
 			var k string
 			var v string
 
-			k = windows.UTF16PtrToString(kv.Key)
-			v = windows.UTF16PtrToString(kv.Value)
+			k = utf16PtrToString(kv.Key)
+			v = utf16PtrToString(kv.Value)
 			mapvar[k] = v
 
 		}
@@ -24125,11 +23240,8 @@ func (obj *FabricChaosParameters) toInnerStruct() *innerFabricChaosParameters {
 		for k, v := range obj.Context {
 			kv := innerFabricEventContextMapItem{}
 
-			s_579, _ := windows.UTF16PtrFromString(k)
-			kv.Key = s_579
-
-			s_580, _ := windows.UTF16PtrFromString(v)
-			kv.Value = s_580
+			kv.Key = utf16PtrFromString(k)
+			kv.Value = utf16PtrFromString(v)
 
 			tmp = append(tmp, kv)
 		}
@@ -24192,8 +23304,8 @@ func (obj *innerFabricChaosParameters) toGoStruct() (dst *FabricChaosParameters)
 			var k string
 			var v string
 
-			k = windows.UTF16PtrToString(kv.Key)
-			v = windows.UTF16PtrToString(kv.Value)
+			k = utf16PtrToString(kv.Key)
+			v = utf16PtrToString(kv.Value)
 			mapvar[k] = v
 
 		}
@@ -24224,7 +23336,7 @@ func (obj *FabricChaosTargetFilter) toInnerStruct() *innerFabricChaosTargetFilte
 		return nil
 	}
 	dst := &innerFabricChaosTargetFilter{}
-	lst_582 := &innerFabricStringList{}
+	lst_130 := &innerFabricStringList{}
 	{
 
 		var tmp []*uint16
@@ -24232,20 +23344,19 @@ func (obj *FabricChaosTargetFilter) toInnerStruct() *innerFabricChaosTargetFilte
 		for _, item := range obj.NodeTypeInclusionList {
 			var tmpitem *uint16
 
-			s_583, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_583
+			tmpitem = utf16PtrFromString(item)
 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_582.Count = uint32(len(tmp))
+		lst_130.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_582.Items = &tmp[0]
+			lst_130.Items = &tmp[0]
 		}
 
 	}
-	dst.NodeTypeInclusionList = lst_582
-	lst_584 := &innerFabricStringList{}
+	dst.NodeTypeInclusionList = lst_130
+	lst_131 := &innerFabricStringList{}
 	{
 
 		var tmp []*uint16
@@ -24253,19 +23364,18 @@ func (obj *FabricChaosTargetFilter) toInnerStruct() *innerFabricChaosTargetFilte
 		for _, item := range obj.ApplicationInclusionList {
 			var tmpitem *uint16
 
-			s_585, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_585
+			tmpitem = utf16PtrFromString(item)
 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_584.Count = uint32(len(tmp))
+		lst_131.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_584.Items = &tmp[0]
+			lst_131.Items = &tmp[0]
 		}
 
 	}
-	dst.ApplicationInclusionList = lst_584
+	dst.ApplicationInclusionList = lst_131
 	return dst
 }
 
@@ -24287,7 +23397,7 @@ func (obj *innerFabricChaosTargetFilter) toGoStruct() (dst *FabricChaosTargetFil
 		for _, item := range innerlst {
 			var tmpitem string
 
-			tmpitem = windows.UTF16PtrToString(item)
+			tmpitem = utf16PtrToString(item)
 
 			dst.NodeTypeInclusionList = append(dst.NodeTypeInclusionList, tmpitem)
 		}
@@ -24300,7 +23410,7 @@ func (obj *innerFabricChaosTargetFilter) toGoStruct() (dst *FabricChaosTargetFil
 		for _, item := range innerlst {
 			var tmpitem string
 
-			tmpitem = windows.UTF16PtrToString(item)
+			tmpitem = utf16PtrToString(item)
 
 			dst.ApplicationInclusionList = append(dst.ApplicationInclusionList, tmpitem)
 		}
@@ -24340,14 +23450,14 @@ func (obj *FabricChaosEventsSegmentFilter) toInnerStruct() *innerFabricChaosEven
 		return nil
 	}
 	dst := &innerFabricChaosEventsSegmentFilter{}
-	dst.StartTimeUtc = windows.NsecToFiletime(obj.StartTimeUtc.UnixNano())
-	dst.EndTimeUtc = windows.NsecToFiletime(obj.EndTimeUtc.UnixNano())
+	dst.StartTimeUtc = timeToFiletime(obj.StartTimeUtc)
+	dst.EndTimeUtc = timeToFiletime(obj.EndTimeUtc)
 	return dst
 }
 
 type innerFabricChaosEventsSegmentFilter struct {
-	StartTimeUtc windows.Filetime
-	EndTimeUtc   windows.Filetime
+	StartTimeUtc filetime
+	EndTimeUtc   filetime
 	Reserved     unsafe.Pointer
 }
 
@@ -24356,8 +23466,8 @@ func (obj *innerFabricChaosEventsSegmentFilter) toGoStruct() (dst *FabricChaosEv
 		return
 	}
 	dst = &FabricChaosEventsSegmentFilter{}
-	dst.StartTimeUtc = time.Unix(0, obj.StartTimeUtc.Nanoseconds())
-	dst.EndTimeUtc = time.Unix(0, obj.EndTimeUtc.Nanoseconds())
+	dst.StartTimeUtc = obj.StartTimeUtc.ToTime()
+	dst.EndTimeUtc = obj.EndTimeUtc.ToTime()
 	return
 }
 
@@ -24393,14 +23503,14 @@ func (obj *FabricChaosReportFilter) toInnerStruct() *innerFabricChaosReportFilte
 		return nil
 	}
 	dst := &innerFabricChaosReportFilter{}
-	dst.StartTimeUtc = windows.NsecToFiletime(obj.StartTimeUtc.UnixNano())
-	dst.EndTimeUtc = windows.NsecToFiletime(obj.EndTimeUtc.UnixNano())
+	dst.StartTimeUtc = timeToFiletime(obj.StartTimeUtc)
+	dst.EndTimeUtc = timeToFiletime(obj.EndTimeUtc)
 	return dst
 }
 
 type innerFabricChaosReportFilter struct {
-	StartTimeUtc windows.Filetime
-	EndTimeUtc   windows.Filetime
+	StartTimeUtc filetime
+	EndTimeUtc   filetime
 	Reserved     unsafe.Pointer
 }
 
@@ -24409,8 +23519,8 @@ func (obj *innerFabricChaosReportFilter) toGoStruct() (dst *FabricChaosReportFil
 		return
 	}
 	dst = &FabricChaosReportFilter{}
-	dst.StartTimeUtc = time.Unix(0, obj.StartTimeUtc.Nanoseconds())
-	dst.EndTimeUtc = time.Unix(0, obj.EndTimeUtc.Nanoseconds())
+	dst.StartTimeUtc = obj.StartTimeUtc.ToTime()
+	dst.EndTimeUtc = obj.EndTimeUtc.ToTime()
 	return
 }
 
@@ -24425,9 +23535,7 @@ func (obj *FabricGetChaosReportDescription) toInnerStruct() *innerFabricGetChaos
 	}
 	dst := &innerFabricGetChaosReportDescription{}
 	dst.Filter = obj.Filter.toInnerStruct()
-	s_586, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
-	dst.ContinuationToken = s_586
-
+	dst.ContinuationToken = utf16PtrFromString(obj.ContinuationToken)
 	return dst
 }
 
@@ -24443,7 +23551,7 @@ func (obj *innerFabricGetChaosReportDescription) toGoStruct() (dst *FabricGetCha
 	}
 	dst = &FabricGetChaosReportDescription{}
 	dst.Filter = obj.Filter.toGoStruct()
-	dst.ContinuationToken = windows.UTF16PtrToString(obj.ContinuationToken)
+	dst.ContinuationToken = utf16PtrToString(obj.ContinuationToken)
 	return
 }
 
@@ -24487,13 +23595,13 @@ func (obj *FabricStartedEvent) toInnerStruct() *innerFabricStartedEvent {
 		return nil
 	}
 	dst := &innerFabricStartedEvent{}
-	dst.TimeStampUtc = windows.NsecToFiletime(obj.TimeStampUtc.UnixNano())
+	dst.TimeStampUtc = timeToFiletime(obj.TimeStampUtc)
 	dst.ChaosParameters = obj.ChaosParameters.toInnerStruct()
 	return dst
 }
 
 type innerFabricStartedEvent struct {
-	TimeStampUtc    windows.Filetime
+	TimeStampUtc    filetime
 	ChaosParameters *innerFabricChaosParameters
 	Reserved        unsafe.Pointer
 }
@@ -24503,7 +23611,7 @@ func (obj *innerFabricStartedEvent) toGoStruct() (dst *FabricStartedEvent) {
 		return
 	}
 	dst = &FabricStartedEvent{}
-	dst.TimeStampUtc = time.Unix(0, obj.TimeStampUtc.Nanoseconds())
+	dst.TimeStampUtc = obj.TimeStampUtc.ToTime()
 	dst.ChaosParameters = obj.ChaosParameters.toGoStruct()
 	return
 }
@@ -24518,8 +23626,8 @@ func (obj *FabricExecutingFaultsEvent) toInnerStruct() *innerFabricExecutingFaul
 		return nil
 	}
 	dst := &innerFabricExecutingFaultsEvent{}
-	dst.TimeStampUtc = windows.NsecToFiletime(obj.TimeStampUtc.UnixNano())
-	lst_587 := &innerFabricStringList{}
+	dst.TimeStampUtc = timeToFiletime(obj.TimeStampUtc)
+	lst_132 := &innerFabricStringList{}
 	{
 
 		var tmp []*uint16
@@ -24527,24 +23635,23 @@ func (obj *FabricExecutingFaultsEvent) toInnerStruct() *innerFabricExecutingFaul
 		for _, item := range obj.Faults {
 			var tmpitem *uint16
 
-			s_588, _ := windows.UTF16PtrFromString(item)
-			tmpitem = s_588
+			tmpitem = utf16PtrFromString(item)
 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_587.Count = uint32(len(tmp))
+		lst_132.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_587.Items = &tmp[0]
+			lst_132.Items = &tmp[0]
 		}
 
 	}
-	dst.Faults = lst_587
+	dst.Faults = lst_132
 	return dst
 }
 
 type innerFabricExecutingFaultsEvent struct {
-	TimeStampUtc windows.Filetime
+	TimeStampUtc filetime
 	Faults       *innerFabricStringList
 	Reserved     unsafe.Pointer
 }
@@ -24554,7 +23661,7 @@ func (obj *innerFabricExecutingFaultsEvent) toGoStruct() (dst *FabricExecutingFa
 		return
 	}
 	dst = &FabricExecutingFaultsEvent{}
-	dst.TimeStampUtc = time.Unix(0, obj.TimeStampUtc.Nanoseconds())
+	dst.TimeStampUtc = obj.TimeStampUtc.ToTime()
 	{
 		var innerlst []*uint16
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.Faults.Items), int(obj.Faults.Count))
@@ -24562,7 +23669,7 @@ func (obj *innerFabricExecutingFaultsEvent) toGoStruct() (dst *FabricExecutingFa
 		for _, item := range innerlst {
 			var tmpitem string
 
-			tmpitem = windows.UTF16PtrToString(item)
+			tmpitem = utf16PtrToString(item)
 
 			dst.Faults = append(dst.Faults, tmpitem)
 		}
@@ -24581,15 +23688,13 @@ func (obj *FabricWaitingEvent) toInnerStruct() *innerFabricWaitingEvent {
 		return nil
 	}
 	dst := &innerFabricWaitingEvent{}
-	dst.TimeStampUtc = windows.NsecToFiletime(obj.TimeStampUtc.UnixNano())
-	s_589, _ := windows.UTF16PtrFromString(obj.Reason)
-	dst.Reason = s_589
-
+	dst.TimeStampUtc = timeToFiletime(obj.TimeStampUtc)
+	dst.Reason = utf16PtrFromString(obj.Reason)
 	return dst
 }
 
 type innerFabricWaitingEvent struct {
-	TimeStampUtc windows.Filetime
+	TimeStampUtc filetime
 	Reason       *uint16
 	Reserved     unsafe.Pointer
 }
@@ -24599,8 +23704,8 @@ func (obj *innerFabricWaitingEvent) toGoStruct() (dst *FabricWaitingEvent) {
 		return
 	}
 	dst = &FabricWaitingEvent{}
-	dst.TimeStampUtc = time.Unix(0, obj.TimeStampUtc.Nanoseconds())
-	dst.Reason = windows.UTF16PtrToString(obj.Reason)
+	dst.TimeStampUtc = obj.TimeStampUtc.ToTime()
+	dst.Reason = utf16PtrToString(obj.Reason)
 	return
 }
 
@@ -24614,15 +23719,13 @@ func (obj *FabricValidationFailedEvent) toInnerStruct() *innerFabricValidationFa
 		return nil
 	}
 	dst := &innerFabricValidationFailedEvent{}
-	dst.TimeStampUtc = windows.NsecToFiletime(obj.TimeStampUtc.UnixNano())
-	s_590, _ := windows.UTF16PtrFromString(obj.Reason)
-	dst.Reason = s_590
-
+	dst.TimeStampUtc = timeToFiletime(obj.TimeStampUtc)
+	dst.Reason = utf16PtrFromString(obj.Reason)
 	return dst
 }
 
 type innerFabricValidationFailedEvent struct {
-	TimeStampUtc windows.Filetime
+	TimeStampUtc filetime
 	Reason       *uint16
 	Reserved     unsafe.Pointer
 }
@@ -24632,8 +23735,8 @@ func (obj *innerFabricValidationFailedEvent) toGoStruct() (dst *FabricValidation
 		return
 	}
 	dst = &FabricValidationFailedEvent{}
-	dst.TimeStampUtc = time.Unix(0, obj.TimeStampUtc.Nanoseconds())
-	dst.Reason = windows.UTF16PtrToString(obj.Reason)
+	dst.TimeStampUtc = obj.TimeStampUtc.ToTime()
+	dst.Reason = utf16PtrToString(obj.Reason)
 	return
 }
 
@@ -24647,15 +23750,13 @@ func (obj *FabricTestErrorEvent) toInnerStruct() *innerFabricTestErrorEvent {
 		return nil
 	}
 	dst := &innerFabricTestErrorEvent{}
-	dst.TimeStampUtc = windows.NsecToFiletime(obj.TimeStampUtc.UnixNano())
-	s_591, _ := windows.UTF16PtrFromString(obj.Reason)
-	dst.Reason = s_591
-
+	dst.TimeStampUtc = timeToFiletime(obj.TimeStampUtc)
+	dst.Reason = utf16PtrFromString(obj.Reason)
 	return dst
 }
 
 type innerFabricTestErrorEvent struct {
-	TimeStampUtc windows.Filetime
+	TimeStampUtc filetime
 	Reason       *uint16
 	Reserved     unsafe.Pointer
 }
@@ -24665,8 +23766,8 @@ func (obj *innerFabricTestErrorEvent) toGoStruct() (dst *FabricTestErrorEvent) {
 		return
 	}
 	dst = &FabricTestErrorEvent{}
-	dst.TimeStampUtc = time.Unix(0, obj.TimeStampUtc.Nanoseconds())
-	dst.Reason = windows.UTF16PtrToString(obj.Reason)
+	dst.TimeStampUtc = obj.TimeStampUtc.ToTime()
+	dst.Reason = utf16PtrToString(obj.Reason)
 	return
 }
 
@@ -24680,15 +23781,13 @@ func (obj *FabricStoppedEvent) toInnerStruct() *innerFabricStoppedEvent {
 		return nil
 	}
 	dst := &innerFabricStoppedEvent{}
-	dst.TimeStampUtc = windows.NsecToFiletime(obj.TimeStampUtc.UnixNano())
-	s_592, _ := windows.UTF16PtrFromString(obj.Reason)
-	dst.Reason = s_592
-
+	dst.TimeStampUtc = timeToFiletime(obj.TimeStampUtc)
+	dst.Reason = utf16PtrFromString(obj.Reason)
 	return dst
 }
 
 type innerFabricStoppedEvent struct {
-	TimeStampUtc windows.Filetime
+	TimeStampUtc filetime
 	Reason       *uint16
 	Reserved     unsafe.Pointer
 }
@@ -24698,8 +23797,8 @@ func (obj *innerFabricStoppedEvent) toGoStruct() (dst *FabricStoppedEvent) {
 		return
 	}
 	dst = &FabricStoppedEvent{}
-	dst.TimeStampUtc = time.Unix(0, obj.TimeStampUtc.Nanoseconds())
-	dst.Reason = windows.UTF16PtrToString(obj.Reason)
+	dst.TimeStampUtc = obj.TimeStampUtc.ToTime()
+	dst.Reason = utf16PtrToString(obj.Reason)
 	return
 }
 
@@ -24740,10 +23839,8 @@ func (obj *FabricChaosReport) toInnerStruct() *innerFabricChaosReport {
 	dst := &innerFabricChaosReport{}
 	dst.ChaosParameters = obj.ChaosParameters.toInnerStruct()
 	dst.Status = obj.Status
-	s_593, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
-	dst.ContinuationToken = s_593
-
-	lst_594 := &innerFabricChaosEventList{}
+	dst.ContinuationToken = utf16PtrFromString(obj.ContinuationToken)
+	lst_133 := &innerFabricChaosEventList{}
 	{
 
 		var tmp []innerFabricChaosEvent
@@ -24756,13 +23853,13 @@ func (obj *FabricChaosReport) toInnerStruct() *innerFabricChaosReport {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_594.Count = uint32(len(tmp))
+		lst_133.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_594.Items = &tmp[0]
+			lst_133.Items = &tmp[0]
 		}
 
 	}
-	dst.History = lst_594
+	dst.History = lst_133
 	return dst
 }
 
@@ -24781,7 +23878,7 @@ func (obj *innerFabricChaosReport) toGoStruct() (dst *FabricChaosReport) {
 	dst = &FabricChaosReport{}
 	dst.ChaosParameters = obj.ChaosParameters.toGoStruct()
 	dst.Status = obj.Status
-	dst.ContinuationToken = windows.UTF16PtrToString(obj.ContinuationToken)
+	dst.ContinuationToken = utf16PtrToString(obj.ContinuationToken)
 	{
 		var innerlst []innerFabricChaosEvent
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.History.Items), int(obj.History.Count))
@@ -24808,10 +23905,8 @@ func (obj *FabricChaosEventsSegment) toInnerStruct() *innerFabricChaosEventsSegm
 		return nil
 	}
 	dst := &innerFabricChaosEventsSegment{}
-	s_595, _ := windows.UTF16PtrFromString(obj.ContinuationToken)
-	dst.ContinuationToken = s_595
-
-	lst_596 := &innerFabricChaosEventList{}
+	dst.ContinuationToken = utf16PtrFromString(obj.ContinuationToken)
+	lst_134 := &innerFabricChaosEventList{}
 	{
 
 		var tmp []innerFabricChaosEvent
@@ -24824,13 +23919,13 @@ func (obj *FabricChaosEventsSegment) toInnerStruct() *innerFabricChaosEventsSegm
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_596.Count = uint32(len(tmp))
+		lst_134.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_596.Items = &tmp[0]
+			lst_134.Items = &tmp[0]
 		}
 
 	}
-	dst.History = lst_596
+	dst.History = lst_134
 	return dst
 }
 
@@ -24845,7 +23940,7 @@ func (obj *innerFabricChaosEventsSegment) toGoStruct() (dst *FabricChaosEventsSe
 		return
 	}
 	dst = &FabricChaosEventsSegment{}
-	dst.ContinuationToken = windows.UTF16PtrToString(obj.ContinuationToken)
+	dst.ContinuationToken = utf16PtrToString(obj.ContinuationToken)
 	{
 		var innerlst []innerFabricChaosEvent
 		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(obj.History.Items), int(obj.History.Count))
@@ -24990,11 +24085,9 @@ func (obj *FabricChaosScheduleJob) toInnerStruct() *innerFabricChaosScheduleJob 
 		return nil
 	}
 	dst := &innerFabricChaosScheduleJob{}
-	s_597, _ := windows.UTF16PtrFromString(obj.ChaosParameters)
-	dst.ChaosParameters = s_597
-
+	dst.ChaosParameters = utf16PtrFromString(obj.ChaosParameters)
 	dst.Days = obj.Days.toInnerStruct()
-	lst_598 := &innerFabricChaosScheduleTimeRangeUtcList{}
+	lst_135 := &innerFabricChaosScheduleTimeRangeUtcList{}
 	{
 
 		var tmp []innerFabricChaosScheduleTimeRangeUtc
@@ -25007,13 +24100,13 @@ func (obj *FabricChaosScheduleJob) toInnerStruct() *innerFabricChaosScheduleJob 
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_598.Count = uint32(len(tmp))
+		lst_135.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_598.Items = &tmp[0]
+			lst_135.Items = &tmp[0]
 		}
 
 	}
-	dst.Times = lst_598
+	dst.Times = lst_135
 	return dst
 }
 
@@ -25029,7 +24122,7 @@ func (obj *innerFabricChaosScheduleJob) toGoStruct() (dst *FabricChaosScheduleJo
 		return
 	}
 	dst = &FabricChaosScheduleJob{}
-	dst.ChaosParameters = windows.UTF16PtrToString(obj.ChaosParameters)
+	dst.ChaosParameters = utf16PtrToString(obj.ChaosParameters)
 	dst.Days = obj.Days.toGoStruct()
 	{
 		var innerlst []innerFabricChaosScheduleTimeRangeUtc
@@ -25080,9 +24173,7 @@ func (obj *FabricChaosScheduleChaosParametersMapItem) toInnerStruct() *innerFabr
 		return nil
 	}
 	dst := &innerFabricChaosScheduleChaosParametersMapItem{}
-	s_599, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_599
-
+	dst.Name = utf16PtrFromString(obj.Name)
 	dst.Parameters = obj.Parameters.toInnerStruct()
 	return dst
 }
@@ -25097,7 +24188,7 @@ func (obj *innerFabricChaosScheduleChaosParametersMapItem) toGoStruct() (dst *Fa
 		return
 	}
 	dst = &FabricChaosScheduleChaosParametersMapItem{}
-	dst.Name = windows.UTF16PtrToString(obj.Name)
+	dst.Name = utf16PtrToString(obj.Name)
 	dst.Parameters = obj.Parameters.toGoStruct()
 	return
 }
@@ -25120,7 +24211,7 @@ func (obj *innerFabricChaosScheduleChaosParametersMap) toGoStruct() map[string]F
 			var k string
 			var v *FabricChaosParameters
 
-			k = windows.UTF16PtrToString(kv.Name)
+			k = utf16PtrToString(kv.Name)
 			v = kv.Parameters.toGoStruct()
 			mapvar[k] = *v
 
@@ -25143,8 +24234,8 @@ func (obj *FabricChaosSchedule) toInnerStruct() *innerFabricChaosSchedule {
 		return nil
 	}
 	dst := &innerFabricChaosSchedule{}
-	dst.StartDate = windows.NsecToFiletime(obj.StartDate.UnixNano())
-	dst.ExpiryDate = windows.NsecToFiletime(obj.ExpiryDate.UnixNano())
+	dst.StartDate = timeToFiletime(obj.StartDate)
+	dst.ExpiryDate = timeToFiletime(obj.ExpiryDate)
 	{
 		mapobj := &innerFabricChaosScheduleChaosParametersMap{}
 
@@ -25153,9 +24244,7 @@ func (obj *FabricChaosSchedule) toInnerStruct() *innerFabricChaosSchedule {
 		for k, v := range obj.ChaosParametersMap {
 			kv := innerFabricChaosScheduleChaosParametersMapItem{}
 
-			s_602, _ := windows.UTF16PtrFromString(k)
-			kv.Name = s_602
-
+			kv.Name = utf16PtrFromString(k)
 			kv.Parameters = v.toInnerStruct()
 
 			tmp = append(tmp, kv)
@@ -25168,7 +24257,7 @@ func (obj *FabricChaosSchedule) toInnerStruct() *innerFabricChaosSchedule {
 
 		dst.ChaosParametersMap = mapobj
 	}
-	lst_603 := &innerFabricChaosScheduleJobList{}
+	lst_138 := &innerFabricChaosScheduleJobList{}
 	{
 
 		var tmp []innerFabricChaosScheduleJob
@@ -25181,19 +24270,19 @@ func (obj *FabricChaosSchedule) toInnerStruct() *innerFabricChaosSchedule {
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_603.Count = uint32(len(tmp))
+		lst_138.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_603.Items = &tmp[0]
+			lst_138.Items = &tmp[0]
 		}
 
 	}
-	dst.Jobs = lst_603
+	dst.Jobs = lst_138
 	return dst
 }
 
 type innerFabricChaosSchedule struct {
-	StartDate          windows.Filetime
-	ExpiryDate         windows.Filetime
+	StartDate          filetime
+	ExpiryDate         filetime
 	ChaosParametersMap *innerFabricChaosScheduleChaosParametersMap
 	Jobs               *innerFabricChaosScheduleJobList
 	Reserved           unsafe.Pointer
@@ -25204,8 +24293,8 @@ func (obj *innerFabricChaosSchedule) toGoStruct() (dst *FabricChaosSchedule) {
 		return
 	}
 	dst = &FabricChaosSchedule{}
-	dst.StartDate = time.Unix(0, obj.StartDate.Nanoseconds())
-	dst.ExpiryDate = time.Unix(0, obj.ExpiryDate.Nanoseconds())
+	dst.StartDate = obj.StartDate.ToTime()
+	dst.ExpiryDate = obj.ExpiryDate.ToTime()
 	{
 		var mapvar = make(map[string]FabricChaosParameters)
 
@@ -25217,7 +24306,7 @@ func (obj *innerFabricChaosSchedule) toGoStruct() (dst *FabricChaosSchedule) {
 			var k string
 			var v *FabricChaosParameters
 
-			k = windows.UTF16PtrToString(kv.Name)
+			k = utf16PtrToString(kv.Name)
 			v = kv.Parameters.toGoStruct()
 			mapvar[k] = *v
 
@@ -25297,21 +24386,11 @@ func (obj *FabricSecret) toInnerStruct() *innerFabricSecret {
 		return nil
 	}
 	dst := &innerFabricSecret{}
-	s_605, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_605
-
-	s_606, _ := windows.UTF16PtrFromString(obj.Version)
-	dst.Version = s_606
-
-	s_607, _ := windows.UTF16PtrFromString(obj.Value)
-	dst.Value = s_607
-
-	s_608, _ := windows.UTF16PtrFromString(obj.Kind)
-	dst.Kind = s_608
-
-	s_609, _ := windows.UTF16PtrFromString(obj.ContentType)
-	dst.ContentType = s_609
-
+	dst.Name = utf16PtrFromString(obj.Name)
+	dst.Version = utf16PtrFromString(obj.Version)
+	dst.Value = utf16PtrFromString(obj.Value)
+	dst.Kind = utf16PtrFromString(obj.Kind)
+	dst.ContentType = utf16PtrFromString(obj.ContentType)
 	return dst
 }
 
@@ -25328,11 +24407,11 @@ func (obj *innerFabricSecret) toGoStruct() (dst *FabricSecret) {
 		return
 	}
 	dst = &FabricSecret{}
-	dst.Name = windows.UTF16PtrToString(obj.Name)
-	dst.Version = windows.UTF16PtrToString(obj.Version)
-	dst.Value = windows.UTF16PtrToString(obj.Value)
-	dst.Kind = windows.UTF16PtrToString(obj.Kind)
-	dst.ContentType = windows.UTF16PtrToString(obj.ContentType)
+	dst.Name = utf16PtrToString(obj.Name)
+	dst.Version = utf16PtrToString(obj.Version)
+	dst.Value = utf16PtrToString(obj.Value)
+	dst.Kind = utf16PtrToString(obj.Kind)
+	dst.ContentType = utf16PtrToString(obj.ContentType)
 	return
 }
 
@@ -25369,12 +24448,8 @@ func (obj *FabricSecretReference) toInnerStruct() *innerFabricSecretReference {
 		return nil
 	}
 	dst := &innerFabricSecretReference{}
-	s_610, _ := windows.UTF16PtrFromString(obj.Name)
-	dst.Name = s_610
-
-	s_611, _ := windows.UTF16PtrFromString(obj.Version)
-	dst.Version = s_611
-
+	dst.Name = utf16PtrFromString(obj.Name)
+	dst.Version = utf16PtrFromString(obj.Version)
 	return dst
 }
 
@@ -25388,8 +24463,8 @@ func (obj *innerFabricSecretReference) toGoStruct() (dst *FabricSecretReference)
 		return
 	}
 	dst = &FabricSecretReference{}
-	dst.Name = windows.UTF16PtrToString(obj.Name)
-	dst.Version = windows.UTF16PtrToString(obj.Version)
+	dst.Name = utf16PtrToString(obj.Name)
+	dst.Version = utf16PtrToString(obj.Version)
 	return
 }
 
@@ -25443,9 +24518,7 @@ func (obj *FabricCodePackageEventDescription) toInnerStruct() *innerFabricCodePa
 		return nil
 	}
 	dst := &innerFabricCodePackageEventDescription{}
-	s_612, _ := windows.UTF16PtrFromString(obj.CodePackageName)
-	dst.CodePackageName = s_612
-
+	dst.CodePackageName = utf16PtrFromString(obj.CodePackageName)
 	dst.IsSetupEntryPoint = obj.IsSetupEntryPoint
 	dst.IsContainerHost = obj.IsContainerHost
 	dst.EventType = obj.EventType
@@ -25459,11 +24532,8 @@ func (obj *FabricCodePackageEventDescription) toInnerStruct() *innerFabricCodePa
 		for k, v := range obj.Properties {
 			kv := innerFabricApplicationParameter{}
 
-			s_614, _ := windows.UTF16PtrFromString(k)
-			kv.Name = s_614
-
-			s_615, _ := windows.UTF16PtrFromString(v)
-			kv.Value = s_615
+			kv.Name = utf16PtrFromString(k)
+			kv.Value = utf16PtrFromString(v)
 
 			tmp = append(tmp, kv)
 		}
@@ -25494,7 +24564,7 @@ func (obj *innerFabricCodePackageEventDescription) toGoStruct() (dst *FabricCode
 		return
 	}
 	dst = &FabricCodePackageEventDescription{}
-	dst.CodePackageName = windows.UTF16PtrToString(obj.CodePackageName)
+	dst.CodePackageName = utf16PtrToString(obj.CodePackageName)
 	dst.IsSetupEntryPoint = obj.IsSetupEntryPoint
 	dst.IsContainerHost = obj.IsContainerHost
 	dst.EventType = obj.EventType
@@ -25511,8 +24581,8 @@ func (obj *innerFabricCodePackageEventDescription) toGoStruct() (dst *FabricCode
 			var k string
 			var v string
 
-			k = windows.UTF16PtrToString(kv.Name)
-			v = windows.UTF16PtrToString(kv.Value)
+			k = utf16PtrToString(kv.Name)
+			v = utf16PtrToString(kv.Value)
 			mapvar[k] = v
 
 		}
@@ -25561,9 +24631,7 @@ func (obj *FabricLocalNetworkConfigurationDescription) toInnerStruct() *innerFab
 		return nil
 	}
 	dst := &innerFabricLocalNetworkConfigurationDescription{}
-	s_617, _ := windows.UTF16PtrFromString(obj.NetworkAddressPrefix)
-	dst.NetworkAddressPrefix = s_617
-
+	dst.NetworkAddressPrefix = utf16PtrFromString(obj.NetworkAddressPrefix)
 	return dst
 }
 
@@ -25577,7 +24645,7 @@ func (obj *innerFabricLocalNetworkConfigurationDescription) toGoStruct() (dst *F
 		return
 	}
 	dst = &FabricLocalNetworkConfigurationDescription{}
-	dst.NetworkAddressPrefix = windows.UTF16PtrToString(obj.NetworkAddressPrefix)
+	dst.NetworkAddressPrefix = utf16PtrToString(obj.NetworkAddressPrefix)
 	return
 }
 
@@ -25611,9 +24679,7 @@ func (obj *FabricDeleteNetworkDescription) toInnerStruct() *innerFabricDeleteNet
 		return nil
 	}
 	dst := &innerFabricDeleteNetworkDescription{}
-	s_618, _ := windows.UTF16PtrFromString(obj.NetworkName)
-	dst.NetworkName = s_618
-
+	dst.NetworkName = utf16PtrFromString(obj.NetworkName)
 	return dst
 }
 
@@ -25627,7 +24693,7 @@ func (obj *innerFabricDeleteNetworkDescription) toGoStruct() (dst *FabricDeleteN
 		return
 	}
 	dst = &FabricDeleteNetworkDescription{}
-	dst.NetworkName = windows.UTF16PtrToString(obj.NetworkName)
+	dst.NetworkName = utf16PtrToString(obj.NetworkName)
 	return
 }
 
@@ -25672,9 +24738,7 @@ func (obj *FabricNetworkQueryDescription) toInnerStruct() *innerFabricNetworkQue
 		return nil
 	}
 	dst := &innerFabricNetworkQueryDescription{}
-	s_619, _ := windows.UTF16PtrFromString(obj.NetworkNameFilter)
-	dst.NetworkNameFilter = s_619
-
+	dst.NetworkNameFilter = utf16PtrFromString(obj.NetworkNameFilter)
 	dst.NetworkStatusFilter = obj.NetworkStatusFilter
 	dst.PagingDescription = obj.PagingDescription.toInnerStruct()
 	return dst
@@ -25692,7 +24756,7 @@ func (obj *innerFabricNetworkQueryDescription) toGoStruct() (dst *FabricNetworkQ
 		return
 	}
 	dst = &FabricNetworkQueryDescription{}
-	dst.NetworkNameFilter = windows.UTF16PtrToString(obj.NetworkNameFilter)
+	dst.NetworkNameFilter = utf16PtrToString(obj.NetworkNameFilter)
 	dst.NetworkStatusFilter = obj.NetworkStatusFilter
 	dst.PagingDescription = obj.PagingDescription.toGoStruct()
 	return
@@ -25709,9 +24773,7 @@ func (obj *FabricLocalNetworkInformation) toInnerStruct() *innerFabricLocalNetwo
 		return nil
 	}
 	dst := &innerFabricLocalNetworkInformation{}
-	s_620, _ := windows.UTF16PtrFromString(obj.NetworkName)
-	dst.NetworkName = s_620
-
+	dst.NetworkName = utf16PtrFromString(obj.NetworkName)
 	dst.NetworkConfiguration = obj.NetworkConfiguration.toInnerStruct()
 	dst.NetworkStatus = obj.NetworkStatus
 	return dst
@@ -25729,7 +24791,7 @@ func (obj *innerFabricLocalNetworkInformation) toGoStruct() (dst *FabricLocalNet
 		return
 	}
 	dst = &FabricLocalNetworkInformation{}
-	dst.NetworkName = windows.UTF16PtrToString(obj.NetworkName)
+	dst.NetworkName = utf16PtrToString(obj.NetworkName)
 	dst.NetworkConfiguration = obj.NetworkConfiguration.toGoStruct()
 	dst.NetworkStatus = obj.NetworkStatus
 	return
@@ -25769,12 +24831,8 @@ func (obj *FabricNetworkApplicationQueryDescription) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := &innerFabricNetworkApplicationQueryDescription{}
-	s_621, _ := windows.UTF16PtrFromString(obj.NetworkName)
-	dst.NetworkName = s_621
-
-	s_622, _ := windows.UTF16PtrFromString(obj.ApplicationNameFilter)
-	dst.ApplicationNameFilter = s_622
-
+	dst.NetworkName = utf16PtrFromString(obj.NetworkName)
+	dst.ApplicationNameFilter = utf16PtrFromString(obj.ApplicationNameFilter)
 	dst.PagingDescription = obj.PagingDescription.toInnerStruct()
 	return dst
 }
@@ -25791,8 +24849,8 @@ func (obj *innerFabricNetworkApplicationQueryDescription) toGoStruct() (dst *Fab
 		return
 	}
 	dst = &FabricNetworkApplicationQueryDescription{}
-	dst.NetworkName = windows.UTF16PtrToString(obj.NetworkName)
-	dst.ApplicationNameFilter = windows.UTF16PtrToString(obj.ApplicationNameFilter)
+	dst.NetworkName = utf16PtrToString(obj.NetworkName)
+	dst.ApplicationNameFilter = utf16PtrToString(obj.ApplicationNameFilter)
 	dst.PagingDescription = obj.PagingDescription.toGoStruct()
 	return
 }
@@ -25806,9 +24864,7 @@ func (obj *FabricNetworkApplicationQueryResultItem) toInnerStruct() *innerFabric
 		return nil
 	}
 	dst := &innerFabricNetworkApplicationQueryResultItem{}
-	s_623, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_623
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
 	return dst
 }
 
@@ -25822,7 +24878,7 @@ func (obj *innerFabricNetworkApplicationQueryResultItem) toGoStruct() (dst *Fabr
 		return
 	}
 	dst = &FabricNetworkApplicationQueryResultItem{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
 	return
 }
 
@@ -25860,12 +24916,8 @@ func (obj *FabricNetworkNodeQueryDescription) toInnerStruct() *innerFabricNetwor
 		return nil
 	}
 	dst := &innerFabricNetworkNodeQueryDescription{}
-	s_624, _ := windows.UTF16PtrFromString(obj.NetworkName)
-	dst.NetworkName = s_624
-
-	s_625, _ := windows.UTF16PtrFromString(obj.NodeNameFilter)
-	dst.NodeNameFilter = s_625
-
+	dst.NetworkName = utf16PtrFromString(obj.NetworkName)
+	dst.NodeNameFilter = utf16PtrFromString(obj.NodeNameFilter)
 	dst.PagingDescription = obj.PagingDescription.toInnerStruct()
 	return dst
 }
@@ -25882,8 +24934,8 @@ func (obj *innerFabricNetworkNodeQueryDescription) toGoStruct() (dst *FabricNetw
 		return
 	}
 	dst = &FabricNetworkNodeQueryDescription{}
-	dst.NetworkName = windows.UTF16PtrToString(obj.NetworkName)
-	dst.NodeNameFilter = windows.UTF16PtrToString(obj.NodeNameFilter)
+	dst.NetworkName = utf16PtrToString(obj.NetworkName)
+	dst.NodeNameFilter = utf16PtrToString(obj.NodeNameFilter)
 	dst.PagingDescription = obj.PagingDescription.toGoStruct()
 	return
 }
@@ -25897,9 +24949,7 @@ func (obj *FabricNetworkNodeQueryResultItem) toInnerStruct() *innerFabricNetwork
 		return nil
 	}
 	dst := &innerFabricNetworkNodeQueryResultItem{}
-	s_626, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_626
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	return dst
 }
 
@@ -25913,7 +24963,7 @@ func (obj *innerFabricNetworkNodeQueryResultItem) toGoStruct() (dst *FabricNetwo
 		return
 	}
 	dst = &FabricNetworkNodeQueryResultItem{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	return
 }
 
@@ -25950,9 +25000,7 @@ func (obj *FabricApplicationNetworkQueryDescription) toInnerStruct() *innerFabri
 		return nil
 	}
 	dst := &innerFabricApplicationNetworkQueryDescription{}
-	s_627, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_627
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
 	dst.PagingDescription = obj.PagingDescription.toInnerStruct()
 	return dst
 }
@@ -25968,7 +25016,7 @@ func (obj *innerFabricApplicationNetworkQueryDescription) toGoStruct() (dst *Fab
 		return
 	}
 	dst = &FabricApplicationNetworkQueryDescription{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
 	dst.PagingDescription = obj.PagingDescription.toGoStruct()
 	return
 }
@@ -25982,9 +25030,7 @@ func (obj *FabricApplicationNetworkQueryResultItem) toInnerStruct() *innerFabric
 		return nil
 	}
 	dst := &innerFabricApplicationNetworkQueryResultItem{}
-	s_628, _ := windows.UTF16PtrFromString(obj.NetworkName)
-	dst.NetworkName = s_628
-
+	dst.NetworkName = utf16PtrFromString(obj.NetworkName)
 	return dst
 }
 
@@ -25998,7 +25044,7 @@ func (obj *innerFabricApplicationNetworkQueryResultItem) toGoStruct() (dst *Fabr
 		return
 	}
 	dst = &FabricApplicationNetworkQueryResultItem{}
-	dst.NetworkName = windows.UTF16PtrToString(obj.NetworkName)
+	dst.NetworkName = utf16PtrToString(obj.NetworkName)
 	return
 }
 
@@ -26035,9 +25081,7 @@ func (obj *FabricDeployedNetworkQueryDescription) toInnerStruct() *innerFabricDe
 		return nil
 	}
 	dst := &innerFabricDeployedNetworkQueryDescription{}
-	s_629, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_629
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
 	dst.PagingDescription = obj.PagingDescription.toInnerStruct()
 	return dst
 }
@@ -26053,7 +25097,7 @@ func (obj *innerFabricDeployedNetworkQueryDescription) toGoStruct() (dst *Fabric
 		return
 	}
 	dst = &FabricDeployedNetworkQueryDescription{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
 	dst.PagingDescription = obj.PagingDescription.toGoStruct()
 	return
 }
@@ -26067,9 +25111,7 @@ func (obj *FabricDeployedNetworkQueryResultItem) toInnerStruct() *innerFabricDep
 		return nil
 	}
 	dst := &innerFabricDeployedNetworkQueryResultItem{}
-	s_630, _ := windows.UTF16PtrFromString(obj.NetworkName)
-	dst.NetworkName = s_630
-
+	dst.NetworkName = utf16PtrFromString(obj.NetworkName)
 	return dst
 }
 
@@ -26083,7 +25125,7 @@ func (obj *innerFabricDeployedNetworkQueryResultItem) toGoStruct() (dst *FabricD
 		return
 	}
 	dst = &FabricDeployedNetworkQueryResultItem{}
-	dst.NetworkName = windows.UTF16PtrToString(obj.NetworkName)
+	dst.NetworkName = utf16PtrToString(obj.NetworkName)
 	return
 }
 
@@ -26124,21 +25166,11 @@ func (obj *FabricDeployedNetworkCodePackageQueryDescription) toInnerStruct() *in
 		return nil
 	}
 	dst := &innerFabricDeployedNetworkCodePackageQueryDescription{}
-	s_631, _ := windows.UTF16PtrFromString(obj.NodeName)
-	dst.NodeName = s_631
-
-	s_632, _ := windows.UTF16PtrFromString(obj.NetworkName)
-	dst.NetworkName = s_632
-
-	s_633, _ := windows.UTF16PtrFromString(obj.ApplicationNameFilter)
-	dst.ApplicationNameFilter = s_633
-
-	s_634, _ := windows.UTF16PtrFromString(obj.ServiceManifestNameFilter)
-	dst.ServiceManifestNameFilter = s_634
-
-	s_635, _ := windows.UTF16PtrFromString(obj.CodePackageNameFilter)
-	dst.CodePackageNameFilter = s_635
-
+	dst.NodeName = utf16PtrFromString(obj.NodeName)
+	dst.NetworkName = utf16PtrFromString(obj.NetworkName)
+	dst.ApplicationNameFilter = utf16PtrFromString(obj.ApplicationNameFilter)
+	dst.ServiceManifestNameFilter = utf16PtrFromString(obj.ServiceManifestNameFilter)
+	dst.CodePackageNameFilter = utf16PtrFromString(obj.CodePackageNameFilter)
 	dst.PagingDescription = obj.PagingDescription.toInnerStruct()
 	return dst
 }
@@ -26158,11 +25190,11 @@ func (obj *innerFabricDeployedNetworkCodePackageQueryDescription) toGoStruct() (
 		return
 	}
 	dst = &FabricDeployedNetworkCodePackageQueryDescription{}
-	dst.NodeName = windows.UTF16PtrToString(obj.NodeName)
-	dst.NetworkName = windows.UTF16PtrToString(obj.NetworkName)
-	dst.ApplicationNameFilter = windows.UTF16PtrToString(obj.ApplicationNameFilter)
-	dst.ServiceManifestNameFilter = windows.UTF16PtrToString(obj.ServiceManifestNameFilter)
-	dst.CodePackageNameFilter = windows.UTF16PtrToString(obj.CodePackageNameFilter)
+	dst.NodeName = utf16PtrToString(obj.NodeName)
+	dst.NetworkName = utf16PtrToString(obj.NetworkName)
+	dst.ApplicationNameFilter = utf16PtrToString(obj.ApplicationNameFilter)
+	dst.ServiceManifestNameFilter = utf16PtrToString(obj.ServiceManifestNameFilter)
+	dst.CodePackageNameFilter = utf16PtrToString(obj.CodePackageNameFilter)
 	dst.PagingDescription = obj.PagingDescription.toGoStruct()
 	return
 }
@@ -26183,30 +25215,14 @@ func (obj *FabricDeployedNetworkCodePackageQueryResultItem) toInnerStruct() *inn
 		return nil
 	}
 	dst := &innerFabricDeployedNetworkCodePackageQueryResultItem{}
-	s_636, _ := windows.UTF16PtrFromString(obj.ApplicationName)
-	dst.ApplicationName = s_636
-
-	s_637, _ := windows.UTF16PtrFromString(obj.NetworkName)
-	dst.NetworkName = s_637
-
-	s_638, _ := windows.UTF16PtrFromString(obj.CodePackageName)
-	dst.CodePackageName = s_638
-
-	s_639, _ := windows.UTF16PtrFromString(obj.CodePackageVersion)
-	dst.CodePackageVersion = s_639
-
-	s_640, _ := windows.UTF16PtrFromString(obj.ServiceManifestName)
-	dst.ServiceManifestName = s_640
-
-	s_641, _ := windows.UTF16PtrFromString(obj.ServicePackageActivationId)
-	dst.ServicePackageActivationId = s_641
-
-	s_642, _ := windows.UTF16PtrFromString(obj.ContainerAddress)
-	dst.ContainerAddress = s_642
-
-	s_643, _ := windows.UTF16PtrFromString(obj.ContainerId)
-	dst.ContainerId = s_643
-
+	dst.ApplicationName = utf16PtrFromString(obj.ApplicationName)
+	dst.NetworkName = utf16PtrFromString(obj.NetworkName)
+	dst.CodePackageName = utf16PtrFromString(obj.CodePackageName)
+	dst.CodePackageVersion = utf16PtrFromString(obj.CodePackageVersion)
+	dst.ServiceManifestName = utf16PtrFromString(obj.ServiceManifestName)
+	dst.ServicePackageActivationId = utf16PtrFromString(obj.ServicePackageActivationId)
+	dst.ContainerAddress = utf16PtrFromString(obj.ContainerAddress)
+	dst.ContainerId = utf16PtrFromString(obj.ContainerId)
 	return dst
 }
 
@@ -26227,14 +25243,14 @@ func (obj *innerFabricDeployedNetworkCodePackageQueryResultItem) toGoStruct() (d
 		return
 	}
 	dst = &FabricDeployedNetworkCodePackageQueryResultItem{}
-	dst.ApplicationName = windows.UTF16PtrToString(obj.ApplicationName)
-	dst.NetworkName = windows.UTF16PtrToString(obj.NetworkName)
-	dst.CodePackageName = windows.UTF16PtrToString(obj.CodePackageName)
-	dst.CodePackageVersion = windows.UTF16PtrToString(obj.CodePackageVersion)
-	dst.ServiceManifestName = windows.UTF16PtrToString(obj.ServiceManifestName)
-	dst.ServicePackageActivationId = windows.UTF16PtrToString(obj.ServicePackageActivationId)
-	dst.ContainerAddress = windows.UTF16PtrToString(obj.ContainerAddress)
-	dst.ContainerId = windows.UTF16PtrToString(obj.ContainerId)
+	dst.ApplicationName = utf16PtrToString(obj.ApplicationName)
+	dst.NetworkName = utf16PtrToString(obj.NetworkName)
+	dst.CodePackageName = utf16PtrToString(obj.CodePackageName)
+	dst.CodePackageVersion = utf16PtrToString(obj.CodePackageVersion)
+	dst.ServiceManifestName = utf16PtrToString(obj.ServiceManifestName)
+	dst.ServicePackageActivationId = utf16PtrToString(obj.ServicePackageActivationId)
+	dst.ContainerAddress = utf16PtrToString(obj.ContainerAddress)
+	dst.ContainerId = utf16PtrToString(obj.ContainerId)
 	return
 }
 

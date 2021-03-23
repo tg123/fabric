@@ -5,6 +5,7 @@ import (
 	"unsafe"
 
 	ole "github.com/go-ole/go-ole"
+	"github.com/google/uuid"
 	"golang.org/x/sys/windows"
 )
 
@@ -33,7 +34,7 @@ func (v *comFabricStatelessServiceFactoryGoProxy) CreateInstance(
 	serviceName *uint16,
 	initializationDataLength uint32,
 	initializationData *byte,
-	partitionId *windows.GUID,
+	partitionId *uuid.UUID,
 	instanceId int64,
 	serviceInstance **comFabricStatelessServiceInstance,
 ) uintptr {

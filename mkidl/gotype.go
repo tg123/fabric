@@ -24,7 +24,7 @@ var basicTypeMap = map[string]string{
 	"LPCWSTR":   "string",
 
 	"HRESULT":  "FabricErrorCode",
-	"GUID":     "windows.GUID",
+	"GUID":     "uuid.UUID",
 	"FILETIME": "time.Time",
 	"void":     "interface{}",
 }
@@ -32,7 +32,7 @@ var basicTypeMap = map[string]string{
 var basicTypeMapInner = map[string]string{
 	"LPWSTR":   "*uint16",
 	"LPCWSTR":  "*uint16",
-	"FILETIME": "windows.Filetime",
+	"FILETIME": "filetime",
 	"void":     "unsafe.Pointer",
 }
 
@@ -47,17 +47,6 @@ func (g *generator) unwrapTypedef(idltype string) string {
 var innerOnlyWhitelist = map[string]bool{
 	"FABRIC_NAMED_PARTITION_SCHEME_DESCRIPTION": true,
 	"FABRIC_NAMED_REPARTITION_DESCRIPTION":      true,
-
-	// "FABRIC_X509_CREDENTIALS":       true,
-	// "FABRIC_X509_CREDENTIALS_EX1":   true,
-	// "FABRIC_X509_CREDENTIALS_EX2":   true,
-	// "FABRIC_X509_ISSUER_NAME":       true,
-	// "FABRIC_X509_NAME":              true,
-	// "FABRIC_X509_CREDENTIALS2":      true,
-	// "FABRIC_X509_CREDENTIALS_EX3":   true,
-	// "FABRIC_CLAIMS_CREDENTIALS":     true,
-	// "FABRIC_CLAIMS_CREDENTIALS_EX1": true,
-	// "FABRIC_WINDOWS_CREDENTIALS":    true,
 }
 
 func (g *generator) isListLike(idltype string) bool {
@@ -246,18 +235,16 @@ func (g *generator) generateToGolangObject(srcvar, dstvar, rawtype string, indir
 			fallthrough
 		case "FabricErrorCode":
 			fallthrough
-		case "windows.GUID":
+		case "uuid.UUID":
 			fallthrough
-		case "*windows.GUID":
+		case "*uuid.UUID":
 			g.printfln("%v = %v", dstvar, srcvar)
 		case "interface{}":
 			g.printfln("%v = fromUnsafePointer(%v)", dstvar, srcvar)
 		case "string":
-			g.importpkg("windows")
-			g.printfln("%v = windows.UTF16PtrToString(%s)", dstvar, srcvar)
+			g.printfln("%v = utf16PtrToString(%s)", dstvar, srcvar)
 		case "time.Time":
-			g.importpkg("time")
-			g.printfln("%v = time.Unix(0, %v.Nanoseconds())", dstvar, srcvar)
+			g.printfln("%v = %v.ToTime()", dstvar, srcvar)
 		default:
 			panic(fmt.Sprintf("unsupported generateToGolangObject type %v, raw %v", t, rawtype))
 		}
@@ -417,16 +404,14 @@ func (g *generator) generateToInnerObject(srcvar, dstvar, rawtype string, indire
 			fallthrough
 		case "FabricErrorCode":
 			fallthrough
-		case "windows.GUID":
+		case "uuid.UUID":
 			g.printfln("%v = %v", dstvar, srcvar)
 		case "interface{}":
 			g.printfln("%v = toUnsafePointer(%v)", dstvar, srcvar)
 		case "string":
-			i := g.nextvarid()
-			g.printfln("s_%v, _ := windows.UTF16PtrFromString(%s)", i, srcvar)
-			g.printfln("%v = s_%v\n", dstvar, i)
+			g.printfln("%v = utf16PtrFromString(%v)", dstvar, srcvar)
 		case "time.Time":
-			g.printfln("%v = windows.NsecToFiletime(%v.UnixNano())", dstvar, srcvar)
+			g.printfln("%v = timeToFiletime(%v)", dstvar, srcvar)
 		default:
 			panic(fmt.Sprintf("unsupported generateToInnerObject type %v, raw %v", t, rawtype))
 		}

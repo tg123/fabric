@@ -27,8 +27,8 @@ func newGenerator(ctx *defContext) *generator {
 }
 
 var pkgMap = map[string]string{
-	"windows": `golang.org/x/sys/windows`,
-	"ole":     `github.com/go-ole/go-ole`,
+	"ole":  `github.com/go-ole/go-ole`,
+	"uuid": `github.com/google/uuid`,
 }
 
 func (g *generator) nextvarid() int {

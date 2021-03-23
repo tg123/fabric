@@ -1,11 +1,11 @@
 package fabric
 
-import "golang.org/x/sys/windows"
+import "github.com/google/uuid"
 
 type ServiceContext struct {
 	ServiceTypeName    string
 	ServiceName        string
 	InitializationData []byte
-	PartitionId        windows.GUID
+	PartitionId        uuid.UUID
 	InstanceId         int64
 }

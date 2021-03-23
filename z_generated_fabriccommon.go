@@ -4,7 +4,6 @@ package fabric
 import (
 	"context"
 	"github.com/go-ole/go-ole"
-	"golang.org/x/sys/windows"
 	"sync"
 	"syscall"
 	"unsafe"
@@ -251,7 +250,7 @@ func (v *comFabricStringResult) GetString() (rt string, err error) {
 
 	tmp := (*uint16)(unsafe.Pointer(hr))
 
-	rt = windows.UTF16PtrToString(tmp)
+	rt = utf16PtrToString(tmp)
 	return
 }
 

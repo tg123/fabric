@@ -4,7 +4,7 @@ package fabric
 import (
 	"context"
 	"github.com/go-ole/go-ole"
-	"golang.org/x/sys/windows"
+	"github.com/google/uuid"
 	"runtime"
 	"syscall"
 	"unsafe"
@@ -2323,7 +2323,7 @@ func (v *FabricClient) GetClusterManifest(
 }
 func (v *FabricClient) RecoverPartition(
 	ctx context.Context,
-	partitionId windows.GUID,
+	partitionId uuid.UUID,
 ) (err error) {
 	if v.hub.FabricClusterManagementClient2 == nil {
 		err = errComNotImpl
@@ -2663,7 +2663,7 @@ func (v *FabricClient) RollbackFabricUpgrade(
 }
 func (v *FabricClient) ResetPartitionLoad(
 	ctx context.Context,
-	partitionId windows.GUID,
+	partitionId uuid.UUID,
 ) (err error) {
 	if v.hub.FabricClusterManagementClient5 == nil {
 		err = errComNotImpl
@@ -3122,7 +3122,7 @@ func (v *FabricClient) GetServiceHealth(
 }
 func (v *FabricClient) GetPartitionHealth(
 	ctx context.Context,
-	partitionId windows.GUID,
+	partitionId uuid.UUID,
 	healthPolicy *FabricApplicationHealthPolicy,
 ) (result_0 *FabricPartitionHealth, err error) {
 	if v.hub.FabricHealthClient == nil {
@@ -3166,7 +3166,7 @@ func (v *FabricClient) GetPartitionHealth(
 }
 func (v *FabricClient) GetReplicaHealth(
 	ctx context.Context,
-	partitionId windows.GUID,
+	partitionId uuid.UUID,
 	replicaId int64,
 	healthPolicy *FabricApplicationHealthPolicy,
 ) (result_0 *FabricReplicaHealth, err error) {
@@ -5251,7 +5251,7 @@ func (v *FabricClient) StartPartitionDataLoss(
 }
 func (v *FabricClient) GetPartitionDataLossProgress(
 	ctx context.Context,
-	operationId windows.GUID,
+	operationId uuid.UUID,
 ) (result_0 *FabricPartitionDataLossProgress, err error) {
 	if v.hub.FabricTestManagementClient == nil {
 		err = errComNotImpl
@@ -5333,7 +5333,7 @@ func (v *FabricClient) StartPartitionQuorumLoss(
 }
 func (v *FabricClient) GetPartitionQuorumLossProgress(
 	ctx context.Context,
-	operationId windows.GUID,
+	operationId uuid.UUID,
 ) (result_0 *FabricPartitionQuorumLossProgress, err error) {
 	if v.hub.FabricTestManagementClient == nil {
 		err = errComNotImpl
@@ -5415,7 +5415,7 @@ func (v *FabricClient) StartPartitionRestart(
 }
 func (v *FabricClient) GetPartitionRestartProgress(
 	ctx context.Context,
-	operationId windows.GUID,
+	operationId uuid.UUID,
 ) (result_0 *FabricPartitionRestartProgress, err error) {
 	if v.hub.FabricTestManagementClient == nil {
 		err = errComNotImpl
@@ -5699,7 +5699,7 @@ func (v *FabricClient) StartNodeTransition(
 }
 func (v *FabricClient) GetNodeTransitionProgress(
 	ctx context.Context,
-	operationId windows.GUID,
+	operationId uuid.UUID,
 ) (result_0 *FabricNodeTransitionProgress, err error) {
 	if v.hub.FabricTestManagementClient3 == nil {
 		err = errComNotImpl
@@ -6504,9 +6504,7 @@ func (v *comFabricPropertyManagementClient) beginCreateName(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_1, _ := windows.UTF16PtrFromString(name)
-	p_0 = s_1
-
+	p_0 = utf16PtrFromString(name)
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_3
@@ -6549,9 +6547,7 @@ func (v *comFabricPropertyManagementClient) beginDeleteName(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_2, _ := windows.UTF16PtrFromString(name)
-	p_0 = s_2
-
+	p_0 = utf16PtrFromString(name)
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_3
@@ -6594,9 +6590,7 @@ func (v *comFabricPropertyManagementClient) beginNameExists(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_3, _ := windows.UTF16PtrFromString(name)
-	p_0 = s_3
-
+	p_0 = utf16PtrFromString(name)
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_3
@@ -6645,9 +6639,7 @@ func (v *comFabricPropertyManagementClient) beginEnumerateSubNames(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_4, _ := windows.UTF16PtrFromString(name)
-	p_0 = s_4
-
+	p_0 = utf16PtrFromString(name)
 	p_2 := 0
 	if recursive {
 		p_2 = 1
@@ -6684,13 +6676,9 @@ func (v *comFabricPropertyManagementClient) beginPutPropertyBinary(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_5, _ := windows.UTF16PtrFromString(name)
-	p_0 = s_5
-
+	p_0 = utf16PtrFromString(name)
 	var p_1 *uint16
-	s_6, _ := windows.UTF16PtrFromString(propertyName)
-	p_1 = s_6
-
+	p_1 = utf16PtrFromString(propertyName)
 	var p_6 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_6
@@ -6738,13 +6726,9 @@ func (v *comFabricPropertyManagementClient) beginPutPropertyInt64(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_7, _ := windows.UTF16PtrFromString(name)
-	p_0 = s_7
-
+	p_0 = utf16PtrFromString(name)
 	var p_1 *uint16
-	s_8, _ := windows.UTF16PtrFromString(propertyName)
-	p_1 = s_8
-
+	p_1 = utf16PtrFromString(propertyName)
 	var p_5 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_5
@@ -6792,13 +6776,9 @@ func (v *comFabricPropertyManagementClient) beginPutPropertyDouble(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_9, _ := windows.UTF16PtrFromString(name)
-	p_0 = s_9
-
+	p_0 = utf16PtrFromString(name)
 	var p_1 *uint16
-	s_10, _ := windows.UTF16PtrFromString(propertyName)
-	p_1 = s_10
-
+	p_1 = utf16PtrFromString(propertyName)
 	var p_5 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_5
@@ -6846,17 +6826,11 @@ func (v *comFabricPropertyManagementClient) beginPutPropertyWString(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_11, _ := windows.UTF16PtrFromString(name)
-	p_0 = s_11
-
+	p_0 = utf16PtrFromString(name)
 	var p_1 *uint16
-	s_12, _ := windows.UTF16PtrFromString(propertyName)
-	p_1 = s_12
-
+	p_1 = utf16PtrFromString(propertyName)
 	var p_2 *uint16
-	s_13, _ := windows.UTF16PtrFromString(data)
-	p_2 = s_13
-
+	p_2 = utf16PtrFromString(data)
 	var p_5 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_5
@@ -6899,18 +6873,14 @@ func (v *comFabricPropertyManagementClient) endPutPropertyWString(
 func (v *comFabricPropertyManagementClient) beginPutPropertyGuid(
 	name string,
 	propertyName string,
-	data *windows.GUID,
+	data *uuid.UUID,
 	timeoutMilliseconds uint32,
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_14, _ := windows.UTF16PtrFromString(name)
-	p_0 = s_14
-
+	p_0 = utf16PtrFromString(name)
 	var p_1 *uint16
-	s_15, _ := windows.UTF16PtrFromString(propertyName)
-	p_1 = s_15
-
+	p_1 = utf16PtrFromString(propertyName)
 	var p_5 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_5
@@ -6957,13 +6927,9 @@ func (v *comFabricPropertyManagementClient) beginDeleteProperty(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_16, _ := windows.UTF16PtrFromString(name)
-	p_0 = s_16
-
+	p_0 = utf16PtrFromString(name)
 	var p_1 *uint16
-	s_17, _ := windows.UTF16PtrFromString(propertyName)
-	p_1 = s_17
-
+	p_1 = utf16PtrFromString(propertyName)
 	var p_4 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_4
@@ -7007,13 +6973,9 @@ func (v *comFabricPropertyManagementClient) beginGetPropertyMetadata(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_18, _ := windows.UTF16PtrFromString(name)
-	p_0 = s_18
-
+	p_0 = utf16PtrFromString(name)
 	var p_1 *uint16
-	s_19, _ := windows.UTF16PtrFromString(propertyName)
-	p_1 = s_19
-
+	p_1 = utf16PtrFromString(propertyName)
 	var p_4 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_4
@@ -7061,13 +7023,9 @@ func (v *comFabricPropertyManagementClient) beginGetProperty(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_20, _ := windows.UTF16PtrFromString(name)
-	p_0 = s_20
-
+	p_0 = utf16PtrFromString(name)
 	var p_1 *uint16
-	s_21, _ := windows.UTF16PtrFromString(propertyName)
-	p_1 = s_21
-
+	p_1 = utf16PtrFromString(propertyName)
 	var p_4 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_4
@@ -7096,9 +7054,7 @@ func (v *comFabricPropertyManagementClient) beginSubmitPropertyBatch(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_22, _ := windows.UTF16PtrFromString(name)
-	p_0 = s_22
-
+	p_0 = utf16PtrFromString(name)
 	var p_2 *innerFabricPropertyBatchOperation
 	p_2 = operations.toInnerStruct()
 	var p_5 *comFabricAsyncOperationContext
@@ -7132,9 +7088,7 @@ func (v *comFabricPropertyManagementClient) beginEnumerateProperties(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_23, _ := windows.UTF16PtrFromString(name)
-	p_0 = s_23
-
+	p_0 = utf16PtrFromString(name)
 	p_1 := 0
 	if includeValues {
 		p_1 = 1
@@ -7184,9 +7138,7 @@ func (v *comFabricPropertyManagementClient2) beginPutCustomPropertyOperation(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_24, _ := windows.UTF16PtrFromString(name)
-	p_0 = s_24
-
+	p_0 = utf16PtrFromString(name)
 	var p_1 *innerFabricPutCustomPropertyOperation
 	p_1 = propertyOperation.toInnerStruct()
 	var p_4 *comFabricAsyncOperationContext
@@ -7303,17 +7255,11 @@ func (v *comFabricServiceManagementClient) beginCreateServiceFromTemplate(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_25, _ := windows.UTF16PtrFromString(applicationName)
-	p_0 = s_25
-
+	p_0 = utf16PtrFromString(applicationName)
 	var p_1 *uint16
-	s_26, _ := windows.UTF16PtrFromString(serviceName)
-	p_1 = s_26
-
+	p_1 = utf16PtrFromString(serviceName)
 	var p_2 *uint16
-	s_27, _ := windows.UTF16PtrFromString(serviceTypeName)
-	p_2 = s_27
-
+	p_2 = utf16PtrFromString(serviceTypeName)
 	var p_7 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_7
@@ -7359,9 +7305,7 @@ func (v *comFabricServiceManagementClient) beginDeleteService(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_28, _ := windows.UTF16PtrFromString(name)
-	p_0 = s_28
-
+	p_0 = utf16PtrFromString(name)
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_3
@@ -7404,9 +7348,7 @@ func (v *comFabricServiceManagementClient) beginGetServiceDescription(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_29, _ := windows.UTF16PtrFromString(name)
-	p_0 = s_29
-
+	p_0 = utf16PtrFromString(name)
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_3
@@ -7454,9 +7396,7 @@ func (v *comFabricServiceManagementClient) RegisterServicePartitionResolutionCha
 	callback *comFabricServicePartitionResolutionChangeHandler,
 ) (callbackHandle int64, err error) {
 	var p_0 *uint16
-	s_30, _ := windows.UTF16PtrFromString(name)
-	p_0 = s_30
-
+	p_0 = utf16PtrFromString(name)
 	var p_4 int64
 	defer func() {
 		callbackHandle = p_4
@@ -7502,9 +7442,7 @@ func (v *comFabricServiceManagementClient) beginResolveServicePartition(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_31, _ := windows.UTF16PtrFromString(name)
-	p_0 = s_31
-
+	p_0 = utf16PtrFromString(name)
 	var p_6 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_6
@@ -7553,17 +7491,11 @@ func (v *comFabricServiceManagementClient2) beginGetServiceManifest(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_32, _ := windows.UTF16PtrFromString(applicationTypeName)
-	p_0 = s_32
-
+	p_0 = utf16PtrFromString(applicationTypeName)
 	var p_1 *uint16
-	s_33, _ := windows.UTF16PtrFromString(applicationTypeVersion)
-	p_1 = s_33
-
+	p_1 = utf16PtrFromString(applicationTypeVersion)
 	var p_2 *uint16
-	s_34, _ := windows.UTF16PtrFromString(serviceManifestName)
-	p_2 = s_34
-
+	p_2 = utf16PtrFromString(serviceManifestName)
 	var p_5 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_5
@@ -7614,9 +7546,7 @@ func (v *comFabricServiceManagementClient2) beginUpdateService(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_35, _ := windows.UTF16PtrFromString(name)
-	p_0 = s_35
-
+	p_0 = utf16PtrFromString(name)
 	var p_1 *innerFabricServiceUpdateDescription
 	p_1 = serviceUpdateDescription.toInnerStruct()
 	var p_4 *comFabricAsyncOperationContext
@@ -8047,9 +7977,7 @@ func (v *comFabricServiceGroupManagementClient) beginDeleteServiceGroup(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_36, _ := windows.UTF16PtrFromString(name)
-	p_0 = s_36
-
+	p_0 = utf16PtrFromString(name)
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_3
@@ -8092,9 +8020,7 @@ func (v *comFabricServiceGroupManagementClient) beginGetServiceGroupDescription(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_37, _ := windows.UTF16PtrFromString(name)
-	p_0 = s_37
-
+	p_0 = utf16PtrFromString(name)
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_3
@@ -8157,9 +8083,7 @@ func (v *comFabricServiceGroupManagementClient2) beginUpdateServiceGroup(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_38, _ := windows.UTF16PtrFromString(name)
-	p_0 = s_38
-
+	p_0 = utf16PtrFromString(name)
 	var p_1 *innerFabricServiceGroupUpdateDescription
 	p_1 = serviceGroupUpdateDescription.toInnerStruct()
 	var p_4 *comFabricAsyncOperationContext
@@ -8223,17 +8147,11 @@ func (v *comFabricServiceGroupManagementClient3) beginCreateServiceGroupFromTemp
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_39, _ := windows.UTF16PtrFromString(applicationName)
-	p_0 = s_39
-
+	p_0 = utf16PtrFromString(applicationName)
 	var p_1 *uint16
-	s_40, _ := windows.UTF16PtrFromString(serviceName)
-	p_1 = s_40
-
+	p_1 = utf16PtrFromString(serviceName)
 	var p_2 *uint16
-	s_41, _ := windows.UTF16PtrFromString(serviceTypeName)
-	p_2 = s_41
-
+	p_2 = utf16PtrFromString(serviceTypeName)
 	var p_7 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_7
@@ -8364,9 +8282,7 @@ func (v *comFabricApplicationManagementClient) beginProvisionApplicationType(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_42, _ := windows.UTF16PtrFromString(applicationBuildPath)
-	p_0 = s_42
-
+	p_0 = utf16PtrFromString(applicationBuildPath)
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_3
@@ -8495,9 +8411,7 @@ func (v *comFabricApplicationManagementClient) beginGetApplicationUpgradeProgres
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_43, _ := windows.UTF16PtrFromString(applicationName)
-	p_0 = s_43
-
+	p_0 = utf16PtrFromString(applicationName)
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_3
@@ -8585,9 +8499,7 @@ func (v *comFabricApplicationManagementClient) beginDeleteApplication(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_44, _ := windows.UTF16PtrFromString(applicationName)
-	p_0 = s_44
-
+	p_0 = utf16PtrFromString(applicationName)
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_3
@@ -8631,13 +8543,9 @@ func (v *comFabricApplicationManagementClient) beginUnprovisionApplicationType(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_45, _ := windows.UTF16PtrFromString(applicationTypeName)
-	p_0 = s_45
-
+	p_0 = utf16PtrFromString(applicationTypeName)
 	var p_1 *uint16
-	s_46, _ := windows.UTF16PtrFromString(applicationTypeVersion)
-	p_1 = s_46
-
+	p_1 = utf16PtrFromString(applicationTypeVersion)
 	var p_4 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_4
@@ -8698,13 +8606,9 @@ func (v *comFabricApplicationManagementClient2) beginGetApplicationManifest(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_47, _ := windows.UTF16PtrFromString(applicationTypeName)
-	p_0 = s_47
-
+	p_0 = utf16PtrFromString(applicationTypeName)
 	var p_1 *uint16
-	s_48, _ := windows.UTF16PtrFromString(applicationTypeVersion)
-	p_1 = s_48
-
+	p_1 = utf16PtrFromString(applicationTypeVersion)
 	var p_4 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_4
@@ -8752,13 +8656,9 @@ func (v *comFabricApplicationManagementClient2) beginMoveNextApplicationUpgradeD
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_49, _ := windows.UTF16PtrFromString(applicationName)
-	p_0 = s_49
-
+	p_0 = utf16PtrFromString(applicationName)
 	var p_1 *uint16
-	s_50, _ := windows.UTF16PtrFromString(nextUpgradeDomain)
-	p_1 = s_50
-
+	p_1 = utf16PtrFromString(nextUpgradeDomain)
 	var p_4 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_4
@@ -8906,17 +8806,11 @@ func (v *comFabricApplicationManagementClient3) CopyApplicationPackage(
 	applicationPackagePathInImageStore string,
 ) (err error) {
 	var p_0 *uint16
-	s_51, _ := windows.UTF16PtrFromString(imageStoreConnectionString)
-	p_0 = s_51
-
+	p_0 = utf16PtrFromString(imageStoreConnectionString)
 	var p_1 *uint16
-	s_52, _ := windows.UTF16PtrFromString(applicationPackagePath)
-	p_1 = s_52
-
+	p_1 = utf16PtrFromString(applicationPackagePath)
 	var p_2 *uint16
-	s_53, _ := windows.UTF16PtrFromString(applicationPackagePathInImageStore)
-	p_2 = s_53
-
+	p_2 = utf16PtrFromString(applicationPackagePathInImageStore)
 	hr, _, err1 := syscall.Syscall6(
 		v.vtable().CopyApplicationPackage,
 		4,
@@ -8938,13 +8832,9 @@ func (v *comFabricApplicationManagementClient3) RemoveApplicationPackage(
 	applicationPackagePathInImageStore string,
 ) (err error) {
 	var p_0 *uint16
-	s_54, _ := windows.UTF16PtrFromString(imageStoreConnectionString)
-	p_0 = s_54
-
+	p_0 = utf16PtrFromString(imageStoreConnectionString)
 	var p_1 *uint16
-	s_55, _ := windows.UTF16PtrFromString(applicationPackagePathInImageStore)
-	p_1 = s_55
-
+	p_1 = utf16PtrFromString(applicationPackagePathInImageStore)
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().RemoveApplicationPackage,
 		3,
@@ -8983,19 +8873,13 @@ func (v *comFabricApplicationManagementClient4) beginDeployServicePackageToNode(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_56, _ := windows.UTF16PtrFromString(applicationTypeName)
-	p_0 = s_56
-
+	p_0 = utf16PtrFromString(applicationTypeName)
 	var p_1 *uint16
-	s_57, _ := windows.UTF16PtrFromString(applicationTypeVersion)
-	p_1 = s_57
-
+	p_1 = utf16PtrFromString(applicationTypeVersion)
 	var p_2 *uint16
-	s_58, _ := windows.UTF16PtrFromString(serviceManifestName)
-	p_2 = s_58
-
+	p_2 = utf16PtrFromString(serviceManifestName)
 	var p_3 *innerFabricPackageSharingPolicyList
-	lst_59 := &innerFabricPackageSharingPolicyList{}
+	lst_1 := &innerFabricPackageSharingPolicyList{}
 	{
 
 		var tmp []innerFabricPackageSharingPolicy
@@ -9008,17 +8892,15 @@ func (v *comFabricApplicationManagementClient4) beginDeployServicePackageToNode(
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_59.Count = uint32(len(tmp))
+		lst_1.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_59.Items = &tmp[0]
+			lst_1.Items = &tmp[0]
 		}
 
 	}
-	p_3 = lst_59
+	p_3 = lst_1
 	var p_4 *uint16
-	s_60, _ := windows.UTF16PtrFromString(nodeName)
-	p_4 = s_60
-
+	p_4 = utf16PtrFromString(nodeName)
 	var p_7 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_7
@@ -9079,9 +8961,7 @@ func (v *comFabricApplicationManagementClient5) beginRollbackApplicationUpgrade(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_61, _ := windows.UTF16PtrFromString(applicationName)
-	p_0 = s_61
-
+	p_0 = utf16PtrFromString(applicationName)
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_3
@@ -9431,9 +9311,7 @@ func (v *comFabricClusterManagementClient) beginNodeStateRemoved(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_62, _ := windows.UTF16PtrFromString(nodeName)
-	p_0 = s_62
-
+	p_0 = utf16PtrFromString(nodeName)
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_3
@@ -9554,9 +9432,7 @@ func (v *comFabricClusterManagementClient2) beginDeactivateNode(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_63, _ := windows.UTF16PtrFromString(nodeName)
-	p_0 = s_63
-
+	p_0 = utf16PtrFromString(nodeName)
 	var p_4 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_4
@@ -9599,9 +9475,7 @@ func (v *comFabricClusterManagementClient2) beginActivateNode(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_64, _ := windows.UTF16PtrFromString(nodeName)
-	p_0 = s_64
-
+	p_0 = utf16PtrFromString(nodeName)
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_3
@@ -9645,13 +9519,9 @@ func (v *comFabricClusterManagementClient2) beginProvisionFabric(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_65, _ := windows.UTF16PtrFromString(codeFilepath)
-	p_0 = s_65
-
+	p_0 = utf16PtrFromString(codeFilepath)
 	var p_1 *uint16
-	s_66, _ := windows.UTF16PtrFromString(clusterManifestFilepath)
-	p_1 = s_66
-
+	p_1 = utf16PtrFromString(clusterManifestFilepath)
 	var p_4 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_4
@@ -9822,9 +9692,7 @@ func (v *comFabricClusterManagementClient2) beginMoveNextFabricUpgradeDomain2(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_67, _ := windows.UTF16PtrFromString(nextUpgradeDomain)
-	p_0 = s_67
-
+	p_0 = utf16PtrFromString(nextUpgradeDomain)
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_3
@@ -9868,13 +9736,9 @@ func (v *comFabricClusterManagementClient2) beginUnprovisionFabric(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_68, _ := windows.UTF16PtrFromString(codeVersion)
-	p_0 = s_68
-
+	p_0 = utf16PtrFromString(codeVersion)
 	var p_1 *uint16
-	s_69, _ := windows.UTF16PtrFromString(configVersion)
-	p_1 = s_69
-
+	p_1 = utf16PtrFromString(configVersion)
 	var p_4 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_4
@@ -9956,7 +9820,7 @@ func (v *comFabricClusterManagementClient2) endGetClusterManifest(
 	return
 }
 func (v *comFabricClusterManagementClient2) beginRecoverPartition(
-	partitionId windows.GUID,
+	partitionId uuid.UUID,
 	timeoutMilliseconds uint32,
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
@@ -10002,9 +9866,7 @@ func (v *comFabricClusterManagementClient2) beginRecoverServicePartitions(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_70, _ := windows.UTF16PtrFromString(serviceName)
-	p_0 = s_70
-
+	p_0 = utf16PtrFromString(serviceName)
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_3
@@ -10284,25 +10146,15 @@ func (v *comFabricClusterManagementClient3) CopyClusterPackage(
 	codePackagePathInImageStore string,
 ) (err error) {
 	var p_0 *uint16
-	s_71, _ := windows.UTF16PtrFromString(imageStoreConnectionString)
-	p_0 = s_71
-
+	p_0 = utf16PtrFromString(imageStoreConnectionString)
 	var p_1 *uint16
-	s_72, _ := windows.UTF16PtrFromString(clusterManifestPath)
-	p_1 = s_72
-
+	p_1 = utf16PtrFromString(clusterManifestPath)
 	var p_2 *uint16
-	s_73, _ := windows.UTF16PtrFromString(clusterManifestPathInImageStore)
-	p_2 = s_73
-
+	p_2 = utf16PtrFromString(clusterManifestPathInImageStore)
 	var p_3 *uint16
-	s_74, _ := windows.UTF16PtrFromString(codePackagePath)
-	p_3 = s_74
-
+	p_3 = utf16PtrFromString(codePackagePath)
 	var p_4 *uint16
-	s_75, _ := windows.UTF16PtrFromString(codePackagePathInImageStore)
-	p_4 = s_75
-
+	p_4 = utf16PtrFromString(codePackagePathInImageStore)
 	hr, _, err1 := syscall.Syscall6(
 		v.vtable().CopyClusterPackage,
 		6,
@@ -10325,17 +10177,11 @@ func (v *comFabricClusterManagementClient3) RemoveClusterPackage(
 	codePackagePathInImageStore string,
 ) (err error) {
 	var p_0 *uint16
-	s_76, _ := windows.UTF16PtrFromString(imageStoreConnectionString)
-	p_0 = s_76
-
+	p_0 = utf16PtrFromString(imageStoreConnectionString)
 	var p_1 *uint16
-	s_77, _ := windows.UTF16PtrFromString(clusterManifestPathInImageStore)
-	p_1 = s_77
-
+	p_1 = utf16PtrFromString(clusterManifestPathInImageStore)
 	var p_2 *uint16
-	s_78, _ := windows.UTF16PtrFromString(codePackagePathInImageStore)
-	p_2 = s_78
-
+	p_2 = utf16PtrFromString(codePackagePathInImageStore)
 	hr, _, err1 := syscall.Syscall6(
 		v.vtable().RemoveClusterPackage,
 		4,
@@ -10423,7 +10269,7 @@ func (v *comFabricClusterManagementClient5) vtable() *comFabricClusterManagement
 }
 
 func (v *comFabricClusterManagementClient5) beginResetPartitionLoad(
-	partitionId windows.GUID,
+	partitionId uuid.UUID,
 	timeoutMilliseconds uint32,
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
@@ -10886,9 +10732,7 @@ func (v *comFabricClusterManagementClient9) beginSetUpgradeOrchestrationServiceS
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_79, _ := windows.UTF16PtrFromString(state)
-	p_0 = s_79
-
+	p_0 = utf16PtrFromString(state)
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_3
@@ -10950,9 +10794,7 @@ func (v *comFabricClusterManagementClient10) beginGetClusterConfiguration2(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_80, _ := windows.UTF16PtrFromString(apiVersion)
-	p_0 = s_80
-
+	p_0 = utf16PtrFromString(apiVersion)
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_3
@@ -11095,9 +10937,7 @@ func (v *comFabricHealthClient) beginGetNodeHealth(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_81, _ := windows.UTF16PtrFromString(nodeName)
-	p_0 = s_81
-
+	p_0 = utf16PtrFromString(nodeName)
 	var p_1 *innerFabricClusterHealthPolicy
 	p_1 = healthPolicy.toInnerStruct()
 	var p_4 *comFabricAsyncOperationContext
@@ -11147,9 +10987,7 @@ func (v *comFabricHealthClient) beginGetApplicationHealth(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_82, _ := windows.UTF16PtrFromString(applicationName)
-	p_0 = s_82
-
+	p_0 = utf16PtrFromString(applicationName)
 	var p_1 *innerFabricApplicationHealthPolicy
 	p_1 = healthPolicy.toInnerStruct()
 	var p_4 *comFabricAsyncOperationContext
@@ -11199,9 +11037,7 @@ func (v *comFabricHealthClient) beginGetServiceHealth(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_83, _ := windows.UTF16PtrFromString(serviceName)
-	p_0 = s_83
-
+	p_0 = utf16PtrFromString(serviceName)
 	var p_1 *innerFabricApplicationHealthPolicy
 	p_1 = healthPolicy.toInnerStruct()
 	var p_4 *comFabricAsyncOperationContext
@@ -11245,7 +11081,7 @@ func (v *comFabricHealthClient) endGetServiceHealth(
 	return
 }
 func (v *comFabricHealthClient) beginGetPartitionHealth(
-	partitionId windows.GUID,
+	partitionId uuid.UUID,
 	healthPolicy *FabricApplicationHealthPolicy,
 	timeoutMilliseconds uint32,
 	callback *comFabricAsyncOperationCallback,
@@ -11293,7 +11129,7 @@ func (v *comFabricHealthClient) endGetPartitionHealth(
 	return
 }
 func (v *comFabricHealthClient) beginGetReplicaHealth(
-	partitionId windows.GUID,
+	partitionId uuid.UUID,
 	replicaId int64,
 	healthPolicy *FabricApplicationHealthPolicy,
 	timeoutMilliseconds uint32,
@@ -11352,13 +11188,9 @@ func (v *comFabricHealthClient) beginGetDeployedApplicationHealth(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_84, _ := windows.UTF16PtrFromString(applicationName)
-	p_0 = s_84
-
+	p_0 = utf16PtrFromString(applicationName)
 	var p_1 *uint16
-	s_85, _ := windows.UTF16PtrFromString(nodeName)
-	p_1 = s_85
-
+	p_1 = utf16PtrFromString(nodeName)
 	var p_2 *innerFabricApplicationHealthPolicy
 	p_2 = healthPolicy.toInnerStruct()
 	var p_5 *comFabricAsyncOperationContext
@@ -11413,17 +11245,11 @@ func (v *comFabricHealthClient) beginGetDeployedServicePackageHealth(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_86, _ := windows.UTF16PtrFromString(applicationName)
-	p_0 = s_86
-
+	p_0 = utf16PtrFromString(applicationName)
 	var p_1 *uint16
-	s_87, _ := windows.UTF16PtrFromString(serviceManifestName)
-	p_1 = s_87
-
+	p_1 = utf16PtrFromString(serviceManifestName)
 	var p_2 *uint16
-	s_88, _ := windows.UTF16PtrFromString(nodeName)
-	p_2 = s_88
-
+	p_2 = utf16PtrFromString(nodeName)
 	var p_3 *innerFabricApplicationHealthPolicy
 	p_3 = healthPolicy.toInnerStruct()
 	var p_6 *comFabricAsyncOperationContext
@@ -13449,13 +13275,9 @@ func (v *comFabricInfrastructureServiceClient) beginInvokeInfrastructureCommand(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_89, _ := windows.UTF16PtrFromString(serviceName)
-	p_0 = s_89
-
+	p_0 = utf16PtrFromString(serviceName)
 	var p_1 *uint16
-	s_90, _ := windows.UTF16PtrFromString(command)
-	p_1 = s_90
-
+	p_1 = utf16PtrFromString(command)
 	var p_4 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_4
@@ -13503,13 +13325,9 @@ func (v *comFabricInfrastructureServiceClient) beginInvokeInfrastructureQuery(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_91, _ := windows.UTF16PtrFromString(serviceName)
-	p_0 = s_91
-
+	p_0 = utf16PtrFromString(serviceName)
 	var p_1 *uint16
-	s_92, _ := windows.UTF16PtrFromString(command)
-	p_1 = s_92
-
+	p_1 = utf16PtrFromString(command)
 	var p_4 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_4
@@ -14215,7 +14033,7 @@ func (v *comFabricTestManagementClient) endStartPartitionDataLoss(
 	return
 }
 func (v *comFabricTestManagementClient) beginGetPartitionDataLossProgress(
-	operationId windows.GUID,
+	operationId uuid.UUID,
 	timeoutMilliseconds uint32,
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
@@ -14303,7 +14121,7 @@ func (v *comFabricTestManagementClient) endStartPartitionQuorumLoss(
 	return
 }
 func (v *comFabricTestManagementClient) beginGetPartitionQuorumLossProgress(
-	operationId windows.GUID,
+	operationId uuid.UUID,
 	timeoutMilliseconds uint32,
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
@@ -14391,7 +14209,7 @@ func (v *comFabricTestManagementClient) endStartPartitionRestart(
 	return
 }
 func (v *comFabricTestManagementClient) beginGetPartitionRestartProgress(
-	operationId windows.GUID,
+	operationId uuid.UUID,
 	timeoutMilliseconds uint32,
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
@@ -14735,7 +14553,7 @@ func (v *comFabricTestManagementClient3) endStartNodeTransition(
 	return
 }
 func (v *comFabricTestManagementClient3) beginGetNodeTransitionProgress(
-	operationId windows.GUID,
+	operationId uuid.UUID,
 	timeoutMilliseconds uint32,
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
@@ -15014,9 +14832,7 @@ func (v *comFabricNetworkManagementClient) beginCreateNetwork(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *uint16
-	s_93, _ := windows.UTF16PtrFromString(networkName)
-	p_0 = s_93
-
+	p_0 = utf16PtrFromString(networkName)
 	var p_1 *innerFabricNetworkDescription
 	p_1 = description.toInnerStruct()
 	var p_4 *comFabricAsyncOperationContext
@@ -15802,7 +15618,7 @@ func (v *comFabricPropertyValueResult) GetValueAsDouble() (value float64, err er
 func (v *comFabricPropertyValueResult) GetValueAsWString() (bufferedValue string, err error) {
 	var p_0 *uint16
 	defer func() {
-		bufferedValue = windows.UTF16PtrToString(p_0)
+		bufferedValue = utf16PtrToString(p_0)
 	}()
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().GetValueAsWString,
@@ -15817,8 +15633,8 @@ func (v *comFabricPropertyValueResult) GetValueAsWString() (bufferedValue string
 	}
 	return
 }
-func (v *comFabricPropertyValueResult) GetValueAsGuid() (value windows.GUID, err error) {
-	var p_0 windows.GUID
+func (v *comFabricPropertyValueResult) GetValueAsGuid() (value uuid.UUID, err error) {
+	var p_0 uuid.UUID
 	defer func() {
 		value = p_0
 	}()
@@ -15963,7 +15779,7 @@ func (v *comFabricApplicationUpgradeProgressResult) GetApplicationName() (rt str
 
 	tmp := (*uint16)(unsafe.Pointer(hr))
 
-	rt = windows.UTF16PtrToString(tmp)
+	rt = utf16PtrToString(tmp)
 	return
 }
 func (v *comFabricApplicationUpgradeProgressResult) GetApplicationTypeName() (rt string, err error) {
@@ -15981,7 +15797,7 @@ func (v *comFabricApplicationUpgradeProgressResult) GetApplicationTypeName() (rt
 
 	tmp := (*uint16)(unsafe.Pointer(hr))
 
-	rt = windows.UTF16PtrToString(tmp)
+	rt = utf16PtrToString(tmp)
 	return
 }
 func (v *comFabricApplicationUpgradeProgressResult) GetTargetApplicationTypeVersion() (rt string, err error) {
@@ -15999,7 +15815,7 @@ func (v *comFabricApplicationUpgradeProgressResult) GetTargetApplicationTypeVers
 
 	tmp := (*uint16)(unsafe.Pointer(hr))
 
-	rt = windows.UTF16PtrToString(tmp)
+	rt = utf16PtrToString(tmp)
 	return
 }
 func (v *comFabricApplicationUpgradeProgressResult) GetUpgradeState() (rt FabricApplicationUpgradeState, err error) {
@@ -16056,7 +15872,7 @@ func (v *comFabricApplicationUpgradeProgressResult2) GetNextUpgradeDomain() (rt 
 
 	tmp := (*uint16)(unsafe.Pointer(hr))
 
-	rt = windows.UTF16PtrToString(tmp)
+	rt = utf16PtrToString(tmp)
 	return
 }
 
@@ -16124,7 +15940,7 @@ func (v *comFabricUpgradeProgressResult) GetTargetCodeVersion() (rt string, err 
 
 	tmp := (*uint16)(unsafe.Pointer(hr))
 
-	rt = windows.UTF16PtrToString(tmp)
+	rt = utf16PtrToString(tmp)
 	return
 }
 func (v *comFabricUpgradeProgressResult) GetTargetConfigVersion() (rt string, err error) {
@@ -16142,7 +15958,7 @@ func (v *comFabricUpgradeProgressResult) GetTargetConfigVersion() (rt string, er
 
 	tmp := (*uint16)(unsafe.Pointer(hr))
 
-	rt = windows.UTF16PtrToString(tmp)
+	rt = utf16PtrToString(tmp)
 	return
 }
 func (v *comFabricUpgradeProgressResult) GetUpgradeState() (rt FabricUpgradeState, err error) {
@@ -16440,7 +16256,7 @@ func (v *comFabricUpgradeProgressResult2) GetNextUpgradeDomain() (rt string, err
 
 	tmp := (*uint16)(unsafe.Pointer(hr))
 
-	rt = windows.UTF16PtrToString(tmp)
+	rt = utf16PtrToString(tmp)
 	return
 }
 
@@ -18795,7 +18611,7 @@ func (v *comFabricSecretStoreClient) beginGetSecrets(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricSecretReferenceList
-	lst_94 := &innerFabricSecretReferenceList{}
+	lst_2 := &innerFabricSecretReferenceList{}
 	{
 
 		var tmp []innerFabricSecretReference
@@ -18808,13 +18624,13 @@ func (v *comFabricSecretStoreClient) beginGetSecrets(
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_94.Count = uint32(len(tmp))
+		lst_2.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_94.Items = &tmp[0]
+			lst_2.Items = &tmp[0]
 		}
 
 	}
-	p_0 = lst_94
+	p_0 = lst_2
 	p_1 := 0
 	if includeValue {
 		p_1 = 1
@@ -18865,7 +18681,7 @@ func (v *comFabricSecretStoreClient) beginSetSecrets(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricSecretList
-	lst_95 := &innerFabricSecretList{}
+	lst_3 := &innerFabricSecretList{}
 	{
 
 		var tmp []innerFabricSecret
@@ -18878,13 +18694,13 @@ func (v *comFabricSecretStoreClient) beginSetSecrets(
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_95.Count = uint32(len(tmp))
+		lst_3.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_95.Items = &tmp[0]
+			lst_3.Items = &tmp[0]
 		}
 
 	}
-	p_0 = lst_95
+	p_0 = lst_3
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_3
@@ -18931,7 +18747,7 @@ func (v *comFabricSecretStoreClient) beginRemoveSecrets(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricSecretReferenceList
-	lst_96 := &innerFabricSecretReferenceList{}
+	lst_4 := &innerFabricSecretReferenceList{}
 	{
 
 		var tmp []innerFabricSecretReference
@@ -18944,13 +18760,13 @@ func (v *comFabricSecretStoreClient) beginRemoveSecrets(
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_96.Count = uint32(len(tmp))
+		lst_4.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_96.Items = &tmp[0]
+			lst_4.Items = &tmp[0]
 		}
 
 	}
-	p_0 = lst_96
+	p_0 = lst_4
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_3
@@ -18997,7 +18813,7 @@ func (v *comFabricSecretStoreClient) beginGetSecretVersions(
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
 	var p_0 *innerFabricSecretReferenceList
-	lst_97 := &innerFabricSecretReferenceList{}
+	lst_5 := &innerFabricSecretReferenceList{}
 	{
 
 		var tmp []innerFabricSecretReference
@@ -19010,13 +18826,13 @@ func (v *comFabricSecretStoreClient) beginGetSecretVersions(
 			tmp = append(tmp, tmpitem)
 		}
 
-		lst_97.Count = uint32(len(tmp))
+		lst_5.Count = uint32(len(tmp))
 		if len(tmp) > 0 {
-			lst_97.Items = &tmp[0]
+			lst_5.Items = &tmp[0]
 		}
 
 	}
-	p_0 = lst_97
+	p_0 = lst_5
 	var p_3 *comFabricAsyncOperationContext
 	defer func() {
 		context = p_3
