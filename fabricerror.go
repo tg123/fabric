@@ -6,6 +6,8 @@ import (
 	"github.com/pkg/errors"
 )
 
+var errComNotImpl = fmt.Errorf("operation not supported on this fabric version")
+
 func (c FabricErrorCode) Error() string {
 	if c == 0 {
 		return ""

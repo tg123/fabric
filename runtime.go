@@ -5,13 +5,6 @@ import (
 	"unsafe"
 
 	ole "github.com/go-ole/go-ole"
-	"golang.org/x/sys/windows"
-)
-
-var (
-	fabricRuntimeDll                     = windows.NewLazyDLL("FabricRuntime.dll")
-	fabricFabricCreateRuntimeProc        = fabricRuntimeDll.NewProc("FabricCreateRuntime")
-	fabricFabricGetActivationContextProc = fabricRuntimeDll.NewProc("FabricGetActivationContext")
 )
 
 type FabricRuntime struct {
@@ -19,13 +12,15 @@ type FabricRuntime struct {
 	hub *fabricRuntimeComHub
 }
 
+var (
+	iidIFabricRuntime = ole.NewGUID("{CC53AF8E-74CD-11DF-AC3E-0024811E3892}")
+)
+
 func NewFabricRuntime() (*FabricRuntime, error) {
 	var com *comFabricRuntime
 
-	clzid, _ := ole.IIDFromString("{cc53af8e-74cd-11df-ac3e-0024811e3892}")
-	r, _, err := fabricFabricCreateRuntimeProc.Call(uintptr(unsafe.Pointer(clzid)), uintptr(unsafe.Pointer(&com)))
-
-	if r != 0 {
+	err := callfabricFabricCreateRuntime(unsafe.Pointer(iidIFabricRuntime), unsafe.Pointer(&com))
+	if err != nil {
 		return nil, err
 	}
 
@@ -51,12 +46,12 @@ type FabricCodePackageActivationContext struct {
 func NewFabricCodePackageActivationContext() (*FabricCodePackageActivationContext, error) {
 	var unknown *ole.IUnknown
 
-	r, _, err := fabricFabricGetActivationContextProc.Call(
-		uintptr(unsafe.Pointer(ole.IID_IUnknown)),
-		uintptr(unsafe.Pointer(&unknown)),
+	err := callfabricFabricGetActivationContext(
+		unsafe.Pointer(ole.IID_IUnknown),
+		unsafe.Pointer(&unknown),
 	)
 
-	if r != 0 {
+	if err != nil {
 		return nil, err
 	}
 

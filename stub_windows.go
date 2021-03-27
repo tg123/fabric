@@ -3,13 +3,12 @@
 package fabric
 
 import (
+	"syscall"
 	"unsafe"
-
-	"golang.org/x/sys/windows"
 )
 
 var (
-	fabricClientDll              = windows.NewLazyDLL("FabricClient.dll")
+	fabricClientDll              = syscall.NewLazyDLL("FabricClient.dll")
 	fabricCreateLocalClientProc  = fabricClientDll.NewProc("FabricCreateLocalClient")
 	fabricCreateLocalClient2Proc = fabricClientDll.NewProc("FabricCreateLocalClient2")
 	fabricCreateLocalClient3Proc = fabricClientDll.NewProc("FabricCreateLocalClient3")
@@ -36,11 +35,7 @@ func callCreateClient3(
 		uintptr(outptr),
 	)
 
-	if r != 0 {
-		return err
-	}
-
-	return nil
+	return errno(r, err)
 }
 
 func callCreateLocalClient4(
@@ -58,9 +53,44 @@ func callCreateLocalClient4(
 		uintptr(outptr),
 	)
 
-	if r != 0 {
-		return err
+	return errno(r, err)
+}
+
+var (
+	fabricCommonDll               = syscall.NewLazyDLL("FabricCommon.dll")
+	fabricGetLastErrorMessageProc = fabricCommonDll.NewProc("FabricGetLastErrorMessage")
+)
+
+func fabricGetLastError() string {
+	var result *comFabricStringResult
+	hr, _, _ := fabricGetLastErrorMessageProc.Call(uintptr(unsafe.Pointer(&result)))
+
+	if hr != 0 {
+		return ""
 	}
 
-	return nil
+	msg, _ := result.GetString()
+	return msg
+}
+
+var (
+	fabricRuntimeDll                     = syscall.NewLazyDLL("FabricRuntime.dll")
+	fabricFabricCreateRuntimeProc        = fabricRuntimeDll.NewProc("FabricCreateRuntime")
+	fabricFabricGetActivationContextProc = fabricRuntimeDll.NewProc("FabricGetActivationContext")
+)
+
+func callfabricFabricCreateRuntime(
+	clzid unsafe.Pointer,
+	outptr unsafe.Pointer,
+) error {
+	r, _, err := fabricFabricCreateRuntimeProc.Call(uintptr(clzid), uintptr(outptr))
+	return errno(r, err)
+}
+
+func callfabricFabricGetActivationContext(
+	clzid unsafe.Pointer,
+	outptr unsafe.Pointer,
+) error {
+	r, _, err := fabricFabricGetActivationContextProc.Call(uintptr(clzid), uintptr(outptr))
+	return errno(r, err)
 }

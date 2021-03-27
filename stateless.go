@@ -5,7 +5,6 @@ import (
 	"unsafe"
 
 	ole "github.com/go-ole/go-ole"
-	"golang.org/x/sys/windows"
 )
 
 // TODO genrate interface from mkidl
@@ -38,8 +37,8 @@ func (v *comFabricStatelessServiceFactoryGoProxy) CreateInstance(
 	serviceInstance **comFabricStatelessServiceInstance,
 ) uintptr {
 	ctx := ServiceContext{
-		ServiceTypeName: windows.UTF16PtrToString(serviceTypeName),
-		ServiceName:     windows.UTF16PtrToString(serviceName),
+		ServiceTypeName: utf16PtrToString(serviceTypeName),
+		ServiceName:     utf16PtrToString(serviceName),
 		PartitionId:     *partitionId,
 		InstanceId:      instanceId,
 	}

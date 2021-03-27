@@ -22,3 +22,21 @@ func callCreateLocalClient4(
 ) error {
 	return errComNotImpl
 }
+
+func fabricGetLastError() string {
+	return ""
+}
+
+func callfabricFabricCreateRuntime(
+	clzid unsafe.Pointer,
+	outptr unsafe.Pointer,
+) error {
+	return errComNotImpl
+}
+
+func callfabricFabricGetActivationContext(
+	clzid unsafe.Pointer,
+	outptr unsafe.Pointer,
+) error {
+	return errComNotImpl
+}
