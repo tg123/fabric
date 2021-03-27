@@ -1,6 +1,10 @@
 // +build !windows
+// +build !linux
+// +build !amd64
 
 package fabric
+
+import "unsafe"
 
 func callCreateClient3(
 	len int,

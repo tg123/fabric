@@ -1,4 +1,5 @@
 // +build windows
+// +build amd64
 
 package fabric
 
