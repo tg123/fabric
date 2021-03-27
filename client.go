@@ -6,47 +6,25 @@ import (
 	"unsafe"
 
 	ole "github.com/go-ole/go-ole"
-	"golang.org/x/sys/windows"
 )
 
-var (
-	fabricClientDll              = windows.NewLazyDLL("FabricClient.dll")
-	fabricCreateLocalClientProc  = fabricClientDll.NewProc("FabricCreateLocalClient")
-	fabricCreateLocalClient2Proc = fabricClientDll.NewProc("FabricCreateLocalClient2")
-	fabricCreateLocalClient3Proc = fabricClientDll.NewProc("FabricCreateLocalClient3")
-	fabricCreateLocalClient4Proc = fabricClientDll.NewProc("FabricCreateLocalClient4")
-	fabricCreateClientProc       = fabricClientDll.NewProc("FabricCreateClient")
-	fabricCreateClient2Proc      = fabricClientDll.NewProc("FabricCreateClient2")
-	fabricCreateClient3Proc      = fabricClientDll.NewProc("FabricCreateClient3")
-)
-
-func createLocalClient(client *FabricClient, role FabricClientRole, iid string, p unsafe.Pointer) error {
-	clzid, err := ole.IIDFromString(iid)
-	if err != nil {
-		return err
-	}
-
-	r, _, err := fabricCreateLocalClient4Proc.Call(
-		uintptr(unsafe.Pointer(newComFabricServiceNotificationEventHandler(client))),
-		uintptr(unsafe.Pointer(newComFabricClientConnectionEventHandler(client))),
-		uintptr(role),
-		uintptr(unsafe.Pointer(clzid)),
-		uintptr(p),
+func createFabricSettingLocalClient(client *FabricClient, role FabricClientRole, p unsafe.Pointer) error {
+	err := callCreateLocalClient4(
+		unsafe.Pointer(newComFabricServiceNotificationEventHandler(client)),
+		unsafe.Pointer(newComFabricClientConnectionEventHandler(client)),
+		role,
+		unsafe.Pointer(iidIFabricClientSettingsIID),
+		p,
 	)
 
-	if r != 0 {
+	if err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func createClient(client *FabricClient, connectionStrings []string, iid string, p unsafe.Pointer) error {
-	clzid, err := ole.IIDFromString(iid)
-	if err != nil {
-		return err
-	}
-
+func createFabricSettingClient(client *FabricClient, connectionStrings []string, p unsafe.Pointer) error {
 	if len(connectionStrings) == 0 {
 		return fmt.Errorf("empty connection string")
 	}
@@ -54,25 +32,19 @@ func createClient(client *FabricClient, connectionStrings []string, iid string, 
 	var conn []*uint16
 
 	for _, c := range connectionStrings {
-		s, err := windows.UTF16PtrFromString(c)
-
-		if err != nil {
-			return err
-		}
-
-		conn = append(conn, s)
+		conn = append(conn, utf16PtrFromString(c))
 	}
 
-	r, _, err := fabricCreateClient3Proc.Call(
-		uintptr(len(conn)),
-		uintptr(unsafe.Pointer(&conn[0])),
-		uintptr(unsafe.Pointer(newComFabricServiceNotificationEventHandler(client))),
-		uintptr(unsafe.Pointer(newComFabricClientConnectionEventHandler(client))),
-		uintptr(unsafe.Pointer(clzid)),
-		uintptr(p),
+	err := callCreateClient3(
+		len(conn),
+		unsafe.Pointer(&conn[0]),
+		unsafe.Pointer(newComFabricServiceNotificationEventHandler(client)),
+		unsafe.Pointer(newComFabricClientConnectionEventHandler(client)),
+		unsafe.Pointer(iidIFabricClientSettingsIID),
+		p,
 	)
 
-	if r != 0 {
+	if err != nil {
 		return err
 	}
 
@@ -151,8 +123,8 @@ type FabricClient struct {
 	OnDisconnected func(info FabricGatewayInformation)
 }
 
-const (
-	comIFabricClientSettingsIID = "{b0e7dee0-cf64-11e0-9572-0800200c9a66}" // Lowest ver Service Fabric 6.0
+var (
+	iidIFabricClientSettingsIID = ole.NewGUID("{B0E7DEE0-CF64-11E0-9572-0800200C9A66}") // Lowest ver Service Fabric 6.0
 )
 
 func comHubFromComClientSetting(com *comFabricClientSettings) *fabricClientComHub {
@@ -189,7 +161,7 @@ func NewClient(opt FabricClientOpt) (*FabricClient, error) {
 	}
 
 	var com *comFabricClientSettings
-	err := createClient(c, opt.Address, comIFabricClientSettingsIID, unsafe.Pointer(&com))
+	err := createFabricSettingClient(c, opt.Address, unsafe.Pointer(&com))
 	if err != nil {
 		return nil, err
 	}
@@ -239,7 +211,7 @@ func NewLocalClientOpt(opt FabricLocalClientOpt) (*FabricClient, error) {
 	}
 
 	var com *comFabricClientSettings
-	err := createLocalClient(c, opt.Role, comIFabricClientSettingsIID, unsafe.Pointer(&com))
+	err := createFabricSettingLocalClient(c, opt.Role, unsafe.Pointer(&com))
 	if err != nil {
 		return nil, err
 	}

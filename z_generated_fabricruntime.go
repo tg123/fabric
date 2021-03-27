@@ -3,7 +3,6 @@ package fabric
 
 import (
 	"github.com/go-ole/go-ole"
-	"github.com/google/uuid"
 	"syscall"
 	"unsafe"
 )
@@ -268,7 +267,7 @@ serviceTypeName *uint16,
 serviceName *uint16,
 initializationDataLength uint32,
 initializationData *byte,
-partitionId uuid.UUID,
+partitionId ole.GUID,
 instanceId int64,
 serviceInstance **comFabricStatelessServiceInstance,
 ) uintptr { return 0}
@@ -293,7 +292,7 @@ func (v *comFabricStatelessServiceFactory) CreateInstance(
 	serviceName string,
 	initializationDataLength uint32,
 	initializationData *byte,
-	partitionId uuid.UUID,
+	partitionId ole.GUID,
 	instanceId int64,
 ) (serviceInstance *comFabricStatelessServiceInstance, err error) {
 	var p_0 *uint16
@@ -716,7 +715,7 @@ func (v *comFabricStatefulServiceFactory) CreateReplica(
 	serviceName string,
 	initializationDataLength uint32,
 	initializationData *byte,
-	partitionId uuid.UUID,
+	partitionId ole.GUID,
 	replicaId int64,
 ) (serviceReplica *comFabricStatefulServiceReplica, err error) {
 	var p_0 *uint16
@@ -2639,7 +2638,7 @@ func (v *comFabricServiceGroupPartition) vtable() *comFabricServiceGroupPartitio
 
 func (v *comFabricServiceGroupPartition) ResolveMember(
 	name string,
-	riid *uuid.UUID,
+	riid *ole.GUID,
 ) (member interface{}, err error) {
 	var p_0 *uint16
 	p_0 = utf16PtrFromString(name)
@@ -4142,7 +4141,7 @@ func (v *comFabricTransactionBase) vtable() *comFabricTransactionBaseVtbl {
 	return (*comFabricTransactionBaseVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *comFabricTransactionBase) GetId() (rt *uuid.UUID, err error) {
+func (v *comFabricTransactionBase) GetId() (rt *ole.GUID, err error) {
 	hr, _, err1 := syscall.Syscall(
 		v.vtable().get_Id,
 		1,
@@ -4155,7 +4154,7 @@ func (v *comFabricTransactionBase) GetId() (rt *uuid.UUID, err error) {
 		return
 	}
 
-	tmp := (*uuid.UUID)(unsafe.Pointer(hr))
+	tmp := (*ole.GUID)(unsafe.Pointer(hr))
 
 	rt = tmp
 	return

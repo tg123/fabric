@@ -2,7 +2,6 @@ package fabric
 
 import (
 	"context"
-	"fmt"
 	"io"
 	"reflect"
 	"sync"
@@ -10,16 +9,7 @@ import (
 	"unsafe"
 
 	ole "github.com/go-ole/go-ole"
-	"github.com/pkg/errors"
-	"golang.org/x/sys/windows"
 )
-
-var (
-	fabricCommonDll               = windows.NewLazyDLL("FabricCommon.dll")
-	fabricGetLastErrorMessageProc = fabricCommonDll.NewProc("FabricGetLastErrorMessage")
-)
-
-var errComNotImpl = fmt.Errorf("operation not supported on this fabric version")
 
 type comCreator func(iid string, outptr unsafe.Pointer) error
 
@@ -51,34 +41,6 @@ func releaseComObject(com *ole.IUnknown) error {
 
 	com.Release()
 	return nil
-}
-
-func fabricGetLastError() string {
-	var result *comFabricStringResult
-	hr, _, _ := fabricGetLastErrorMessageProc.Call(uintptr(unsafe.Pointer(&result)))
-
-	if hr != 0 {
-		return ""
-	}
-
-	msg, _ := result.GetString()
-	return msg
-}
-
-func (c FabricErrorCode) Error() string {
-	if c == 0 {
-		return ""
-	}
-
-	return fmt.Sprintf("error [%v] [0x%x]", c.String(), uint64(c))
-}
-
-func errno(hr uintptr, syserr error) error {
-	if hr == 0 {
-		return nil
-	}
-
-	return errors.Wrap(FabricErrorCode(hr), fabricGetLastError())
 }
 
 func waitch(ctx context.Context, ch <-chan error, sfctx *comFabricAsyncOperationContext, timeout time.Duration) (err error) {
@@ -122,8 +84,7 @@ func (v *comFabricStringResultGoProxy) init() {
 }
 
 func (v *comFabricStringResultGoProxy) GetString(_ *ole.IUnknown) uintptr {
-	s, _ := windows.UTF16PtrFromString(v.result)
-	return uintptr(unsafe.Pointer(s))
+	return uintptr(unsafe.Pointer(utf16PtrFromString(v.result)))
 }
 
 func errorToHResult(err error) uintptr {

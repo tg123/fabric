@@ -24,7 +24,7 @@ var basicTypeMap = map[string]string{
 	"LPCWSTR":   "string",
 
 	"HRESULT":  "FabricErrorCode",
-	"GUID":     "uuid.UUID",
+	"GUID":     "ole.GUID",
 	"FILETIME": "time.Time",
 	"void":     "interface{}",
 }
@@ -235,9 +235,9 @@ func (g *generator) generateToGolangObject(srcvar, dstvar, rawtype string, indir
 			fallthrough
 		case "FabricErrorCode":
 			fallthrough
-		case "uuid.UUID":
+		case "ole.GUID":
 			fallthrough
-		case "*uuid.UUID":
+		case "*ole.GUID":
 			g.printfln("%v = %v", dstvar, srcvar)
 		case "interface{}":
 			g.printfln("%v = fromUnsafePointer(%v)", dstvar, srcvar)
@@ -404,7 +404,7 @@ func (g *generator) generateToInnerObject(srcvar, dstvar, rawtype string, indire
 			fallthrough
 		case "FabricErrorCode":
 			fallthrough
-		case "uuid.UUID":
+		case "ole.GUID":
 			g.printfln("%v = %v", dstvar, srcvar)
 		case "interface{}":
 			g.printfln("%v = toUnsafePointer(%v)", dstvar, srcvar)

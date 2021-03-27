@@ -2,7 +2,7 @@
 package fabric
 
 import (
-	"github.com/google/uuid"
+	"github.com/go-ole/go-ole"
 	"time"
 	"unsafe"
 )
@@ -1606,7 +1606,7 @@ func (obj *innerFabricPartitionSelector) toGoStruct() (dst *FabricPartitionSelec
 }
 
 type FabricStartPartitionDataLossDescription struct {
-	OperationId       uuid.UUID
+	OperationId       ole.GUID
 	PartitionSelector *FabricPartitionSelector
 	DataLossMode      FabricDataLossMode
 }
@@ -1630,7 +1630,7 @@ func (obj *FabricStartPartitionDataLossDescription) toInnerStruct() *innerFabric
 
 type FabricSelectedPartition struct {
 	ServiceName string
-	PartitionId uuid.UUID
+	PartitionId ole.GUID
 }
 
 func (obj *FabricSelectedPartition) toInnerStruct() *innerFabricSelectedPartition {
@@ -1645,7 +1645,7 @@ func (obj *FabricSelectedPartition) toInnerStruct() *innerFabricSelectedPartitio
 
 type innerFabricSelectedPartition struct {
 	ServiceName *uint16
-	PartitionId uuid.UUID
+	PartitionId ole.GUID
 	Reserved    unsafe.Pointer
 }
 
@@ -1704,7 +1704,7 @@ func (obj *FabricPartitionDataLossProgress) toInnerStruct() *innerFabricPartitio
 }
 
 type FabricStartPartitionQuorumLossDescription struct {
-	OperationId                      uuid.UUID
+	OperationId                      ole.GUID
 	PartitionSelector                *FabricPartitionSelector
 	QuorumLossMode                   FabricQuorumLossMode
 	QuorumLossDurationInMilliSeconds int32
@@ -1772,7 +1772,7 @@ func (obj *FabricPartitionQuorumLossProgress) toInnerStruct() *innerFabricPartit
 }
 
 type FabricStartPartitionRestartDescription struct {
-	OperationId          uuid.UUID
+	OperationId          ole.GUID
 	PartitionSelector    *FabricPartitionSelector
 	RestartPartitionMode FabricRestartPartitionMode
 }
@@ -1898,7 +1898,7 @@ func (obj *FabricPartitionRestartProgress) toInnerStruct() *innerFabricPartition
 }
 
 type FabricCancelTestCommandDescription struct {
-	OperationId uuid.UUID
+	OperationId ole.GUID
 	Force       bool
 }
 type innerFabricCancelTestCommandDescription struct {
@@ -1920,7 +1920,7 @@ func (obj *FabricCancelTestCommandDescription) toInnerStruct() *innerFabricCance
 }
 
 type FabricOperationId struct {
-	PartitionId uuid.UUID
+	PartitionId ole.GUID
 }
 type innerFabricOperationId struct {
 	FabricOperationId
@@ -1963,7 +1963,7 @@ func (obj *FabricTestCommandListDescription) toInnerStruct() *innerFabricTestCom
 }
 
 type TestCommandQueryResultItem struct {
-	OperationId      uuid.UUID
+	OperationId      ole.GUID
 	TestCommandState FabricTestCommandProgressState
 	TestCommandType  FabricTestCommandType
 }
@@ -2626,7 +2626,7 @@ func (obj *innerFabricServicePartitionInformation) toGoStruct() (dst *FabricServ
 }
 
 type FabricSingletonPartitionInformation struct {
-	Id uuid.UUID
+	Id ole.GUID
 }
 type innerFabricSingletonPartitionInformation struct {
 	FabricSingletonPartitionInformation
@@ -2647,7 +2647,7 @@ func (obj *FabricSingletonPartitionInformation) toInnerStruct() *innerFabricSing
 }
 
 type FabricInt64RangePartitionInformation struct {
-	Id      uuid.UUID
+	Id      ole.GUID
 	LowKey  int64
 	HighKey int64
 }
@@ -2670,7 +2670,7 @@ func (obj *FabricInt64RangePartitionInformation) toInnerStruct() *innerFabricInt
 }
 
 type FabricNamedPartitionInformation struct {
-	Id   uuid.UUID
+	Id   ole.GUID
 	Name string
 }
 
@@ -2685,7 +2685,7 @@ func (obj *FabricNamedPartitionInformation) toInnerStruct() *innerFabricNamedPar
 }
 
 type innerFabricNamedPartitionInformation struct {
-	Id       uuid.UUID
+	Id       ole.GUID
 	Name     *uint16
 	Reserved unsafe.Pointer
 }
@@ -4914,7 +4914,7 @@ func (obj *innerFabricNodeTransitionDescription) toGoStruct() (dst *FabricNodeTr
 }
 
 type FabricNodeStopDescription struct {
-	OperationId           uuid.UUID
+	OperationId           ole.GUID
 	NodeName              string
 	NodeInstanceId        uint64
 	StopDurationInSeconds uint32
@@ -4933,7 +4933,7 @@ func (obj *FabricNodeStopDescription) toInnerStruct() *innerFabricNodeStopDescri
 }
 
 type innerFabricNodeStopDescription struct {
-	OperationId           uuid.UUID
+	OperationId           ole.GUID
 	NodeName              *uint16
 	NodeInstanceId        uint64
 	StopDurationInSeconds uint32
@@ -4953,7 +4953,7 @@ func (obj *innerFabricNodeStopDescription) toGoStruct() (dst *FabricNodeStopDesc
 }
 
 type FabricNodeStartDescription struct {
-	OperationId    uuid.UUID
+	OperationId    ole.GUID
 	NodeName       string
 	NodeInstanceId uint64
 }
@@ -4970,7 +4970,7 @@ func (obj *FabricNodeStartDescription) toInnerStruct() *innerFabricNodeStartDesc
 }
 
 type innerFabricNodeStartDescription struct {
-	OperationId    uuid.UUID
+	OperationId    ole.GUID
 	NodeName       *uint16
 	NodeInstanceId uint64
 	Reserved       unsafe.Pointer
@@ -5231,7 +5231,7 @@ func (obj *innerFabricUpgradeSafetyCheck) toGoStruct() (dst *FabricUpgradeSafety
 }
 
 type FabricUpgradePartitionSafetyCheck struct {
-	PartitionId uuid.UUID
+	PartitionId ole.GUID
 }
 type innerFabricUpgradePartitionSafetyCheck struct {
 	FabricUpgradePartitionSafetyCheck
@@ -6652,7 +6652,7 @@ func (obj *innerFabricResolvedServicePartition) toGoStruct() (dst *FabricResolve
 
 type FabricServiceNotification struct {
 	ServiceName   string
-	PartitionId   uuid.UUID
+	PartitionId   ole.GUID
 	Endpoints     []FabricResolvedServiceEndpoint
 	PartitionInfo *FabricServicePartitionInformation
 }
@@ -6688,7 +6688,7 @@ func (obj *FabricServiceNotification) toInnerStruct() *innerFabricServiceNotific
 
 type innerFabricServiceNotification struct {
 	ServiceName   *uint16
-	PartitionId   uuid.UUID
+	PartitionId   ole.GUID
 	EndpointCount uint32
 	Endpoints     *innerFabricResolvedServiceEndpoint
 	PartitionInfo *innerFabricServicePartitionInformation
@@ -8631,7 +8631,7 @@ func (obj *innerFabricSafetyCheck) toGoStruct() (dst *FabricSafetyCheck) {
 }
 
 type FabricPartitionSafetyCheck struct {
-	PartitionId uuid.UUID
+	PartitionId ole.GUID
 }
 type innerFabricPartitionSafetyCheck struct {
 	FabricPartitionSafetyCheck
@@ -9883,7 +9883,7 @@ func (obj *innerFabricServiceGroupMemberQueryResultList) toGoStruct() []FabricSe
 }
 
 type FabricPartitionLoadInformationQueryDescription struct {
-	PartitionId uuid.UUID
+	PartitionId ole.GUID
 }
 type innerFabricPartitionLoadInformationQueryDescription struct {
 	FabricPartitionLoadInformationQueryDescription
@@ -9904,7 +9904,7 @@ func (obj *FabricPartitionLoadInformationQueryDescription) toInnerStruct() *inne
 }
 
 type FabricReplicaLoadInformationQueryDescription struct {
-	PartitionId         uuid.UUID
+	PartitionId         ole.GUID
 	ReplicaOrInstanceId int64
 }
 type innerFabricReplicaLoadInformationQueryDescription struct {
@@ -9927,7 +9927,7 @@ func (obj *FabricReplicaLoadInformationQueryDescription) toInnerStruct() *innerF
 
 type FabricUnplacedReplicaInformationQueryDescription struct {
 	ServiceName        string
-	PartitionId        uuid.UUID
+	PartitionId        ole.GUID
 	OnlyQueryPrimaries bool
 }
 
@@ -9944,7 +9944,7 @@ func (obj *FabricUnplacedReplicaInformationQueryDescription) toInnerStruct() *in
 
 type innerFabricUnplacedReplicaInformationQueryDescription struct {
 	ServiceName        *uint16
-	PartitionId        uuid.UUID
+	PartitionId        ole.GUID
 	OnlyQueryPrimaries bool
 	Reserved           unsafe.Pointer
 }
@@ -9962,7 +9962,7 @@ func (obj *innerFabricUnplacedReplicaInformationQueryDescription) toGoStruct() (
 
 type FabricServicePartitionQueryDescription struct {
 	ServiceName       string
-	PartitionIdFilter uuid.UUID
+	PartitionIdFilter ole.GUID
 	ContinuationToken string
 }
 
@@ -9982,7 +9982,7 @@ func (obj *FabricServicePartitionQueryDescription) toInnerStruct() *innerFabricS
 
 type innerFabricServicePartitionQueryDescription struct {
 	ServiceName       *uint16
-	PartitionIdFilter uuid.UUID
+	PartitionIdFilter ole.GUID
 	Reserved          unsafe.Pointer
 }
 type innerFabricServicePartitionQueryDescriptionEx1 struct {
@@ -10200,7 +10200,7 @@ func (obj *innerFabricStatefulServicePartitionQueryResultItem) toGoStruct() (dst
 }
 
 type FabricServiceReplicaQueryDescription struct {
-	PartitionId                 uuid.UUID
+	PartitionId                 ole.GUID
 	ReplicaIdOrInstanceIdFilter int64
 	ReplicaStatusFilter         uint32
 	ContinuationToken           string
@@ -10224,7 +10224,7 @@ func (obj *FabricServiceReplicaQueryDescription) toInnerStruct() *innerFabricSer
 }
 
 type innerFabricServiceReplicaQueryDescription struct {
-	PartitionId                 uuid.UUID
+	PartitionId                 ole.GUID
 	ReplicaIdOrInstanceIdFilter int64
 	Reserved                    unsafe.Pointer
 }
@@ -11080,7 +11080,7 @@ type FabricDeployedServiceReplicaQueryDescription struct {
 	NodeName                  string
 	ApplicationName           string
 	ServiceManifestNameFilter string
-	PartitionIdFilter         uuid.UUID
+	PartitionIdFilter         ole.GUID
 }
 
 func (obj *FabricDeployedServiceReplicaQueryDescription) toInnerStruct() *innerFabricDeployedServiceReplicaQueryDescription {
@@ -11099,7 +11099,7 @@ type innerFabricDeployedServiceReplicaQueryDescription struct {
 	NodeName                  *uint16
 	ApplicationName           *uint16
 	ServiceManifestNameFilter *uint16
-	PartitionIdFilter         uuid.UUID
+	PartitionIdFilter         ole.GUID
 	Reserved                  unsafe.Pointer
 }
 
@@ -11212,7 +11212,7 @@ type FabricDeployedStatefulServiceReplicaQueryResultItem struct {
 	ServiceTypeName            string
 	ServiceManifestVersion     string
 	CodePackageName            string
-	PartitionId                uuid.UUID
+	PartitionId                ole.GUID
 	ReplicaId                  int64
 	ReplicaRole                FabricReplicaRole
 	ReplicaStatus              FabricQueryServiceReplicaStatus
@@ -11256,7 +11256,7 @@ type innerFabricDeployedStatefulServiceReplicaQueryResultItem struct {
 	ServiceTypeName        *uint16
 	ServiceManifestVersion *uint16
 	CodePackageName        *uint16
-	PartitionId            uuid.UUID
+	PartitionId            ole.GUID
 	ReplicaId              int64
 	ReplicaRole            FabricReplicaRole
 	ReplicaStatus          FabricQueryServiceReplicaStatus
@@ -11316,7 +11316,7 @@ type FabricDeployedStatelessServiceInstanceQueryResultItem struct {
 	ServiceTypeName            string
 	ServiceManifestVersion     string
 	CodePackageName            string
-	PartitionId                uuid.UUID
+	PartitionId                ole.GUID
 	InstanceId                 int64
 	ReplicaStatus              FabricQueryServiceReplicaStatus
 	Address                    string
@@ -11356,7 +11356,7 @@ type innerFabricDeployedStatelessServiceInstanceQueryResultItem struct {
 	ServiceTypeName        *uint16
 	ServiceManifestVersion *uint16
 	CodePackageName        *uint16
-	PartitionId            uuid.UUID
+	PartitionId            ole.GUID
 	InstanceId             int64
 	ReplicaStatus          FabricQueryServiceReplicaStatus
 	Address                *uint16
@@ -11505,7 +11505,7 @@ func (obj *innerFabricUnplacedReplicaInformationList) toGoStruct() []string {
 
 type FabricDeployedServiceReplicaDetailQueryDescription struct {
 	NodeName    string
-	PartitionId uuid.UUID
+	PartitionId ole.GUID
 	ReplicaId   int64
 }
 
@@ -11522,7 +11522,7 @@ func (obj *FabricDeployedServiceReplicaDetailQueryDescription) toInnerStruct() *
 
 type innerFabricDeployedServiceReplicaDetailQueryDescription struct {
 	NodeName    *uint16
-	PartitionId uuid.UUID
+	PartitionId ole.GUID
 	ReplicaId   int64
 	Reserved    unsafe.Pointer
 }
@@ -11570,7 +11570,7 @@ func (obj *innerFabricDeployedServiceReplicaDetailQueryResultItem) toGoStruct() 
 
 type FabricDeployedStatelessServiceInstanceDetailQueryResultItem struct {
 	ServiceName                         string
-	PartitionId                         uuid.UUID
+	PartitionId                         ole.GUID
 	InstanceId                          int64
 	CurrentServiceOperation             FabricQueryServiceOperationName
 	CurrentServiceOperationStartTimeUtc time.Time
@@ -11617,7 +11617,7 @@ func (obj *FabricDeployedStatelessServiceInstanceDetailQueryResultItem) toInnerS
 
 type innerFabricDeployedStatelessServiceInstanceDetailQueryResultItem struct {
 	ServiceName                         *uint16
-	PartitionId                         uuid.UUID
+	PartitionId                         ole.GUID
 	InstanceId                          int64
 	CurrentServiceOperation             FabricQueryServiceOperationName
 	CurrentServiceOperationStartTimeUtc filetime
@@ -11979,7 +11979,7 @@ func (obj *innerFabricReplicaStatusQueryResult) toGoStruct() (dst *FabricReplica
 
 type FabricDeployedStatefulServiceReplicaDetailQueryResultItem struct {
 	ServiceName                         string
-	PartitionId                         uuid.UUID
+	PartitionId                         ole.GUID
 	ReplicaId                           int64
 	CurrentServiceOperation             FabricQueryServiceOperationName
 	CurrentServiceOperationStartTimeUtc time.Time
@@ -12038,7 +12038,7 @@ func (obj *FabricDeployedStatefulServiceReplicaDetailQueryResultItem) toInnerStr
 
 type innerFabricDeployedStatefulServiceReplicaDetailQueryResultItem struct {
 	ServiceName                         *uint16
-	PartitionId                         uuid.UUID
+	PartitionId                         ole.GUID
 	ReplicaId                           int64
 	CurrentServiceOperation             FabricQueryServiceOperationName
 	CurrentServiceOperationStartTimeUtc filetime
@@ -12339,7 +12339,7 @@ func (obj *innerFabricProvisionedConfigVersionQueryResultList) toGoStruct() []Fa
 }
 
 type FabricServiceNameQueryDescription struct {
-	PartitionId uuid.UUID
+	PartitionId ole.GUID
 }
 type innerFabricServiceNameQueryDescription struct {
 	FabricServiceNameQueryDescription
@@ -12973,7 +12973,7 @@ func (obj *innerFabricMovePrimaryDescription2) toGoStruct() (dst *FabricMovePrim
 type FabricMovePrimaryDescriptionUsingNodeName struct {
 	NodeName          string
 	ServiceName       string
-	PartitionId       uuid.UUID
+	PartitionId       ole.GUID
 	IgnoreConstraints bool
 }
 
@@ -12992,7 +12992,7 @@ func (obj *FabricMovePrimaryDescriptionUsingNodeName) toInnerStruct() *innerFabr
 type innerFabricMovePrimaryDescriptionUsingNodeName struct {
 	NodeName          *uint16
 	ServiceName       *uint16
-	PartitionId       uuid.UUID
+	PartitionId       ole.GUID
 	IgnoreConstraints bool
 	Reserved          unsafe.Pointer
 }
@@ -13012,7 +13012,7 @@ func (obj *innerFabricMovePrimaryDescriptionUsingNodeName) toGoStruct() (dst *Fa
 type FabricMovePrimaryResult struct {
 	NodeName    string
 	ServiceName string
-	PartitionId uuid.UUID
+	PartitionId ole.GUID
 }
 
 func (obj *FabricMovePrimaryResult) toInnerStruct() *innerFabricMovePrimaryResult {
@@ -13029,7 +13029,7 @@ func (obj *FabricMovePrimaryResult) toInnerStruct() *innerFabricMovePrimaryResul
 type innerFabricMovePrimaryResult struct {
 	NodeName    *uint16
 	ServiceName *uint16
-	PartitionId uuid.UUID
+	PartitionId ole.GUID
 	Reserved    unsafe.Pointer
 }
 
@@ -13078,7 +13078,7 @@ type FabricMoveSecondaryDescriptionUsingNodeName struct {
 	CurrentNodeName   string
 	NewNodeName       string
 	ServiceName       string
-	PartitionId       uuid.UUID
+	PartitionId       ole.GUID
 	IgnoreConstraints bool
 }
 
@@ -13099,7 +13099,7 @@ type innerFabricMoveSecondaryDescriptionUsingNodeName struct {
 	CurrentNodeName   *uint16
 	NewNodeName       *uint16
 	ServiceName       *uint16
-	PartitionId       uuid.UUID
+	PartitionId       ole.GUID
 	IgnoreConstraints bool
 	Reserved          unsafe.Pointer
 }
@@ -13121,7 +13121,7 @@ type FabricMoveSecondaryResult struct {
 	CurrentNodeName string
 	NewNodeName     string
 	ServiceName     string
-	PartitionId     uuid.UUID
+	PartitionId     ole.GUID
 }
 
 func (obj *FabricMoveSecondaryResult) toInnerStruct() *innerFabricMoveSecondaryResult {
@@ -13140,7 +13140,7 @@ type innerFabricMoveSecondaryResult struct {
 	CurrentNodeName *uint16
 	NewNodeName     *uint16
 	ServiceName     *uint16
-	PartitionId     uuid.UUID
+	PartitionId     ole.GUID
 	Reserved        unsafe.Pointer
 }
 
@@ -13158,7 +13158,7 @@ func (obj *innerFabricMoveSecondaryResult) toGoStruct() (dst *FabricMoveSecondar
 
 type FabricRestartReplicaDescription struct {
 	NodeName            string
-	PartitionId         uuid.UUID
+	PartitionId         ole.GUID
 	ReplicaOrInstanceId int64
 }
 
@@ -13175,7 +13175,7 @@ func (obj *FabricRestartReplicaDescription) toInnerStruct() *innerFabricRestartR
 
 type innerFabricRestartReplicaDescription struct {
 	NodeName            *uint16
-	PartitionId         uuid.UUID
+	PartitionId         ole.GUID
 	ReplicaOrInstanceId int64
 	Reserved            unsafe.Pointer
 }
@@ -13193,7 +13193,7 @@ func (obj *innerFabricRestartReplicaDescription) toGoStruct() (dst *FabricRestar
 
 type FabricRemoveReplicaDescription struct {
 	NodeName            string
-	PartitionId         uuid.UUID
+	PartitionId         ole.GUID
 	ReplicaOrInstanceId int64
 	ForceRemove         bool
 }
@@ -13215,7 +13215,7 @@ func (obj *FabricRemoveReplicaDescription) toInnerStruct() *innerFabricRemoveRep
 
 type innerFabricRemoveReplicaDescription struct {
 	NodeName            *uint16
-	PartitionId         uuid.UUID
+	PartitionId         ole.GUID
 	ReplicaOrInstanceId int64
 	Reserved            unsafe.Pointer
 }
@@ -13365,7 +13365,7 @@ func (obj *FabricClusterHealthReport) toInnerStruct() *innerFabricClusterHealthR
 }
 
 type FabricStatelessServiceInstanceHealthReport struct {
-	PartitionId       uuid.UUID
+	PartitionId       ole.GUID
 	InstanceId        int64
 	HealthInformation *FabricHealthInformation
 }
@@ -13388,7 +13388,7 @@ func (obj *FabricStatelessServiceInstanceHealthReport) toInnerStruct() *innerFab
 }
 
 type FabricStatefulServiceReplicaHealthReport struct {
-	PartitionId       uuid.UUID
+	PartitionId       ole.GUID
 	ReplicaId         int64
 	HealthInformation *FabricHealthInformation
 }
@@ -13411,7 +13411,7 @@ func (obj *FabricStatefulServiceReplicaHealthReport) toInnerStruct() *innerFabri
 }
 
 type FabricPartitionHealthReport struct {
-	PartitionId       uuid.UUID
+	PartitionId       ole.GUID
 	HealthInformation *FabricHealthInformation
 }
 type innerFabricPartitionHealthReport struct {
@@ -14180,7 +14180,7 @@ func (obj *innerFabricClusterLoadInformation) toGoStruct() (dst *FabricClusterLo
 }
 
 type FabricPartitionLoadInformation struct {
-	PartitionId                uuid.UUID
+	PartitionId                ole.GUID
 	PrimaryLoadMetricReports   []FabricLoadMetricReport
 	SecondaryLoadMetricReports []FabricLoadMetricReport
 }
@@ -14235,7 +14235,7 @@ func (obj *FabricPartitionLoadInformation) toInnerStruct() *innerFabricPartition
 }
 
 type innerFabricPartitionLoadInformation struct {
-	PartitionId                uuid.UUID
+	PartitionId                ole.GUID
 	PrimaryLoadMetricReports   *innerFabricLoadMetricReportList
 	SecondaryLoadMetricReports *innerFabricLoadMetricReportList
 	Reserved                   unsafe.Pointer
@@ -14277,7 +14277,7 @@ func (obj *innerFabricPartitionLoadInformation) toGoStruct() (dst *FabricPartiti
 }
 
 type FabricReplicaLoadInformation struct {
-	PartitionId         uuid.UUID
+	PartitionId         ole.GUID
 	ReplicaOrInstanceId int64
 	LoadMetricReports   []FabricLoadMetricReport
 }
@@ -14313,7 +14313,7 @@ func (obj *FabricReplicaLoadInformation) toInnerStruct() *innerFabricReplicaLoad
 }
 
 type innerFabricReplicaLoadInformation struct {
-	PartitionId         uuid.UUID
+	PartitionId         ole.GUID
 	ReplicaOrInstanceId int64
 	LoadMetricReports   *innerFabricLoadMetricReportList
 	Reserved            unsafe.Pointer
@@ -14344,7 +14344,7 @@ func (obj *innerFabricReplicaLoadInformation) toGoStruct() (dst *FabricReplicaLo
 
 type FabricUnplacedReplicaInformation struct {
 	ServiceName            string
-	PartitionId            uuid.UUID
+	PartitionId            ole.GUID
 	UnplacedReplicaReasons []string
 }
 
@@ -14380,7 +14380,7 @@ func (obj *FabricUnplacedReplicaInformation) toInnerStruct() *innerFabricUnplace
 
 type innerFabricUnplacedReplicaInformation struct {
 	ServiceName            *uint16
-	PartitionId            uuid.UUID
+	PartitionId            ole.GUID
 	UnplacedReplicaReasons *innerFabricStringList
 	Reserved               unsafe.Pointer
 }
@@ -14753,7 +14753,7 @@ func (obj *innerFabricGatewayInformation) toGoStruct() (dst *FabricGatewayInform
 }
 
 type FabricStartApprovedUpgradesDescription struct {
-	OperationId       uuid.UUID
+	OperationId       ole.GUID
 	ClusterConfigPath string
 	RollbackOnFailure bool
 }
@@ -14770,7 +14770,7 @@ func (obj *FabricStartApprovedUpgradesDescription) toInnerStruct() *innerFabricS
 }
 
 type innerFabricStartApprovedUpgradesDescription struct {
-	OperationId       uuid.UUID
+	OperationId       ole.GUID
 	ClusterConfigPath *uint16
 	RollbackOnFailure bool
 	Reserved          unsafe.Pointer
@@ -15181,7 +15181,7 @@ func (obj *innerFabricReplicaHealth) toGoStruct() (dst *FabricReplicaHealth) {
 }
 
 type FabricStatefulServiceReplicaHealth struct {
-	PartitionId           uuid.UUID
+	PartitionId           ole.GUID
 	ReplicaId             int64
 	AggregatedHealthState FabricHealthState
 	HealthEvents          []FabricHealthEvent
@@ -15243,7 +15243,7 @@ func (obj *FabricStatefulServiceReplicaHealth) toInnerStruct() *innerFabricState
 }
 
 type innerFabricStatefulServiceReplicaHealth struct {
-	PartitionId           uuid.UUID
+	PartitionId           ole.GUID
 	ReplicaId             int64
 	AggregatedHealthState FabricHealthState
 	HealthEvents          *innerFabricHealthEventList
@@ -15297,7 +15297,7 @@ func (obj *innerFabricStatefulServiceReplicaHealth) toGoStruct() (dst *FabricSta
 }
 
 type FabricStatelessServiceInstanceHealth struct {
-	PartitionId           uuid.UUID
+	PartitionId           ole.GUID
 	InstanceId            int64
 	AggregatedHealthState FabricHealthState
 	HealthEvents          []FabricHealthEvent
@@ -15359,7 +15359,7 @@ func (obj *FabricStatelessServiceInstanceHealth) toInnerStruct() *innerFabricSta
 }
 
 type innerFabricStatelessServiceInstanceHealth struct {
-	PartitionId           uuid.UUID
+	PartitionId           ole.GUID
 	InstanceId            int64
 	AggregatedHealthState FabricHealthState
 	HealthEvents          *innerFabricHealthEventList
@@ -15466,7 +15466,7 @@ func (obj *innerFabricReplicaHealthStateList) toGoStruct() []FabricReplicaHealth
 }
 
 type FabricStatelessServiceInstanceHealthState struct {
-	PartitionId           uuid.UUID
+	PartitionId           ole.GUID
 	InstanceId            int64
 	AggregatedHealthState FabricHealthState
 	UnhealthyEvaluations  []FabricHealthEvaluation
@@ -15507,7 +15507,7 @@ func (obj *FabricStatelessServiceInstanceHealthState) toInnerStruct() *innerFabr
 }
 
 type innerFabricStatelessServiceInstanceHealthState struct {
-	PartitionId           uuid.UUID
+	PartitionId           ole.GUID
 	InstanceId            int64
 	AggregatedHealthState FabricHealthState
 	Reserved              unsafe.Pointer
@@ -15547,7 +15547,7 @@ func (obj *innerFabricStatelessServiceInstanceHealthState) toGoStruct() (dst *Fa
 }
 
 type FabricStatefulServiceReplicaHealthState struct {
-	PartitionId           uuid.UUID
+	PartitionId           ole.GUID
 	ReplicaId             int64
 	AggregatedHealthState FabricHealthState
 	UnhealthyEvaluations  []FabricHealthEvaluation
@@ -15588,7 +15588,7 @@ func (obj *FabricStatefulServiceReplicaHealthState) toInnerStruct() *innerFabric
 }
 
 type innerFabricStatefulServiceReplicaHealthState struct {
-	PartitionId           uuid.UUID
+	PartitionId           ole.GUID
 	ReplicaId             int64
 	AggregatedHealthState FabricHealthState
 	Reserved              unsafe.Pointer
@@ -15628,7 +15628,7 @@ func (obj *innerFabricStatefulServiceReplicaHealthState) toGoStruct() (dst *Fabr
 }
 
 type FabricPartitionHealth struct {
-	PartitionId           uuid.UUID
+	PartitionId           ole.GUID
 	AggregatedHealthState FabricHealthState
 	HealthEvents          []FabricHealthEvent
 	ReplicaHealthStates   []FabricReplicaHealthState
@@ -15713,7 +15713,7 @@ func (obj *FabricPartitionHealth) toInnerStruct() *innerFabricPartitionHealth {
 }
 
 type innerFabricPartitionHealth struct {
-	PartitionId           uuid.UUID
+	PartitionId           ole.GUID
 	AggregatedHealthState FabricHealthState
 	HealthEvents          *innerFabricHealthEventList
 	ReplicaHealthStates   *innerFabricReplicaHealthStateList
@@ -15788,7 +15788,7 @@ func (obj *innerFabricPartitionHealth) toGoStruct() (dst *FabricPartitionHealth)
 }
 
 type FabricPartitionHealthState struct {
-	PartitionId           uuid.UUID
+	PartitionId           ole.GUID
 	AggregatedHealthState FabricHealthState
 }
 type innerFabricPartitionHealthState struct {
@@ -17944,7 +17944,7 @@ func (obj *innerFabricNodeHealthEvaluation) toGoStruct() (dst *FabricNodeHealthE
 
 type FabricReplicaHealthEvaluation struct {
 	Description           string
-	PartitionId           uuid.UUID
+	PartitionId           ole.GUID
 	ReplicaOrInstanceId   int64
 	AggregatedHealthState FabricHealthState
 	UnhealthyEvaluations  []FabricHealthEvaluation
@@ -17984,7 +17984,7 @@ func (obj *FabricReplicaHealthEvaluation) toInnerStruct() *innerFabricReplicaHea
 
 type innerFabricReplicaHealthEvaluation struct {
 	Description           *uint16
-	PartitionId           uuid.UUID
+	PartitionId           ole.GUID
 	ReplicaOrInstanceId   int64
 	AggregatedHealthState FabricHealthState
 	UnhealthyEvaluations  *innerFabricHealthEvaluationList
@@ -18018,7 +18018,7 @@ func (obj *innerFabricReplicaHealthEvaluation) toGoStruct() (dst *FabricReplicaH
 
 type FabricPartitionHealthEvaluation struct {
 	Description           string
-	PartitionId           uuid.UUID
+	PartitionId           ole.GUID
 	AggregatedHealthState FabricHealthState
 	UnhealthyEvaluations  []FabricHealthEvaluation
 }
@@ -18056,7 +18056,7 @@ func (obj *FabricPartitionHealthEvaluation) toInnerStruct() *innerFabricPartitio
 
 type innerFabricPartitionHealthEvaluation struct {
 	Description           *uint16
-	PartitionId           uuid.UUID
+	PartitionId           ole.GUID
 	AggregatedHealthState FabricHealthState
 	UnhealthyEvaluations  *innerFabricHealthEvaluationList
 	Reserved              unsafe.Pointer
@@ -20523,7 +20523,7 @@ func (obj *FabricServiceHealthStatisticsFilter) toInnerStruct() *innerFabricServ
 }
 
 type FabricPartitionHealthQueryDescription struct {
-	PartitionId            uuid.UUID
+	PartitionId            ole.GUID
 	HealthPolicy           *FabricApplicationHealthPolicy
 	EventsFilter           *FabricHealthEventsFilter
 	ReplicasFilter         *FabricReplicaHealthStatesFilter
@@ -20547,7 +20547,7 @@ func (obj *FabricPartitionHealthQueryDescription) toInnerStruct() *innerFabricPa
 }
 
 type innerFabricPartitionHealthQueryDescription struct {
-	PartitionId    uuid.UUID
+	PartitionId    ole.GUID
 	HealthPolicy   *innerFabricApplicationHealthPolicy
 	EventsFilter   *innerFabricHealthEventsFilter
 	ReplicasFilter *innerFabricReplicaHealthStatesFilter
@@ -20598,7 +20598,7 @@ func (obj *FabricPartitionHealthStatisticsFilter) toInnerStruct() *innerFabricPa
 }
 
 type FabricReplicaHealthQueryDescription struct {
-	PartitionId         uuid.UUID
+	PartitionId         ole.GUID
 	ReplicaOrInstanceId int64
 	HealthPolicy        *FabricApplicationHealthPolicy
 	EventsFilter        *FabricHealthEventsFilter
@@ -21373,7 +21373,7 @@ const (
 type FabricStoreBackupInfo struct {
 	BackupFolder  string
 	BackupOption  FabricStoreBackupOption
-	BackupChainId uuid.UUID
+	BackupChainId ole.GUID
 	BackupIndex   uint32
 }
 
@@ -21398,7 +21398,7 @@ type innerFabricStoreBackupInfo struct {
 	Reserved     unsafe.Pointer
 }
 type innerFabricStoreBackupInfoEx1 struct {
-	BackupChainId uuid.UUID
+	BackupChainId ole.GUID
 	BackupIndex   uint32
 	Reserved      unsafe.Pointer
 }
@@ -22011,7 +22011,7 @@ func (obj *innerFabricReplicaHealthStateFilterList) toGoStruct() []FabricReplica
 
 type FabricPartitionHealthStateFilter struct {
 	HealthStateFilter uint32
-	PartitionIdFilter uuid.UUID
+	PartitionIdFilter ole.GUID
 	ReplicaFilters    []FabricReplicaHealthStateFilter
 }
 
@@ -22047,7 +22047,7 @@ func (obj *FabricPartitionHealthStateFilter) toInnerStruct() *innerFabricPartiti
 
 type innerFabricPartitionHealthStateFilter struct {
 	HealthStateFilter uint32
-	PartitionIdFilter uuid.UUID
+	PartitionIdFilter ole.GUID
 	ReplicaFilters    *innerFabricReplicaHealthStateFilterList
 	Reserved          unsafe.Pointer
 }
@@ -22569,7 +22569,7 @@ func (obj *innerFabricReplicaHealthStateChunkList) toGoStruct() []FabricReplicaH
 }
 
 type FabricPartitionHealthStateChunk struct {
-	PartitionId              uuid.UUID
+	PartitionId              ole.GUID
 	HealthState              FabricHealthState
 	ReplicaHealthStateChunks []FabricReplicaHealthStateChunk
 }
@@ -22605,7 +22605,7 @@ func (obj *FabricPartitionHealthStateChunk) toInnerStruct() *innerFabricPartitio
 }
 
 type innerFabricPartitionHealthStateChunk struct {
-	PartitionId              uuid.UUID
+	PartitionId              ole.GUID
 	HealthState              FabricHealthState
 	ReplicaHealthStateChunks *innerFabricReplicaHealthStateChunkList
 	Reserved                 unsafe.Pointer

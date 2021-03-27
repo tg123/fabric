@@ -27,8 +27,7 @@ func newGenerator(ctx *defContext) *generator {
 }
 
 var pkgMap = map[string]string{
-	"ole":  `github.com/go-ole/go-ole`,
-	"uuid": `github.com/google/uuid`,
+	"ole": `github.com/go-ole/go-ole`,
 }
 
 func (g *generator) nextvarid() int {

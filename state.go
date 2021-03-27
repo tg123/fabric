@@ -1,11 +1,11 @@
 package fabric
 
-import "github.com/google/uuid"
+import ole "github.com/go-ole/go-ole"
 
 type ServiceContext struct {
 	ServiceTypeName    string
 	ServiceName        string
 	InitializationData []byte
-	PartitionId        uuid.UUID
+	PartitionId        ole.GUID
 	InstanceId         int64
 }

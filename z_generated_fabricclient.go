@@ -4,7 +4,6 @@ package fabric
 import (
 	"context"
 	"github.com/go-ole/go-ole"
-	"github.com/google/uuid"
 	"runtime"
 	"syscall"
 	"unsafe"
@@ -2323,7 +2322,7 @@ func (v *FabricClient) GetClusterManifest(
 }
 func (v *FabricClient) RecoverPartition(
 	ctx context.Context,
-	partitionId uuid.UUID,
+	partitionId ole.GUID,
 ) (err error) {
 	if v.hub.FabricClusterManagementClient2 == nil {
 		err = errComNotImpl
@@ -2663,7 +2662,7 @@ func (v *FabricClient) RollbackFabricUpgrade(
 }
 func (v *FabricClient) ResetPartitionLoad(
 	ctx context.Context,
-	partitionId uuid.UUID,
+	partitionId ole.GUID,
 ) (err error) {
 	if v.hub.FabricClusterManagementClient5 == nil {
 		err = errComNotImpl
@@ -3122,7 +3121,7 @@ func (v *FabricClient) GetServiceHealth(
 }
 func (v *FabricClient) GetPartitionHealth(
 	ctx context.Context,
-	partitionId uuid.UUID,
+	partitionId ole.GUID,
 	healthPolicy *FabricApplicationHealthPolicy,
 ) (result_0 *FabricPartitionHealth, err error) {
 	if v.hub.FabricHealthClient == nil {
@@ -3166,7 +3165,7 @@ func (v *FabricClient) GetPartitionHealth(
 }
 func (v *FabricClient) GetReplicaHealth(
 	ctx context.Context,
-	partitionId uuid.UUID,
+	partitionId ole.GUID,
 	replicaId int64,
 	healthPolicy *FabricApplicationHealthPolicy,
 ) (result_0 *FabricReplicaHealth, err error) {
@@ -5251,7 +5250,7 @@ func (v *FabricClient) StartPartitionDataLoss(
 }
 func (v *FabricClient) GetPartitionDataLossProgress(
 	ctx context.Context,
-	operationId uuid.UUID,
+	operationId ole.GUID,
 ) (result_0 *FabricPartitionDataLossProgress, err error) {
 	if v.hub.FabricTestManagementClient == nil {
 		err = errComNotImpl
@@ -5333,7 +5332,7 @@ func (v *FabricClient) StartPartitionQuorumLoss(
 }
 func (v *FabricClient) GetPartitionQuorumLossProgress(
 	ctx context.Context,
-	operationId uuid.UUID,
+	operationId ole.GUID,
 ) (result_0 *FabricPartitionQuorumLossProgress, err error) {
 	if v.hub.FabricTestManagementClient == nil {
 		err = errComNotImpl
@@ -5415,7 +5414,7 @@ func (v *FabricClient) StartPartitionRestart(
 }
 func (v *FabricClient) GetPartitionRestartProgress(
 	ctx context.Context,
-	operationId uuid.UUID,
+	operationId ole.GUID,
 ) (result_0 *FabricPartitionRestartProgress, err error) {
 	if v.hub.FabricTestManagementClient == nil {
 		err = errComNotImpl
@@ -5699,7 +5698,7 @@ func (v *FabricClient) StartNodeTransition(
 }
 func (v *FabricClient) GetNodeTransitionProgress(
 	ctx context.Context,
-	operationId uuid.UUID,
+	operationId ole.GUID,
 ) (result_0 *FabricNodeTransitionProgress, err error) {
 	if v.hub.FabricTestManagementClient3 == nil {
 		err = errComNotImpl
@@ -6873,7 +6872,7 @@ func (v *comFabricPropertyManagementClient) endPutPropertyWString(
 func (v *comFabricPropertyManagementClient) beginPutPropertyGuid(
 	name string,
 	propertyName string,
-	data *uuid.UUID,
+	data *ole.GUID,
 	timeoutMilliseconds uint32,
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
@@ -9820,7 +9819,7 @@ func (v *comFabricClusterManagementClient2) endGetClusterManifest(
 	return
 }
 func (v *comFabricClusterManagementClient2) beginRecoverPartition(
-	partitionId uuid.UUID,
+	partitionId ole.GUID,
 	timeoutMilliseconds uint32,
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
@@ -10269,7 +10268,7 @@ func (v *comFabricClusterManagementClient5) vtable() *comFabricClusterManagement
 }
 
 func (v *comFabricClusterManagementClient5) beginResetPartitionLoad(
-	partitionId uuid.UUID,
+	partitionId ole.GUID,
 	timeoutMilliseconds uint32,
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
@@ -11081,7 +11080,7 @@ func (v *comFabricHealthClient) endGetServiceHealth(
 	return
 }
 func (v *comFabricHealthClient) beginGetPartitionHealth(
-	partitionId uuid.UUID,
+	partitionId ole.GUID,
 	healthPolicy *FabricApplicationHealthPolicy,
 	timeoutMilliseconds uint32,
 	callback *comFabricAsyncOperationCallback,
@@ -11129,7 +11128,7 @@ func (v *comFabricHealthClient) endGetPartitionHealth(
 	return
 }
 func (v *comFabricHealthClient) beginGetReplicaHealth(
-	partitionId uuid.UUID,
+	partitionId ole.GUID,
 	replicaId int64,
 	healthPolicy *FabricApplicationHealthPolicy,
 	timeoutMilliseconds uint32,
@@ -14033,7 +14032,7 @@ func (v *comFabricTestManagementClient) endStartPartitionDataLoss(
 	return
 }
 func (v *comFabricTestManagementClient) beginGetPartitionDataLossProgress(
-	operationId uuid.UUID,
+	operationId ole.GUID,
 	timeoutMilliseconds uint32,
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
@@ -14121,7 +14120,7 @@ func (v *comFabricTestManagementClient) endStartPartitionQuorumLoss(
 	return
 }
 func (v *comFabricTestManagementClient) beginGetPartitionQuorumLossProgress(
-	operationId uuid.UUID,
+	operationId ole.GUID,
 	timeoutMilliseconds uint32,
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
@@ -14209,7 +14208,7 @@ func (v *comFabricTestManagementClient) endStartPartitionRestart(
 	return
 }
 func (v *comFabricTestManagementClient) beginGetPartitionRestartProgress(
-	operationId uuid.UUID,
+	operationId ole.GUID,
 	timeoutMilliseconds uint32,
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
@@ -14553,7 +14552,7 @@ func (v *comFabricTestManagementClient3) endStartNodeTransition(
 	return
 }
 func (v *comFabricTestManagementClient3) beginGetNodeTransitionProgress(
-	operationId uuid.UUID,
+	operationId ole.GUID,
 	timeoutMilliseconds uint32,
 	callback *comFabricAsyncOperationCallback,
 ) (context *comFabricAsyncOperationContext, err error) {
@@ -15633,8 +15632,8 @@ func (v *comFabricPropertyValueResult) GetValueAsWString() (bufferedValue string
 	}
 	return
 }
-func (v *comFabricPropertyValueResult) GetValueAsGuid() (value uuid.UUID, err error) {
-	var p_0 uuid.UUID
+func (v *comFabricPropertyValueResult) GetValueAsGuid() (value ole.GUID, err error) {
+	var p_0 ole.GUID
 	defer func() {
 		value = p_0
 	}()

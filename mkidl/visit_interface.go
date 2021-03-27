@@ -223,9 +223,9 @@ func (g *generator) generateMethods(n *ast.InterfaceNode) {
 					g.printfln("p_%v = 1", i)
 					g.printfln("}")
 					syscallParams = append(syscallParams, fmt.Sprintf("uintptr(p_%v)", i))
-				case "*uuid.UUID":
+				case "*ole.GUID":
 					syscallParams = append(syscallParams, fmt.Sprintf("uintptr(unsafe.Pointer(%s))", paramName))
-				case "uuid.UUID":
+				case "ole.GUID":
 					syscallParams = append(syscallParams, fmt.Sprintf("uintptr(unsafe.Pointer(&%s))", paramName))
 				case "unsafe.Pointer": // interface{}
 					syscallParams = append(syscallParams, fmt.Sprintf("uintptr(toUnsafePointer(%v))", paramName))
