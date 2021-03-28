@@ -1,10 +1,24 @@
 package main
 
+import (
+	"sort"
+)
+
 func (g *generator) generateStub(callbody func(fn string, paramTypes []string), callbackbody func(fn string, paramTypes []string)) {
 	g.importpkg("unsafe")
-	for f, p := range g.ctx.stubBuilder.calls {
+
+	sorted := func(m map[int][]string) (keys []int) {
+		for k := range m {
+			keys = append(keys, k)
+		}
+		sort.Ints(keys)
+		return
+	}
+
+	for _, f := range sorted(g.ctx.stubBuilder.calls) {
 
 		fn := g.ctx.stubBuilder.CallStubName(f)
+		p := g.ctx.stubBuilder.calls[f]
 
 		g.printfln("func %v(", fn)
 		g.printfln("addr uintptr,")
@@ -20,9 +34,10 @@ func (g *generator) generateStub(callbody func(fn string, paramTypes []string), 
 		g.printfln("}")
 	}
 
-	for f, p := range g.ctx.stubBuilder.callbacks {
+	for _, f := range sorted(g.ctx.stubBuilder.callbacks) {
 
 		fn := g.ctx.stubBuilder.CallbackStubName(f)
+		p := g.ctx.stubBuilder.calls[f]
 
 		g.printfln("func %v(", fn)
 		g.printfln("cb interface{},")

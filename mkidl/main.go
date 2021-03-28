@@ -3,13 +3,11 @@ package main
 import (
 	"fmt"
 	"os"
-	"runtime"
 
 	"github.com/pinzolo/casee"
 )
 
 func main() {
-	fmt.Println(runtime.GOARCH)
 	ctx, err := newDefContext(os.Args[1:]...)
 
 	if err != nil {
