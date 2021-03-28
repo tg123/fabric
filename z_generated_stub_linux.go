@@ -12,6 +12,10 @@ func callStub1(
 	argc int,
 	this unsafe.Pointer,
 	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 uint32,
+	argv3 unsafe.Pointer,
+	argv4 unsafe.Pointer,
 ) (uintptr, error) {
 	panic("not impl")
 }
@@ -19,7 +23,8 @@ func callStub2(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
-	argv0 uint32,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
 ) (uintptr, error) {
 	panic("not impl")
 }
@@ -28,322 +33,10 @@ func callStub3(
 	argc int,
 	this unsafe.Pointer,
 	argv0 unsafe.Pointer,
-	argv1 uint32,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub4(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
 ) (uintptr, error) {
 	panic("not impl")
 }
 func callStub5(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 bool,
-	argv3 uint32,
-	argv4 unsafe.Pointer,
-	argv5 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub6(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 uint32,
-	argv3 unsafe.Pointer,
-	argv4 uint32,
-	argv5 unsafe.Pointer,
-	argv6 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub7(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 int64,
-	argv3 uint32,
-	argv4 unsafe.Pointer,
-	argv5 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub8(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 float64,
-	argv3 uint32,
-	argv4 unsafe.Pointer,
-	argv5 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub9(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 unsafe.Pointer,
-	argv3 uint32,
-	argv4 unsafe.Pointer,
-	argv5 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub10(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 uint32,
-	argv3 unsafe.Pointer,
-	argv4 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub11(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 uint32,
-	argv2 unsafe.Pointer,
-	argv3 uint32,
-	argv4 unsafe.Pointer,
-	argv5 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub12(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 bool,
-	argv2 unsafe.Pointer,
-	argv3 uint32,
-	argv4 unsafe.Pointer,
-	argv5 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub13(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 unsafe.Pointer,
-	argv3 uint32,
-	argv4 unsafe.Pointer,
-	argv5 uint32,
-	argv6 unsafe.Pointer,
-	argv7 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub14(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 FabricPartitionKeyType,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-	argv4 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub15(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 int64,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub16(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 FabricPartitionKeyType,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-	argv4 uint32,
-	argv5 unsafe.Pointer,
-	argv6 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub17(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 int64,
-	argv1 uint32,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub18(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub19(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-	argv4 unsafe.Pointer,
-	argv5 uint32,
-	argv6 unsafe.Pointer,
-	argv7 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub20(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 uint32,
-	argv1 unsafe.Pointer,
-	argv2 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub21(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 FabricNodeDeactivationIntent,
-	argv2 uint32,
-	argv3 unsafe.Pointer,
-	argv4 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub22(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-	argv4 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub23(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 bool,
-	argv1 uint32,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub24(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 int64,
-	argv2 unsafe.Pointer,
-	argv3 uint32,
-	argv4 unsafe.Pointer,
-	argv5 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub25(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-	argv4 uint32,
-	argv5 unsafe.Pointer,
-	argv6 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub26(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub27(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 uint32,
-	argv1 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub28(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 int64,
-	argv2 unsafe.Pointer,
-	argv3 FabricErrorCode,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub30(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 bool,
-	argv2 uint32,
-	argv3 unsafe.Pointer,
-	argv4 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub32(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -357,7 +50,33 @@ func callStub32(
 ) (uintptr, error) {
 	panic("not impl")
 }
-func callStub36(
+func callStub10(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+) (uintptr, error) {
+	panic("not impl")
+}
+func callStub11(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+) (uintptr, error) {
+	panic("not impl")
+}
+func callStub12(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 uint32,
+	argv1 unsafe.Pointer,
+) (uintptr, error) {
+	panic("not impl")
+}
+func callStub13(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -365,7 +84,7 @@ func callStub36(
 ) (uintptr, error) {
 	panic("not impl")
 }
-func callStub37(
+func callStub14(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -373,7 +92,7 @@ func callStub37(
 ) (uintptr, error) {
 	panic("not impl")
 }
-func callStub38(
+func callStub15(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -384,7 +103,7 @@ func callStub38(
 ) (uintptr, error) {
 	panic("not impl")
 }
-func callStub39(
+func callStub16(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -394,7 +113,7 @@ func callStub39(
 ) (uintptr, error) {
 	panic("not impl")
 }
-func callStub40(
+func callStub17(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -405,7 +124,7 @@ func callStub40(
 ) (uintptr, error) {
 	panic("not impl")
 }
-func callStub41(
+func callStub18(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -416,7 +135,7 @@ func callStub41(
 ) (uintptr, error) {
 	panic("not impl")
 }
-func callStub42(
+func callStub19(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -426,7 +145,7 @@ func callStub42(
 ) (uintptr, error) {
 	panic("not impl")
 }
-func callStub43(
+func callStub20(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -437,7 +156,7 @@ func callStub43(
 ) (uintptr, error) {
 	panic("not impl")
 }
-func callStub44(
+func callStub21(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -447,7 +166,15 @@ func callStub44(
 ) (uintptr, error) {
 	panic("not impl")
 }
-func callStub45(
+func callStub22(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 int64,
+) (uintptr, error) {
+	panic("not impl")
+}
+func callStub23(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -459,7 +186,7 @@ func callStub45(
 ) (uintptr, error) {
 	panic("not impl")
 }
-func callStub46(
+func callStub24(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -470,7 +197,7 @@ func callStub46(
 ) (uintptr, error) {
 	panic("not impl")
 }
-func callStub47(
+func callStub25(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -481,7 +208,17 @@ func callStub47(
 ) (uintptr, error) {
 	panic("not impl")
 }
-func callStub48(
+func callStub26(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 uint32,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+) (uintptr, error) {
+	panic("not impl")
+}
+func callStub27(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -492,7 +229,7 @@ func callStub48(
 ) (uintptr, error) {
 	panic("not impl")
 }
-func callStub49(
+func callStub28(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -502,7 +239,7 @@ func callStub49(
 ) (uintptr, error) {
 	panic("not impl")
 }
-func callStub50(
+func callStub29(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -514,7 +251,7 @@ func callStub50(
 ) (uintptr, error) {
 	panic("not impl")
 }
-func callStub51(
+func callStub30(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -526,7 +263,7 @@ func callStub51(
 ) (uintptr, error) {
 	panic("not impl")
 }
-func callStub52(
+func callStub31(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -538,7 +275,7 @@ func callStub52(
 ) (uintptr, error) {
 	panic("not impl")
 }
-func callStub53(
+func callStub32(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -549,7 +286,7 @@ func callStub53(
 ) (uintptr, error) {
 	panic("not impl")
 }
-func callStub54(
+func callStub33(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -562,7 +299,7 @@ func callStub54(
 ) (uintptr, error) {
 	panic("not impl")
 }
-func callStub55(
+func callStub34(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -573,7 +310,7 @@ func callStub55(
 ) (uintptr, error) {
 	panic("not impl")
 }
-func callStub56(
+func callStub35(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -583,7 +320,18 @@ func callStub56(
 ) (uintptr, error) {
 	panic("not impl")
 }
-func callStub57(
+func callStub36(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 uint32,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+) (uintptr, error) {
+	panic("not impl")
+}
+func callStub37(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -591,27 +339,279 @@ func callStub57(
 ) (uintptr, error) {
 	panic("not impl")
 }
-func createCallbackStub29(
+func callStub38(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 uint32,
+) (uintptr, error) {
+	panic("not impl")
+}
+func callStub39(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 bool,
+	argv3 uint32,
+	argv4 unsafe.Pointer,
+	argv5 unsafe.Pointer,
+) (uintptr, error) {
+	panic("not impl")
+}
+func callStub40(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 uint32,
+	argv3 unsafe.Pointer,
+	argv4 uint32,
+	argv5 unsafe.Pointer,
+	argv6 unsafe.Pointer,
+) (uintptr, error) {
+	panic("not impl")
+}
+func callStub41(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 int64,
+	argv3 uint32,
+	argv4 unsafe.Pointer,
+	argv5 unsafe.Pointer,
+) (uintptr, error) {
+	panic("not impl")
+}
+func callStub42(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 float64,
+	argv3 uint32,
+	argv4 unsafe.Pointer,
+	argv5 unsafe.Pointer,
+) (uintptr, error) {
+	panic("not impl")
+}
+func callStub43(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+	argv3 uint32,
+	argv4 unsafe.Pointer,
+	argv5 unsafe.Pointer,
+) (uintptr, error) {
+	panic("not impl")
+}
+func callStub44(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 uint32,
+	argv2 unsafe.Pointer,
+	argv3 uint32,
+	argv4 unsafe.Pointer,
+	argv5 unsafe.Pointer,
+) (uintptr, error) {
+	panic("not impl")
+}
+func callStub45(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 bool,
+	argv2 unsafe.Pointer,
+	argv3 uint32,
+	argv4 unsafe.Pointer,
+	argv5 unsafe.Pointer,
+) (uintptr, error) {
+	panic("not impl")
+}
+func callStub46(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+	argv3 uint32,
+	argv4 unsafe.Pointer,
+	argv5 uint32,
+	argv6 unsafe.Pointer,
+	argv7 unsafe.Pointer,
+) (uintptr, error) {
+	panic("not impl")
+}
+func callStub47(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 FabricPartitionKeyType,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+	argv4 unsafe.Pointer,
+) (uintptr, error) {
+	panic("not impl")
+}
+func callStub48(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 FabricPartitionKeyType,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+	argv4 uint32,
+	argv5 unsafe.Pointer,
+	argv6 unsafe.Pointer,
+) (uintptr, error) {
+	panic("not impl")
+}
+func callStub49(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 int64,
+	argv1 uint32,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+) (uintptr, error) {
+	panic("not impl")
+}
+func callStub50(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+	argv4 unsafe.Pointer,
+	argv5 uint32,
+	argv6 unsafe.Pointer,
+	argv7 unsafe.Pointer,
+) (uintptr, error) {
+	panic("not impl")
+}
+func callStub51(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 FabricNodeDeactivationIntent,
+	argv2 uint32,
+	argv3 unsafe.Pointer,
+	argv4 unsafe.Pointer,
+) (uintptr, error) {
+	panic("not impl")
+}
+func callStub52(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+	argv4 unsafe.Pointer,
+) (uintptr, error) {
+	panic("not impl")
+}
+func callStub53(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 bool,
+	argv1 uint32,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+) (uintptr, error) {
+	panic("not impl")
+}
+func callStub54(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 int64,
+	argv2 unsafe.Pointer,
+	argv3 uint32,
+	argv4 unsafe.Pointer,
+	argv5 unsafe.Pointer,
+) (uintptr, error) {
+	panic("not impl")
+}
+func callStub55(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+	argv4 uint32,
+	argv5 unsafe.Pointer,
+	argv6 unsafe.Pointer,
+) (uintptr, error) {
+	panic("not impl")
+}
+func callStub56(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 int64,
+	argv2 unsafe.Pointer,
+	argv3 FabricErrorCode,
+) (uintptr, error) {
+	panic("not impl")
+}
+func callStub57(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 bool,
+	argv2 uint32,
+	argv3 unsafe.Pointer,
+	argv4 unsafe.Pointer,
+) (uintptr, error) {
+	panic("not impl")
+}
+func createCallbackStub4(
 	cb interface{},
 ) uintptr {
 	panic("not impl")
 }
-func createCallbackStub31(
+func createCallbackStub6(
 	cb interface{},
 ) uintptr {
 	panic("not impl")
 }
-func createCallbackStub33(
+func createCallbackStub7(
 	cb interface{},
 ) uintptr {
 	panic("not impl")
 }
-func createCallbackStub34(
+func createCallbackStub8(
 	cb interface{},
 ) uintptr {
 	panic("not impl")
 }
-func createCallbackStub35(
+func createCallbackStub9(
 	cb interface{},
 ) uintptr {
 	panic("not impl")

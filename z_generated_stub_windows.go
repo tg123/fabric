@@ -4,346 +4,70 @@
 package fabric
 
 import (
+	"syscall"
 	"unsafe"
 )
 
+func boolToUintptr(x bool) uintptr {
+	if x {
+		return 1
+	}
+	return 0
+}
 func callStub1(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
 	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 uint32,
+	argv3 unsafe.Pointer,
+	argv4 unsafe.Pointer,
 ) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+	)
+	return hr, err
 }
 func callStub2(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
-	argv0 uint32,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
 ) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+	)
+	return hr, err
 }
 func callStub3(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
 	argv0 unsafe.Pointer,
-	argv1 uint32,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
 ) (uintptr, error) {
-	panic("not impl")
-}
-func callStub4(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		0,
+	)
+	return hr, err
 }
 func callStub5(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 bool,
-	argv3 uint32,
-	argv4 unsafe.Pointer,
-	argv5 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub6(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 uint32,
-	argv3 unsafe.Pointer,
-	argv4 uint32,
-	argv5 unsafe.Pointer,
-	argv6 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub7(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 int64,
-	argv3 uint32,
-	argv4 unsafe.Pointer,
-	argv5 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub8(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 float64,
-	argv3 uint32,
-	argv4 unsafe.Pointer,
-	argv5 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub9(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 unsafe.Pointer,
-	argv3 uint32,
-	argv4 unsafe.Pointer,
-	argv5 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub10(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 uint32,
-	argv3 unsafe.Pointer,
-	argv4 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub11(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 uint32,
-	argv2 unsafe.Pointer,
-	argv3 uint32,
-	argv4 unsafe.Pointer,
-	argv5 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub12(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 bool,
-	argv2 unsafe.Pointer,
-	argv3 uint32,
-	argv4 unsafe.Pointer,
-	argv5 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub13(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 unsafe.Pointer,
-	argv3 uint32,
-	argv4 unsafe.Pointer,
-	argv5 uint32,
-	argv6 unsafe.Pointer,
-	argv7 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub14(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 FabricPartitionKeyType,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-	argv4 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub15(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 int64,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub16(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 FabricPartitionKeyType,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-	argv4 uint32,
-	argv5 unsafe.Pointer,
-	argv6 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub17(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 int64,
-	argv1 uint32,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub18(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub19(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-	argv4 unsafe.Pointer,
-	argv5 uint32,
-	argv6 unsafe.Pointer,
-	argv7 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub20(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 uint32,
-	argv1 unsafe.Pointer,
-	argv2 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub21(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 FabricNodeDeactivationIntent,
-	argv2 uint32,
-	argv3 unsafe.Pointer,
-	argv4 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub22(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-	argv4 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub23(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 bool,
-	argv1 uint32,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub24(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 int64,
-	argv2 unsafe.Pointer,
-	argv3 uint32,
-	argv4 unsafe.Pointer,
-	argv5 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub25(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-	argv4 uint32,
-	argv5 unsafe.Pointer,
-	argv6 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub26(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub27(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 uint32,
-	argv1 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub28(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 int64,
-	argv2 unsafe.Pointer,
-	argv3 FabricErrorCode,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub30(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 bool,
-	argv2 uint32,
-	argv3 unsafe.Pointer,
-	argv4 unsafe.Pointer,
-) (uintptr, error) {
-	panic("not impl")
-}
-func callStub32(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -355,25 +79,102 @@ func callStub32(
 	argv5 int64,
 	argv6 unsafe.Pointer,
 ) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall9(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+		uintptr(argv5),
+		uintptr(argv6),
+		0,
+	)
+	return hr, err
 }
-func callStub36(
+func callStub10(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		0,
+		0,
+	)
+	return hr, err
+}
+func callStub11(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		0,
+		0,
+	)
+	return hr, err
+}
+func callStub12(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 uint32,
+	argv1 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+	)
+	return hr, err
+}
+func callStub13(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
 	argv0 FabricFaultType,
 ) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		0,
+	)
+	return hr, err
 }
-func callStub37(
+func callStub14(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
 	argv0 FabricMoveCost,
 ) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		0,
+	)
+	return hr, err
 }
-func callStub38(
+func callStub15(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -382,9 +183,19 @@ func callStub38(
 	argv2 unsafe.Pointer,
 	argv3 unsafe.Pointer,
 ) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		0,
+	)
+	return hr, err
 }
-func callStub39(
+func callStub16(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -392,9 +203,19 @@ func callStub39(
 	argv1 unsafe.Pointer,
 	argv2 unsafe.Pointer,
 ) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		0,
+		0,
+	)
+	return hr, err
 }
-func callStub40(
+func callStub17(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -403,9 +224,19 @@ func callStub40(
 	argv2 unsafe.Pointer,
 	argv3 unsafe.Pointer,
 ) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		0,
+	)
+	return hr, err
 }
-func callStub41(
+func callStub18(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -414,9 +245,19 @@ func callStub41(
 	argv2 unsafe.Pointer,
 	argv3 unsafe.Pointer,
 ) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		0,
+	)
+	return hr, err
 }
-func callStub42(
+func callStub19(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -424,9 +265,19 @@ func callStub42(
 	argv1 unsafe.Pointer,
 	argv2 unsafe.Pointer,
 ) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		0,
+		0,
+	)
+	return hr, err
 }
-func callStub43(
+func callStub20(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -435,9 +286,19 @@ func callStub43(
 	argv2 unsafe.Pointer,
 	argv3 unsafe.Pointer,
 ) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		0,
+	)
+	return hr, err
 }
-func callStub44(
+func callStub21(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -445,9 +306,34 @@ func callStub44(
 	argv1 unsafe.Pointer,
 	argv2 unsafe.Pointer,
 ) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		0,
+		0,
+	)
+	return hr, err
 }
-func callStub45(
+func callStub22(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 int64,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		0,
+	)
+	return hr, err
+}
+func callStub23(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -457,9 +343,19 @@ func callStub45(
 	argv3 unsafe.Pointer,
 	argv4 unsafe.Pointer,
 ) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+	)
+	return hr, err
 }
-func callStub46(
+func callStub24(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -468,9 +364,19 @@ func callStub46(
 	argv2 unsafe.Pointer,
 	argv3 unsafe.Pointer,
 ) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		0,
+	)
+	return hr, err
 }
-func callStub47(
+func callStub25(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -479,9 +385,39 @@ func callStub47(
 	argv2 unsafe.Pointer,
 	argv3 unsafe.Pointer,
 ) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		0,
+	)
+	return hr, err
 }
-func callStub48(
+func callStub26(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 uint32,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		0,
+		0,
+	)
+	return hr, err
+}
+func callStub27(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -490,9 +426,19 @@ func callStub48(
 	argv2 int32,
 	argv3 unsafe.Pointer,
 ) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		0,
+	)
+	return hr, err
 }
-func callStub49(
+func callStub28(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -500,9 +446,19 @@ func callStub49(
 	argv1 unsafe.Pointer,
 	argv2 int64,
 ) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		0,
+		0,
+	)
+	return hr, err
 }
-func callStub50(
+func callStub29(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -512,9 +468,19 @@ func callStub50(
 	argv3 unsafe.Pointer,
 	argv4 int64,
 ) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+	)
+	return hr, err
 }
-func callStub51(
+func callStub30(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -524,9 +490,19 @@ func callStub51(
 	argv3 unsafe.Pointer,
 	argv4 unsafe.Pointer,
 ) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+	)
+	return hr, err
 }
-func callStub52(
+func callStub31(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -536,9 +512,19 @@ func callStub52(
 	argv3 unsafe.Pointer,
 	argv4 unsafe.Pointer,
 ) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+	)
+	return hr, err
 }
-func callStub53(
+func callStub32(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -547,9 +533,19 @@ func callStub53(
 	argv2 int64,
 	argv3 unsafe.Pointer,
 ) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		0,
+	)
+	return hr, err
 }
-func callStub54(
+func callStub33(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -560,9 +556,22 @@ func callStub54(
 	argv4 int64,
 	argv5 unsafe.Pointer,
 ) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall9(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+		uintptr(argv5),
+		0,
+		0,
+	)
+	return hr, err
 }
-func callStub55(
+func callStub34(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -571,9 +580,19 @@ func callStub55(
 	argv2 bool,
 	argv3 unsafe.Pointer,
 ) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		boolToUintptr(argv2),
+		uintptr(argv3),
+		0,
+	)
+	return hr, err
 }
-func callStub56(
+func callStub35(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -581,38 +600,561 @@ func callStub56(
 	argv1 bool,
 	argv2 unsafe.Pointer,
 ) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		boolToUintptr(argv1),
+		uintptr(argv2),
+		0,
+		0,
+	)
+	return hr, err
 }
-func callStub57(
+func callStub36(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 uint32,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		0,
+	)
+	return hr, err
+}
+func callStub37(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
 	argv0 uint64,
 ) (uintptr, error) {
-	panic("not impl")
+	hr, _, err := syscall.Syscall(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		0,
+	)
+	return hr, err
 }
-func createCallbackStub29(
+func callStub38(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 uint32,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		0,
+	)
+	return hr, err
+}
+func callStub39(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 bool,
+	argv3 uint32,
+	argv4 unsafe.Pointer,
+	argv5 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall9(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		boolToUintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+		uintptr(argv5),
+		0,
+		0,
+	)
+	return hr, err
+}
+func callStub40(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 uint32,
+	argv3 unsafe.Pointer,
+	argv4 uint32,
+	argv5 unsafe.Pointer,
+	argv6 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall9(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+		uintptr(argv5),
+		uintptr(argv6),
+		0,
+	)
+	return hr, err
+}
+func callStub41(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 int64,
+	argv3 uint32,
+	argv4 unsafe.Pointer,
+	argv5 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall9(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+		uintptr(argv5),
+		0,
+		0,
+	)
+	return hr, err
+}
+func callStub42(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 float64,
+	argv3 uint32,
+	argv4 unsafe.Pointer,
+	argv5 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall9(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+		uintptr(argv5),
+		0,
+		0,
+	)
+	return hr, err
+}
+func callStub43(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+	argv3 uint32,
+	argv4 unsafe.Pointer,
+	argv5 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall9(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+		uintptr(argv5),
+		0,
+		0,
+	)
+	return hr, err
+}
+func callStub44(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 uint32,
+	argv2 unsafe.Pointer,
+	argv3 uint32,
+	argv4 unsafe.Pointer,
+	argv5 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall9(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+		uintptr(argv5),
+		0,
+		0,
+	)
+	return hr, err
+}
+func callStub45(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 bool,
+	argv2 unsafe.Pointer,
+	argv3 uint32,
+	argv4 unsafe.Pointer,
+	argv5 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall9(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		boolToUintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+		uintptr(argv5),
+		0,
+		0,
+	)
+	return hr, err
+}
+func callStub46(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+	argv3 uint32,
+	argv4 unsafe.Pointer,
+	argv5 uint32,
+	argv6 unsafe.Pointer,
+	argv7 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall9(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+		uintptr(argv5),
+		uintptr(argv6),
+		uintptr(argv7),
+	)
+	return hr, err
+}
+func callStub47(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 FabricPartitionKeyType,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+	argv4 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+	)
+	return hr, err
+}
+func callStub48(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 FabricPartitionKeyType,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+	argv4 uint32,
+	argv5 unsafe.Pointer,
+	argv6 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall9(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+		uintptr(argv5),
+		uintptr(argv6),
+		0,
+	)
+	return hr, err
+}
+func callStub49(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 int64,
+	argv1 uint32,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		0,
+	)
+	return hr, err
+}
+func callStub50(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+	argv4 unsafe.Pointer,
+	argv5 uint32,
+	argv6 unsafe.Pointer,
+	argv7 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall9(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+		uintptr(argv5),
+		uintptr(argv6),
+		uintptr(argv7),
+	)
+	return hr, err
+}
+func callStub51(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 FabricNodeDeactivationIntent,
+	argv2 uint32,
+	argv3 unsafe.Pointer,
+	argv4 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+	)
+	return hr, err
+}
+func callStub52(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+	argv4 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+	)
+	return hr, err
+}
+func callStub53(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 bool,
+	argv1 uint32,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		boolToUintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		0,
+	)
+	return hr, err
+}
+func callStub54(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 int64,
+	argv2 unsafe.Pointer,
+	argv3 uint32,
+	argv4 unsafe.Pointer,
+	argv5 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall9(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+		uintptr(argv5),
+		0,
+		0,
+	)
+	return hr, err
+}
+func callStub55(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+	argv4 uint32,
+	argv5 unsafe.Pointer,
+	argv6 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall9(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+		uintptr(argv5),
+		uintptr(argv6),
+		0,
+	)
+	return hr, err
+}
+func callStub56(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 int64,
+	argv2 unsafe.Pointer,
+	argv3 FabricErrorCode,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		0,
+	)
+	return hr, err
+}
+func callStub57(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 bool,
+	argv2 uint32,
+	argv3 unsafe.Pointer,
+	argv4 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		boolToUintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+	)
+	return hr, err
+}
+func createCallbackStub4(
 	cb interface{},
 ) uintptr {
-	panic("not impl")
+	return syscall.NewCallback(cb)
 }
-func createCallbackStub31(
+func createCallbackStub6(
 	cb interface{},
 ) uintptr {
-	panic("not impl")
+	return syscall.NewCallback(cb)
 }
-func createCallbackStub33(
+func createCallbackStub7(
 	cb interface{},
 ) uintptr {
-	panic("not impl")
+	return syscall.NewCallback(cb)
 }
-func createCallbackStub34(
+func createCallbackStub8(
 	cb interface{},
 ) uintptr {
-	panic("not impl")
+	return syscall.NewCallback(cb)
 }
-func createCallbackStub35(
+func createCallbackStub9(
 	cb interface{},
 ) uintptr {
-	panic("not impl")
+	return syscall.NewCallback(cb)
 }

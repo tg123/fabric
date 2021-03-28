@@ -1,7 +1,9 @@
 package main
 
 import (
+	"math"
 	"sort"
+	"strconv"
 )
 
 func (g *generator) generateStub(callbody func(fn string, paramTypes []string), callbackbody func(fn string, paramTypes []string)) {
@@ -72,11 +74,62 @@ func (g *generator) visitStubWindows() {
 	g.headerprintfln(`// +build windows,amd64`)
 	g.headerprintfln("")
 
-	returnpanic := func(fn string, paramTypes []string) {
-		g.printfln(`panic("not impl")`)
-	}
+	g.printfln(`func boolToUintptr(x bool) uintptr {
+		if x {
+			return 1
+		}
+		return 0
+	}`)
 
-	g.generateStub(returnpanic, returnpanic)
+	g.generateStub(func(fn string, paramTypes []string) {
+		numSyscallParams := len(paramTypes)
+		numSyscallRequired := int(math.Ceil(float64(numSyscallParams+1)/3)) * 3
+
+		syscallFunc := "Syscall"
+		if numSyscallRequired > 18 {
+			panic("more params than supported by syscall")
+		} else if numSyscallRequired > 3 {
+			syscallFunc += strconv.Itoa(numSyscallRequired)
+		}
+
+		// actualSyscallParamLen := len(syscallParams)
+		// for i := len(syscallParams); i < numSyscallRequired-1; i++ {
+		// 	syscallParams = append(syscallParams, "0")
+		// }
+
+		g.importpkg("unsafe")
+		g.importpkg("syscall")
+
+		g.printfln("hr, _, err := syscall.%s(", syscallFunc)
+		g.printfln("addr,")
+		g.printfln("uintptr(argc + 1),")
+		g.printfln("uintptr(this),")
+
+		// for _, param := range syscallParams {
+		// 	g.printfln("%v,", param)
+		// }
+
+		for i := 0; i < numSyscallRequired-1; i++ {
+			if i < numSyscallParams {
+				if paramTypes[i] == "bool" {
+					g.printfln("boolToUintptr(argv%v),", i)
+				} else {
+					g.printfln("uintptr(argv%v),", i)
+				}
+			} else {
+				g.printfln("0,")
+			}
+		}
+
+		g.printfln(")")
+		g.printfln("return hr, err")
+
+	}, func(fn string, paramTypes []string) {
+		g.importpkg("syscall")
+
+		g.printfln("return syscall.NewCallback(cb)")
+
+	})
 }
 
 func (g *generator) visitStubLinux() {

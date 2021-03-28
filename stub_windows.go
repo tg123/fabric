@@ -97,5 +97,5 @@ func callfabricFabricGetActivationContext(
 }
 
 func createCallback(cb interface{}) uintptr {
-	panic("not impl")
+	return syscall.NewCallback(cb)
 }

@@ -21,7 +21,7 @@ func newComFabricAsyncOperationCallback(
 	vtbl := com.vtable()
 	com.proxy.unknownref = attachIUnknown("{86F08D7E-14DD-4575-8489-B1D5D679029C}", &vtbl.IUnknownVtbl)
 
-	vtbl.Invoke = createCallbackStub29(com.proxy.Invoke)
+	vtbl.Invoke = createCallbackStub8(com.proxy.Invoke)
 
 	com.proxy.callback = callback
 
@@ -53,7 +53,7 @@ func (v *comFabricAsyncOperationCallback) vtable() *comFabricAsyncOperationCallb
 func (v *comFabricAsyncOperationCallback) Invoke(
 	context *comFabricAsyncOperationContext,
 ) (rt interface{}, err error) {
-	hr, err1 := callStub1(
+	hr, err1 := callStub3(
 		v.vtable().Invoke,
 		1,
 		unsafe.Pointer(v),
@@ -91,10 +91,10 @@ func newComFabricAsyncOperationContext(
 	vtbl := com.vtable()
 	com.proxy.unknownref = attachIUnknown("{841720BF-C9E8-4E6F-9C3F-6B7F4AC73BCD}", &vtbl.IUnknownVtbl)
 
-	vtbl.IsCompleted = createCallbackStub35(com.proxy.IsCompleted)
-	vtbl.CompletedSynchronously = createCallbackStub35(com.proxy.CompletedSynchronously)
-	vtbl.get_Callback = createCallbackStub29(com.proxy.GetCallback)
-	vtbl.Cancel = createCallbackStub35(com.proxy.Cancel)
+	vtbl.IsCompleted = createCallbackStub9(com.proxy.IsCompleted)
+	vtbl.CompletedSynchronously = createCallbackStub9(com.proxy.CompletedSynchronously)
+	vtbl.get_Callback = createCallbackStub8(com.proxy.GetCallback)
+	vtbl.Cancel = createCallbackStub9(com.proxy.Cancel)
 
 	com.proxy.nativeCallback = nativeCallback
 
@@ -139,7 +139,7 @@ func (v *comFabricAsyncOperationContext) vtable() *comFabricAsyncOperationContex
 }
 
 func (v *comFabricAsyncOperationContext) IsCompleted() (rt bool, err error) {
-	hr, err1 := callStub26(
+	hr, err1 := callStub11(
 		v.vtable().IsCompleted,
 		0,
 		unsafe.Pointer(v),
@@ -149,7 +149,7 @@ func (v *comFabricAsyncOperationContext) IsCompleted() (rt bool, err error) {
 	return
 }
 func (v *comFabricAsyncOperationContext) CompletedSynchronously() (rt bool, err error) {
-	hr, err1 := callStub26(
+	hr, err1 := callStub11(
 		v.vtable().CompletedSynchronously,
 		0,
 		unsafe.Pointer(v),
@@ -163,7 +163,7 @@ func (v *comFabricAsyncOperationContext) GetCallback() (callback *comFabricAsync
 	defer func() {
 		callback = p_0
 	}()
-	hr, err1 := callStub1(
+	hr, err1 := callStub3(
 		v.vtable().get_Callback,
 		1,
 		unsafe.Pointer(v),
@@ -176,7 +176,7 @@ func (v *comFabricAsyncOperationContext) GetCallback() (callback *comFabricAsync
 	return
 }
 func (v *comFabricAsyncOperationContext) Cancel() (err error) {
-	hr, err1 := callStub26(
+	hr, err1 := callStub11(
 		v.vtable().Cancel,
 		0,
 		unsafe.Pointer(v),
@@ -201,7 +201,7 @@ func newComFabricStringResult(
 	vtbl := com.vtable()
 	com.proxy.unknownref = attachIUnknown("{4AE69614-7D0F-4CD4-B836-23017000D132}", &vtbl.IUnknownVtbl)
 
-	vtbl.get_String = createCallbackStub35(com.proxy.GetString)
+	vtbl.get_String = createCallbackStub9(com.proxy.GetString)
 
 	com.proxy.result = result
 
@@ -230,7 +230,7 @@ func (v *comFabricStringResult) vtable() *comFabricStringResultVtbl {
 }
 
 func (v *comFabricStringResult) GetString() (rt string, err error) {
-	hr, err1 := callStub26(
+	hr, err1 := callStub11(
 		v.vtable().get_String,
 		0,
 		unsafe.Pointer(v),
@@ -273,7 +273,7 @@ func (v *comFabricGetReplicatorStatusResult) vtable() *comFabricGetReplicatorSta
 }
 
 func (v *comFabricGetReplicatorStatusResult) GetReplicatorStatus() (rt *FabricReplicatorStatusQueryResult, err error) {
-	hr, err1 := callStub26(
+	hr, err1 := callStub11(
 		v.vtable().get_ReplicatorStatus,
 		0,
 		unsafe.Pointer(v),
