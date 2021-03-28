@@ -2,35 +2,49 @@ package main
 
 import (
 	"fmt"
+	"hash/maphash"
 	"strings"
 )
 
 type callStubBuilder struct {
-	uid          int
-	callstub     map[string]int
-	callbackstub map[string]int
-	calls        map[int][]string
-	callbacks    map[int][]string
+	// uid          int
+
+	callstub     map[string]uint64
+	callbackstub map[string]uint64
+	calls        map[uint64][]string
+	callbacks    map[uint64][]string
 }
 
 func newCallStubBuilder() *callStubBuilder {
 	return &callStubBuilder{
-		callstub:     make(map[string]int),
-		calls:        make(map[int][]string),
-		callbackstub: make(map[string]int),
-		callbacks:    make(map[int][]string),
+		callstub:     make(map[string]uint64),
+		calls:        make(map[uint64][]string),
+		callbackstub: make(map[string]uint64),
+		callbacks:    make(map[uint64][]string),
 	}
 }
 
-func (c *callStubBuilder) makeStub(stub map[string]int, funcs map[int][]string, paramTypes []string) int {
+func (c *callStubBuilder) makeStub(stub map[string]uint64, funcs map[uint64][]string, paramTypes []string) uint64 {
 	k := strings.Join(paramTypes, ",")
 
 	u, ok := stub[k]
 
 	if !ok {
-		c.uid++
-		u = c.uid
-		stub[k] = c.uid
+		// c.uid++
+		var h maphash.Hash
+		h.WriteString(k)
+		u = h.Sum64()
+
+		for {
+			_, ok := funcs[u]
+			if !ok {
+				break
+			}
+
+			u++
+		}
+
+		stub[k] = u
 		tmp := make([]string, len(paramTypes))
 		copy(tmp, paramTypes)
 		funcs[u] = tmp
@@ -47,10 +61,10 @@ func (c *callStubBuilder) MakeCallbackStub(paramTypes []string) string {
 	return c.CallbackStubName(c.makeStub(c.callbackstub, c.callbacks, paramTypes))
 }
 
-func (c *callStubBuilder) CallStubName(u int) string {
+func (c *callStubBuilder) CallStubName(u uint64) string {
 	return fmt.Sprintf("callStub%v", u)
 }
 
-func (c *callStubBuilder) CallbackStubName(u int) string {
+func (c *callStubBuilder) CallbackStubName(u uint64) string {
 	return fmt.Sprintf("createCallbackStub%v", u)
 }

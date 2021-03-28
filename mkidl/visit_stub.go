@@ -9,11 +9,11 @@ import (
 func (g *generator) generateStub(callbody func(fn string, paramTypes []string), callbackbody func(fn string, paramTypes []string)) {
 	g.importpkg("unsafe")
 
-	sorted := func(m map[int][]string) (keys []int) {
+	sorted := func(m map[uint64][]string) (keys []uint64) {
 		for k := range m {
 			keys = append(keys, k)
 		}
-		sort.Ints(keys)
+		sort.Slice(keys, func(i, j int) bool { return keys[i] < keys[j] })
 		return
 	}
 
