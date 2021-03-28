@@ -95,3 +95,7 @@ func callfabricFabricGetActivationContext(
 	r, _, err := fabricFabricGetActivationContextProc.Call(uintptr(clzid), uintptr(outptr))
 	return errno(r, err)
 }
+
+func createCallback(cb interface{}) uintptr {
+	panic("not impl")
+}

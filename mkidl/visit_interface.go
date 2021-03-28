@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math"
-	"strconv"
 	"strings"
 
 	"github.com/jd3nn1s/gomidl/ast"
@@ -185,6 +183,36 @@ func (g *generator) generateMethodSig(receiver string, m *ast.MethodNode, forceH
 	return paramNames, methodName
 }
 
+func (g *generator) extractCallType(m *ast.MethodNode) []string {
+	syscallParamTypes := make([]string, 0, len(m.Params))
+
+	for _, p := range m.Params {
+		if isOutParam(p) {
+			syscallParamTypes = append(syscallParamTypes, "unsafe.Pointer")
+		} else {
+			t := g.toGolangType(p.Type, p.Indirections, true)
+			switch t {
+			case "*ole.GUID":
+				fallthrough
+			case "ole.GUID":
+				fallthrough
+			case "unsafe.Pointer": // interface{}
+				syscallParamTypes = append(syscallParamTypes, "unsafe.Pointer")
+			default:
+				if _, ok := g.ctx.definedStruct[g.unwrapTypedef(p.Type)]; ok || t == "*uint16" || p.Indirections > 0 {
+					// string or obj
+					syscallParamTypes = append(syscallParamTypes, "unsafe.Pointer")
+				} else {
+					syscallParamTypes = append(syscallParamTypes, t)
+				}
+
+			}
+		}
+	}
+
+	return syscallParamTypes
+}
+
 func (g *generator) generateMethods(n *ast.InterfaceNode) {
 	interfaceName := g.goInterfaceName(n.Name)
 
@@ -197,6 +225,7 @@ func (g *generator) generateMethods(n *ast.InterfaceNode) {
 
 		g.generateMethodSig(interfaceName, m, false)
 		syscallParams := make([]string, 0, len(m.Params))
+		syscallParamTypes := g.extractCallType(m)
 
 		// TODO dup code, but i did not find better way to make it more clear
 		for i, p := range m.Params {
@@ -213,35 +242,35 @@ func (g *generator) generateMethods(n *ast.InterfaceNode) {
 
 				g.generateToGolangObject(fmt.Sprintf("p_%v", i), paramName, p.Type, p.Indirections-1)
 				g.printfln(`}()`)
-				syscallParams = append(syscallParams, fmt.Sprintf("uintptr(unsafe.Pointer(&p_%v))", i))
+				syscallParams = append(syscallParams, fmt.Sprintf("unsafe.Pointer(&p_%v)", i))
 			} else {
 				t := g.toGolangType(p.Type, p.Indirections, true)
 				switch t {
-				case "bool":
-					g.printfln("p_%v := 0", i)
-					g.printfln("if %v {", paramName)
-					g.printfln("p_%v = 1", i)
-					g.printfln("}")
-					syscallParams = append(syscallParams, fmt.Sprintf("uintptr(p_%v)", i))
+				// case "bool":
+				// 	g.printfln("p_%v := 0", i)
+				// 	g.printfln("if %v {", paramName)
+				// 	g.printfln("p_%v = 1", i)
+				// 	g.printfln("}")
+				// 	syscallParams = append(syscallParams, fmt.Sprintf("p_%v", i))
 				case "*ole.GUID":
-					syscallParams = append(syscallParams, fmt.Sprintf("uintptr(unsafe.Pointer(%s))", paramName))
+					syscallParams = append(syscallParams, fmt.Sprintf("unsafe.Pointer(%s)", paramName))
 				case "ole.GUID":
-					syscallParams = append(syscallParams, fmt.Sprintf("uintptr(unsafe.Pointer(&%s))", paramName))
+					syscallParams = append(syscallParams, fmt.Sprintf("unsafe.Pointer(&%s)", paramName))
 				case "unsafe.Pointer": // interface{}
-					syscallParams = append(syscallParams, fmt.Sprintf("uintptr(toUnsafePointer(%v))", paramName))
+					syscallParams = append(syscallParams, fmt.Sprintf("toUnsafePointer(%v)", paramName))
 				default:
 
 					if _, ok := g.ctx.definedStruct[g.unwrapTypedef(p.Type)]; ok || t == "*uint16" {
 						// string or obj
 						g.printfln("var p_%v %v", i, t)
 						g.generateToInnerObject(paramName, fmt.Sprintf("p_%v", i), p.Type, p.Indirections)
-						syscallParams = append(syscallParams, fmt.Sprintf("uintptr(unsafe.Pointer(p_%v))", i))
+						syscallParams = append(syscallParams, fmt.Sprintf("unsafe.Pointer(p_%v)", i))
 					} else if p.Indirections > 0 {
 						// pointer
-						syscallParams = append(syscallParams, fmt.Sprintf("uintptr(unsafe.Pointer(%v))", paramName))
+						syscallParams = append(syscallParams, fmt.Sprintf("unsafe.Pointer(%v)", paramName))
 					} else {
 						// all others
-						syscallParams = append(syscallParams, fmt.Sprintf("uintptr(%v)", paramName))
+						syscallParams = append(syscallParams, fmt.Sprintf("%v", paramName))
 					}
 
 				}
@@ -249,28 +278,29 @@ func (g *generator) generateMethods(n *ast.InterfaceNode) {
 			}
 		}
 
-		numSyscallParams := len(m.Params) + 1
-		numSyscallRequired := int(math.Ceil(float64(numSyscallParams)/3)) * 3
+		syscallFunc := g.ctx.stubBuilder.MakeCallStub(syscallParamTypes)
 
-		syscallFunc := "Syscall"
-		if numSyscallRequired > 18 {
-			panic("more params than supported by syscall")
-		} else if numSyscallRequired > 3 {
-			syscallFunc += strconv.Itoa(numSyscallRequired)
-		}
+		// numSyscallParams := len(m.Params) + 1
+		// numSyscallRequired := int(math.Ceil(float64(numSyscallParams)/3)) * 3
 
-		actualSyscallParamLen := len(syscallParams)
-		for i := len(syscallParams); i < numSyscallRequired-1; i++ {
-			syscallParams = append(syscallParams, "0")
-		}
+		// syscallFunc := "Syscall"
+		// if numSyscallRequired > 18 {
+		// 	panic("more params than supported by syscall")
+		// } else if numSyscallRequired > 3 {
+		// 	syscallFunc += strconv.Itoa(numSyscallRequired)
+		// }
+
+		// actualSyscallParamLen := len(syscallParams)
+		// for i := len(syscallParams); i < numSyscallRequired-1; i++ {
+		// 	syscallParams = append(syscallParams, "0")
+		// }
 
 		g.importpkg("unsafe")
-		g.importpkg("syscall")
 
-		g.printfln("hr, _, err1 := syscall.%s(", syscallFunc)
+		g.printfln("hr, err1 := %s(", syscallFunc)
 		g.printfln("v.vtable().%s,", m.Name)
-		g.printfln("%d,", actualSyscallParamLen+1)
-		g.printfln("uintptr(unsafe.Pointer(v)),")
+		g.printfln("%d,", len(syscallParamTypes))
+		g.printfln("unsafe.Pointer(v),")
 
 		for _, param := range syscallParams {
 			g.printfln("%v,", param)
@@ -366,7 +396,6 @@ func (g *generator) generateComStub(n *ast.InterfaceNode) {
 }
 
 func (g *generator) generateGoProxy(n *ast.InterfaceNode) {
-	g.importpkg("syscall")
 	interfaceName := g.goInterfaceName(n.Name)
 	props := goproxyProperties[n.Name]
 
@@ -376,7 +405,6 @@ func (g *generator) generateGoProxy(n *ast.InterfaceNode) {
 			g.importpkg(p[0])
 		}
 	}
-
 	g.templateln(`
 		type {{.Name | ToCamelCase }}GoProxy struct {
 			unknownref *goIUnknown
@@ -391,8 +419,27 @@ func (g *generator) generateGoProxy(n *ast.InterfaceNode) {
 			*(**{{.InnerName}}Vtbl)(unsafe.Pointer(com)) = &{{.InnerName}}Vtbl{}
 			vtbl := com.vtable()
 			com.proxy.unknownref = attachIUnknown("{{"{"}}{{ .IID }}{{"}"}}", &vtbl.IUnknownVtbl)
-			{{ range .Methods }} vtbl.{{.Name}} = syscall.NewCallback(com.proxy.{{.Name | ToPascalCase }})
-			{{ end }} 
+	`, struct {
+		Name       string
+		InnerName  string
+		Methods    []*ast.MethodNode
+		Properties []goproxyProperty
+		IID        string
+	}{
+		Name:       interfaceName,
+		InnerName:  casee.ToCamelCase(interfaceName),
+		Methods:    n.Methods,
+		Properties: props,
+		IID:        strings.ToUpper(findIID(n)),
+	})
+
+	for _, m := range n.Methods {
+		syscallParamTypes := g.extractCallType(m)
+		syscallfunc := g.ctx.stubBuilder.MakeCallbackStub(syscallParamTypes)
+		g.printfln("vtbl.%v = %v(com.proxy.%v)", m.Name, syscallfunc, casee.ToPascalCase(m.Name))
+	}
+
+	g.templateln(`
 			{{ range .Properties }}  {{if not .NoCtor }} com.proxy.{{.Name}} = {{.Name}} {{ end }} 
 			{{ end }} 
 			com.proxy.init()

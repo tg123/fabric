@@ -44,3 +44,7 @@ func callfabricFabricGetActivationContext(
 ) error {
 	return errComNotImpl
 }
+
+func createCallback(cb interface{}) uintptr {
+	panic("not impl")
+}

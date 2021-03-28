@@ -3,7 +3,6 @@ package fabric
 
 import (
 	"github.com/go-ole/go-ole"
-	"syscall"
 	"unsafe"
 )
 
@@ -92,15 +91,15 @@ func (v *comFabricRuntime) beginRegisterStatelessServiceFactory(
 	defer func() {
 		context = p_4
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub10(
 		v.vtable().BeginRegisterStatelessServiceFactory,
-		6,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(factory)),
-		uintptr(timeoutMilliseconds),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_4)),
+		5,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(factory),
+		timeoutMilliseconds,
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_4),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -114,12 +113,12 @@ func (v *comFabricRuntime) RegisterStatelessServiceFactory(
 ) (err error) {
 	var p_0 *uint16
 	p_0 = utf16PtrFromString(serviceTypeName)
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().RegisterStatelessServiceFactory,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(factory)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(factory),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -139,15 +138,15 @@ func (v *comFabricRuntime) beginRegisterStatefulServiceFactory(
 	defer func() {
 		context = p_4
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub10(
 		v.vtable().BeginRegisterStatefulServiceFactory,
-		6,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(factory)),
-		uintptr(timeoutMilliseconds),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_4)),
+		5,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(factory),
+		timeoutMilliseconds,
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_4),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -161,12 +160,12 @@ func (v *comFabricRuntime) RegisterStatefulServiceFactory(
 ) (err error) {
 	var p_0 *uint16
 	p_0 = utf16PtrFromString(serviceTypeName)
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().RegisterStatefulServiceFactory,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(factory)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(factory),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -179,12 +178,11 @@ func (v *comFabricRuntime) CreateServiceGroupFactoryBuilder() (builder *comFabri
 	defer func() {
 		builder = p_0
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().CreateServiceGroupFactoryBuilder,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -204,15 +202,15 @@ func (v *comFabricRuntime) beginRegisterServiceGroupFactory(
 	defer func() {
 		context = p_4
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub10(
 		v.vtable().BeginRegisterServiceGroupFactory,
-		6,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(factory)),
-		uintptr(timeoutMilliseconds),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_4)),
+		5,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(factory),
+		timeoutMilliseconds,
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_4),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -226,12 +224,12 @@ func (v *comFabricRuntime) RegisterServiceGroupFactory(
 ) (err error) {
 	var p_0 *uint16
 	p_0 = utf16PtrFromString(groupServiceType)
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().RegisterServiceGroupFactory,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(factory)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(factory),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -252,7 +250,8 @@ func newComFabricStatelessServiceFactory(
 	*(**comFabricStatelessServiceFactoryVtbl)(unsafe.Pointer(com)) = &comFabricStatelessServiceFactoryVtbl{}
 	vtbl := com.vtable()
 	com.proxy.unknownref = attachIUnknown("{CC53AF8F-74CD-11DF-AC3E-0024811E3892}", &vtbl.IUnknownVtbl)
-	vtbl.CreateInstance = syscall.NewCallback(com.proxy.CreateInstance)
+
+	vtbl.CreateInstance = createCallbackStub31(com.proxy.CreateInstance)
 
 	com.proxy.builder = builder
 
@@ -303,18 +302,17 @@ func (v *comFabricStatelessServiceFactory) CreateInstance(
 	defer func() {
 		serviceInstance = p_6
 	}()
-	hr, _, err1 := syscall.Syscall9(
+	hr, err1 := callStub32(
 		v.vtable().CreateInstance,
-		8,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(p_1)),
-		uintptr(initializationDataLength),
-		uintptr(unsafe.Pointer(initializationData)),
-		uintptr(unsafe.Pointer(&partitionId)),
-		uintptr(instanceId),
-		uintptr(unsafe.Pointer(&p_6)),
-		0,
+		7,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(p_1),
+		initializationDataLength,
+		unsafe.Pointer(initializationData),
+		unsafe.Pointer(&partitionId),
+		instanceId,
+		unsafe.Pointer(&p_6),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -335,11 +333,12 @@ func newComFabricStatelessServiceInstance(
 	*(**comFabricStatelessServiceInstanceVtbl)(unsafe.Pointer(com)) = &comFabricStatelessServiceInstanceVtbl{}
 	vtbl := com.vtable()
 	com.proxy.unknownref = attachIUnknown("{CC53AF90-74CD-11DF-AC3E-0024811E3892}", &vtbl.IUnknownVtbl)
-	vtbl.BeginOpen = syscall.NewCallback(com.proxy.BeginOpen)
-	vtbl.EndOpen = syscall.NewCallback(com.proxy.EndOpen)
-	vtbl.BeginClose = syscall.NewCallback(com.proxy.BeginClose)
-	vtbl.EndClose = syscall.NewCallback(com.proxy.EndClose)
-	vtbl.Abort = syscall.NewCallback(com.proxy.Abort)
+
+	vtbl.BeginOpen = createCallbackStub33(com.proxy.BeginOpen)
+	vtbl.EndOpen = createCallbackStub34(com.proxy.EndOpen)
+	vtbl.BeginClose = createCallbackStub34(com.proxy.BeginClose)
+	vtbl.EndClose = createCallbackStub29(com.proxy.EndClose)
+	vtbl.Abort = createCallbackStub35(com.proxy.Abort)
 
 	com.proxy.instance = instance
 
@@ -399,15 +398,13 @@ func (v *comFabricStatelessServiceInstance) beginOpen(
 	defer func() {
 		context = p_2
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub18(
 		v.vtable().BeginOpen,
-		4,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(partition)),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_2)),
-		0,
-		0,
+		3,
+		unsafe.Pointer(v),
+		unsafe.Pointer(partition),
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_2),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -422,12 +419,12 @@ func (v *comFabricStatelessServiceInstance) endOpen(
 	defer func() {
 		serviceAddress = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().EndOpen,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -442,12 +439,12 @@ func (v *comFabricStatelessServiceInstance) beginClose(
 	defer func() {
 		context = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().BeginClose,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -458,12 +455,11 @@ func (v *comFabricStatelessServiceInstance) beginClose(
 func (v *comFabricStatelessServiceInstance) endClose(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().EndClose,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -472,12 +468,10 @@ func (v *comFabricStatelessServiceInstance) endClose(
 	return
 }
 func (v *comFabricStatelessServiceInstance) Abort() (rt interface{}, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().Abort,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -510,12 +504,11 @@ func (v *comFabricStatelessServicePartition) GetPartitionInfo() (bufferedValue *
 	defer func() {
 		bufferedValue = p_0.toGoStruct()
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().GetPartitionInfo,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -529,12 +522,12 @@ func (v *comFabricStatelessServicePartition) ReportLoad(
 ) (err error) {
 	var p_1 *innerFabricLoadMetric
 	p_1 = metrics.toInnerStruct()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub27(
 		v.vtable().ReportLoad,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(metricCount),
-		uintptr(unsafe.Pointer(p_1)),
+		2,
+		unsafe.Pointer(v),
+		metricCount,
+		unsafe.Pointer(p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -545,12 +538,11 @@ func (v *comFabricStatelessServicePartition) ReportLoad(
 func (v *comFabricStatelessServicePartition) ReportFault(
 	faultType FabricFaultType,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub36(
 		v.vtable().ReportFault,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(faultType),
-		0,
+		1,
+		unsafe.Pointer(v),
+		faultType,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -575,12 +567,11 @@ func (v *comFabricStatelessServicePartition1) vtable() *comFabricStatelessServic
 func (v *comFabricStatelessServicePartition1) ReportMoveCost(
 	moveCost FabricMoveCost,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub37(
 		v.vtable().ReportMoveCost,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(moveCost),
-		0,
+		1,
+		unsafe.Pointer(v),
+		moveCost,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -608,12 +599,11 @@ func (v *comFabricStatelessServicePartition2) ReportInstanceHealth(
 ) (err error) {
 	var p_0 *innerFabricHealthInformation
 	p_0 = healthInfo.toInnerStruct()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().ReportInstanceHealth,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -626,12 +616,11 @@ func (v *comFabricStatelessServicePartition2) ReportPartitionHealth(
 ) (err error) {
 	var p_0 *innerFabricHealthInformation
 	p_0 = healthInfo.toInnerStruct()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().ReportPartitionHealth,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -662,12 +651,12 @@ func (v *comFabricStatelessServicePartition3) ReportInstanceHealth2(
 	p_0 = healthInfo.toInnerStruct()
 	var p_1 *innerFabricHealthReportSendOptions
 	p_1 = sendOptions.toInnerStruct()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().ReportInstanceHealth2,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -683,12 +672,12 @@ func (v *comFabricStatelessServicePartition3) ReportPartitionHealth2(
 	p_0 = healthInfo.toInnerStruct()
 	var p_1 *innerFabricHealthReportSendOptions
 	p_1 = sendOptions.toInnerStruct()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().ReportPartitionHealth2,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -726,18 +715,17 @@ func (v *comFabricStatefulServiceFactory) CreateReplica(
 	defer func() {
 		serviceReplica = p_6
 	}()
-	hr, _, err1 := syscall.Syscall9(
+	hr, err1 := callStub32(
 		v.vtable().CreateReplica,
-		8,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(p_1)),
-		uintptr(initializationDataLength),
-		uintptr(unsafe.Pointer(initializationData)),
-		uintptr(unsafe.Pointer(&partitionId)),
-		uintptr(replicaId),
-		uintptr(unsafe.Pointer(&p_6)),
-		0,
+		7,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(p_1),
+		initializationDataLength,
+		unsafe.Pointer(initializationData),
+		unsafe.Pointer(&partitionId),
+		replicaId,
+		unsafe.Pointer(&p_6),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -774,15 +762,14 @@ func (v *comFabricStatefulServiceReplica) beginOpen(
 	defer func() {
 		context = p_3
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub38(
 		v.vtable().BeginOpen,
-		5,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(openMode),
-		uintptr(unsafe.Pointer(partition)),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_3)),
-		0,
+		4,
+		unsafe.Pointer(v),
+		openMode,
+		unsafe.Pointer(partition),
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_3),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -797,12 +784,12 @@ func (v *comFabricStatefulServiceReplica) endOpen(
 	defer func() {
 		replicator = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().EndOpen,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -818,15 +805,13 @@ func (v *comFabricStatefulServiceReplica) beginChangeRole(
 	defer func() {
 		context = p_2
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub39(
 		v.vtable().BeginChangeRole,
-		4,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(newRole),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_2)),
-		0,
-		0,
+		3,
+		unsafe.Pointer(v),
+		newRole,
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_2),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -841,12 +826,12 @@ func (v *comFabricStatefulServiceReplica) endChangeRole(
 	defer func() {
 		serviceAddress = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().EndChangeRole,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -861,12 +846,12 @@ func (v *comFabricStatefulServiceReplica) beginClose(
 	defer func() {
 		context = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().BeginClose,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -877,12 +862,11 @@ func (v *comFabricStatefulServiceReplica) beginClose(
 func (v *comFabricStatefulServiceReplica) endClose(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().EndClose,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -891,12 +875,10 @@ func (v *comFabricStatefulServiceReplica) endClose(
 	return
 }
 func (v *comFabricStatefulServiceReplica) Abort() (rt interface{}, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().Abort,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -932,12 +914,11 @@ func (v *comFabricStatefulServicePartition) GetPartitionInfo() (bufferedValue *F
 	defer func() {
 		bufferedValue = p_0.toGoStruct()
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().GetPartitionInfo,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -950,12 +931,11 @@ func (v *comFabricStatefulServicePartition) GetReadStatus() (readStatus FabricSe
 	defer func() {
 		readStatus = p_0
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().GetReadStatus,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -968,12 +948,11 @@ func (v *comFabricStatefulServicePartition) GetWriteStatus() (writeStatus Fabric
 	defer func() {
 		writeStatus = p_0
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().GetWriteStatus,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -995,15 +974,14 @@ func (v *comFabricStatefulServicePartition) CreateReplicator(
 	defer func() {
 		stateReplicator = p_3
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub40(
 		v.vtable().CreateReplicator,
-		5,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(stateProvider)),
-		uintptr(unsafe.Pointer(p_1)),
-		uintptr(unsafe.Pointer(&p_2)),
-		uintptr(unsafe.Pointer(&p_3)),
-		0,
+		4,
+		unsafe.Pointer(v),
+		unsafe.Pointer(stateProvider),
+		unsafe.Pointer(p_1),
+		unsafe.Pointer(&p_2),
+		unsafe.Pointer(&p_3),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1017,12 +995,12 @@ func (v *comFabricStatefulServicePartition) ReportLoad(
 ) (err error) {
 	var p_1 *innerFabricLoadMetric
 	p_1 = metrics.toInnerStruct()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub27(
 		v.vtable().ReportLoad,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(metricCount),
-		uintptr(unsafe.Pointer(p_1)),
+		2,
+		unsafe.Pointer(v),
+		metricCount,
+		unsafe.Pointer(p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1033,12 +1011,11 @@ func (v *comFabricStatefulServicePartition) ReportLoad(
 func (v *comFabricStatefulServicePartition) ReportFault(
 	faultType FabricFaultType,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub36(
 		v.vtable().ReportFault,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(faultType),
-		0,
+		1,
+		unsafe.Pointer(v),
+		faultType,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1063,12 +1040,11 @@ func (v *comFabricStatefulServicePartition1) vtable() *comFabricStatefulServiceP
 func (v *comFabricStatefulServicePartition1) ReportMoveCost(
 	moveCost FabricMoveCost,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub37(
 		v.vtable().ReportMoveCost,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(moveCost),
-		0,
+		1,
+		unsafe.Pointer(v),
+		moveCost,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1096,12 +1072,11 @@ func (v *comFabricStatefulServicePartition2) ReportReplicaHealth(
 ) (err error) {
 	var p_0 *innerFabricHealthInformation
 	p_0 = healthInfo.toInnerStruct()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().ReportReplicaHealth,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1114,12 +1089,11 @@ func (v *comFabricStatefulServicePartition2) ReportPartitionHealth(
 ) (err error) {
 	var p_0 *innerFabricHealthInformation
 	p_0 = healthInfo.toInnerStruct()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().ReportPartitionHealth,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1150,12 +1124,12 @@ func (v *comFabricStatefulServicePartition3) ReportReplicaHealth2(
 	p_0 = healthInfo.toInnerStruct()
 	var p_1 *innerFabricHealthReportSendOptions
 	p_1 = sendOptions.toInnerStruct()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().ReportReplicaHealth2,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1171,12 +1145,12 @@ func (v *comFabricStatefulServicePartition3) ReportPartitionHealth2(
 	p_0 = healthInfo.toInnerStruct()
 	var p_1 *innerFabricHealthReportSendOptions
 	p_1 = sendOptions.toInnerStruct()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().ReportPartitionHealth2,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1214,15 +1188,14 @@ func (v *comFabricStateReplicator) beginReplicate(
 	defer func() {
 		context = p_3
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub40(
 		v.vtable().BeginReplicate,
-		5,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(operationData)),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_2)),
-		uintptr(unsafe.Pointer(&p_3)),
-		0,
+		4,
+		unsafe.Pointer(v),
+		unsafe.Pointer(operationData),
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_2),
+		unsafe.Pointer(&p_3),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1237,12 +1210,12 @@ func (v *comFabricStateReplicator) endReplicate(
 	defer func() {
 		sequenceNumber = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().EndReplicate,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1255,12 +1228,11 @@ func (v *comFabricStateReplicator) GetReplicationStream() (stream *comFabricOper
 	defer func() {
 		stream = p_0
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().GetReplicationStream,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1273,12 +1245,11 @@ func (v *comFabricStateReplicator) GetCopyStream() (stream *comFabricOperationSt
 	defer func() {
 		stream = p_0
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().GetCopyStream,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1291,12 +1262,11 @@ func (v *comFabricStateReplicator) UpdateReplicatorSettings(
 ) (err error) {
 	var p_0 *innerFabricReplicatorSettings
 	p_0 = replicatorSettings.toInnerStruct()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().UpdateReplicatorSettings,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1323,12 +1293,11 @@ func (v *comFabricStateReplicator2) GetReplicatorSettings() (replicatorSettings 
 	defer func() {
 		replicatorSettings = p_0
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().GetReplicatorSettings,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1367,15 +1336,14 @@ func (v *comFabricStateProvider) beginUpdateEpoch(
 	defer func() {
 		context = p_3
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub41(
 		v.vtable().BeginUpdateEpoch,
-		5,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(previousEpochLastSequenceNumber),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_3)),
-		0,
+		4,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		previousEpochLastSequenceNumber,
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_3),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1386,12 +1354,11 @@ func (v *comFabricStateProvider) beginUpdateEpoch(
 func (v *comFabricStateProvider) endUpdateEpoch(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().EndUpdateEpoch,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1404,12 +1371,11 @@ func (v *comFabricStateProvider) GetLastCommittedSequenceNumber() (sequenceNumbe
 	defer func() {
 		sequenceNumber = p_0
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().GetLastCommittedSequenceNumber,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1424,12 +1390,12 @@ func (v *comFabricStateProvider) beginOnDataLoss(
 	defer func() {
 		context = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().BeginOnDataLoss,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1444,12 +1410,12 @@ func (v *comFabricStateProvider) endOnDataLoss(
 	defer func() {
 		isStateChanged = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().EndOnDataLoss,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1462,12 +1428,11 @@ func (v *comFabricStateProvider) GetCopyContext() (copyContextStream *comFabricO
 	defer func() {
 		copyContextStream = p_0
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().GetCopyContext,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1483,15 +1448,13 @@ func (v *comFabricStateProvider) GetCopyState(
 	defer func() {
 		copyStateStream = p_2
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub42(
 		v.vtable().GetCopyState,
-		4,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(uptoSequenceNumber),
-		uintptr(unsafe.Pointer(copyContextStream)),
-		uintptr(unsafe.Pointer(&p_2)),
-		0,
-		0,
+		3,
+		unsafe.Pointer(v),
+		uptoSequenceNumber,
+		unsafe.Pointer(copyContextStream),
+		unsafe.Pointer(&p_2),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1516,12 +1479,10 @@ func (v *comFabricOperation) vtable() *comFabricOperationVtbl {
 }
 
 func (v *comFabricOperation) GetMetadata() (rt *FabricOperationMetadata, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_Metadata,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -1542,12 +1503,12 @@ func (v *comFabricOperation) GetData() (count uint32, buffers *FabricOperationDa
 	defer func() {
 		buffers = p_1.toGoStruct()
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().GetData,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1556,12 +1517,10 @@ func (v *comFabricOperation) GetData() (count uint32, buffers *FabricOperationDa
 	return
 }
 func (v *comFabricOperation) Acknowledge() (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().Acknowledge,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1592,12 +1551,12 @@ func (v *comFabricOperationData) GetData() (count uint32, buffers *FabricOperati
 	defer func() {
 		buffers = p_1.toGoStruct()
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().GetData,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1627,12 +1586,12 @@ func (v *comFabricOperationStream) beginGetOperation(
 	defer func() {
 		context = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().BeginGetOperation,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1647,12 +1606,12 @@ func (v *comFabricOperationStream) endGetOperation(
 	defer func() {
 		operation = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().EndGetOperation,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1677,12 +1636,11 @@ func (v *comFabricOperationStream2) vtable() *comFabricOperationStream2Vtbl {
 func (v *comFabricOperationStream2) ReportFault(
 	faultType FabricFaultType,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub36(
 		v.vtable().ReportFault,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(faultType),
-		0,
+		1,
+		unsafe.Pointer(v),
+		faultType,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1712,12 +1670,12 @@ func (v *comFabricOperationDataStream) beginGetNext(
 	defer func() {
 		context = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().BeginGetNext,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1732,12 +1690,12 @@ func (v *comFabricOperationDataStream) endGetNext(
 	defer func() {
 		operationData = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().EndGetNext,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1776,12 +1734,12 @@ func (v *comFabricReplicator) beginOpen(
 	defer func() {
 		context = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().BeginOpen,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1796,12 +1754,12 @@ func (v *comFabricReplicator) endOpen(
 	defer func() {
 		replicationAddress = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().EndOpen,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1820,15 +1778,14 @@ func (v *comFabricReplicator) beginChangeRole(
 	defer func() {
 		context = p_3
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub43(
 		v.vtable().BeginChangeRole,
-		5,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(role),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_3)),
-		0,
+		4,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		role,
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_3),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1839,12 +1796,11 @@ func (v *comFabricReplicator) beginChangeRole(
 func (v *comFabricReplicator) endChangeRole(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().EndChangeRole,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1862,15 +1818,13 @@ func (v *comFabricReplicator) beginUpdateEpoch(
 	defer func() {
 		context = p_2
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub18(
 		v.vtable().BeginUpdateEpoch,
-		4,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_2)),
-		0,
-		0,
+		3,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_2),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1881,12 +1835,11 @@ func (v *comFabricReplicator) beginUpdateEpoch(
 func (v *comFabricReplicator) endUpdateEpoch(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().EndUpdateEpoch,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1901,12 +1854,12 @@ func (v *comFabricReplicator) beginClose(
 	defer func() {
 		context = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().BeginClose,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1917,12 +1870,11 @@ func (v *comFabricReplicator) beginClose(
 func (v *comFabricReplicator) endClose(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().EndClose,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1931,12 +1883,10 @@ func (v *comFabricReplicator) endClose(
 	return
 }
 func (v *comFabricReplicator) Abort() (rt interface{}, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().Abort,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -1953,12 +1903,11 @@ func (v *comFabricReplicator) GetCurrentProgress() (lastSequenceNumber int64, er
 	defer func() {
 		lastSequenceNumber = p_0
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().GetCurrentProgress,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1971,12 +1920,11 @@ func (v *comFabricReplicator) GetCatchUpCapability() (fromSequenceNumber int64, 
 	defer func() {
 		fromSequenceNumber = p_0
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().GetCatchUpCapability,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2013,12 +1961,12 @@ func (v *comFabricPrimaryReplicator) beginOnDataLoss(
 	defer func() {
 		context = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().BeginOnDataLoss,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2033,12 +1981,12 @@ func (v *comFabricPrimaryReplicator) endOnDataLoss(
 	defer func() {
 		isStateChanged = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().EndOnDataLoss,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2054,12 +2002,12 @@ func (v *comFabricPrimaryReplicator) UpdateCatchUpReplicaSetConfiguration(
 	p_0 = currentConfiguration.toInnerStruct()
 	var p_1 *innerFabricReplicaSetConfiguration
 	p_1 = previousConfiguration.toInnerStruct()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().UpdateCatchUpReplicaSetConfiguration,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2075,15 +2023,13 @@ func (v *comFabricPrimaryReplicator) beginWaitForCatchUpQuorum(
 	defer func() {
 		context = p_2
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub44(
 		v.vtable().BeginWaitForCatchUpQuorum,
-		4,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(catchUpMode),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_2)),
-		0,
-		0,
+		3,
+		unsafe.Pointer(v),
+		catchUpMode,
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_2),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2094,12 +2040,11 @@ func (v *comFabricPrimaryReplicator) beginWaitForCatchUpQuorum(
 func (v *comFabricPrimaryReplicator) endWaitForCatchUpQuorum(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().EndWaitForCatchUpQuorum,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2112,12 +2057,11 @@ func (v *comFabricPrimaryReplicator) UpdateCurrentReplicaSetConfiguration(
 ) (err error) {
 	var p_0 *innerFabricReplicaSetConfiguration
 	p_0 = currentConfiguration.toInnerStruct()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().UpdateCurrentReplicaSetConfiguration,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2135,15 +2079,13 @@ func (v *comFabricPrimaryReplicator) beginBuildReplica(
 	defer func() {
 		context = p_2
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub18(
 		v.vtable().BeginBuildReplica,
-		4,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_2)),
-		0,
-		0,
+		3,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_2),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2154,12 +2096,11 @@ func (v *comFabricPrimaryReplicator) beginBuildReplica(
 func (v *comFabricPrimaryReplicator) endBuildReplica(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().EndBuildReplica,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2170,12 +2111,11 @@ func (v *comFabricPrimaryReplicator) endBuildReplica(
 func (v *comFabricPrimaryReplicator) RemoveReplica(
 	replicaId int64,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub15(
 		v.vtable().RemoveReplica,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(replicaId),
-		0,
+		1,
+		unsafe.Pointer(v),
+		replicaId,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2220,12 +2160,11 @@ func (v *comFabricAtomicGroupStateReplicator) CreateAtomicGroup() (AtomicGroupId
 	defer func() {
 		AtomicGroupId = p_0
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().CreateAtomicGroup,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2246,15 +2185,15 @@ func (v *comFabricAtomicGroupStateReplicator) beginReplicateAtomicGroupOperation
 	defer func() {
 		context = p_4
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub45(
 		v.vtable().BeginReplicateAtomicGroupOperation,
-		6,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(atomicGroupId),
-		uintptr(unsafe.Pointer(operationData)),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_3)),
-		uintptr(unsafe.Pointer(&p_4)),
+		5,
+		unsafe.Pointer(v),
+		atomicGroupId,
+		unsafe.Pointer(operationData),
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_3),
+		unsafe.Pointer(&p_4),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2269,12 +2208,12 @@ func (v *comFabricAtomicGroupStateReplicator) endReplicateAtomicGroupOperation(
 	defer func() {
 		operationSequenceNumber = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().EndReplicateAtomicGroupOperation,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2294,15 +2233,14 @@ func (v *comFabricAtomicGroupStateReplicator) beginReplicateAtomicGroupCommit(
 	defer func() {
 		context = p_3
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub46(
 		v.vtable().BeginReplicateAtomicGroupCommit,
-		5,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(atomicGroupId),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_2)),
-		uintptr(unsafe.Pointer(&p_3)),
-		0,
+		4,
+		unsafe.Pointer(v),
+		atomicGroupId,
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_2),
+		unsafe.Pointer(&p_3),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2317,12 +2255,12 @@ func (v *comFabricAtomicGroupStateReplicator) endReplicateAtomicGroupCommit(
 	defer func() {
 		commitSequenceNumber = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().EndReplicateAtomicGroupCommit,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2342,15 +2280,14 @@ func (v *comFabricAtomicGroupStateReplicator) beginReplicateAtomicGroupRollback(
 	defer func() {
 		context = p_3
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub46(
 		v.vtable().BeginReplicateAtomicGroupRollback,
-		5,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(atomicGroupId),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_2)),
-		uintptr(unsafe.Pointer(&p_3)),
-		0,
+		4,
+		unsafe.Pointer(v),
+		atomicGroupId,
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_2),
+		unsafe.Pointer(&p_3),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2365,12 +2302,12 @@ func (v *comFabricAtomicGroupStateReplicator) endReplicateAtomicGroupRollback(
 	defer func() {
 		rollbackSequenceNumber = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().EndReplicateAtomicGroupRollback,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2406,15 +2343,14 @@ func (v *comFabricAtomicGroupStateProvider) beginAtomicGroupCommit(
 	defer func() {
 		context = p_3
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub47(
 		v.vtable().BeginAtomicGroupCommit,
-		5,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(atomicGroupId),
-		uintptr(commitSequenceNumber),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_3)),
-		0,
+		4,
+		unsafe.Pointer(v),
+		atomicGroupId,
+		commitSequenceNumber,
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_3),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2425,12 +2361,11 @@ func (v *comFabricAtomicGroupStateProvider) beginAtomicGroupCommit(
 func (v *comFabricAtomicGroupStateProvider) endAtomicGroupCommit(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().EndAtomicGroupCommit,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2447,15 +2382,14 @@ func (v *comFabricAtomicGroupStateProvider) beginAtomicGroupRollback(
 	defer func() {
 		context = p_3
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub47(
 		v.vtable().BeginAtomicGroupRollback,
-		5,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(atomicGroupId),
-		uintptr(rollbackequenceNumber),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_3)),
-		0,
+		4,
+		unsafe.Pointer(v),
+		atomicGroupId,
+		rollbackequenceNumber,
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_3),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2466,12 +2400,11 @@ func (v *comFabricAtomicGroupStateProvider) beginAtomicGroupRollback(
 func (v *comFabricAtomicGroupStateProvider) endAtomicGroupRollback(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().EndAtomicGroupRollback,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2487,15 +2420,13 @@ func (v *comFabricAtomicGroupStateProvider) beginUndoProgress(
 	defer func() {
 		context = p_2
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub42(
 		v.vtable().BeginUndoProgress,
-		4,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(fromCommitSequenceNumber),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_2)),
-		0,
-		0,
+		3,
+		unsafe.Pointer(v),
+		fromCommitSequenceNumber,
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_2),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2506,12 +2437,11 @@ func (v *comFabricAtomicGroupStateProvider) beginUndoProgress(
 func (v *comFabricAtomicGroupStateProvider) endUndoProgress(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().EndUndoProgress,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2554,12 +2484,12 @@ func (v *comFabricServiceGroupFactoryBuilder) AddStatelessServiceFactory(
 ) (err error) {
 	var p_0 *uint16
 	p_0 = utf16PtrFromString(memberServiceType)
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().AddStatelessServiceFactory,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(factory)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(factory),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2573,12 +2503,12 @@ func (v *comFabricServiceGroupFactoryBuilder) AddStatefulServiceFactory(
 ) (err error) {
 	var p_0 *uint16
 	p_0 = utf16PtrFromString(memberServiceType)
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().AddStatefulServiceFactory,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(factory)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(factory),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2591,12 +2521,11 @@ func (v *comFabricServiceGroupFactoryBuilder) RemoveServiceFactory(
 ) (err error) {
 	var p_0 *uint16
 	p_0 = utf16PtrFromString(memberServiceType)
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().RemoveServiceFactory,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2609,12 +2538,11 @@ func (v *comFabricServiceGroupFactoryBuilder) ToServiceGroupFactory() (factory *
 	defer func() {
 		factory = p_0
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().ToServiceGroupFactory,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2646,15 +2574,13 @@ func (v *comFabricServiceGroupPartition) ResolveMember(
 	defer func() {
 		member = fromUnsafePointer(p_2)
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub18(
 		v.vtable().ResolveMember,
-		4,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(riid)),
-		uintptr(unsafe.Pointer(&p_2)),
-		0,
-		0,
+		3,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(riid),
+		unsafe.Pointer(&p_2),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2699,12 +2625,10 @@ func (v *comFabricCodePackageActivationContext) vtable() *comFabricCodePackageAc
 }
 
 func (v *comFabricCodePackageActivationContext) GetContextId() (rt string, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_ContextId,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -2717,12 +2641,10 @@ func (v *comFabricCodePackageActivationContext) GetContextId() (rt string, err e
 	return
 }
 func (v *comFabricCodePackageActivationContext) GetCodePackageName() (rt string, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_CodePackageName,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -2735,12 +2657,10 @@ func (v *comFabricCodePackageActivationContext) GetCodePackageName() (rt string,
 	return
 }
 func (v *comFabricCodePackageActivationContext) GetCodePackageVersion() (rt string, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_CodePackageVersion,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -2753,12 +2673,10 @@ func (v *comFabricCodePackageActivationContext) GetCodePackageVersion() (rt stri
 	return
 }
 func (v *comFabricCodePackageActivationContext) GetWorkDirectory() (rt string, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_WorkDirectory,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -2771,12 +2689,10 @@ func (v *comFabricCodePackageActivationContext) GetWorkDirectory() (rt string, e
 	return
 }
 func (v *comFabricCodePackageActivationContext) GetLogDirectory() (rt string, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_LogDirectory,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -2789,12 +2705,10 @@ func (v *comFabricCodePackageActivationContext) GetLogDirectory() (rt string, er
 	return
 }
 func (v *comFabricCodePackageActivationContext) GetTempDirectory() (rt string, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_TempDirectory,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -2807,12 +2721,10 @@ func (v *comFabricCodePackageActivationContext) GetTempDirectory() (rt string, e
 	return
 }
 func (v *comFabricCodePackageActivationContext) GetServiceTypes() (rt []FabricServiceTypeDescription, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_ServiceTypes,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -2837,12 +2749,10 @@ func (v *comFabricCodePackageActivationContext) GetServiceTypes() (rt []FabricSe
 	return
 }
 func (v *comFabricCodePackageActivationContext) GetServiceGroupTypes() (rt []FabricServiceGroupTypeDescription, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_ServiceGroupTypes,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -2867,12 +2777,10 @@ func (v *comFabricCodePackageActivationContext) GetServiceGroupTypes() (rt []Fab
 	return
 }
 func (v *comFabricCodePackageActivationContext) GetApplicationPrincipals() (rt *FabricApplicationPrincipalsDescription, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_ApplicationPrincipals,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -2885,12 +2793,10 @@ func (v *comFabricCodePackageActivationContext) GetApplicationPrincipals() (rt *
 	return
 }
 func (v *comFabricCodePackageActivationContext) GetServiceEndpointResources() (rt []FabricEndpointResourceDescription, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_ServiceEndpointResources,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -2923,12 +2829,12 @@ func (v *comFabricCodePackageActivationContext) GetServiceEndpointResource(
 	defer func() {
 		bufferedValue = p_1.toGoStruct()
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().GetServiceEndpointResource,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2941,12 +2847,11 @@ func (v *comFabricCodePackageActivationContext) GetCodePackageNames() (names *co
 	defer func() {
 		names = p_0
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().GetCodePackageNames,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2959,12 +2864,11 @@ func (v *comFabricCodePackageActivationContext) GetConfigurationPackageNames() (
 	defer func() {
 		names = p_0
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().GetConfigurationPackageNames,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2977,12 +2881,11 @@ func (v *comFabricCodePackageActivationContext) GetDataPackageNames() (names *co
 	defer func() {
 		names = p_0
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().GetDataPackageNames,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2999,12 +2902,12 @@ func (v *comFabricCodePackageActivationContext) GetCodePackage(
 	defer func() {
 		codePackage = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().GetCodePackage,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3021,12 +2924,12 @@ func (v *comFabricCodePackageActivationContext) GetConfigurationPackage(
 	defer func() {
 		configPackage = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().GetConfigurationPackage,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3043,12 +2946,12 @@ func (v *comFabricCodePackageActivationContext) GetDataPackage(
 	defer func() {
 		dataPackage = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().GetDataPackage,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3063,12 +2966,12 @@ func (v *comFabricCodePackageActivationContext) RegisterCodePackageChangeHandler
 	defer func() {
 		callbackHandle = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().RegisterCodePackageChangeHandler,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3079,12 +2982,11 @@ func (v *comFabricCodePackageActivationContext) RegisterCodePackageChangeHandler
 func (v *comFabricCodePackageActivationContext) UnregisterCodePackageChangeHandler(
 	callbackHandle int64,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub15(
 		v.vtable().UnregisterCodePackageChangeHandler,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(callbackHandle),
-		0,
+		1,
+		unsafe.Pointer(v),
+		callbackHandle,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3099,12 +3001,12 @@ func (v *comFabricCodePackageActivationContext) RegisterConfigurationPackageChan
 	defer func() {
 		callbackHandle = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().RegisterConfigurationPackageChangeHandler,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3115,12 +3017,11 @@ func (v *comFabricCodePackageActivationContext) RegisterConfigurationPackageChan
 func (v *comFabricCodePackageActivationContext) UnregisterConfigurationPackageChangeHandler(
 	callbackHandle int64,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub15(
 		v.vtable().UnregisterConfigurationPackageChangeHandler,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(callbackHandle),
-		0,
+		1,
+		unsafe.Pointer(v),
+		callbackHandle,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3135,12 +3036,12 @@ func (v *comFabricCodePackageActivationContext) RegisterDataPackageChangeHandler
 	defer func() {
 		callbackHandle = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().RegisterDataPackageChangeHandler,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3151,12 +3052,11 @@ func (v *comFabricCodePackageActivationContext) RegisterDataPackageChangeHandler
 func (v *comFabricCodePackageActivationContext) UnregisterDataPackageChangeHandler(
 	callbackHandle int64,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub15(
 		v.vtable().UnregisterDataPackageChangeHandler,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(callbackHandle),
-		0,
+		1,
+		unsafe.Pointer(v),
+		callbackHandle,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3182,12 +3082,10 @@ func (v *comFabricCodePackageActivationContext2) vtable() *comFabricCodePackageA
 }
 
 func (v *comFabricCodePackageActivationContext2) GetApplicationName() (rt string, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_ApplicationName,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -3200,12 +3098,10 @@ func (v *comFabricCodePackageActivationContext2) GetApplicationName() (rt string
 	return
 }
 func (v *comFabricCodePackageActivationContext2) GetApplicationTypeName() (rt string, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_ApplicationTypeName,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -3222,12 +3118,11 @@ func (v *comFabricCodePackageActivationContext2) GetServiceManifestName() (servi
 	defer func() {
 		serviceManifestName = p_0
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().GetServiceManifestName,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3240,12 +3135,11 @@ func (v *comFabricCodePackageActivationContext2) GetServiceManifestVersion() (se
 	defer func() {
 		serviceManifestVersion = p_0
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().GetServiceManifestVersion,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3274,12 +3168,11 @@ func (v *comFabricCodePackageActivationContext3) ReportApplicationHealth(
 ) (err error) {
 	var p_0 *innerFabricHealthInformation
 	p_0 = healthInfo.toInnerStruct()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().ReportApplicationHealth,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3292,12 +3185,11 @@ func (v *comFabricCodePackageActivationContext3) ReportDeployedApplicationHealth
 ) (err error) {
 	var p_0 *innerFabricHealthInformation
 	p_0 = healthInfo.toInnerStruct()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().ReportDeployedApplicationHealth,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3310,12 +3202,11 @@ func (v *comFabricCodePackageActivationContext3) ReportDeployedServicePackageHea
 ) (err error) {
 	var p_0 *innerFabricHealthInformation
 	p_0 = healthInfo.toInnerStruct()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().ReportDeployedServicePackageHealth,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3347,12 +3238,12 @@ func (v *comFabricCodePackageActivationContext4) ReportApplicationHealth2(
 	p_0 = healthInfo.toInnerStruct()
 	var p_1 *innerFabricHealthReportSendOptions
 	p_1 = sendOptions.toInnerStruct()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().ReportApplicationHealth2,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3368,12 +3259,12 @@ func (v *comFabricCodePackageActivationContext4) ReportDeployedApplicationHealth
 	p_0 = healthInfo.toInnerStruct()
 	var p_1 *innerFabricHealthReportSendOptions
 	p_1 = sendOptions.toInnerStruct()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().ReportDeployedApplicationHealth2,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3389,12 +3280,12 @@ func (v *comFabricCodePackageActivationContext4) ReportDeployedServicePackageHea
 	p_0 = healthInfo.toInnerStruct()
 	var p_1 *innerFabricHealthReportSendOptions
 	p_1 = sendOptions.toInnerStruct()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().ReportDeployedServicePackageHealth2,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3418,12 +3309,10 @@ func (v *comFabricCodePackageActivationContext5) vtable() *comFabricCodePackageA
 }
 
 func (v *comFabricCodePackageActivationContext5) GetServiceListenAddress() (rt string, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_ServiceListenAddress,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -3436,12 +3325,10 @@ func (v *comFabricCodePackageActivationContext5) GetServiceListenAddress() (rt s
 	return
 }
 func (v *comFabricCodePackageActivationContext5) GetServicePublishAddress() (rt string, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_ServicePublishAddress,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -3476,12 +3363,12 @@ func (v *comFabricCodePackageActivationContext6) GetDirectory(
 	defer func() {
 		directoryPath = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().GetDirectory,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3505,12 +3392,10 @@ func (v *comFabricCodePackage) vtable() *comFabricCodePackageVtbl {
 }
 
 func (v *comFabricCodePackage) GetDescription() (rt *FabricCodePackageDescription, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_Description,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -3523,12 +3408,10 @@ func (v *comFabricCodePackage) GetDescription() (rt *FabricCodePackageDescriptio
 	return
 }
 func (v *comFabricCodePackage) GetPath() (rt string, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_Path,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -3556,12 +3439,10 @@ func (v *comFabricCodePackage2) vtable() *comFabricCodePackage2Vtbl {
 }
 
 func (v *comFabricCodePackage2) GetSetupEntryPointRunAsPolicy() (rt *FabricRunasPolicyDescription, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_SetupEntryPointRunAsPolicy,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -3574,12 +3455,10 @@ func (v *comFabricCodePackage2) GetSetupEntryPointRunAsPolicy() (rt *FabricRunas
 	return
 }
 func (v *comFabricCodePackage2) GetEntryPointRunAsPolicy() (rt *FabricRunasPolicyDescription, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_EntryPointRunAsPolicy,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -3611,12 +3490,10 @@ func (v *comFabricConfigurationPackage) vtable() *comFabricConfigurationPackageV
 }
 
 func (v *comFabricConfigurationPackage) GetDescription() (rt *FabricConfigurationPackageDescription, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_Description,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -3629,12 +3506,10 @@ func (v *comFabricConfigurationPackage) GetDescription() (rt *FabricConfiguratio
 	return
 }
 func (v *comFabricConfigurationPackage) GetPath() (rt string, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_Path,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -3647,12 +3522,10 @@ func (v *comFabricConfigurationPackage) GetPath() (rt string, err error) {
 	return
 }
 func (v *comFabricConfigurationPackage) GetSettings() (rt *FabricConfigurationSettings, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_Settings,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -3673,12 +3546,12 @@ func (v *comFabricConfigurationPackage) GetSection(
 	defer func() {
 		bufferedValue = p_1.toGoStruct()
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().GetSection,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3702,15 +3575,14 @@ func (v *comFabricConfigurationPackage) GetValue(
 	defer func() {
 		bufferedValue = utf16PtrToString(p_3)
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub40(
 		v.vtable().GetValue,
-		5,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(p_1)),
-		uintptr(unsafe.Pointer(&p_2)),
-		uintptr(unsafe.Pointer(&p_3)),
-		0,
+		4,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(p_1),
+		unsafe.Pointer(&p_2),
+		unsafe.Pointer(&p_3),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3727,12 +3599,12 @@ func (v *comFabricConfigurationPackage) DecryptValue(
 	defer func() {
 		decryptedValue = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().DecryptValue,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3778,15 +3650,13 @@ func (v *comFabricConfigurationPackage2) GetValues(
 
 		}
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub18(
 		v.vtable().GetValues,
-		4,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(p_1)),
-		uintptr(unsafe.Pointer(&p_2)),
-		0,
-		0,
+		3,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(p_1),
+		unsafe.Pointer(&p_2),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3810,12 +3680,10 @@ func (v *comFabricDataPackage) vtable() *comFabricDataPackageVtbl {
 }
 
 func (v *comFabricDataPackage) GetDescription() (rt *FabricDataPackageDescription, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_Description,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -3828,12 +3696,10 @@ func (v *comFabricDataPackage) GetDescription() (rt *FabricDataPackageDescriptio
 	return
 }
 func (v *comFabricDataPackage) GetPath() (rt string, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_Path,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -3865,12 +3731,12 @@ func (v *comFabricCodePackageChangeHandler) OnPackageAdded(
 	source *comFabricCodePackageActivationContext,
 	codePackage *comFabricCodePackage,
 ) (rt interface{}, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().OnPackageAdded,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(source)),
-		uintptr(unsafe.Pointer(codePackage)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(source),
+		unsafe.Pointer(codePackage),
 	)
 	if hr == 0 {
 		err = err1
@@ -3886,12 +3752,12 @@ func (v *comFabricCodePackageChangeHandler) OnPackageRemoved(
 	source *comFabricCodePackageActivationContext,
 	codePackage *comFabricCodePackage,
 ) (rt interface{}, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().OnPackageRemoved,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(source)),
-		uintptr(unsafe.Pointer(codePackage)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(source),
+		unsafe.Pointer(codePackage),
 	)
 	if hr == 0 {
 		err = err1
@@ -3908,15 +3774,13 @@ func (v *comFabricCodePackageChangeHandler) OnPackageModified(
 	previousCodePackage *comFabricCodePackage,
 	codePackage *comFabricCodePackage,
 ) (rt interface{}, err error) {
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub18(
 		v.vtable().OnPackageModified,
-		4,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(source)),
-		uintptr(unsafe.Pointer(previousCodePackage)),
-		uintptr(unsafe.Pointer(codePackage)),
-		0,
-		0,
+		3,
+		unsafe.Pointer(v),
+		unsafe.Pointer(source),
+		unsafe.Pointer(previousCodePackage),
+		unsafe.Pointer(codePackage),
 	)
 	if hr == 0 {
 		err = err1
@@ -3948,12 +3812,12 @@ func (v *comFabricConfigurationPackageChangeHandler) OnPackageAdded(
 	source *comFabricCodePackageActivationContext,
 	configPackage *comFabricConfigurationPackage,
 ) (rt interface{}, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().OnPackageAdded,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(source)),
-		uintptr(unsafe.Pointer(configPackage)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(source),
+		unsafe.Pointer(configPackage),
 	)
 	if hr == 0 {
 		err = err1
@@ -3969,12 +3833,12 @@ func (v *comFabricConfigurationPackageChangeHandler) OnPackageRemoved(
 	source *comFabricCodePackageActivationContext,
 	configPackage *comFabricConfigurationPackage,
 ) (rt interface{}, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().OnPackageRemoved,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(source)),
-		uintptr(unsafe.Pointer(configPackage)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(source),
+		unsafe.Pointer(configPackage),
 	)
 	if hr == 0 {
 		err = err1
@@ -3991,15 +3855,13 @@ func (v *comFabricConfigurationPackageChangeHandler) OnPackageModified(
 	previousConfigPackage *comFabricConfigurationPackage,
 	configPackage *comFabricConfigurationPackage,
 ) (rt interface{}, err error) {
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub18(
 		v.vtable().OnPackageModified,
-		4,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(source)),
-		uintptr(unsafe.Pointer(previousConfigPackage)),
-		uintptr(unsafe.Pointer(configPackage)),
-		0,
-		0,
+		3,
+		unsafe.Pointer(v),
+		unsafe.Pointer(source),
+		unsafe.Pointer(previousConfigPackage),
+		unsafe.Pointer(configPackage),
 	)
 	if hr == 0 {
 		err = err1
@@ -4031,12 +3893,12 @@ func (v *comFabricDataPackageChangeHandler) OnPackageAdded(
 	source *comFabricCodePackageActivationContext,
 	dataPackage *comFabricDataPackage,
 ) (rt interface{}, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().OnPackageAdded,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(source)),
-		uintptr(unsafe.Pointer(dataPackage)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(source),
+		unsafe.Pointer(dataPackage),
 	)
 	if hr == 0 {
 		err = err1
@@ -4052,12 +3914,12 @@ func (v *comFabricDataPackageChangeHandler) OnPackageRemoved(
 	source *comFabricCodePackageActivationContext,
 	dataPackage *comFabricDataPackage,
 ) (rt interface{}, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().OnPackageRemoved,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(source)),
-		uintptr(unsafe.Pointer(dataPackage)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(source),
+		unsafe.Pointer(dataPackage),
 	)
 	if hr == 0 {
 		err = err1
@@ -4074,15 +3936,13 @@ func (v *comFabricDataPackageChangeHandler) OnPackageModified(
 	previousDataPackage *comFabricDataPackage,
 	dataPackage *comFabricDataPackage,
 ) (rt interface{}, err error) {
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub18(
 		v.vtable().OnPackageModified,
-		4,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(source)),
-		uintptr(unsafe.Pointer(previousDataPackage)),
-		uintptr(unsafe.Pointer(dataPackage)),
-		0,
-		0,
+		3,
+		unsafe.Pointer(v),
+		unsafe.Pointer(source),
+		unsafe.Pointer(previousDataPackage),
+		unsafe.Pointer(dataPackage),
 	)
 	if hr == 0 {
 		err = err1
@@ -4109,12 +3969,10 @@ func (v *comFabricProcessExitHandler) vtable() *comFabricProcessExitHandlerVtbl 
 }
 
 func (v *comFabricProcessExitHandler) FabricProcessExited() (rt interface{}, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().FabricProcessExited,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -4142,12 +4000,10 @@ func (v *comFabricTransactionBase) vtable() *comFabricTransactionBaseVtbl {
 }
 
 func (v *comFabricTransactionBase) GetId() (rt *ole.GUID, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_Id,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -4160,12 +4016,10 @@ func (v *comFabricTransactionBase) GetId() (rt *ole.GUID, err error) {
 	return
 }
 func (v *comFabricTransactionBase) GetIsolationLevel() (rt FabricTransactionIsolationLevel, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_IsolationLevel,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	_ = err1
 	rt = FabricTransactionIsolationLevel(hr)
@@ -4195,15 +4049,13 @@ func (v *comFabricTransaction) beginCommit(
 	defer func() {
 		context = p_2
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub20(
 		v.vtable().BeginCommit,
-		4,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(timeoutMilliseconds),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_2)),
-		0,
-		0,
+		3,
+		unsafe.Pointer(v),
+		timeoutMilliseconds,
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_2),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4218,12 +4070,12 @@ func (v *comFabricTransaction) endCommit(
 	defer func() {
 		commitSequenceNumber = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().EndCommit,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4232,12 +4084,10 @@ func (v *comFabricTransaction) endCommit(
 	return
 }
 func (v *comFabricTransaction) Rollback() (rt interface{}, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().Rollback,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -4280,12 +4130,11 @@ func (v *comFabricKeyValueStoreReplica) GetCurrentEpoch() (currentEpoch FabricEp
 	defer func() {
 		currentEpoch = *p_0.toGoStruct()
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().GetCurrentEpoch,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4298,12 +4147,11 @@ func (v *comFabricKeyValueStoreReplica) UpdateReplicatorSettings(
 ) (err error) {
 	var p_0 *innerFabricReplicatorSettings
 	p_0 = replicatorSettings.toInnerStruct()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().UpdateReplicatorSettings,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4316,12 +4164,11 @@ func (v *comFabricKeyValueStoreReplica) CreateTransaction() (transaction *comFab
 	defer func() {
 		transaction = p_0
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().CreateTransaction,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4337,15 +4184,14 @@ func (v *comFabricKeyValueStoreReplica) Add(
 ) (err error) {
 	var p_1 *uint16
 	p_1 = utf16PtrFromString(key)
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub48(
 		v.vtable().Add,
-		5,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(transaction)),
-		uintptr(unsafe.Pointer(p_1)),
-		uintptr(valueSizeInBytes),
-		uintptr(unsafe.Pointer(value)),
-		0,
+		4,
+		unsafe.Pointer(v),
+		unsafe.Pointer(transaction),
+		unsafe.Pointer(p_1),
+		valueSizeInBytes,
+		unsafe.Pointer(value),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4360,15 +4206,13 @@ func (v *comFabricKeyValueStoreReplica) Remove(
 ) (err error) {
 	var p_1 *uint16
 	p_1 = utf16PtrFromString(key)
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub49(
 		v.vtable().Remove,
-		4,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(transaction)),
-		uintptr(unsafe.Pointer(p_1)),
-		uintptr(checkSequenceNumber),
-		0,
-		0,
+		3,
+		unsafe.Pointer(v),
+		unsafe.Pointer(transaction),
+		unsafe.Pointer(p_1),
+		checkSequenceNumber,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4385,15 +4229,15 @@ func (v *comFabricKeyValueStoreReplica) Update(
 ) (err error) {
 	var p_1 *uint16
 	p_1 = utf16PtrFromString(key)
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub50(
 		v.vtable().Update,
-		6,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(transaction)),
-		uintptr(unsafe.Pointer(p_1)),
-		uintptr(valueSizeInBytes),
-		uintptr(unsafe.Pointer(value)),
-		uintptr(checkSequenceNumber),
+		5,
+		unsafe.Pointer(v),
+		unsafe.Pointer(transaction),
+		unsafe.Pointer(p_1),
+		valueSizeInBytes,
+		unsafe.Pointer(value),
+		checkSequenceNumber,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4411,15 +4255,13 @@ func (v *comFabricKeyValueStoreReplica) Get(
 	defer func() {
 		result = p_2
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub18(
 		v.vtable().Get,
-		4,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(transaction)),
-		uintptr(unsafe.Pointer(p_1)),
-		uintptr(unsafe.Pointer(&p_2)),
-		0,
-		0,
+		3,
+		unsafe.Pointer(v),
+		unsafe.Pointer(transaction),
+		unsafe.Pointer(p_1),
+		unsafe.Pointer(&p_2),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4437,15 +4279,13 @@ func (v *comFabricKeyValueStoreReplica) GetMetadata(
 	defer func() {
 		result = p_2
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub18(
 		v.vtable().GetMetadata,
-		4,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(transaction)),
-		uintptr(unsafe.Pointer(p_1)),
-		uintptr(unsafe.Pointer(&p_2)),
-		0,
-		0,
+		3,
+		unsafe.Pointer(v),
+		unsafe.Pointer(transaction),
+		unsafe.Pointer(p_1),
+		unsafe.Pointer(&p_2),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4463,15 +4303,13 @@ func (v *comFabricKeyValueStoreReplica) Contains(
 	defer func() {
 		result = p_2
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub18(
 		v.vtable().Contains,
-		4,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(transaction)),
-		uintptr(unsafe.Pointer(p_1)),
-		uintptr(unsafe.Pointer(&p_2)),
-		0,
-		0,
+		3,
+		unsafe.Pointer(v),
+		unsafe.Pointer(transaction),
+		unsafe.Pointer(p_1),
+		unsafe.Pointer(&p_2),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4486,12 +4324,12 @@ func (v *comFabricKeyValueStoreReplica) Enumerate(
 	defer func() {
 		result = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().Enumerate,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(transaction)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(transaction),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4509,15 +4347,13 @@ func (v *comFabricKeyValueStoreReplica) EnumerateByKey(
 	defer func() {
 		result = p_2
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub18(
 		v.vtable().EnumerateByKey,
-		4,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(transaction)),
-		uintptr(unsafe.Pointer(p_1)),
-		uintptr(unsafe.Pointer(&p_2)),
-		0,
-		0,
+		3,
+		unsafe.Pointer(v),
+		unsafe.Pointer(transaction),
+		unsafe.Pointer(p_1),
+		unsafe.Pointer(&p_2),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4532,12 +4368,12 @@ func (v *comFabricKeyValueStoreReplica) EnumerateMetadata(
 	defer func() {
 		result = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().EnumerateMetadata,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(transaction)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(transaction),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4555,15 +4391,13 @@ func (v *comFabricKeyValueStoreReplica) EnumerateMetadataByKey(
 	defer func() {
 		result = p_2
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub18(
 		v.vtable().EnumerateMetadataByKey,
-		4,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(transaction)),
-		uintptr(unsafe.Pointer(p_1)),
-		uintptr(unsafe.Pointer(&p_2)),
-		0,
-		0,
+		3,
+		unsafe.Pointer(v),
+		unsafe.Pointer(transaction),
+		unsafe.Pointer(p_1),
+		unsafe.Pointer(&p_2),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4592,12 +4426,11 @@ func (v *comFabricKeyValueStoreReplica2) Backup(
 ) (err error) {
 	var p_0 *uint16
 	p_0 = utf16PtrFromString(backupDirectory)
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().Backup,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4610,12 +4443,11 @@ func (v *comFabricKeyValueStoreReplica2) Restore(
 ) (err error) {
 	var p_0 *uint16
 	p_0 = utf16PtrFromString(backupDirectory)
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().Restore,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4632,12 +4464,12 @@ func (v *comFabricKeyValueStoreReplica2) CreateTransaction2(
 	defer func() {
 		transaction = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().CreateTransaction2,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4672,15 +4504,15 @@ func (v *comFabricKeyValueStoreReplica3) beginBackup(
 	defer func() {
 		context = p_4
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub51(
 		v.vtable().BeginBackup,
-		6,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(backupOption),
-		uintptr(unsafe.Pointer(postBackupHandler)),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_4)),
+		5,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		backupOption,
+		unsafe.Pointer(postBackupHandler),
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_4),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4691,12 +4523,11 @@ func (v *comFabricKeyValueStoreReplica3) beginBackup(
 func (v *comFabricKeyValueStoreReplica3) endBackup(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().EndBackup,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4729,15 +4560,13 @@ func (v *comFabricKeyValueStoreReplica4) beginRestore(
 	defer func() {
 		context = p_2
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub18(
 		v.vtable().BeginRestore,
-		4,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_2)),
-		0,
-		0,
+		3,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_2),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4748,12 +4577,11 @@ func (v *comFabricKeyValueStoreReplica4) beginRestore(
 func (v *comFabricKeyValueStoreReplica4) endRestore(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().EndRestore,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4793,15 +4621,15 @@ func (v *comFabricKeyValueStoreReplica5) TryAdd(
 	defer func() {
 		added = p_4
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub52(
 		v.vtable().TryAdd,
-		6,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(transaction)),
-		uintptr(unsafe.Pointer(p_1)),
-		uintptr(valueSizeInBytes),
-		uintptr(unsafe.Pointer(value)),
-		uintptr(unsafe.Pointer(&p_4)),
+		5,
+		unsafe.Pointer(v),
+		unsafe.Pointer(transaction),
+		unsafe.Pointer(p_1),
+		valueSizeInBytes,
+		unsafe.Pointer(value),
+		unsafe.Pointer(&p_4),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4820,15 +4648,14 @@ func (v *comFabricKeyValueStoreReplica5) TryRemove(
 	defer func() {
 		exists = p_3
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub53(
 		v.vtable().TryRemove,
-		5,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(transaction)),
-		uintptr(unsafe.Pointer(p_1)),
-		uintptr(checkSequenceNumber),
-		uintptr(unsafe.Pointer(&p_3)),
-		0,
+		4,
+		unsafe.Pointer(v),
+		unsafe.Pointer(transaction),
+		unsafe.Pointer(p_1),
+		checkSequenceNumber,
+		unsafe.Pointer(&p_3),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4849,18 +4676,16 @@ func (v *comFabricKeyValueStoreReplica5) TryUpdate(
 	defer func() {
 		exists = p_5
 	}()
-	hr, _, err1 := syscall.Syscall9(
+	hr, err1 := callStub54(
 		v.vtable().TryUpdate,
-		7,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(transaction)),
-		uintptr(unsafe.Pointer(p_1)),
-		uintptr(valueSizeInBytes),
-		uintptr(unsafe.Pointer(value)),
-		uintptr(checkSequenceNumber),
-		uintptr(unsafe.Pointer(&p_5)),
-		0,
-		0,
+		6,
+		unsafe.Pointer(v),
+		unsafe.Pointer(transaction),
+		unsafe.Pointer(p_1),
+		valueSizeInBytes,
+		unsafe.Pointer(value),
+		checkSequenceNumber,
+		unsafe.Pointer(&p_5),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4878,15 +4703,13 @@ func (v *comFabricKeyValueStoreReplica5) TryGet(
 	defer func() {
 		result = p_2
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub18(
 		v.vtable().TryGet,
-		4,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(transaction)),
-		uintptr(unsafe.Pointer(p_1)),
-		uintptr(unsafe.Pointer(&p_2)),
-		0,
-		0,
+		3,
+		unsafe.Pointer(v),
+		unsafe.Pointer(transaction),
+		unsafe.Pointer(p_1),
+		unsafe.Pointer(&p_2),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4904,15 +4727,13 @@ func (v *comFabricKeyValueStoreReplica5) TryGetMetadata(
 	defer func() {
 		result = p_2
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub18(
 		v.vtable().TryGetMetadata,
-		4,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(transaction)),
-		uintptr(unsafe.Pointer(p_1)),
-		uintptr(unsafe.Pointer(&p_2)),
-		0,
-		0,
+		3,
+		unsafe.Pointer(v),
+		unsafe.Pointer(transaction),
+		unsafe.Pointer(p_1),
+		unsafe.Pointer(&p_2),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4927,23 +4748,18 @@ func (v *comFabricKeyValueStoreReplica5) EnumerateByKey2(
 ) (result *comFabricKeyValueStoreItemEnumerator, err error) {
 	var p_1 *uint16
 	p_1 = utf16PtrFromString(keyPrefix)
-	p_2 := 0
-	if strictPrefix {
-		p_2 = 1
-	}
 	var p_3 *comFabricKeyValueStoreItemEnumerator
 	defer func() {
 		result = p_3
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub55(
 		v.vtable().EnumerateByKey2,
-		5,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(transaction)),
-		uintptr(unsafe.Pointer(p_1)),
-		uintptr(p_2),
-		uintptr(unsafe.Pointer(&p_3)),
-		0,
+		4,
+		unsafe.Pointer(v),
+		unsafe.Pointer(transaction),
+		unsafe.Pointer(p_1),
+		strictPrefix,
+		unsafe.Pointer(&p_3),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4958,23 +4774,18 @@ func (v *comFabricKeyValueStoreReplica5) EnumerateMetadataByKey2(
 ) (result *comFabricKeyValueStoreItemMetadataEnumerator, err error) {
 	var p_1 *uint16
 	p_1 = utf16PtrFromString(keyPrefix)
-	p_2 := 0
-	if strictPrefix {
-		p_2 = 1
-	}
 	var p_3 *comFabricKeyValueStoreItemMetadataEnumerator
 	defer func() {
 		result = p_3
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub55(
 		v.vtable().EnumerateMetadataByKey2,
-		5,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(transaction)),
-		uintptr(unsafe.Pointer(p_1)),
-		uintptr(p_2),
-		uintptr(unsafe.Pointer(&p_3)),
-		0,
+		4,
+		unsafe.Pointer(v),
+		unsafe.Pointer(transaction),
+		unsafe.Pointer(p_1),
+		strictPrefix,
+		unsafe.Pointer(&p_3),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5009,15 +4820,14 @@ func (v *comFabricKeyValueStoreReplica6) beginRestore2(
 	defer func() {
 		context = p_3
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub40(
 		v.vtable().BeginRestore2,
-		5,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(p_1)),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_3)),
-		0,
+		4,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(p_1),
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_3),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5049,12 +4859,12 @@ func (v *comFabricKeyValueStoreEnumerator) EnumerateByKey(
 	defer func() {
 		result = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().EnumerateByKey,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5071,12 +4881,12 @@ func (v *comFabricKeyValueStoreEnumerator) EnumerateMetadataByKey(
 	defer func() {
 		result = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().EnumerateMetadataByKey,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5105,23 +4915,17 @@ func (v *comFabricKeyValueStoreEnumerator2) EnumerateByKey2(
 ) (result *comFabricKeyValueStoreItemEnumerator, err error) {
 	var p_0 *uint16
 	p_0 = utf16PtrFromString(keyPrefix)
-	p_1 := 0
-	if strictPrefix {
-		p_1 = 1
-	}
 	var p_2 *comFabricKeyValueStoreItemEnumerator
 	defer func() {
 		result = p_2
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub56(
 		v.vtable().EnumerateByKey2,
-		4,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(p_1),
-		uintptr(unsafe.Pointer(&p_2)),
-		0,
-		0,
+		3,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		strictPrefix,
+		unsafe.Pointer(&p_2),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5135,23 +4939,17 @@ func (v *comFabricKeyValueStoreEnumerator2) EnumerateMetadataByKey2(
 ) (result *comFabricKeyValueStoreItemMetadataEnumerator, err error) {
 	var p_0 *uint16
 	p_0 = utf16PtrFromString(keyPrefix)
-	p_1 := 0
-	if strictPrefix {
-		p_1 = 1
-	}
 	var p_2 *comFabricKeyValueStoreItemMetadataEnumerator
 	defer func() {
 		result = p_2
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub56(
 		v.vtable().EnumerateMetadataByKey2,
-		4,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(p_1),
-		uintptr(unsafe.Pointer(&p_2)),
-		0,
-		0,
+		3,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		strictPrefix,
+		unsafe.Pointer(&p_2),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5175,12 +4973,10 @@ func (v *comFabricKeyValueStoreItemEnumerator) vtable() *comFabricKeyValueStoreI
 }
 
 func (v *comFabricKeyValueStoreItemEnumerator) MoveNext() (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().MoveNext,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5189,12 +4985,10 @@ func (v *comFabricKeyValueStoreItemEnumerator) MoveNext() (err error) {
 	return
 }
 func (v *comFabricKeyValueStoreItemEnumerator) GetCurrent() (rt *comFabricKeyValueStoreItemResult, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_Current,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -5222,12 +5016,10 @@ func (v *comFabricKeyValueStoreItemMetadataEnumerator) vtable() *comFabricKeyVal
 }
 
 func (v *comFabricKeyValueStoreItemMetadataEnumerator) MoveNext() (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().MoveNext,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5236,12 +5028,10 @@ func (v *comFabricKeyValueStoreItemMetadataEnumerator) MoveNext() (err error) {
 	return
 }
 func (v *comFabricKeyValueStoreItemMetadataEnumerator) GetCurrent() (rt *comFabricKeyValueStoreItemMetadataResult, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_Current,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -5270,12 +5060,10 @@ func (v *comFabricKeyValueStoreNotificationEnumerator) vtable() *comFabricKeyVal
 }
 
 func (v *comFabricKeyValueStoreNotificationEnumerator) MoveNext() (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().MoveNext,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5284,12 +5072,10 @@ func (v *comFabricKeyValueStoreNotificationEnumerator) MoveNext() (err error) {
 	return
 }
 func (v *comFabricKeyValueStoreNotificationEnumerator) GetCurrent() (rt *comFabricKeyValueStoreNotification, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_Current,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -5302,12 +5088,10 @@ func (v *comFabricKeyValueStoreNotificationEnumerator) GetCurrent() (rt *comFabr
 	return
 }
 func (v *comFabricKeyValueStoreNotificationEnumerator) Reset() (rt interface{}, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().Reset,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -5338,12 +5122,11 @@ func (v *comFabricKeyValueStoreItemEnumerator2) TryMoveNext() (success bool, err
 	defer func() {
 		success = p_0
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().TryMoveNext,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5370,12 +5153,11 @@ func (v *comFabricKeyValueStoreItemMetadataEnumerator2) TryMoveNext() (success b
 	defer func() {
 		success = p_0
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().TryMoveNext,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5402,12 +5184,11 @@ func (v *comFabricKeyValueStoreNotificationEnumerator2) TryMoveNext() (success b
 	defer func() {
 		success = p_0
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().TryMoveNext,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5430,12 +5211,10 @@ func (v *comFabricKeyValueStoreItemResult) vtable() *comFabricKeyValueStoreItemR
 }
 
 func (v *comFabricKeyValueStoreItemResult) GetItem() (rt *FabricKeyValueStoreItem, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_Item,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -5462,12 +5241,10 @@ func (v *comFabricKeyValueStoreItemMetadataResult) vtable() *comFabricKeyValueSt
 }
 
 func (v *comFabricKeyValueStoreItemMetadataResult) GetMetadata() (rt *FabricKeyValueStoreItemMetadata, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_Metadata,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -5494,12 +5271,10 @@ func (v *comFabricKeyValueStoreNotification) vtable() *comFabricKeyValueStoreNot
 }
 
 func (v *comFabricKeyValueStoreNotification) IsDelete() (rt bool, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().IsDelete,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	_ = err1
 	rt = hr != 0
@@ -5520,12 +5295,10 @@ func (v *comFabricStoreEventHandler) vtable() *comFabricStoreEventHandlerVtbl {
 }
 
 func (v *comFabricStoreEventHandler) OnDataLoss() (rt interface{}, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().OnDataLoss,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -5559,12 +5332,12 @@ func (v *comFabricStoreEventHandler2) beginOnDataLoss(
 	defer func() {
 		context = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().BeginOnDataLoss,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5579,12 +5352,12 @@ func (v *comFabricStoreEventHandler2) endOnDataLoss(
 	defer func() {
 		isStateChanged = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().EndOnDataLoss,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5617,15 +5390,13 @@ func (v *comFabricStorePostBackupHandler) beginPostBackup(
 	defer func() {
 		context = p_2
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub18(
 		v.vtable().BeginPostBackup,
-		4,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_2)),
-		0,
-		0,
+		3,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_2),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5640,12 +5411,12 @@ func (v *comFabricStorePostBackupHandler) endPostBackup(
 	defer func() {
 		status = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().EndPostBackup,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5671,12 +5442,11 @@ func (v *comFabricSecondaryEventHandler) vtable() *comFabricSecondaryEventHandle
 func (v *comFabricSecondaryEventHandler) OnCopyComplete(
 	enumerator *comFabricKeyValueStoreEnumerator,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().OnCopyComplete,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(enumerator)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(enumerator),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5687,12 +5457,11 @@ func (v *comFabricSecondaryEventHandler) OnCopyComplete(
 func (v *comFabricSecondaryEventHandler) OnReplicationOperation(
 	enumerator *comFabricKeyValueStoreNotificationEnumerator,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().OnReplicationOperation,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(enumerator)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(enumerator),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5715,12 +5484,10 @@ func (v *comFabricNodeContextResult) vtable() *comFabricNodeContextResultVtbl {
 }
 
 func (v *comFabricNodeContextResult) GetNodeContext() (rt *FabricNodeContext, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_NodeContext,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -5755,12 +5522,12 @@ func (v *comFabricNodeContextResult2) GetDirectory(
 	defer func() {
 		directoryPath = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().GetDirectory,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5783,12 +5550,10 @@ func (v *comFabricReplicatorSettingsResult) vtable() *comFabricReplicatorSetting
 }
 
 func (v *comFabricReplicatorSettingsResult) GetReplicatorSettings() (rt *FabricReplicatorSettings, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_ReplicatorSettings,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -5815,12 +5580,10 @@ func (v *comFabricEseLocalStoreSettingsResult) vtable() *comFabricEseLocalStoreS
 }
 
 func (v *comFabricEseLocalStoreSettingsResult) GetSettings() (rt *FabricEseLocalStoreSettings, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_Settings,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -5847,12 +5610,10 @@ func (v *comFabricSecurityCredentialsResult) vtable() *comFabricSecurityCredenti
 }
 
 func (v *comFabricSecurityCredentialsResult) GetSecurityCredentials() (rt *FabricSecurityCredentials, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_SecurityCredentials,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -5937,15 +5698,15 @@ func (v *comFabricCodePackageActivator) beginActivateCodePackage(
 	defer func() {
 		context = p_4
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub10(
 		v.vtable().BeginActivateCodePackage,
-		6,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(unsafe.Pointer(p_1)),
-		uintptr(timeoutMilliseconds),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_4)),
+		5,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		unsafe.Pointer(p_1),
+		timeoutMilliseconds,
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_4),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5956,12 +5717,11 @@ func (v *comFabricCodePackageActivator) beginActivateCodePackage(
 func (v *comFabricCodePackageActivator) endActivateCodePackage(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().EndActivateCodePackage,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5999,15 +5759,14 @@ func (v *comFabricCodePackageActivator) beginDeactivateCodePackage(
 	defer func() {
 		context = p_3
 	}()
-	hr, _, err1 := syscall.Syscall6(
+	hr, err1 := callStub3(
 		v.vtable().BeginDeactivateCodePackage,
-		5,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		uintptr(timeoutMilliseconds),
-		uintptr(unsafe.Pointer(callback)),
-		uintptr(unsafe.Pointer(&p_3)),
-		0,
+		4,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
+		timeoutMilliseconds,
+		unsafe.Pointer(callback),
+		unsafe.Pointer(&p_3),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -6018,12 +5777,11 @@ func (v *comFabricCodePackageActivator) beginDeactivateCodePackage(
 func (v *comFabricCodePackageActivator) endDeactivateCodePackage(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().EndDeactivateCodePackage,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -6055,12 +5813,11 @@ func (v *comFabricCodePackageActivator) AbortCodePackage(
 
 	}
 	p_0 = lst_4
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().AbortCodePackage,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -6075,12 +5832,12 @@ func (v *comFabricCodePackageActivator) RegisterCodePackageEventHandler(
 	defer func() {
 		callbackHandle = p_1
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().RegisterCodePackageEventHandler,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(eventHandler)),
-		uintptr(unsafe.Pointer(&p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(eventHandler),
+		unsafe.Pointer(&p_1),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -6091,12 +5848,11 @@ func (v *comFabricCodePackageActivator) RegisterCodePackageEventHandler(
 func (v *comFabricCodePackageActivator) UnregisterCodePackageEventHandler(
 	callbackHandle uint64,
 ) (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub57(
 		v.vtable().UnregisterCodePackageEventHandler,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(callbackHandle),
-		0,
+		1,
+		unsafe.Pointer(v),
+		callbackHandle,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -6124,12 +5880,12 @@ func (v *comFabricCodePackageEventHandler) OnCodePackageEvent(
 ) (rt interface{}, err error) {
 	var p_1 *innerFabricCodePackageEventDescription
 	p_1 = eventDesc.toInnerStruct()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub4(
 		v.vtable().OnCodePackageEvent,
-		3,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(source)),
-		uintptr(unsafe.Pointer(p_1)),
+		2,
+		unsafe.Pointer(v),
+		unsafe.Pointer(source),
+		unsafe.Pointer(p_1),
 	)
 	if hr == 0 {
 		err = err1

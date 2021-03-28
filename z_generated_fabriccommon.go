@@ -5,7 +5,6 @@ import (
 	"context"
 	"github.com/go-ole/go-ole"
 	"sync"
-	"syscall"
 	"unsafe"
 )
 
@@ -21,7 +20,8 @@ func newComFabricAsyncOperationCallback(
 	*(**comFabricAsyncOperationCallbackVtbl)(unsafe.Pointer(com)) = &comFabricAsyncOperationCallbackVtbl{}
 	vtbl := com.vtable()
 	com.proxy.unknownref = attachIUnknown("{86F08D7E-14DD-4575-8489-B1D5D679029C}", &vtbl.IUnknownVtbl)
-	vtbl.Invoke = syscall.NewCallback(com.proxy.Invoke)
+
+	vtbl.Invoke = createCallbackStub29(com.proxy.Invoke)
 
 	com.proxy.callback = callback
 
@@ -53,12 +53,11 @@ func (v *comFabricAsyncOperationCallback) vtable() *comFabricAsyncOperationCallb
 func (v *comFabricAsyncOperationCallback) Invoke(
 	context *comFabricAsyncOperationContext,
 ) (rt interface{}, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().Invoke,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(context)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(context),
 	)
 	if hr == 0 {
 		err = err1
@@ -91,10 +90,11 @@ func newComFabricAsyncOperationContext(
 	*(**comFabricAsyncOperationContextVtbl)(unsafe.Pointer(com)) = &comFabricAsyncOperationContextVtbl{}
 	vtbl := com.vtable()
 	com.proxy.unknownref = attachIUnknown("{841720BF-C9E8-4E6F-9C3F-6B7F4AC73BCD}", &vtbl.IUnknownVtbl)
-	vtbl.IsCompleted = syscall.NewCallback(com.proxy.IsCompleted)
-	vtbl.CompletedSynchronously = syscall.NewCallback(com.proxy.CompletedSynchronously)
-	vtbl.get_Callback = syscall.NewCallback(com.proxy.GetCallback)
-	vtbl.Cancel = syscall.NewCallback(com.proxy.Cancel)
+
+	vtbl.IsCompleted = createCallbackStub35(com.proxy.IsCompleted)
+	vtbl.CompletedSynchronously = createCallbackStub35(com.proxy.CompletedSynchronously)
+	vtbl.get_Callback = createCallbackStub29(com.proxy.GetCallback)
+	vtbl.Cancel = createCallbackStub35(com.proxy.Cancel)
 
 	com.proxy.nativeCallback = nativeCallback
 
@@ -139,24 +139,20 @@ func (v *comFabricAsyncOperationContext) vtable() *comFabricAsyncOperationContex
 }
 
 func (v *comFabricAsyncOperationContext) IsCompleted() (rt bool, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().IsCompleted,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	_ = err1
 	rt = hr != 0
 	return
 }
 func (v *comFabricAsyncOperationContext) CompletedSynchronously() (rt bool, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().CompletedSynchronously,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	_ = err1
 	rt = hr != 0
@@ -167,12 +163,11 @@ func (v *comFabricAsyncOperationContext) GetCallback() (callback *comFabricAsync
 	defer func() {
 		callback = p_0
 	}()
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub1(
 		v.vtable().get_Callback,
-		2,
-		uintptr(unsafe.Pointer(v)),
-		uintptr(unsafe.Pointer(&p_0)),
-		0,
+		1,
+		unsafe.Pointer(v),
+		unsafe.Pointer(&p_0),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -181,12 +176,10 @@ func (v *comFabricAsyncOperationContext) GetCallback() (callback *comFabricAsync
 	return
 }
 func (v *comFabricAsyncOperationContext) Cancel() (err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().Cancel,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -207,7 +200,8 @@ func newComFabricStringResult(
 	*(**comFabricStringResultVtbl)(unsafe.Pointer(com)) = &comFabricStringResultVtbl{}
 	vtbl := com.vtable()
 	com.proxy.unknownref = attachIUnknown("{4AE69614-7D0F-4CD4-B836-23017000D132}", &vtbl.IUnknownVtbl)
-	vtbl.get_String = syscall.NewCallback(com.proxy.GetString)
+
+	vtbl.get_String = createCallbackStub35(com.proxy.GetString)
 
 	com.proxy.result = result
 
@@ -236,12 +230,10 @@ func (v *comFabricStringResult) vtable() *comFabricStringResultVtbl {
 }
 
 func (v *comFabricStringResult) GetString() (rt string, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_String,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
@@ -281,12 +273,10 @@ func (v *comFabricGetReplicatorStatusResult) vtable() *comFabricGetReplicatorSta
 }
 
 func (v *comFabricGetReplicatorStatusResult) GetReplicatorStatus() (rt *FabricReplicatorStatusQueryResult, err error) {
-	hr, _, err1 := syscall.Syscall(
+	hr, err1 := callStub26(
 		v.vtable().get_ReplicatorStatus,
-		1,
-		uintptr(unsafe.Pointer(v)),
 		0,
-		0,
+		unsafe.Pointer(v),
 	)
 	if hr == 0 {
 		err = err1
