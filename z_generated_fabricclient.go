@@ -6375,7 +6375,7 @@ func (v *comFabricClientSettings) SetSecurityCredentials(
 ) (err error) {
 	var p_0 *innerFabricSecurityCredentials
 	p_0 = securityCredentials.toInnerStruct()
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().SetSecurityCredentials,
 		1,
 		unsafe.Pointer(v),
@@ -6390,7 +6390,7 @@ func (v *comFabricClientSettings) SetSecurityCredentials(
 func (v *comFabricClientSettings) SetKeepAlive(
 	keepAliveIntervalInSeconds uint32,
 ) (err error) {
-	hr, err1 := callStub15718182357955102547(
+	hr, err1 := callStub142410278(
 		v.vtable().SetKeepAlive,
 		1,
 		unsafe.Pointer(v),
@@ -6422,7 +6422,7 @@ func (v *comFabricClientSettings2) GetSettings() (result *comFabricClientSetting
 	defer func() {
 		result = p_0
 	}()
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().GetSettings,
 		1,
 		unsafe.Pointer(v),
@@ -6439,7 +6439,7 @@ func (v *comFabricClientSettings2) SetSettings(
 ) (err error) {
 	var p_0 *innerFabricClientSettings
 	p_0 = fabricClientSettings.toInnerStruct()
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().SetSettings,
 		1,
 		unsafe.Pointer(v),
@@ -6503,7 +6503,7 @@ func (v *comFabricPropertyManagementClient) beginCreateName(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginCreateName,
 		4,
 		unsafe.Pointer(v),
@@ -6521,7 +6521,7 @@ func (v *comFabricPropertyManagementClient) beginCreateName(
 func (v *comFabricPropertyManagementClient) endCreateName(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndCreateName,
 		1,
 		unsafe.Pointer(v),
@@ -6544,7 +6544,7 @@ func (v *comFabricPropertyManagementClient) beginDeleteName(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginDeleteName,
 		4,
 		unsafe.Pointer(v),
@@ -6562,7 +6562,7 @@ func (v *comFabricPropertyManagementClient) beginDeleteName(
 func (v *comFabricPropertyManagementClient) endDeleteName(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndDeleteName,
 		1,
 		unsafe.Pointer(v),
@@ -6585,7 +6585,7 @@ func (v *comFabricPropertyManagementClient) beginNameExists(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginNameExists,
 		4,
 		unsafe.Pointer(v),
@@ -6607,7 +6607,7 @@ func (v *comFabricPropertyManagementClient) endNameExists(
 	defer func() {
 		value = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndNameExists,
 		2,
 		unsafe.Pointer(v),
@@ -6633,7 +6633,7 @@ func (v *comFabricPropertyManagementClient) beginEnumerateSubNames(
 	defer func() {
 		context = p_5
 	}()
-	hr, err1 := callStub5955222752708360228(
+	hr, err1 := callStub3415612146(
 		v.vtable().BeginEnumerateSubNames,
 		6,
 		unsafe.Pointer(v),
@@ -6666,7 +6666,7 @@ func (v *comFabricPropertyManagementClient) beginPutPropertyBinary(
 	defer func() {
 		context = p_6
 	}()
-	hr, err1 := callStub10058214422621334751(
+	hr, err1 := callStub3312394536(
 		v.vtable().BeginPutPropertyBinary,
 		7,
 		unsafe.Pointer(v),
@@ -6687,7 +6687,7 @@ func (v *comFabricPropertyManagementClient) beginPutPropertyBinary(
 func (v *comFabricPropertyManagementClient) endPutPropertyBinary(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndPutPropertyBinary,
 		1,
 		unsafe.Pointer(v),
@@ -6714,7 +6714,7 @@ func (v *comFabricPropertyManagementClient) beginPutPropertyInt64(
 	defer func() {
 		context = p_5
 	}()
-	hr, err1 := callStub1630288334828793287(
+	hr, err1 := callStub3657439995(
 		v.vtable().BeginPutPropertyInt64,
 		6,
 		unsafe.Pointer(v),
@@ -6734,7 +6734,7 @@ func (v *comFabricPropertyManagementClient) beginPutPropertyInt64(
 func (v *comFabricPropertyManagementClient) endPutPropertyInt64(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndPutPropertyInt64,
 		1,
 		unsafe.Pointer(v),
@@ -6761,7 +6761,7 @@ func (v *comFabricPropertyManagementClient) beginPutPropertyDouble(
 	defer func() {
 		context = p_5
 	}()
-	hr, err1 := callStub12664629900598883453(
+	hr, err1 := callStub328735686(
 		v.vtable().BeginPutPropertyDouble,
 		6,
 		unsafe.Pointer(v),
@@ -6781,7 +6781,7 @@ func (v *comFabricPropertyManagementClient) beginPutPropertyDouble(
 func (v *comFabricPropertyManagementClient) endPutPropertyDouble(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndPutPropertyDouble,
 		1,
 		unsafe.Pointer(v),
@@ -6810,7 +6810,7 @@ func (v *comFabricPropertyManagementClient) beginPutPropertyWString(
 	defer func() {
 		context = p_5
 	}()
-	hr, err1 := callStub9660077576991986601(
+	hr, err1 := callStub4095221463(
 		v.vtable().BeginPutPropertyWString,
 		6,
 		unsafe.Pointer(v),
@@ -6830,7 +6830,7 @@ func (v *comFabricPropertyManagementClient) beginPutPropertyWString(
 func (v *comFabricPropertyManagementClient) endPutPropertyWString(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndPutPropertyWString,
 		1,
 		unsafe.Pointer(v),
@@ -6857,7 +6857,7 @@ func (v *comFabricPropertyManagementClient) beginPutPropertyGuid(
 	defer func() {
 		context = p_5
 	}()
-	hr, err1 := callStub9660077576991986601(
+	hr, err1 := callStub4095221463(
 		v.vtable().BeginPutPropertyGuid,
 		6,
 		unsafe.Pointer(v),
@@ -6877,7 +6877,7 @@ func (v *comFabricPropertyManagementClient) beginPutPropertyGuid(
 func (v *comFabricPropertyManagementClient) endPutPropertyGuid(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndPutPropertyGuid,
 		1,
 		unsafe.Pointer(v),
@@ -6903,7 +6903,7 @@ func (v *comFabricPropertyManagementClient) beginDeleteProperty(
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub15738012513523528246(
+	hr, err1 := callStub1238898970(
 		v.vtable().BeginDeleteProperty,
 		5,
 		unsafe.Pointer(v),
@@ -6922,7 +6922,7 @@ func (v *comFabricPropertyManagementClient) beginDeleteProperty(
 func (v *comFabricPropertyManagementClient) endDeleteProperty(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndDeleteProperty,
 		1,
 		unsafe.Pointer(v),
@@ -6948,7 +6948,7 @@ func (v *comFabricPropertyManagementClient) beginGetPropertyMetadata(
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub15738012513523528246(
+	hr, err1 := callStub1238898970(
 		v.vtable().BeginGetPropertyMetadata,
 		5,
 		unsafe.Pointer(v),
@@ -6971,7 +6971,7 @@ func (v *comFabricPropertyManagementClient) endGetPropertyMetadata(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetPropertyMetadata,
 		2,
 		unsafe.Pointer(v),
@@ -6998,7 +6998,7 @@ func (v *comFabricPropertyManagementClient) beginGetProperty(
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub15738012513523528246(
+	hr, err1 := callStub1238898970(
 		v.vtable().BeginGetProperty,
 		5,
 		unsafe.Pointer(v),
@@ -7029,7 +7029,7 @@ func (v *comFabricPropertyManagementClient) beginSubmitPropertyBatch(
 	defer func() {
 		context = p_5
 	}()
-	hr, err1 := callStub9429292076469177682(
+	hr, err1 := callStub4076149611(
 		v.vtable().BeginSubmitPropertyBatch,
 		6,
 		unsafe.Pointer(v),
@@ -7059,7 +7059,7 @@ func (v *comFabricPropertyManagementClient) beginEnumerateProperties(
 	defer func() {
 		context = p_5
 	}()
-	hr, err1 := callStub17320848538307195614(
+	hr, err1 := callStub3398245106(
 		v.vtable().BeginEnumerateProperties,
 		6,
 		unsafe.Pointer(v),
@@ -7105,7 +7105,7 @@ func (v *comFabricPropertyManagementClient2) beginPutCustomPropertyOperation(
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub15738012513523528246(
+	hr, err1 := callStub1238898970(
 		v.vtable().BeginPutCustomPropertyOperation,
 		5,
 		unsafe.Pointer(v),
@@ -7124,7 +7124,7 @@ func (v *comFabricPropertyManagementClient2) beginPutCustomPropertyOperation(
 func (v *comFabricPropertyManagementClient2) endPutCustomPropertyOperation(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndPutCustomPropertyOperation,
 		1,
 		unsafe.Pointer(v),
@@ -7172,7 +7172,7 @@ func (v *comFabricServiceManagementClient) beginCreateService(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginCreateService,
 		4,
 		unsafe.Pointer(v),
@@ -7190,7 +7190,7 @@ func (v *comFabricServiceManagementClient) beginCreateService(
 func (v *comFabricServiceManagementClient) endCreateService(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndCreateService,
 		1,
 		unsafe.Pointer(v),
@@ -7221,7 +7221,7 @@ func (v *comFabricServiceManagementClient) beginCreateServiceFromTemplate(
 	defer func() {
 		context = p_7
 	}()
-	hr, err1 := callStub14727739111527231414(
+	hr, err1 := callStub3992725221(
 		v.vtable().BeginCreateServiceFromTemplate,
 		8,
 		unsafe.Pointer(v),
@@ -7243,7 +7243,7 @@ func (v *comFabricServiceManagementClient) beginCreateServiceFromTemplate(
 func (v *comFabricServiceManagementClient) endCreateServiceFromTemplate(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndCreateServiceFromTemplate,
 		1,
 		unsafe.Pointer(v),
@@ -7266,7 +7266,7 @@ func (v *comFabricServiceManagementClient) beginDeleteService(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginDeleteService,
 		4,
 		unsafe.Pointer(v),
@@ -7284,7 +7284,7 @@ func (v *comFabricServiceManagementClient) beginDeleteService(
 func (v *comFabricServiceManagementClient) endDeleteService(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndDeleteService,
 		1,
 		unsafe.Pointer(v),
@@ -7307,7 +7307,7 @@ func (v *comFabricServiceManagementClient) beginGetServiceDescription(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetServiceDescription,
 		4,
 		unsafe.Pointer(v),
@@ -7329,7 +7329,7 @@ func (v *comFabricServiceManagementClient) endGetServiceDescription(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetServiceDescription,
 		2,
 		unsafe.Pointer(v),
@@ -7354,7 +7354,7 @@ func (v *comFabricServiceManagementClient) RegisterServicePartitionResolutionCha
 	defer func() {
 		callbackHandle = p_4
 	}()
-	hr, err1 := callStub7503403356184589199(
+	hr, err1 := callStub642392001(
 		v.vtable().RegisterServicePartitionResolutionChangeHandler,
 		5,
 		unsafe.Pointer(v),
@@ -7373,7 +7373,7 @@ func (v *comFabricServiceManagementClient) RegisterServicePartitionResolutionCha
 func (v *comFabricServiceManagementClient) UnregisterServicePartitionResolutionChangeHandler(
 	callbackHandle int64,
 ) (err error) {
-	hr, err1 := callStub9532067423886724566(
+	hr, err1 := callStub96862646(
 		v.vtable().UnregisterServicePartitionResolutionChangeHandler,
 		1,
 		unsafe.Pointer(v),
@@ -7399,7 +7399,7 @@ func (v *comFabricServiceManagementClient) beginResolveServicePartition(
 	defer func() {
 		context = p_6
 	}()
-	hr, err1 := callStub15487510995445485658(
+	hr, err1 := callStub877275087(
 		v.vtable().BeginResolveServicePartition,
 		7,
 		unsafe.Pointer(v),
@@ -7451,7 +7451,7 @@ func (v *comFabricServiceManagementClient2) beginGetServiceManifest(
 	defer func() {
 		context = p_5
 	}()
-	hr, err1 := callStub9660077576991986601(
+	hr, err1 := callStub4095221463(
 		v.vtable().BeginGetServiceManifest,
 		6,
 		unsafe.Pointer(v),
@@ -7475,7 +7475,7 @@ func (v *comFabricServiceManagementClient2) endGetServiceManifest(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetServiceManifest,
 		2,
 		unsafe.Pointer(v),
@@ -7502,7 +7502,7 @@ func (v *comFabricServiceManagementClient2) beginUpdateService(
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub15738012513523528246(
+	hr, err1 := callStub1238898970(
 		v.vtable().BeginUpdateService,
 		5,
 		unsafe.Pointer(v),
@@ -7521,7 +7521,7 @@ func (v *comFabricServiceManagementClient2) beginUpdateService(
 func (v *comFabricServiceManagementClient2) endUpdateService(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndUpdateService,
 		1,
 		unsafe.Pointer(v),
@@ -7561,7 +7561,7 @@ func (v *comFabricServiceManagementClient3) beginRemoveReplica(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginRemoveReplica,
 		4,
 		unsafe.Pointer(v),
@@ -7579,7 +7579,7 @@ func (v *comFabricServiceManagementClient3) beginRemoveReplica(
 func (v *comFabricServiceManagementClient3) endRemoveReplica(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndRemoveReplica,
 		1,
 		unsafe.Pointer(v),
@@ -7602,7 +7602,7 @@ func (v *comFabricServiceManagementClient3) beginRestartReplica(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginRestartReplica,
 		4,
 		unsafe.Pointer(v),
@@ -7620,7 +7620,7 @@ func (v *comFabricServiceManagementClient3) beginRestartReplica(
 func (v *comFabricServiceManagementClient3) endRestartReplica(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndRestartReplica,
 		1,
 		unsafe.Pointer(v),
@@ -7660,7 +7660,7 @@ func (v *comFabricServiceManagementClient4) beginRegisterServiceNotificationFilt
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginRegisterServiceNotificationFilter,
 		4,
 		unsafe.Pointer(v),
@@ -7682,7 +7682,7 @@ func (v *comFabricServiceManagementClient4) endRegisterServiceNotificationFilter
 	defer func() {
 		filterId = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndRegisterServiceNotificationFilter,
 		2,
 		unsafe.Pointer(v),
@@ -7704,7 +7704,7 @@ func (v *comFabricServiceManagementClient4) beginUnregisterServiceNotificationFi
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7287933853701551490(
+	hr, err1 := callStub1121783681(
 		v.vtable().BeginUnregisterServiceNotificationFilter,
 		4,
 		unsafe.Pointer(v),
@@ -7722,7 +7722,7 @@ func (v *comFabricServiceManagementClient4) beginUnregisterServiceNotificationFi
 func (v *comFabricServiceManagementClient4) endUnregisterServiceNotificationFilter(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndUnregisterServiceNotificationFilter,
 		1,
 		unsafe.Pointer(v),
@@ -7760,7 +7760,7 @@ func (v *comFabricServiceManagementClient5) beginDeleteService2(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginDeleteService2,
 		4,
 		unsafe.Pointer(v),
@@ -7778,7 +7778,7 @@ func (v *comFabricServiceManagementClient5) beginDeleteService2(
 func (v *comFabricServiceManagementClient5) endDeleteService2(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndDeleteService2,
 		1,
 		unsafe.Pointer(v),
@@ -7816,7 +7816,7 @@ func (v *comFabricServiceManagementClient6) beginCreateServiceFromTemplate2(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginCreateServiceFromTemplate2,
 		4,
 		unsafe.Pointer(v),
@@ -7834,7 +7834,7 @@ func (v *comFabricServiceManagementClient6) beginCreateServiceFromTemplate2(
 func (v *comFabricServiceManagementClient6) endCreateServiceFromTemplate2(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndCreateServiceFromTemplate2,
 		1,
 		unsafe.Pointer(v),
@@ -7876,7 +7876,7 @@ func (v *comFabricServiceGroupManagementClient) beginCreateServiceGroup(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginCreateServiceGroup,
 		4,
 		unsafe.Pointer(v),
@@ -7894,7 +7894,7 @@ func (v *comFabricServiceGroupManagementClient) beginCreateServiceGroup(
 func (v *comFabricServiceGroupManagementClient) endCreateServiceGroup(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndCreateServiceGroup,
 		1,
 		unsafe.Pointer(v),
@@ -7917,7 +7917,7 @@ func (v *comFabricServiceGroupManagementClient) beginDeleteServiceGroup(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginDeleteServiceGroup,
 		4,
 		unsafe.Pointer(v),
@@ -7935,7 +7935,7 @@ func (v *comFabricServiceGroupManagementClient) beginDeleteServiceGroup(
 func (v *comFabricServiceGroupManagementClient) endDeleteServiceGroup(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndDeleteServiceGroup,
 		1,
 		unsafe.Pointer(v),
@@ -7958,7 +7958,7 @@ func (v *comFabricServiceGroupManagementClient) beginGetServiceGroupDescription(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetServiceGroupDescription,
 		4,
 		unsafe.Pointer(v),
@@ -7980,7 +7980,7 @@ func (v *comFabricServiceGroupManagementClient) endGetServiceGroupDescription(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetServiceGroupDescription,
 		2,
 		unsafe.Pointer(v),
@@ -8022,7 +8022,7 @@ func (v *comFabricServiceGroupManagementClient2) beginUpdateServiceGroup(
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub15738012513523528246(
+	hr, err1 := callStub1238898970(
 		v.vtable().BeginUpdateServiceGroup,
 		5,
 		unsafe.Pointer(v),
@@ -8041,7 +8041,7 @@ func (v *comFabricServiceGroupManagementClient2) beginUpdateServiceGroup(
 func (v *comFabricServiceGroupManagementClient2) endUpdateServiceGroup(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndUpdateServiceGroup,
 		1,
 		unsafe.Pointer(v),
@@ -8087,7 +8087,7 @@ func (v *comFabricServiceGroupManagementClient3) beginCreateServiceGroupFromTemp
 	defer func() {
 		context = p_7
 	}()
-	hr, err1 := callStub14727739111527231414(
+	hr, err1 := callStub3992725221(
 		v.vtable().BeginCreateServiceGroupFromTemplate,
 		8,
 		unsafe.Pointer(v),
@@ -8109,7 +8109,7 @@ func (v *comFabricServiceGroupManagementClient3) beginCreateServiceGroupFromTemp
 func (v *comFabricServiceGroupManagementClient3) endCreateServiceGroupFromTemplate(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndCreateServiceGroupFromTemplate,
 		1,
 		unsafe.Pointer(v),
@@ -8147,7 +8147,7 @@ func (v *comFabricServiceGroupManagementClient4) beginCreateServiceGroupFromTemp
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginCreateServiceGroupFromTemplate2,
 		4,
 		unsafe.Pointer(v),
@@ -8165,7 +8165,7 @@ func (v *comFabricServiceGroupManagementClient4) beginCreateServiceGroupFromTemp
 func (v *comFabricServiceGroupManagementClient4) endCreateServiceGroupFromTemplate2(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndCreateServiceGroupFromTemplate2,
 		1,
 		unsafe.Pointer(v),
@@ -8215,7 +8215,7 @@ func (v *comFabricApplicationManagementClient) beginProvisionApplicationType(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginProvisionApplicationType,
 		4,
 		unsafe.Pointer(v),
@@ -8233,7 +8233,7 @@ func (v *comFabricApplicationManagementClient) beginProvisionApplicationType(
 func (v *comFabricApplicationManagementClient) endProvisionApplicationType(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndProvisionApplicationType,
 		1,
 		unsafe.Pointer(v),
@@ -8256,7 +8256,7 @@ func (v *comFabricApplicationManagementClient) beginCreateApplication(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginCreateApplication,
 		4,
 		unsafe.Pointer(v),
@@ -8274,7 +8274,7 @@ func (v *comFabricApplicationManagementClient) beginCreateApplication(
 func (v *comFabricApplicationManagementClient) endCreateApplication(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndCreateApplication,
 		1,
 		unsafe.Pointer(v),
@@ -8297,7 +8297,7 @@ func (v *comFabricApplicationManagementClient) beginUpgradeApplication(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginUpgradeApplication,
 		4,
 		unsafe.Pointer(v),
@@ -8315,7 +8315,7 @@ func (v *comFabricApplicationManagementClient) beginUpgradeApplication(
 func (v *comFabricApplicationManagementClient) endUpgradeApplication(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndUpgradeApplication,
 		1,
 		unsafe.Pointer(v),
@@ -8338,7 +8338,7 @@ func (v *comFabricApplicationManagementClient) beginGetApplicationUpgradeProgres
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetApplicationUpgradeProgress,
 		4,
 		unsafe.Pointer(v),
@@ -8360,7 +8360,7 @@ func (v *comFabricApplicationManagementClient) endGetApplicationUpgradeProgress(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetApplicationUpgradeProgress,
 		2,
 		unsafe.Pointer(v),
@@ -8382,7 +8382,7 @@ func (v *comFabricApplicationManagementClient) beginMoveNextApplicationUpgradeDo
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginMoveNextApplicationUpgradeDomain,
 		4,
 		unsafe.Pointer(v),
@@ -8400,7 +8400,7 @@ func (v *comFabricApplicationManagementClient) beginMoveNextApplicationUpgradeDo
 func (v *comFabricApplicationManagementClient) endMoveNextApplicationUpgradeDomain(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndMoveNextApplicationUpgradeDomain,
 		1,
 		unsafe.Pointer(v),
@@ -8423,7 +8423,7 @@ func (v *comFabricApplicationManagementClient) beginDeleteApplication(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginDeleteApplication,
 		4,
 		unsafe.Pointer(v),
@@ -8441,7 +8441,7 @@ func (v *comFabricApplicationManagementClient) beginDeleteApplication(
 func (v *comFabricApplicationManagementClient) endDeleteApplication(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndDeleteApplication,
 		1,
 		unsafe.Pointer(v),
@@ -8467,7 +8467,7 @@ func (v *comFabricApplicationManagementClient) beginUnprovisionApplicationType(
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub15738012513523528246(
+	hr, err1 := callStub1238898970(
 		v.vtable().BeginUnprovisionApplicationType,
 		5,
 		unsafe.Pointer(v),
@@ -8486,7 +8486,7 @@ func (v *comFabricApplicationManagementClient) beginUnprovisionApplicationType(
 func (v *comFabricApplicationManagementClient) endUnprovisionApplicationType(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndUnprovisionApplicationType,
 		1,
 		unsafe.Pointer(v),
@@ -8529,7 +8529,7 @@ func (v *comFabricApplicationManagementClient2) beginGetApplicationManifest(
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub15738012513523528246(
+	hr, err1 := callStub1238898970(
 		v.vtable().BeginGetApplicationManifest,
 		5,
 		unsafe.Pointer(v),
@@ -8552,7 +8552,7 @@ func (v *comFabricApplicationManagementClient2) endGetApplicationManifest(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetApplicationManifest,
 		2,
 		unsafe.Pointer(v),
@@ -8579,7 +8579,7 @@ func (v *comFabricApplicationManagementClient2) beginMoveNextApplicationUpgradeD
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub15738012513523528246(
+	hr, err1 := callStub1238898970(
 		v.vtable().BeginMoveNextApplicationUpgradeDomain2,
 		5,
 		unsafe.Pointer(v),
@@ -8598,7 +8598,7 @@ func (v *comFabricApplicationManagementClient2) beginMoveNextApplicationUpgradeD
 func (v *comFabricApplicationManagementClient2) endMoveNextApplicationUpgradeDomain2(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndMoveNextApplicationUpgradeDomain2,
 		1,
 		unsafe.Pointer(v),
@@ -8640,7 +8640,7 @@ func (v *comFabricApplicationManagementClient3) beginUpdateApplicationUpgrade(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginUpdateApplicationUpgrade,
 		4,
 		unsafe.Pointer(v),
@@ -8658,7 +8658,7 @@ func (v *comFabricApplicationManagementClient3) beginUpdateApplicationUpgrade(
 func (v *comFabricApplicationManagementClient3) endUpdateApplicationUpgrade(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndUpdateApplicationUpgrade,
 		1,
 		unsafe.Pointer(v),
@@ -8681,7 +8681,7 @@ func (v *comFabricApplicationManagementClient3) beginRestartDeployedCodePackage(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginRestartDeployedCodePackage,
 		4,
 		unsafe.Pointer(v),
@@ -8699,7 +8699,7 @@ func (v *comFabricApplicationManagementClient3) beginRestartDeployedCodePackage(
 func (v *comFabricApplicationManagementClient3) endRestartDeployedCodePackage(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndRestartDeployedCodePackage,
 		1,
 		unsafe.Pointer(v),
@@ -8722,7 +8722,7 @@ func (v *comFabricApplicationManagementClient3) CopyApplicationPackage(
 	p_1 = utf16PtrFromString(applicationPackagePath)
 	var p_2 *uint16
 	p_2 = utf16PtrFromString(applicationPackagePathInImageStore)
-	hr, err1 := callStub8271036529602806980(
+	hr, err1 := callStub2138378508(
 		v.vtable().CopyApplicationPackage,
 		3,
 		unsafe.Pointer(v),
@@ -8744,7 +8744,7 @@ func (v *comFabricApplicationManagementClient3) RemoveApplicationPackage(
 	p_0 = utf16PtrFromString(imageStoreConnectionString)
 	var p_1 *uint16
 	p_1 = utf16PtrFromString(applicationPackagePathInImageStore)
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().RemoveApplicationPackage,
 		2,
 		unsafe.Pointer(v),
@@ -8814,7 +8814,7 @@ func (v *comFabricApplicationManagementClient4) beginDeployServicePackageToNode(
 	defer func() {
 		context = p_7
 	}()
-	hr, err1 := callStub17244673165462293359(
+	hr, err1 := callStub1258170961(
 		v.vtable().BeginDeployServicePackageToNode,
 		8,
 		unsafe.Pointer(v),
@@ -8836,7 +8836,7 @@ func (v *comFabricApplicationManagementClient4) beginDeployServicePackageToNode(
 func (v *comFabricApplicationManagementClient4) endDeployServicePackageToNode(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndDeployServicePackageToNode,
 		1,
 		unsafe.Pointer(v),
@@ -8874,7 +8874,7 @@ func (v *comFabricApplicationManagementClient5) beginRollbackApplicationUpgrade(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginRollbackApplicationUpgrade,
 		4,
 		unsafe.Pointer(v),
@@ -8892,7 +8892,7 @@ func (v *comFabricApplicationManagementClient5) beginRollbackApplicationUpgrade(
 func (v *comFabricApplicationManagementClient5) endRollbackApplicationUpgrade(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndRollbackApplicationUpgrade,
 		1,
 		unsafe.Pointer(v),
@@ -8930,7 +8930,7 @@ func (v *comFabricApplicationManagementClient6) beginUpdateApplication(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginUpdateApplication,
 		4,
 		unsafe.Pointer(v),
@@ -8948,7 +8948,7 @@ func (v *comFabricApplicationManagementClient6) beginUpdateApplication(
 func (v *comFabricApplicationManagementClient6) endUpdateApplication(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndUpdateApplication,
 		1,
 		unsafe.Pointer(v),
@@ -8986,7 +8986,7 @@ func (v *comFabricApplicationManagementClient7) beginDeleteApplication2(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginDeleteApplication2,
 		4,
 		unsafe.Pointer(v),
@@ -9004,7 +9004,7 @@ func (v *comFabricApplicationManagementClient7) beginDeleteApplication2(
 func (v *comFabricApplicationManagementClient7) endDeleteApplication2(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndDeleteApplication2,
 		1,
 		unsafe.Pointer(v),
@@ -9042,7 +9042,7 @@ func (v *comFabricApplicationManagementClient8) beginProvisionApplicationType2(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginProvisionApplicationType2,
 		4,
 		unsafe.Pointer(v),
@@ -9060,7 +9060,7 @@ func (v *comFabricApplicationManagementClient8) beginProvisionApplicationType2(
 func (v *comFabricApplicationManagementClient8) endProvisionApplicationType2(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndProvisionApplicationType2,
 		1,
 		unsafe.Pointer(v),
@@ -9098,7 +9098,7 @@ func (v *comFabricApplicationManagementClient9) beginUnprovisionApplicationType2
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginUnprovisionApplicationType2,
 		4,
 		unsafe.Pointer(v),
@@ -9116,7 +9116,7 @@ func (v *comFabricApplicationManagementClient9) beginUnprovisionApplicationType2
 func (v *comFabricApplicationManagementClient9) endUnprovisionApplicationType2(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndUnprovisionApplicationType2,
 		1,
 		unsafe.Pointer(v),
@@ -9154,7 +9154,7 @@ func (v *comFabricApplicationManagementClient10) beginProvisionApplicationType3(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginProvisionApplicationType3,
 		4,
 		unsafe.Pointer(v),
@@ -9172,7 +9172,7 @@ func (v *comFabricApplicationManagementClient10) beginProvisionApplicationType3(
 func (v *comFabricApplicationManagementClient10) endProvisionApplicationType3(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndProvisionApplicationType3,
 		1,
 		unsafe.Pointer(v),
@@ -9212,7 +9212,7 @@ func (v *comFabricClusterManagementClient) beginNodeStateRemoved(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginNodeStateRemoved,
 		4,
 		unsafe.Pointer(v),
@@ -9230,7 +9230,7 @@ func (v *comFabricClusterManagementClient) beginNodeStateRemoved(
 func (v *comFabricClusterManagementClient) endNodeStateRemoved(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndNodeStateRemoved,
 		1,
 		unsafe.Pointer(v),
@@ -9250,7 +9250,7 @@ func (v *comFabricClusterManagementClient) beginRecoverPartitions(
 	defer func() {
 		context = p_2
 	}()
-	hr, err1 := callStub1048489181713478054(
+	hr, err1 := callStub4152495520(
 		v.vtable().BeginRecoverPartitions,
 		3,
 		unsafe.Pointer(v),
@@ -9267,7 +9267,7 @@ func (v *comFabricClusterManagementClient) beginRecoverPartitions(
 func (v *comFabricClusterManagementClient) endRecoverPartitions(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndRecoverPartitions,
 		1,
 		unsafe.Pointer(v),
@@ -9328,7 +9328,7 @@ func (v *comFabricClusterManagementClient2) beginDeactivateNode(
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub17177410701984374373(
+	hr, err1 := callStub3654885027(
 		v.vtable().BeginDeactivateNode,
 		5,
 		unsafe.Pointer(v),
@@ -9347,7 +9347,7 @@ func (v *comFabricClusterManagementClient2) beginDeactivateNode(
 func (v *comFabricClusterManagementClient2) endDeactivateNode(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndDeactivateNode,
 		1,
 		unsafe.Pointer(v),
@@ -9370,7 +9370,7 @@ func (v *comFabricClusterManagementClient2) beginActivateNode(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginActivateNode,
 		4,
 		unsafe.Pointer(v),
@@ -9388,7 +9388,7 @@ func (v *comFabricClusterManagementClient2) beginActivateNode(
 func (v *comFabricClusterManagementClient2) endActivateNode(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndActivateNode,
 		1,
 		unsafe.Pointer(v),
@@ -9414,7 +9414,7 @@ func (v *comFabricClusterManagementClient2) beginProvisionFabric(
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub15738012513523528246(
+	hr, err1 := callStub1238898970(
 		v.vtable().BeginProvisionFabric,
 		5,
 		unsafe.Pointer(v),
@@ -9433,7 +9433,7 @@ func (v *comFabricClusterManagementClient2) beginProvisionFabric(
 func (v *comFabricClusterManagementClient2) endProvisionFabric(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndProvisionFabric,
 		1,
 		unsafe.Pointer(v),
@@ -9456,7 +9456,7 @@ func (v *comFabricClusterManagementClient2) beginUpgradeFabric(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginUpgradeFabric,
 		4,
 		unsafe.Pointer(v),
@@ -9474,7 +9474,7 @@ func (v *comFabricClusterManagementClient2) beginUpgradeFabric(
 func (v *comFabricClusterManagementClient2) endUpgradeFabric(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndUpgradeFabric,
 		1,
 		unsafe.Pointer(v),
@@ -9494,7 +9494,7 @@ func (v *comFabricClusterManagementClient2) beginGetFabricUpgradeProgress(
 	defer func() {
 		context = p_2
 	}()
-	hr, err1 := callStub1048489181713478054(
+	hr, err1 := callStub4152495520(
 		v.vtable().BeginGetFabricUpgradeProgress,
 		3,
 		unsafe.Pointer(v),
@@ -9515,7 +9515,7 @@ func (v *comFabricClusterManagementClient2) endGetFabricUpgradeProgress(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetFabricUpgradeProgress,
 		2,
 		unsafe.Pointer(v),
@@ -9537,7 +9537,7 @@ func (v *comFabricClusterManagementClient2) beginMoveNextFabricUpgradeDomain(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginMoveNextFabricUpgradeDomain,
 		4,
 		unsafe.Pointer(v),
@@ -9555,7 +9555,7 @@ func (v *comFabricClusterManagementClient2) beginMoveNextFabricUpgradeDomain(
 func (v *comFabricClusterManagementClient2) endMoveNextFabricUpgradeDomain(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndMoveNextFabricUpgradeDomain,
 		1,
 		unsafe.Pointer(v),
@@ -9578,7 +9578,7 @@ func (v *comFabricClusterManagementClient2) beginMoveNextFabricUpgradeDomain2(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginMoveNextFabricUpgradeDomain2,
 		4,
 		unsafe.Pointer(v),
@@ -9596,7 +9596,7 @@ func (v *comFabricClusterManagementClient2) beginMoveNextFabricUpgradeDomain2(
 func (v *comFabricClusterManagementClient2) endMoveNextFabricUpgradeDomain2(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndMoveNextFabricUpgradeDomain2,
 		1,
 		unsafe.Pointer(v),
@@ -9622,7 +9622,7 @@ func (v *comFabricClusterManagementClient2) beginUnprovisionFabric(
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub15738012513523528246(
+	hr, err1 := callStub1238898970(
 		v.vtable().BeginUnprovisionFabric,
 		5,
 		unsafe.Pointer(v),
@@ -9641,7 +9641,7 @@ func (v *comFabricClusterManagementClient2) beginUnprovisionFabric(
 func (v *comFabricClusterManagementClient2) endUnprovisionFabric(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndUnprovisionFabric,
 		1,
 		unsafe.Pointer(v),
@@ -9661,7 +9661,7 @@ func (v *comFabricClusterManagementClient2) beginGetClusterManifest(
 	defer func() {
 		context = p_2
 	}()
-	hr, err1 := callStub1048489181713478054(
+	hr, err1 := callStub4152495520(
 		v.vtable().BeginGetClusterManifest,
 		3,
 		unsafe.Pointer(v),
@@ -9682,7 +9682,7 @@ func (v *comFabricClusterManagementClient2) endGetClusterManifest(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetClusterManifest,
 		2,
 		unsafe.Pointer(v),
@@ -9704,7 +9704,7 @@ func (v *comFabricClusterManagementClient2) beginRecoverPartition(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginRecoverPartition,
 		4,
 		unsafe.Pointer(v),
@@ -9722,7 +9722,7 @@ func (v *comFabricClusterManagementClient2) beginRecoverPartition(
 func (v *comFabricClusterManagementClient2) endRecoverPartition(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndRecoverPartition,
 		1,
 		unsafe.Pointer(v),
@@ -9745,7 +9745,7 @@ func (v *comFabricClusterManagementClient2) beginRecoverServicePartitions(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginRecoverServicePartitions,
 		4,
 		unsafe.Pointer(v),
@@ -9763,7 +9763,7 @@ func (v *comFabricClusterManagementClient2) beginRecoverServicePartitions(
 func (v *comFabricClusterManagementClient2) endRecoverServicePartitions(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndRecoverServicePartitions,
 		1,
 		unsafe.Pointer(v),
@@ -9783,7 +9783,7 @@ func (v *comFabricClusterManagementClient2) beginRecoverSystemPartitions(
 	defer func() {
 		context = p_2
 	}()
-	hr, err1 := callStub1048489181713478054(
+	hr, err1 := callStub4152495520(
 		v.vtable().BeginRecoverSystemPartitions,
 		3,
 		unsafe.Pointer(v),
@@ -9800,7 +9800,7 @@ func (v *comFabricClusterManagementClient2) beginRecoverSystemPartitions(
 func (v *comFabricClusterManagementClient2) endRecoverSystemPartitions(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndRecoverSystemPartitions,
 		1,
 		unsafe.Pointer(v),
@@ -9846,7 +9846,7 @@ func (v *comFabricClusterManagementClient3) beginUpdateFabricUpgrade(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginUpdateFabricUpgrade,
 		4,
 		unsafe.Pointer(v),
@@ -9864,7 +9864,7 @@ func (v *comFabricClusterManagementClient3) beginUpdateFabricUpgrade(
 func (v *comFabricClusterManagementClient3) endUpdateFabricUpgrade(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndUpdateFabricUpgrade,
 		1,
 		unsafe.Pointer(v),
@@ -9887,7 +9887,7 @@ func (v *comFabricClusterManagementClient3) beginStopNode(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginStopNode,
 		4,
 		unsafe.Pointer(v),
@@ -9905,7 +9905,7 @@ func (v *comFabricClusterManagementClient3) beginStopNode(
 func (v *comFabricClusterManagementClient3) endStopNode(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndStopNode,
 		1,
 		unsafe.Pointer(v),
@@ -9928,7 +9928,7 @@ func (v *comFabricClusterManagementClient3) beginRestartNode(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginRestartNode,
 		4,
 		unsafe.Pointer(v),
@@ -9946,7 +9946,7 @@ func (v *comFabricClusterManagementClient3) beginRestartNode(
 func (v *comFabricClusterManagementClient3) endRestartNode(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndRestartNode,
 		1,
 		unsafe.Pointer(v),
@@ -9969,7 +9969,7 @@ func (v *comFabricClusterManagementClient3) beginStartNode(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginStartNode,
 		4,
 		unsafe.Pointer(v),
@@ -9987,7 +9987,7 @@ func (v *comFabricClusterManagementClient3) beginStartNode(
 func (v *comFabricClusterManagementClient3) endStartNode(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndStartNode,
 		1,
 		unsafe.Pointer(v),
@@ -10016,7 +10016,7 @@ func (v *comFabricClusterManagementClient3) CopyClusterPackage(
 	p_3 = utf16PtrFromString(codePackagePath)
 	var p_4 *uint16
 	p_4 = utf16PtrFromString(codePackagePathInImageStore)
-	hr, err1 := callStub4555919410121256920(
+	hr, err1 := callStub765140102(
 		v.vtable().CopyClusterPackage,
 		5,
 		unsafe.Pointer(v),
@@ -10043,7 +10043,7 @@ func (v *comFabricClusterManagementClient3) RemoveClusterPackage(
 	p_1 = utf16PtrFromString(clusterManifestPathInImageStore)
 	var p_2 *uint16
 	p_2 = utf16PtrFromString(codePackagePathInImageStore)
-	hr, err1 := callStub8271036529602806980(
+	hr, err1 := callStub2138378508(
 		v.vtable().RemoveClusterPackage,
 		3,
 		unsafe.Pointer(v),
@@ -10080,7 +10080,7 @@ func (v *comFabricClusterManagementClient4) beginRollbackFabricUpgrade(
 	defer func() {
 		context = p_2
 	}()
-	hr, err1 := callStub1048489181713478054(
+	hr, err1 := callStub4152495520(
 		v.vtable().BeginRollbackFabricUpgrade,
 		3,
 		unsafe.Pointer(v),
@@ -10097,7 +10097,7 @@ func (v *comFabricClusterManagementClient4) beginRollbackFabricUpgrade(
 func (v *comFabricClusterManagementClient4) endRollbackFabricUpgrade(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndRollbackFabricUpgrade,
 		1,
 		unsafe.Pointer(v),
@@ -10133,7 +10133,7 @@ func (v *comFabricClusterManagementClient5) beginResetPartitionLoad(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginResetPartitionLoad,
 		4,
 		unsafe.Pointer(v),
@@ -10151,7 +10151,7 @@ func (v *comFabricClusterManagementClient5) beginResetPartitionLoad(
 func (v *comFabricClusterManagementClient5) endResetPartitionLoad(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndResetPartitionLoad,
 		1,
 		unsafe.Pointer(v),
@@ -10187,7 +10187,7 @@ func (v *comFabricClusterManagementClient6) beginToggleVerboseServicePlacementHe
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub15846046096096524420(
+	hr, err1 := callStub1072500600(
 		v.vtable().BeginToggleVerboseServicePlacementHealthReporting,
 		4,
 		unsafe.Pointer(v),
@@ -10205,7 +10205,7 @@ func (v *comFabricClusterManagementClient6) beginToggleVerboseServicePlacementHe
 func (v *comFabricClusterManagementClient6) endToggleVerboseServicePlacementHealthReporting(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndToggleVerboseServicePlacementHealthReporting,
 		1,
 		unsafe.Pointer(v),
@@ -10251,7 +10251,7 @@ func (v *comFabricClusterManagementClient7) beginUpgradeConfiguration(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginUpgradeConfiguration,
 		4,
 		unsafe.Pointer(v),
@@ -10269,7 +10269,7 @@ func (v *comFabricClusterManagementClient7) beginUpgradeConfiguration(
 func (v *comFabricClusterManagementClient7) endUpgradeConfiguration(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndUpgradeConfiguration,
 		1,
 		unsafe.Pointer(v),
@@ -10289,7 +10289,7 @@ func (v *comFabricClusterManagementClient7) beginGetClusterConfigurationUpgradeS
 	defer func() {
 		context = p_2
 	}()
-	hr, err1 := callStub1048489181713478054(
+	hr, err1 := callStub4152495520(
 		v.vtable().BeginGetClusterConfigurationUpgradeStatus,
 		3,
 		unsafe.Pointer(v),
@@ -10310,7 +10310,7 @@ func (v *comFabricClusterManagementClient7) endGetClusterConfigurationUpgradeSta
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetClusterConfigurationUpgradeStatus,
 		2,
 		unsafe.Pointer(v),
@@ -10331,7 +10331,7 @@ func (v *comFabricClusterManagementClient7) beginGetClusterConfiguration(
 	defer func() {
 		context = p_2
 	}()
-	hr, err1 := callStub1048489181713478054(
+	hr, err1 := callStub4152495520(
 		v.vtable().BeginGetClusterConfiguration,
 		3,
 		unsafe.Pointer(v),
@@ -10352,7 +10352,7 @@ func (v *comFabricClusterManagementClient7) endGetClusterConfiguration(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetClusterConfiguration,
 		2,
 		unsafe.Pointer(v),
@@ -10373,7 +10373,7 @@ func (v *comFabricClusterManagementClient7) beginGetUpgradesPendingApproval(
 	defer func() {
 		context = p_2
 	}()
-	hr, err1 := callStub1048489181713478054(
+	hr, err1 := callStub4152495520(
 		v.vtable().BeginGetUpgradesPendingApproval,
 		3,
 		unsafe.Pointer(v),
@@ -10390,7 +10390,7 @@ func (v *comFabricClusterManagementClient7) beginGetUpgradesPendingApproval(
 func (v *comFabricClusterManagementClient7) endGetUpgradesPendingApproval(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndGetUpgradesPendingApproval,
 		1,
 		unsafe.Pointer(v),
@@ -10410,7 +10410,7 @@ func (v *comFabricClusterManagementClient7) beginStartApprovedUpgrades(
 	defer func() {
 		context = p_2
 	}()
-	hr, err1 := callStub1048489181713478054(
+	hr, err1 := callStub4152495520(
 		v.vtable().BeginStartApprovedUpgrades,
 		3,
 		unsafe.Pointer(v),
@@ -10427,7 +10427,7 @@ func (v *comFabricClusterManagementClient7) beginStartApprovedUpgrades(
 func (v *comFabricClusterManagementClient7) endStartApprovedUpgrades(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndStartApprovedUpgrades,
 		1,
 		unsafe.Pointer(v),
@@ -10465,7 +10465,7 @@ func (v *comFabricClusterManagementClient8) beginGetClusterManifest2(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetClusterManifest2,
 		4,
 		unsafe.Pointer(v),
@@ -10487,7 +10487,7 @@ func (v *comFabricClusterManagementClient8) endGetClusterManifest2(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetClusterManifest2,
 		2,
 		unsafe.Pointer(v),
@@ -10525,7 +10525,7 @@ func (v *comFabricClusterManagementClient9) beginGetUpgradeOrchestrationServiceS
 	defer func() {
 		context = p_2
 	}()
-	hr, err1 := callStub1048489181713478054(
+	hr, err1 := callStub4152495520(
 		v.vtable().BeginGetUpgradeOrchestrationServiceState,
 		3,
 		unsafe.Pointer(v),
@@ -10546,7 +10546,7 @@ func (v *comFabricClusterManagementClient9) endGetUpgradeOrchestrationServiceSta
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetUpgradeOrchestrationServiceState,
 		2,
 		unsafe.Pointer(v),
@@ -10570,7 +10570,7 @@ func (v *comFabricClusterManagementClient9) beginSetUpgradeOrchestrationServiceS
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginSetUpgradeOrchestrationServiceState,
 		4,
 		unsafe.Pointer(v),
@@ -10592,7 +10592,7 @@ func (v *comFabricClusterManagementClient9) endSetUpgradeOrchestrationServiceSta
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndSetUpgradeOrchestrationServiceState,
 		2,
 		unsafe.Pointer(v),
@@ -10631,7 +10631,7 @@ func (v *comFabricClusterManagementClient10) beginGetClusterConfiguration2(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetClusterConfiguration2,
 		4,
 		unsafe.Pointer(v),
@@ -10653,7 +10653,7 @@ func (v *comFabricClusterManagementClient10) endGetClusterConfiguration2(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetClusterConfiguration2,
 		2,
 		unsafe.Pointer(v),
@@ -10701,7 +10701,7 @@ func (v *comFabricHealthClient) ReportHealth(
 ) (err error) {
 	var p_0 *innerFabricHealthReport
 	p_0 = healthReport.toInnerStruct()
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().ReportHealth,
 		1,
 		unsafe.Pointer(v),
@@ -10724,7 +10724,7 @@ func (v *comFabricHealthClient) beginGetClusterHealth(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetClusterHealth,
 		4,
 		unsafe.Pointer(v),
@@ -10746,7 +10746,7 @@ func (v *comFabricHealthClient) endGetClusterHealth(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetClusterHealth,
 		2,
 		unsafe.Pointer(v),
@@ -10773,7 +10773,7 @@ func (v *comFabricHealthClient) beginGetNodeHealth(
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub15738012513523528246(
+	hr, err1 := callStub1238898970(
 		v.vtable().BeginGetNodeHealth,
 		5,
 		unsafe.Pointer(v),
@@ -10796,7 +10796,7 @@ func (v *comFabricHealthClient) endGetNodeHealth(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetNodeHealth,
 		2,
 		unsafe.Pointer(v),
@@ -10823,7 +10823,7 @@ func (v *comFabricHealthClient) beginGetApplicationHealth(
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub15738012513523528246(
+	hr, err1 := callStub1238898970(
 		v.vtable().BeginGetApplicationHealth,
 		5,
 		unsafe.Pointer(v),
@@ -10846,7 +10846,7 @@ func (v *comFabricHealthClient) endGetApplicationHealth(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetApplicationHealth,
 		2,
 		unsafe.Pointer(v),
@@ -10873,7 +10873,7 @@ func (v *comFabricHealthClient) beginGetServiceHealth(
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub15738012513523528246(
+	hr, err1 := callStub1238898970(
 		v.vtable().BeginGetServiceHealth,
 		5,
 		unsafe.Pointer(v),
@@ -10896,7 +10896,7 @@ func (v *comFabricHealthClient) endGetServiceHealth(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetServiceHealth,
 		2,
 		unsafe.Pointer(v),
@@ -10921,7 +10921,7 @@ func (v *comFabricHealthClient) beginGetPartitionHealth(
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub15738012513523528246(
+	hr, err1 := callStub1238898970(
 		v.vtable().BeginGetPartitionHealth,
 		5,
 		unsafe.Pointer(v),
@@ -10944,7 +10944,7 @@ func (v *comFabricHealthClient) endGetPartitionHealth(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetPartitionHealth,
 		2,
 		unsafe.Pointer(v),
@@ -10970,7 +10970,7 @@ func (v *comFabricHealthClient) beginGetReplicaHealth(
 	defer func() {
 		context = p_5
 	}()
-	hr, err1 := callStub13310073979949236625(
+	hr, err1 := callStub3552647931(
 		v.vtable().BeginGetReplicaHealth,
 		6,
 		unsafe.Pointer(v),
@@ -10994,7 +10994,7 @@ func (v *comFabricHealthClient) endGetReplicaHealth(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetReplicaHealth,
 		2,
 		unsafe.Pointer(v),
@@ -11024,7 +11024,7 @@ func (v *comFabricHealthClient) beginGetDeployedApplicationHealth(
 	defer func() {
 		context = p_5
 	}()
-	hr, err1 := callStub9660077576991986601(
+	hr, err1 := callStub4095221463(
 		v.vtable().BeginGetDeployedApplicationHealth,
 		6,
 		unsafe.Pointer(v),
@@ -11048,7 +11048,7 @@ func (v *comFabricHealthClient) endGetDeployedApplicationHealth(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetDeployedApplicationHealth,
 		2,
 		unsafe.Pointer(v),
@@ -11081,7 +11081,7 @@ func (v *comFabricHealthClient) beginGetDeployedServicePackageHealth(
 	defer func() {
 		context = p_6
 	}()
-	hr, err1 := callStub10107670971298011941(
+	hr, err1 := callStub4101645460(
 		v.vtable().BeginGetDeployedServicePackageHealth,
 		7,
 		unsafe.Pointer(v),
@@ -11106,7 +11106,7 @@ func (v *comFabricHealthClient) endGetDeployedServicePackageHealth(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetDeployedServicePackageHealth,
 		2,
 		unsafe.Pointer(v),
@@ -11159,7 +11159,7 @@ func (v *comFabricHealthClient2) beginGetClusterHealth2(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetClusterHealth2,
 		4,
 		unsafe.Pointer(v),
@@ -11181,7 +11181,7 @@ func (v *comFabricHealthClient2) endGetClusterHealth2(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetClusterHealth2,
 		2,
 		unsafe.Pointer(v),
@@ -11205,7 +11205,7 @@ func (v *comFabricHealthClient2) beginGetNodeHealth2(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetNodeHealth2,
 		4,
 		unsafe.Pointer(v),
@@ -11227,7 +11227,7 @@ func (v *comFabricHealthClient2) endGetNodeHealth2(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetNodeHealth2,
 		2,
 		unsafe.Pointer(v),
@@ -11251,7 +11251,7 @@ func (v *comFabricHealthClient2) beginGetApplicationHealth2(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetApplicationHealth2,
 		4,
 		unsafe.Pointer(v),
@@ -11273,7 +11273,7 @@ func (v *comFabricHealthClient2) endGetApplicationHealth2(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetApplicationHealth2,
 		2,
 		unsafe.Pointer(v),
@@ -11297,7 +11297,7 @@ func (v *comFabricHealthClient2) beginGetServiceHealth2(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetServiceHealth2,
 		4,
 		unsafe.Pointer(v),
@@ -11319,7 +11319,7 @@ func (v *comFabricHealthClient2) endGetServiceHealth2(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetServiceHealth2,
 		2,
 		unsafe.Pointer(v),
@@ -11343,7 +11343,7 @@ func (v *comFabricHealthClient2) beginGetPartitionHealth2(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetPartitionHealth2,
 		4,
 		unsafe.Pointer(v),
@@ -11365,7 +11365,7 @@ func (v *comFabricHealthClient2) endGetPartitionHealth2(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetPartitionHealth2,
 		2,
 		unsafe.Pointer(v),
@@ -11389,7 +11389,7 @@ func (v *comFabricHealthClient2) beginGetReplicaHealth2(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetReplicaHealth2,
 		4,
 		unsafe.Pointer(v),
@@ -11411,7 +11411,7 @@ func (v *comFabricHealthClient2) endGetReplicaHealth2(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetReplicaHealth2,
 		2,
 		unsafe.Pointer(v),
@@ -11435,7 +11435,7 @@ func (v *comFabricHealthClient2) beginGetDeployedApplicationHealth2(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetDeployedApplicationHealth2,
 		4,
 		unsafe.Pointer(v),
@@ -11457,7 +11457,7 @@ func (v *comFabricHealthClient2) endGetDeployedApplicationHealth2(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetDeployedApplicationHealth2,
 		2,
 		unsafe.Pointer(v),
@@ -11481,7 +11481,7 @@ func (v *comFabricHealthClient2) beginGetDeployedServicePackageHealth2(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetDeployedServicePackageHealth2,
 		4,
 		unsafe.Pointer(v),
@@ -11503,7 +11503,7 @@ func (v *comFabricHealthClient2) endGetDeployedServicePackageHealth2(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetDeployedServicePackageHealth2,
 		2,
 		unsafe.Pointer(v),
@@ -11542,7 +11542,7 @@ func (v *comFabricHealthClient3) beginGetClusterHealthChunk(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetClusterHealthChunk,
 		4,
 		unsafe.Pointer(v),
@@ -11564,7 +11564,7 @@ func (v *comFabricHealthClient3) endGetClusterHealthChunk(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetClusterHealthChunk,
 		2,
 		unsafe.Pointer(v),
@@ -11599,7 +11599,7 @@ func (v *comFabricHealthClient4) ReportHealth2(
 	p_0 = healthReport.toInnerStruct()
 	var p_1 *innerFabricHealthReportSendOptions
 	p_1 = sendOptions.toInnerStruct()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().ReportHealth2,
 		2,
 		unsafe.Pointer(v),
@@ -11660,7 +11660,7 @@ func (v *comFabricQueryClient) beginGetNodeList(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetNodeList,
 		4,
 		unsafe.Pointer(v),
@@ -11682,7 +11682,7 @@ func (v *comFabricQueryClient) endGetNodeList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetNodeList,
 		2,
 		unsafe.Pointer(v),
@@ -11706,7 +11706,7 @@ func (v *comFabricQueryClient) beginGetApplicationTypeList(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetApplicationTypeList,
 		4,
 		unsafe.Pointer(v),
@@ -11728,7 +11728,7 @@ func (v *comFabricQueryClient) endGetApplicationTypeList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetApplicationTypeList,
 		2,
 		unsafe.Pointer(v),
@@ -11752,7 +11752,7 @@ func (v *comFabricQueryClient) beginGetServiceTypeList(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetServiceTypeList,
 		4,
 		unsafe.Pointer(v),
@@ -11774,7 +11774,7 @@ func (v *comFabricQueryClient) endGetServiceTypeList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetServiceTypeList,
 		2,
 		unsafe.Pointer(v),
@@ -11798,7 +11798,7 @@ func (v *comFabricQueryClient) beginGetApplicationList(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetApplicationList,
 		4,
 		unsafe.Pointer(v),
@@ -11820,7 +11820,7 @@ func (v *comFabricQueryClient) endGetApplicationList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetApplicationList,
 		2,
 		unsafe.Pointer(v),
@@ -11844,7 +11844,7 @@ func (v *comFabricQueryClient) beginGetServiceList(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetServiceList,
 		4,
 		unsafe.Pointer(v),
@@ -11866,7 +11866,7 @@ func (v *comFabricQueryClient) endGetServiceList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetServiceList,
 		2,
 		unsafe.Pointer(v),
@@ -11890,7 +11890,7 @@ func (v *comFabricQueryClient) beginGetPartitionList(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetPartitionList,
 		4,
 		unsafe.Pointer(v),
@@ -11912,7 +11912,7 @@ func (v *comFabricQueryClient) endGetPartitionList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetPartitionList,
 		2,
 		unsafe.Pointer(v),
@@ -11936,7 +11936,7 @@ func (v *comFabricQueryClient) beginGetReplicaList(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetReplicaList,
 		4,
 		unsafe.Pointer(v),
@@ -11958,7 +11958,7 @@ func (v *comFabricQueryClient) endGetReplicaList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetReplicaList,
 		2,
 		unsafe.Pointer(v),
@@ -11982,7 +11982,7 @@ func (v *comFabricQueryClient) beginGetDeployedApplicationList(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetDeployedApplicationList,
 		4,
 		unsafe.Pointer(v),
@@ -12004,7 +12004,7 @@ func (v *comFabricQueryClient) endGetDeployedApplicationList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetDeployedApplicationList,
 		2,
 		unsafe.Pointer(v),
@@ -12028,7 +12028,7 @@ func (v *comFabricQueryClient) beginGetDeployedServicePackageList(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetDeployedServicePackageList,
 		4,
 		unsafe.Pointer(v),
@@ -12050,7 +12050,7 @@ func (v *comFabricQueryClient) endGetDeployedServicePackageList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetDeployedServicePackageList,
 		2,
 		unsafe.Pointer(v),
@@ -12074,7 +12074,7 @@ func (v *comFabricQueryClient) beginGetDeployedServiceTypeList(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetDeployedServiceTypeList,
 		4,
 		unsafe.Pointer(v),
@@ -12096,7 +12096,7 @@ func (v *comFabricQueryClient) endGetDeployedServiceTypeList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetDeployedServiceTypeList,
 		2,
 		unsafe.Pointer(v),
@@ -12120,7 +12120,7 @@ func (v *comFabricQueryClient) beginGetDeployedCodePackageList(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetDeployedCodePackageList,
 		4,
 		unsafe.Pointer(v),
@@ -12142,7 +12142,7 @@ func (v *comFabricQueryClient) endGetDeployedCodePackageList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetDeployedCodePackageList,
 		2,
 		unsafe.Pointer(v),
@@ -12166,7 +12166,7 @@ func (v *comFabricQueryClient) beginGetDeployedReplicaList(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetDeployedReplicaList,
 		4,
 		unsafe.Pointer(v),
@@ -12188,7 +12188,7 @@ func (v *comFabricQueryClient) endGetDeployedReplicaList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetDeployedReplicaList,
 		2,
 		unsafe.Pointer(v),
@@ -12235,7 +12235,7 @@ func (v *comFabricQueryClient2) beginGetDeployedReplicaDetail(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetDeployedReplicaDetail,
 		4,
 		unsafe.Pointer(v),
@@ -12257,7 +12257,7 @@ func (v *comFabricQueryClient2) endGetDeployedReplicaDetail(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetDeployedReplicaDetail,
 		2,
 		unsafe.Pointer(v),
@@ -12278,7 +12278,7 @@ func (v *comFabricQueryClient2) beginGetClusterLoadInformation(
 	defer func() {
 		context = p_2
 	}()
-	hr, err1 := callStub1048489181713478054(
+	hr, err1 := callStub4152495520(
 		v.vtable().BeginGetClusterLoadInformation,
 		3,
 		unsafe.Pointer(v),
@@ -12299,7 +12299,7 @@ func (v *comFabricQueryClient2) endGetClusterLoadInformation(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetClusterLoadInformation,
 		2,
 		unsafe.Pointer(v),
@@ -12323,7 +12323,7 @@ func (v *comFabricQueryClient2) beginGetPartitionLoadInformation(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetPartitionLoadInformation,
 		4,
 		unsafe.Pointer(v),
@@ -12345,7 +12345,7 @@ func (v *comFabricQueryClient2) endGetPartitionLoadInformation(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetPartitionLoadInformation,
 		2,
 		unsafe.Pointer(v),
@@ -12369,7 +12369,7 @@ func (v *comFabricQueryClient2) beginGetProvisionedFabricCodeVersionList(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetProvisionedFabricCodeVersionList,
 		4,
 		unsafe.Pointer(v),
@@ -12391,7 +12391,7 @@ func (v *comFabricQueryClient2) endGetProvisionedFabricCodeVersionList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetProvisionedFabricCodeVersionList,
 		2,
 		unsafe.Pointer(v),
@@ -12415,7 +12415,7 @@ func (v *comFabricQueryClient2) beginGetProvisionedFabricConfigVersionList(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetProvisionedFabricConfigVersionList,
 		4,
 		unsafe.Pointer(v),
@@ -12437,7 +12437,7 @@ func (v *comFabricQueryClient2) endGetProvisionedFabricConfigVersionList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetProvisionedFabricConfigVersionList,
 		2,
 		unsafe.Pointer(v),
@@ -12478,7 +12478,7 @@ func (v *comFabricQueryClient3) beginGetNodeLoadInformation(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetNodeLoadInformation,
 		4,
 		unsafe.Pointer(v),
@@ -12500,7 +12500,7 @@ func (v *comFabricQueryClient3) endGetNodeLoadInformation(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetNodeLoadInformation,
 		2,
 		unsafe.Pointer(v),
@@ -12524,7 +12524,7 @@ func (v *comFabricQueryClient3) beginGetReplicaLoadInformation(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetReplicaLoadInformation,
 		4,
 		unsafe.Pointer(v),
@@ -12546,7 +12546,7 @@ func (v *comFabricQueryClient3) endGetReplicaLoadInformation(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetReplicaLoadInformation,
 		2,
 		unsafe.Pointer(v),
@@ -12587,7 +12587,7 @@ func (v *comFabricQueryClient4) beginGetServiceGroupMemberList(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetServiceGroupMemberList,
 		4,
 		unsafe.Pointer(v),
@@ -12609,7 +12609,7 @@ func (v *comFabricQueryClient4) endGetServiceGroupMemberList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetServiceGroupMemberList,
 		2,
 		unsafe.Pointer(v),
@@ -12633,7 +12633,7 @@ func (v *comFabricQueryClient4) beginGetServiceGroupMemberTypeList(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetServiceGroupMemberTypeList,
 		4,
 		unsafe.Pointer(v),
@@ -12655,7 +12655,7 @@ func (v *comFabricQueryClient4) endGetServiceGroupMemberTypeList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetServiceGroupMemberTypeList,
 		2,
 		unsafe.Pointer(v),
@@ -12694,7 +12694,7 @@ func (v *comFabricQueryClient5) beginGetUnplacedReplicaInformation(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetUnplacedReplicaInformation,
 		4,
 		unsafe.Pointer(v),
@@ -12716,7 +12716,7 @@ func (v *comFabricQueryClient5) endGetUnplacedReplicaInformation(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetUnplacedReplicaInformation,
 		2,
 		unsafe.Pointer(v),
@@ -12772,7 +12772,7 @@ func (v *comFabricQueryClient7) beginGetApplicationLoadInformation(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetApplicationLoadInformation,
 		4,
 		unsafe.Pointer(v),
@@ -12794,7 +12794,7 @@ func (v *comFabricQueryClient7) endGetApplicationLoadInformation(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetApplicationLoadInformation,
 		2,
 		unsafe.Pointer(v),
@@ -12835,7 +12835,7 @@ func (v *comFabricQueryClient8) beginGetServiceName(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetServiceName,
 		4,
 		unsafe.Pointer(v),
@@ -12857,7 +12857,7 @@ func (v *comFabricQueryClient8) endGetServiceName(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetServiceName,
 		2,
 		unsafe.Pointer(v),
@@ -12881,7 +12881,7 @@ func (v *comFabricQueryClient8) beginGetApplicationName(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetApplicationName,
 		4,
 		unsafe.Pointer(v),
@@ -12903,7 +12903,7 @@ func (v *comFabricQueryClient8) endGetApplicationName(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetApplicationName,
 		2,
 		unsafe.Pointer(v),
@@ -12942,7 +12942,7 @@ func (v *comFabricQueryClient9) beginGetApplicationTypePagedList(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetApplicationTypePagedList,
 		4,
 		unsafe.Pointer(v),
@@ -12964,7 +12964,7 @@ func (v *comFabricQueryClient9) endGetApplicationTypePagedList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetApplicationTypePagedList,
 		2,
 		unsafe.Pointer(v),
@@ -13003,7 +13003,7 @@ func (v *comFabricQueryClient10) beginGetDeployedApplicationPagedList(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetDeployedApplicationPagedList,
 		4,
 		unsafe.Pointer(v),
@@ -13025,7 +13025,7 @@ func (v *comFabricQueryClient10) endGetDeployedApplicationPagedList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetDeployedApplicationPagedList,
 		2,
 		unsafe.Pointer(v),
@@ -13069,7 +13069,7 @@ func (v *comFabricInfrastructureServiceClient) beginInvokeInfrastructureCommand(
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub15738012513523528246(
+	hr, err1 := callStub1238898970(
 		v.vtable().BeginInvokeInfrastructureCommand,
 		5,
 		unsafe.Pointer(v),
@@ -13092,7 +13092,7 @@ func (v *comFabricInfrastructureServiceClient) endInvokeInfrastructureCommand(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndInvokeInfrastructureCommand,
 		2,
 		unsafe.Pointer(v),
@@ -13119,7 +13119,7 @@ func (v *comFabricInfrastructureServiceClient) beginInvokeInfrastructureQuery(
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub15738012513523528246(
+	hr, err1 := callStub1238898970(
 		v.vtable().BeginInvokeInfrastructureQuery,
 		5,
 		unsafe.Pointer(v),
@@ -13142,7 +13142,7 @@ func (v *comFabricInfrastructureServiceClient) endInvokeInfrastructureQuery(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndInvokeInfrastructureQuery,
 		2,
 		unsafe.Pointer(v),
@@ -13191,7 +13191,7 @@ func (v *comFabricRepairManagementClient) beginCreateRepairTask(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginCreateRepairTask,
 		4,
 		unsafe.Pointer(v),
@@ -13213,7 +13213,7 @@ func (v *comFabricRepairManagementClient) endCreateRepairTask(
 	defer func() {
 		commitVersion = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndCreateRepairTask,
 		2,
 		unsafe.Pointer(v),
@@ -13237,7 +13237,7 @@ func (v *comFabricRepairManagementClient) beginCancelRepairTask(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginCancelRepairTask,
 		4,
 		unsafe.Pointer(v),
@@ -13259,7 +13259,7 @@ func (v *comFabricRepairManagementClient) endCancelRepairTask(
 	defer func() {
 		commitVersion = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndCancelRepairTask,
 		2,
 		unsafe.Pointer(v),
@@ -13283,7 +13283,7 @@ func (v *comFabricRepairManagementClient) beginForceApproveRepairTask(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginForceApproveRepairTask,
 		4,
 		unsafe.Pointer(v),
@@ -13305,7 +13305,7 @@ func (v *comFabricRepairManagementClient) endForceApproveRepairTask(
 	defer func() {
 		commitVersion = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndForceApproveRepairTask,
 		2,
 		unsafe.Pointer(v),
@@ -13329,7 +13329,7 @@ func (v *comFabricRepairManagementClient) beginDeleteRepairTask(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginDeleteRepairTask,
 		4,
 		unsafe.Pointer(v),
@@ -13347,7 +13347,7 @@ func (v *comFabricRepairManagementClient) beginDeleteRepairTask(
 func (v *comFabricRepairManagementClient) endDeleteRepairTask(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndDeleteRepairTask,
 		1,
 		unsafe.Pointer(v),
@@ -13370,7 +13370,7 @@ func (v *comFabricRepairManagementClient) beginUpdateRepairExecutionState(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginUpdateRepairExecutionState,
 		4,
 		unsafe.Pointer(v),
@@ -13392,7 +13392,7 @@ func (v *comFabricRepairManagementClient) endUpdateRepairExecutionState(
 	defer func() {
 		commitVersion = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndUpdateRepairExecutionState,
 		2,
 		unsafe.Pointer(v),
@@ -13416,7 +13416,7 @@ func (v *comFabricRepairManagementClient) beginGetRepairTaskList(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetRepairTaskList,
 		4,
 		unsafe.Pointer(v),
@@ -13438,7 +13438,7 @@ func (v *comFabricRepairManagementClient) endGetRepairTaskList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetRepairTaskList,
 		2,
 		unsafe.Pointer(v),
@@ -13477,7 +13477,7 @@ func (v *comFabricRepairManagementClient2) beginUpdateRepairTaskHealthPolicy(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginUpdateRepairTaskHealthPolicy,
 		4,
 		unsafe.Pointer(v),
@@ -13499,7 +13499,7 @@ func (v *comFabricRepairManagementClient2) endUpdateRepairTaskHealthPolicy(
 	defer func() {
 		commitVersion = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndUpdateRepairTaskHealthPolicy,
 		2,
 		unsafe.Pointer(v),
@@ -13548,7 +13548,7 @@ func (v *comFabricFaultManagementClient) beginRestartNode(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginRestartNode,
 		4,
 		unsafe.Pointer(v),
@@ -13574,7 +13574,7 @@ func (v *comFabricFaultManagementClient) beginStartNode(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginStartNode,
 		4,
 		unsafe.Pointer(v),
@@ -13600,7 +13600,7 @@ func (v *comFabricFaultManagementClient) beginStopNode(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginStopNode,
 		4,
 		unsafe.Pointer(v),
@@ -13626,7 +13626,7 @@ func (v *comFabricFaultManagementClient) beginRestartDeployedCodePackage(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginRestartDeployedCodePackage,
 		4,
 		unsafe.Pointer(v),
@@ -13652,7 +13652,7 @@ func (v *comFabricFaultManagementClient) beginMovePrimary(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginMovePrimary,
 		4,
 		unsafe.Pointer(v),
@@ -13674,7 +13674,7 @@ func (v *comFabricFaultManagementClient) endMovePrimary(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndMovePrimary,
 		2,
 		unsafe.Pointer(v),
@@ -13698,7 +13698,7 @@ func (v *comFabricFaultManagementClient) beginMoveSecondary(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginMoveSecondary,
 		4,
 		unsafe.Pointer(v),
@@ -13720,7 +13720,7 @@ func (v *comFabricFaultManagementClient) endMoveSecondary(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndMoveSecondary,
 		2,
 		unsafe.Pointer(v),
@@ -13773,7 +13773,7 @@ func (v *comFabricTestManagementClient) beginStartPartitionDataLoss(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginStartPartitionDataLoss,
 		4,
 		unsafe.Pointer(v),
@@ -13791,7 +13791,7 @@ func (v *comFabricTestManagementClient) beginStartPartitionDataLoss(
 func (v *comFabricTestManagementClient) endStartPartitionDataLoss(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndStartPartitionDataLoss,
 		1,
 		unsafe.Pointer(v),
@@ -13812,7 +13812,7 @@ func (v *comFabricTestManagementClient) beginGetPartitionDataLossProgress(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetPartitionDataLossProgress,
 		4,
 		unsafe.Pointer(v),
@@ -13834,7 +13834,7 @@ func (v *comFabricTestManagementClient) endGetPartitionDataLossProgress(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetPartitionDataLossProgress,
 		2,
 		unsafe.Pointer(v),
@@ -13858,7 +13858,7 @@ func (v *comFabricTestManagementClient) beginStartPartitionQuorumLoss(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginStartPartitionQuorumLoss,
 		4,
 		unsafe.Pointer(v),
@@ -13876,7 +13876,7 @@ func (v *comFabricTestManagementClient) beginStartPartitionQuorumLoss(
 func (v *comFabricTestManagementClient) endStartPartitionQuorumLoss(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndStartPartitionQuorumLoss,
 		1,
 		unsafe.Pointer(v),
@@ -13897,7 +13897,7 @@ func (v *comFabricTestManagementClient) beginGetPartitionQuorumLossProgress(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetPartitionQuorumLossProgress,
 		4,
 		unsafe.Pointer(v),
@@ -13919,7 +13919,7 @@ func (v *comFabricTestManagementClient) endGetPartitionQuorumLossProgress(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetPartitionQuorumLossProgress,
 		2,
 		unsafe.Pointer(v),
@@ -13943,7 +13943,7 @@ func (v *comFabricTestManagementClient) beginStartPartitionRestart(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginStartPartitionRestart,
 		4,
 		unsafe.Pointer(v),
@@ -13961,7 +13961,7 @@ func (v *comFabricTestManagementClient) beginStartPartitionRestart(
 func (v *comFabricTestManagementClient) endStartPartitionRestart(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndStartPartitionRestart,
 		1,
 		unsafe.Pointer(v),
@@ -13982,7 +13982,7 @@ func (v *comFabricTestManagementClient) beginGetPartitionRestartProgress(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetPartitionRestartProgress,
 		4,
 		unsafe.Pointer(v),
@@ -14004,7 +14004,7 @@ func (v *comFabricTestManagementClient) endGetPartitionRestartProgress(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetPartitionRestartProgress,
 		2,
 		unsafe.Pointer(v),
@@ -14028,7 +14028,7 @@ func (v *comFabricTestManagementClient) beginGetTestCommandStatusList(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetTestCommandStatusList,
 		4,
 		unsafe.Pointer(v),
@@ -14050,7 +14050,7 @@ func (v *comFabricTestManagementClient) endGetTestCommandStatusList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetTestCommandStatusList,
 		2,
 		unsafe.Pointer(v),
@@ -14074,7 +14074,7 @@ func (v *comFabricTestManagementClient) beginCancelTestCommand(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginCancelTestCommand,
 		4,
 		unsafe.Pointer(v),
@@ -14092,7 +14092,7 @@ func (v *comFabricTestManagementClient) beginCancelTestCommand(
 func (v *comFabricTestManagementClient) endCancelTestCommand(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndCancelTestCommand,
 		1,
 		unsafe.Pointer(v),
@@ -14134,7 +14134,7 @@ func (v *comFabricTestManagementClient2) beginStartChaos(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginStartChaos,
 		4,
 		unsafe.Pointer(v),
@@ -14152,7 +14152,7 @@ func (v *comFabricTestManagementClient2) beginStartChaos(
 func (v *comFabricTestManagementClient2) endStartChaos(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndStartChaos,
 		1,
 		unsafe.Pointer(v),
@@ -14172,7 +14172,7 @@ func (v *comFabricTestManagementClient2) beginStopChaos(
 	defer func() {
 		context = p_2
 	}()
-	hr, err1 := callStub1048489181713478054(
+	hr, err1 := callStub4152495520(
 		v.vtable().BeginStopChaos,
 		3,
 		unsafe.Pointer(v),
@@ -14189,7 +14189,7 @@ func (v *comFabricTestManagementClient2) beginStopChaos(
 func (v *comFabricTestManagementClient2) endStopChaos(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndStopChaos,
 		1,
 		unsafe.Pointer(v),
@@ -14212,7 +14212,7 @@ func (v *comFabricTestManagementClient2) beginGetChaosReport(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetChaosReport,
 		4,
 		unsafe.Pointer(v),
@@ -14234,7 +14234,7 @@ func (v *comFabricTestManagementClient2) endGetChaosReport(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetChaosReport,
 		2,
 		unsafe.Pointer(v),
@@ -14275,7 +14275,7 @@ func (v *comFabricTestManagementClient3) beginStartNodeTransition(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginStartNodeTransition,
 		4,
 		unsafe.Pointer(v),
@@ -14293,7 +14293,7 @@ func (v *comFabricTestManagementClient3) beginStartNodeTransition(
 func (v *comFabricTestManagementClient3) endStartNodeTransition(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndStartNodeTransition,
 		1,
 		unsafe.Pointer(v),
@@ -14314,7 +14314,7 @@ func (v *comFabricTestManagementClient3) beginGetNodeTransitionProgress(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetNodeTransitionProgress,
 		4,
 		unsafe.Pointer(v),
@@ -14336,7 +14336,7 @@ func (v *comFabricTestManagementClient3) endGetNodeTransitionProgress(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetNodeTransitionProgress,
 		2,
 		unsafe.Pointer(v),
@@ -14378,7 +14378,7 @@ func (v *comFabricTestManagementClient4) beginGetChaos(
 	defer func() {
 		context = p_2
 	}()
-	hr, err1 := callStub1048489181713478054(
+	hr, err1 := callStub4152495520(
 		v.vtable().BeginGetChaos,
 		3,
 		unsafe.Pointer(v),
@@ -14399,7 +14399,7 @@ func (v *comFabricTestManagementClient4) endGetChaos(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetChaos,
 		2,
 		unsafe.Pointer(v),
@@ -14420,7 +14420,7 @@ func (v *comFabricTestManagementClient4) beginGetChaosSchedule(
 	defer func() {
 		context = p_2
 	}()
-	hr, err1 := callStub1048489181713478054(
+	hr, err1 := callStub4152495520(
 		v.vtable().BeginGetChaosSchedule,
 		3,
 		unsafe.Pointer(v),
@@ -14441,7 +14441,7 @@ func (v *comFabricTestManagementClient4) endGetChaosSchedule(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetChaosSchedule,
 		2,
 		unsafe.Pointer(v),
@@ -14465,7 +14465,7 @@ func (v *comFabricTestManagementClient4) beginSetChaosSchedule(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginSetChaosSchedule,
 		4,
 		unsafe.Pointer(v),
@@ -14483,7 +14483,7 @@ func (v *comFabricTestManagementClient4) beginSetChaosSchedule(
 func (v *comFabricTestManagementClient4) endSetChaosSchedule(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndSetChaosSchedule,
 		1,
 		unsafe.Pointer(v),
@@ -14506,7 +14506,7 @@ func (v *comFabricTestManagementClient4) beginGetChaosEvents(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetChaosEvents,
 		4,
 		unsafe.Pointer(v),
@@ -14528,7 +14528,7 @@ func (v *comFabricTestManagementClient4) endGetChaosEvents(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetChaosEvents,
 		2,
 		unsafe.Pointer(v),
@@ -14584,7 +14584,7 @@ func (v *comFabricNetworkManagementClient) beginCreateNetwork(
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub15738012513523528246(
+	hr, err1 := callStub1238898970(
 		v.vtable().BeginCreateNetwork,
 		5,
 		unsafe.Pointer(v),
@@ -14603,7 +14603,7 @@ func (v *comFabricNetworkManagementClient) beginCreateNetwork(
 func (v *comFabricNetworkManagementClient) endCreateNetwork(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndCreateNetwork,
 		1,
 		unsafe.Pointer(v),
@@ -14626,7 +14626,7 @@ func (v *comFabricNetworkManagementClient) beginDeleteNetwork(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginDeleteNetwork,
 		4,
 		unsafe.Pointer(v),
@@ -14644,7 +14644,7 @@ func (v *comFabricNetworkManagementClient) beginDeleteNetwork(
 func (v *comFabricNetworkManagementClient) endDeleteNetwork(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().EndDeleteNetwork,
 		1,
 		unsafe.Pointer(v),
@@ -14667,7 +14667,7 @@ func (v *comFabricNetworkManagementClient) beginGetNetworkList(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetNetworkList,
 		4,
 		unsafe.Pointer(v),
@@ -14689,7 +14689,7 @@ func (v *comFabricNetworkManagementClient) endGetNetworkList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetNetworkList,
 		2,
 		unsafe.Pointer(v),
@@ -14713,7 +14713,7 @@ func (v *comFabricNetworkManagementClient) beginGetNetworkApplicationList(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetNetworkApplicationList,
 		4,
 		unsafe.Pointer(v),
@@ -14735,7 +14735,7 @@ func (v *comFabricNetworkManagementClient) endGetNetworkApplicationList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetNetworkApplicationList,
 		2,
 		unsafe.Pointer(v),
@@ -14759,7 +14759,7 @@ func (v *comFabricNetworkManagementClient) beginGetNetworkNodeList(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetNetworkNodeList,
 		4,
 		unsafe.Pointer(v),
@@ -14781,7 +14781,7 @@ func (v *comFabricNetworkManagementClient) endGetNetworkNodeList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetNetworkNodeList,
 		2,
 		unsafe.Pointer(v),
@@ -14805,7 +14805,7 @@ func (v *comFabricNetworkManagementClient) beginGetApplicationNetworkList(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetApplicationNetworkList,
 		4,
 		unsafe.Pointer(v),
@@ -14827,7 +14827,7 @@ func (v *comFabricNetworkManagementClient) endGetApplicationNetworkList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetApplicationNetworkList,
 		2,
 		unsafe.Pointer(v),
@@ -14851,7 +14851,7 @@ func (v *comFabricNetworkManagementClient) beginGetDeployedNetworkList(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetDeployedNetworkList,
 		4,
 		unsafe.Pointer(v),
@@ -14873,7 +14873,7 @@ func (v *comFabricNetworkManagementClient) endGetDeployedNetworkList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetDeployedNetworkList,
 		2,
 		unsafe.Pointer(v),
@@ -14897,7 +14897,7 @@ func (v *comFabricNetworkManagementClient) beginGetDeployedNetworkCodePackageLis
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetDeployedNetworkCodePackageList,
 		4,
 		unsafe.Pointer(v),
@@ -14919,7 +14919,7 @@ func (v *comFabricNetworkManagementClient) endGetDeployedNetworkCodePackageList(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetDeployedNetworkCodePackageList,
 		2,
 		unsafe.Pointer(v),
@@ -14947,7 +14947,7 @@ func (v *comFabricGetRepairTaskListResult) vtable() *comFabricGetRepairTaskListR
 }
 
 func (v *comFabricGetRepairTaskListResult) GetTasks() (rt []FabricRepairTask, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_Tasks,
 		0,
 		unsafe.Pointer(v),
@@ -14989,7 +14989,7 @@ func (v *comFabricServiceDescriptionResult) vtable() *comFabricServiceDescriptio
 }
 
 func (v *comFabricServiceDescriptionResult) GetDescription() (rt *FabricServiceDescription, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_Description,
 		0,
 		unsafe.Pointer(v),
@@ -15019,7 +15019,7 @@ func (v *comFabricServiceGroupDescriptionResult) vtable() *comFabricServiceGroup
 }
 
 func (v *comFabricServiceGroupDescriptionResult) GetDescription() (rt *FabricServiceGroupDescription, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_Description,
 		0,
 		unsafe.Pointer(v),
@@ -15051,7 +15051,7 @@ func (v *comFabricResolvedServicePartitionResult) vtable() *comFabricResolvedSer
 }
 
 func (v *comFabricResolvedServicePartitionResult) GetPartition() (rt *FabricResolvedServicePartition, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_Partition,
 		0,
 		unsafe.Pointer(v),
@@ -15071,7 +15071,7 @@ func (v *comFabricResolvedServicePartitionResult) GetEndpoint() (endpoint *Fabri
 	defer func() {
 		endpoint = p_0.toGoStruct()
 	}()
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().GetEndpoint,
 		1,
 		unsafe.Pointer(v),
@@ -15090,7 +15090,7 @@ func (v *comFabricResolvedServicePartitionResult) CompareVersion(
 	defer func() {
 		compareResult = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().CompareVersion,
 		2,
 		unsafe.Pointer(v),
@@ -15124,7 +15124,7 @@ func (v *comFabricServiceEndpointsVersion) Compare(
 	defer func() {
 		compareResult = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().Compare,
 		2,
 		unsafe.Pointer(v),
@@ -15153,7 +15153,7 @@ func (v *comFabricServiceNotification) vtable() *comFabricServiceNotificationVtb
 }
 
 func (v *comFabricServiceNotification) GetNotification() (rt *FabricServiceNotification, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_Notification,
 		0,
 		unsafe.Pointer(v),
@@ -15173,7 +15173,7 @@ func (v *comFabricServiceNotification) GetVersion() (result *comFabricServiceEnd
 	defer func() {
 		result = p_0
 	}()
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().GetVersion,
 		1,
 		unsafe.Pointer(v),
@@ -15201,7 +15201,7 @@ func (v *comFabricNameEnumerationResult) vtable() *comFabricNameEnumerationResul
 }
 
 func (v *comFabricNameEnumerationResult) GetEnumerationStatus() (rt FabricErrornumerationStatus, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_EnumerationStatus,
 		0,
 		unsafe.Pointer(v),
@@ -15225,7 +15225,7 @@ func (v *comFabricPropertyMetadataResult) vtable() *comFabricPropertyMetadataRes
 }
 
 func (v *comFabricPropertyMetadataResult) GetMetadata() (rt *FabricNamedPropertyMetadata, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_Metadata,
 		0,
 		unsafe.Pointer(v),
@@ -15260,7 +15260,7 @@ func (v *comFabricPropertyValueResult) vtable() *comFabricPropertyValueResultVtb
 }
 
 func (v *comFabricPropertyValueResult) GetProperty() (rt *FabricNamedProperty, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_Property,
 		0,
 		unsafe.Pointer(v),
@@ -15284,7 +15284,7 @@ func (v *comFabricPropertyValueResult) GetValueAsBinary() (byteCount uint32, buf
 	defer func() {
 		bufferedValue = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().GetValueAsBinary,
 		2,
 		unsafe.Pointer(v),
@@ -15302,7 +15302,7 @@ func (v *comFabricPropertyValueResult) GetValueAsInt64() (value int64, err error
 	defer func() {
 		value = p_0
 	}()
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().GetValueAsInt64,
 		1,
 		unsafe.Pointer(v),
@@ -15319,7 +15319,7 @@ func (v *comFabricPropertyValueResult) GetValueAsDouble() (value float64, err er
 	defer func() {
 		value = p_0
 	}()
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().GetValueAsDouble,
 		1,
 		unsafe.Pointer(v),
@@ -15336,7 +15336,7 @@ func (v *comFabricPropertyValueResult) GetValueAsWString() (bufferedValue string
 	defer func() {
 		bufferedValue = utf16PtrToString(p_0)
 	}()
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().GetValueAsWString,
 		1,
 		unsafe.Pointer(v),
@@ -15353,7 +15353,7 @@ func (v *comFabricPropertyValueResult) GetValueAsGuid() (value ole.GUID, err err
 	defer func() {
 		value = p_0
 	}()
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().GetValueAsGuid,
 		1,
 		unsafe.Pointer(v),
@@ -15386,7 +15386,7 @@ func (v *comFabricPropertyBatchResult) GetProperty(
 	defer func() {
 		property = p_1
 	}()
-	hr, err1 := callStub13385571198022537309(
+	hr, err1 := callStub1425410019(
 		v.vtable().GetProperty,
 		2,
 		unsafe.Pointer(v),
@@ -15416,7 +15416,7 @@ func (v *comFabricPropertyEnumerationResult) vtable() *comFabricPropertyEnumerat
 }
 
 func (v *comFabricPropertyEnumerationResult) GetEnumerationStatus() (rt FabricErrornumerationStatus, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_EnumerationStatus,
 		0,
 		unsafe.Pointer(v),
@@ -15426,7 +15426,7 @@ func (v *comFabricPropertyEnumerationResult) GetEnumerationStatus() (rt FabricEr
 	return
 }
 func (v *comFabricPropertyEnumerationResult) GetPropertyCount() (rt uint32, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_PropertyCount,
 		0,
 		unsafe.Pointer(v),
@@ -15442,7 +15442,7 @@ func (v *comFabricPropertyEnumerationResult) GetProperty(
 	defer func() {
 		property = p_1
 	}()
-	hr, err1 := callStub13385571198022537309(
+	hr, err1 := callStub1425410019(
 		v.vtable().GetProperty,
 		2,
 		unsafe.Pointer(v),
@@ -15475,7 +15475,7 @@ func (v *comFabricApplicationUpgradeProgressResult) vtable() *comFabricApplicati
 }
 
 func (v *comFabricApplicationUpgradeProgressResult) GetApplicationName() (rt string, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ApplicationName,
 		0,
 		unsafe.Pointer(v),
@@ -15491,7 +15491,7 @@ func (v *comFabricApplicationUpgradeProgressResult) GetApplicationName() (rt str
 	return
 }
 func (v *comFabricApplicationUpgradeProgressResult) GetApplicationTypeName() (rt string, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ApplicationTypeName,
 		0,
 		unsafe.Pointer(v),
@@ -15507,7 +15507,7 @@ func (v *comFabricApplicationUpgradeProgressResult) GetApplicationTypeName() (rt
 	return
 }
 func (v *comFabricApplicationUpgradeProgressResult) GetTargetApplicationTypeVersion() (rt string, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_TargetApplicationTypeVersion,
 		0,
 		unsafe.Pointer(v),
@@ -15523,7 +15523,7 @@ func (v *comFabricApplicationUpgradeProgressResult) GetTargetApplicationTypeVers
 	return
 }
 func (v *comFabricApplicationUpgradeProgressResult) GetUpgradeState() (rt FabricApplicationUpgradeState, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_UpgradeState,
 		0,
 		unsafe.Pointer(v),
@@ -15548,7 +15548,7 @@ func (v *comFabricApplicationUpgradeProgressResult2) vtable() *comFabricApplicat
 }
 
 func (v *comFabricApplicationUpgradeProgressResult2) GetRollingUpgradeMode() (rt FabricRollingUpgradeMode, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_RollingUpgradeMode,
 		0,
 		unsafe.Pointer(v),
@@ -15558,7 +15558,7 @@ func (v *comFabricApplicationUpgradeProgressResult2) GetRollingUpgradeMode() (rt
 	return
 }
 func (v *comFabricApplicationUpgradeProgressResult2) GetNextUpgradeDomain() (rt string, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_NextUpgradeDomain,
 		0,
 		unsafe.Pointer(v),
@@ -15588,7 +15588,7 @@ func (v *comFabricApplicationUpgradeProgressResult3) vtable() *comFabricApplicat
 }
 
 func (v *comFabricApplicationUpgradeProgressResult3) GetUpgradeProgress() (rt *FabricApplicationUpgradeProgress, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_UpgradeProgress,
 		0,
 		unsafe.Pointer(v),
@@ -15622,7 +15622,7 @@ func (v *comFabricUpgradeProgressResult) vtable() *comFabricUpgradeProgressResul
 }
 
 func (v *comFabricUpgradeProgressResult) GetTargetCodeVersion() (rt string, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_TargetCodeVersion,
 		0,
 		unsafe.Pointer(v),
@@ -15638,7 +15638,7 @@ func (v *comFabricUpgradeProgressResult) GetTargetCodeVersion() (rt string, err 
 	return
 }
 func (v *comFabricUpgradeProgressResult) GetTargetConfigVersion() (rt string, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_TargetConfigVersion,
 		0,
 		unsafe.Pointer(v),
@@ -15654,7 +15654,7 @@ func (v *comFabricUpgradeProgressResult) GetTargetConfigVersion() (rt string, er
 	return
 }
 func (v *comFabricUpgradeProgressResult) GetUpgradeState() (rt FabricUpgradeState, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_UpgradeState,
 		0,
 		unsafe.Pointer(v),
@@ -15672,7 +15672,7 @@ func (v *comFabricUpgradeProgressResult) GetUpgradeDomains() (itemCount uint32, 
 	defer func() {
 		bufferedItems = p_1.toGoStruct()
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().GetUpgradeDomains,
 		2,
 		unsafe.Pointer(v),
@@ -15696,7 +15696,7 @@ func (v *comFabricUpgradeProgressResult) GetChangedUpgradeDomains(
 	defer func() {
 		bufferedItems = p_2.toGoStruct()
 	}()
-	hr, err1 := callStub8271036529602806980(
+	hr, err1 := callStub2138378508(
 		v.vtable().GetChangedUpgradeDomains,
 		3,
 		unsafe.Pointer(v),
@@ -15725,7 +15725,7 @@ func (v *comFabricRestartNodeResult) vtable() *comFabricRestartNodeResultVtbl {
 }
 
 func (v *comFabricRestartNodeResult) GetResult() (rt *FabricNodeResult, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_Result,
 		0,
 		unsafe.Pointer(v),
@@ -15755,7 +15755,7 @@ func (v *comFabricStartNodeResult) vtable() *comFabricStartNodeResultVtbl {
 }
 
 func (v *comFabricStartNodeResult) GetResult() (rt *FabricNodeResult, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_Result,
 		0,
 		unsafe.Pointer(v),
@@ -15785,7 +15785,7 @@ func (v *comFabricStopNodeResult) vtable() *comFabricStopNodeResultVtbl {
 }
 
 func (v *comFabricStopNodeResult) GetResult() (rt *FabricNodeResult, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_Result,
 		0,
 		unsafe.Pointer(v),
@@ -15815,7 +15815,7 @@ func (v *comFabricRestartDeployedCodePackageResult) vtable() *comFabricRestartDe
 }
 
 func (v *comFabricRestartDeployedCodePackageResult) GetResult() (rt *FabricDeployedCodePackageResult, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_Result,
 		0,
 		unsafe.Pointer(v),
@@ -15845,7 +15845,7 @@ func (v *comFabricMovePrimaryResult) vtable() *comFabricMovePrimaryResultVtbl {
 }
 
 func (v *comFabricMovePrimaryResult) GetResult() (rt *FabricMovePrimaryResult, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_Result,
 		0,
 		unsafe.Pointer(v),
@@ -15875,7 +15875,7 @@ func (v *comFabricMoveSecondaryResult) vtable() *comFabricMoveSecondaryResultVtb
 }
 
 func (v *comFabricMoveSecondaryResult) GetResult() (rt *FabricMoveSecondaryResult, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_Result,
 		0,
 		unsafe.Pointer(v),
@@ -15906,7 +15906,7 @@ func (v *comFabricUpgradeProgressResult2) vtable() *comFabricUpgradeProgressResu
 }
 
 func (v *comFabricUpgradeProgressResult2) GetRollingUpgradeMode() (rt FabricRollingUpgradeMode, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_RollingUpgradeMode,
 		0,
 		unsafe.Pointer(v),
@@ -15916,7 +15916,7 @@ func (v *comFabricUpgradeProgressResult2) GetRollingUpgradeMode() (rt FabricRoll
 	return
 }
 func (v *comFabricUpgradeProgressResult2) GetNextUpgradeDomain() (rt string, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_NextUpgradeDomain,
 		0,
 		unsafe.Pointer(v),
@@ -15946,7 +15946,7 @@ func (v *comFabricUpgradeProgressResult3) vtable() *comFabricUpgradeProgressResu
 }
 
 func (v *comFabricUpgradeProgressResult3) GetUpgradeProgress() (rt *FabricUpgradeProgress, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_UpgradeProgress,
 		0,
 		unsafe.Pointer(v),
@@ -15981,7 +15981,7 @@ func (v *comFabricServicePartitionResolutionChangeHandler) OnChange(
 	partition *comFabricResolvedServicePartitionResult,
 	error FabricErrorCode,
 ) (rt interface{}, err error) {
-	hr, err1 := callStub5789215629241811153(
+	hr, err1 := callStub4048098088(
 		v.vtable().OnChange,
 		4,
 		unsafe.Pointer(v),
@@ -16014,7 +16014,7 @@ func newComFabricServiceNotificationEventHandler(
 	vtbl := com.vtable()
 	com.proxy.unknownref = attachIUnknown("{A04B7E9A-DAAB-45D4-8DA3-95EF3AB5DBAC}", &vtbl.IUnknownVtbl)
 
-	vtbl.OnNotification = createCallbackStub13508278033908553326(com.proxy.OnNotification)
+	vtbl.OnNotification = createCallbackStub699991442(com.proxy.OnNotification)
 
 	com.proxy.client = client
 
@@ -16046,7 +16046,7 @@ func (v *comFabricServiceNotificationEventHandler) vtable() *comFabricServiceNot
 func (v *comFabricServiceNotificationEventHandler) OnNotification(
 	param_0 *comFabricServiceNotification,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().OnNotification,
 		1,
 		unsafe.Pointer(v),
@@ -16072,8 +16072,8 @@ func newComFabricClientConnectionEventHandler(
 	vtbl := com.vtable()
 	com.proxy.unknownref = attachIUnknown("{2BD21F94-D962-4BB4-84B8-5A4B3E9D4D4D}", &vtbl.IUnknownVtbl)
 
-	vtbl.OnConnected = createCallbackStub13508278033908553326(com.proxy.OnConnected)
-	vtbl.OnDisconnected = createCallbackStub13508278033908553326(com.proxy.OnDisconnected)
+	vtbl.OnConnected = createCallbackStub699991442(com.proxy.OnConnected)
+	vtbl.OnDisconnected = createCallbackStub699991442(com.proxy.OnDisconnected)
 
 	com.proxy.client = client
 
@@ -16110,7 +16110,7 @@ func (v *comFabricClientConnectionEventHandler) vtable() *comFabricClientConnect
 func (v *comFabricClientConnectionEventHandler) OnConnected(
 	param_0 *comFabricGatewayInformationResult,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().OnConnected,
 		1,
 		unsafe.Pointer(v),
@@ -16125,7 +16125,7 @@ func (v *comFabricClientConnectionEventHandler) OnConnected(
 func (v *comFabricClientConnectionEventHandler) OnDisconnected(
 	param_0 *comFabricGatewayInformationResult,
 ) (err error) {
-	hr, err1 := callStub3547117239461852141(
+	hr, err1 := callStub699991442(
 		v.vtable().OnDisconnected,
 		1,
 		unsafe.Pointer(v),
@@ -16152,7 +16152,7 @@ func (v *comFabricClientSettingsResult) vtable() *comFabricClientSettingsResultV
 }
 
 func (v *comFabricClientSettingsResult) GetSettings() (rt *FabricClientSettings, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_Settings,
 		0,
 		unsafe.Pointer(v),
@@ -16182,7 +16182,7 @@ func (v *comFabricClusterHealthResult) vtable() *comFabricClusterHealthResultVtb
 }
 
 func (v *comFabricClusterHealthResult) GetClusterHealth() (rt *FabricClusterHealth, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ClusterHealth,
 		0,
 		unsafe.Pointer(v),
@@ -16212,7 +16212,7 @@ func (v *comFabricNodeHealthResult) vtable() *comFabricNodeHealthResultVtbl {
 }
 
 func (v *comFabricNodeHealthResult) GetNodeHealth() (rt *FabricNodeHealth, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_NodeHealth,
 		0,
 		unsafe.Pointer(v),
@@ -16242,7 +16242,7 @@ func (v *comFabricApplicationHealthResult) vtable() *comFabricApplicationHealthR
 }
 
 func (v *comFabricApplicationHealthResult) GetApplicationHealth() (rt *FabricApplicationHealth, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ApplicationHealth,
 		0,
 		unsafe.Pointer(v),
@@ -16272,7 +16272,7 @@ func (v *comFabricServiceHealthResult) vtable() *comFabricServiceHealthResultVtb
 }
 
 func (v *comFabricServiceHealthResult) GetServiceHealth() (rt *FabricServiceHealth, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ServiceHealth,
 		0,
 		unsafe.Pointer(v),
@@ -16302,7 +16302,7 @@ func (v *comFabricPartitionHealthResult) vtable() *comFabricPartitionHealthResul
 }
 
 func (v *comFabricPartitionHealthResult) GetPartitionHealth() (rt *FabricPartitionHealth, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_PartitionHealth,
 		0,
 		unsafe.Pointer(v),
@@ -16332,7 +16332,7 @@ func (v *comFabricReplicaHealthResult) vtable() *comFabricReplicaHealthResultVtb
 }
 
 func (v *comFabricReplicaHealthResult) GetReplicaHealth() (rt *FabricReplicaHealth, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ReplicaHealth,
 		0,
 		unsafe.Pointer(v),
@@ -16362,7 +16362,7 @@ func (v *comFabricDeployedApplicationHealthResult) vtable() *comFabricDeployedAp
 }
 
 func (v *comFabricDeployedApplicationHealthResult) GetDeployedApplicationHealth() (rt *FabricDeployedApplicationHealth, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_DeployedApplicationHealth,
 		0,
 		unsafe.Pointer(v),
@@ -16392,7 +16392,7 @@ func (v *comFabricDeployedServicePackageHealthResult) vtable() *comFabricDeploye
 }
 
 func (v *comFabricDeployedServicePackageHealthResult) GetDeployedServicePackageHealth() (rt *FabricDeployedServicePackageHealth, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_DeployedServicePackageHealth,
 		0,
 		unsafe.Pointer(v),
@@ -16422,7 +16422,7 @@ func (v *comFabricGetNodeListResult) vtable() *comFabricGetNodeListResultVtbl {
 }
 
 func (v *comFabricGetNodeListResult) GetNodeList() (rt []FabricNodeQueryResultItem, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_NodeList,
 		0,
 		unsafe.Pointer(v),
@@ -16464,7 +16464,7 @@ func (v *comFabricGetApplicationTypeListResult) vtable() *comFabricGetApplicatio
 }
 
 func (v *comFabricGetApplicationTypeListResult) GetApplicationTypeList() (rt []FabricApplicationTypeQueryResultItem, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ApplicationTypeList,
 		0,
 		unsafe.Pointer(v),
@@ -16507,7 +16507,7 @@ func (v *comFabricGetApplicationTypePagedListResult) vtable() *comFabricGetAppli
 }
 
 func (v *comFabricGetApplicationTypePagedListResult) GetApplicationTypePagedList() (rt []FabricApplicationTypeQueryResultItem, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ApplicationTypePagedList,
 		0,
 		unsafe.Pointer(v),
@@ -16535,7 +16535,7 @@ func (v *comFabricGetApplicationTypePagedListResult) GetApplicationTypePagedList
 	return
 }
 func (v *comFabricGetApplicationTypePagedListResult) GetPagingStatus() (rt *FabricPagingStatus, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_PagingStatus,
 		0,
 		unsafe.Pointer(v),
@@ -16565,7 +16565,7 @@ func (v *comFabricGetApplicationListResult) vtable() *comFabricGetApplicationLis
 }
 
 func (v *comFabricGetApplicationListResult) GetApplicationList() (rt []FabricApplicationQueryResultItem, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ApplicationList,
 		0,
 		unsafe.Pointer(v),
@@ -16607,7 +16607,7 @@ func (v *comFabricGetServiceTypeListResult) vtable() *comFabricGetServiceTypeLis
 }
 
 func (v *comFabricGetServiceTypeListResult) GetServiceTypeList() (rt []FabricServiceTypeQueryResultItem, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ServiceTypeList,
 		0,
 		unsafe.Pointer(v),
@@ -16649,7 +16649,7 @@ func (v *comFabricGetServiceGroupMemberTypeListResult) vtable() *comFabricGetSer
 }
 
 func (v *comFabricGetServiceGroupMemberTypeListResult) GetServiceGroupMemberTypeList() (rt []FabricServiceGroupMemberTypeQueryResultItem, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ServiceGroupMemberTypeList,
 		0,
 		unsafe.Pointer(v),
@@ -16691,7 +16691,7 @@ func (v *comFabricGetServiceListResult) vtable() *comFabricGetServiceListResultV
 }
 
 func (v *comFabricGetServiceListResult) GetServiceList() (rt []FabricServiceQueryResultItem, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ServiceList,
 		0,
 		unsafe.Pointer(v),
@@ -16733,7 +16733,7 @@ func (v *comFabricGetServiceGroupMemberListResult) vtable() *comFabricGetService
 }
 
 func (v *comFabricGetServiceGroupMemberListResult) GetServiceGroupMemberList() (rt []FabricServiceGroupMemberQueryResultItem, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ServiceGroupMemberList,
 		0,
 		unsafe.Pointer(v),
@@ -16775,7 +16775,7 @@ func (v *comFabricGetPartitionListResult) vtable() *comFabricGetPartitionListRes
 }
 
 func (v *comFabricGetPartitionListResult) GetPartitionList() (rt []FabricServicePartitionQueryResultItem, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_PartitionList,
 		0,
 		unsafe.Pointer(v),
@@ -16817,7 +16817,7 @@ func (v *comFabricGetPartitionLoadInformationResult) vtable() *comFabricGetParti
 }
 
 func (v *comFabricGetPartitionLoadInformationResult) GetPartitionLoadInformation() (rt *FabricPartitionLoadInformation, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_PartitionLoadInformation,
 		0,
 		unsafe.Pointer(v),
@@ -16847,7 +16847,7 @@ func (v *comFabricGetReplicaListResult) vtable() *comFabricGetReplicaListResultV
 }
 
 func (v *comFabricGetReplicaListResult) GetReplicaList() (rt []FabricServiceReplicaQueryResultItem, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ReplicaList,
 		0,
 		unsafe.Pointer(v),
@@ -16889,7 +16889,7 @@ func (v *comFabricGetDeployedApplicationListResult) vtable() *comFabricGetDeploy
 }
 
 func (v *comFabricGetDeployedApplicationListResult) GetDeployedApplicationList() (rt []FabricDeployedApplicationQueryResultItem, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_DeployedApplicationList,
 		0,
 		unsafe.Pointer(v),
@@ -16932,7 +16932,7 @@ func (v *comFabricGetDeployedApplicationPagedListResult) vtable() *comFabricGetD
 }
 
 func (v *comFabricGetDeployedApplicationPagedListResult) GetDeployedApplicationPagedList() (rt []FabricDeployedApplicationQueryResultItem, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_DeployedApplicationPagedList,
 		0,
 		unsafe.Pointer(v),
@@ -16960,7 +16960,7 @@ func (v *comFabricGetDeployedApplicationPagedListResult) GetDeployedApplicationP
 	return
 }
 func (v *comFabricGetDeployedApplicationPagedListResult) GetPagingStatus() (rt *FabricPagingStatus, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_PagingStatus,
 		0,
 		unsafe.Pointer(v),
@@ -16990,7 +16990,7 @@ func (v *comFabricGetDeployedServicePackageListResult) vtable() *comFabricGetDep
 }
 
 func (v *comFabricGetDeployedServicePackageListResult) GetDeployedServicePackageList() (rt []FabricDeployedServicePackageQueryResultItem, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_DeployedServicePackageList,
 		0,
 		unsafe.Pointer(v),
@@ -17032,7 +17032,7 @@ func (v *comFabricGetDeployedServiceTypeListResult) vtable() *comFabricGetDeploy
 }
 
 func (v *comFabricGetDeployedServiceTypeListResult) GetDeployedServiceTypeList() (rt []FabricDeployedServiceTypeQueryResultItem, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_DeployedServiceTypeList,
 		0,
 		unsafe.Pointer(v),
@@ -17074,7 +17074,7 @@ func (v *comFabricGetDeployedCodePackageListResult) vtable() *comFabricGetDeploy
 }
 
 func (v *comFabricGetDeployedCodePackageListResult) GetDeployedCodePackageList() (rt []FabricDeployedCodePackageQueryResultItem, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_DeployedCodePackageList,
 		0,
 		unsafe.Pointer(v),
@@ -17116,7 +17116,7 @@ func (v *comFabricGetDeployedReplicaListResult) vtable() *comFabricGetDeployedRe
 }
 
 func (v *comFabricGetDeployedReplicaListResult) GetDeployedReplicaList() (rt []FabricDeployedServiceReplicaQueryResultItem, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_DeployedReplicaList,
 		0,
 		unsafe.Pointer(v),
@@ -17158,7 +17158,7 @@ func (v *comFabricGetDeployedServiceReplicaDetailResult) vtable() *comFabricGetD
 }
 
 func (v *comFabricGetDeployedServiceReplicaDetailResult) GetReplicaDetail() (rt *FabricDeployedServiceReplicaDetailQueryResultItem, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ReplicaDetail,
 		0,
 		unsafe.Pointer(v),
@@ -17188,7 +17188,7 @@ func (v *comFabricGetProvisionedCodeVersionListResult) vtable() *comFabricGetPro
 }
 
 func (v *comFabricGetProvisionedCodeVersionListResult) GetProvisionedCodeVersionList() (rt []FabricProvisionedCodeVersionQueryResultItem, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ProvisionedCodeVersionList,
 		0,
 		unsafe.Pointer(v),
@@ -17230,7 +17230,7 @@ func (v *comFabricGetClusterLoadInformationResult) vtable() *comFabricGetCluster
 }
 
 func (v *comFabricGetClusterLoadInformationResult) GetClusterLoadInformation() (rt *FabricClusterLoadInformation, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ClusterLoadInformation,
 		0,
 		unsafe.Pointer(v),
@@ -17260,7 +17260,7 @@ func (v *comFabricGetProvisionedConfigVersionListResult) vtable() *comFabricGetP
 }
 
 func (v *comFabricGetProvisionedConfigVersionListResult) GetProvisionedConfigVersionList() (rt []FabricProvisionedConfigVersionQueryResultItem, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ProvisionedConfigVersionList,
 		0,
 		unsafe.Pointer(v),
@@ -17302,7 +17302,7 @@ func (v *comFabricGetNodeLoadInformationResult) vtable() *comFabricGetNodeLoadIn
 }
 
 func (v *comFabricGetNodeLoadInformationResult) GetNodeLoadInformation() (rt *FabricNodeLoadInformation, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_NodeLoadInformation,
 		0,
 		unsafe.Pointer(v),
@@ -17332,7 +17332,7 @@ func (v *comFabricGetReplicaLoadInformationResult) vtable() *comFabricGetReplica
 }
 
 func (v *comFabricGetReplicaLoadInformationResult) GetReplicaLoadInformation() (rt *FabricReplicaLoadInformation, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ReplicaLoadInformation,
 		0,
 		unsafe.Pointer(v),
@@ -17362,7 +17362,7 @@ func (v *comFabricGetApplicationLoadInformationResult) vtable() *comFabricGetApp
 }
 
 func (v *comFabricGetApplicationLoadInformationResult) GetApplicationLoadInformation() (rt *FabricApplicationLoadInformation, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ApplicationLoadInformation,
 		0,
 		unsafe.Pointer(v),
@@ -17392,7 +17392,7 @@ func (v *comFabricGatewayInformationResult) vtable() *comFabricGatewayInformatio
 }
 
 func (v *comFabricGatewayInformationResult) GetGatewayInformation() (rt *FabricGatewayInformation, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_GatewayInformation,
 		0,
 		unsafe.Pointer(v),
@@ -17422,7 +17422,7 @@ func (v *comFabricGetRollingUpgradeMonitoringPolicyResult) vtable() *comFabricGe
 }
 
 func (v *comFabricGetRollingUpgradeMonitoringPolicyResult) GetPolicy() (rt *FabricRollingUpgradeMonitoringPolicy, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_Policy,
 		0,
 		unsafe.Pointer(v),
@@ -17452,7 +17452,7 @@ func (v *comFabricGetUnplacedReplicaInformationResult) vtable() *comFabricGetUnp
 }
 
 func (v *comFabricGetUnplacedReplicaInformationResult) GetUnplacedReplicaInformation() (rt *FabricUnplacedReplicaInformation, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_UnplacedReplicaInformation,
 		0,
 		unsafe.Pointer(v),
@@ -17482,7 +17482,7 @@ func (v *comFabricGetNodeListResult2) vtable() *comFabricGetNodeListResult2Vtbl 
 }
 
 func (v *comFabricGetNodeListResult2) GetPagingStatus() (rt *FabricPagingStatus, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_PagingStatus,
 		0,
 		unsafe.Pointer(v),
@@ -17512,7 +17512,7 @@ func (v *comFabricGetApplicationListResult2) vtable() *comFabricGetApplicationLi
 }
 
 func (v *comFabricGetApplicationListResult2) GetPagingStatus() (rt *FabricPagingStatus, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_PagingStatus,
 		0,
 		unsafe.Pointer(v),
@@ -17542,7 +17542,7 @@ func (v *comFabricGetServiceListResult2) vtable() *comFabricGetServiceListResult
 }
 
 func (v *comFabricGetServiceListResult2) GetPagingStatus() (rt *FabricPagingStatus, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_PagingStatus,
 		0,
 		unsafe.Pointer(v),
@@ -17572,7 +17572,7 @@ func (v *comFabricGetPartitionListResult2) vtable() *comFabricGetPartitionListRe
 }
 
 func (v *comFabricGetPartitionListResult2) GetPagingStatus() (rt *FabricPagingStatus, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_PagingStatus,
 		0,
 		unsafe.Pointer(v),
@@ -17602,7 +17602,7 @@ func (v *comFabricGetReplicaListResult2) vtable() *comFabricGetReplicaListResult
 }
 
 func (v *comFabricGetReplicaListResult2) GetPagingStatus() (rt *FabricPagingStatus, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_PagingStatus,
 		0,
 		unsafe.Pointer(v),
@@ -17632,7 +17632,7 @@ func (v *comFabricGetClusterHealthChunkResult) vtable() *comFabricGetClusterHeal
 }
 
 func (v *comFabricGetClusterHealthChunkResult) GetClusterHealthChunk() (rt *FabricClusterHealthChunk, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ClusterHealthChunk,
 		0,
 		unsafe.Pointer(v),
@@ -17662,7 +17662,7 @@ func (v *comFabricPartitionDataLossProgressResult) vtable() *comFabricPartitionD
 }
 
 func (v *comFabricPartitionDataLossProgressResult) GetProgress() (rt *FabricPartitionDataLossProgress, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_Progress,
 		0,
 		unsafe.Pointer(v),
@@ -17692,7 +17692,7 @@ func (v *comFabricOrchestrationUpgradeStatusResult) vtable() *comFabricOrchestra
 }
 
 func (v *comFabricOrchestrationUpgradeStatusResult) GetProgress() (rt *FabricOrchestrationUpgradeProgress, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_Progress,
 		0,
 		unsafe.Pointer(v),
@@ -17722,7 +17722,7 @@ func (v *comFabricUpgradeOrchestrationServiceStateResult) vtable() *comFabricUpg
 }
 
 func (v *comFabricUpgradeOrchestrationServiceStateResult) GetState() (rt *FabricUpgradeOrchestrationServiceState, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_State,
 		0,
 		unsafe.Pointer(v),
@@ -17752,7 +17752,7 @@ func (v *comFabricPartitionQuorumLossProgressResult) vtable() *comFabricPartitio
 }
 
 func (v *comFabricPartitionQuorumLossProgressResult) GetProgress() (rt *FabricPartitionQuorumLossProgress, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_Progress,
 		0,
 		unsafe.Pointer(v),
@@ -17782,7 +17782,7 @@ func (v *comFabricPartitionRestartProgressResult) vtable() *comFabricPartitionRe
 }
 
 func (v *comFabricPartitionRestartProgressResult) GetProgress() (rt *FabricPartitionRestartProgress, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_Progress,
 		0,
 		unsafe.Pointer(v),
@@ -17812,7 +17812,7 @@ func (v *comFabricTestCommandStatusResult) vtable() *comFabricTestCommandStatusR
 }
 
 func (v *comFabricTestCommandStatusResult) GetResult() (rt []interface{}, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_Result,
 		0,
 		unsafe.Pointer(v),
@@ -17854,7 +17854,7 @@ func (v *comFabricChaosEventsSegmentResult) vtable() *comFabricChaosEventsSegmen
 }
 
 func (v *comFabricChaosEventsSegmentResult) GetChaosEventsSegmentResult() (rt *FabricChaosEventsSegment, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ChaosEventsSegmentResult,
 		0,
 		unsafe.Pointer(v),
@@ -17884,7 +17884,7 @@ func (v *comFabricChaosDescriptionResult) vtable() *comFabricChaosDescriptionRes
 }
 
 func (v *comFabricChaosDescriptionResult) GetChaosDescriptionResult() (rt *FabricChaosDescription, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ChaosDescriptionResult,
 		0,
 		unsafe.Pointer(v),
@@ -17914,7 +17914,7 @@ func (v *comFabricChaosScheduleDescriptionResult) vtable() *comFabricChaosSchedu
 }
 
 func (v *comFabricChaosScheduleDescriptionResult) GetChaosScheduleDescriptionResult() (rt *FabricChaosScheduleDescription, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ChaosScheduleDescriptionResult,
 		0,
 		unsafe.Pointer(v),
@@ -17944,7 +17944,7 @@ func (v *comFabricChaosReportResult) vtable() *comFabricChaosReportResultVtbl {
 }
 
 func (v *comFabricChaosReportResult) GetChaosReportResult() (rt *FabricChaosReport, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ChaosReportResult,
 		0,
 		unsafe.Pointer(v),
@@ -17974,7 +17974,7 @@ func (v *comFabricNodeTransitionProgressResult) vtable() *comFabricNodeTransitio
 }
 
 func (v *comFabricNodeTransitionProgressResult) GetProgress() (rt *FabricNodeTransitionProgress, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_Progress,
 		0,
 		unsafe.Pointer(v),
@@ -18004,7 +18004,7 @@ func (v *comFabricGetServiceNameResult) vtable() *comFabricGetServiceNameResultV
 }
 
 func (v *comFabricGetServiceNameResult) GetServiceName() (rt *FabricServiceNameQueryResult, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ServiceName,
 		0,
 		unsafe.Pointer(v),
@@ -18034,7 +18034,7 @@ func (v *comFabricGetApplicationNameResult) vtable() *comFabricGetApplicationNam
 }
 
 func (v *comFabricGetApplicationNameResult) GetApplicationName() (rt *FabricApplicationNameQueryResult, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ApplicationName,
 		0,
 		unsafe.Pointer(v),
@@ -18064,7 +18064,7 @@ func (v *comFabricSecretsResult) vtable() *comFabricSecretsResultVtbl {
 }
 
 func (v *comFabricSecretsResult) GetSecrets() (rt []FabricSecret, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_Secrets,
 		0,
 		unsafe.Pointer(v),
@@ -18106,7 +18106,7 @@ func (v *comFabricSecretReferencesResult) vtable() *comFabricSecretReferencesRes
 }
 
 func (v *comFabricSecretReferencesResult) GetSecretReferences() (rt []FabricSecretReference, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_SecretReferences,
 		0,
 		unsafe.Pointer(v),
@@ -18185,7 +18185,7 @@ func (v *comFabricSecretStoreClient) beginGetSecrets(
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub15598723421636958591(
+	hr, err1 := callStub1522013493(
 		v.vtable().BeginGetSecrets,
 		5,
 		unsafe.Pointer(v),
@@ -18208,7 +18208,7 @@ func (v *comFabricSecretStoreClient) endGetSecrets(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetSecrets,
 		2,
 		unsafe.Pointer(v),
@@ -18251,7 +18251,7 @@ func (v *comFabricSecretStoreClient) beginSetSecrets(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginSetSecrets,
 		4,
 		unsafe.Pointer(v),
@@ -18273,7 +18273,7 @@ func (v *comFabricSecretStoreClient) endSetSecrets(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndSetSecrets,
 		2,
 		unsafe.Pointer(v),
@@ -18316,7 +18316,7 @@ func (v *comFabricSecretStoreClient) beginRemoveSecrets(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginRemoveSecrets,
 		4,
 		unsafe.Pointer(v),
@@ -18338,7 +18338,7 @@ func (v *comFabricSecretStoreClient) endRemoveSecrets(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndRemoveSecrets,
 		2,
 		unsafe.Pointer(v),
@@ -18381,7 +18381,7 @@ func (v *comFabricSecretStoreClient) beginGetSecretVersions(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub7782600151265676089(
+	hr, err1 := callStub4120646493(
 		v.vtable().BeginGetSecretVersions,
 		4,
 		unsafe.Pointer(v),
@@ -18403,7 +18403,7 @@ func (v *comFabricSecretStoreClient) endGetSecretVersions(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub12358644010272102580(
+	hr, err1 := callStub2844134223(
 		v.vtable().EndGetSecretVersions,
 		2,
 		unsafe.Pointer(v),
@@ -18432,7 +18432,7 @@ func (v *comFabricGetNetworkListResult) vtable() *comFabricGetNetworkListResultV
 }
 
 func (v *comFabricGetNetworkListResult) GetNetworkList() (rt []FabricNetworkInformation, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_NetworkList,
 		0,
 		unsafe.Pointer(v),
@@ -18460,7 +18460,7 @@ func (v *comFabricGetNetworkListResult) GetNetworkList() (rt []FabricNetworkInfo
 	return
 }
 func (v *comFabricGetNetworkListResult) GetPagingStatus() (rt *FabricPagingStatus, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_PagingStatus,
 		0,
 		unsafe.Pointer(v),
@@ -18491,7 +18491,7 @@ func (v *comFabricGetNetworkApplicationListResult) vtable() *comFabricGetNetwork
 }
 
 func (v *comFabricGetNetworkApplicationListResult) GetNetworkApplicationList() (rt []FabricNetworkApplicationQueryResultItem, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_NetworkApplicationList,
 		0,
 		unsafe.Pointer(v),
@@ -18519,7 +18519,7 @@ func (v *comFabricGetNetworkApplicationListResult) GetNetworkApplicationList() (
 	return
 }
 func (v *comFabricGetNetworkApplicationListResult) GetPagingStatus() (rt *FabricPagingStatus, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_PagingStatus,
 		0,
 		unsafe.Pointer(v),
@@ -18550,7 +18550,7 @@ func (v *comFabricGetNetworkNodeListResult) vtable() *comFabricGetNetworkNodeLis
 }
 
 func (v *comFabricGetNetworkNodeListResult) GetNetworkNodeList() (rt []FabricNetworkNodeQueryResultItem, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_NetworkNodeList,
 		0,
 		unsafe.Pointer(v),
@@ -18578,7 +18578,7 @@ func (v *comFabricGetNetworkNodeListResult) GetNetworkNodeList() (rt []FabricNet
 	return
 }
 func (v *comFabricGetNetworkNodeListResult) GetPagingStatus() (rt *FabricPagingStatus, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_PagingStatus,
 		0,
 		unsafe.Pointer(v),
@@ -18609,7 +18609,7 @@ func (v *comFabricGetApplicationNetworkListResult) vtable() *comFabricGetApplica
 }
 
 func (v *comFabricGetApplicationNetworkListResult) GetApplicationNetworkList() (rt []FabricApplicationNetworkQueryResultItem, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_ApplicationNetworkList,
 		0,
 		unsafe.Pointer(v),
@@ -18637,7 +18637,7 @@ func (v *comFabricGetApplicationNetworkListResult) GetApplicationNetworkList() (
 	return
 }
 func (v *comFabricGetApplicationNetworkListResult) GetPagingStatus() (rt *FabricPagingStatus, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_PagingStatus,
 		0,
 		unsafe.Pointer(v),
@@ -18668,7 +18668,7 @@ func (v *comFabricGetDeployedNetworkListResult) vtable() *comFabricGetDeployedNe
 }
 
 func (v *comFabricGetDeployedNetworkListResult) GetDeployedNetworkList() (rt []FabricDeployedNetworkQueryResultItem, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_DeployedNetworkList,
 		0,
 		unsafe.Pointer(v),
@@ -18696,7 +18696,7 @@ func (v *comFabricGetDeployedNetworkListResult) GetDeployedNetworkList() (rt []F
 	return
 }
 func (v *comFabricGetDeployedNetworkListResult) GetPagingStatus() (rt *FabricPagingStatus, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_PagingStatus,
 		0,
 		unsafe.Pointer(v),
@@ -18727,7 +18727,7 @@ func (v *comFabricGetDeployedNetworkCodePackageListResult) vtable() *comFabricGe
 }
 
 func (v *comFabricGetDeployedNetworkCodePackageListResult) GetDeployedNetworkCodePackageList() (rt []FabricDeployedNetworkCodePackageQueryResultItem, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_DeployedNetworkCodePackageList,
 		0,
 		unsafe.Pointer(v),
@@ -18755,7 +18755,7 @@ func (v *comFabricGetDeployedNetworkCodePackageListResult) GetDeployedNetworkCod
 	return
 }
 func (v *comFabricGetDeployedNetworkCodePackageListResult) GetPagingStatus() (rt *FabricPagingStatus, err error) {
-	hr, err1 := callStub1819859077681302979(
+	hr, err1 := callStub1(
 		v.vtable().get_PagingStatus,
 		0,
 		unsafe.Pointer(v),

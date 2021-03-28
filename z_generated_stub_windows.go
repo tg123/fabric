@@ -14,94 +14,7 @@ func boolToUintptr(x bool) uintptr {
 	}
 	return 0
 }
-func callStub1048489181713478054(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 uint32,
-	argv1 unsafe.Pointer,
-	argv2 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall6(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		0,
-		0,
-	)
-	return hr, err
-}
-func callStub1335730304632643656(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 bool,
-	argv3 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall6(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		boolToUintptr(argv2),
-		uintptr(argv3),
-		0,
-	)
-	return hr, err
-}
-func callStub1533526493275071680(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 int64,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall6(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		0,
-		0,
-	)
-	return hr, err
-}
-func callStub1630288334828793287(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 int64,
-	argv3 uint32,
-	argv4 unsafe.Pointer,
-	argv5 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall9(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		uintptr(argv3),
-		uintptr(argv4),
-		uintptr(argv5),
-		0,
-		0,
-	)
-	return hr, err
-}
-func callStub1819859077681302979(
+func callStub1(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -115,7 +28,37 @@ func callStub1819859077681302979(
 	)
 	return hr, err
 }
-func callStub2075713109747488783(
+func callStub96862646(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 int64,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		0,
+	)
+	return hr, err
+}
+func callStub142410278(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 uint32,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		0,
+	)
+	return hr, err
+}
+func callStub142934571(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -130,599 +73,7 @@ func callStub2075713109747488783(
 	)
 	return hr, err
 }
-func callStub2165927519712776285(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall6(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		uintptr(argv3),
-		0,
-	)
-	return hr, err
-}
-func callStub2483127582336966541(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 FabricReplicaOpenMode,
-	argv1 unsafe.Pointer,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall6(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		uintptr(argv3),
-		0,
-	)
-	return hr, err
-}
-func callStub2882371996775522769(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 int32,
-	argv3 unsafe.Pointer,
-	argv4 int64,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall6(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		uintptr(argv3),
-		uintptr(argv4),
-	)
-	return hr, err
-}
-func callStub3094878924190377857(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 FabricStoreBackupOption,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-	argv4 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall6(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		uintptr(argv3),
-		uintptr(argv4),
-	)
-	return hr, err
-}
-func callStub3185167729122897081(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 int64,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall6(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		uintptr(argv3),
-		0,
-	)
-	return hr, err
-}
-func callStub3547117239461852141(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		0,
-	)
-	return hr, err
-}
-func callStub4161178164818170091(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 int64,
-	argv1 unsafe.Pointer,
-	argv2 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall6(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		0,
-		0,
-	)
-	return hr, err
-}
-func callStub4405830402697095593(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 FabricReplicaRole,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall6(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		uintptr(argv3),
-		0,
-	)
-	return hr, err
-}
-func callStub4555919410121256920(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-	argv4 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall6(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		uintptr(argv3),
-		uintptr(argv4),
-	)
-	return hr, err
-}
-func callStub5789215629241811153(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 int64,
-	argv2 unsafe.Pointer,
-	argv3 FabricErrorCode,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall6(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		uintptr(argv3),
-		0,
-	)
-	return hr, err
-}
-func callStub5955222752708360228(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 bool,
-	argv3 uint32,
-	argv4 unsafe.Pointer,
-	argv5 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall9(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		boolToUintptr(argv2),
-		uintptr(argv3),
-		uintptr(argv4),
-		uintptr(argv5),
-		0,
-		0,
-	)
-	return hr, err
-}
-func callStub6142135466863627413(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 int64,
-	argv3 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall6(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		uintptr(argv3),
-		0,
-	)
-	return hr, err
-}
-func callStub6419494709900638139(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 FabricFaultType,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		0,
-	)
-	return hr, err
-}
-func callStub7287933853701551490(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 int64,
-	argv1 uint32,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall6(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		uintptr(argv3),
-		0,
-	)
-	return hr, err
-}
-func callStub7503403356184589199(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 FabricPartitionKeyType,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-	argv4 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall6(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		uintptr(argv3),
-		uintptr(argv4),
-	)
-	return hr, err
-}
-func callStub7782600151265676089(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 uint32,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall6(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		uintptr(argv3),
-		0,
-	)
-	return hr, err
-}
-func callStub8271036529602806980(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall6(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		0,
-		0,
-	)
-	return hr, err
-}
-func callStub9429292076469177682(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 uint32,
-	argv2 unsafe.Pointer,
-	argv3 uint32,
-	argv4 unsafe.Pointer,
-	argv5 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall9(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		uintptr(argv3),
-		uintptr(argv4),
-		uintptr(argv5),
-		0,
-		0,
-	)
-	return hr, err
-}
-func callStub9532067423886724566(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 int64,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		0,
-	)
-	return hr, err
-}
-func callStub9554407596381520368(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 int64,
-	argv1 int64,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall6(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		uintptr(argv3),
-		0,
-	)
-	return hr, err
-}
-func callStub9660077576991986601(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 unsafe.Pointer,
-	argv3 uint32,
-	argv4 unsafe.Pointer,
-	argv5 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall9(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		uintptr(argv3),
-		uintptr(argv4),
-		uintptr(argv5),
-		0,
-		0,
-	)
-	return hr, err
-}
-func callStub9707163627877372518(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 bool,
-	argv2 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall6(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		boolToUintptr(argv1),
-		uintptr(argv2),
-		0,
-		0,
-	)
-	return hr, err
-}
-func callStub10058214422621334751(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 uint32,
-	argv3 unsafe.Pointer,
-	argv4 uint32,
-	argv5 unsafe.Pointer,
-	argv6 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall9(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		uintptr(argv3),
-		uintptr(argv4),
-		uintptr(argv5),
-		uintptr(argv6),
-		0,
-	)
-	return hr, err
-}
-func callStub10107670971298011941(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 unsafe.Pointer,
-	argv3 unsafe.Pointer,
-	argv4 uint32,
-	argv5 unsafe.Pointer,
-	argv6 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall9(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		uintptr(argv3),
-		uintptr(argv4),
-		uintptr(argv5),
-		uintptr(argv6),
-		0,
-	)
-	return hr, err
-}
-func callStub11099145478811451011(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 int32,
-	argv3 unsafe.Pointer,
-	argv4 int64,
-	argv5 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall9(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		uintptr(argv3),
-		uintptr(argv4),
-		uintptr(argv5),
-		0,
-		0,
-	)
-	return hr, err
-}
-func callStub11563507578962675232(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 int32,
-	argv3 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall6(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		uintptr(argv3),
-		0,
-	)
-	return hr, err
-}
-func callStub11945374741807581896(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 FabricMoveCost,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		0,
-	)
-	return hr, err
-}
-func callStub12358644010272102580(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-	)
-	return hr, err
-}
-func callStub12664629900598883453(
+func callStub328735686(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -748,83 +99,15 @@ func callStub12664629900598883453(
 	)
 	return hr, err
 }
-func callStub13310073979949236625(
+func callStub571021482(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 int64,
+	argv0 int64,
+	argv1 unsafe.Pointer,
 	argv2 unsafe.Pointer,
-	argv3 uint32,
+	argv3 unsafe.Pointer,
 	argv4 unsafe.Pointer,
-	argv5 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall9(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		uintptr(argv3),
-		uintptr(argv4),
-		uintptr(argv5),
-		0,
-		0,
-	)
-	return hr, err
-}
-func callStub13385571198022537309(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 uint32,
-	argv1 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-	)
-	return hr, err
-}
-func callStub14727739111527231414(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 unsafe.Pointer,
-	argv3 uint32,
-	argv4 unsafe.Pointer,
-	argv5 uint32,
-	argv6 unsafe.Pointer,
-	argv7 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall9(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		uintptr(argv3),
-		uintptr(argv4),
-		uintptr(argv5),
-		uintptr(argv6),
-		uintptr(argv7),
-	)
-	return hr, err
-}
-func callStub15208723179229678737(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 FabricReplicaRole,
-	argv1 unsafe.Pointer,
-	argv2 unsafe.Pointer,
 ) (uintptr, error) {
 	hr, _, err := syscall.Syscall6(
 		addr,
@@ -833,12 +116,144 @@ func callStub15208723179229678737(
 		uintptr(argv0),
 		uintptr(argv1),
 		uintptr(argv2),
-		0,
+		uintptr(argv3),
+		uintptr(argv4),
+	)
+	return hr, err
+}
+func callStub642392001(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 FabricPartitionKeyType,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+	argv4 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+	)
+	return hr, err
+}
+func callStub667092344(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 FabricMoveCost,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
 		0,
 	)
 	return hr, err
 }
-func callStub15487510995445485658(
+func callStub699991442(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		0,
+	)
+	return hr, err
+}
+func callStub765140102(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+	argv4 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+	)
+	return hr, err
+}
+func callStub765920742(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 FabricFaultType,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		0,
+	)
+	return hr, err
+}
+func callStub770250917(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 int32,
+	argv3 unsafe.Pointer,
+	argv4 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+	)
+	return hr, err
+}
+func callStub824512273(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 int64,
+	argv1 int64,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		0,
+	)
+	return hr, err
+}
+func callStub877275087(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -865,66 +280,7 @@ func callStub15487510995445485658(
 	)
 	return hr, err
 }
-func callStub15598723421636958591(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 bool,
-	argv2 uint32,
-	argv3 unsafe.Pointer,
-	argv4 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall6(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		boolToUintptr(argv1),
-		uintptr(argv2),
-		uintptr(argv3),
-		uintptr(argv4),
-	)
-	return hr, err
-}
-func callStub15718182357955102547(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 uint32,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		0,
-	)
-	return hr, err
-}
-func callStub15738012513523528246(
-	addr uintptr,
-	argc int,
-	this unsafe.Pointer,
-	argv0 unsafe.Pointer,
-	argv1 unsafe.Pointer,
-	argv2 uint32,
-	argv3 unsafe.Pointer,
-	argv4 unsafe.Pointer,
-) (uintptr, error) {
-	hr, _, err := syscall.Syscall6(
-		addr,
-		uintptr(argc+1),
-		uintptr(this),
-		uintptr(argv0),
-		uintptr(argv1),
-		uintptr(argv2),
-		uintptr(argv3),
-		uintptr(argv4),
-	)
-	return hr, err
-}
-func callStub15846046096096524420(
+func callStub1072500600(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -945,12 +301,12 @@ func callStub15846046096096524420(
 	)
 	return hr, err
 }
-func callStub15865859949363472529(
+func callStub1121783681(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
 	argv0 int64,
-	argv1 unsafe.Pointer,
+	argv1 uint32,
 	argv2 unsafe.Pointer,
 	argv3 unsafe.Pointer,
 ) (uintptr, error) {
@@ -966,13 +322,15 @@ func callStub15865859949363472529(
 	)
 	return hr, err
 }
-func callStub16087644903281589486(
+func callStub1128800280(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
-	argv0 FabricReplicaSetQuorumMode,
-	argv1 unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 FabricStoreBackupOption,
 	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+	argv4 unsafe.Pointer,
 ) (uintptr, error) {
 	hr, _, err := syscall.Syscall6(
 		addr,
@@ -981,17 +339,17 @@ func callStub16087644903281589486(
 		uintptr(argv0),
 		uintptr(argv1),
 		uintptr(argv2),
-		0,
-		0,
+		uintptr(argv3),
+		uintptr(argv4),
 	)
 	return hr, err
 }
-func callStub17177410701984374373(
+func callStub1238898970(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
 	argv0 unsafe.Pointer,
-	argv1 FabricNodeDeactivationIntent,
+	argv1 unsafe.Pointer,
 	argv2 uint32,
 	argv3 unsafe.Pointer,
 	argv4 unsafe.Pointer,
@@ -1008,7 +366,7 @@ func callStub17177410701984374373(
 	)
 	return hr, err
 }
-func callStub17244673165462293359(
+func callStub1258170961(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -1036,18 +394,54 @@ func callStub17244673165462293359(
 	)
 	return hr, err
 }
-func callStub17320848538307195614(
+func callStub1292376406(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 FabricReplicaOpenMode,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		0,
+	)
+	return hr, err
+}
+func callStub1425410019(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 uint32,
+	argv1 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+	)
+	return hr, err
+}
+func callStub1522013493(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
 	argv0 unsafe.Pointer,
 	argv1 bool,
-	argv2 unsafe.Pointer,
-	argv3 uint32,
+	argv2 uint32,
+	argv3 unsafe.Pointer,
 	argv4 unsafe.Pointer,
-	argv5 unsafe.Pointer,
 ) (uintptr, error) {
-	hr, _, err := syscall.Syscall9(
+	hr, _, err := syscall.Syscall6(
 		addr,
 		uintptr(argc+1),
 		uintptr(this),
@@ -1056,21 +450,18 @@ func callStub17320848538307195614(
 		uintptr(argv2),
 		uintptr(argv3),
 		uintptr(argv4),
-		uintptr(argv5),
-		0,
-		0,
 	)
 	return hr, err
 }
-func callStub17813239524112400266(
+func callStub1580995785(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
-	argv0 int64,
+	argv0 unsafe.Pointer,
 	argv1 unsafe.Pointer,
-	argv2 unsafe.Pointer,
+	argv2 int32,
 	argv3 unsafe.Pointer,
-	argv4 unsafe.Pointer,
+	argv4 int64,
 ) (uintptr, error) {
 	hr, _, err := syscall.Syscall6(
 		addr,
@@ -1084,7 +475,47 @@ func callStub17813239524112400266(
 	)
 	return hr, err
 }
-func callStub18124872607643347555(
+func callStub1789138364(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 FabricReplicaSetQuorumMode,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		0,
+		0,
+	)
+	return hr, err
+}
+func callStub2138378508(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		0,
+		0,
+	)
+	return hr, err
+}
+func callStub2823758008(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
@@ -1111,13 +542,243 @@ func callStub18124872607643347555(
 	)
 	return hr, err
 }
-func callStub18391797109609713916(
+func callStub2844134223(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+	)
+	return hr, err
+}
+func callStub2876708553(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		0,
+	)
+	return hr, err
+}
+func callStub2937459220(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 FabricReplicaRole,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		0,
+		0,
+	)
+	return hr, err
+}
+func callStub3260095110(
 	addr uintptr,
 	argc int,
 	this unsafe.Pointer,
 	argv0 unsafe.Pointer,
 	argv1 unsafe.Pointer,
 	argv2 int32,
+	argv3 unsafe.Pointer,
+	argv4 int64,
+	argv5 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall9(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+		uintptr(argv5),
+		0,
+		0,
+	)
+	return hr, err
+}
+func callStub3312394536(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 uint32,
+	argv3 unsafe.Pointer,
+	argv4 uint32,
+	argv5 unsafe.Pointer,
+	argv6 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall9(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+		uintptr(argv5),
+		uintptr(argv6),
+		0,
+	)
+	return hr, err
+}
+func callStub3398245106(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 bool,
+	argv2 unsafe.Pointer,
+	argv3 uint32,
+	argv4 unsafe.Pointer,
+	argv5 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall9(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		boolToUintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+		uintptr(argv5),
+		0,
+		0,
+	)
+	return hr, err
+}
+func callStub3415612146(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 bool,
+	argv3 uint32,
+	argv4 unsafe.Pointer,
+	argv5 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall9(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		boolToUintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+		uintptr(argv5),
+		0,
+		0,
+	)
+	return hr, err
+}
+func callStub3552647931(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 int64,
+	argv2 unsafe.Pointer,
+	argv3 uint32,
+	argv4 unsafe.Pointer,
+	argv5 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall9(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+		uintptr(argv5),
+		0,
+		0,
+	)
+	return hr, err
+}
+func callStub3634565860(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 bool,
+	argv3 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		boolToUintptr(argv2),
+		uintptr(argv3),
+		0,
+	)
+	return hr, err
+}
+func callStub3653833453(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 int64,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		0,
+	)
+	return hr, err
+}
+func callStub3654885027(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 FabricNodeDeactivationIntent,
+	argv2 uint32,
 	argv3 unsafe.Pointer,
 	argv4 unsafe.Pointer,
 ) (uintptr, error) {
@@ -1133,27 +794,366 @@ func callStub18391797109609713916(
 	)
 	return hr, err
 }
-func createCallbackStub9488618411548846275(
+func callStub3657439995(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 int64,
+	argv3 uint32,
+	argv4 unsafe.Pointer,
+	argv5 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall9(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+		uintptr(argv5),
+		0,
+		0,
+	)
+	return hr, err
+}
+func callStub3758625517(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 int64,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		0,
+	)
+	return hr, err
+}
+func callStub3857978088(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 int32,
+	argv3 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		0,
+	)
+	return hr, err
+}
+func callStub3858959655(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 bool,
+	argv2 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		boolToUintptr(argv1),
+		uintptr(argv2),
+		0,
+		0,
+	)
+	return hr, err
+}
+func callStub3863417581(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 int64,
+	argv3 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		0,
+	)
+	return hr, err
+}
+func callStub3886746928(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 int64,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		0,
+		0,
+	)
+	return hr, err
+}
+func callStub3964606417(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 FabricReplicaRole,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		0,
+	)
+	return hr, err
+}
+func callStub3992725221(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+	argv3 uint32,
+	argv4 unsafe.Pointer,
+	argv5 uint32,
+	argv6 unsafe.Pointer,
+	argv7 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall9(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+		uintptr(argv5),
+		uintptr(argv6),
+		uintptr(argv7),
+	)
+	return hr, err
+}
+func callStub4048098088(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 int64,
+	argv2 unsafe.Pointer,
+	argv3 FabricErrorCode,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		0,
+	)
+	return hr, err
+}
+func callStub4076149611(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 uint32,
+	argv2 unsafe.Pointer,
+	argv3 uint32,
+	argv4 unsafe.Pointer,
+	argv5 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall9(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+		uintptr(argv5),
+		0,
+		0,
+	)
+	return hr, err
+}
+func callStub4095221463(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+	argv3 uint32,
+	argv4 unsafe.Pointer,
+	argv5 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall9(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+		uintptr(argv5),
+		0,
+		0,
+	)
+	return hr, err
+}
+func callStub4096331056(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 int64,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		0,
+		0,
+	)
+	return hr, err
+}
+func callStub4101645460(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+	argv4 uint32,
+	argv5 unsafe.Pointer,
+	argv6 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall9(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		uintptr(argv4),
+		uintptr(argv5),
+		uintptr(argv6),
+		0,
+	)
+	return hr, err
+}
+func callStub4120646493(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 unsafe.Pointer,
+	argv1 uint32,
+	argv2 unsafe.Pointer,
+	argv3 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		uintptr(argv3),
+		0,
+	)
+	return hr, err
+}
+func callStub4152495520(
+	addr uintptr,
+	argc int,
+	this unsafe.Pointer,
+	argv0 uint32,
+	argv1 unsafe.Pointer,
+	argv2 unsafe.Pointer,
+) (uintptr, error) {
+	hr, _, err := syscall.Syscall6(
+		addr,
+		uintptr(argc+1),
+		uintptr(this),
+		uintptr(argv0),
+		uintptr(argv1),
+		uintptr(argv2),
+		0,
+		0,
+	)
+	return hr, err
+}
+func createCallbackStub1(
 	cb interface{},
 ) uintptr {
 	return syscall.NewCallback(cb)
 }
-func createCallbackStub12380892614712961058(
+func createCallbackStub699991442(
 	cb interface{},
 ) uintptr {
 	return syscall.NewCallback(cb)
 }
-func createCallbackStub13508278033908553326(
+func createCallbackStub2138378508(
 	cb interface{},
 ) uintptr {
 	return syscall.NewCallback(cb)
 }
-func createCallbackStub15030901481496332800(
+func createCallbackStub2823758008(
 	cb interface{},
 ) uintptr {
 	return syscall.NewCallback(cb)
 }
-func createCallbackStub15268508920543171926(
+func createCallbackStub2844134223(
 	cb interface{},
 ) uintptr {
 	return syscall.NewCallback(cb)

@@ -9,7 +9,7 @@ import (
 func (g *generator) generateStub(callbody func(fn string, paramTypes []string), callbackbody func(fn string, paramTypes []string)) {
 	g.importpkg("unsafe")
 
-	sorted := func(m map[uint64][]string) (keys []uint64) {
+	sorted := func(m map[uint32][]string) (keys []uint32) {
 		for k := range m {
 			keys = append(keys, k)
 		}
