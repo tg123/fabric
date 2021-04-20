@@ -2,7 +2,6 @@ package fabric
 
 import (
 	"sync"
-	"syscall"
 	"unsafe"
 
 	ole "github.com/go-ole/go-ole"
@@ -21,9 +20,9 @@ type goIUnknown struct {
 
 func attachIUnknown(iid string, vtbl *ole.IUnknownVtbl) *goIUnknown {
 	un := &goIUnknown{iid: iid}
-	vtbl.QueryInterface = syscall.NewCallback(un.queryInterface)
-	vtbl.AddRef = syscall.NewCallback(un.addRef)
-	vtbl.Release = syscall.NewCallback(un.release)
+	vtbl.QueryInterface = createCallback(un.queryInterface)
+	vtbl.AddRef = createCallback(un.addRef)
+	vtbl.Release = createCallback(un.release)
 	return un
 }
 

@@ -22,6 +22,8 @@ type defContext struct {
 	definedStructExParent map[string]string
 	definedInterface      map[string]*ast.InterfaceNode
 	definedTypedef        map[string]*ast.TypedefNode
+
+	stubBuilder *callStubBuilder
 }
 
 func defineIdent(c *defContext, nodes []interface{}) {
@@ -61,6 +63,8 @@ func newDefContext(idls ...string) (*defContext, error) {
 		definedStructExParent: make(map[string]string),
 		definedInterface:      make(map[string]*ast.InterfaceNode),
 		definedTypedef:        make(map[string]*ast.TypedefNode),
+
+		stubBuilder: newCallStubBuilder(),
 	}
 
 	for _, fn := range idls {
