@@ -1,5 +1,4 @@
-// +build windows
-// +build amd64
+// +build windows, amd64
 
 package fabric
 
@@ -18,6 +17,13 @@ var (
 	fabricCreateClient2Proc      = fabricClientDll.NewProc("FabricCreateClient2")
 	fabricCreateClient3Proc      = fabricClientDll.NewProc("FabricCreateClient3")
 )
+
+func boolToUintptr(x bool) uintptr {
+	if x {
+		return 1
+	}
+	return 0
+}
 
 func callCreateClient3(
 	len int,

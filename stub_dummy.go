@@ -1,6 +1,4 @@
-// +build !windows
-// +build !linux
-// +build !amd64
+// +build !windows, !linux, !amd64, !cgo
 
 package fabric
 

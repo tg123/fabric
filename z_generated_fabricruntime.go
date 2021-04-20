@@ -91,15 +91,15 @@ func (v *comFabricRuntime) beginRegisterStatelessServiceFactory(
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub1238898970(
+	hr, err1 := callStub2123967250(
 		v.vtable().BeginRegisterStatelessServiceFactory,
 		5,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(factory),
+		p_0,
+		factory,
 		timeoutMilliseconds,
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_4),
+		callback,
+		&p_4,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -113,12 +113,12 @@ func (v *comFabricRuntime) RegisterStatelessServiceFactory(
 ) (err error) {
 	var p_0 *uint16
 	p_0 = utf16PtrFromString(serviceTypeName)
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub906170255(
 		v.vtable().RegisterStatelessServiceFactory,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(factory),
+		p_0,
+		factory,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -138,15 +138,15 @@ func (v *comFabricRuntime) beginRegisterStatefulServiceFactory(
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub1238898970(
+	hr, err1 := callStub1319774882(
 		v.vtable().BeginRegisterStatefulServiceFactory,
 		5,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(factory),
+		p_0,
+		factory,
 		timeoutMilliseconds,
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_4),
+		callback,
+		&p_4,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -160,12 +160,12 @@ func (v *comFabricRuntime) RegisterStatefulServiceFactory(
 ) (err error) {
 	var p_0 *uint16
 	p_0 = utf16PtrFromString(serviceTypeName)
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub637800223(
 		v.vtable().RegisterStatefulServiceFactory,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(factory),
+		p_0,
+		factory,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -178,11 +178,11 @@ func (v *comFabricRuntime) CreateServiceGroupFactoryBuilder() (builder *comFabri
 	defer func() {
 		builder = p_0
 	}()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub95161944(
 		v.vtable().CreateServiceGroupFactoryBuilder,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
+		&p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -202,15 +202,15 @@ func (v *comFabricRuntime) beginRegisterServiceGroupFactory(
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub1238898970(
+	hr, err1 := callStub3357944167(
 		v.vtable().BeginRegisterServiceGroupFactory,
 		5,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(factory),
+		p_0,
+		factory,
 		timeoutMilliseconds,
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_4),
+		callback,
+		&p_4,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -224,12 +224,12 @@ func (v *comFabricRuntime) RegisterServiceGroupFactory(
 ) (err error) {
 	var p_0 *uint16
 	p_0 = utf16PtrFromString(groupServiceType)
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub4182969828(
 		v.vtable().RegisterServiceGroupFactory,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(factory),
+		p_0,
+		factory,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -251,7 +251,7 @@ func newComFabricStatelessServiceFactory(
 	vtbl := com.vtable()
 	com.proxy.unknownref = attachIUnknown("{CC53AF8F-74CD-11DF-AC3E-0024811E3892}", &vtbl.IUnknownVtbl)
 
-	vtbl.CreateInstance = createCallbackStub2823758008(com.proxy.CreateInstance)
+	vtbl.CreateInstance = createCallbackStub351017874(com.proxy.CreateInstance)
 
 	com.proxy.builder = builder
 
@@ -302,17 +302,17 @@ func (v *comFabricStatelessServiceFactory) CreateInstance(
 	defer func() {
 		serviceInstance = p_6
 	}()
-	hr, err1 := callStub2823758008(
+	hr, err1 := callStub351017874(
 		v.vtable().CreateInstance,
 		7,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(p_1),
+		p_0,
+		p_1,
 		initializationDataLength,
-		unsafe.Pointer(initializationData),
-		unsafe.Pointer(&partitionId),
+		initializationData,
+		partitionId,
 		instanceId,
-		unsafe.Pointer(&p_6),
+		&p_6,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -334,10 +334,10 @@ func newComFabricStatelessServiceInstance(
 	vtbl := com.vtable()
 	com.proxy.unknownref = attachIUnknown("{CC53AF90-74CD-11DF-AC3E-0024811E3892}", &vtbl.IUnknownVtbl)
 
-	vtbl.BeginOpen = createCallbackStub2138378508(com.proxy.BeginOpen)
-	vtbl.EndOpen = createCallbackStub2844134223(com.proxy.EndOpen)
-	vtbl.BeginClose = createCallbackStub2844134223(com.proxy.BeginClose)
-	vtbl.EndClose = createCallbackStub699991442(com.proxy.EndClose)
+	vtbl.BeginOpen = createCallbackStub3267176230(com.proxy.BeginOpen)
+	vtbl.EndOpen = createCallbackStub1252332865(com.proxy.EndOpen)
+	vtbl.BeginClose = createCallbackStub719329543(com.proxy.BeginClose)
+	vtbl.EndClose = createCallbackStub3172535365(com.proxy.EndClose)
 	vtbl.Abort = createCallbackStub1(com.proxy.Abort)
 
 	com.proxy.instance = instance
@@ -398,13 +398,13 @@ func (v *comFabricStatelessServiceInstance) beginOpen(
 	defer func() {
 		context = p_2
 	}()
-	hr, err1 := callStub2138378508(
+	hr, err1 := callStub3267176230(
 		v.vtable().BeginOpen,
 		3,
 		unsafe.Pointer(v),
-		unsafe.Pointer(partition),
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_2),
+		partition,
+		callback,
+		&p_2,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -419,12 +419,12 @@ func (v *comFabricStatelessServiceInstance) endOpen(
 	defer func() {
 		serviceAddress = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub1252332865(
 		v.vtable().EndOpen,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
-		unsafe.Pointer(&p_1),
+		context,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -439,12 +439,12 @@ func (v *comFabricStatelessServiceInstance) beginClose(
 	defer func() {
 		context = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub719329543(
 		v.vtable().BeginClose,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_1),
+		callback,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -455,11 +455,11 @@ func (v *comFabricStatelessServiceInstance) beginClose(
 func (v *comFabricStatelessServiceInstance) endClose(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub3172535365(
 		v.vtable().EndClose,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
+		context,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -504,11 +504,11 @@ func (v *comFabricStatelessServicePartition) GetPartitionInfo() (bufferedValue *
 	defer func() {
 		bufferedValue = p_0.toGoStruct()
 	}()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub923865033(
 		v.vtable().GetPartitionInfo,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
+		&p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -522,12 +522,12 @@ func (v *comFabricStatelessServicePartition) ReportLoad(
 ) (err error) {
 	var p_1 *innerFabricLoadMetric
 	p_1 = metrics.toInnerStruct()
-	hr, err1 := callStub1425410019(
+	hr, err1 := callStub2628324035(
 		v.vtable().ReportLoad,
 		2,
 		unsafe.Pointer(v),
 		metricCount,
-		unsafe.Pointer(p_1),
+		p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -599,11 +599,11 @@ func (v *comFabricStatelessServicePartition2) ReportInstanceHealth(
 ) (err error) {
 	var p_0 *innerFabricHealthInformation
 	p_0 = healthInfo.toInnerStruct()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub2782464874(
 		v.vtable().ReportInstanceHealth,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
+		p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -616,11 +616,11 @@ func (v *comFabricStatelessServicePartition2) ReportPartitionHealth(
 ) (err error) {
 	var p_0 *innerFabricHealthInformation
 	p_0 = healthInfo.toInnerStruct()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub2782464874(
 		v.vtable().ReportPartitionHealth,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
+		p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -651,12 +651,12 @@ func (v *comFabricStatelessServicePartition3) ReportInstanceHealth2(
 	p_0 = healthInfo.toInnerStruct()
 	var p_1 *innerFabricHealthReportSendOptions
 	p_1 = sendOptions.toInnerStruct()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub959650155(
 		v.vtable().ReportInstanceHealth2,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(p_1),
+		p_0,
+		p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -672,12 +672,12 @@ func (v *comFabricStatelessServicePartition3) ReportPartitionHealth2(
 	p_0 = healthInfo.toInnerStruct()
 	var p_1 *innerFabricHealthReportSendOptions
 	p_1 = sendOptions.toInnerStruct()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub959650155(
 		v.vtable().ReportPartitionHealth2,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(p_1),
+		p_0,
+		p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -715,17 +715,17 @@ func (v *comFabricStatefulServiceFactory) CreateReplica(
 	defer func() {
 		serviceReplica = p_6
 	}()
-	hr, err1 := callStub2823758008(
+	hr, err1 := callStub3716160173(
 		v.vtable().CreateReplica,
 		7,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(p_1),
+		p_0,
+		p_1,
 		initializationDataLength,
-		unsafe.Pointer(initializationData),
-		unsafe.Pointer(&partitionId),
+		initializationData,
+		partitionId,
 		replicaId,
-		unsafe.Pointer(&p_6),
+		&p_6,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -762,14 +762,14 @@ func (v *comFabricStatefulServiceReplica) beginOpen(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub1292376406(
+	hr, err1 := callStub895233792(
 		v.vtable().BeginOpen,
 		4,
 		unsafe.Pointer(v),
 		openMode,
-		unsafe.Pointer(partition),
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_3),
+		partition,
+		callback,
+		&p_3,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -784,12 +784,12 @@ func (v *comFabricStatefulServiceReplica) endOpen(
 	defer func() {
 		replicator = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub540480608(
 		v.vtable().EndOpen,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
-		unsafe.Pointer(&p_1),
+		context,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -805,13 +805,13 @@ func (v *comFabricStatefulServiceReplica) beginChangeRole(
 	defer func() {
 		context = p_2
 	}()
-	hr, err1 := callStub2937459220(
+	hr, err1 := callStub607330252(
 		v.vtable().BeginChangeRole,
 		3,
 		unsafe.Pointer(v),
 		newRole,
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_2),
+		callback,
+		&p_2,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -826,12 +826,12 @@ func (v *comFabricStatefulServiceReplica) endChangeRole(
 	defer func() {
 		serviceAddress = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub1252332865(
 		v.vtable().EndChangeRole,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
-		unsafe.Pointer(&p_1),
+		context,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -846,12 +846,12 @@ func (v *comFabricStatefulServiceReplica) beginClose(
 	defer func() {
 		context = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub719329543(
 		v.vtable().BeginClose,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_1),
+		callback,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -862,11 +862,11 @@ func (v *comFabricStatefulServiceReplica) beginClose(
 func (v *comFabricStatefulServiceReplica) endClose(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub3172535365(
 		v.vtable().EndClose,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
+		context,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -914,11 +914,11 @@ func (v *comFabricStatefulServicePartition) GetPartitionInfo() (bufferedValue *F
 	defer func() {
 		bufferedValue = p_0.toGoStruct()
 	}()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub923865033(
 		v.vtable().GetPartitionInfo,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
+		&p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -931,11 +931,11 @@ func (v *comFabricStatefulServicePartition) GetReadStatus() (readStatus FabricSe
 	defer func() {
 		readStatus = p_0
 	}()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub4029877715(
 		v.vtable().GetReadStatus,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
+		&p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -948,11 +948,11 @@ func (v *comFabricStatefulServicePartition) GetWriteStatus() (writeStatus Fabric
 	defer func() {
 		writeStatus = p_0
 	}()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub4029877715(
 		v.vtable().GetWriteStatus,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
+		&p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -974,14 +974,14 @@ func (v *comFabricStatefulServicePartition) CreateReplicator(
 	defer func() {
 		stateReplicator = p_3
 	}()
-	hr, err1 := callStub2876708553(
+	hr, err1 := callStub4107741011(
 		v.vtable().CreateReplicator,
 		4,
 		unsafe.Pointer(v),
-		unsafe.Pointer(stateProvider),
-		unsafe.Pointer(p_1),
-		unsafe.Pointer(&p_2),
-		unsafe.Pointer(&p_3),
+		stateProvider,
+		p_1,
+		&p_2,
+		&p_3,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -995,12 +995,12 @@ func (v *comFabricStatefulServicePartition) ReportLoad(
 ) (err error) {
 	var p_1 *innerFabricLoadMetric
 	p_1 = metrics.toInnerStruct()
-	hr, err1 := callStub1425410019(
+	hr, err1 := callStub2628324035(
 		v.vtable().ReportLoad,
 		2,
 		unsafe.Pointer(v),
 		metricCount,
-		unsafe.Pointer(p_1),
+		p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1072,11 +1072,11 @@ func (v *comFabricStatefulServicePartition2) ReportReplicaHealth(
 ) (err error) {
 	var p_0 *innerFabricHealthInformation
 	p_0 = healthInfo.toInnerStruct()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub2782464874(
 		v.vtable().ReportReplicaHealth,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
+		p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1089,11 +1089,11 @@ func (v *comFabricStatefulServicePartition2) ReportPartitionHealth(
 ) (err error) {
 	var p_0 *innerFabricHealthInformation
 	p_0 = healthInfo.toInnerStruct()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub2782464874(
 		v.vtable().ReportPartitionHealth,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
+		p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1124,12 +1124,12 @@ func (v *comFabricStatefulServicePartition3) ReportReplicaHealth2(
 	p_0 = healthInfo.toInnerStruct()
 	var p_1 *innerFabricHealthReportSendOptions
 	p_1 = sendOptions.toInnerStruct()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub959650155(
 		v.vtable().ReportReplicaHealth2,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(p_1),
+		p_0,
+		p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1145,12 +1145,12 @@ func (v *comFabricStatefulServicePartition3) ReportPartitionHealth2(
 	p_0 = healthInfo.toInnerStruct()
 	var p_1 *innerFabricHealthReportSendOptions
 	p_1 = sendOptions.toInnerStruct()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub959650155(
 		v.vtable().ReportPartitionHealth2,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(p_1),
+		p_0,
+		p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1188,14 +1188,14 @@ func (v *comFabricStateReplicator) beginReplicate(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub2876708553(
+	hr, err1 := callStub3351979033(
 		v.vtable().BeginReplicate,
 		4,
 		unsafe.Pointer(v),
-		unsafe.Pointer(operationData),
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_2),
-		unsafe.Pointer(&p_3),
+		operationData,
+		callback,
+		&p_2,
+		&p_3,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1210,12 +1210,12 @@ func (v *comFabricStateReplicator) endReplicate(
 	defer func() {
 		sequenceNumber = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub452726352(
 		v.vtable().EndReplicate,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
-		unsafe.Pointer(&p_1),
+		context,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1228,11 +1228,11 @@ func (v *comFabricStateReplicator) GetReplicationStream() (stream *comFabricOper
 	defer func() {
 		stream = p_0
 	}()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub2135951864(
 		v.vtable().GetReplicationStream,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
+		&p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1245,11 +1245,11 @@ func (v *comFabricStateReplicator) GetCopyStream() (stream *comFabricOperationSt
 	defer func() {
 		stream = p_0
 	}()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub2135951864(
 		v.vtable().GetCopyStream,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
+		&p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1262,11 +1262,11 @@ func (v *comFabricStateReplicator) UpdateReplicatorSettings(
 ) (err error) {
 	var p_0 *innerFabricReplicatorSettings
 	p_0 = replicatorSettings.toInnerStruct()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub3011972084(
 		v.vtable().UpdateReplicatorSettings,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
+		p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1293,11 +1293,11 @@ func (v *comFabricStateReplicator2) GetReplicatorSettings() (replicatorSettings 
 	defer func() {
 		replicatorSettings = p_0
 	}()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub3947302336(
 		v.vtable().GetReplicatorSettings,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
+		&p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1336,14 +1336,14 @@ func (v *comFabricStateProvider) beginUpdateEpoch(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub3758625517(
+	hr, err1 := callStub3304399248(
 		v.vtable().BeginUpdateEpoch,
 		4,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
+		p_0,
 		previousEpochLastSequenceNumber,
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_3),
+		callback,
+		&p_3,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1354,11 +1354,11 @@ func (v *comFabricStateProvider) beginUpdateEpoch(
 func (v *comFabricStateProvider) endUpdateEpoch(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub3172535365(
 		v.vtable().EndUpdateEpoch,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
+		context,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1371,11 +1371,11 @@ func (v *comFabricStateProvider) GetLastCommittedSequenceNumber() (sequenceNumbe
 	defer func() {
 		sequenceNumber = p_0
 	}()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub113443296(
 		v.vtable().GetLastCommittedSequenceNumber,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
+		&p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1390,12 +1390,12 @@ func (v *comFabricStateProvider) beginOnDataLoss(
 	defer func() {
 		context = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub719329543(
 		v.vtable().BeginOnDataLoss,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_1),
+		callback,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1410,12 +1410,12 @@ func (v *comFabricStateProvider) endOnDataLoss(
 	defer func() {
 		isStateChanged = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub213847623(
 		v.vtable().EndOnDataLoss,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
-		unsafe.Pointer(&p_1),
+		context,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1428,11 +1428,11 @@ func (v *comFabricStateProvider) GetCopyContext() (copyContextStream *comFabricO
 	defer func() {
 		copyContextStream = p_0
 	}()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub2849508210(
 		v.vtable().GetCopyContext,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
+		&p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1448,13 +1448,13 @@ func (v *comFabricStateProvider) GetCopyState(
 	defer func() {
 		copyStateStream = p_2
 	}()
-	hr, err1 := callStub3886746928(
+	hr, err1 := callStub708974790(
 		v.vtable().GetCopyState,
 		3,
 		unsafe.Pointer(v),
 		uptoSequenceNumber,
-		unsafe.Pointer(copyContextStream),
-		unsafe.Pointer(&p_2),
+		copyContextStream,
+		&p_2,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1503,12 +1503,12 @@ func (v *comFabricOperation) GetData() (count uint32, buffers *FabricOperationDa
 	defer func() {
 		buffers = p_1.toGoStruct()
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub519835320(
 		v.vtable().GetData,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
-		unsafe.Pointer(&p_1),
+		&p_0,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1551,12 +1551,12 @@ func (v *comFabricOperationData) GetData() (count uint32, buffers *FabricOperati
 	defer func() {
 		buffers = p_1.toGoStruct()
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub519835320(
 		v.vtable().GetData,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
-		unsafe.Pointer(&p_1),
+		&p_0,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1586,12 +1586,12 @@ func (v *comFabricOperationStream) beginGetOperation(
 	defer func() {
 		context = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub719329543(
 		v.vtable().BeginGetOperation,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_1),
+		callback,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1606,12 +1606,12 @@ func (v *comFabricOperationStream) endGetOperation(
 	defer func() {
 		operation = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub202642428(
 		v.vtable().EndGetOperation,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
-		unsafe.Pointer(&p_1),
+		context,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1670,12 +1670,12 @@ func (v *comFabricOperationDataStream) beginGetNext(
 	defer func() {
 		context = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub719329543(
 		v.vtable().BeginGetNext,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_1),
+		callback,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1690,12 +1690,12 @@ func (v *comFabricOperationDataStream) endGetNext(
 	defer func() {
 		operationData = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub1602229622(
 		v.vtable().EndGetNext,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
-		unsafe.Pointer(&p_1),
+		context,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1734,12 +1734,12 @@ func (v *comFabricReplicator) beginOpen(
 	defer func() {
 		context = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub719329543(
 		v.vtable().BeginOpen,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_1),
+		callback,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1754,12 +1754,12 @@ func (v *comFabricReplicator) endOpen(
 	defer func() {
 		replicationAddress = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub1252332865(
 		v.vtable().EndOpen,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
-		unsafe.Pointer(&p_1),
+		context,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1778,14 +1778,14 @@ func (v *comFabricReplicator) beginChangeRole(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub3964606417(
+	hr, err1 := callStub2355046004(
 		v.vtable().BeginChangeRole,
 		4,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
+		p_0,
 		role,
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_3),
+		callback,
+		&p_3,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1796,11 +1796,11 @@ func (v *comFabricReplicator) beginChangeRole(
 func (v *comFabricReplicator) endChangeRole(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub3172535365(
 		v.vtable().EndChangeRole,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
+		context,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1818,13 +1818,13 @@ func (v *comFabricReplicator) beginUpdateEpoch(
 	defer func() {
 		context = p_2
 	}()
-	hr, err1 := callStub2138378508(
+	hr, err1 := callStub456925103(
 		v.vtable().BeginUpdateEpoch,
 		3,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_2),
+		p_0,
+		callback,
+		&p_2,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1835,11 +1835,11 @@ func (v *comFabricReplicator) beginUpdateEpoch(
 func (v *comFabricReplicator) endUpdateEpoch(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub3172535365(
 		v.vtable().EndUpdateEpoch,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
+		context,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1854,12 +1854,12 @@ func (v *comFabricReplicator) beginClose(
 	defer func() {
 		context = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub719329543(
 		v.vtable().BeginClose,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_1),
+		callback,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1870,11 +1870,11 @@ func (v *comFabricReplicator) beginClose(
 func (v *comFabricReplicator) endClose(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub3172535365(
 		v.vtable().EndClose,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
+		context,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1903,11 +1903,11 @@ func (v *comFabricReplicator) GetCurrentProgress() (lastSequenceNumber int64, er
 	defer func() {
 		lastSequenceNumber = p_0
 	}()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub113443296(
 		v.vtable().GetCurrentProgress,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
+		&p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1920,11 +1920,11 @@ func (v *comFabricReplicator) GetCatchUpCapability() (fromSequenceNumber int64, 
 	defer func() {
 		fromSequenceNumber = p_0
 	}()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub113443296(
 		v.vtable().GetCatchUpCapability,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
+		&p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1961,12 +1961,12 @@ func (v *comFabricPrimaryReplicator) beginOnDataLoss(
 	defer func() {
 		context = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub719329543(
 		v.vtable().BeginOnDataLoss,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_1),
+		callback,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -1981,12 +1981,12 @@ func (v *comFabricPrimaryReplicator) endOnDataLoss(
 	defer func() {
 		isStateChanged = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub213847623(
 		v.vtable().EndOnDataLoss,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
-		unsafe.Pointer(&p_1),
+		context,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2002,12 +2002,12 @@ func (v *comFabricPrimaryReplicator) UpdateCatchUpReplicaSetConfiguration(
 	p_0 = currentConfiguration.toInnerStruct()
 	var p_1 *innerFabricReplicaSetConfiguration
 	p_1 = previousConfiguration.toInnerStruct()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub3686276047(
 		v.vtable().UpdateCatchUpReplicaSetConfiguration,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(p_1),
+		p_0,
+		p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2023,13 +2023,13 @@ func (v *comFabricPrimaryReplicator) beginWaitForCatchUpQuorum(
 	defer func() {
 		context = p_2
 	}()
-	hr, err1 := callStub1789138364(
+	hr, err1 := callStub1667310452(
 		v.vtable().BeginWaitForCatchUpQuorum,
 		3,
 		unsafe.Pointer(v),
 		catchUpMode,
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_2),
+		callback,
+		&p_2,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2040,11 +2040,11 @@ func (v *comFabricPrimaryReplicator) beginWaitForCatchUpQuorum(
 func (v *comFabricPrimaryReplicator) endWaitForCatchUpQuorum(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub3172535365(
 		v.vtable().EndWaitForCatchUpQuorum,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
+		context,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2057,11 +2057,11 @@ func (v *comFabricPrimaryReplicator) UpdateCurrentReplicaSetConfiguration(
 ) (err error) {
 	var p_0 *innerFabricReplicaSetConfiguration
 	p_0 = currentConfiguration.toInnerStruct()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub4059762130(
 		v.vtable().UpdateCurrentReplicaSetConfiguration,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
+		p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2079,13 +2079,13 @@ func (v *comFabricPrimaryReplicator) beginBuildReplica(
 	defer func() {
 		context = p_2
 	}()
-	hr, err1 := callStub2138378508(
+	hr, err1 := callStub4108199174(
 		v.vtable().BeginBuildReplica,
 		3,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_2),
+		p_0,
+		callback,
+		&p_2,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2096,11 +2096,11 @@ func (v *comFabricPrimaryReplicator) beginBuildReplica(
 func (v *comFabricPrimaryReplicator) endBuildReplica(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub3172535365(
 		v.vtable().EndBuildReplica,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
+		context,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2160,11 +2160,11 @@ func (v *comFabricAtomicGroupStateReplicator) CreateAtomicGroup() (AtomicGroupId
 	defer func() {
 		AtomicGroupId = p_0
 	}()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub113443296(
 		v.vtable().CreateAtomicGroup,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
+		&p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2185,15 +2185,15 @@ func (v *comFabricAtomicGroupStateReplicator) beginReplicateAtomicGroupOperation
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub571021482(
+	hr, err1 := callStub2212636154(
 		v.vtable().BeginReplicateAtomicGroupOperation,
 		5,
 		unsafe.Pointer(v),
 		atomicGroupId,
-		unsafe.Pointer(operationData),
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_3),
-		unsafe.Pointer(&p_4),
+		operationData,
+		callback,
+		&p_3,
+		&p_4,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2208,12 +2208,12 @@ func (v *comFabricAtomicGroupStateReplicator) endReplicateAtomicGroupOperation(
 	defer func() {
 		operationSequenceNumber = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub452726352(
 		v.vtable().EndReplicateAtomicGroupOperation,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
-		unsafe.Pointer(&p_1),
+		context,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2233,14 +2233,14 @@ func (v *comFabricAtomicGroupStateReplicator) beginReplicateAtomicGroupCommit(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub3653833453(
+	hr, err1 := callStub1547050227(
 		v.vtable().BeginReplicateAtomicGroupCommit,
 		4,
 		unsafe.Pointer(v),
 		atomicGroupId,
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_2),
-		unsafe.Pointer(&p_3),
+		callback,
+		&p_2,
+		&p_3,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2255,12 +2255,12 @@ func (v *comFabricAtomicGroupStateReplicator) endReplicateAtomicGroupCommit(
 	defer func() {
 		commitSequenceNumber = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub452726352(
 		v.vtable().EndReplicateAtomicGroupCommit,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
-		unsafe.Pointer(&p_1),
+		context,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2280,14 +2280,14 @@ func (v *comFabricAtomicGroupStateReplicator) beginReplicateAtomicGroupRollback(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub3653833453(
+	hr, err1 := callStub1547050227(
 		v.vtable().BeginReplicateAtomicGroupRollback,
 		4,
 		unsafe.Pointer(v),
 		atomicGroupId,
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_2),
-		unsafe.Pointer(&p_3),
+		callback,
+		&p_2,
+		&p_3,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2302,12 +2302,12 @@ func (v *comFabricAtomicGroupStateReplicator) endReplicateAtomicGroupRollback(
 	defer func() {
 		rollbackSequenceNumber = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub452726352(
 		v.vtable().EndReplicateAtomicGroupRollback,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
-		unsafe.Pointer(&p_1),
+		context,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2343,14 +2343,14 @@ func (v *comFabricAtomicGroupStateProvider) beginAtomicGroupCommit(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub824512273(
+	hr, err1 := callStub969350345(
 		v.vtable().BeginAtomicGroupCommit,
 		4,
 		unsafe.Pointer(v),
 		atomicGroupId,
 		commitSequenceNumber,
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_3),
+		callback,
+		&p_3,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2361,11 +2361,11 @@ func (v *comFabricAtomicGroupStateProvider) beginAtomicGroupCommit(
 func (v *comFabricAtomicGroupStateProvider) endAtomicGroupCommit(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub3172535365(
 		v.vtable().EndAtomicGroupCommit,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
+		context,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2382,14 +2382,14 @@ func (v *comFabricAtomicGroupStateProvider) beginAtomicGroupRollback(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub824512273(
+	hr, err1 := callStub969350345(
 		v.vtable().BeginAtomicGroupRollback,
 		4,
 		unsafe.Pointer(v),
 		atomicGroupId,
 		rollbackequenceNumber,
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_3),
+		callback,
+		&p_3,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2400,11 +2400,11 @@ func (v *comFabricAtomicGroupStateProvider) beginAtomicGroupRollback(
 func (v *comFabricAtomicGroupStateProvider) endAtomicGroupRollback(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub3172535365(
 		v.vtable().EndAtomicGroupRollback,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
+		context,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2420,13 +2420,13 @@ func (v *comFabricAtomicGroupStateProvider) beginUndoProgress(
 	defer func() {
 		context = p_2
 	}()
-	hr, err1 := callStub3886746928(
+	hr, err1 := callStub2896763624(
 		v.vtable().BeginUndoProgress,
 		3,
 		unsafe.Pointer(v),
 		fromCommitSequenceNumber,
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_2),
+		callback,
+		&p_2,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2437,11 +2437,11 @@ func (v *comFabricAtomicGroupStateProvider) beginUndoProgress(
 func (v *comFabricAtomicGroupStateProvider) endUndoProgress(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub3172535365(
 		v.vtable().EndUndoProgress,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
+		context,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2484,12 +2484,12 @@ func (v *comFabricServiceGroupFactoryBuilder) AddStatelessServiceFactory(
 ) (err error) {
 	var p_0 *uint16
 	p_0 = utf16PtrFromString(memberServiceType)
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub906170255(
 		v.vtable().AddStatelessServiceFactory,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(factory),
+		p_0,
+		factory,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2503,12 +2503,12 @@ func (v *comFabricServiceGroupFactoryBuilder) AddStatefulServiceFactory(
 ) (err error) {
 	var p_0 *uint16
 	p_0 = utf16PtrFromString(memberServiceType)
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub637800223(
 		v.vtable().AddStatefulServiceFactory,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(factory),
+		p_0,
+		factory,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2521,11 +2521,11 @@ func (v *comFabricServiceGroupFactoryBuilder) RemoveServiceFactory(
 ) (err error) {
 	var p_0 *uint16
 	p_0 = utf16PtrFromString(memberServiceType)
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub161743442(
 		v.vtable().RemoveServiceFactory,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
+		p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2538,11 +2538,11 @@ func (v *comFabricServiceGroupFactoryBuilder) ToServiceGroupFactory() (factory *
 	defer func() {
 		factory = p_0
 	}()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub2851408785(
 		v.vtable().ToServiceGroupFactory,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
+		&p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2574,12 +2574,12 @@ func (v *comFabricServiceGroupPartition) ResolveMember(
 	defer func() {
 		member = fromUnsafePointer(p_2)
 	}()
-	hr, err1 := callStub2138378508(
+	hr, err1 := callStub2879064828(
 		v.vtable().ResolveMember,
 		3,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(riid),
+		p_0,
+		riid,
 		unsafe.Pointer(&p_2),
 	)
 	if hr != 0 {
@@ -2829,12 +2829,12 @@ func (v *comFabricCodePackageActivationContext) GetServiceEndpointResource(
 	defer func() {
 		bufferedValue = p_1.toGoStruct()
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub2791051842(
 		v.vtable().GetServiceEndpointResource,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(&p_1),
+		p_0,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2847,11 +2847,11 @@ func (v *comFabricCodePackageActivationContext) GetCodePackageNames() (names *co
 	defer func() {
 		names = p_0
 	}()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub2309098093(
 		v.vtable().GetCodePackageNames,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
+		&p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2864,11 +2864,11 @@ func (v *comFabricCodePackageActivationContext) GetConfigurationPackageNames() (
 	defer func() {
 		names = p_0
 	}()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub2309098093(
 		v.vtable().GetConfigurationPackageNames,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
+		&p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2881,11 +2881,11 @@ func (v *comFabricCodePackageActivationContext) GetDataPackageNames() (names *co
 	defer func() {
 		names = p_0
 	}()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub2309098093(
 		v.vtable().GetDataPackageNames,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
+		&p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2902,12 +2902,12 @@ func (v *comFabricCodePackageActivationContext) GetCodePackage(
 	defer func() {
 		codePackage = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub2593786495(
 		v.vtable().GetCodePackage,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(&p_1),
+		p_0,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2924,12 +2924,12 @@ func (v *comFabricCodePackageActivationContext) GetConfigurationPackage(
 	defer func() {
 		configPackage = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub261819996(
 		v.vtable().GetConfigurationPackage,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(&p_1),
+		p_0,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2946,12 +2946,12 @@ func (v *comFabricCodePackageActivationContext) GetDataPackage(
 	defer func() {
 		dataPackage = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub2592672382(
 		v.vtable().GetDataPackage,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(&p_1),
+		p_0,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -2966,12 +2966,12 @@ func (v *comFabricCodePackageActivationContext) RegisterCodePackageChangeHandler
 	defer func() {
 		callbackHandle = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub1041370855(
 		v.vtable().RegisterCodePackageChangeHandler,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_1),
+		callback,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3001,12 +3001,12 @@ func (v *comFabricCodePackageActivationContext) RegisterConfigurationPackageChan
 	defer func() {
 		callbackHandle = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub3899200196(
 		v.vtable().RegisterConfigurationPackageChangeHandler,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_1),
+		callback,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3036,12 +3036,12 @@ func (v *comFabricCodePackageActivationContext) RegisterDataPackageChangeHandler
 	defer func() {
 		callbackHandle = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub1038946022(
 		v.vtable().RegisterDataPackageChangeHandler,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_1),
+		callback,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3118,11 +3118,11 @@ func (v *comFabricCodePackageActivationContext2) GetServiceManifestName() (servi
 	defer func() {
 		serviceManifestName = p_0
 	}()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub1659701457(
 		v.vtable().GetServiceManifestName,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
+		&p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3135,11 +3135,11 @@ func (v *comFabricCodePackageActivationContext2) GetServiceManifestVersion() (se
 	defer func() {
 		serviceManifestVersion = p_0
 	}()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub1659701457(
 		v.vtable().GetServiceManifestVersion,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
+		&p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3168,11 +3168,11 @@ func (v *comFabricCodePackageActivationContext3) ReportApplicationHealth(
 ) (err error) {
 	var p_0 *innerFabricHealthInformation
 	p_0 = healthInfo.toInnerStruct()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub2782464874(
 		v.vtable().ReportApplicationHealth,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
+		p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3185,11 +3185,11 @@ func (v *comFabricCodePackageActivationContext3) ReportDeployedApplicationHealth
 ) (err error) {
 	var p_0 *innerFabricHealthInformation
 	p_0 = healthInfo.toInnerStruct()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub2782464874(
 		v.vtable().ReportDeployedApplicationHealth,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
+		p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3202,11 +3202,11 @@ func (v *comFabricCodePackageActivationContext3) ReportDeployedServicePackageHea
 ) (err error) {
 	var p_0 *innerFabricHealthInformation
 	p_0 = healthInfo.toInnerStruct()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub2782464874(
 		v.vtable().ReportDeployedServicePackageHealth,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
+		p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3238,12 +3238,12 @@ func (v *comFabricCodePackageActivationContext4) ReportApplicationHealth2(
 	p_0 = healthInfo.toInnerStruct()
 	var p_1 *innerFabricHealthReportSendOptions
 	p_1 = sendOptions.toInnerStruct()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub959650155(
 		v.vtable().ReportApplicationHealth2,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(p_1),
+		p_0,
+		p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3259,12 +3259,12 @@ func (v *comFabricCodePackageActivationContext4) ReportDeployedApplicationHealth
 	p_0 = healthInfo.toInnerStruct()
 	var p_1 *innerFabricHealthReportSendOptions
 	p_1 = sendOptions.toInnerStruct()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub959650155(
 		v.vtable().ReportDeployedApplicationHealth2,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(p_1),
+		p_0,
+		p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3280,12 +3280,12 @@ func (v *comFabricCodePackageActivationContext4) ReportDeployedServicePackageHea
 	p_0 = healthInfo.toInnerStruct()
 	var p_1 *innerFabricHealthReportSendOptions
 	p_1 = sendOptions.toInnerStruct()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub959650155(
 		v.vtable().ReportDeployedServicePackageHealth2,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(p_1),
+		p_0,
+		p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3363,12 +3363,12 @@ func (v *comFabricCodePackageActivationContext6) GetDirectory(
 	defer func() {
 		directoryPath = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub2823424846(
 		v.vtable().GetDirectory,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(&p_1),
+		p_0,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3546,12 +3546,12 @@ func (v *comFabricConfigurationPackage) GetSection(
 	defer func() {
 		bufferedValue = p_1.toGoStruct()
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub805965666(
 		v.vtable().GetSection,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(&p_1),
+		p_0,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3575,14 +3575,14 @@ func (v *comFabricConfigurationPackage) GetValue(
 	defer func() {
 		bufferedValue = utf16PtrToString(p_3)
 	}()
-	hr, err1 := callStub2876708553(
+	hr, err1 := callStub2480277880(
 		v.vtable().GetValue,
 		4,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(p_1),
-		unsafe.Pointer(&p_2),
-		unsafe.Pointer(&p_3),
+		p_0,
+		p_1,
+		&p_2,
+		&p_3,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3599,12 +3599,12 @@ func (v *comFabricConfigurationPackage) DecryptValue(
 	defer func() {
 		decryptedValue = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub2823424846(
 		v.vtable().DecryptValue,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(&p_1),
+		p_0,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3650,13 +3650,13 @@ func (v *comFabricConfigurationPackage2) GetValues(
 
 		}
 	}()
-	hr, err1 := callStub2138378508(
+	hr, err1 := callStub358945863(
 		v.vtable().GetValues,
 		3,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(p_1),
-		unsafe.Pointer(&p_2),
+		p_0,
+		p_1,
+		&p_2,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -3731,12 +3731,12 @@ func (v *comFabricCodePackageChangeHandler) OnPackageAdded(
 	source *comFabricCodePackageActivationContext,
 	codePackage *comFabricCodePackage,
 ) (rt interface{}, err error) {
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub3022460626(
 		v.vtable().OnPackageAdded,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(source),
-		unsafe.Pointer(codePackage),
+		source,
+		codePackage,
 	)
 	if hr == 0 {
 		err = err1
@@ -3752,12 +3752,12 @@ func (v *comFabricCodePackageChangeHandler) OnPackageRemoved(
 	source *comFabricCodePackageActivationContext,
 	codePackage *comFabricCodePackage,
 ) (rt interface{}, err error) {
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub3022460626(
 		v.vtable().OnPackageRemoved,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(source),
-		unsafe.Pointer(codePackage),
+		source,
+		codePackage,
 	)
 	if hr == 0 {
 		err = err1
@@ -3774,13 +3774,13 @@ func (v *comFabricCodePackageChangeHandler) OnPackageModified(
 	previousCodePackage *comFabricCodePackage,
 	codePackage *comFabricCodePackage,
 ) (rt interface{}, err error) {
-	hr, err1 := callStub2138378508(
+	hr, err1 := callStub36708053(
 		v.vtable().OnPackageModified,
 		3,
 		unsafe.Pointer(v),
-		unsafe.Pointer(source),
-		unsafe.Pointer(previousCodePackage),
-		unsafe.Pointer(codePackage),
+		source,
+		previousCodePackage,
+		codePackage,
 	)
 	if hr == 0 {
 		err = err1
@@ -3812,12 +3812,12 @@ func (v *comFabricConfigurationPackageChangeHandler) OnPackageAdded(
 	source *comFabricCodePackageActivationContext,
 	configPackage *comFabricConfigurationPackage,
 ) (rt interface{}, err error) {
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub2551388847(
 		v.vtable().OnPackageAdded,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(source),
-		unsafe.Pointer(configPackage),
+		source,
+		configPackage,
 	)
 	if hr == 0 {
 		err = err1
@@ -3833,12 +3833,12 @@ func (v *comFabricConfigurationPackageChangeHandler) OnPackageRemoved(
 	source *comFabricCodePackageActivationContext,
 	configPackage *comFabricConfigurationPackage,
 ) (rt interface{}, err error) {
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub2551388847(
 		v.vtable().OnPackageRemoved,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(source),
-		unsafe.Pointer(configPackage),
+		source,
+		configPackage,
 	)
 	if hr == 0 {
 		err = err1
@@ -3855,13 +3855,13 @@ func (v *comFabricConfigurationPackageChangeHandler) OnPackageModified(
 	previousConfigPackage *comFabricConfigurationPackage,
 	configPackage *comFabricConfigurationPackage,
 ) (rt interface{}, err error) {
-	hr, err1 := callStub2138378508(
+	hr, err1 := callStub2313561743(
 		v.vtable().OnPackageModified,
 		3,
 		unsafe.Pointer(v),
-		unsafe.Pointer(source),
-		unsafe.Pointer(previousConfigPackage),
-		unsafe.Pointer(configPackage),
+		source,
+		previousConfigPackage,
+		configPackage,
 	)
 	if hr == 0 {
 		err = err1
@@ -3893,12 +3893,12 @@ func (v *comFabricDataPackageChangeHandler) OnPackageAdded(
 	source *comFabricCodePackageActivationContext,
 	dataPackage *comFabricDataPackage,
 ) (rt interface{}, err error) {
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub3021346513(
 		v.vtable().OnPackageAdded,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(source),
-		unsafe.Pointer(dataPackage),
+		source,
+		dataPackage,
 	)
 	if hr == 0 {
 		err = err1
@@ -3914,12 +3914,12 @@ func (v *comFabricDataPackageChangeHandler) OnPackageRemoved(
 	source *comFabricCodePackageActivationContext,
 	dataPackage *comFabricDataPackage,
 ) (rt interface{}, err error) {
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub3021346513(
 		v.vtable().OnPackageRemoved,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(source),
-		unsafe.Pointer(dataPackage),
+		source,
+		dataPackage,
 	)
 	if hr == 0 {
 		err = err1
@@ -3936,13 +3936,13 @@ func (v *comFabricDataPackageChangeHandler) OnPackageModified(
 	previousDataPackage *comFabricDataPackage,
 	dataPackage *comFabricDataPackage,
 ) (rt interface{}, err error) {
-	hr, err1 := callStub2138378508(
+	hr, err1 := callStub33038035(
 		v.vtable().OnPackageModified,
 		3,
 		unsafe.Pointer(v),
-		unsafe.Pointer(source),
-		unsafe.Pointer(previousDataPackage),
-		unsafe.Pointer(dataPackage),
+		source,
+		previousDataPackage,
+		dataPackage,
 	)
 	if hr == 0 {
 		err = err1
@@ -4049,13 +4049,13 @@ func (v *comFabricTransaction) beginCommit(
 	defer func() {
 		context = p_2
 	}()
-	hr, err1 := callStub4152495520(
+	hr, err1 := callStub3426753368(
 		v.vtable().BeginCommit,
 		3,
 		unsafe.Pointer(v),
 		timeoutMilliseconds,
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_2),
+		callback,
+		&p_2,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4070,12 +4070,12 @@ func (v *comFabricTransaction) endCommit(
 	defer func() {
 		commitSequenceNumber = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub452726352(
 		v.vtable().EndCommit,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
-		unsafe.Pointer(&p_1),
+		context,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4130,11 +4130,11 @@ func (v *comFabricKeyValueStoreReplica) GetCurrentEpoch() (currentEpoch FabricEp
 	defer func() {
 		currentEpoch = *p_0.toGoStruct()
 	}()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub955057789(
 		v.vtable().GetCurrentEpoch,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
+		&p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4147,11 +4147,11 @@ func (v *comFabricKeyValueStoreReplica) UpdateReplicatorSettings(
 ) (err error) {
 	var p_0 *innerFabricReplicatorSettings
 	p_0 = replicatorSettings.toInnerStruct()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub3011972084(
 		v.vtable().UpdateReplicatorSettings,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
+		p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4164,11 +4164,11 @@ func (v *comFabricKeyValueStoreReplica) CreateTransaction() (transaction *comFab
 	defer func() {
 		transaction = p_0
 	}()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub1510606945(
 		v.vtable().CreateTransaction,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
+		&p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4184,14 +4184,14 @@ func (v *comFabricKeyValueStoreReplica) Add(
 ) (err error) {
 	var p_1 *uint16
 	p_1 = utf16PtrFromString(key)
-	hr, err1 := callStub3857978088(
+	hr, err1 := callStub2106724373(
 		v.vtable().Add,
 		4,
 		unsafe.Pointer(v),
-		unsafe.Pointer(transaction),
-		unsafe.Pointer(p_1),
+		transaction,
+		p_1,
 		valueSizeInBytes,
-		unsafe.Pointer(value),
+		value,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4206,12 +4206,12 @@ func (v *comFabricKeyValueStoreReplica) Remove(
 ) (err error) {
 	var p_1 *uint16
 	p_1 = utf16PtrFromString(key)
-	hr, err1 := callStub4096331056(
+	hr, err1 := callStub591269392(
 		v.vtable().Remove,
 		3,
 		unsafe.Pointer(v),
-		unsafe.Pointer(transaction),
-		unsafe.Pointer(p_1),
+		transaction,
+		p_1,
 		checkSequenceNumber,
 	)
 	if hr != 0 {
@@ -4229,14 +4229,14 @@ func (v *comFabricKeyValueStoreReplica) Update(
 ) (err error) {
 	var p_1 *uint16
 	p_1 = utf16PtrFromString(key)
-	hr, err1 := callStub1580995785(
+	hr, err1 := callStub3839431158(
 		v.vtable().Update,
 		5,
 		unsafe.Pointer(v),
-		unsafe.Pointer(transaction),
-		unsafe.Pointer(p_1),
+		transaction,
+		p_1,
 		valueSizeInBytes,
-		unsafe.Pointer(value),
+		value,
 		checkSequenceNumber,
 	)
 	if hr != 0 {
@@ -4255,13 +4255,13 @@ func (v *comFabricKeyValueStoreReplica) Get(
 	defer func() {
 		result = p_2
 	}()
-	hr, err1 := callStub2138378508(
+	hr, err1 := callStub1583356278(
 		v.vtable().Get,
 		3,
 		unsafe.Pointer(v),
-		unsafe.Pointer(transaction),
-		unsafe.Pointer(p_1),
-		unsafe.Pointer(&p_2),
+		transaction,
+		p_1,
+		&p_2,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4279,13 +4279,13 @@ func (v *comFabricKeyValueStoreReplica) GetMetadata(
 	defer func() {
 		result = p_2
 	}()
-	hr, err1 := callStub2138378508(
+	hr, err1 := callStub917576855(
 		v.vtable().GetMetadata,
 		3,
 		unsafe.Pointer(v),
-		unsafe.Pointer(transaction),
-		unsafe.Pointer(p_1),
-		unsafe.Pointer(&p_2),
+		transaction,
+		p_1,
+		&p_2,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4303,13 +4303,13 @@ func (v *comFabricKeyValueStoreReplica) Contains(
 	defer func() {
 		result = p_2
 	}()
-	hr, err1 := callStub2138378508(
+	hr, err1 := callStub577637937(
 		v.vtable().Contains,
 		3,
 		unsafe.Pointer(v),
-		unsafe.Pointer(transaction),
-		unsafe.Pointer(p_1),
-		unsafe.Pointer(&p_2),
+		transaction,
+		p_1,
+		&p_2,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4324,12 +4324,12 @@ func (v *comFabricKeyValueStoreReplica) Enumerate(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub239278236(
 		v.vtable().Enumerate,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(transaction),
-		unsafe.Pointer(&p_1),
+		transaction,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4347,13 +4347,13 @@ func (v *comFabricKeyValueStoreReplica) EnumerateByKey(
 	defer func() {
 		result = p_2
 	}()
-	hr, err1 := callStub2138378508(
+	hr, err1 := callStub3353025305(
 		v.vtable().EnumerateByKey,
 		3,
 		unsafe.Pointer(v),
-		unsafe.Pointer(transaction),
-		unsafe.Pointer(p_1),
-		unsafe.Pointer(&p_2),
+		transaction,
+		p_1,
+		&p_2,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4368,12 +4368,12 @@ func (v *comFabricKeyValueStoreReplica) EnumerateMetadata(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub3743488957(
 		v.vtable().EnumerateMetadata,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(transaction),
-		unsafe.Pointer(&p_1),
+		transaction,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4391,13 +4391,13 @@ func (v *comFabricKeyValueStoreReplica) EnumerateMetadataByKey(
 	defer func() {
 		result = p_2
 	}()
-	hr, err1 := callStub2138378508(
+	hr, err1 := callStub2897223226(
 		v.vtable().EnumerateMetadataByKey,
 		3,
 		unsafe.Pointer(v),
-		unsafe.Pointer(transaction),
-		unsafe.Pointer(p_1),
-		unsafe.Pointer(&p_2),
+		transaction,
+		p_1,
+		&p_2,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4426,11 +4426,11 @@ func (v *comFabricKeyValueStoreReplica2) Backup(
 ) (err error) {
 	var p_0 *uint16
 	p_0 = utf16PtrFromString(backupDirectory)
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub161743442(
 		v.vtable().Backup,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
+		p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4443,11 +4443,11 @@ func (v *comFabricKeyValueStoreReplica2) Restore(
 ) (err error) {
 	var p_0 *uint16
 	p_0 = utf16PtrFromString(backupDirectory)
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub161743442(
 		v.vtable().Restore,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
+		p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4464,12 +4464,12 @@ func (v *comFabricKeyValueStoreReplica2) CreateTransaction2(
 	defer func() {
 		transaction = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub1956780580(
 		v.vtable().CreateTransaction2,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(&p_1),
+		p_0,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4504,15 +4504,15 @@ func (v *comFabricKeyValueStoreReplica3) beginBackup(
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub1128800280(
+	hr, err1 := callStub1992503670(
 		v.vtable().BeginBackup,
 		5,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
+		p_0,
 		backupOption,
-		unsafe.Pointer(postBackupHandler),
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_4),
+		postBackupHandler,
+		callback,
+		&p_4,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4523,11 +4523,11 @@ func (v *comFabricKeyValueStoreReplica3) beginBackup(
 func (v *comFabricKeyValueStoreReplica3) endBackup(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub3172535365(
 		v.vtable().EndBackup,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
+		context,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4560,13 +4560,13 @@ func (v *comFabricKeyValueStoreReplica4) beginRestore(
 	defer func() {
 		context = p_2
 	}()
-	hr, err1 := callStub2138378508(
+	hr, err1 := callStub3636403076(
 		v.vtable().BeginRestore,
 		3,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_2),
+		p_0,
+		callback,
+		&p_2,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4577,11 +4577,11 @@ func (v *comFabricKeyValueStoreReplica4) beginRestore(
 func (v *comFabricKeyValueStoreReplica4) endRestore(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub3172535365(
 		v.vtable().EndRestore,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
+		context,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4621,15 +4621,15 @@ func (v *comFabricKeyValueStoreReplica5) TryAdd(
 	defer func() {
 		added = p_4
 	}()
-	hr, err1 := callStub770250917(
+	hr, err1 := callStub3825799703(
 		v.vtable().TryAdd,
 		5,
 		unsafe.Pointer(v),
-		unsafe.Pointer(transaction),
-		unsafe.Pointer(p_1),
+		transaction,
+		p_1,
 		valueSizeInBytes,
-		unsafe.Pointer(value),
-		unsafe.Pointer(&p_4),
+		value,
+		&p_4,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4648,14 +4648,14 @@ func (v *comFabricKeyValueStoreReplica5) TryRemove(
 	defer func() {
 		exists = p_3
 	}()
-	hr, err1 := callStub3863417581(
+	hr, err1 := callStub2107052050(
 		v.vtable().TryRemove,
 		4,
 		unsafe.Pointer(v),
-		unsafe.Pointer(transaction),
-		unsafe.Pointer(p_1),
+		transaction,
+		p_1,
 		checkSequenceNumber,
-		unsafe.Pointer(&p_3),
+		&p_3,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4676,16 +4676,16 @@ func (v *comFabricKeyValueStoreReplica5) TryUpdate(
 	defer func() {
 		exists = p_5
 	}()
-	hr, err1 := callStub3260095110(
+	hr, err1 := callStub1453659128(
 		v.vtable().TryUpdate,
 		6,
 		unsafe.Pointer(v),
-		unsafe.Pointer(transaction),
-		unsafe.Pointer(p_1),
+		transaction,
+		p_1,
 		valueSizeInBytes,
-		unsafe.Pointer(value),
+		value,
 		checkSequenceNumber,
-		unsafe.Pointer(&p_5),
+		&p_5,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4703,13 +4703,13 @@ func (v *comFabricKeyValueStoreReplica5) TryGet(
 	defer func() {
 		result = p_2
 	}()
-	hr, err1 := callStub2138378508(
+	hr, err1 := callStub1583356278(
 		v.vtable().TryGet,
 		3,
 		unsafe.Pointer(v),
-		unsafe.Pointer(transaction),
-		unsafe.Pointer(p_1),
-		unsafe.Pointer(&p_2),
+		transaction,
+		p_1,
+		&p_2,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4727,13 +4727,13 @@ func (v *comFabricKeyValueStoreReplica5) TryGetMetadata(
 	defer func() {
 		result = p_2
 	}()
-	hr, err1 := callStub2138378508(
+	hr, err1 := callStub917576855(
 		v.vtable().TryGetMetadata,
 		3,
 		unsafe.Pointer(v),
-		unsafe.Pointer(transaction),
-		unsafe.Pointer(p_1),
-		unsafe.Pointer(&p_2),
+		transaction,
+		p_1,
+		&p_2,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4752,14 +4752,14 @@ func (v *comFabricKeyValueStoreReplica5) EnumerateByKey2(
 	defer func() {
 		result = p_3
 	}()
-	hr, err1 := callStub3634565860(
+	hr, err1 := callStub1371020529(
 		v.vtable().EnumerateByKey2,
 		4,
 		unsafe.Pointer(v),
-		unsafe.Pointer(transaction),
-		unsafe.Pointer(p_1),
+		transaction,
+		p_1,
 		strictPrefix,
-		unsafe.Pointer(&p_3),
+		&p_3,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4778,14 +4778,14 @@ func (v *comFabricKeyValueStoreReplica5) EnumerateMetadataByKey2(
 	defer func() {
 		result = p_3
 	}()
-	hr, err1 := callStub3634565860(
+	hr, err1 := callStub1162682386(
 		v.vtable().EnumerateMetadataByKey2,
 		4,
 		unsafe.Pointer(v),
-		unsafe.Pointer(transaction),
-		unsafe.Pointer(p_1),
+		transaction,
+		p_1,
 		strictPrefix,
-		unsafe.Pointer(&p_3),
+		&p_3,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4820,14 +4820,14 @@ func (v *comFabricKeyValueStoreReplica6) beginRestore2(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub2876708553(
+	hr, err1 := callStub2786667429(
 		v.vtable().BeginRestore2,
 		4,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(p_1),
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_3),
+		p_0,
+		p_1,
+		callback,
+		&p_3,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4859,12 +4859,12 @@ func (v *comFabricKeyValueStoreEnumerator) EnumerateByKey(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub2104103228(
 		v.vtable().EnumerateByKey,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(&p_1),
+		p_0,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4881,12 +4881,12 @@ func (v *comFabricKeyValueStoreEnumerator) EnumerateMetadataByKey(
 	defer func() {
 		result = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub324473949(
 		v.vtable().EnumerateMetadataByKey,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(&p_1),
+		p_0,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4919,13 +4919,13 @@ func (v *comFabricKeyValueStoreEnumerator2) EnumerateByKey2(
 	defer func() {
 		result = p_2
 	}()
-	hr, err1 := callStub3858959655(
+	hr, err1 := callStub3588690708(
 		v.vtable().EnumerateByKey2,
 		3,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
+		p_0,
 		strictPrefix,
-		unsafe.Pointer(&p_2),
+		&p_2,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -4943,13 +4943,13 @@ func (v *comFabricKeyValueStoreEnumerator2) EnumerateMetadataByKey2(
 	defer func() {
 		result = p_2
 	}()
-	hr, err1 := callStub3858959655(
+	hr, err1 := callStub2056525365(
 		v.vtable().EnumerateMetadataByKey2,
 		3,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
+		p_0,
 		strictPrefix,
-		unsafe.Pointer(&p_2),
+		&p_2,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5122,11 +5122,11 @@ func (v *comFabricKeyValueStoreItemEnumerator2) TryMoveNext() (success bool, err
 	defer func() {
 		success = p_0
 	}()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub83231191(
 		v.vtable().TryMoveNext,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
+		&p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5153,11 +5153,11 @@ func (v *comFabricKeyValueStoreItemMetadataEnumerator2) TryMoveNext() (success b
 	defer func() {
 		success = p_0
 	}()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub83231191(
 		v.vtable().TryMoveNext,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
+		&p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5184,11 +5184,11 @@ func (v *comFabricKeyValueStoreNotificationEnumerator2) TryMoveNext() (success b
 	defer func() {
 		success = p_0
 	}()
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub83231191(
 		v.vtable().TryMoveNext,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(&p_0),
+		&p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5332,12 +5332,12 @@ func (v *comFabricStoreEventHandler2) beginOnDataLoss(
 	defer func() {
 		context = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub719329543(
 		v.vtable().BeginOnDataLoss,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_1),
+		callback,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5352,12 +5352,12 @@ func (v *comFabricStoreEventHandler2) endOnDataLoss(
 	defer func() {
 		isStateChanged = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub213847623(
 		v.vtable().EndOnDataLoss,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
-		unsafe.Pointer(&p_1),
+		context,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5390,13 +5390,13 @@ func (v *comFabricStorePostBackupHandler) beginPostBackup(
 	defer func() {
 		context = p_2
 	}()
-	hr, err1 := callStub2138378508(
+	hr, err1 := callStub2053317551(
 		v.vtable().BeginPostBackup,
 		3,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_2),
+		p_0,
+		callback,
+		&p_2,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5411,12 +5411,12 @@ func (v *comFabricStorePostBackupHandler) endPostBackup(
 	defer func() {
 		status = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub213847623(
 		v.vtable().EndPostBackup,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
-		unsafe.Pointer(&p_1),
+		context,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5442,11 +5442,11 @@ func (v *comFabricSecondaryEventHandler) vtable() *comFabricSecondaryEventHandle
 func (v *comFabricSecondaryEventHandler) OnCopyComplete(
 	enumerator *comFabricKeyValueStoreEnumerator,
 ) (err error) {
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub3583053062(
 		v.vtable().OnCopyComplete,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(enumerator),
+		enumerator,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5457,11 +5457,11 @@ func (v *comFabricSecondaryEventHandler) OnCopyComplete(
 func (v *comFabricSecondaryEventHandler) OnReplicationOperation(
 	enumerator *comFabricKeyValueStoreNotificationEnumerator,
 ) (err error) {
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub2425950701(
 		v.vtable().OnReplicationOperation,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(enumerator),
+		enumerator,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5522,12 +5522,12 @@ func (v *comFabricNodeContextResult2) GetDirectory(
 	defer func() {
 		directoryPath = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub2823424846(
 		v.vtable().GetDirectory,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(&p_1),
+		p_0,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5698,15 +5698,15 @@ func (v *comFabricCodePackageActivator) beginActivateCodePackage(
 	defer func() {
 		context = p_4
 	}()
-	hr, err1 := callStub1238898970(
+	hr, err1 := callStub644099186(
 		v.vtable().BeginActivateCodePackage,
 		5,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
-		unsafe.Pointer(p_1),
+		p_0,
+		p_1,
 		timeoutMilliseconds,
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_4),
+		callback,
+		&p_4,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5717,11 +5717,11 @@ func (v *comFabricCodePackageActivator) beginActivateCodePackage(
 func (v *comFabricCodePackageActivator) endActivateCodePackage(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub3172535365(
 		v.vtable().EndActivateCodePackage,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
+		context,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5759,14 +5759,14 @@ func (v *comFabricCodePackageActivator) beginDeactivateCodePackage(
 	defer func() {
 		context = p_3
 	}()
-	hr, err1 := callStub4120646493(
+	hr, err1 := callStub2933269540(
 		v.vtable().BeginDeactivateCodePackage,
 		4,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
+		p_0,
 		timeoutMilliseconds,
-		unsafe.Pointer(callback),
-		unsafe.Pointer(&p_3),
+		callback,
+		&p_3,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5777,11 +5777,11 @@ func (v *comFabricCodePackageActivator) beginDeactivateCodePackage(
 func (v *comFabricCodePackageActivator) endDeactivateCodePackage(
 	context *comFabricAsyncOperationContext,
 ) (err error) {
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub3172535365(
 		v.vtable().EndDeactivateCodePackage,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(context),
+		context,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5813,11 +5813,11 @@ func (v *comFabricCodePackageActivator) AbortCodePackage(
 
 	}
 	p_0 = lst_4
-	hr, err1 := callStub699991442(
+	hr, err1 := callStub1614547105(
 		v.vtable().AbortCodePackage,
 		1,
 		unsafe.Pointer(v),
-		unsafe.Pointer(p_0),
+		p_0,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5832,12 +5832,12 @@ func (v *comFabricCodePackageActivator) RegisterCodePackageEventHandler(
 	defer func() {
 		callbackHandle = p_1
 	}()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub1078136600(
 		v.vtable().RegisterCodePackageEventHandler,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(eventHandler),
-		unsafe.Pointer(&p_1),
+		eventHandler,
+		&p_1,
 	)
 	if hr != 0 {
 		err = errno(hr, err1)
@@ -5880,12 +5880,12 @@ func (v *comFabricCodePackageEventHandler) OnCodePackageEvent(
 ) (rt interface{}, err error) {
 	var p_1 *innerFabricCodePackageEventDescription
 	p_1 = eventDesc.toInnerStruct()
-	hr, err1 := callStub2844134223(
+	hr, err1 := callStub2819431147(
 		v.vtable().OnCodePackageEvent,
 		2,
 		unsafe.Pointer(v),
-		unsafe.Pointer(source),
-		unsafe.Pointer(p_1),
+		source,
+		p_1,
 	)
 	if hr == 0 {
 		err = err1

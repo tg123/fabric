@@ -187,27 +187,8 @@ func (g *generator) extractCallType(m *ast.MethodNode) []string {
 	syscallParamTypes := make([]string, 0, len(m.Params))
 
 	for _, p := range m.Params {
-		if isOutParam(p) {
-			syscallParamTypes = append(syscallParamTypes, "unsafe.Pointer")
-		} else {
-			t := g.toGolangType(p.Type, p.Indirections, true)
-			switch t {
-			case "*ole.GUID":
-				fallthrough
-			case "ole.GUID":
-				fallthrough
-			case "unsafe.Pointer": // interface{}
-				syscallParamTypes = append(syscallParamTypes, "unsafe.Pointer")
-			default:
-				if _, ok := g.ctx.definedStruct[g.unwrapTypedef(p.Type)]; ok || t == "*uint16" || p.Indirections > 0 {
-					// string or obj
-					syscallParamTypes = append(syscallParamTypes, "unsafe.Pointer")
-				} else {
-					syscallParamTypes = append(syscallParamTypes, t)
-				}
-
-			}
-		}
+		t := g.toGolangType(p.Type, p.Indirections, true)
+		syscallParamTypes = append(syscallParamTypes, t)
 	}
 
 	return syscallParamTypes
@@ -225,7 +206,6 @@ func (g *generator) generateMethods(n *ast.InterfaceNode) {
 
 		g.generateMethodSig(interfaceName, m, false)
 		syscallParams := make([]string, 0, len(m.Params))
-		syscallParamTypes := g.extractCallType(m)
 
 		// TODO dup code, but i did not find better way to make it more clear
 		for i, p := range m.Params {
@@ -242,7 +222,11 @@ func (g *generator) generateMethods(n *ast.InterfaceNode) {
 
 				g.generateToGolangObject(fmt.Sprintf("p_%v", i), paramName, p.Type, p.Indirections-1)
 				g.printfln(`}()`)
-				syscallParams = append(syscallParams, fmt.Sprintf("unsafe.Pointer(&p_%v)", i))
+				if t == "unsafe.Pointer" {
+					syscallParams = append(syscallParams, fmt.Sprintf("unsafe.Pointer(&p_%v)", i))
+				} else {
+					syscallParams = append(syscallParams, fmt.Sprintf("&p_%v", i))
+				}
 			} else {
 				t := g.toGolangType(p.Type, p.Indirections, true)
 				switch t {
@@ -252,22 +236,22 @@ func (g *generator) generateMethods(n *ast.InterfaceNode) {
 				// 	g.printfln("p_%v = 1", i)
 				// 	g.printfln("}")
 				// 	syscallParams = append(syscallParams, fmt.Sprintf("p_%v", i))
-				case "*ole.GUID":
-					syscallParams = append(syscallParams, fmt.Sprintf("unsafe.Pointer(%s)", paramName))
-				case "ole.GUID":
-					syscallParams = append(syscallParams, fmt.Sprintf("unsafe.Pointer(&%s)", paramName))
+				// case "*ole.GUID":
+				// syscallParams = append(syscallParams, fmt.Sprintf("unsafe.Pointer(%s)", paramName))
+				// case "ole.GUID":
+				// syscallParams = append(syscallParams, fmt.Sprintf("unsafe.Pointer(&%s)", paramName))
 				case "unsafe.Pointer": // interface{}
 					syscallParams = append(syscallParams, fmt.Sprintf("toUnsafePointer(%v)", paramName))
 				default:
 
 					if _, ok := g.ctx.definedStruct[g.unwrapTypedef(p.Type)]; ok || t == "*uint16" {
-						// string or obj
+						// 	// string or obj
 						g.printfln("var p_%v %v", i, t)
 						g.generateToInnerObject(paramName, fmt.Sprintf("p_%v", i), p.Type, p.Indirections)
-						syscallParams = append(syscallParams, fmt.Sprintf("unsafe.Pointer(p_%v)", i))
-					} else if p.Indirections > 0 {
-						// pointer
-						syscallParams = append(syscallParams, fmt.Sprintf("unsafe.Pointer(%v)", paramName))
+						syscallParams = append(syscallParams, fmt.Sprintf("p_%v", i))
+						// } else if p.Indirections > 0 {
+						// 	// pointer
+						// 	syscallParams = append(syscallParams, fmt.Sprintf("unsafe.Pointer(%v)", paramName))
 					} else {
 						// all others
 						syscallParams = append(syscallParams, fmt.Sprintf("%v", paramName))
@@ -278,22 +262,8 @@ func (g *generator) generateMethods(n *ast.InterfaceNode) {
 			}
 		}
 
+		syscallParamTypes := g.extractCallType(m)
 		syscallFunc := g.ctx.stubBuilder.MakeCallStub(syscallParamTypes)
-
-		// numSyscallParams := len(m.Params) + 1
-		// numSyscallRequired := int(math.Ceil(float64(numSyscallParams)/3)) * 3
-
-		// syscallFunc := "Syscall"
-		// if numSyscallRequired > 18 {
-		// 	panic("more params than supported by syscall")
-		// } else if numSyscallRequired > 3 {
-		// 	syscallFunc += strconv.Itoa(numSyscallRequired)
-		// }
-
-		// actualSyscallParamLen := len(syscallParams)
-		// for i := len(syscallParams); i < numSyscallRequired-1; i++ {
-		// 	syscallParams = append(syscallParams, "0")
-		// }
 
 		g.importpkg("unsafe")
 

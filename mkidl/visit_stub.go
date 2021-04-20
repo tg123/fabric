@@ -4,6 +4,7 @@ import (
 	"math"
 	"sort"
 	"strconv"
+	"strings"
 )
 
 func (g *generator) generateStub(callbody func(fn string, paramTypes []string), callbackbody func(fn string, paramTypes []string)) {
@@ -28,6 +29,10 @@ func (g *generator) generateStub(callbody func(fn string, paramTypes []string), 
 		g.printfln("this unsafe.Pointer,")
 
 		for i, a := range p {
+			ap := strings.Split(a, ".")
+			if len(ap) == 2 {
+				g.importpkg(strings.Trim(ap[0], "*"))
+			}
 			g.printfln("argv%v %v,", i, a)
 		}
 
@@ -43,16 +48,6 @@ func (g *generator) generateStub(callbody func(fn string, paramTypes []string), 
 
 		g.printfln("func %v(", fn)
 		g.printfln("cb interface{},")
-
-		_ = p
-		// TODO
-		// g.printfln("argc int,")
-		// g.printfln("this unsafe.Pointer,")
-
-		// for i, a := range p {
-		// 	g.printfln("argv%v %v,", i, a)
-		// }
-
 		g.printfln(") uintptr {")
 		callbackbody(fn, p)
 		g.printfln("}")
@@ -60,7 +55,7 @@ func (g *generator) generateStub(callbody func(fn string, paramTypes []string), 
 }
 
 func (g *generator) generateStubDummy() {
-	g.headerprintfln(`// +build !windows,!linux,!amd64`)
+	g.headerprintfln(`// +build !windows,!linux,!amd64,!cgo`)
 	g.headerprintfln("")
 
 	returnpanic := func(fn string, paramTypes []string) {
@@ -74,13 +69,6 @@ func (g *generator) visitStubWindows() {
 	g.headerprintfln(`// +build windows,amd64`)
 	g.headerprintfln("")
 
-	g.printfln(`func boolToUintptr(x bool) uintptr {
-		if x {
-			return 1
-		}
-		return 0
-	}`)
-
 	g.generateStub(func(fn string, paramTypes []string) {
 		numSyscallParams := len(paramTypes)
 		numSyscallRequired := int(math.Ceil(float64(numSyscallParams+1)/3)) * 3
@@ -92,11 +80,6 @@ func (g *generator) visitStubWindows() {
 			syscallFunc += strconv.Itoa(numSyscallRequired)
 		}
 
-		// actualSyscallParamLen := len(syscallParams)
-		// for i := len(syscallParams); i < numSyscallRequired-1; i++ {
-		// 	syscallParams = append(syscallParams, "0")
-		// }
-
 		g.importpkg("unsafe")
 		g.importpkg("syscall")
 
@@ -105,17 +88,23 @@ func (g *generator) visitStubWindows() {
 		g.printfln("uintptr(argc + 1),")
 		g.printfln("uintptr(this),")
 
-		// for _, param := range syscallParams {
-		// 	g.printfln("%v,", param)
-		// }
-
 		for i := 0; i < numSyscallRequired-1; i++ {
 			if i < numSyscallParams {
-				if paramTypes[i] == "bool" {
+
+				if strings.HasPrefix(paramTypes[i], "*") {
+					g.printfln("uintptr(unsafe.Pointer(argv%v)),", i)
+					continue
+				}
+
+				switch paramTypes[i] {
+				case "bool":
 					g.printfln("boolToUintptr(argv%v),", i)
-				} else {
+				case "ole.GUID":
+					g.printfln("uintptr(unsafe.Pointer(argv%v)),", i)
+				default:
 					g.printfln("uintptr(argv%v),", i)
 				}
+
 			} else {
 				g.printfln("0,")
 			}
@@ -133,13 +122,15 @@ func (g *generator) visitStubWindows() {
 }
 
 func (g *generator) visitStubLinux() {
-	g.headerprintfln(`// +build linux,amd64`)
+	g.headerprintfln(`// +build linux,amd64,cgo`)
 	g.headerprintfln("")
 
 	returnpanic := func(fn string, paramTypes []string) {
 		g.printfln(`panic("not impl")`)
 	}
-	g.generateStub(returnpanic, returnpanic)
+	g.generateStub(returnpanic, func(fn string, paramTypes []string) {
+		g.printfln(`panic("not impl")`)
+	})
 
 }
 
