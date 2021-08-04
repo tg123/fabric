@@ -1,10 +1,11 @@
-package fabric
+package fabric_test
 
 import (
 	"context"
 	"fmt"
 
 	ole "github.com/go-ole/go-ole"
+	"github.com/tg123/fabric"
 )
 
 func ExampleNewX509Client() {
@@ -13,15 +14,15 @@ func ExampleNewX509Client() {
 		panic(err)
 	}
 
-	client, err := NewClient(FabricClientOpt{
+	client, err := fabric.NewClient(fabric.FabricClientOpt{
 		Address: []string{"test.southcentralus.cloudapp.azure.com:19000"},
-		Credentials: &FabricSecurityCredentials{
-			Kind: FabricSecurityCredentialKindX509,
-			Value: FabricX509Credentials{
-				FindType:              FabricX509FindTypeFindbythumbprint,
+		Credentials: &fabric.FabricSecurityCredentials{
+			Kind: fabric.FabricSecurityCredentialKindX509,
+			Value: fabric.FabricX509Credentials{
+				FindType:              fabric.FabricX509FindTypeFindbythumbprint,
 				FindValue:             "1111111111111111111111111111111111111111",
 				StoreName:             "MY",
-				StoreLocation:         FabricX509StoreLocationCurrentuser,
+				StoreLocation:         fabric.FabricX509StoreLocationCurrentuser,
 				RemoteCertThumbprints: []string{"1111111111111111111111111111111111111111"},
 			},
 		},
@@ -31,7 +32,7 @@ func ExampleNewX509Client() {
 		panic(err)
 	}
 
-	nodes, err := client.GetNodeList(context.TODO(), &FabricNodeQueryDescription{
+	nodes, err := client.GetNodeList(context.TODO(), &fabric.FabricNodeQueryDescription{
 		NodeNameFilter: "",
 	})
 
