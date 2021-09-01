@@ -2734,8 +2734,7 @@ func (v *comFabricCodePackageActivationContext) GetServiceTypes() (rt []FabricSe
 	tmp := (*innerFabricServiceTypeDescriptionList)(unsafe.Pointer(hr))
 
 	{
-		var innerlst []innerFabricServiceTypeDescription
-		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
+		innerlst := unsafe.Slice(tmp.Items, tmp.Count)
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceTypeDescription
@@ -2762,8 +2761,7 @@ func (v *comFabricCodePackageActivationContext) GetServiceGroupTypes() (rt []Fab
 	tmp := (*innerFabricServiceGroupTypeDescriptionList)(unsafe.Pointer(hr))
 
 	{
-		var innerlst []innerFabricServiceGroupTypeDescription
-		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
+		innerlst := unsafe.Slice(tmp.Items, tmp.Count)
 
 		for _, item := range innerlst {
 			var tmpitem FabricServiceGroupTypeDescription
@@ -2806,8 +2804,7 @@ func (v *comFabricCodePackageActivationContext) GetServiceEndpointResources() (r
 	tmp := (*innerFabricEndpointResourceDescriptionList)(unsafe.Pointer(hr))
 
 	{
-		var innerlst []innerFabricEndpointResourceDescription
-		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(tmp.Items), int(tmp.Count))
+		innerlst := unsafe.Slice(tmp.Items, tmp.Count)
 
 		for _, item := range innerlst {
 			var tmpitem FabricEndpointResourceDescription
@@ -3637,8 +3634,7 @@ func (v *comFabricConfigurationPackage2) GetValues(
 	var p_2 *innerFabricConfigurationParameterList
 	defer func() {
 		{
-			var innerlst []innerFabricConfigurationParameter
-			sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer(p_2.Items), int(p_2.Count))
+			innerlst := unsafe.Slice(p_2.Items, p_2.Count)
 
 			for _, item := range innerlst {
 				var tmpitem FabricConfigurationParameter

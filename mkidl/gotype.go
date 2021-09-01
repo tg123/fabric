@@ -280,8 +280,7 @@ func (g *generator) generatePointerToGolangSlice(dstSlice, countFieldName, itemF
 	}
 
 	g.templateln(`{
-		var innerlst []{{.ItemTypeName}}
-		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer({{.ItemFieldName}}), int({{.CountFieldName}}))
+		innerlst := unsafe.Slice({{.ItemFieldName}}, {{.CountFieldName}})
 
 		for _, item := range innerlst {
 			var tmpitem {{.GolangItemTypeName}}
@@ -334,9 +333,7 @@ func (g *generator) generateMapObjectToGolangMap(srcvar, dstvar, mapType string)
 	g.templateln(`{
 		var mapvar = make({{.GolangTypeName}})
 
-		var innerlst []{{.ItemTypeName}}
-		
-		sliceCast(unsafe.Pointer(&innerlst), unsafe.Pointer({{.Srcvar}}.{{.ItemFieldName}}), int({{.Srcvar}}.{{.CountFieldName}}))
+		innerlst := unsafe.Slice({{.Srcvar}}.{{.ItemFieldName}}, {{.Srcvar}}.{{.CountFieldName}})
 
 		for _, kv := range innerlst {
 			var k {{.KeyTypeName}}

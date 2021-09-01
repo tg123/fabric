@@ -3,7 +3,6 @@ package fabric
 import (
 	"context"
 	"io"
-	"reflect"
 	"sync"
 	"time"
 	"unsafe"
@@ -71,13 +70,6 @@ func toTimeout(ctx context.Context, v withTimeout) time.Duration {
 	}
 
 	return v.GetTimeout()
-}
-
-func sliceCast(dst, src unsafe.Pointer, len int) {
-	slice := (*reflect.SliceHeader)(dst)
-	slice.Data = uintptr(src)
-	slice.Len = len
-	slice.Cap = len
 }
 
 func (v *comFabricStringResultGoProxy) init() {

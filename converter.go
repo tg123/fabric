@@ -90,7 +90,5 @@ func utf16PtrToString(p *uint16) string {
 		ptr = unsafe.Pointer(uintptr(ptr) + unsafe.Sizeof(*p))
 	}
 
-	var s []uint16
-	sliceCast(unsafe.Pointer(&s), unsafe.Pointer(p), n)
-	return string(utf16.Decode(s))
+	return string(utf16.Decode(unsafe.Slice(p, n)))
 }

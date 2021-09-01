@@ -42,7 +42,8 @@ func (v *comFabricStatelessServiceFactoryGoProxy) CreateInstance(
 		PartitionId:     *partitionId,
 		InstanceId:      instanceId,
 	}
-	sliceCast(unsafe.Pointer(&ctx.InitializationData), unsafe.Pointer(initializationData), int(initializationDataLength))
+
+	ctx.InitializationData = unsafe.Slice(initializationData, initializationDataLength)
 
 	inst, err := v.builder(ctx)
 

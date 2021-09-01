@@ -105,6 +105,8 @@ func newDefContext(idls ...string) (*defContext, error) {
 		Indirection: 1,
 	}
 
+	c.definedStruct["TEST_COMMAND_QUERY_RESULT_LIST"].Fields[1].Type = "TEST_COMMAND_QUERY_RESULT_ITEM"
+
 	for s := range c.definedStruct {
 		p := strings.Split(s, "_EX")
 		if len(p) == 2 {

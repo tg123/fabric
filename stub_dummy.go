@@ -1,4 +1,5 @@
-// +build !windows, !linux, !amd64, !cgo
+//go:build (!windows && ignore) || (!linux && ignore) || (!amd64 && ignore) || !cgo
+// +build !windows,ignore !linux,ignore !amd64,ignore !cgo
 
 package fabric
 

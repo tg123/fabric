@@ -1,4 +1,5 @@
-// +build windows, amd64
+//go:build (windows && ignore) || amd64
+// +build windows,ignore amd64
 
 package fabric
 
